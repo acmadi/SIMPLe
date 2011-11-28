@@ -89,32 +89,34 @@
             </tr>
             </thead>
             <tbody>
+            <?php $i = 1 ?>
+            <?php foreach ($categories->result() as $category): ?>
             <tr>
                 <td><input type="checkbox"/></td>
-                <td>01</td>
-                <td>Peraturan</td>
+
+                <td><?php echo $i++ ?></td>
+                <td><?php echo $category->kat_knowledge_base ?></td>
                 <td>
                     <form action="#" onsubmit="return false;"><input type="button" value="Ubah"
                                                                      onclick="popup_show('popup', 'popup_drag', 'popup_exit', 'screen-center', 0, 0);"
                                                                      style="float:left; font-size:10px; width:80px; height:25px; "/>
                     </form>
-                    <input type="button" value="hapus" style="font-size:10px; width:80px; height:25px;"
-                           onclick="return yesOrNo()"/>
+                    <input type="button" value="hapus" class="delete" link="<?php echo site_url("/admin/knowledge/delete_category/{$category->id_kat_knowledge_base}") ?>" style="font-size:10px; width:80px; height:25px;" />
+
+
+
+
+
+
+
+
+
+
                 </td>
+
             </tr>
-            <tr>
-                <td><input type="checkbox"/></td>
-                <td>02</td>
-                <td>Perundang-Undangan</td>
-                <td>
-                    <form action="#" onsubmit="return false;"><input type="button" value="Ubah"
-                                                                     onclick="popup_show('popup', 'popup_drag', 'popup_exit', 'screen-center', 0, 0);"
-                                                                     style="float:left; font-size:10px; width:80px; height:25px; "/>
-                    </form>
-                    <input type="button" value="hapus" style="font-size:10px; width:80px; height:25px;"
-                           onclick="return yesOrNo()"/>
-                </td>
-            </tr>
+            <?php endforeach ?>
+
             </tbody>
         </table>
     </div>
@@ -122,19 +124,19 @@
         <div id="tail">
             <span style="margin:0px 0px 0px -280px; padding-left:10px; position:absolute; width:50px; height:10px; background:#FFF;">Cari Unit</span>
 
-            <form action="#" method="post"
+            <form action="<?php echo site_url('/admin/knowledge/add_category') ?>" method="post"
                   style="border: 1px solid #999; padding: 13px 30px 13px 13px; margin:5px 0px 0px 20px;">
                 <table>
                     <tr>
                         <td>Nama Kategori</td>
                         <td>:</td>
-                        <td><input type="text" value=""/></td>
+                        <td><input type="text" name="category" value=""/></td>
                     </tr>
                 </table>
                 <br/>
-                <input type="button" style="width:70px; height:23px; margin:0px 76px 0px 20px; font-size:10px; "
+                <input type="reset" style="width:70px; height:23px; margin:0px 76px 0px 20px; font-size:10px; "
                        value="reset"/>
-                <input type="button" style="width:70px; height:23px; font-size:10px; " value="simpan"/>
+                <input type="submit" style="width:70px; height:23px; font-size:10px; " value="simpan"/>
             </form>
             </form>
         </div>

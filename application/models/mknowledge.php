@@ -15,4 +15,29 @@ class Mknowledge extends CI_Model
 
         $this->db->query($sql);
     }
+
+    /**
+     * Ambil kategori pada knowledge base
+     *
+     * @return Object
+     */
+    public function get_all_category()
+    {
+        $sql = "SELECT * FROM `tb_kat_knowledge_base` ORDER BY `kat_knowledge_base`";
+        return $this->db->query($sql);
+    }
+
+    /**
+     * Hapus kategori pada knowledge base
+     *
+     * @param $id Integer
+     * @return void
+     */
+    public function delete_category($id)
+    {
+        // TODO: Buat validasi dan pengecekan user sudah login atau belum?
+
+        //$sql = "DELETE FROM `tb_kat_knowledge_base` WHERE `tb_kat_knowledge_base`.`id_kat_knowledge_base` = '$id'";
+        //$this->db->query($sql);
+    }
 }
