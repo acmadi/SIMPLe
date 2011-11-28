@@ -8,7 +8,7 @@ endif;
 
 ?>
 
-<p>* Dev note: Sementara field id_petugas_satker ditampilkan sebagai input biasa, dari yang seharusnya hidden.
+<p>* Dev note: Sementara field id_petugas_satker ditampilkan sebagai input biasa, dari yang seharusnya hidden. 
 </p>
 
 <?php echo form_open('pengaduan/kirim'); ?>
