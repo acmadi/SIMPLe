@@ -30,8 +30,7 @@
                         <td>
                             <a href="knowledge_ubah"><input type="button" value="Ubah" onclick=""
                                                             style="float:left; font-size:10px; width:80px; height:25px; "/></a>
-                            <input type="button" value="hapus" style="font-size:10px; width:80px; height:25px;"
-                                   onclick="return yesOrNo()"/>
+                                <input type="button" value="hapus" class="delete" link="" style="font-size:10px; width:80px; height:25px;" />
                         </td>
                     </tr>
                     <tr>
@@ -42,8 +41,7 @@
                         <td>
                             <input type="button" value="Ubah" onclick=""
                                    style="float:left; font-size:10px; width:80px; height:25px; "/>
-                            <input type="button" value="hapus" style="font-size:10px; width:80px; height:25px;"
-                                   onclick="return yesOrNo()"/>
+                            <input type="button" value="hapus" class="delete" link="" style="font-size:10px; width:80px; height:25px;" />
                         </td>
                     </tr>
                     <tr>
@@ -54,8 +52,7 @@
                         <td>
                             <input type="button" value="Ubah" onclick=""
                                    style="float:left; font-size:10px; width:80px; height:25px; "/>
-                            <input type="button" value="hapus" style="font-size:10px; width:80px; height:25px;"
-                                   onclick="return yesOrNo()"/>
+                            <input type="button" value="hapus" class="delete" link="" style="font-size:10px; width:80px; height:25px;" />
                         </td>
                     </tr>
                     <tr>
@@ -66,8 +63,7 @@
                         <td>
                             <input type="button" value="Ubah" onclick=""
                                    style="float:left; font-size:10px; width:80px; height:25px; "/>
-                            <input type="button" value="hapus" style="font-size:10px; width:80px; height:25px;"
-                                   onclick="return yesOrNo()"/>
+                            <input type="button" value="hapus" class="delete" link="" style="font-size:10px; width:80px; height:25px;" />
                         </td>
                     </tr>
                     </tbody>
@@ -102,15 +98,6 @@
                                                                      style="float:left; font-size:10px; width:80px; height:25px; "/>
                     </form>
                     <input type="button" value="hapus" class="delete" link="<?php echo site_url("/admin/knowledge/delete_category/{$category->id_kat_knowledge_base}") ?>" style="font-size:10px; width:80px; height:25px;" />
-
-
-
-
-
-
-
-
-
 
                 </td>
 
