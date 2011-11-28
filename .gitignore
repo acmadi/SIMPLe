@@ -1,0 +1,17 @@
+# Common gitignore for CodeIgniter
+*/config/development
+*/logs/log-*.php
+*/logs/!index.html
+*/cache/*
+*/cache/!index.html
+
+# Ignore junk files for Windows, Mac, Linux
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# KDE
+.directory
+
+# Backup Files (gedit)
+*~
