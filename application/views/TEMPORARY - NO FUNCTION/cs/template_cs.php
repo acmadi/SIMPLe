@@ -39,7 +39,6 @@
 </script>
 
 <!--TABLE JQUERY-->
-<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery-1.2.6.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.wjb.selectallrows.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {

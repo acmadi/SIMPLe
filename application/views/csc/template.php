@@ -25,7 +25,6 @@
 </html>
 
 <!--TABS--GANTI MODEL EXTJS ! :) -->
-<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery-1.4.2.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         $('#tab1').fadeIn('slow'); //tab pertama ditampilkan
@@ -42,7 +41,6 @@
 </script>
 
 <!--TABLE JQUERY-->
-<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery-1.2.6.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.wjb.selectallrows.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
