@@ -78,7 +78,7 @@ CREATE TABLE `tb_formulir_revisi` (
   `id_satker` varchar(7) DEFAULT NULL,
   `tanggal` date DEFAULT NULL,
   PRIMARY KEY (`id_formulir`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -87,6 +87,7 @@ CREATE TABLE `tb_formulir_revisi` (
 
 LOCK TABLES `tb_formulir_revisi` WRITE;
 /*!40000 ALTER TABLE `tb_formulir_revisi` DISABLE KEYS */;
+INSERT INTO `tb_formulir_revisi` VALUES (1,1,'000017','2011-11-22'),(2,2,'003019','2011-11-23');
 /*!40000 ALTER TABLE `tb_formulir_revisi` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -133,7 +134,7 @@ CREATE TABLE `tb_histori_tiket` (
   PRIMARY KEY (`id_histori_tiket`),
   KEY `FK_tb_histori_tiket` (`no_tiket_frontdesk`),
   CONSTRAINT `FK_tb_histori_tiket` FOREIGN KEY (`no_tiket_frontdesk`) REFERENCES `tb_tiket_frontdesk` (`no_tiket_frontdesk`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -142,6 +143,7 @@ CREATE TABLE `tb_histori_tiket` (
 
 LOCK TABLES `tb_histori_tiket` WRITE;
 /*!40000 ALTER TABLE `tb_histori_tiket` DISABLE KEYS */;
+INSERT INTO `tb_histori_tiket` VALUES (2,2,1,'2011-11-11'),(3,2,2,'2011-11-12'),(4,2,3,'2011-11-13'),(5,3,4,'2011-11-13'),(6,3,6,'2011-11-14'),(7,3,7,'2011-11-15');
 /*!40000 ALTER TABLE `tb_histori_tiket` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -203,7 +205,7 @@ CREATE TABLE `tb_kat_knowledge_base` (
   `id_kat_knowledge_base` int(11) NOT NULL AUTO_INCREMENT,
   `kat_knowledge_base` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id_kat_knowledge_base`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -212,6 +214,7 @@ CREATE TABLE `tb_kat_knowledge_base` (
 
 LOCK TABLES `tb_kat_knowledge_base` WRITE;
 /*!40000 ALTER TABLE `tb_kat_knowledge_base` DISABLE KEYS */;
+INSERT INTO `tb_kat_knowledge_base` VALUES (1,'A'),(2,'B'),(3,'C'),(4,'D');
 /*!40000 ALTER TABLE `tb_kat_knowledge_base` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -226,7 +229,7 @@ CREATE TABLE `tb_kelengkapan_doc` (
   `id_kelengkapan` int(11) NOT NULL AUTO_INCREMENT,
   `nama_kelengkapan` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id_kelengkapan`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -235,6 +238,7 @@ CREATE TABLE `tb_kelengkapan_doc` (
 
 LOCK TABLES `tb_kelengkapan_doc` WRITE;
 /*!40000 ALTER TABLE `tb_kelengkapan_doc` DISABLE KEYS */;
+INSERT INTO `tb_kelengkapan_doc` VALUES (1,'Surat Pengajuan Revisi Anggaran (ASLI)\r\nSurat Pengajuan Revisi Anggaran (ASLI)\r\nSurat Pengajuan Revisi Anggaran (ASLI)'),(2,'SP-RKA-K/L Sebelum revisi'),(3,'Konsep Usulan revisi SP-RKA-K/L'),(4,'Arsip Data Komputer RKA-K/L hasil revisi'),(5,'TOR'),(6,'RAB');
 /*!40000 ALTER TABLE `tb_kelengkapan_doc` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -255,7 +259,7 @@ CREATE TABLE `tb_kelengkapan_formulir` (
   KEY `FK_tb_kelengkapan_formulir_tikrt` (`no_tiket_frontdesk`),
   CONSTRAINT `FK_tb_kelengkapan_formulir` FOREIGN KEY (`id_kelengkapan`) REFERENCES `tb_kelengkapan_doc` (`id_kelengkapan`),
   CONSTRAINT `FK_tb_kelengkapan_formulir_tikrt` FOREIGN KEY (`no_tiket_frontdesk`) REFERENCES `tb_tiket_frontdesk` (`no_tiket_frontdesk`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -264,6 +268,7 @@ CREATE TABLE `tb_kelengkapan_formulir` (
 
 LOCK TABLES `tb_kelengkapan_formulir` WRITE;
 /*!40000 ALTER TABLE `tb_kelengkapan_formulir` DISABLE KEYS */;
+INSERT INTO `tb_kelengkapan_formulir` VALUES (1,2,1,NULL),(2,2,2,NULL),(3,2,3,NULL),(4,2,4,NULL),(5,2,5,NULL),(6,3,1,NULL),(7,3,2,NULL),(8,3,3,NULL),(9,3,4,NULL),(10,3,5,NULL);
 /*!40000 ALTER TABLE `tb_kelengkapan_formulir` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -307,7 +312,7 @@ CREATE TABLE `tb_knowledge_base` (
   PRIMARY KEY (`id_knowledge_base`),
   KEY `FK_tb_knowledge_base` (`id_kat_knowledge_base`),
   CONSTRAINT `FK_tb_knowledge_base` FOREIGN KEY (`id_kat_knowledge_base`) REFERENCES `tb_kat_knowledge_base` (`id_kat_knowledge_base`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -316,6 +321,7 @@ CREATE TABLE `tb_knowledge_base` (
 
 LOCK TABLES `tb_knowledge_base` WRITE;
 /*!40000 ALTER TABLE `tb_knowledge_base` DISABLE KEYS */;
+INSERT INTO `tb_knowledge_base` VALUES (1,1,'Knowledge A','Deskripsi A','Jawaban A'),(2,2,'Knowledge B','Deskripsi B','Jawaban B'),(3,3,'Knowledge C','Deskripsi C','Jawaban C'),(4,4,'Knowledge D','Deskripsi D','Jawaban D');
 /*!40000 ALTER TABLE `tb_knowledge_base` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -335,7 +341,7 @@ CREATE TABLE `tb_kon_unit_satker` (
   KEY `FK_tb_kon_unit_satker_satker` (`id_satker`),
   CONSTRAINT `FK_tb_kon_unit_satker` FOREIGN KEY (`kode_unit`) REFERENCES `tb_unit_saker` (`kode_unit`),
   CONSTRAINT `FK_tb_kon_unit_satker_satker` FOREIGN KEY (`id_satker`) REFERENCES `tb_satker` (`id_satker`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -344,6 +350,7 @@ CREATE TABLE `tb_kon_unit_satker` (
 
 LOCK TABLES `tb_kon_unit_satker` WRITE;
 /*!40000 ALTER TABLE `tb_kon_unit_satker` DISABLE KEYS */;
+INSERT INTO `tb_kon_unit_satker` VALUES (1,'0203010100201101','631648'),(2,'0203010100201101','662745'),(3,'0203010100201101','450799'),(4,'0203010100201101','890594'),(5,'0203010100201101','003030'),(6,'0203010100201101','450800'),(7,'0203010100201101','450774'),(8,'0203010100201101','003051'),(9,'0203010100201101','890572'),(10,'0203010100201101','450780'),(11,'0203010100201101','445243'),(12,'0203010100201101','579213'),(13,'0203010100201101','445237'),(14,'0203010100201101','040424'),(15,'0203010100201101','040444'),(16,'0203010200201101','040453'),(17,'0203010200201101','045101'),(18,'0203010200201101','045102'),(19,'0203010200201101','045104'),(20,'0203010200201101','045105'),(21,'0203010200201101','045112'),(22,'0203010200201101','045114'),(23,'0203010200201101','045116'),(24,'0203010200201101','045117'),(25,'0203010200201101','045119'),(26,'0203010200201101','045120'),(27,'0203010200201101','045121'),(28,'0203010200201101','045122'),(29,'0203010200201101','045123'),(30,'0203010200201101','045124'),(31,'0203010200201101','045126'),(32,'0203010200201101','045127'),(33,'0203010200201101','045128');
 /*!40000 ALTER TABLE `tb_kon_unit_satker` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -411,7 +418,7 @@ CREATE TABLE `tb_masa_kerja` (
   PRIMARY KEY (`id_masa_kerja`),
   KEY `FK_tb_masa_kerja` (`id_user`),
   CONSTRAINT `FK_tb_masa_kerja` FOREIGN KEY (`id_user`) REFERENCES `tb_user` (`id_user`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -420,6 +427,7 @@ CREATE TABLE `tb_masa_kerja` (
 
 LOCK TABLES `tb_masa_kerja` WRITE;
 /*!40000 ALTER TABLE `tb_masa_kerja` DISABLE KEYS */;
+INSERT INTO `tb_masa_kerja` VALUES (3,1,'2011-03-01','2011-03-20'),(4,2,'2011-03-10','2011-03-20'),(6,1,'2011-03-21','2011-03-29'),(7,2,'2011-03-21','2011-03-29'),(8,2,'2011-03-21','2011-03-29'),(9,5,'2011-03-10','2011-03-29'),(10,6,'2011-03-10','2011-03-29'),(11,7,'2011-03-10','2011-03-20'),(12,8,'2011-03-10','2011-03-20');
 /*!40000 ALTER TABLE `tb_masa_kerja` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -468,7 +476,7 @@ CREATE TABLE `tb_petugas_satker` (
   PRIMARY KEY (`id_petugas_satker`),
   KEY `FK_tb_petugas_satker_sat` (`id_satker`),
   CONSTRAINT `FK_tb_petugas_satker_sat` FOREIGN KEY (`id_satker`) REFERENCES `tb_satker` (`id_satker`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -477,6 +485,7 @@ CREATE TABLE `tb_petugas_satker` (
 
 LOCK TABLES `tb_petugas_satker` WRITE;
 /*!40000 ALTER TABLE `tb_petugas_satker` DISABLE KEYS */;
+INSERT INTO `tb_petugas_satker` VALUES (1,'003030','John Doe','Anything','Anyting'),(2,'005016','More Doe','Anything','Anything'),(3,'005016','Three Doe','Anything','Anything');
 /*!40000 ALTER TABLE `tb_petugas_satker` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -540,7 +549,7 @@ CREATE TABLE `tb_tiket_frontdesk` (
   CONSTRAINT `FK_tb_tiket_frontdesk_formulir` FOREIGN KEY (`id_formulir`) REFERENCES `tb_formulir_revisi` (`id_formulir`),
   CONSTRAINT `FK_tb_tiket_frontdesk_satker` FOREIGN KEY (`id_satker`) REFERENCES `tb_satker` (`id_satker`),
   CONSTRAINT `FK_tb_tiket_frontdesk_satker_a` FOREIGN KEY (`id_petugas_satker`) REFERENCES `tb_petugas_satker` (`id_petugas_satker`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -549,6 +558,7 @@ CREATE TABLE `tb_tiket_frontdesk` (
 
 LOCK TABLES `tb_tiket_frontdesk` WRITE;
 /*!40000 ALTER TABLE `tb_tiket_frontdesk` DISABLE KEYS */;
+INSERT INTO `tb_tiket_frontdesk` VALUES (2,'001012',1,'2011-11-10',NULL,'C 001','OPEN',1,NULL),(3,'001030',2,'2011-11-10',NULL,'C 002','OPEN',2,NULL);
 /*!40000 ALTER TABLE `tb_tiket_frontdesk` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -571,15 +581,15 @@ CREATE TABLE `tb_tiket_helpdesk` (
   `no_antrian` varchar(10) DEFAULT NULL,
   `status` varchar(8) DEFAULT NULL,
   `tanggal_selesai` date DEFAULT NULL,
-  `id_petugas_satket` int(11) DEFAULT NULL,
+  `id_petugas_satker` int(11) DEFAULT NULL,
   PRIMARY KEY (`no_tiket_helpdesk`),
   KEY `FK_tb_tiket_helpdesk` (`id_knowledge_base`),
-  KEY `FK_tb_tiket_helpdesk_satker_a` (`id_petugas_satket`),
   KEY `FK_tb_tiket_helpdesk_satker` (`id_satker`),
+  KEY `FK_tb_tiket_helpdesk_satker_a` (`id_petugas_satker`) USING BTREE,
+  CONSTRAINT `FK_tb_tiket_helpdesk_satker_a` FOREIGN KEY (`id_petugas_satker`) REFERENCES `tb_petugas_satker` (`id_petugas_satker`),
   CONSTRAINT `FK_tb_tiket_helpdesk` FOREIGN KEY (`id_knowledge_base`) REFERENCES `tb_knowledge_base` (`id_knowledge_base`),
-  CONSTRAINT `FK_tb_tiket_helpdesk_satker` FOREIGN KEY (`id_satker`) REFERENCES `tb_satker` (`id_satker`),
-  CONSTRAINT `FK_tb_tiket_helpdesk_satker_a` FOREIGN KEY (`id_petugas_satket`) REFERENCES `tb_petugas_satker` (`id_petugas_satker`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  CONSTRAINT `FK_tb_tiket_helpdesk_satker` FOREIGN KEY (`id_satker`) REFERENCES `tb_satker` (`id_satker`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -588,6 +598,7 @@ CREATE TABLE `tb_tiket_helpdesk` (
 
 LOCK TABLES `tb_tiket_helpdesk` WRITE;
 /*!40000 ALTER TABLE `tb_tiket_helpdesk` DISABLE KEYS */;
+INSERT INTO `tb_tiket_helpdesk` VALUES (2,'001030','2011-11-11','judul inti pertanyaan','isi pertanyaan',1,'2','','A 001','CLOSE','2011-11-11',1),(3,'003019','2011-11-11','judul inti pertanyaan','',2,'','','A 002','CLOSE','2011-11-11',2),(4,'631648','2011-11-11','judul inti pertanyaan','',3,'','','A 003','CLOSE','2011-11-11',3),(5,'662745','2011-11-11','judul inti pertanyaan','',1,'','','B 001','CLOSE','2011-11-11',1),(6,'450799','2011-11-11','judul inti pertanyaan','',2,'','','B 003','CLOSE','2011-11-11',2),(7,'890594','2011-11-11','judul inti pertanyaan','',2,'','','B 004','CLOSE','2011-11-11',3),(8,'003030','2011-11-11','judul inti pertanyaan','',4,'','','A 005','CLOSE','2011-11-11',1),(9,'450800','2011-11-11','judul inti pertanyaan','',3,'','','A 006','CLOSE','2011-11-11',2),(10,'450774','2011-11-11','judul inti pertanyaan','',2,'','','A 007','CLOSE','2011-11-11',3),(11,'003051','2011-11-11','judul inti pertanyaan','',4,'','','A 008','CLOSE','2011-11-11',1),(12,'890572','2011-11-11','judul inti pertanyaan','',4,'','','A 009','CLOSE','2011-11-11',2),(13,'450780','2011-11-11','judul inti pertanyaan','',1,'','','A 010','CLOSE','2011-11-11',3);
 /*!40000 ALTER TABLE `tb_tiket_helpdesk` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -684,4 +695,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-11-28 22:20:47
+-- Dump completed on 2011-11-28 23:45:08
