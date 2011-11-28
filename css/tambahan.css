@@ -1,0 +1,28 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* SATPAM / SATKER */
+#ABCDE{
+	background-image: linear-gradient(left top, rgb(108,162,199) 33%, rgb(141,200,240) 80%, rgb(168,207,255) 99%);
+	background-image: -o-linear-gradient(left top, rgb(108,162,199) 33%, rgb(141,200,240) 80%, rgb(168,207,255) 99%);
+	background-image: -moz-linear-gradient(left top, rgb(108,162,199) 33%, rgb(141,200,240) 80%, rgb(168,207,255) 99%);
+	background-image: -webkit-linear-gradient(left top, rgb(108,162,199) 33%, rgb(141,200,240) 80%, rgb(168,207,255) 99%);
+	background-image: -ms-linear-gradient(left top, rgb(108,162,199) 33%, rgb(141,200,240) 80%, rgb(168,207,255) 99%);
+	
+	background-image: -webkit-gradient(
+	linear,
+	left top,
+	right bottom,
+	color-stop(0.33, rgb(108,162,199)),
+	color-stop(0.8, rgb(141,200,240)),
+	color-stop(0.99, rgb(168,207,255))
+	);
+	height:60px;
+	width:60px;
+}
+	#ABCDE h1{
+		text-align:center;
+		padding:10px;
+		color:#000;
+		font-weight:bold;
+	}
