@@ -1,5 +1,5 @@
 1. Extract file download
-2. Pindahkan ke htdocs di localhost dengan nama direktori `DJA` (case sensitive, harap diseragamkan untuk kemudahan bersama)
+2. Pindahkan ke htdocs di localhost dengan nama direktori `dja` (case sensitive, harap diseragamkan untuk kemudahan bersama)
 3. Visit to `http://localhost/phpmyadmin/`
 4. Create DB, db name= "db_dja" (harap diseragamkan untuk kemudahan bersama)
 5. Change username and password mysql, if you've changed them - [ open file : `system/application/config/config.php` ]
