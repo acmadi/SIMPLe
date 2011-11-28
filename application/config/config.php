@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= '';
+$config['base_url']	= sprintf("%s%s%s/", 'http://', $_SERVER['HTTP_HOST'], dirname($_SERVER['SCRIPT_NAME']));
 
 /*
 |--------------------------------------------------------------------------
