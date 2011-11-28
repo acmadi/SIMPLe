@@ -1,6 +1,20 @@
 <?php
 class Mknowledge extends CI_Model
 {
+
+    /**
+     * Ambil semua knowledge dan kategorinya.
+     *
+     * @return Object
+     */
+    public function get_all() {
+        $sql = "SELECT tb_knowledge_base.*, tb_kat_knowledge_base.*
+                FROM tb_knowledge_base
+                LEFT JOIN tb_kat_knowledge_base
+                ON tb_knowledge_base.id_kat_knowledge_base = tb_kat_knowledge_base.id_kat_knowledge_base";
+        return $this->db->query($sql);
+    }
+
     /**
      * Untuk menambah kategori baru pada knowledge base
      *

@@ -16,6 +16,8 @@ class Knowledge extends CI_Controller
 
         $this->load->model('Mknowledge', 'knowledge');
 
+        $data['knowledges'] = $this->knowledge->get_all();
+
         $data['title'] = 'Knowledge';
         $data['content'] = 'admin/knowledge/knowledge';
         $data['categories'] = $this->knowledge->get_all_category();
