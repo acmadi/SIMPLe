@@ -21,7 +21,7 @@ Class Login extends CI_Controller
 
         $data['temukkan'] = $this->mlogin->cekdb();
         if ($data['temukkan'] == null) {
-            return "no";
+            return "yes"; //tes
         } else {
             return "yes";
         }

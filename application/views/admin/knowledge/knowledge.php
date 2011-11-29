@@ -27,13 +27,12 @@
                     <?php foreach ($knowledges->result() as $knowledge): ?>
                     <tr>
                         <td><input type="checkbox"/></td>
-                        <td>1</td>
+                        <td><?php echo ++$i?></td>
                         <td><?php echo $knowledge->kat_knowledge_base ?></td>
                         <td><?php echo $knowledge->judul?></td>
                         <td>
-                            <a href="knowledge_ubah"><input type="button" value="Ubah" onclick=""
-                                                            style="float:left; font-size:10px; width:80px; height:25px; "/></a>
-                                <input type="button" value="hapus" class="delete" link="" style="font-size:10px; width:80px; height:25px;" />
+                            <a href="<?php echo base_url()?>index.php/admin/knowledge_ubah/index/<?php echo $knowledge->id_knowledge_base?>"><input type="button" value="Ubah" onclick="" style="float:left; font-size:10px; width:80px; height:25px; "/></a>
+                            <input type="button" value="hapus" class="delete" link="<?php echo site_url("/admin/knowledge/delete_knowledge/{$knowledge->id_knowledge_base}") ?>" style="font-size:10px; width:80px; height:25px;" />
                         </td>
                     </tr>
                     <?php endforeach ?>

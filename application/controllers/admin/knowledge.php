@@ -18,8 +18,8 @@ class Knowledge extends CI_Controller
 
         $data['knowledges'] = $this->knowledge->get_all();
 
-        $data['title'] = 'Knowledge';
-        $data['content'] = 'admin/knowledge/knowledge';
+        $data['title'] 		= 'Knowledge';
+        $data['content'] 	= 'admin/knowledge/knowledge';
         $data['categories'] = $this->knowledge->get_all_category();
         $this->load->view('admin/template', $data);
         /*}
@@ -50,6 +50,17 @@ class Knowledge extends CI_Controller
 
         $this->load->model('Mknowledge', 'knowledge');
         $this->knowledge->delete_category($id);
+
+        $this->session->set_flashdata('Kategori telah dihapus.');
+
+    }
+	
+	public function delete_knowledge($id)
+    {
+        // TODO: Buat validasi dan pengecekan user sudah login atau belum?
+
+        $this->load->model('Mknowledge', 'knowledge');
+        $this->knowledge->delete_knowledge($id);
 
         $this->session->set_flashdata('Kategori telah dihapus.');
 
