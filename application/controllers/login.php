@@ -56,11 +56,14 @@ Class Login extends CI_Controller
             redirect('/');
         }
 
-    } 
+    }
 
     public function process_logout()
     {
+        $this->session->unset_userdata('user');
+        $this->session->unset_userdata('level');
         $this->session->sess_destroy();
+        unset($_SESSION);
         $this->session->set_flashdata("anda telah berhasil logout");
         redirect("login");
 

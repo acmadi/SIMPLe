@@ -10,6 +10,13 @@
 |
 */
 
+$hook['pre_controller'] = array(
+    'class' => 'Login_checker',
+    'function' => 'login_checker',
+    'filename' => 'login_checker.php',
+    'filepath' => 'hooks',
+    'params' => array()
+);
 
 /* End of file hooks.php */
 /* Location: ./system/application/config/hooks.php */
