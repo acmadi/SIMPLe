@@ -1,4 +1,4 @@
-<label style="float:right; font-size:12px; margin:5px; ">10 November 2011</label>
+<label style="float:right; font-size:12px; margin:5px; "><?php echo date('d F Y') ?></label>
 <center><br/><br/><br/>
 
     <a href="identitas_satker"><img src="<?php echo base_url(); ?>images/dashboard_csc_user_skip.png"
