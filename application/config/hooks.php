@@ -10,7 +10,7 @@
 |
 */
 
-$hook['pre_controller'] = array(
+$hook['post_controller'] = array(
     'class' => 'Login_checker',
     'function' => 'login_checker',
     'filename' => 'login_checker.php',
