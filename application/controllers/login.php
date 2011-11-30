@@ -50,6 +50,9 @@ Class Login extends CI_Controller
                 case 'dirjen':
                     redirect('dirjen/dashboard');
                     break;
+                case 'satker':
+                    redirect('satker/dashboard');
+                    break;
             }
         } else {
             $this->session->set_flashdata('error', 'Login gagal');
