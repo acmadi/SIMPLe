@@ -14,7 +14,7 @@
 <body>
 <div id="wrapper">
 	<div id="header"></div>
-    <div id="navbar"><?php $this->load->view('navbar_cse'); ?></div>
+    <div id="navbar"><?php $this->load->view('navbar_supervisor'); ?></div>
     <div id="container">
     	<div id="content"><?php $this->load->view($content); ?></div>
     </div>
