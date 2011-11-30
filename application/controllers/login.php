@@ -13,73 +13,62 @@ Class Login extends CI_Controller
         $this->load->view("login", $data);
     }
 
-    public function cekuser()
-    {
-        $data['user'] = $this->input->POST('user');
-        $data['pass'] = $this->input->POST('pass');
-        $data['level'] = $this->input->post('level');
-
-        $data['temukkan'] = $this->mlogin->cekdb();
-        if ($data['temukkan'] == null) {
-            return "yes"; //tes
-        } else {
-            return "yes";
-        }
-    }
-
     public function usermasuk()
     {
-        if ($this->cekuser() == "yes") {
-            $data['user'] = $this->input->post('user');
-            $data['level'] = $this->input->post('level');
-            $newdata = array('username' => $data['user'], 'level' => $data['level'], 'status' => 'ok');
-            $this->session->set_userdata($newdata);
-            //$data['tampil']=$this->mlogin->get_by_id(member)->row();
+        $user = $this->input->post('user');
+        $pass = $this->input->post('pass');
 
-            if ($data["level"] == "admin") {
-                redirect('admin/dashboard');
-            } elseif (($data["level"] == "cs") && ($data["user"] == "csa")) {
-                redirect('csa/dashboard');
-            } elseif (($data["level"] == "cs") && ($data["user"] == "csb")) {
-                redirect('csb/dashboard');
-            } elseif (($data["level"] == "cs") && ($data["user"] == "csc")) {
-                redirect('csc/dashboard');
-            } elseif (($data["level"] == "cs") && ($data["user"] == "csd")) {
-                redirect('csd/dashboard');
-            } elseif (($data["level"] == "cs") && ($data["user"] == "cse")) {
-                redirect('cse/dashboard');
-            } elseif (($data["level"] == "cs") && ($data["user"] == "halodja")) {
-                redirect('halodja/dashboard');
-            } elseif ($data["level"] == "supervisor") {
-                redirect('supervisor/dashboard');
-            } elseif ($data["level"] == "pelaksana") {
-                redirect('pelaksana/dashboard');
-            } elseif ($data["level"] == "kasubdit") {
-                redirect('kasubdit/dashboard');
-            } elseif ($data["level"] == "direktur") {
-                redirect('direktur/dashboard');
-            } elseif ($data["level"] == "dirjen") {
-                redirect('dirjen/dashboard');
-            } else {
-                echo "error";
+        $login_data = $this->mlogin->cekdb($user, $pass);
+
+        if ($login_data) {
+
+            $this->session->set_userdata('user', $login_data->user);
+            $this->session->set_userdata('level', $login_data->level);
+
+            switch ($login_data->level) {
+                case 'admin':
+                    redirect('admin/dashboard');
+                    break;
+                case 'cs':
+                    redirect("{$login_data->user}/dashboard");
+                    break;
+                case 'halodja':
+                    redirect('halodja/dashboard');
+                    break;
+                case 'supervisor':
+                    redirect('supervisor/dashboard');
+                    break;
+                case 'pelaksana':
+                    redirect('pelaksana/dashboard');
+                    break;
+                case 'kasubdit':
+                    redirect('kasubdit/dashboard');
+                    break;
+                case 'direktur':
+                    redirect('direktur/dashboard');
+                    break;
+                case 'dirjen':
+                    redirect('dirjen/dashboard');
+                    break;
+                case 'satker':
+                    redirect('satker/dashboard');
+                    break;
             }
-
         } else {
-            echo "login gagal";
+            $this->session->set_flashdata('error', 'Login gagal');
+            redirect('/');
         }
-    }
 
-    public function gagallogin()
-    {
-        if ($this->cekuser() == "no") {
-            echo "gagal login";
-        }
     }
 
     public function process_logout()
     {
+        $this->session->unset_userdata('user');
+        $this->session->unset_userdata('level');
         $this->session->sess_destroy();
+        unset($_SESSION);
+        $this->session->set_flashdata("anda telah berhasil logout");
         redirect("login");
-        echo "anda telah berhasil logout";
+
     }
 }

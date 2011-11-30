@@ -1,64 +1,54 @@
-<ul id="nav">
-    <li><a href="#tab1" class="active">Konsultasi Help Desk</a></li>
-</ul>
-<div class="clear"></div>
-<div id="konten">
-    <div style="display: none;" id="tab1" class="tab_konten">
-        <div class="table" style="font-size:10px;">
-            <div style="border: 1px solid black; padding: 20px">
-                <p style="position:absolute; background-color:#FFFFFF; display:block; margin: -40px 0px 0px 5px; padding: 10px">
-                    Identitas</p>
-                <table align="center">
-                    <tr>
-                        <td>No Tiket</td>
-                        <td>:</td>
-                        <td style="font-weight:bold">2819</td>
-                        <td rowspan="4" style="width:100px; "></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <td>No Satker</td>
-                    <td>:</td>
-                    <td>826239</td>
-                    <td>No Kantor</td>
-                    <td>:</td>
-                    <td>021291891</td>
-                    <tr>
-                        <td>Nama Satker</td>
-                        <td>:</td>
-                        <td>Dirjen Pajak</td>
-                        <td>No Hp</td>
-                        <td>:</td>
-                        <td>081225651234</td>
-                    </tr>
-                    <tr>
-                        <td>Nama Petugas</td>
-                        <td>:</td>
-                        <td>Adi</td>
-                        <td>Email</td>
-                        <td>:</td>
-                        <td>ady@yahoo.com</td>
-                    </tr>
-                </table>
-            </div>
-            <br/><br/>
+    <ul id="nav">
+        <li><a href="#tab1" class="active">Konsultasi Help Desk</a></li>
+    </ul>
+    <div class="clear"></div>
 
-            <div style="border: 1px solid black; padding: 20px">
-                <p style="position:absolute; background-color:#FFFFFF; display:block; margin: -40px 0px 0px 5px; padding: 10px">
-                    List Pertanyaan Sebelumnya</p>
-                <table id="tableOne" class="yui">
-                    <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Tanggal</th>
-                        <th>Nama</th>
+    <div id="div_pertanyaan">
+        <div id="div_pertanyaan1">
+            <p class="identitas">Identitas</p>
+            <ul class="left">
+                <li>
+                    <p><label for="no-tiket">No. Tiket</label><b>2819</b></p>
+                </li>
+                <li>
+                    <p><label for="">No. Satker</label>826239</p>
+                </li>
+                <li>
+                    <p><label for="">Nama Satker</label>Dirjen Pajak</p>
+                </li>
+                <li>
+                    <p><label for="">Nama Petugas</label>Adi</p>
+                </li>
+            </ul>
+            <ul class="right">
+                <li>
+                    <p style="color:#fff;">&nbsp;</p>
+                </li>
+                <li>
+                    <p><label for="">No. Kantor</label>021291891</p>
+                </li>
+                <li>
+                    <p><label for="">No Hp</label>081225651234</p>
+                </li>
+                <li>
+                    <p><label for="">Email</label>Ady@yahoo.com</p>
+                </li>
+            </ul>
+        </div>
+        <div id="div_pertanyaan2">
+            <p class="list">List Pertanyaan Sebelumnya</p>
+            <table id="tableOne" class="yui">    
+                <thead>
+                    <tr>           
+                        <th>No</th>    
+                        <th>Tanggal</th>    
+                        <th>Nama</th>               
                         <th>Nama Satker</th>
                         <th>Subjek</th>
                         <th>Status</th>
                     </tr>
-                    </thead>
-                    <tbody>
+                </thead>
+                <tbody>
                     <tr>
                         <td>1</td>
                         <td>22/06/2011</td>
@@ -75,80 +65,94 @@
                         <td>Tanya Anggaran</td>
                         <td>Open</td>
                     </tr>
-                    </tbody>
-                </table>
-            </div>
-            <br/><br/>
+                </tbody>
+            </table>
+        </div>
+        <div id="pertanyaan3">
+            <p class="label-pertanyaan">Pertanyaan Stakeholder</p>
+            <form method="post" id="pertanyaan1">   
+                <p class="ki">
+                    <label for="Kategori">Kategori</label>
+                    <select name="peraturan">
+                        <option value="pilih">peraturan</option>
+                        <option value="kategori">kategori 1</option>
+                        <option value="kategori1">kategori 2</option>
+                    </select>
+                </p>
+                <p class="ka">
+                    <label for="">Prioritas</label>
+                    <select name="prioritas" id="">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </p>
+                <p class="break">
+                    <label for="pertanyaan">Pertanyaan</label>
+                    <input type="text" name="text" id="text" value="textbox"/>
+                </p>
+                <p>
+                    <label for="description">Description</label>
+                    <textarea name="textarea" id="textar" cols="30" rows="10"></textarea>
+                </p>
+                <p>
+                    <input type="submit" class="tombol" value="Submit">
+                </p>
+            </form>
+        
+            <p class="label-referensi">Referensi Jawaban</p>
+            <form method="post" id="pertanyaan2">
+                <div style="min-height:300px; height:auto; overflow-x:hiden; border:2px solid #222; padding:10px 10px 10px 10px; ">
+                	<p>
+                    	<a href="title">Refensi Jawaban 1</a><br />
+                        Penjelasan 
+                    </p>
+                    <br />
+                	<p>
+                    	<a href="title">Refensi Jawaban 2</a><br />
+                        Penjelasan 
+                    </p>
+                    <br />
+                	<p>
+                    	<a href="title">Refensi Jawaban 3</a><br />
+                        Penjelasan 
+                    </p>
+                    <br />
+                	<p>
+                    	<a href="title">Refensi Jawaban 4</a><br />
+                        Penjelasan 
+                    </p>
+                    <br />
+                	<p>
+                    	<a href="title">Refensi Jawaban 5</a><br />
+                        Penjelasan 
+                    </p>
+                    <br />
+                	<p>
+                    	<a href="title">Refensi Jawaban 6</a><br />
+                        Penjelasan 
+                    </p>
+                    <br />
+                	<p>
+                    	<a href="title">Refensi Jawaban 7</a><br />
+                        Penjelasan 
+                    </p>
+                    <br />
+                	<p>
+                    	<a href="title">Refensi Jawaban 8</a><br />
+                        Penjelasan 
+                    </p>
 
-            <div style="border: 1px solid black; padding: 20px">
-                <p style="position:absolute; background-color:#FFFFFF; display:block; margin: -40px 0px 0px 5px; padding: 10px">
-                    Pertanyaan Stakeholder</p>
-
-                <form action="#" name="" method="post" style="font-size:10px">
-                    <table align="center">
-                        <tr>
-                            <td>Kategori</td>
-                            <td>
-                                <select>
-                                    <option>Peraturan</option>
-                                    <option>Kategori 2</option>
-                                    <option>Kategori 3</option>
-                                </select>
-                            </td>
-                            <td>Prioritas</td>
-                            <td>
-                                <select>
-                                    <option>Rendah</option>
-                                    <option>Medium</option>
-                                    <option>Tinggi</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Pertanyaan</td>
-                            <td colspan="3"><input type="text" size="100" name="" id=""/></td>
-                        </tr>
-                        <tr>
-                            <td>Description</td>
-                            <td><textarea cols="90" rows="5"></textarea></td>
-                        </tr>
-                        <tr>
-                            <td colspan="4" align="right"><input type="submit" value="Submit"
-                                                                 style="width:105px; height:26px; font-size:10px;"/>
-                            </td>
-                        </tr>
-                    </table>
-                </form>
-            </div>
-            <br/><br/>
-
-            <div class="table" style="font-size:10px;">
-                <div style="border: 1px solid black; padding: 20px; width: 99%">
-                    <p style="position:absolute; background-color:#FFFFFF; display:block; margin: -40px 0px 0px 5px; padding: 10px">
-                        Referensi Jawaban</p><br/>
-
-                    <div style="overflow:scroll; overflow-x:hidden; height:100px; border:1px solid #999; ">
-                        <li>Jawaban 1</li>
-                        <li>Penjelsaan Jawaban</li>
-                        <li>Jawaban 2</li>
-                        <li>Penjelasan Jawaban</li>
-                        <li>Jawaban 3</li>
-                        <li>Penjelsaan Jawaban</li>
-                        <li>Jawaban 4</li>
-                        <li>Penjelasan Jawaban</li>
-                        <li>Jawaban 5</li>
-                        <li>Penjelasan Jawaban</li>
-                        <li>Jawaban 6</li>
-                        <li>Penjelasan Jawaban</li>
-                    </div>
                 </div>
-                <br/>
-                <input type="submit" value="Referensi Peraturan"
-                       style="width:100px; height:23px; font-size:10px; margin-right:-30px; float:right; "/>
-                <input type="submit" value="Eskalasi"
-                       style="width:70px; height:23px; font-size:10px; margin-right:0px; float:right; "/>&nbsp;&nbsp;
-                <br/>
-            </div>
+                    <input type="submit" class="tombol" value="Referensi Peraturan" onclick="popUp()" />
+                <div class="break"></div>
+            </form>
         </div>
     </div>
-</div>
+    
+                        <script type="text/javascript">
+                        function popUp()
+                        {
+                        window.open("popup","_blank","width=800, height=400");
+                        }
+                    </script>

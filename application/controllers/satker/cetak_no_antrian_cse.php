@@ -2,7 +2,7 @@
 class Cetak_no_antrian_cse extends CI_Controller
 {
 
-    function Cetak_no_antrian_cse()
+    function __construct()
     {
         parent::__construct();
     }
@@ -14,6 +14,8 @@ class Cetak_no_antrian_cse extends CI_Controller
         /*
           if ($this->session->userdata('login') == TRUE)
           {*/
+        $this->load->model('msatker');
+        $data['antrian'] = $this->msatker->antrian_terakhir('E');
         $data['title'] = 'Cetak No Antrian';
         $data['content'] = 'satker/cetak_no_antrian_cse';
         $this->load->view('satker/template', $data);

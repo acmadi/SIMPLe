@@ -3,17 +3,17 @@
 class Mlogin extends CI_Model
 {
 
-    public function cekdb()
+    public function cekdb($user, $pass)
     {
-        $user = $this->input->post('user');
-        $pass = $this->input->post('pass');
-        $level = $this->input->post('level');
+        $query = $this->db->from('member')
+                      ->where('user', $user)
+                      ->where('pass', $pass)
+                      ->get();
 
-        $this->db->where('user', $user);
-        $this->db->where('pass', $pass);
-        $this->db->where('level', $level);
-        $query = $this->db->get('member');
-        return $query->result();
+        if ($query->num_rows() == 1) {
+            $query = $query->result();
+            return $query[0];
+        }
     }
 
     public function getdropdownsup()

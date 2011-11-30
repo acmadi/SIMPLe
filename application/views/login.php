@@ -14,6 +14,8 @@
 
     <div id="mid">
         <h4 id="title_form_login">Admin</h4><br/>
+
+        <?php echo $this->session->flashdata('error') ?>
         <?php echo form_open("login/usermasuk"); ?>
         <table>
             <tr>
@@ -26,12 +28,6 @@
                 <td><label for="password">Password</label></td>
                 <td>:</td>
                 <td><input type="password" name="pass" size="24" class="form_field"/></td>
-            </tr>
-
-            <tr>
-                <td><label for="password">Level</label></td>
-                <td>:</td>
-                <td><?php echo form_dropdown("level", $optionlist, "", "id ='level'"); ?></td>
             </tr>
 
             <tr>
