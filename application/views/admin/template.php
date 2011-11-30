@@ -10,7 +10,7 @@
     <style type="text/css">@import url("<?php echo base_url() . 'css/table.css'; ?>");</style>
     <!--POP UP-->
     <style type="text/css">@import url("<?php echo base_url() . 'css/pop-up.css'; ?>");</style>
-
+	<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery-1.4.2.min.js"></script>
 </head>
 <body>
 <div id="wrapper">
@@ -25,10 +25,10 @@
 </html>
 
 <!--TABS--GANTI MODEL EXTJS ! :) -->
-<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery-1.4.2.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#tab1').fadeIn('slow'); //tab pertama ditampilkan
+        //$('#tab1').fadeIn('slow'); //tab pertama ditampilkan
+        $('<?php echo isset($tabAktif)?$tabAktif:'#tab1';?>').fadeIn('slow'); //tab pertama ditampilkan
         $('ul#nav li a').click(function() { // jika link tab di klik
             $('ul#nav li a').removeClass('active'); //menghilangkan class active (yang tampil)
             $(this).addClass("active"); // menambahkan class active pada link yang diklik
@@ -63,15 +63,28 @@
         })
                 .css("border-width", "10px");
 
-
         // Delete confirmation
         $('.delete').click(function(){
             answer = confirm('Anda yakin akan menghapus?');
             if (answer) {
                 _this = $(this);
                 link = _this.attr('link');
-                $.get(link, function(){
-                    _this.closest('tr').css('background', 'red').fadeOut();
+                $.get(link, function(data){
+					//tambahan fadhli
+					if(data == 1){ 
+						_this.closest('tr').css('background', 'red').fadeOut();
+						$("div#msg").html("<p style='color:blue;'>sukses menghapus data</p>");
+						setTimeout('$("div#msg").html("")', 3000);
+					}
+					if(data == 2){
+						$("div#msg").html("<p style='color:red;'>gagal menghapus data</p>");
+						setTimeout('$("div#msg").html("")', 3000);
+					}
+					
+					if(data == 3){
+						$("div#msg").html("<p style='color:red;'>terdapat keterkaitan dengan data lain</p>");
+						setTimeout('$("div#msg").html("")', 3000);
+					}
                 });
             }
         })

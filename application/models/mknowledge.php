@@ -8,10 +8,9 @@ class Mknowledge extends CI_Model
      * @return Object
      */
     public function get_all() {
-        $sql = "SELECT tb_knowledge_base.*, tb_kat_knowledge_base.*
-                FROM tb_knowledge_base
-                LEFT JOIN tb_kat_knowledge_base
-                ON tb_knowledge_base.id_kat_knowledge_base = tb_kat_knowledge_base.id_kat_knowledge_base";
+        $sql = "SELECT a.id_knowledge_base,a.judul,a.desripsi,a.jawaban,b.kat_knowledge_base
+				FROM tb_knowledge_base a,tb_kat_knowledge_base b
+				WHERE a.id_kat_knowledge_base = b.id_kat_knowledge_base";
         return $this->db->query($sql);
     }
 
@@ -23,11 +22,35 @@ class Mknowledge extends CI_Model
      */
     public function add_category($name)
     {
-        $sql = "INSERT INTO `tb_kat_knowledge_base`
-                (`id_kat_knowledge_base`, `kat_knowledge_base`)
-                VALUES (NULL, '$name')";
+        $sql = "INSERT INTO tb_kat_knowledge_base
+                (kat_knowledge_base)
+                VALUES (?)";
 
-        $this->db->query($sql);
+        $query = $this->db->query($sql,array($name));
+		if($this->db->affected_rows() > 0){ 
+			return true;
+		}else{ 
+			return false;
+		}
+    }
+	
+	/**
+     * Untuk menambah  knowledge
+     *
+     * @param $data array
+     * @return void
+     */
+    public function add_knowledge($data = array())
+    {
+        $sql = "INSERT INTO tb_knowledge_base(id_kat_knowledge_base,judul,desripsi,jawaban) 
+				VALUES(?,?,?,?);";
+
+        $query = $this->db->query($sql,array($data['flist'],$data['fjudul'],$data['fdesk'],$data['fjawab']));
+		if($this->db->affected_rows() > 0){ 
+			return true;
+		}else{ 
+			return false;
+		}
     }
 
     /**
@@ -37,7 +60,7 @@ class Mknowledge extends CI_Model
      */
     public function get_all_category()
     {
-        $sql = "SELECT * FROM `tb_kat_knowledge_base` ORDER BY `kat_knowledge_base`";
+        $sql = "SELECT * FROM tb_kat_knowledge_base ORDER BY kat_knowledge_base";
         return $this->db->query($sql);
     }
 	
@@ -78,17 +101,76 @@ class Mknowledge extends CI_Model
 		
 	}
 	
-    /**
-     * Hapus kategori pada knowledge base
+	/**
+     * ubah kategori knowledge base
      *
-     * @param $id Integer
-     * @return void
+     * @param $data array
+     * @return Row
      */
-    public function delete_category($id)
-    {
-        // TODO: Buat validasi dan pengecekan user sudah login atau belum?
-
-        //$sql = "DELETE FROM `tb_kat_knowledge_base` WHERE `tb_kat_knowledge_base`.`id_kat_knowledge_base` = '$id'";
-        //$this->db->query($sql);
-    }
+	public function do_edit_category($data = array()){
+		$sql = "UPDATE tb_kat_knowledge_base SET kat_knowledge_base = ? WHERE id_kat_knowledge_base = ?";
+		$query	= $this->db->query($sql, array($data['kat'],$data['id']));
+		if($this->db->affected_rows() > 0){ 
+			return true;
+		}else{ 
+			return false;
+		}
+		
+	}
+	
+	/**
+     * hapus knowledge base
+     *
+     * @param $data integer
+     * @return boolean
+     */
+	public function delete_knowledge($id){
+		$sql = "SELECT no_tiket_helpdesk
+				FROM tb_tiket_helpdesk 
+				WHERE id_knowledge_base = ?";
+		
+		$query	= $this->db->query($sql, array($id));
+		
+		if($query->num_rows()>0){
+			return 3;
+		}else{
+			$sql2 = "DELETE FROM tb_knowledge_base WHERE id_knowledge_base = ?";
+			$query2	= $this->db->query($sql2, array($id));
+			
+			if($this->db->affected_rows() > 0){ 
+				return 1;
+			}else{ 
+				return 2;
+			}
+		}
+		
+	}
+	
+	/**
+     * hapus kategori knowledge base
+     *
+     * @param $data integer
+     * @return boolean
+     */
+	public function delete_category($id){
+		$sql = "SELECT id_knowledge_base
+				FROM tb_knowledge_base
+				WHERE id_kat_knowledge_base = ?";
+		
+		$query	= $this->db->query($sql, array($id));
+		
+		if($query->num_rows()>0){
+			return 3;
+		}else{
+			$sql2 = "DELETE FROM tb_kat_knowledge_base WHERE id_kat_knowledge_base = ?";
+			$query2	= $this->db->query($sql2, array($id));
+			
+			if($this->db->affected_rows() > 0){ 
+				return 1;
+			}else{ 
+				return 2;
+			}
+		}
+		
+	}
 }

@@ -20,6 +20,7 @@ class Knowledge_ubah extends CI_Controller
 		$data['list_kat']	= $this->knowledge->get_all_category();
         $data['title'] 		= 'Knowledge Ubah';
         $data['content'] 	= 'admin/knowledge/knowledge_ubah';
+		
         $this->load->view('admin/template', $data);
         /*}
           else
@@ -37,11 +38,19 @@ class Knowledge_ubah extends CI_Controller
 		$this->form_validation->set_rules('fjawaban', 'Jawaban', 'required');
 		$id 	= $this->input->post('id',TRUE);
 		
-		
 		if ($this->form_validation->run() == FALSE)
 		{
-			$this->session->set_flashdata('Silahkan isi data dengan benar.');
-			redirect('/admin/knowledge_ubah/index/'.$id,'location');
+			$data1['id_kat_knowledge_base'] 	= $this->input->post('fkategori',TRUE);
+			$data1['judul'] 					= $this->input->post('fjudul',TRUE);
+			$data1['desripsi'] 					= $this->input->post('fdeskripsi',TRUE);
+			$data1['jawaban'] 					= $this->input->post('fjawaban',TRUE);
+			$data1['id_knowledge_base'] 		= $id;
+			
+			$data['ubah']		= (object) $data1 ;
+			$data['list_kat']	= $this->knowledge->get_all_category();
+			$data['title'] 		= 'Knowledge Ubah';
+			$data['content'] 	= 'admin/knowledge/knowledge_ubah';
+			$this->load->view('admin/template', $data);
 		}
 		else
 		{	
@@ -54,10 +63,10 @@ class Knowledge_ubah extends CI_Controller
 				
 			$info = $this->knowledge->edit_data_by_id($data);
 			if($info):
-				$this->session->set_flashdata('Knowledge berhasil diupdate.');
+				$this->session->set_flashdata('msg',"<p style='color:blue;'>Knowledge berhasil diupdate.</p>");
 				redirect('/admin/knowledge/index/','location');
 			else:
-				$this->session->set_flashdata('Knowledge gagal diupdate.');
+				$this->session->set_flashdata('msg',"<p style='color:red;'>Knowledge gagal diupdate atau tidak ada perubahan.</p>");
 				redirect('/admin/knowledge/index/','location');
 			endif;
 			

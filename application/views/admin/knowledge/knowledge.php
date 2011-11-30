@@ -5,9 +5,17 @@
     <li><a href="#tab4" class="active">Tambah Knowledge Base</a></li>
 </ul>
 <div class="clear"></div>
-<div id="konten">
-    <div style="display: none;" id="tab1" class="tab_konten">
 
+<div id="konten">
+	<div id="msg">
+	<?php
+	if ($this->session->flashdata('msg')){
+		echo $this->session->flashdata('msg');
+	}
+	?>
+	</div>
+    <div style="display: none;" id="tab1" class="tab_konten">
+	
 
         <div class="table">
             <div id="tail">
@@ -65,7 +73,7 @@
                 <td><?php echo $category->kat_knowledge_base ?></td>
                 <td>
                     <form action="#" onsubmit="return false;"><input type="button" value="Ubah"
-                                                                     onclick="popup_show('popup', 'popup_drag', 'popup_exit', 'screen-center', 0, 0);"
+                                                                     onclick="tampil_popup('<?php echo $category->id_kat_knowledge_base ?>','<?php echo $category->kat_knowledge_base ?>');"
                                                                      style="float:left; font-size:10px; width:80px; height:25px; "/>
                     </form>
                     <input type="button" value="hapus" class="delete" link="<?php echo site_url("/admin/knowledge/delete_category/{$category->id_kat_knowledge_base}") ?>" style="font-size:10px; width:80px; height:25px;" />
@@ -103,41 +111,42 @@
         <div id="tail">
             <span style="margin:0px 0px 0px -280px; padding-left:10px; position:absolute; width:50px; height:10px; background:#FFF;">Cari Unit</span>
 
-            <form action="#" method="post"
+            <form action="<?php echo site_url('/admin/knowledge/add_knowledge') ?>" method="post"
                   style="border: 1px solid #999; padding: 13px 30px 13px 13px; margin:5px 0px 0px 20px;">
                 <table>
                     <tr>
                         <td>Kategori</td>
                         <td>:</td>
                         <td>
-                            <select style="font-size:10px; ">
+                            <select style="font-size:10px;" name="flist2">
                                 <option selected="selected">- pertanyaan -</option>
-                                <option>ABCD</option>
-                                <option>EFGH</option>
+                                <?php foreach($categories->result() as $lk): ?>
+									<option value="<?php echo $lk->id_kat_knowledge_base?>"><?php echo $lk->kat_knowledge_base?></option>
+								<?php endforeach;?>
                             </select>
                         </td>
                     </tr>
                     <tr>
                         <td>Pertanyaan</td>
                         <td>:</td>
-                        <td><input type="text" size="50"/></td>
+                        <td><input type="text" size="50" name="fjudul2"/></td>
                     </tr>
                     <tr>
                         <td>Deskripsi</td>
                         <td>:</td>
-                        <td><textarea cols="100" rows="6"></textarea></td>
+                        <td><textarea cols="100" rows="6" name="fdesripsi2"></textarea></td>
                     </tr>
                     <tr>
                         <td>Jawaban</td>
                         <td>:</td>
-                        <td><textarea cols="100" rows="6"></textarea></td>
+                        <td><textarea cols="100" rows="6" name="fjawaban2"></textarea></td>
                     </tr>
                     <tr>
                         <td></td>
                         <td></td>
                         <td><input type="button"
                                    style="width:70px; height:23px; margin:0px 76px 0px 20px; font-size:10px; "
-                                   value="reset"/><input type="button" style="width:70px; height:23px; font-size:10px; "
+                                   value="reset"/><input type="submit" style="width:70px; height:23px; font-size:10px; "
                                                          value="simpan"/></td>
                     </tr>
                 </table>
@@ -149,42 +158,29 @@
 
 <script type="text/javascript" src="<?php echo base_url(); ?>js/fungsi.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>js/popup-window.js"></script>
+<script type="text/javascript">
+	setTimeout('$("div#msg").html("")', 3000);
+	function tampil_popup(id,kategori){
+		$('#pidkat').val(id);
+		$('#pkategori').val(kategori);
+		popup_show('popup', 'popup_drag', 'popup_exit', 'screen-center', 0, 0);
+	}
+</script>
 
 <!-- ***** Popup Window **************************************************** -->
 
 <div class="sample_popup" id="popup" style="display: none;">
     <div class="menu_form_header" id="popup_drag">
-        <img class="menu_form_exit" id="popup_exit" src="form_exit.png" alt=""/>
+        <img class="menu_form_exit" id="popup_exit" src="<?php echo base_url()?>css/form_exit.png" alt=""/>
         &nbsp;&nbsp;&nbsp;Ubah Kategori
     </div>
     <div class="menu_form_body">
-        <form action="#">
+        <form action="<?php echo site_url("/admin/knowledge/edit_category")?>" method="post" name="formpopup">
+			<input type="hidden" name="pidkat" value="" id="pidkat"/>
             <table>
                 <tr>
                     <th>Kategori:</th>
-                    <td><input class="field" type="text" name="kategori" value="Peraturan"/></td>
-                </tr>
-                <tr>
-                    <th></th>
-                    <td><input class="btn" type="submit" value="simpan"/></td>
-                </tr>
-            </table>
-        </form>
-    </div>
-</div>
-
-
-<div class="sample_popup" id="popup" style="display: none;">
-    <div class="menu_form_header" id="popup_drag">
-        <img class="menu_form_exit" id="popup_exit" src="form_exit.png" alt=""/>
-        &nbsp;&nbsp;&nbsp;Ubah Kategori
-    </div>
-    <div class="menu_form_body">
-        <form action="#">
-            <table>
-                <tr>
-                    <th>ad:</th>
-                    <td><input class="field" type="text" name="kategori" value="Peraturan"/></td>
+                    <td><input class="field" type="text" name="pkategori" value="" id="pkategori"/></td>
                 </tr>
                 <tr>
                     <th></th>
