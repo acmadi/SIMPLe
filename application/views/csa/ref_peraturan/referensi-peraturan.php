@@ -23,17 +23,17 @@
             <ul>
                 <li><img src="<?php echo base_url(); ?>images/folder-closed.gif" style="height:16px;" alt="dir" />Peraturan A
                     <ul>
-                        <li> - Knowledge Base Kategori Peraturan</li>
-                        <li> - Knowledge Base Kategori Peraturan</li>
-                        <li> - Knowledge Base Kategori Peraturan</li>
+                        <li>Judul - judul peraturan yang ada</li>
+                        <li>Judul - judul peraturan yang ada</li>
+                        <li>Judul - judul peraturan yang ada</li>
                         <li class="jauh"> >> Selengkapnya</li>
                     </ul>
                 </li>
                 <li><img src="<?php echo base_url(); ?>images/folder-closed.gif" style="height:16px;" alt="dir" />Peraturan B
                     <ul>
-                        <li> - Knowledge Base Kategori Peraturan</li>
-                        <li> - Knowledge Base Kategori Peraturan</li>
-                        <li> - Knowledge Base Kategori Peraturan</li>
+                        <li>Judul - judul peraturan yang ada</li>
+                        <li>Judul - judul peraturan yang ada</li>
+                        <li>Judul - judul peraturan yang ada</li>
                         <li class="jauh"> >> Selengkapnya</li>
                     </ul>
                 </li>
