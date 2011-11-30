@@ -46,6 +46,7 @@ class Dashboard extends CI_Controller
         echo '<pre>';
         echo sprintf("<div>Backup database: <a href='%s' style='text-decoration: none'>%s</a></div>", $url . $filename, $url . $filename);
         echo sprintf("<div>Untuk database terakhir dapat diakses di: <a href='%s' style='text-decoration: none'>%s</a></div>", $url . $latest_filename, $url . $latest_filename);
-        echo '<pre';
+        echo '<pre>';
+        exit();
     }
 }
