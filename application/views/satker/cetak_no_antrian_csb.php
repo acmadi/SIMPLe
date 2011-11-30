@@ -2,9 +2,9 @@
 <br/>
 <a href="dashboard">
     <div id="cetak" style="width:500px; height:220px; background:#ddd; margin:0 auto; padding-top:10px; ">
-        <font id="date" style="margin:15px; text-align:left; ">Tanggal 10 November 2011 : 10.17 WIB</font><br/><br/>
+        <font id="date" style="margin:15px; text-align:left; ">Tanggal <?php echo date('d F Y H:m') ?> WIB</font><br/><br/>
         <center><font style="font-weight:bold; text-align:center; font-size:25px;">No Antrian</font></center>
-        <center><font style="font-weight:bold; text-align:center; font-size:50px; color:#909; ">48</font></center>
+        <center><font style="font-weight:bold; text-align:center; font-size:50px; color:#909; "><?php echo $antrian ?></font></center>
         <br/>
         <center><font style="font-weight:bold; text-align:center; font-size:20px;">Sistem Informasi Pusat Layanan
             (SIMPLE)</font></center>
