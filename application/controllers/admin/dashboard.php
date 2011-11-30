@@ -38,7 +38,7 @@ class Dashboard extends CI_Controller
         if (file_exists($local_path) === FALSE)
             mkdir($local_path);
 
-        $command = 'mysqldump -u backup db_dja > ' . $local_path . $latest_filename;
+        $command = '/opt/lampp/bin/mysqldump -u backup db_dja > ' . $local_path . $latest_filename;
         exec($command);
 
         copy($local_path . $latest_filename, $local_path . $filename);
