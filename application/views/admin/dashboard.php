@@ -1,1 +1,2 @@
+<a href="<?php echo site_url('admin/dashboard/database_backup') ?>">Database Backup</a>
 <div style="text-align: center;"><img src="<?php echo base_url(); ?>images/dashboard.png" style="height:400px; width:auto; margin-top:30px; "/></div>
