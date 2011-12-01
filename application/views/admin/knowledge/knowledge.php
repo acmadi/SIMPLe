@@ -40,7 +40,7 @@
                         <td><?php echo $knowledge->judul?></td>
                         <td>
                             <a href="<?php echo base_url()?>index.php/admin/knowledge_ubah/index/<?php echo $knowledge->id_knowledge_base?>"><input type="button" value="Ubah" onclick="" style="float:left; font-size:10px; width:80px; height:25px; "/></a>
-                            <a href="<?php echo base_url()?>index.php/admin/knowledge/delete/<?php echo $knowledge->id_knowledge_base?>"><input type="button" value="Hapus" onclick="" style="float:left; font-size:10px; width:80px; height:25px; "/></a>
+                            <a href="<?php echo base_url()?>index.php/admin/knowledge/delete/<?php echo $knowledge->id_knowledge_base?>" onclick="return confirm('Anda yakin akan menghapus?');"><input type="button" value="Hapus" onclick="" style="float:left; font-size:10px; width:80px; height:25px; "/></a>
                         </td>
                     </tr>
                     <?php endforeach ?>
@@ -76,7 +76,7 @@
                                                                      onclick="tampil_popup('<?php echo $category->id_kat_knowledge_base ?>','<?php echo $category->kat_knowledge_base ?>');"
                                                                      style="float:left; font-size:10px; width:80px; height:25px; "/>
                     </form>
-					<a href="<?php echo base_url()?>index.php/admin/knowledge/delete_category/<?php echo $category->id_kat_knowledge_base?>"><input type="button" value="Hapus" onclick="" style="float:left; font-size:10px; width:80px; height:25px; "/></a>
+					<a href="<?php echo base_url()?>index.php/admin/knowledge/delete_category/<?php echo $category->id_kat_knowledge_base?>" onclick="return confirm('Anda yakin akan menghapus?');"><input type="button" value="Hapus" onclick="" style="float:left; font-size:10px; width:80px; height:25px; "/></a>
                 </td>
 
             </tr>
