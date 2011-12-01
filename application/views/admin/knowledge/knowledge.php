@@ -143,7 +143,7 @@
                     <tr>
                         <td></td>
                         <td></td>
-                        <td><input type="button"
+                        <td><input type="reset"
                                    style="width:70px; height:23px; margin:0px 76px 0px 20px; font-size:10px; "
                                    value="reset"/><input type="submit" style="width:70px; height:23px; font-size:10px; "
                                                          value="simpan"/></td>
