@@ -135,7 +135,7 @@ class Mknowledge extends CI_Model
 			return 3;
 		}else{
 			$sql2 = "DELETE FROM tb_knowledge_base WHERE id_knowledge_base = ?";
-			$query2	= $this->db->query($sql2, array($id));
+			$this->db->query($sql2, array($id));
 			
 			if($this->db->affected_rows() > 0){ 
 				return 1;

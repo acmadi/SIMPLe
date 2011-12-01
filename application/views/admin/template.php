@@ -70,21 +70,7 @@
                 _this = $(this);
                 link = _this.attr('link');
                 $.get(link, function(data){
-					//tambahan fadhli
-					if(data == 1){ 
 						_this.closest('tr').css('background', 'red').fadeOut();
-						$("div#msg").html("<p style='color:blue;'>sukses menghapus data</p>");
-						setTimeout('$("div#msg").html("")', 3000);
-					}
-					if(data == 2){
-						$("div#msg").html("<p style='color:red;'>gagal menghapus data</p>");
-						setTimeout('$("div#msg").html("")', 3000);
-					}
-					
-					if(data == 3){
-						$("div#msg").html("<p style='color:red;'>terdapat keterkaitan dengan data lain</p>");
-						setTimeout('$("div#msg").html("")', 3000);
-					}
                 });
             }
         })

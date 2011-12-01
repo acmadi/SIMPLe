@@ -101,15 +101,42 @@ class Knowledge extends CI_Controller
     }
 
     public function delete_category($id)
-    {
+    { 
         $this->load->model('Mknowledge', 'knowledge');
-        echo $this->knowledge->delete_category($id);
+        $info = $this->knowledge->delete_category($id);
+		switch($info){
+			case 1:
+				$this->session->set_flashdata('msg',"<p style='color:blue;'>Berhasil dihapus</p>");
+				break;
+			case 2:
+				$this->session->set_flashdata('msg',"<p style='color:red;'>Gagal dihapus</p>");
+				break;
+			default:
+				$this->session->set_flashdata('msg',"<p style='color:red;'>Terdapat keterkaitan dengan data lain</p>");
+				break;
+		}
+		
+		redirect('/admin/knowledge/index/2');
     }
 	
-	public function delete_knowledge($id)
+	public function delete($id)
     {
         $this->load->model('Mknowledge', 'knowledge');
-        echo  $this->knowledge->delete_knowledge($id);
+        $info = $this->knowledge->delete_knowledge($id);
+		
+		switch($info){
+			case 1:
+				$this->session->set_flashdata('msg',"<p style='color:blue;'>Berhasil dihapus</p>");
+				break;
+			case 2:
+				$this->session->set_flashdata('msg',"<p style='color:red;'>Gagal dihapus</p>");
+				break;
+			default:
+				$this->session->set_flashdata('msg',"<p style='color:red;'>Terdapat keterkaitan dengan data lain</p>");
+				break;
+		}
+		
+		redirect('/admin/knowledge');
     }
 	
 	public function edit_category(){
