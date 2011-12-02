@@ -173,4 +173,34 @@ class Mknowledge extends CI_Model
 		}
 		
 	}
+	
+	/**
+     * search kategori knowledge base
+     *
+     * @param $data integer
+     * @return boolean
+     */
+	public function search_by_category($id, $limit = ''){
+		$sql = "SELECT a.judul,a.id_kat_knowledge_base
+				FROM tb_knowledge_base a,tb_kat_knowledge_base b
+				WHERE a.id_kat_knowledge_base = b.id_kat_knowledge_base AND a.id_kat_knowledge_base = ? $limit";
+		
+		$data['result'] = $this->db->query($sql, array($id));
+		
+		$sql2 = "SELECT kat_knowledge_base
+				FROM tb_kat_knowledge_base WHERE id_kat_knowledge_base = ?
+				";
+				
+		$query2 	= $this->db->query($sql2, array($id));
+		if ($query2->num_rows() > 0)
+		{
+		   $row = $query2->row();
+		   $data['name'] = $row->kat_knowledge_base;
+		   
+		}
+		
+		return $data;
+	}
+	
+	
 }
