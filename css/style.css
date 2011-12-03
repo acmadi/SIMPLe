@@ -366,3 +366,10 @@ ul#nav li a.active, ul#nav li a.active:hover{
 	width:540px;
 	margin-top:30px;
 }
+
+.msg {
+    background: #9acd32 url(../images/check.png) no-repeat 10px center;
+    color: white;
+    font-size: 13px;
+    padding: 4px 35px;
+}

@@ -4,7 +4,19 @@
     <li><a href="#tab3" class="active">Tambah Forum</a></li>
 </ul>
 <div class="clear"></div>
+
+    
+
     <div id="konten">
+
+        <?php
+        if ($this->session->flashdata('msg')){
+            echo '<div class="msg">';
+            echo $this->session->flashdata('msg');
+            echo '</div>';
+        }
+        ?>
+
         <div style="display: none;" id="tab1" class="tab_konten">
             <div class="table">
                 <div id="head">
@@ -110,20 +122,17 @@
         </div>
         <div style="display: none;" id="tab2" class="tab_konten">
             <div id="tail">
-                <form action="#" method="post"
+                <form action="<?php echo site_url('/admin/man_forum/add_category') ?>" method="post"
                       style="border: 1px solid #999; padding: 13px 30px 13px 13px; margin:5px 0px 0px 20px;">
                     <table>
                         <tr>
-                            <td>Nama Kategori Forum</td>
-                            <td>:</td>
-                            <td><input type="text" value=""/></td>
+                            <td>Nama Kategori Forum: </td>
+                            <td><input type="text" name="kat_forum" value=""/></td>
                         </tr>
                     </table>
                     <br/>
-                    <input type="button" style="width:70px; height:23px; margin:0px 76px 0px 20px; font-size:10px; "
-                           value="reset"/>
-                    <input type="button" style="width:70px; height:23px; font-size:10px; " value="Tambah"/>
-                </form>
+                    <input type="reset" style="width:70px; height:23px; margin:0px 76px 0px 20px; font-size:10px; " value="Reset"/>
+                    <input type="submit"    style="width:70px; height:23px; font-size:10px; " value="Tambah"/>
                 </form>
             </div>
         </div>
