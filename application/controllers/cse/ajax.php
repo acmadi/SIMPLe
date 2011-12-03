@@ -25,9 +25,7 @@ class Ajax extends CI_Controller {
 		$petugas = $this->satker->get_petugas_by_satker($id_satker);
 
 		if (is_array($petugas)) :
-			echo '
-				{
-				"petugas": [';
+			echo '{"petugas": [';
 
 			for($i = 0; $i < count($petugas); $i++) :
 				echo '{';
@@ -38,17 +36,22 @@ class Ajax extends CI_Controller {
 				echo '}';
 
 				if ($i < count($petugas) - 1) :
-					echo ',';
+					echo ', ';
 				endif;
 			endfor;
-
-			echo ']
-				}';
-
+			echo ']}';
 		else :
 			$petugas = array();
 		endif;
 	}
 
 }
-
+{
+	"petugas": [
+	{
+		"id_petugas_satker": "1",
+		"nama_petugas": "John Doe",
+		"jabatan_petugas": "Anything",
+		"no_hp": "Anyting"}
+	]
+}
