@@ -1,0 +1,6 @@
+Untuk kemudahan bersama, dump tabel telah saya pecah-pecah menjadi beberapa file .sql 
+yang telah dinomori sesuai urutan eksekusinya.
+
+1** = CREATE TABLE
+2** = INSERT INTO
+3** = CONSTRAINT (Foreign Key, dsb)
