@@ -377,7 +377,7 @@ ul#nav li a.active, ul#nav li a.active:hover{
 
 .error {
     border: 2px solid #FBC2C4;
-    background: #FBE3E4 url(../images/check.png) no-repeat 10px center;
+    background: #FBE3E4 url(../images/error.png) no-repeat 10px center;
     color: #8A1F11;
     font-size: 13px;
     padding: 4px 35px;
@@ -385,7 +385,7 @@ ul#nav li a.active, ul#nav li a.active:hover{
 
 .info {
     border: 2px solid #92CAE4;
-    background: #D5EDF8 url(../images/check.png) no-repeat 10px center;
+    background: #D5EDF8 url(../images/info.png) no-repeat 10px center;
     color: #205791;
     font-size: 13px;
     padding: 4px 35px;
@@ -393,7 +393,7 @@ ul#nav li a.active, ul#nav li a.active:hover{
 
 .notice {
     border: 2px solid #FFD324;
-    background: #FFF6BF url(../images/check.png) no-repeat 10px center;
+    background: #FFF6BF url(../images/exclamation.png) no-repeat 10px center;
     color: #514721;
     font-size: 13px;
     padding: 4px 35px;
