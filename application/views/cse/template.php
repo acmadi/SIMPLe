@@ -66,7 +66,7 @@ $(document).ready(function() {
 
                     $.get('<?php echo base_url() . index_page() ?>/cse/ajax/get_nama_satker/' + kode, 
                     function(data) {
-                        if (data != 'notfound'){
+                        if (data != ''){
                             $('#nama_satker').attr('value', data);
                             $('#nama_status').html('Satker ditemukan');
 

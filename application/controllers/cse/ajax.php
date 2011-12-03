@@ -15,13 +15,13 @@ class Ajax extends CI_Controller {
 		if (is_object($satker)) : 
 			echo $satker->nama_satker;
 		else :
-			echo 'notfound';
+			
 		endif;
 	}
 
 	function get_petugas_satker($id_satker){
 		header('Content-type: application/json');
-		
+
 		$petugas = $this->satker->get_petugas_by_satker($id_satker);
 
 		if (is_array($petugas)) :
@@ -52,15 +52,3 @@ class Ajax extends CI_Controller {
 
 }
 
-
-/*
-{
-"petugas": [
-	{
-		"id_petugas_satker": "22",
-		"nama_petugas": "rumah kesenian"
-	},
-]
-}
-
-*/
