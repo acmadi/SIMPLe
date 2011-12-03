@@ -5,6 +5,7 @@
         10px;"/></a></div>
     <ul class="sf-menu">
         <li class="current "><?php echo anchor('cse/dashboard', 'Dashboard');?></li>
+        <li class="current "><?php echo anchor('cse/pengaduan', 'Pengaduan');?></li>
         <li class="current "><?php echo anchor('cse/man_forum', 'Manajemen Forum');?></li>
     </ul>
 </div>

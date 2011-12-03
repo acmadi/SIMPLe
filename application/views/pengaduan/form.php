@@ -11,7 +11,7 @@ endif;
 <p>* Dev note: Sementara field id_petugas_satker ditampilkan sebagai input biasa, dari yang seharusnya hidden. 
 </p>
 
-<?php echo form_open('pengaduan/kirim'); ?>
+<?php echo form_open('cse/pengaduan/kirim'); ?>
 	
 	Id_petugas_satker: 
 	<input type="text" name="id_petugas_satker" value="<?php echo $id_petugas_satker ?>"/> *
