@@ -366,3 +366,35 @@ ul#nav li a.active, ul#nav li a.active:hover{
 	width:540px;
 	margin-top:30px;
 }
+
+.success {
+    border: 2px solid #C6D880;
+    background: #E6EFC2 url(../images/check.png) no-repeat 10px center;
+    color: #264409;
+    font-size: 13px;
+    padding: 4px 35px;
+}
+
+.error {
+    border: 2px solid #FBC2C4;
+    background: #FBE3E4 url(../images/error.png) no-repeat 10px center;
+    color: #8A1F11;
+    font-size: 13px;
+    padding: 4px 35px;
+}
+
+.info {
+    border: 2px solid #92CAE4;
+    background: #D5EDF8 url(../images/info.png) no-repeat 10px center;
+    color: #205791;
+    font-size: 13px;
+    padding: 4px 35px;
+}
+
+.notice {
+    border: 2px solid #FFD324;
+    background: #FFF6BF url(../images/exclamation.png) no-repeat 10px center;
+    color: #514721;
+    font-size: 13px;
+    padding: 4px 35px;
+}
