@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE HTML>
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
@@ -10,11 +10,11 @@
     <style type="text/css">@import url("<?php echo base_url() . 'css/table.css'; ?>");</style>
     <!--POP UP-->
     <style type="text/css">@import url("<?php echo base_url() . 'css/pop-up.css'; ?>");</style>
-	<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>js/jquery-1.4.2.min.js"></script>
 </head>
 <body>
 <div id="wrapper">
-    <div id="header"></div>
+    <div id="header">Sistem Informasi Pusat Layanan DJA</div>
     <div id="navbar"><?php $this->load->view('navbar'); ?></div>
     <div id="container">
         <div id="content"><?php $this->load->view($content); ?></div>
@@ -28,7 +28,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
         //$('#tab1').fadeIn('slow'); //tab pertama ditampilkan
-        $('<?php echo isset($tabAktif)?$tabAktif:'#tab1';?>').fadeIn('slow'); //tab pertama ditampilkan
+        $('<?php echo isset($tabAktif) ? $tabAktif : '#tab1';?>').fadeIn('slow'); //tab pertama ditampilkan
         $('ul#nav li a').click(function() { // jika link tab di klik
             $('ul#nav li a').removeClass('active'); //menghilangkan class active (yang tampil)
             $(this).addClass("active"); // menambahkan class active pada link yang diklik
@@ -64,13 +64,13 @@
                 .css("border-width", "10px");
 
         // Delete confirmation
-        $('.delete').click(function(){
+        $('.delete').click(function() {
             answer = confirm('Anda yakin akan menghapus?');
             if (answer) {
                 _this = $(this);
                 link = _this.attr('link');
-                $.get(link, function(data){
-						_this.closest('tr').css('background', 'red').fadeOut();
+                $.get(link, function(data) {
+                    _this.closest('tr').css('background', 'red').fadeOut();
                 });
             }
         })
