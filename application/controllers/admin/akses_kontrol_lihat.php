@@ -13,8 +13,13 @@ class Akses_kontrol_lihat extends CI_Controller
     {
         /*if ($this->session->userdata('login') == TRUE)
           {*/
-        $data['title'] = 'Akses Kontrol - Lihat';
-        $data['content'] = 'admin/akses_kontrol/akses_kontrol_lihat';
+		$this->load->model('Makses', 'akses');
+		
+		$id = $this->uri->segment(4);
+		$data['list_kontrol'] 	= $this->akses->get_akses_by_id($id);
+		
+        $data['title'] 			= 'Akses Kontrol - Lihat';
+        $data['content'] 		= 'admin/akses_kontrol/akses_kontrol_lihat';
         $this->load->view('admin/template', $data);
         /*}
           else
