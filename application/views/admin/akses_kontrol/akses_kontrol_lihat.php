@@ -3,21 +3,21 @@
 </ul>
 <div class="clear"></div>
 <div id="konten">
-    <div style="display: none;" id="tab1" class="tab_konten">
+    <div style="display:none" id="tab1" class="tab_konten">
 
 
         <div class="table">
             <div id="head">
-                <table>
+               <table>
                     <tr>
                         <td class="medium">No Level</td>
                         <td class="sort">:</td>
-                        <td>1</td>
+                        <td><?php echo $list_kontrol['result2']->kode_unit?></td>
                     </tr>
                     <tr>
                         <td class="medium">Nama Level</td>
                         <td class="sort">:</td>
-                        <td>CS A</td>
+                        <td><?php echo $list_kontrol['result2']->nama_unit?></td>
                     </tr>
                 </table>
             </div>
@@ -34,12 +34,13 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>28723</td>
-                        <td>yuki</td>
-                        <td>yuki mukminin</td>
-                        <td>201010200201101</td>
-                        <td>1</td>
+                    <?php foreach($list_kontrol['result']->result() as $item):?>
+					<tr>
+                        <td><?php echo $item->id_user?></td>
+                        <td><?php echo $item->username?></td>
+                        <td><?php echo $item->nama?></td>
+                        <td><?php echo $item->kode_unit?></td>
+                        <td><?php echo $item->id_lavel?></td>
                         <td>
                             <span class="button_kecil"><a title="Edit" href="#" onclick='return yesOrNo()'/><img
                                     src="<?php echo base_url(); ?>images/icon_suratkerja.png"
@@ -55,69 +56,8 @@
                                     style="width:20px; height:20px; "/></a></span>
                         </td>
                     </tr>
-                    <tr>
-                        <td>8237</td>
-                        <td>momo</td>
-                        <td>momoki</td>
-                        <td>201010200201101</td>
-                        <td>1</td>
-                        <td>
-                            <span class="button_kecil"><a title="Edit" href="#" onclick='return yesOrNo()'/><img
-                                    src="<?php echo base_url(); ?>images/icon_suratkerja.png"
-                                    style="width:20px; height:20px; "/></a></span>
-                            <span class="button_kecil"><a title="Edit" href="#" onclick='return yesOrNo()'/><img
-                                    src="<?php echo base_url(); ?>images/icon_reset.png"
-                                    style="width:20px; height:20px; "/></a></span>
-                            <span class="button_kecil"><a title="Edit" href="#" onclick='return yesOrNo()'/><img
-                                    src="<?php echo base_url(); ?>images/icon_edit.png"
-                                    style="width:20px; height:20px; "/></a></span>
-                            <span class="button_kecil"><a title="Edit" href="#" onclick='return yesOrNo()'/><img
-                                    src="<?php echo base_url(); ?>images/icon_delete.png"
-                                    style="width:20px; height:20px; "/></a></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>0383</td>
-                        <td>jike</td>
-                        <td>yusuf m</td>
-                        <td>201010200201101</td>
-                        <td>1</td>
-                        <td>
-                            <span class="button_kecil"><a title="Edit" href="#" onclick='return yesOrNo()'/><img
-                                    src="<?php echo base_url(); ?>images/icon_suratkerja.png"
-                                    style="width:20px; height:20px; "/></a></span>
-                            <span class="button_kecil"><a title="Edit" href="#" onclick='return yesOrNo()'/><img
-                                    src="<?php echo base_url(); ?>images/icon_reset.png"
-                                    style="width:20px; height:20px; "/></a></span>
-                            <span class="button_kecil"><a title="Edit" href="#" onclick='return yesOrNo()'/><img
-                                    src="<?php echo base_url(); ?>images/icon_edit.png"
-                                    style="width:20px; height:20px; "/></a></span>
-                            <span class="button_kecil"><a title="Edit" href="#" onclick='return yesOrNo()'/><img
-                                    src="<?php echo base_url(); ?>images/icon_delete.png"
-                                    style="width:20px; height:20px; "/></a></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>87238</td>
-                        <td>loli</td>
-                        <td>nadia liontin</td>
-                        <td>201010200201101</td>
-                        <td>1</td>
-                        <td>
-                            <span class="button_kecil"><a title="Edit" href="#" onclick='return yesOrNo()'/><img
-                                    src="<?php echo base_url(); ?>images/icon_suratkerja.png"
-                                    style="width:20px; height:20px; "/></a></span>
-                            <span class="button_kecil"><a title="Edit" href="#" onclick='return yesOrNo()'/><img
-                                    src="<?php echo base_url(); ?>images/icon_reset.png"
-                                    style="width:20px; height:20px; "/></a></span>
-                            <span class="button_kecil"><a title="Edit" href="#" onclick='return yesOrNo()'/><img
-                                    src="<?php echo base_url(); ?>images/icon_edit.png"
-                                    style="width:20px; height:20px; "/></a></span>
-                            <span class="button_kecil"><a title="Edit" href="#" onclick='return yesOrNo()'/><img
-                                    src="<?php echo base_url(); ?>images/icon_delete.png"
-                                    style="width:20px; height:20px; "/></a></span>
-                        </td>
-                    </tr>
+                    <?php endforeach;?>
+                    
                     </tbody>
                 </table>
                 <br/>

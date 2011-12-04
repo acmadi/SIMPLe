@@ -4,7 +4,7 @@
     <div class="clear"></div>
 	
     <div id="konten">
-			<div id="msg">
+	<div id="msg">
 	<?php
 	if ($this->session->flashdata('msg')){
 		echo $this->session->flashdata('msg');
