@@ -1,0 +1,65 @@
+/*kasubdit*/
+#knowledge .text{height:17px;width:220px;margin-right:10px;margin-top:-1px;}
+#knowledge .button{padding:0 8px 3px 8px;font-size:12px;height:25px;}
+
+/*dirjen*/
+#dirjen{margin:0 auto;}
+#tabthree{margin:30px auto;}
+#one{margin-left:33px;
+	width:30%;
+	min-height:200px;
+	overflow:hidden;
+	float:left;
+}
+a #one, a:hover #one{
+	color:#000;
+}
+#dirjen .title-dirjen{
+	margin:10px;
+	font-size:12px;
+	color:#000;
+}
+#one .judul{border-bottom:solid 1px #000;padding-bottom:10px;padding-top:15px;font-weight:bold;font-size:22px;text-align:center;}
+#one .datar{overflow:hidden;margin:20px 0;}
+#one .datar li{display:inline;list-style:none; margin:15px;line-height:20px;}
+#one .one-1{
+	padding:53px 0 0 0;
+	background:#44EDFC;
+	min-height:100px;
+	float:left;
+	margin-right:1px;
+	font-size:12px;
+	font-weight:bold;
+	line-height:20px;
+}
+#one .one-1 ul li{list-style:none;margin:20px;}
+#one .one-2{
+	background:#C5E6F7;
+	min-height:100px;
+	float:left;
+}
+
+.divider{
+	margin:30px;
+}
+
+#one span.terima{
+	background:#498DFC;
+	border:solid 1px #000;padding:10px;
+	margin-left:5px;
+}
+ #one span.terus{
+ 	background:#13F44F;
+	border:solid 1px #000;padding:10px;
+	margin-left:8px;
+ }
+#one span.setuju{
+ 	background:#F785E4;
+	border:solid 1px #000;padding:10px;
+	margin-left:8px;
+ }
+#one span.tolak{
+ 	background:#F44E77;
+	border:solid 1px #000;padding:10px;
+	margin-left:8px;
+ }

@@ -1,15 +1,9 @@
-.table
-{	
-	margin-right:30px;
-	text-align:left;
-	min-height:500px; height:auto; height:100%; 
-}
-
+#tableOne tr:nth-child(even) {background: #eee}
+.table{ padding-bottom:20px; }
 table.yui 
 {
 	font-family:arial;   
     border-collapse:collapse;
-    font-size:small;
 }
 
 table.yui td {	
@@ -38,7 +32,7 @@ table.yui th a
     white-space:nowrap;
     background: url('bg.gif') no-repeat right 50%;
 }
-#tableOne{ width:100%; font-size:10px; }
+#tableOne{ width:100%; font-size:12px; }
 table thead{ background:#e0e9ef; }
 table tr{ border-bottom:#e0e9ef 2px solid; }
 
@@ -114,7 +108,7 @@ table.yui .tablesorterPager input.next {
 }
 table.yui .pagedisplay 	
 {
-    font-size:10px;
+    font-size:12px;
 	width: 30px;
 	border: 0px;	
 	background-color: #E1ECF9;
