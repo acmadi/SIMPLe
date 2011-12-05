@@ -33,24 +33,19 @@
                         </tr>
                         </thead>
                         <tbody>
+
+
+                        <?php foreach ($units->result() as $unit): ?>
                         <tr>
-                            <td align="center">201010200201101</td>
-                            <td align="center">Seksi Anggaran IA-1</td>
-                            <td align="center"><a href="man_unit_ubah"><input type="button" name="edit" value="Edit"
-                                                                              style="width:60px; height:24px; font-size:10px;"/></a>
-                                <a href="man_unit_lihat"><input type="button" name="view" value="Lihat"
-                                                                style="width:60px; height:24px; font-size:10px;"/></a>
+                            <td align="center"><?php echo $unit->kode_unit ?></td>
+                            <td align="center"><?php echo $unit->nama_unit ?></td>
+                            <td align="center"><a href="man_unit_ubah">
+                                <a href="<?php echo site_url('/admin/man_unit/edit/' . $unit->kode_unit) ?>">Edit</a>
+                                <a href="<?php echo site_url('/admin/man_unit/delete/' . $unit->kode_unit) ?>">Hapus</a>
                             </td>
                         </tr>
-                        <tr>
-                            <td align="center">201010200201101</td>
-                            <td align="center">SUBBSGIAN TATA LAKSANA</td>
-                            <td align="center"><a href="man_unit_ubah"><input type="button" name="edit" value="Edit"
-                                                                              style="width:60px; height:24px; font-size:10px;"/></a>
-                                <a href="man_unit_lihat"><input type="button" name="view" value="Lihat"
-                                                                style="width:60px; height:24px; font-size:10px;"/></a>
-                            </td>
-                        </tr>
+                        <?php endforeach ?>
+
                         </tbody>
                     </table>
                 </div>
