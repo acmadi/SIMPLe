@@ -180,26 +180,75 @@ class Mknowledge extends CI_Model
      * @param $data integer
      * @return boolean
      */
-	public function search_by_category($id, $limit = ''){
-		$sql = "SELECT a.judul,a.id_kat_knowledge_base
+	public function search_by_keyword($id){
+		$id = '%'.$id.'%';
+		$sql = "SELECT a.judul,a.id_kat_knowledge_base,b.kat_knowledge_base,a.id_knowledge_base
 				FROM tb_knowledge_base a,tb_kat_knowledge_base b
-				WHERE a.id_kat_knowledge_base = b.id_kat_knowledge_base AND a.id_kat_knowledge_base = ? $limit";
+				WHERE a.id_kat_knowledge_base = b.id_kat_knowledge_base AND 
+					 (a.judul LIKE ? OR b.kat_knowledge_base LIKE ? OR a.desripsi LIKE ? OR jawaban LIKE ?)";
 		
-		$data['result'] = $this->db->query($sql, array($id));
+		$query = $this->db->query($sql, array($id,$id,$id,$id));
 		
-		$sql2 = "SELECT kat_knowledge_base
-				FROM tb_kat_knowledge_base WHERE id_kat_knowledge_base = ?
-				";
-				
-		$query2 	= $this->db->query($sql2, array($id));
-		if ($query2->num_rows() > 0)
+		if ($query->num_rows() > 0)
 		{
-		   $row = $query2->row();
-		   $data['name'] = $row->kat_knowledge_base;
+		   foreach($query->result_array() as $r):
+				$data[$r['id_kat_knowledge_base']][]	= $r;
+				$data['dir'][$r['id_kat_knowledge_base']] 	= $r['kat_knowledge_base'];
+		   endforeach;
 		   
 		}
 		
-		return $data;
+		/*echo "<pre>";
+		print_r($data); exit();
+		echo "</pre>";*/
+		
+		return isset($data)?$data:'';
+	}
+	
+	public function search_by_category($id){
+		$sql = "SELECT a.judul,a.id_kat_knowledge_base,b.kat_knowledge_base,a.id_knowledge_base
+				FROM tb_knowledge_base a,tb_kat_knowledge_base b
+				WHERE a.id_kat_knowledge_base = b.id_kat_knowledge_base AND a.id_kat_knowledge_base = ?";
+		
+		$query = $this->db->query($sql, array($id));
+		
+		if ($query->num_rows() > 0)
+		{
+		   foreach($query->result_array() as $r):
+				$data[$r['id_kat_knowledge_base']][]	= $r;
+				$data['dir'][$r['id_kat_knowledge_base']] 	= $r['kat_knowledge_base'];
+		   endforeach;
+		   
+		}
+		
+		/*echo "<pre>";
+		print_r($data); exit();
+		echo "</pre>";*/
+		
+		return isset($data)?$data:'';
+	}
+	
+	public function get_all_data_category(){
+		$sql = "SELECT a.judul,a.id_kat_knowledge_base,b.kat_knowledge_base,a.id_knowledge_base
+				FROM tb_knowledge_base a,tb_kat_knowledge_base b
+				WHERE a.id_kat_knowledge_base = b.id_kat_knowledge_base";
+		
+		$query = $this->db->query($sql);
+		
+		if ($query->num_rows() > 0)
+		{
+		   foreach($query->result_array() as $r):
+				$data[$r['id_kat_knowledge_base']][]	= $r;
+				$data['dir'][$r['id_kat_knowledge_base']] 	= $r['kat_knowledge_base'];
+		   endforeach;
+		   
+		}
+		
+		/*echo "<pre>";
+		print_r($data); exit();
+		echo "</pre>";*/
+		
+		return isset($data)?$data:'';
 	}
 	
 	

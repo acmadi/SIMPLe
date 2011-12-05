@@ -10,7 +10,7 @@
 <!--POP UP-->
 <style type="text/css">@import url("<?php echo base_url() . 'css/pop-up.css'; ?>");</style>
 
-<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery-1.4.2.min.js"></script>
 
 </head>
 <body>
