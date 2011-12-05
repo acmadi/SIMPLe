@@ -10,10 +10,12 @@
 <!--POP UP-->
 <style type="text/css">@import url("<?php echo base_url() . 'css/pop-up.css'; ?>");</style>
 
+<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery-1.4.4.min.js"></script>
+
 </head>
 <body>
 <div id="wrapper">
-	<div id="header"></div>
+	<div id="header">Sistem Informasi Pusat Layanan DJA</div>
     <div id="navbar"><?php $this->load->view('navbar_csa'); ?></div>
     <div id="container">
     	<div id="content"><?php $this->load->view($content); ?></div>
@@ -24,7 +26,6 @@
 </html>
 
 <!--TABS--GANTI MODEL EXTJS ! :) -->
-<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery-1.4.2.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	$('#tab1').fadeIn('slow'); //tab pertama ditampilkan
@@ -41,7 +42,6 @@ $(document).ready(function() {
 </script>
 
 <!--TABLE JQUERY-->
-	<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery-1.2.6.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.wjb.selectallrows.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {

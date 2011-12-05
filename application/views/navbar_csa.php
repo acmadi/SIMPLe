@@ -4,7 +4,7 @@
         <li class="current "><?php echo anchor('csa/dashboard', 'Dashboard');?></li>
         <li class="current "><?php echo anchor('csa/list_antrian', 'List Antrian');?></li>
         <li class="current "><?php echo anchor('csa/knowledge_base', 'Knowledge Base');?></li>
-        <li class="current "><?php echo anchor('csa/referensi_peraturan', 'Referensi Peraturan');?></li>
+        <li class="current "><a href="<?php echo base_url() . 'upload/PMK-93.pdf' ?>" target="pdf">Referensi Peraturan</a></li>
         <li class="current "><?php echo anchor('csa/man_forum', 'Forum');?></li>
     </ul>
 </div>

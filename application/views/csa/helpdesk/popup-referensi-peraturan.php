@@ -29,9 +29,6 @@
 		margin:20px 15px;
 		clear:both;
 	}
-	.tombol{
-		float:right;
-	}
 	.tombol input{
 		padding:0 8px 3px 8px;
 		font-size:12px;
@@ -39,24 +36,46 @@
 		width:80px;
 		margin:20px 5px;
 	}
+	.button{background-image: linear-gradient(left , rgb(109,181,232) 16%, rgb(194,217,242) 58%, rgb(112,172,235) 97%);
+	background-image: -o-linear-gradient(left , rgb(109,181,232) 16%, rgb(194,217,242) 58%, rgb(112,172,235) 97%);
+	background-image: -moz-linear-gradient(left , rgb(109,181,232) 16%, rgb(194,217,242) 58%, rgb(112,172,235) 97%);
+	background-image: -webkit-linear-gradient(left , rgb(109,181,232) 16%, rgb(194,217,242) 58%, rgb(112,172,235) 97%);
+	background-image: -ms-linear-gradient(left , rgb(109,181,232) 16%, rgb(194,217,242) 58%, rgb(112,172,235) 97%);
+	
+	background-image: -webkit-gradient(
+		linear,
+		left top,
+		right top,
+		color-stop(0.16, rgb(109,181,232)),
+		color-stop(0.58, rgb(194,217,242)),
+		color-stop(0.97, rgb(112,172,235))
+	);
+	}
 	</style>
 </head>
 <body>
 <div id="wrapper">
-	<p>Deskripsi Peraturan</p>
+	<p>Referensi Peraturan</p>
 	<div class="line"><br />
-    	<div style="min-height:300px" style="overflow:auto; overflow-x:hidden;">
-        <p>Jawaban ... Jawaban ... Jawaban ... Jawaban ... Jawaban ... Jawaban ... Jawaban ... Jawaban ... Jawaban ... Jawaban ... Jawaban ... Jawaban ... Jawaban ... Jawaban ... Jawaban ... Jawaban ... Jawaban ... Jawaban ... Jawaban ... Jawaban ... Jawaban ... Jawaban ... Jawaban ... Jawaban ... Jawaban ... Jawaban ... Jawaban ... Jawaban ... Jawaban ... Jawaban ... Jawaban ... Jawaban ... Jawaban ... </p>
+    	<div style="overflow:auto; overflow-x:hidden; min-height:250px; ">
+        <p>Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... </p>
         </div>
 	</div>
-	<input type="checkbox" name="check" id="check" / >Problem belum terselesaikan / tidak ada dalam penjelasan Knowledge Base
-
-
-	<div style="clear:both;"></div>	<div class="tombol">
-		<input type="submit" value="Batal">
-		<input type="submit" value="Eskalasi">
-		<input type="submit" value="Jawab" onclick="return confirm('Proses sudah dilaksanakan \n Apakah ada pertanyaan baru?');">
-	</div>
+    <input type="checkbox" /> Problem Belum Terselesaikan / Tidak ada dalam penjelasan knowledgebase<br /><br />
+    <div style="float:right">
+        <input class="button" type="button" value="Batal" onclick="window.close();" style="float:right;margin-right:10px;"/>
+        <input class="button" type="submit" value="Jawab" onclick="jawab()" style="float:right;margin-right:10px;"/>
+        <input class="button" type="submit"  value="Eskalasi" onclick='return eskalasiPopup()' style="float:right;margin-right:10px; "/>
+    </div>
 </div>
 </body>
 </html>
+<script type="text/javascript" src="<?php echo base_url(); ?>js/fungsi.js"></script> 
+
+<script type="text/javascript">
+	function jawab()
+	{
+		alert("Terimakasih. Jawaban anda sudah terkirim.");
+		window.close();
+	}
+</script>

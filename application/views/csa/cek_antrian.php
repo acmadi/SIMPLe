@@ -1,6 +1,6 @@
 <div id="konten">
 	<div id="cek-tiket">
-    <input type="submit" value="Batal" class="batal" />
+    <a href="dashboard"><input type="submit" value="Batal" class="batal" /></a>
     <h2>Formulir Isian Pengajuan Revisi Anggaran</h2>        
     <div class="table"> 
         <div id="head">

@@ -108,11 +108,11 @@
                                                               onclick='return yesOrNo()'/><img
                                         src="<?php echo base_url(); ?>images/edit.png"
                                         style="width:20px; height:20px; "/></a></span>
-                                <span class="button_kecil"><a title="Delete" class="delete"
-                                                              href="<?php echo site_url('/admin/man_forum/delete_category/' . $category->id_kat_forum) ?>"
-                                                              onClick="return hapusForum()"><img
-                                        src="<?php echo base_url(); ?>images/delete.png"
-                                        style="width:20px; height:20px; "/></a></span>
+                                <span class="button_kecil">
+                                    <a title="Delete" class="delete" href="<?php echo site_url('/admin/man_forum/delete_category/' . $category->id_kat_forum) ?>">
+                                        <img src="<?php echo base_url(); ?>images/delete.png" style="width:20px; height:20px; "/>
+                                    </a>
+                                </span>
                             </td>
                         </tr>
                             <?php endforeach ?>

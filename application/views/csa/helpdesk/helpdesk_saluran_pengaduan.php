@@ -1,10 +1,10 @@
     <ul id="nav">
-        <li><a href="#tab1" class="active">Saluran Pengaduan</a></li>
+        <li><a href="#tab1">Saluran Pengaduan</a></li>
     </ul>
     <div class="clear"></div>
     <div id="pengaduan">
         <p class="title">Form Pengaduan</p>
-        <form method="post" id="form-pengaduan">
+        <form method="post" id="form-pengaduan" action="dashboard">
             <p>
                 <label for="kepada">Kepada</label>
             </p>
@@ -22,8 +22,10 @@
             </p>
             <textarea>text pengaduan</textarea>
             
-            <input type="submit" class="tombol" value="Kirim">
+            <input type="submit" class="tombol" value="Kirim" onclick="return terkirim()">
             <div class="break"></div>
         </form>
     </div>
 
+
+<script type="text/javascript"> function terkirim() { alert("Terkirim!"); window.location='dashboard'; } </script>

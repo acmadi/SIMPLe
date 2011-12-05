@@ -68,11 +68,13 @@
             answer = confirm('Anda yakin akan menghapus?');
             if (answer) {
                 _this = $(this);
-                link = _this.attr('link');
+                link = _this.attr('href');
+                console.log("href=" + link)
                 $.get(link, function(data) {
                     _this.closest('tr').css('background', 'red').fadeOut();
                 });
             }
+            return false;
         })
 
     });

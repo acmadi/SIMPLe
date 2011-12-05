@@ -22,6 +22,7 @@ class Dashboard extends CI_Controller
           {
               $this->load->view('login');
           }*/
+        redirect('/csa/identitas_satker');  
     }
 }
 
