@@ -1,23 +1,22 @@
-<h1>Form Pengaduan</h1>
+<div id="konten">
 
+<h3>Form Pengaduan</h3>
+<br/>
+<br/>
 <?php
 
-if($this->session->flashdata('pesan') != FALSE) :
-	echo '<p>' . $this->session->flashdata('pesan') . '</p>';
-endif;
+
 
 ?>
 
-<p>* Dev note: Sementara field id_petugas_satker ditampilkan sebagai input biasa, dari yang seharusnya hidden. 
-</p>
-
-<?php echo form_open('cse/pengaduan/kirim'); ?>
+<?php echo form_open('cse/dashboard/kirim_pengaduan'); ?>
 	
 	Id_petugas_satker: 
 	<input type="text" name="id_petugas_satker" value="<?php echo $id_petugas_satker ?>"/> *
 	<br/>
-
-	Kepada: 
+	<h4>Dari:</h4>
+	<?php echo $petugas->nama_petugas ?>
+	<h4>Kepada:</h4> 
 	<select name="id_user">
 	<?php foreach($users as $user) : ?>
 		<option value="<?php echo $user->id_user; ?>">
@@ -34,3 +33,5 @@ endif;
 	<input type="submit" value="Kirim"/>
 
 <?php echo form_close(); ?>
+
+</div>

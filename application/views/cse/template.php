@@ -78,10 +78,11 @@ $(document).ready(function() {
 
                     $.get('<?php echo base_url() . index_page() ?>/cse/ajax/get_petugas_satker/' + kode, 
                     function(data) {
-                        if (data != 'notfound'){
+                        if (data != ''){
                             pilihan = '';
-                            for(i=0; i < data.petugas.length; i++){
 
+                            for(i=0; i < data.petugas.length; i++){
+                                
                                 id_petugas = data.petugas[i].id_petugas_satker;
                                 petugas[id_petugas] = new Object();
                                 petugas[id_petugas].jabatan = 
