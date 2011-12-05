@@ -76,6 +76,22 @@ class Man_forum extends CI_Controller
 
         redirect('/admin/man_forum');
     }
+
+    public function delete($id) {
+        $this->db->query("DELETE FROM tb_forum WHERE id_forum=?", array($id));
+    }
+
+    public function delete_category($id) {
+        $this->db->query("DELETE FROM tb_kat_forum WHERE id_kat_forum=?", array($id));
+    }
+
+    public function edit_forum() {
+        $data['title'] = 'Manajemen Forum';
+        $data['content'] = 'admin/man_forum/man_forum_ubah';
+        $data['categories'] = $this->mforum->get_categories();
+        $data['forums'] = $this->mforum->get();
+        $this->load->view('admin/template', $data);
+    }
 }
 
 ?>
