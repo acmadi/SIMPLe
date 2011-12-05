@@ -18,7 +18,7 @@ class Knowledge_base extends CI_Controller
         $data['title'] 			= 'Knowledge Base';
         $data['content'] 		= 'csa/knowledge/knowledge_base';
 		$data['result']			= $this->knowledge->get_all_data_category();
-		
+		$data['idsearch']		= "";
         $this->load->view('csa/template', $data);
         /*}
           else
@@ -56,7 +56,7 @@ class Knowledge_base extends CI_Controller
 			$data['title'] 		= 'Knowledge Base';
 			$data['content'] 	= 'csa/knowledge/knowledge_base';
 			$data['result']		= $item;
-			$data['idsearch']	= $cat;
+			$data['idsearch']	= $keyword;
 			$data['sel']		= true;
 			$this->load->view('csa/template', $data);
 		}
