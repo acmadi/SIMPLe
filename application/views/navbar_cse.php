@@ -2,6 +2,7 @@
 <div id="navbar" class="clearfloat">
     <ul class="sf-menu">
         <li class="current "><?php echo anchor('cse/dashboard', 'Dashboard');?></li>
+        <li class="current "><?php echo anchor('cse/dashboard/identitas', 'Pengaduan');?></li>
         <li class="current "><?php echo anchor('cse/man_forum', 'Forum');?></li>
     </ul>
 </div>

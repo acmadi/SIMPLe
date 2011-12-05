@@ -60,4 +60,19 @@ class Msatker extends CI_Model
         
         return $row;
     }
+
+    public function get_petugas_satker($id_petugas = NULL)
+    {
+        if ($id_petugas != NULL) :
+            $where = "WHERE id_petugas_satker=$id_petugas";
+        endif;
+
+        $sql = "SELECT * FROM tb_petugas_satker $where";
+        $result = ($id_petugas == NULL) ? 
+            $this->db->query($sql)->result() :
+            $this->db->query($sql)->row() 
+            ;
+
+        return $result;
+    }
 }

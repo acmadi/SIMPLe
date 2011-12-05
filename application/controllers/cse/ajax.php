@@ -20,38 +20,10 @@ class Ajax extends CI_Controller {
 	}
 
 	function get_petugas_satker($id_satker){
-		header('Content-type: application/json');
+		$data['petugas'] = $this->satker->get_petugas_by_satker($id_satker);
 
-		$petugas = $this->satker->get_petugas_by_satker($id_satker);
-
-		if (is_array($petugas)) :
-			echo '{"petugas": [';
-
-			for($i = 0; $i < count($petugas); $i++) :
-				echo '{';
-				echo '"id_petugas_satker": "' . $petugas[$i]->id_petugas_satker . '",';
-				echo '"nama_petugas": "' . $petugas[$i]->nama_petugas . '",';
-				echo '"jabatan_petugas": "' . $petugas[$i]->jabatan_petugas . '",';
-				echo '"no_hp": "' . $petugas[$i]->no_hp . '"';
-				echo '}';
-
-				if ($i < count($petugas) - 1) :
-					echo ', ';
-				endif;
-			endfor;
-			echo ']}';
-		else :
-			$petugas = array();
-		endif;
+		$this->load->view('cse/petugas_json', $data);
 	}
 
 }
-{
-	"petugas": [
-	{
-		"id_petugas_satker": "1",
-		"nama_petugas": "John Doe",
-		"jabatan_petugas": "Anything",
-		"no_hp": "Anyting"}
-	]
-}
+?>
