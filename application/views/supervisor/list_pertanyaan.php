@@ -28,7 +28,6 @@
                 <tr>            		    
                     <th>No</th>
                     <th>Tanggal</th>
-                    <th>Nama</th>
                     <th>Nama Satker</th>
                     <th>Subjek</th>
                     <th>Aksi</th>

@@ -1,5 +1,5 @@
     <ul id="nav">
-        <li><a href="#tab1" class="active">Deskripsi Peraturan</a></li>
+        <li><a href="#tab1">Deskripsi Peraturan</a></li>
     </ul>
     <div class="clear"></div>
     <div id="konten">
@@ -40,4 +40,3 @@
             </ul>
             </div><br /><br />
         </div>
-    </div>

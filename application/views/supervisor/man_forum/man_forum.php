@@ -1,5 +1,5 @@
     <ul id="nav">
-        <li><a href="#tab1" class="active">Manajemen Forum</a></li>
+        <li><a href="#tab1">Manajemen Forum</a></li>
     </ul>
     <div class="clear"></div>
     <div id="konten">
@@ -16,4 +16,3 @@
        			<p class="kanan"><a href="#">Selengkapnya...</a></p><br /><br />
                 <div class="break"></div>
         </div>
-    </div>

@@ -1,5 +1,5 @@
     <ul id="nav">
-        <li><a href="#tab1" class="active">Form Jawaban</a></li>
+        <li><a href="#tab1">Form Jawaban</a></li>
     </ul>
     <div class="clear"></div>
 
@@ -62,8 +62,13 @@
 		<input type="checkbox" /> Kirim jawaban ke email petugas satker
         </div><br />
         <div class="submit_right" style="margin:25px; ">
-            <a href="#"><input type="submit" class="button" value="Eskalasi" />
-            <a href="#"><input type="submit" class="button" value="Kirim" /></a>
+            <a href="#"><input type="submit" class="button" value="Eskalasi" onclick="return eskalasi()"/>
+            <input type="submit" class="button" value="Kirim" onclick="return terkirim()" />
         </div>
 
     </div>
+    
+    
+
+<script type="text/javascript" src="<?php echo base_url(); ?>js/fungsi.js"></script>
+<script type="text/javascript"> function terkirim() { alert("Terkirim!"); window.location='list_pertanyaan'; } </script>
