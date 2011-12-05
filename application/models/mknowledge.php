@@ -205,12 +205,14 @@ class Mknowledge extends CI_Model
 		return isset($data)?$data:'';
 	}
 	
-	public function search_by_category($id){
+	public function search_by_category($id,$keyword){
+		$keyword = '%'.$keyword.'%';
 		$sql = "SELECT a.judul,a.id_kat_knowledge_base,b.kat_knowledge_base,a.id_knowledge_base
 				FROM tb_knowledge_base a,tb_kat_knowledge_base b
-				WHERE a.id_kat_knowledge_base = b.id_kat_knowledge_base AND a.id_kat_knowledge_base = ?";
+				WHERE a.id_kat_knowledge_base = b.id_kat_knowledge_base AND a.id_kat_knowledge_base = ? AND 
+					 (a.judul LIKE ? OR b.kat_knowledge_base LIKE ? OR a.desripsi LIKE ? OR jawaban LIKE ?)";
 		
-		$query = $this->db->query($sql, array($id));
+		$query = $this->db->query($sql, array($id,$keyword,$keyword,$keyword,$keyword));
 		
 		if ($query->num_rows() > 0)
 		{

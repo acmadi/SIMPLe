@@ -29,7 +29,7 @@
                     <ul style="list-style:none; margin-left:20px;">
 						<?php 
 							if(isset($part)):
-								$jml = 3;
+								$jml = count($result[$idx])>3?3:count($result[$idx]);
 							else:
 								$jml = count($result[$idx]);
 							endif;
@@ -37,7 +37,7 @@
 							<li> - <?php echo $result[$idx][$n]['judul']?></li>
 						<?php endfor;?>
 						
-                        <?php if(!isset($sel)):?><li style="text-align:right; margin-right:70px; "><a href="<?php echo site_url('/csa/knowledge_base/search_all/'.$idx)?>">Selengkapnya...</a></li><?php endif;?>
+                        <?php if(!isset($sel)):?><li style="text-align:right; margin-right:70px; "><a href="<?php echo site_url('/csa/knowledge_base/search_all/'.$idx.'/'.$idsearch)?>">Selengkapnya...</a></li><?php endif;?>
                     </ul>
 					<?php endforeach;?>
                     <?php endif;?>

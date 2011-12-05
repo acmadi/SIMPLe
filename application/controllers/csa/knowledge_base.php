@@ -48,10 +48,11 @@ class Knowledge_base extends CI_Controller
 	
 	function search_all(){
 		$cat = $this->uri->segment(4, '');
+		$keyword = $this->uri->segment(5, '');
 		
 		if(!empty($cat) OR !empty($limit)){
 			$this->load->model('Mknowledge', 'knowledge');
-			$item 				= $this->knowledge->search_by_category($cat);
+			$item 				= $this->knowledge->search_by_category($cat,$keyword);
 			$data['title'] 		= 'Knowledge Base';
 			$data['content'] 	= 'csa/knowledge/knowledge_base';
 			$data['result']		= $item;
