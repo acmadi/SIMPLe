@@ -25,7 +25,7 @@ body{ background:#d7ebef; color:#000; font-family:Arial, Helvetica, sans-serif; 
 		font-size:80px;
 	}
 #content .separator{background:#CCC;height:230px;width:2px;float:left;margin-right:0px;}
-	
+
 #identitas_satker img{height:123px;width:540px;margin-top:30px;}
 
 #title_form_login { text-align:center; color:#333; margin-left:-190px; margin-top:0px; }
@@ -82,6 +82,19 @@ background-image: -webkit-gradient(
 .sf-menu a {display:block;position:relative;}
 .sf-menu li:hover ul,
 .sf-menu li.sfHover ul {left:0;top:2.7em;z-index:99;}
+.sf-menu li.current {
+    background: rgb(96,108,136);
+    background: -moz-linear-gradient(top,  rgba(96,108,136,1) 0%, rgba(63,76,107,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(96,108,136,1)), color-stop(100%,rgba(63,76,107,1)));
+    background: -webkit-linear-gradient(top,  rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%);
+    background: -o-linear-gradient(top,  rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%);
+    background: -ms-linear-gradient(top,  rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%);
+    background: linear-gradient(top,  rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#606c88', endColorstr='#3f4c6b',GradientType=0 );
+}
+.sf-menu li.current a {
+    color: white;
+}
 ul.sf-menu li:hover li ul,
 ul.sf-menu li.sfHover li ul {top:-999em;}
 ul.sf-menu li li:hover ul,
@@ -110,8 +123,8 @@ ul.sf-menu li li li.sfHover ul {left:10em;top:0;}
 a > .sf-sub-indicator {top:.9em;}
 
 .scroll_top{float:right;margin-top:11px;cursor:pointer;margin-top:15px;}
-.scroll_top span{padding:9px 5px 9px 5px;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;border:1px solid #600;background:#de4049;}	
-	
+.scroll_top span{padding:9px 5px 9px 5px;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;border:1px solid #600;background:#de4049;}
+
 /* COMMON CLASSES */
 .break { clear:both; }
 #logout{ float:right; margin:7px 15px 5px 10px; }
@@ -205,8 +218,8 @@ table tr td{ width:150px; }
 
 
 #head{ float:none; width:100%; margin-bottom:40px;}
-	#btn-kanan-atas{ float:right; }	
-	
+	#btn-kanan-atas{ float:right; }
+
 
 #tail{ float:left; width:100%; min-height:200px; height:auto; margin:20px 0px 10px 0px; padding-right:30px;clear:both;}
 #tail img{width:20px;height:20px;	}
@@ -273,7 +286,7 @@ table.title .title2{
 	width:100px; height:24px; font-size:12px;padding-bottom:3px;
 }
 #cari_user .text{
-	width:180px; height:14px; padding:2px 4px 2px 4px; margin-right:5px; 
+	width:180px; height:14px; padding:2px 4px 2px 4px; margin-right:5px;
 }
 #search .button{
 	width:80px; height:24px; font-size:12px;padding-bottom:3px;
@@ -525,7 +538,7 @@ p.kiri1{
 	background-image: -moz-linear-gradient(left top, rgb(108,162,199) 33%, rgb(141,200,240) 80%, rgb(168,207,255) 99%);
 	background-image: -webkit-linear-gradient(left top, rgb(108,162,199) 33%, rgb(141,200,240) 80%, rgb(168,207,255) 99%);
 	background-image: -ms-linear-gradient(left top, rgb(108,162,199) 33%, rgb(141,200,240) 80%, rgb(168,207,255) 99%);
-	
+
 	background-image: -webkit-gradient(
 	linear,
 	left top,
@@ -541,7 +554,7 @@ gradient{
 	background-image: -moz-linear-gradient(left top, rgb(108,162,199) 33%, rgb(141,200,240) 80%, rgb(168,207,255) 99%);
 	background-image: -webkit-linear-gradient(left top, rgb(108,162,199) 33%, rgb(141,200,240) 80%, rgb(168,207,255) 99%);
 	background-image: -ms-linear-gradient(left top, rgb(108,162,199) 33%, rgb(141,200,240) 80%, rgb(168,207,255) 99%);
-	
+
 	background-image: -webkit-gradient(
 	linear,
 	left top,
