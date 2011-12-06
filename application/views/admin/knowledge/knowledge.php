@@ -1,8 +1,8 @@
 <ul id="nav">
     <li><a href="#tab1" class="active">Knowledge</a></li>
-    <li><a href="#tab2" class="active">Kategori</a></li>
-    <li><a href="#tab3" class="active">Tambah Kategori</a></li>
-    <li><a href="#tab4" class="active">Tambah Knowledge Base</a></li>
+    <li><a href="#tab2" class="">Kategori</a></li>
+    <li><a href="#tab3" class="">Tambah Kategori</a></li>
+    <li><a href="#tab4" class="">Tambah Knowledge Base</a></li>
 </ul>
 <div class="clear"></div>
 
