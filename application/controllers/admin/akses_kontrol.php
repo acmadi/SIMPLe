@@ -27,12 +27,12 @@ class Akses_kontrol extends CI_Controller
     }
 	
 	function save(){
-		$this->form_validation->set_rules('fid', 'ID', 'required');
+		$this->form_validation->set_rules('fid', 'ID', 'required|numeric|min_length[16]|max_length[16]');
 		$this->form_validation->set_rules('fnamalevel', 'Nama Level', 'required');
 		
 		if ($this->form_validation->run() == FALSE)
 		{
-			$this->session->set_flashdata('msg',"<div style='color:red;'>".validation_errors()."</div>");
+			$this->session->set_flashdata('error', validation_errors());
 			redirect('/admin/akses_kontrol/view_form');
 		}
 		else
@@ -43,14 +43,18 @@ class Akses_kontrol extends CI_Controller
 			$this->load->model('Makses', 'akses');
 			$info = $this->akses->add_akses($data);
 			if($info){
-				$this->session->set_flashdata('msg',"<p style='color:blue;'>Akses baru telah ditambahkan !!.</p>");
+				$this->session->set_flashdata('success',"<p style='color:blue;'>Akses baru telah ditambahkan !!.</p>");
 				redirect('/admin/akses_kontrol');
 			}else{
-				$this->session->set_flashdata('msg',"<p style='color:red;'>Akses baru gagal ditambahkan !!.</p>");
+				$this->session->set_flashdata('error',"<p style='color:red;'>Akses baru gagal ditambahkan !!.</p>");
 				redirect('/admin/akses_kontrol');
 			}
 		}
 	}
+
+    function update() {
+        var_dump($_POST);
+    }
 	
 	public function delete($id)
     {
@@ -59,13 +63,13 @@ class Akses_kontrol extends CI_Controller
 		
 		switch($info){
 			case 1:
-				$this->session->set_flashdata('msg',"<p style='color:blue;'>Berhasil dihapus</p>");
+				$this->session->set_flashdata('success',"Berhasil dihapus");
 				break;
 			case 2:
-				$this->session->set_flashdata('msg',"<p style='color:red;'>Gagal dihapus</p>");
+				$this->session->set_flashdata('error',"Gagal dihapus");
 				break;
 			default:
-				$this->session->set_flashdata('msg',"<p style='color:red;'>Terdapat keterkaitan dengan data lain</p>");
+				$this->session->set_flashdata('warning',"Terdapat keterkaitan dengan data lain");
 				break;
 		}
 		

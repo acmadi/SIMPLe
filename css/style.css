@@ -586,3 +586,52 @@ gradient{
 a img {
     border: 0;
 }
+
+form p {
+    padding: 10px 0;
+}
+
+form label {
+    min-width: 100px;
+    display: inline-block;
+}
+
+div.form {
+    background: #f0f0f0;
+    border: 1px solid #cecece;
+}
+
+.success {
+    color: white;
+    padding: 4px 0;
+    font-family: Arial, san-serif;
+    background-image: -moz-linear-gradient(top, #62C362, #58AC58);
+    border: 1px solid #58AC58;
+    border-radius: 4px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25) inset;
+}
+
+.error {
+    color: white;
+    padding: 4px 0;
+    font-family: Arial, san-serif;
+    background-image: -moz-linear-gradient(top, #E95B57, #C83F38);
+    border: 1px solid #C83F38;
+    border-radius: 4px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25) inset;
+}
+
+.notice {
+    color: #595959;
+    padding: 4px 0;
+    font-size: 13px;
+    font-family: Arial, san-serif;
+    background-image: -moz-linear-gradient(top, #FBEDBE, #EFDD97);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25) inset;
+}
+
+.clear {
+    clear: both;
+}

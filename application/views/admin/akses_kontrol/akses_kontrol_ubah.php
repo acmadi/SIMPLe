@@ -1,35 +1,47 @@
 <ul id="nav">
-    <li><a href="#tab1" class="active">Akses Kontrol / Ubah Level</a></li>
+    <li><a href="#tab1" class="active">Akses Kontrol / Tambah</a></li>
 </ul>
 <div class="clear"></div>
 <div id="konten">
     <div style="display: none;" id="tab1" class="tab_konten">
-		<?php echo validation_errors(); ?>
-		<div id="msg">
-		
-		</div>
+
+        <?php
+        // TODO: Satu paket ini untuk alerts. Nanti mau dipindah jadi hanya panggil satu method.
+        if ($this->session->flashdata('success')) {
+            echo '<div class="success">' . $this->session->flashdata('success') . '</div>';
+        }
+        if ($this->session->flashdata('error')) {
+            echo '<div class="error">' . $this->session->flashdata('error') . '</div>';
+        }
+        if ($this->session->flashdata('notice')) {
+            echo '<div class="notice">' . $this->session->flashdata('notice') . '</div>';
+        }
+        if ($this->session->flashdata('info')) {
+            echo '<div class="info">' . $this->session->flashdata('info') . '</div>';
+        }
+        ?>
+
         <div class="table">
             <div id="tail">
-				<form action="<?php echo site_url("/admin/akses_kontrol_ubah/save");?>" method="post">
-				<?php if(isset($ubah->kode_unit)) echo form_hidden('fid',$ubah->kode_unit);?>
-                <table id="tableOne" class="yui">
-                    <tr>
-                        <td>No Level</td>
-                        <td>:</td>
-                        <td><?php echo $ubah->kode_unit?></td>
-                    </tr>
-                    <tr>
-                        <td>Nama Level</td>
-                        <td>:</td>
-                        <td><input type="text" name="fnamalevel" value="<?php echo $ubah->nama_unit?>" style="font-size:10px;"/></td>
-                    </tr>
-                </table>
-                <br/>
+                <form action="<?php echo site_url("/admin/akses_kontrol/update");?>" method="post">
+                    <?php if (isset($ubah->kode_unit)) echo form_hidden('fid', $ubah->kode_unit);?>
+                    <div class="form">
+                        <p>
+                            <label>No Level</label>
+                            <input type="text" name="fid" value="<?php echo $ubah->kode_unit?>"/>
+                        </p>
 
-                <div style="float:right;">
-                    <input type="reset" value="reset" style="width:70px; height:24px; font-size:10px; "/>
-					<input type="submit" value="simpan" style="width:70px; height:24px; font-size:10px; "/></a>
-                </div>
+                        <p>
+                            <label>Nama Level</label>
+                            <input type="text" name="fnamalevel" value="<?php echo $ubah->nama_unit?>"/>
+                        </p>
+
+                        <p>
+                            <input class="button blue-pill" type="submit" value="simpan"/></a>
+                            <input class="button blue-pill" type="reset" value="reset"/>
+                        </p>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
