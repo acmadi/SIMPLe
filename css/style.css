@@ -55,7 +55,6 @@ color:#fff;
 }
 #mid{height:175px;border-top:#b8ceda solid 3px;border-bottom:#b8ceda solid 3px;width:300px;margin:0 auto;margin-top:100px;}
 	#mid table tr{ word-spacing:2px; }
-table{ margin-left:20px; }
 
 
 
@@ -227,8 +226,20 @@ background-image: -webkit-gradient(
 .labelborder{position:absolute; background-color:#FFFFFF; display:block; margin:-26px 0px 0px 20px;padding:5px 15px;-moz-box-shadow: 3px 3px 3px rgba(0, 0, 0, .5);-webkit-box-shadow: 3px 3px 3px rgba(0, 0, 0, .5);-goog-ms-box-shadow: 3px 3px 3px rgba(0, 0, 0, .5);box-shadow: 1px 2px 10px rgba(0, 0, 0, .5);}
 table tr{ line-height:2;}
 table tr td{ width:150px; }
-.table{text-align:left;min-height:500px; height:auto; height:100%;font-size:12px;color:#000;}
+.table{text-align:left;font-size:12px;color:#000;}
 
+table .short {
+    width: 10px;
+}
+
+table thead th {
+    text-align: left;
+}
+
+table .action {
+    text-align: right;
+    width: 75px;
+}
 
 #head{ float:none; width:100%; margin-bottom:40px;}
 	#btn-kanan-atas{ float:right; }
@@ -551,7 +562,7 @@ p.kiri1{
 	background-image: -moz-linear-gradient(left top, rgb(108,162,199) 33%, rgb(141,200,240) 80%, rgb(168,207,255) 99%);
 	background-image: -webkit-linear-gradient(left top, rgb(108,162,199) 33%, rgb(141,200,240) 80%, rgb(168,207,255) 99%);
 	background-image: -ms-linear-gradient(left top, rgb(108,162,199) 33%, rgb(141,200,240) 80%, rgb(168,207,255) 99%);
-	background-image: -webkit-gradient(linear,left top,right bottom,color-stop(0.33, rgb(108,162,199)),color-stop(0.8, rgb(141,200,240)),color-stop(0.99, rgb(168,207,255));
+	background-image: -webkit-gradient(linear,left top,right bottom,color-stop(0.33, rgb(108,162,199)),color-stop(0.8, rgb(141,200,240)),color-stop(0.99, rgb(168,207,255)));
 }
 /*Gradient*/
 gradient{
@@ -571,3 +582,7 @@ gradient{
 	);
 }
 /* STYLE END HERE */
+
+a img {
+    border: 0;
+}

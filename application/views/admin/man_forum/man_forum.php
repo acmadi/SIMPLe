@@ -47,7 +47,7 @@
 
                         <?php foreach ($forums->result() as $forum): ?>
                         <tr>
-                            <td><input type="checkbox"/></td>
+                            <td class="short"><input type="checkbox"/></td>
                             <td><?php echo $forum->judul_forum ?></td>
                             <td><?php echo $forum->kat_forum ?></td>
                             <td class="action">
@@ -115,7 +115,7 @@
                                 </span>
                             </td>
                         </tr>
-                            <?php endforeach ?>
+                        <?php endforeach ?>
 
                         </tbody>
                     </table>

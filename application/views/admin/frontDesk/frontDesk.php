@@ -29,52 +29,41 @@
                                 <div id="search">
                             </td>
                             <td><input type="submit" value="Cari" style="width:60px; height:24px; font-size:10px; "/>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
             </div>
-            </td>
-            </tr>
-            </table>
-            </form>
         </div>
         <div class="tail">
             <p style="padding-top: 110px; position:absolute; padding-left: 10px;">Status Tiket</p><br/>
             <table id="tableOne" class="yui">
                 <thead>
-                <tr>
-                    <th><input type="checkbox"/></th>
-                    <th>No.Tiket</th>
-                    <th>Tanggal</th>
-                    <th>Nama</th>
-                    <th>Departemen</th>
-                    <th>Subyek</th>
-                    <th>Status</th>
-                    <th>Tgl.Selesai</th>
-                </tr>
+                    <tr>
+                        <th class="short"><input type="checkbox"/></th>
+                        <th>No.Tiket</th>
+                        <th>Tanggal</th>
+                        <th>Nama</th>
+                        <th>Departemen</th>
+                        <th>Subyek</th>
+                        <th>Status</th>
+                        <th>Tgl.Selesai</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td><input type="checkbox"/></td>
-                    <td>071</td>
-                    <td>07/01/2011/td>
-                    <td>Palam</td>
-                    <td>A</td>
-                    <td>Pertanyaan?</td>
-                    <td>Open</td>
-                    <td>22/01/2011</td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox"/></td>
-                    <td>041</td>
-                    <td>09/01/2011/td>
-                    <td>Nanda</td>
-                    <td>B</td>
-                    <td>Pertanyaan?</td>
-                    <td>Closed</td>
-                    <td>14/01/2011</td>
-                </tr>
+                    <tr>
+                        <td class="short"><input type="checkbox"/></td>
+                        <td>071</td>
+                        <td>07/01/2011/td>
+                        <td>Palam</td>
+                        <td>A</td>
+                        <td>Pertanyaan?</td>
+                        <td>Open</td>
+                        <td>22/01/2011</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
-        <br/>
 
         <div class="pagination">Halaman <a href="#"><<</a> <a href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a
                 href="#">4</a> <a href="#">5</a> <a href="#">6</a> <a href="#">>></a></div>

@@ -22,11 +22,11 @@
                 <table id="tableOne" class="yui">
                     <thead>
                     <tr>
-                        <th><input type="checkbox"/></th>
-                        <th>No</th>
+                        <th class="short"><input type="checkbox"/></th>
+                        <th class="short">No</th>
                         <th>Kategori</th>
                         <th>Pertanyaan</th>
-                        <th>Aksi</th>
+                        <th class="action">Aksi</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -34,13 +34,17 @@
                     <?php $i = 0 ?>
                     <?php foreach ($knowledges->result() as $knowledge): ?>
                     <tr>
-                        <td><input type="checkbox"/></td>
-                        <td><?php echo ++$i?></td>
+                        <td class="short"><input type="checkbox"/></td>
+                        <td class="short"><?php echo ++$i?></td>
                         <td><?php echo $knowledge->kat_knowledge_base ?></td>
                         <td><?php echo $knowledge->judul?></td>
-                        <td>
-                            <a href="<?php echo base_url()?>index.php/admin/knowledge_ubah/index/<?php echo $knowledge->id_knowledge_base?>"><input type="button" value="Ubah" onclick="" style="float:left; font-size:10px; width:80px; height:25px; "/></a>
-                            <a href="<?php echo base_url()?>index.php/admin/knowledge/delete/<?php echo $knowledge->id_knowledge_base?>" onclick="return confirm('Anda yakin akan menghapus?');"><input type="button" value="Hapus" onclick="" style="float:left; font-size:10px; width:80px; height:25px; "/></a>
+                        <td class="action">
+                            <a href="<?php echo base_url()?>index.php/admin/knowledge_ubah/index/<?php echo $knowledge->id_knowledge_base?>">
+                                <img src="<?php echo base_url() . 'images/edit.png' ?>" title="Ubah" />
+                            </a>
+                            <a href="<?php echo base_url()?>index.php/admin/knowledge/delete/<?php echo $knowledge->id_knowledge_base?>" onclick="return confirm('Anda yakin akan menghapus?');">
+                                <img src="<?php echo base_url() . 'images/delete.png' ?>" title="Hapus" />
+                            </a>
                         </td>
                     </tr>
                     <?php endforeach ?>
@@ -53,30 +57,30 @@
 
     </div>
     <div style="display: none;" id="tab2" class="tab_konten">
-        <table id="tableOne" class="yui"
-               style="margin:20px 0px 10px 0px; padding-right:30px; font-size:10px; text-align:left;">
+        <table id="tableOne" class="yui">
             <thead>
-            <tr>
-                <th><input type="checkbox"/></th>
-                <th>No</th>
-                <th>Kategori</th>
-                <th>Aksi</th>
-            </tr>
+                <tr>
+                    <th class="short"><input type="checkbox"/></th>
+                    <th class="short">No</th>
+                    <th>Kategori</th>
+                    <th class="action">Aksi</th>
+                </tr>
             </thead>
             <tbody>
             <?php $i = 1 ?>
             <?php foreach ($categories->result() as $category): ?>
             <tr>
-                <td><input type="checkbox"/></td>
+                <td class="short"><input type="checkbox"/></td>
 
-                <td><?php echo $i++ ?></td>
+                <td class="short"><?php echo $i++ ?></td>
                 <td><?php echo $category->kat_knowledge_base ?></td>
-                <td>
-                    <form action="#" onsubmit="return false;"><input type="button" value="Ubah"
-                                                                     onclick="tampil_popup('<?php echo $category->id_kat_knowledge_base ?>','<?php echo $category->kat_knowledge_base ?>');"
-                                                                     style="float:left; font-size:10px; width:80px; height:25px; "/>
-                    </form>
-					<a href="<?php echo base_url()?>index.php/admin/knowledge/delete_category/<?php echo $category->id_kat_knowledge_base?>" onclick="return confirm('Anda yakin akan menghapus?');"><input type="button" value="Hapus" onclick="" style="float:left; font-size:10px; width:80px; height:25px; "/></a>
+                <td class="action">
+                    <a href="#" onclick="tampil_popup('<?php echo $category->id_kat_knowledge_base ?>','<?php echo $category->kat_knowledge_base ?>');">
+                        <img src="<?php echo base_url() . 'images/edit.png' ?>" title="Ubah" />
+                    </a>
+					<a href="<?php echo base_url()?>index.php/admin/knowledge/delete_category/<?php echo $category->id_kat_knowledge_base?>" onclick="return confirm('Anda yakin akan menghapus?');">
+                        <img src="<?php echo base_url() . 'images/delete.png' ?>" title="Hapus" />
+                    </a>
                 </td>
 
             </tr>

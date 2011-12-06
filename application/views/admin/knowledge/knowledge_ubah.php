@@ -44,10 +44,14 @@
                             <td><textarea name="fjawaban" cols="58" rows="6"><?php echo $ubah->jawaban?></textarea></td>
                         </tr>
                     </table>
-					<input class="button" type="submit" value="simpan"
-                       style="width:80px; height:25px; float:right; margin:20px 0px 0px 0px; font-size:10px; "/>
-					<input type="reset" value="reset"
-						   style="width:80px; height:25px; float:right; margin:20px 10px 0px 0px; font-size:10px; "/>
+                    <div>
+					    <input class="button blue-pill" type="submit" value="simpan" />
+					    <input class="button blue-pill" type="reset" value="reset" "/>
+                    </div>
+                    <div style="float: right;">
+                        <a class="button blue-pill" href="<?php echo site_url('/admin/knowledge') ?>" />Kembali</a>
+                    </div>
+                    <div style="clear: both;"></div>
                 </form>
                 
             </div>

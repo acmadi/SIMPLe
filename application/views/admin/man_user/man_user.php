@@ -22,96 +22,24 @@
                     <table id="tableOne" class="yui">
                         <thead>
                         <tr>
-                            <th><input type="checkbox"/></th>
+                            <th class="short"><input type="checkbox"/></th>
                             <th>No User</th>
                             <th>Username</th>
                             <th>Nama</th>
                             <th>Kode Unit</th>
                             <th>Level</th>
-                            <th>Aksi</th>
+                            <th class="action">Aksi</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <td><input type="checkbox"/></td>
+                            <td class="short"><input type="checkbox"/></td>
                             <td><a href="man_user_surat_kerja">28723</a></td>
                             <td>yuki</td>
                             <td>momoki</td>
                             <td>201010200201101</td>
                             <td>1</td>
-                            <td>
-                                <span class="button_kecil"><a title="surat kerja" href="man_user_surat_kerja"/><img
-                                        src="<?php echo base_url(); ?>images/icon_suratkerja.png"
-                                        style="width:20px; height:20px; "/></a></span>
-                                <span class="button_kecil"><a title="reset password" href="#"
-                                                              onclick='return resetpassword()'/><img
-                                        src="<?php echo base_url(); ?>images/icon_reset.png"
-                                        style="width:20px; height:20px; "/></a></span>
-                                <span class="button_kecil"><a title="ubah" href="man_user_ubah"/><img
-                                        src="<?php echo base_url(); ?>images/icon_edit.png"
-                                        style="width:20px; height:20px; "/></a></span>
-                                <span class="button_kecil"><a title="hapus" href="man_user"
-                                                              onclick="return hapus()"/><img
-                                        src="<?php echo base_url(); ?>images/icon_delete.png"
-                                        style="width:20px; height:20px; "/></a></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"/></td>
-                            <td>8237</td>
-                            <td>momo</td>
-                            <td>momoki</td>
-                            <td>201010200201101</td>
-                            <td>2</td>
-                            <td>
-                                <span class="button_kecil"><a title="surat kerja" href="man_user_surat_kerja"/><img
-                                        src="<?php echo base_url(); ?>images/icon_suratkerja.png"
-                                        style="width:20px; height:20px; "/></a></span>
-                                <span class="button_kecil"><a title="reset password" href="#"
-                                                              onclick='return resetpassword()'/><img
-                                        src="<?php echo base_url(); ?>images/icon_reset.png"
-                                        style="width:20px; height:20px; "/></a></span>
-                                <span class="button_kecil"><a title="ubah" href="man_user_ubah"/><img
-                                        src="<?php echo base_url(); ?>images/icon_edit.png"
-                                        style="width:20px; height:20px; "/></a></span>
-                                <span class="button_kecil"><a title="hapus" href="man_user"
-                                                              onclick="return hapus()"/><img
-                                        src="<?php echo base_url(); ?>images/icon_delete.png"
-                                        style="width:20px; height:20px; "/></a></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"/></td>
-                            <td>0383</td>
-                            <td>jike</td>
-                            <td>momoki</td>
-                            <td>yusuf m</td>
-                            <td>3</td>
-                            <td>
-                                <span class="button_kecil"><a title="surat kerja" href="man_user_surat_kerja"/><img
-                                        src="<?php echo base_url(); ?>images/icon_suratkerja.png"
-                                        style="width:20px; height:20px; "/></a></span>
-                                <span class="button_kecil"><a title="reset password" href="#"
-                                                              onclick='return resetpassword()'/><img
-                                        src="<?php echo base_url(); ?>images/icon_reset.png"
-                                        style="width:20px; height:20px; "/></a></span>
-                                <span class="button_kecil"><a title="ubah" href="man_user_ubah"/><img
-                                        src="<?php echo base_url(); ?>images/icon_edit.png"
-                                        style="width:20px; height:20px; "/></a></span>
-                                <span class="button_kecil"><a title="hapus" href="man_user"
-                                                              onclick="return hapus()"/><img
-                                        src="<?php echo base_url(); ?>images/icon_delete.png"
-                                        style="width:20px; height:20px; "/></a></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"/></td>
-                            <td>87238</td>
-                            <td>loli</td>
-                            <td>nadia liontin</td>
-                            <td>201010200201101</td>
-                            <td>5</td>
-                            <td>
+                            <td class="action">
                                 <span class="button_kecil"><a title="surat kerja" href="man_user_surat_kerja"/><img
                                         src="<?php echo base_url(); ?>images/icon_suratkerja.png"
                                         style="width:20px; height:20px; "/></a></span>

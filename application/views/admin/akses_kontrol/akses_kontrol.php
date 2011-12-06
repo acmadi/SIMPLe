@@ -28,19 +28,19 @@
             <table id="tableOne" class="yui">
                 <thead>
                 <tr>
-                    <th><input type="checkbox"/></th>
+                    <th class="short"><input type="checkbox"/></th>
                     <th>ID Akun</th>
                     <th>Departemen</th>
-                    <th>Aksi</th>
+                    <th class="action">Aksi</th>
                 </tr>
                 </thead>
                 <tbody>
 				<?php foreach($list_kontrol->result() as $item):?>
                 <tr>
-                    <td><input type="checkbox"/></td>
+                    <td class="short"><input type="checkbox"/></td>
                     <td><?php echo $item->kode_unit?></td>
                     <td><?php echo $item->nama_unit?></td>
-                    <td>
+                    <td class="action">
                             <span class="button_kecil"><a title="Ubah" href="<?php echo site_url("/admin/akses_kontrol_ubah").'/index/'.$item->kode_unit?>"
                                                           onclick='return yesOrNo()'/><img
                                     src="<?php echo base_url(); ?>images/edit.png"
