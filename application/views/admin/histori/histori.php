@@ -7,14 +7,6 @@
 
 
         <div class="table">
-            <div class="head">
-                <span style=" padding-left:30px; padding-top: -10px; position: absolute; width:100px; height:10px; background:#FFF; font-size: 11px;">Backup Database</span>
-
-                <form action="backup" name="" method="post"
-                      style="border: 1px solid #999; padding: 33px 30px 13px 13px; margin:5px 0px 20px 20px; font-size:10px; width:96%">
-                    <input type="submit" value="Backup Database"
-                           style="width:100px; height:23px; font-size:10px; margin: 0px 0px 20px 20px "/></form>
-            </div>
             <div class="tail">
                 <p style="padding-top: 0px; position:absolute; padding-left: 10px;">Sejarah User</p><br/>
 
