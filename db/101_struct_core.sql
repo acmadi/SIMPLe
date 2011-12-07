@@ -223,7 +223,7 @@ CREATE TABLE IF NOT EXISTS `tb_knowledge_base` (
   `judul` varchar(200) DEFAULT NULL,
   `desripsi` text,
   `jawaban` text,
-  `nama_nara_sumber` varchar(127) NOT NULL,
+  `nama_narasumber` varchar(127) NOT NULL,
   `jabatan_narasumber` varchar(100) NOT NULL,
   `bukti_file` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id_knowledge_base`),
