@@ -79,7 +79,7 @@
                         <th>Nama Akun</th>
                         <th>Login</th>
                         <th>Logout</th>
-                        <th>Aksi</th>
+                        <th class="action">Aksi</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -89,7 +89,7 @@
                         <td>Adi</td>
                         <td>10/06/2011 13:00</td>
                         <td>10/06/2011 14:00</td>
-                        <td>
+                        <td class="action">
                             <span class="button_kecil"><a title="Edit" href="man_keu_daftar_brg_del.php?id=59"
                                                           onclick='return yesOrNo()'/><img
                                     src="<?php echo base_url(); ?>images/edit.png"
@@ -104,7 +104,7 @@
                         <td>Palam</td>
                         <td>13/06/2011 14:30</td>
                         <td>13/06/2011 15:22</td>
-                        <td>
+                        <td class="action">
                             <span class="button_kecil"><a title="Edit" href="man_keu_daftar_brg_del.php?id=59"
                                                           onclick='return yesOrNo()'/><img
                                     src="<?php echo base_url(); ?>images/edit.png"
