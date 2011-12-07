@@ -1,18 +1,11 @@
 <script type="text/javascript">
     $(function() {
-        $('#kode_satker').blur(function() {
-            var id_satker = $(this).val();
-            setTimeout(function(){
-                $.get('<?php echo site_url('/csa/identitas_satker/search_satker') ?>', {id_satker: id_satker}, function(response){
-                    if (response) {
-
-                        $('#nama_satker').val(response.nama_satker);
-//                        alert(response.nama_satker);
-//                        $('nama_petugas').val(response.);
-                    }
-                }, 'json')
-            }, 1000);
-        });
+        $('#nama_kl').change(function(){
+            var nama_kl = $('#nama_kl').val();
+            $.get('<?php echo site_url('csa/identitas_satker/cari_kl/') ?>', {id_kementrian : nama_kl}, function(response) {
+                $('#eselon').html(response);
+            })
+        })
     })
 </script>
 
@@ -31,30 +24,22 @@
         <div class="table">
             <table>
                 <tr>
-                    <td>Nama K/L</td>
+                    <td>Kode - Nama K/L</td>
                     <td>
-                        <select>
+                        <select id="nama_kl">
                             <?php foreach ($kementrian->result() as $value): ?>
-                            <option value="<?php echo $value->id_kementrian ?>"><?php echo $value->nama_kementrian ?></option>
+                            <option value="<?php echo $value->id_kementrian ?>"><?php echo $value->id_kementrian ?> - <?php echo $value->nama_kementrian ?></option>
                             <?php endforeach ?>
                         </select>
                     </td>
                 </tr>
                 <tr>
-                    <td>Kode K/L (id_kementrian di table tb_satker)</td>
-                    <td><input type="text" id="kode_satker" name="kode_satker" size="30" value="630931"></td>
-                </tr>
-                <tr>
                     <td>Nama Eselon 1</td>
-                    <td><select></select></td>
-                </tr>
-                <tr>
-                    <td>Kode Eselon</td>
-                    <td><input type="text" id="kode_satker" name="kode_satker" size="30" value="630931"></td>
+                    <td><select id="eselon"></select></td>
                 </tr>
                 <tr>
                     <td>Nama Satker dan Kode</td>
-                    <td><input type="text" id="nama_satker" size="30" value="Dirjen Anggaran" disabled="disabled"></td>
+                    <td><input type="text" id="nama_satker" size="30" value="Dirjen Anggaran"></td>
                 </tr>
             </table>
             <br/><br/>

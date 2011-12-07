@@ -2,7 +2,7 @@
 class Identitas_satker extends CI_Controller
 {
 
-    function Identitas_satker()
+    function __construct()
     {
         parent::__construct();
     }
@@ -11,7 +11,7 @@ class Identitas_satker extends CI_Controller
 
     function index()
     {
-        $data['kementrian'] = $this->db->query('SELECT * FROM tb_kementrian ORDER BY nama_kementrian');
+        $data['kementrian'] = $this->db->query('SELECT * FROM tb_kementrian ORDER BY id_kementrian');
         /*if ($this->session->userdata('login') == TRUE)
           {*/
         $data['title'] = 'Isi Identitas Satker';
@@ -38,6 +38,31 @@ class Identitas_satker extends CI_Controller
         }
         exit();
     }
+
+    function cari_kl()
+    {
+//        if ($this->input->is_ajax_request()) {
+
+            $id_kementrian = $this->input->get('id_kementrian');
+
+            $result = $this->db->query("SELECT * FROM tb_unit WHERE id_kementrian = ? LIMIT 1", array($id_kementrian));
+
+            if ($result->num_rows() == 1) {
+                $result = $result->result();
+
+                $data = array();
+                foreach ($result as $value) {
+                    echo sprintf('<option value="%s">%s</option>', $value->id_unit, $value->nama_unit);
+//                    $data[$value->id_unit] = $value->nama_unit;
+                }
+//                echo json_encode($data);
+                //echo json_encode($result[0]);
+            }
+//        }
+        exit();
+    }
+
+
 }
 
 ?>
