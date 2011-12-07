@@ -71,9 +71,10 @@
                 </table>
             </div>
 
-            <div class="letak-button-bawah">
-                <input type="button" class="button" value="Submit">
-                <input type="reset" class="button" value="Reset">
+            <div style="text-align: center; margin-top: 20px;">
+                <input type="submit" class="button blue-pill" value="Help Desk">
+                <input type="submit" class="button blue-pill" value="Saluran Pengaduan">
+                <input type="reset" class="button gray-pill" value="Reset">
             </div>
         </div>
     </div>
