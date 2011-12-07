@@ -594,6 +594,7 @@ form p {
 form label {
     min-width: 100px;
     display: inline-block;
+    vertical-align: top;
 }
 
 div.form {
@@ -605,6 +606,7 @@ div.form {
     color: white;
     padding: 4px 0;
     font-family: Arial, san-serif;
+    background-image: -webkit-linear-gradient(top, #62C362, #58AC58);
     background-image: -moz-linear-gradient(top, #62C362, #58AC58);
     border: 1px solid #58AC58;
     border-radius: 4px;
@@ -615,6 +617,7 @@ div.form {
     color: white;
     padding: 4px 0;
     font-family: Arial, san-serif;
+    background-image: -webkit-linear-gradient(top, #E95B57, #C83F38);
     background-image: -moz-linear-gradient(top, #E95B57, #C83F38);
     border: 1px solid #C83F38;
     border-radius: 4px;
@@ -626,6 +629,7 @@ div.form {
     padding: 4px 0;
     font-size: 13px;
     font-family: Arial, san-serif;
+    background-image: -webkit-linear-gradient(top, #FBEDBE, #EFDD97);
     background-image: -moz-linear-gradient(top, #FBEDBE, #EFDD97);
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -634,4 +638,37 @@ div.form {
 
 .clear {
     clear: both;
+}
+
+h1, h2, h3, h4 {
+    font-weight: normal;
+}
+
+h1 {
+    color: #7c7c7c;
+    border-bottom: 1px dotted #cecece;
+}
+
+fieldset {
+    border: 1px solid #cecece;
+    padding:  10px;
+    margin: 20px 0;
+    border-radius: 5px;
+}
+
+legend {
+    margin-left: 10px;
+    padding: 4px 20px;
+    border-radius: 12px;
+    background: #cecece;
+    color: black;
+    text-shadow: 1px 1px 0 #fff;
+}
+
+.content {
+    padding: 20px;
+}
+
+table tbody tr:hover {
+    background: #e5e5e5 !important;
 }
