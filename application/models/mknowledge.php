@@ -217,7 +217,7 @@ class Mknowledge extends CI_Model
 		if ($query->num_rows() > 0)
 		{
 		   foreach($query->result_array() as $r):
-				$data[$r['id_kat_knowledge_base']][]	= $r;
+				$data[$r['id_kat_knowledge_base']][]		= $r;
 				$data['dir'][$r['id_kat_knowledge_base']] 	= $r['kat_knowledge_base'];
 		   endforeach;
 		   
