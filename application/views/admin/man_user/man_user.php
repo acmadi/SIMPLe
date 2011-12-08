@@ -1,168 +1,73 @@
 <ul id="nav">
-    <li><a href="#tab1" class="active">Manajemen User</a></li>
+    <li><a href="#tab1">Manajemen User</a></li>
 </ul>
 <div class="clear"></div>
-    <div id="konten">
-        <div style="display: none;" id="tab1" class="tab_konten">
-
-
-            <div class="table">
-                <div id="head">
-                    <form id="tambah_user" action="man_user_tambah"><input type="submit" value="Tambah User"
-                                                                           style="width:100px; height:24px; font-size:10px; "/>
-                    </form>
-                    <form id="cari_user" action="man_user_cari">No User: <input type="text" value="28100"
-                                                                                style="width:180px; height:16px; font-size:10px; padding:2px 4px 2px 4px; margin-right:5px; "/>
-
-                        <div id="search"><input type="submit" value="Cari User"
-                                                style="width:60px; height:24px; font-size:10px; "/></div>
-                    </form>
-                </div>
-                <div id="tail">
-                    <table id="tableOne" class="yui">
-                        <thead>
-                        <tr>
-                            <th><input type="checkbox"/></th>
-                            <th>No User</th>
-                            <th>Username</th>
-                            <th>Nama</th>
-                            <th>Kode Unit</th>
-                            <th>Level</th>
-                            <th>Aksi</th>
+<div id="konten">
+	<div id="msg">
+	<?php
+		if ($this->session->flashdata('msg')){
+			echo $this->session->flashdata('msg');
+		}
+	?>
+	</div>
+    <div style="display: none;" id="tab1" class="tab_konten">
+        <div class="table"> 
+            <div id="head">
+                <form id="form-cari" action="<?php echo site_url('admin/man_user_cari')?>" method="post">
+					Cari : <input id="teks-cari" type="text" name="fcari" value=""  /> <input class="button" type="submit" value="Enter"/>
+                </form>
+                
+                <a href="<?php echo site_url('admin/man_user_tambah')?>"><input id="btn-kanan-atas" class='button' type="submit" value="Tambah User"/></a>
+                
+            </div>
+            <div id="tail">               
+       			<table id="tableOne" class="yui" style="margin:20px 0px 10px 0px; padding-right:30px; text-align:left;">   
+                    <thead>
+                        <tr>            		    
+                            <th style="width:5%;"><input type="checkbox" /></th>
+                            <th style="width:10%;">No User</th>
+                            <th style="width:25%;">Username</th>
+                            <th style="width:25%;">Nama</th>
+                            <th style="width:15%;">Kode Unit</th>
+                            <th style="width:10%; text-align:center;">Level</th>
+                            <th style="text-align:center; width:15%;">Aksi</th>
                         </tr>
-                        </thead>
-                        <tbody>
+                    </thead>
+                    <tbody>
+					<?php $i = 1;foreach($result as $d): ?>
                         <tr>
-                            <td><input type="checkbox"/></td>
-                            <td><a href="man_user_surat_kerja">28723</a></td>
-                            <td>yuki</td>
-                            <td>momoki</td>
-                            <td>201010200201101</td>
-                            <td>1</td>
-                            <td>
-                                <span class="button_kecil"><a title="surat kerja" href="man_user_surat_kerja"/><img
-                                        src="<?php echo base_url(); ?>images/icon_suratkerja.png"
-                                        style="width:20px; height:20px; "/></a></span>
-                                <span class="button_kecil"><a title="reset password" href="#"
-                                                              onclick='return resetpassword()'/><img
-                                        src="<?php echo base_url(); ?>images/icon_reset.png"
-                                        style="width:20px; height:20px; "/></a></span>
-                                <span class="button_kecil"><a title="ubah" href="man_user_ubah"/><img
-                                        src="<?php echo base_url(); ?>images/icon_edit.png"
-                                        style="width:20px; height:20px; "/></a></span>
-                                <span class="button_kecil"><a title="hapus" href="man_user"
-                                                              onclick="return hapus()"/><img
-                                        src="<?php echo base_url(); ?>images/icon_delete.png"
-                                        style="width:20px; height:20px; "/></a></span>
+                            <th style="width:5%;"><input type="checkbox" /></th>
+                            <td><?php echo $d->id_user?></td>
+                            <td><?php echo $d->username?></td>
+                            <td><?php echo $d->nama?></td>
+                            <td><?php echo $d->kode_unit?></td>
+                            <td style="text-align:center;"><?php echo $d->id_lavel?></td>
+                            <td style="text-align:center; width:15%;">
+                <a title="surat kerja" href="<?php echo site_url('admin/man_user_surat_kerja/index/'.$d->id_user)?>"  /><img src="<?php echo base_url(); ?>images/icon_suratkerja.png"/></a> 
+                <a title="reset password" href="<?php echo site_url('admin/man_user/reset_password/'.$d->id_user)?>"  onclick='return resetpassword()' /><img src="<?php echo base_url(); ?>images/reload.png"/></a> 
+                <a title="ubah" href="<?php echo site_url('admin/man_user_ubah/index/'.$d->id_user)?>" /><img src="<?php echo base_url(); ?>images/edit.png"/></a> 
+                <a title="hapus" href="<?php echo site_url('admin/man_user/delete/'.$d->id_user)?>"  onclick="return hapus()" /><img src="<?php echo base_url(); ?>images/icon_delete.png"/></a>
                             </td>
                         </tr>
-                        <tr>
-                            <td><input type="checkbox"/></td>
-                            <td>8237</td>
-                            <td>momo</td>
-                            <td>momoki</td>
-                            <td>201010200201101</td>
-                            <td>2</td>
-                            <td>
-                                <span class="button_kecil"><a title="surat kerja" href="man_user_surat_kerja"/><img
-                                        src="<?php echo base_url(); ?>images/icon_suratkerja.png"
-                                        style="width:20px; height:20px; "/></a></span>
-                                <span class="button_kecil"><a title="reset password" href="#"
-                                                              onclick='return resetpassword()'/><img
-                                        src="<?php echo base_url(); ?>images/icon_reset.png"
-                                        style="width:20px; height:20px; "/></a></span>
-                                <span class="button_kecil"><a title="ubah" href="man_user_ubah"/><img
-                                        src="<?php echo base_url(); ?>images/icon_edit.png"
-                                        style="width:20px; height:20px; "/></a></span>
-                                <span class="button_kecil"><a title="hapus" href="man_user"
-                                                              onclick="return hapus()"/><img
-                                        src="<?php echo base_url(); ?>images/icon_delete.png"
-                                        style="width:20px; height:20px; "/></a></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"/></td>
-                            <td>0383</td>
-                            <td>jike</td>
-                            <td>momoki</td>
-                            <td>yusuf m</td>
-                            <td>3</td>
-                            <td>
-                                <span class="button_kecil"><a title="surat kerja" href="man_user_surat_kerja"/><img
-                                        src="<?php echo base_url(); ?>images/icon_suratkerja.png"
-                                        style="width:20px; height:20px; "/></a></span>
-                                <span class="button_kecil"><a title="reset password" href="#"
-                                                              onclick='return resetpassword()'/><img
-                                        src="<?php echo base_url(); ?>images/icon_reset.png"
-                                        style="width:20px; height:20px; "/></a></span>
-                                <span class="button_kecil"><a title="ubah" href="man_user_ubah"/><img
-                                        src="<?php echo base_url(); ?>images/icon_edit.png"
-                                        style="width:20px; height:20px; "/></a></span>
-                                <span class="button_kecil"><a title="hapus" href="man_user"
-                                                              onclick="return hapus()"/><img
-                                        src="<?php echo base_url(); ?>images/icon_delete.png"
-                                        style="width:20px; height:20px; "/></a></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"/></td>
-                            <td>87238</td>
-                            <td>loli</td>
-                            <td>nadia liontin</td>
-                            <td>201010200201101</td>
-                            <td>5</td>
-                            <td>
-                                <span class="button_kecil"><a title="surat kerja" href="man_user_surat_kerja"/><img
-                                        src="<?php echo base_url(); ?>images/icon_suratkerja.png"
-                                        style="width:20px; height:20px; "/></a></span>
-                                <span class="button_kecil"><a title="reset password" href="#"
-                                                              onclick='return resetpassword()'/><img
-                                        src="<?php echo base_url(); ?>images/icon_reset.png"
-                                        style="width:20px; height:20px; "/></a></span>
-                                <span class="button_kecil"><a title="ubah" href="man_user_ubah"/><img
-                                        src="<?php echo base_url(); ?>images/icon_edit.png"
-                                        style="width:20px; height:20px; "/></a></span>
-                                <span class="button_kecil"><a title="hapus" href="man_user"
-                                                              onclick="return hapus()"/><img
-                                        src="<?php echo base_url(); ?>images/icon_delete.png"
-                                        style="width:20px; height:20px; "/></a></span>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="pagination">Halaman <a href="#"><<</a> <a href="#">1</a> <a href="#">2</a> <a href="#">3</a>
-                    <a href="#">4</a> <a href="#">5</a> <a href="#">6</a> <a href="#">>></a></div>
-                <br/>
-
-                <div id="tail">
-                    <table>
-                        <tr>
-                            <td class="sort"><span class="button_kecil"><a title="surat kerja" href="#"
-                                                                           onclick='return yesOrNo()'/><img
-                                    src="<?php echo base_url(); ?>images/icon_suratkerja.png"
-                                    style="width:20px; height:20px; "/></a></span></td>
-                            <td class="medium">Surat Kerja</td>
-                            <td><span class="button_kecil"><a title="ubah" href="#" onclick='return yesOrNo()'/><img
-                                    src="<?php echo base_url(); ?>images/icon_edit.png"
-                                    style="width:20px; height:20px; "/></a></span></td>
-                            <td>Edit User</td>
-                        </tr>
-                        <tr>
-                            <td class="sort"><span class="button_kecil"><a title="reset password" href="#"
-                                                                           onclick='return yesOrNo()'/><img
-                                    src="<?php echo base_url(); ?>images/icon_reset.png"
-                                    style="width:20px; height:20px; "/></a></span></td>
-                            <td class="medium">Reset Password</td>
-                            <td><span class="button_kecil"><a title="hapus" href="#" onclick='return hapus()'/><img
-                                    src="<?php echo base_url(); ?>images/icon_delete.png"
-                                    style="width:20px; height:20px; "/></a></span></td>
-                            <td>Hapus User</td>
-                        </tr>
-                    </table>
-                </div>
+					<?php endforeach; ?>                     
+                    </tbody>
+                </table>
+            </div>
+            <div class="pagination"><?php echo ($pageLink)?'Halaman '.$pageLink:'';?></div><br />
+            <div id="tail">  
+                <table> 
+                    <tr>
+                        <td><a title="surat kerja" href="#"  onclick='return yesOrNo()' /><img src="<?php echo base_url(); ?>images/icon_suratkerja.png"/></a> &nbsp;  &nbsp; Surat Kerja
+                        <td><a title="ubah" href="#"  onclick='return yesOrNo()' /><img src="<?php echo base_url(); ?>images/edit.png"/></a> &nbsp;  &nbsp; Edit User</td>
+                    </tr>
+                    <tr>
+                        <td><a title="reset password" href="#"  onclick='return yesOrNo()' /><img src="<?php echo base_url(); ?>images/reload.png"/></a> &nbsp;  &nbsp; Reset Password</td>
+                        <td><a title="hapus" href="#"  onclick='return hapus()' /><img src="<?php echo base_url(); ?>images/icon_delete.png"/></a> &nbsp;  &nbsp; Hapus User</td>
+                    </tr>
+                </table>
             </div>
         </div>
-
-
-        <script type="text/javascript" src="<?php echo base_url(); ?>js/fungsi.js"></script>
+    </div>
+    
+    
+<script type="text/javascript" src="<?php echo base_url(); ?>js/fungsi.js"></script>
