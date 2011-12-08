@@ -24,21 +24,21 @@
         <div class="table">
             <div id="tail">
                 <form action="<?php echo site_url("/admin/akses_kontrol/update");?>" method="post">
-                    <?php if (isset($ubah->kode_unit)) echo form_hidden('fid', $ubah->kode_unit);?>
+                    <?php if (isset($ubah->kode_unit)) echo form_hidden('fid', $ubah->lavel);?>
                     <div class="form">
                         <p>
-                            <label>No Level</label>
-                            <input type="text" name="fid" value="<?php echo $ubah->kode_unit?>"/>
+                            <label>Level</label>
+                            <input type="text" name="fid" value="<?php echo $ubah->lavel ?>" disabled />
                         </p>
 
                         <p>
                             <label>Nama Level</label>
-                            <input type="text" name="fnamalevel" value="<?php echo $ubah->nama_unit?>"/>
+                            <input type="text" name="fnamalevel" value="<?php echo $ubah->nama_lavel?>"/>
                         </p>
 
                         <p>
                             <input class="button blue-pill" type="submit" value="simpan"/></a>
-                            <input class="button blue-pill" type="reset" value="reset"/>
+                            <a href="<?php echo site_url('/admin/akses_kontrol') ?>" class="button gray-pill">Batal</a>
                         </p>
                     </div>
                 </form>

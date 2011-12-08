@@ -4,19 +4,28 @@
 <div class="clear"></div>
 <div id="konten">
     <div style="display: none;" id="tab1" class="tab_konten">
-        <div id="msg">
-            <?php
-                if ($this->session->flashdata('msg')) {
-            echo $this->session->flashdata('msg');
+
+        <?php
+        // TODO: Satu paket ini untuk alerts. Nanti mau dipindah jadi hanya panggil satu method.
+        if ($this->session->flashdata('success')) {
+            echo '<div class="success">' . $this->session->flashdata('success') . '</div>';
         }
-            ?>
-        </div>
+        if ($this->session->flashdata('error')) {
+            echo '<div class="error">' . $this->session->flashdata('error') . '</div>';
+        }
+        if ($this->session->flashdata('notice')) {
+            echo '<div class="notice">' . $this->session->flashdata('notice') . '</div>';
+        }
+        if ($this->session->flashdata('info')) {
+            echo '<div class="info">' . $this->session->flashdata('info') . '</div>';
+        }
+        ?>
 
         <div class="table">
             <div id="head">
                 <div style="float: left;">
-                    <a class="button blue-pill"
-                       href="<?php echo site_url("/admin/akses_kontrol/view_form") ?>"/>Tambah</a>
+                    <!--                    <a class="button blue-pill" href="-->
+                    <?php //echo site_url("/admin/akses_kontrol/view_form") ?><!--"/>Tambah</a>-->
                 </div>
 
                 <div style="float: right;">
@@ -31,36 +40,35 @@
                     <table id="tableOne" class="yui">
                         <thead>
                         <tr>
-                            <th class="short"><input type="checkbox"/></th>
-                            <th>ID Akun</th>
-                            <th>Departemen</th>
+                            <th class="short">No</th>
+                            <th>Level</th>
+                            <th>Nama Level</th>
                             <th class="action">Aksi</th>
                         </tr>
                         </thead>
                         <tbody>
+                        <?php $i = 1 ?>
                         <?php foreach ($list_kontrol->result() as $item): ?>
                         <tr>
-                            <td class="short"><input type="checkbox"/></td>
-                            <td><?php echo $item->kode_unit?></td>
-                            <td><?php echo $item->nama_unit?></td>
+                            <td class="short"><?php echo $i++ ?></td>
+                            <td><?php echo $item->lavel ?></td>
+                            <td><?php echo $item->nama_lavel ?></td>
                             <td class="action">
-                            <span class="button_kecil"><a title="Ubah"
-                                                          href="<?php echo site_url("/admin/akses_kontrol_ubah") . '/index/' . $item->kode_unit?>"
-                                                          onclick='return yesOrNo()'/><img
-                                    src="<?php echo base_url(); ?>images/edit.png"
-                                    style="width:20px; height:20px; "/></a></span>
-                            <span class="button_kecil"><a title="Lihat"
-                                                          href="<?php echo site_url("/admin/akses_kontrol_lihat") . '/index/' . $item->kode_unit?>"><img
-                                    src="<?php echo base_url(); ?>images/view.png"
-                                    style="width:20px; height:20px; "/></a></span>
-							<span class="button_kecil"><a title="Lihat"
-                                                          href="<?php echo site_url("/admin/akses_kontrol") . '/delete/' . $item->kode_unit?>"
-                                                          onclick="return confirm('Anda yakin akan menghapus?');"><img
-                                    src="<?php echo base_url(); ?>images/delete.png"
-                                    style="width:20px; height:20px; "/></a></span>
+                            <span class="button_kecil">
+                                <a title="Ubah"
+                                   href="<?php echo site_url("/admin/akses_kontrol/") . '/edit/' . $item->lavel ?>"'/>
+                                    <img src="<?php echo base_url(); ?>images/edit.png"/>
+                                </a>
+                            </span>
+                            <span class="button_kecil">
+                                <a title="Lihat"
+                                   href="<?php echo site_url("/admin/akses_kontrol/") . '/view/' . $item->lavel ?>">
+                                    <img src="<?php echo base_url(); ?>images/view.png"/>
+                                </a>
+                            </span>
                             </td>
                         </tr>
-                            <?php	 endforeach;?>
+                        <?php endforeach;?>
                         </tbody>
                     </table>
                 </div>
@@ -68,6 +76,3 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    setTimeout('$("div#msg").html("")', 3000);
-</script>

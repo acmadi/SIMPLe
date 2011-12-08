@@ -27,7 +27,7 @@
 
                     <div class="form">
                         <p>
-                            <label>No Level</label>
+                            <label>Level</label>
                             <input type="text" name="fid" value="<?php echo $tambah->fid?>" maxlength="16" />
                         </p>
 
