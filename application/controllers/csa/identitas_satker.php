@@ -43,6 +43,8 @@ class Identitas_satker extends CI_Controller
 
             $id_kementrian = $this->input->get('id_kementrian');
 
+            $id_kementrian = substr($id_kementrian, 0, 3);
+
             $result = $this->db->query("SELECT * FROM tb_unit WHERE id_kementrian = ?", array($id_kementrian));
 
             if ($result->num_rows() > 0) {
@@ -74,8 +76,7 @@ class Identitas_satker extends CI_Controller
             $i = 0;
             if ($result->num_rows() > 0) {
                 foreach ($result->result() as $value) {
-                    $array[$i]['value'] = $value->id_satker;
-                    $array[$i]['label'] = $value->id_satker . ' - ' . $value->nama_satker;
+                    $array[$i] = $value->id_satker . ' - ' . $value->nama_satker;
                     $i++;
                 }
             }
@@ -100,7 +101,6 @@ class Identitas_satker extends CI_Controller
                     VALUES (?, ?, ?, ?, ?, ?, ?)";
 
             $this->db->query($sql, array($id_satker, $nama_petugas, $jabatan_petugas, $no_hp, $email, $no_kantor, $tipe));
-            echo $this->db->affected_rows();
 
             $sql = "INSERT INTO tb_tiket_helpdesk
                     (id_satker, tanggal)

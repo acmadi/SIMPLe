@@ -595,6 +595,7 @@ form label {
     min-width: 100px;
     display: inline-block;
     vertical-align: top;
+    padding: 4px;
 }
 
 div.form {
@@ -679,4 +680,22 @@ table tbody tr:hover {
 
 input[type="radio"] {
     margin: 0 10px;
+}
+
+input[type="text"] {
+    min-width: 300px;
+}
+
+select {
+    min-width: 300px;
+}
+
+a.clear_btn {
+    background: url(../images/clear.png) no-repeat;
+    text-indent: -9999px;
+    position: relative;
+    //left: -30px;
+    color: transparent;
+    width: 30px;
+    vertical-align: middle;
 }

@@ -11,9 +11,10 @@
 
 <script type="text/javascript">
     $(function() {
-        $('#nama_kl').change(function() {
+        $('#nama_kl').blur(function() {
             var nama_kl = $('#nama_kl').val();
             $.get('<?php echo site_url('csa/identitas_satker/cari_kl/') ?>', {id_kementrian : nama_kl}, function(response) {
+                console.log(response);
                 $('#eselon').html(response);
                 $('#kode_satker').removeAttr('disabled');
             })
@@ -43,6 +44,18 @@
 //            return false;
         })
 
+        var kementrian_list = [
+            <?php
+            foreach ($kementrian->result() as $value) {
+                echo sprintf("{ label: \"%s\", value: \"%s\" }, ", $value->id_kementrian . ' - ' . $value->nama_kementrian, $value->id_kementrian . ' - ' . $value->nama_kementrian);
+            }
+            ?>
+        ];
+
+        $('#nama_kl').autocomplete({
+            source: kementrian_list
+        });
+
         $('#kode_satker').autocomplete({
             source: function(request, response) {
                 $.ajax({
@@ -62,6 +75,10 @@
             },
             delay: 500,
             minLength: 3
+        })
+
+        $('#clear_nama_kl').click(function(){
+            $('#nama_kl').val('');
         })
     })
 </script>
@@ -86,13 +103,8 @@
 
         <p>
             <label>Kode - Nama K/L</label>
-            <select id="nama_kl" name="nama_kl">
-                <option value="">Pilih Kode - Nama K/L</option>
-                <?php foreach ($kementrian->result() as $value): ?>
-                <option value="<?php echo $value->id_kementrian ?>"><?php echo $value->id_kementrian ?>
-                    - <?php echo $value->nama_kementrian ?></option>
-                <?php endforeach ?>
-            </select>
+            <input type="text" id="nama_kl" name="nama_kl" />
+            <a href="javascript:void(0)" class="clear_btn" id="clear_nama_kl">Hapus</a>
         </p>
         <p>
             <label>Nama Eselon 1</label>
@@ -100,7 +112,7 @@
         </p>
 
         <p>
-            <label>Kode Satker</label>
+            <label>Kode - Nama Satker</label>
             <input type="text" name="kode_satker" id="kode_satker" class="kl" size="30" disabled />
         </p>
     </fieldset>
