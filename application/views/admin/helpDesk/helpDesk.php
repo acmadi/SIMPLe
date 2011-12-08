@@ -28,19 +28,19 @@
 
                                 <div id="search">
                             </td>
-                            <td><input type="submit" value="Cari" style="width:60px; height:24px; font-size:10px; "/>
+                            <td><input type="submit" value="Cari" style="width:60px; height:24px; font-size:10px; "/></td>
+                        </tr>
+                    </table>
+                </form>
             </div>
-            </td>
-            </tr>
-            </table>
-            </form>
         </div>
+
+        <p>Status Tiket</p>
         <div class="tail">
-            <p style="padding-top: 110px; position:absolute; padding-left: 10px;">Status Tiket</p><br/>
             <table id="tableOne" class="yui">
                 <thead>
                 <tr>
-                    <th><input type="checkbox"/></th>
+                    <th class="short"><input type="checkbox"/></th>
                     <th>No.Tiket</th>
                     <th>Tanggal</th>
                     <th>Nama</th>
@@ -52,7 +52,7 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td><input type="checkbox"/></td>
+                    <td class="short"><input type="checkbox"/></td>
                     <td>071</td>
                     <td>07/01/2011</td>
                     <td>Palam</td>
@@ -62,7 +62,7 @@
                     <td>Supervisor</td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox"/></td>
+                    <td class="short"><input type="checkbox"/></td>
                     <td>041</td>
                     <td>09/01/2011</td>
                     <td>Nanda</td>

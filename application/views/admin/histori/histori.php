@@ -7,14 +7,6 @@
 
 
         <div class="table">
-            <div class="head">
-                <span style=" padding-left:30px; padding-top: -10px; position: absolute; width:100px; height:10px; background:#FFF; font-size: 11px;">Backup Database</span>
-
-                <form action="backup" name="" method="post"
-                      style="border: 1px solid #999; padding: 33px 30px 13px 13px; margin:5px 0px 20px 20px; font-size:10px; width:96%">
-                    <input type="submit" value="Backup Database"
-                           style="width:100px; height:23px; font-size:10px; margin: 0px 0px 20px 20px "/></form>
-            </div>
             <div class="tail">
                 <p style="padding-top: 0px; position:absolute; padding-left: 10px;">Sejarah User</p><br/>
 
@@ -87,7 +79,7 @@
                         <th>Nama Akun</th>
                         <th>Login</th>
                         <th>Logout</th>
-                        <th>Aksi</th>
+                        <th class="action">Aksi</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -97,7 +89,7 @@
                         <td>Adi</td>
                         <td>10/06/2011 13:00</td>
                         <td>10/06/2011 14:00</td>
-                        <td>
+                        <td class="action">
                             <span class="button_kecil"><a title="Edit" href="man_keu_daftar_brg_del.php?id=59"
                                                           onclick='return yesOrNo()'/><img
                                     src="<?php echo base_url(); ?>images/edit.png"
@@ -112,7 +104,7 @@
                         <td>Palam</td>
                         <td>13/06/2011 14:30</td>
                         <td>13/06/2011 15:22</td>
-                        <td>
+                        <td class="action">
                             <span class="button_kecil"><a title="Edit" href="man_keu_daftar_brg_del.php?id=59"
                                                           onclick='return yesOrNo()'/><img
                                     src="<?php echo base_url(); ?>images/edit.png"

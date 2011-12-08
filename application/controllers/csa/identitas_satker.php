@@ -2,16 +2,14 @@
 class Identitas_satker extends CI_Controller
 {
 
-    function Identitas_satker()
+    function __construct()
     {
         parent::__construct();
     }
 
-    var $title = 'Identitas SatKer';
-
     function index()
     {
-        $data['kementrian'] = $this->db->query('SELECT * FROM tb_kementrian ORDER BY nama_kementrian');
+        $data['kementrian'] = $this->db->query('SELECT * FROM tb_kementrian ORDER BY id_kementrian');
         /*if ($this->session->userdata('login') == TRUE)
           {*/
         $data['title'] = 'Isi Identitas Satker';
@@ -38,6 +36,61 @@ class Identitas_satker extends CI_Controller
         }
         exit();
     }
+
+    function cari_kl()
+    {
+        //        if ($this->input->is_ajax_request()) {
+
+        $id_kementrian = $this->input->get('id_kementrian');
+
+        $result = $this->db->query("SELECT * FROM tb_unit WHERE id_kementrian = ?", array($id_kementrian));
+
+        if ($result->num_rows() > 0) {
+            $result = $result->result();
+
+            foreach ($result as $value) {
+                echo sprintf('<option value="%s">%s - %s</option>', $value->id_unit, $value->id_unit, $value->nama_unit);
+            }
+        }
+        exit();
+    }
+
+    public function save_identitas()
+    {
+        if ($this->input->post('tipe') == 'kl') {
+            $tipe = $this->input->post('tipe');
+            $id_satker = $this->input->post('id_satker');
+            $nama_petugas = $this->input->post('nama_petugas');
+            $jabatan_petugas = $this->input->post('jabatan_petugas');
+            $no_hp = $this->input->post('no_hp');
+            $email = $this->input->post('email');
+            $no_kantor = $this->input->post('no_kantor');
+
+            $sql = "INSERT INTO tb_petugas_satker
+                    (id_satker, nama_petugas, jabatan_petugas, no_hp, email, no_kantor, tipe)
+                    VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+            $this->db->query($sql, array($id_satker, $nama_petugas, $jabatan_petugas, $no_hp, $email, $no_kantor, $tipe));
+
+        } else {
+            $tipe = $this->input->post('tipe');
+            $nama_petugas = $this->input->post('nama_petugas');
+            $instansi = $this->input->post('instansi');
+            $alamat = $this->input->post('alamat');
+            $email = $this->input->post('email');
+            $no_hp = $this->input->post('no_hp');
+
+            $sql = "INSERT INTO tb_petugas_satker
+                    (nama_petugas, instansi, alamat, email, no_hp, tipe)
+                    VALUES (?, ?, ?, ?, ?, ?)";
+
+            $this->db->query($sql, array($nama_petugas, $instansi, $alamat, $email, $no_hp, $tipe));
+        }
+
+        redirect('/csa/helpdesk_form_pertanyaan');
+    }
+
+
 }
 
 ?>

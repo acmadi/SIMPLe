@@ -8,28 +8,24 @@
 
             <div class="table">
                 <div id="head">
-                    <form id="tambah_unit" action="man_unit_tambah">
-                        <input type="submit" value="Tambah Unit" style="width:100px; height:24px; font-size:10px; "/>
-                    </form>
-                    <span style="margin:0px 0px 0px -320px; padding-left:10px; position:absolute; width:50px; height:10px; background:#FFF;">Cari Unit</span>
+                    <div style="float: left;">
+                        <a class="button blue-pill" href="<?php echo site_url('/admin/man_unit_tambah') ?>">Tambah</a>
+                    </div>
 
-                    <form id="cari_unit" action="man_unit_cari"
-                          style="border: 1px solid #999; padding: 13px 30px 13px 13px; margin:5px 0px 0px 20px; ">Kode
-                        Unit: <input type="text" value="28100"
-                                     style="width:180px; height:16px; font-size:10px; padding:2px 4px 2px 4px; margin-right:5px; "/>
-
-                        <div id="search">
-                            <input type="submit" value="Cari Unit" style="width:60px; height:24px; font-size:10px; "/>
-                        </div>
-                    </form>
+                    <div style="float: right;">
+                        <form id="cari_unit" action="man_unit_cari">
+                            Kode Unit: <input type="text" value="" placeholder="Pencarian kode unit" />
+                                <input class="button blue-pill" type="submit" value="Cari Unit" />
+                        </form>
+                    </div>
                 </div>
                 <div id="tail">
                     <table id="tableOne" class="yui">
                         <thead>
                         <tr>
-                            <th align="center">Kode Unit</th>
-                            <th align="center">Nama Unit</th>
-                            <th align="center">Aksi</th>
+                            <th>Kode Unit</th>
+                            <th>Nama Unit</th>
+                            <th class="action">Aksi</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -37,11 +33,15 @@
 
                         <?php foreach ($units->result() as $unit): ?>
                         <tr>
-                            <td align="center"><?php echo $unit->kode_unit ?></td>
-                            <td align="center"><?php echo $unit->nama_unit ?></td>
-                            <td align="center"><a href="man_unit_ubah">
-                                <a href="<?php echo site_url('/admin/man_unit/edit/' . $unit->kode_unit) ?>">Edit</a>
-                                <a href="<?php echo site_url('/admin/man_unit/delete/' . $unit->kode_unit) ?>">Hapus</a>
+                            <td><?php echo $unit->kode_unit ?></td>
+                            <td><?php echo $unit->nama_unit ?></td>
+                            <td class="action">
+                                <a href="<?php echo site_url('/admin/man_unit/edit/' . $unit->kode_unit) ?>">
+                                    <img src="<?php echo base_url('images/edit.png') ?>" />
+                                </a>
+                                <a href="<?php echo site_url('/admin/man_unit/delete/' . $unit->kode_unit) ?>">
+                                    <img src="<?php echo base_url('images/delete.png') ?>" />
+                                </a>
                             </td>
                         </tr>
                         <?php endforeach ?>

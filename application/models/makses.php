@@ -8,8 +8,7 @@ class Makses extends CI_Model
      * @return Object
      */
     public function get_all() {
-        $sql = "SELECT kode_unit,nama_unit
-				FROM tb_unit_saker";
+        $sql = "SELECT * FROM tb_lavel";
         return $this->db->query($sql);
     }
 	
@@ -19,7 +18,7 @@ class Makses extends CI_Model
      * @return Object
      */
     public function get_akses_by_id($id) {
-        $sql = "SELECT id_user,nama, username, kode_unit, id_lavel 
+        $sql = "SELECT id_user,nama, username, kode_unit, id_lavel
 				FROM tb_user WHERE kode_unit = ?";
 		$sql2 = "SELECT kode_unit,nama_unit
 				FROM tb_unit_saker WHERE kode_unit = ? LIMIT 0,1";

@@ -4,38 +4,45 @@
 <div class="clear"></div>
 <div id="konten">
     <div style="display: none;" id="tab1" class="tab_konten">
-		<div id="msg">
-		<?php
-		if ($this->session->flashdata('msg')){
-			echo $this->session->flashdata('msg');
-		}
-		?>
-		</div>
+
+        <?php
+        // TODO: Satu paket ini untuk alerts. Nanti mau dipindah jadi hanya panggil satu method.
+        if ($this->session->flashdata('success')) {
+            echo '<div class="success">' . $this->session->flashdata('success') . '</div>';
+        }
+        if ($this->session->flashdata('error')) {
+            echo '<div class="error">' . $this->session->flashdata('error') . '</div>';
+        }
+        if ($this->session->flashdata('notice')) {
+            echo '<div class="notice">' . $this->session->flashdata('notice') . '</div>';
+        }
+        if ($this->session->flashdata('info')) {
+            echo '<div class="info">' . $this->session->flashdata('info') . '</div>';
+        }
+        ?>
+
         <div class="table">
             <div id="tail">
-				<form action="<?php echo site_url("/admin/akses_kontrol/save");?>" method="post">
-                <table id="tableOne" class="yui">
-                    <tr>
-                        <td>No Level</td>
-                        <td>:</td>
-                        <td><input type="text" name="fid" value="<?php echo $tambah->fid?>" style="font-size:10px;"/></td>
-                    </tr>
-                    <tr>
-                        <td>Nama Level</td>
-                        <td>:</td>
-                        <td><input type="text" name="fnamalevel" value="<?php echo $tambah->fnamalevel?>" style="font-size:10px;"/></td>
-                    </tr>
-                </table>
-                <br/>
+                <form action="<?php echo site_url("/admin/akses_kontrol/save");?>" method="post">
 
-                <div style="float:right;">
-                    <input type="reset" value="reset" style="width:70px; height:24px; font-size:10px; "/>
-					<input type="submit" value="simpan" style="width:70px; height:24px; font-size:10px; "/></a>
-                </div>
+                    <div class="form">
+                        <p>
+                            <label>Level</label>
+                            <input type="text" name="fid" value="<?php echo $tambah->fid?>" maxlength="16" />
+                        </p>
+
+                        <p>
+                            <label>Nama Level</label>
+                            <input type="text" name="fnamalevel" value="<?php echo $tambah->fnamalevel?>"/>
+                        </p>
+
+                        <p>
+                            <input class="button blue-pill" type="submit" value="simpan"/></a>
+                            <a href="<?php echo site_url('/admin/akses_kontrol/') ?>" class="button gray-pill">Batal</a>
+                        </p>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
-<script type="text/javascript">
-	setTimeout('$("div#msg").html("")', 3000);
-</script>
