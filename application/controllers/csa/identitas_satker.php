@@ -39,18 +39,47 @@ class Identitas_satker extends CI_Controller
 
     function cari_kl()
     {
-        //        if ($this->input->is_ajax_request()) {
+        if ($this->input->is_ajax_request()) {
 
-        $id_kementrian = $this->input->get('id_kementrian');
+            $id_kementrian = $this->input->get('id_kementrian');
 
-        $result = $this->db->query("SELECT * FROM tb_unit WHERE id_kementrian = ?", array($id_kementrian));
+            $result = $this->db->query("SELECT * FROM tb_unit WHERE id_kementrian = ?", array($id_kementrian));
 
-        if ($result->num_rows() > 0) {
-            $result = $result->result();
+            if ($result->num_rows() > 0) {
+                $result = $result->result();
 
-            foreach ($result as $value) {
-                echo sprintf('<option value="%s">%s - %s</option>', $value->id_unit, $value->id_unit, $value->nama_unit);
+                foreach ($result as $value) {
+                    echo sprintf('<option value="%s">%s - %s</option>', $value->id_unit, $value->id_unit, $value->nama_unit);
+                }
             }
+        }
+        exit();
+    }
+
+    function cari_satker()
+    {
+        if ($this->input->is_ajax_request()) {
+            
+            $term = $this->input->get('term');
+            $eselon = $this->input->get('eselon');
+
+            $sql = "SELECT * FROM tb_satker WHERE
+                id_unit = '{$eselon}' AND
+                (id_satker LIKE '%{$term}%' OR nama_satker LIKE '%{$term}%')
+                ORDER BY id_unit";
+
+            $result = $this->db->query($sql);
+
+            $array = array();
+            $i = 0;
+            if ($result->num_rows() > 0) {
+                foreach ($result->result() as $value) {
+                    $array[$i]['value'] = $value->id_satker;
+                    $array[$i]['label'] = $value->id_satker . ' - ' . $value->nama_satker;
+                    $i++;
+                }
+            }
+            echo json_encode($array);
         }
         exit();
     }
@@ -71,6 +100,15 @@ class Identitas_satker extends CI_Controller
                     VALUES (?, ?, ?, ?, ?, ?, ?)";
 
             $this->db->query($sql, array($id_satker, $nama_petugas, $jabatan_petugas, $no_hp, $email, $no_kantor, $tipe));
+            echo $this->db->affected_rows();
+
+            $sql = "INSERT INTO tb_tiket_helpdesk
+                    (id_satker, tanggal)
+                    VALUES (?, ?)";
+
+            $this->db->query($sql, array($id_satker, date('Y-m-d')));
+            //            echo $this->db->affected_rows();
+
 
         } else {
             $tipe = $this->input->post('tipe');

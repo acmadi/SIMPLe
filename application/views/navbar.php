@@ -48,6 +48,6 @@ switch ($this->uri->segment(2)) {
         <li class="<?php echo $nav_helpdesk ?>"><?php echo anchor('admin/helpDesk', 'HelpDesk');?></li>
         <li class="<?php echo $nav_frontdesk ?>"><?php echo anchor('admin/frontDesk', 'FrontDesk Sistem');?></li>
         <li class="<?php echo $nav_history ?>"><?php echo anchor('admin/histori', 'Histori');?></li>
-        <li class="<?php echo $nav_system ?>"><?php echo anchor('admin/system', 'System');?></li>
+        <li class="<?php echo $nav_system ?>"><?php echo anchor('admin/system', 'Sistem');?></li>
     </ul>
 </div>

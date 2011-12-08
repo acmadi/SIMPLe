@@ -16,7 +16,7 @@ switch ($this->uri->segment(2)) {
 }
 ?>
 
-<div id="logout"><?php echo anchor("login/process_logout", 'Logout') ?> &nbsp; <em><?php echo date('d F Y') ?></em>
+<div id="logout"><?php echo anchor("login/process_logout", 'Logout') ?> &nbsp; <em><?php echo date('d-m-Y') ?></em>
 </div>
 <div id="navbar" class="clearfloat">
     <ul class="sf-menu">
