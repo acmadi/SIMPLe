@@ -11,7 +11,7 @@ class Makses extends CI_Model
         $sql = "SELECT * FROM tb_lavel";
         return $this->db->query($sql);
     }
-	
+
 	/**
      * Ambil semua knowledge dan kategorinya.
      *
@@ -22,12 +22,12 @@ class Makses extends CI_Model
 				FROM tb_user WHERE kode_unit = ?";
 		$sql2 = "SELECT kode_unit,nama_unit
 				FROM tb_unit_saker WHERE kode_unit = ? LIMIT 0,1";
-		
+
         $data['result'] = $this->db->query($sql, array($id));
         $data['result2'] = $this->db->query($sql2, array($id))->row();
-		
+
 		return $data;
-		
+
     }
 
     /**
@@ -43,13 +43,13 @@ class Makses extends CI_Model
                 VALUES (?)";
 
         $query = $this->db->query($sql,array($name));
-		if($this->db->affected_rows() > 0){ 
+		if($this->db->affected_rows() > 0){
 			return true;
-		}else{ 
+		}else{
 			return false;
 		}
     }
-	
+
 	/**
      * Untuk menambah  knowledge
      *
@@ -58,13 +58,13 @@ class Makses extends CI_Model
      */
     public function add_akses($data = array())
     {
-        $sql = "INSERT INTO tb_unit_saker(kode_unit,nama_unit) 
+        $sql = "INSERT INTO tb_unit_saker(kode_unit,nama_unit)
 				VALUES(?,?);";
 
         $query = $this->db->query($sql,array($data['fid'],$data['fnamalevel']));
-		if($this->db->affected_rows() > 0){ 
+		if($this->db->affected_rows() > 0){
 			return true;
-		}else{ 
+		}else{
 			return false;
 		}
     }
@@ -79,10 +79,10 @@ class Makses extends CI_Model
         $sql = "SELECT * FROM tb_kat_knowledge_base ORDER BY kat_knowledge_base";
         return $this->db->query($sql);
     }
-	
+
 	/**
      * datapatkan knowledge base
-     * 
+     *
 	 * @param $id integer
      * @return Row
      */
@@ -92,8 +92,8 @@ class Makses extends CI_Model
 								   FROM tb_unit_saker WHERE kode_unit =  '".$id."'");
 		return $query->row();
     }
-	
-	
+
+
 	/**
      * ubah knowledge base
      *
@@ -103,14 +103,14 @@ class Makses extends CI_Model
 	public function edit_data_by_id($data = array()){
 		$sql = "UPDATE tb_unit_saker SET nama_unit = ? WHERE kode_unit = ?";
 		$query	= $this->db->query($sql, array($data['fnamalevel'],$data['fid']));
-		if($this->db->affected_rows() > 0){ 
+		if($this->db->affected_rows() > 0){
 			return true;
-		}else{ 
+		}else{
 			return false;
 		}
-		
+
 	}
-	
+
 	/**
      * ubah kategori knowledge base
      *
@@ -120,14 +120,14 @@ class Makses extends CI_Model
 	public function do_edit_category($data = array()){
 		$sql = "UPDATE tb_kat_knowledge_base SET kat_knowledge_base = ? WHERE id_kat_knowledge_base = ?";
 		$query	= $this->db->query($sql, array($data['kat'],$data['id']));
-		if($this->db->affected_rows() > 0){ 
+		if($this->db->affected_rows() > 0){
 			return true;
-		}else{ 
+		}else{
 			return false;
 		}
-		
+
 	}
-	
+
 	/**
      * hapus knowledge base
      *
@@ -138,24 +138,24 @@ class Makses extends CI_Model
 		$sql = "SELECT id_kon_unit_satker
 				FROM tb_kon_unit_satker
 				WHERE kode_unit = ?";
-		
+
 		$query	= $this->db->query($sql, array($id));
-		
+
 		if($query->num_rows()>0){
 			return 3;
 		}else{
 			$sql2 = "DELETE FROM tb_unit_saker WHERE kode_unit = ?";
 			$this->db->query($sql2, array($id));
-			
-			if($this->db->affected_rows() > 0){ 
+
+			if($this->db->affected_rows() > 0){
 				return 1;
-			}else{ 
+			}else{
 				return 2;
 			}
 		}
-		
+
 	}
-	
+
 	/**
      * hapus kategori knowledge base
      *
@@ -166,24 +166,24 @@ class Makses extends CI_Model
 		$sql = "SELECT id_knowledge_base
 				FROM tb_knowledge_base
 				WHERE id_kat_knowledge_base = ?";
-		
+
 		$query	= $this->db->query($sql, array($id));
-		
+
 		if($query->num_rows()>0){
 			return 3;
 		}else{
 			$sql2 = "DELETE FROM tb_kat_knowledge_base WHERE id_kat_knowledge_base = ?";
 			$query2	= $this->db->query($sql2, array($id));
-			
-			if($this->db->affected_rows() > 0){ 
+
+			if($this->db->affected_rows() > 0){
 				return 1;
-			}else{ 
+			}else{
 				return 2;
 			}
 		}
-		
+
 	}
-	
+
 	/**
      * search kategori knowledge base
      *
@@ -194,23 +194,33 @@ class Makses extends CI_Model
 		$sql = "SELECT a.judul,a.id_kat_knowledge_base
 				FROM tb_knowledge_base a,tb_kat_knowledge_base b
 				WHERE a.id_kat_knowledge_base = b.id_kat_knowledge_base AND a.id_kat_knowledge_base = ? $limit";
-		
+
 		$data['result'] = $this->db->query($sql, array($id));
-		
+
 		$sql2 = "SELECT kat_knowledge_base
 				FROM tb_kat_knowledge_base WHERE id_kat_knowledge_base = ?
 				";
-				
+
 		$query2 	= $this->db->query($sql2, array($id));
 		if ($query2->num_rows() > 0)
 		{
 		   $row = $query2->row();
 		   $data['name'] = $row->kat_knowledge_base;
-		   
+
 		}
-		
+
 		return $data;
 	}
-	
-	
+
+    /**
+     * Ambil semua user berdasarkan level id.
+     *
+     * @param $id level id
+     * @return Object
+     */
+    public function get_all_users_by_level($id) {
+        $sql = "SELECT * FROM tb_user JOIN tb_lavel ON tb_user.id_lavel = tb_lavel.id_lavel WHERE lavel = ?";
+        $result = $this->db->query($sql, array($id));
+        return $result;
+    }
 }
