@@ -12,12 +12,22 @@
                     <tr>
                         <td class="medium">No Level</td>
                         <td class="sort">:</td>
-                        <td><?php echo $list_kontrol['result2']->kode_unit?></td>
+                        <td>
+                            <?php
+                            $temp = ($list_kontrol->result());
+                            echo $temp[0]->lavel;
+                            ?>
+                        </td>
                     </tr>
                     <tr>
                         <td class="medium">Nama Level</td>
                         <td class="sort">:</td>
-                        <td><?php echo $list_kontrol['result2']->nama_unit?></td>
+                        <td>
+                            <?php
+                            $temp = ($list_kontrol->result());
+                            echo $temp[0]->nama_lavel;
+                            ?>
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -25,39 +35,47 @@
                 <table id="tableOne" class="yui">
                     <thead>
                     <tr>
-                        <th>No User</th>
+                        <th class="short">No</th>
                         <th>Username</th>
                         <th>Nama</th>
                         <th>Kode Unit</th>
                         <th>Level</th>
-                        <th>Aksi</th>
+                        <th class="action">Aksi</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <?php foreach($list_kontrol['result']->result() as $item):?>
+                    <?php foreach($list_kontrol->result() as $item):?>
 					<tr>
-                        <td><?php echo $item->id_user?></td>
+                        <td class="short"><?php echo $item->id_user?></td>
                         <td><?php echo $item->username?></td>
                         <td><?php echo $item->nama?></td>
                         <td><?php echo $item->kode_unit?></td>
-                        <td><?php echo $item->id_lavel?></td>
-                        <td>
-                            <span class="button_kecil"><a title="Edit" href="#" onclick='return yesOrNo()'/><img
-                                    src="<?php echo base_url(); ?>images/icon_suratkerja.png"
-                                    style="width:20px; height:20px; "/></a></span>
-                            <span class="button_kecil"><a title="Edit" href="#" onclick='return yesOrNo()'/><img
-                                    src="<?php echo base_url(); ?>images/icon_reset.png"
-                                    style="width:20px; height:20px; "/></a></span>
-                            <span class="button_kecil"><a title="Edit" href="#" onclick='return yesOrNo()'/><img
-                                    src="<?php echo base_url(); ?>images/icon_edit.png"
-                                    style="width:20px; height:20px; "/></a></span>
-                            <span class="button_kecil"><a title="Edit" href="#" onclick='return yesOrNo()'/><img
-                                    src="<?php echo base_url(); ?>images/icon_delete.png"
-                                    style="width:20px; height:20px; "/></a></span>
+                        <td><?php echo $item->lavel?></td>
+                        <td class="action">
+                            <span class="button_kecil">
+                                <a title="Edit" href="#" onclick='return yesOrNo()'/>
+                                    <img src="<?php echo base_url(); ?>images/icon_suratkerja.png" />
+                                </a>
+                            </span>
+                            <span class="button_kecil">
+                                <a title="Edit" href="#" onclick='return yesOrNo()'/>
+                                    <img src="<?php echo base_url(); ?>images/icon_reset.png" />
+                                </a>
+                            </span>
+                            <span class="button_kecil">
+                                <a title="Edit" href="#" onclick='return yesOrNo()'/>
+                                    <img src="<?php echo base_url(); ?>images/icon_edit.png" />
+                                </a>
+                            </span>
+                            <span class="button_kecil">
+                                <a title="Edit" href="#" onclick='return yesOrNo()'/>
+                                    <img src="<?php echo base_url(); ?>images/icon_delete.png" />
+                                </a>
+                            </span>
                         </td>
                     </tr>
                     <?php endforeach;?>
-                    
+
                     </tbody>
                 </table>
                 <br/>

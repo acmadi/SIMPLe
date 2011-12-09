@@ -4,7 +4,7 @@
 
 <div class="content">
     <?php
-            // TODO: Satu paket ini untuk alerts. Nanti mau dipindah jadi hanya panggil satu method.
+    // TODO: Satu paket ini untuk alerts. Nanti mau dipindah jadi hanya panggil satu method.
     if ($this->session->flashdata('success')) {
         echo '<div class="success">' . $this->session->flashdata('success') . '</div>';
     }
@@ -22,11 +22,6 @@
 
 
     <h1>Akses Kontrol</h1>
-
-    <div style="float: left;">
-        <!--                    <a class="button blue-pill" href="-->
-        <?php //echo site_url("/admin/akses_kontrol/view_form") ?><!--"/>Tambah</a>-->
-    </div>
 
     <div style="float: right;">
         <form id="textfield-search" action="knowledge_cari">
@@ -54,21 +49,20 @@
                 <td><?php echo $item->lavel ?></td>
                 <td><?php echo $item->nama_lavel ?></td>
                 <td class="action">
-                            <span class="button_kecil">
-                                <a title="Ubah"
-                                   href="<?php echo site_url("/admin/akses_kontrol/") . '/edit/' . $item->lavel ?>"'/>
-                                    <img src="<?php echo base_url(); ?>images/edit.png"/>
-                                </a>
-                            </span>
-                            <span class="button_kecil">
-                                <a title="Lihat"
-                                   href="<?php echo site_url("/admin/akses_kontrol/") . '/view/' . $item->lavel ?>">
-                                    <img src="<?php echo base_url(); ?>images/view.png"/>
-                                </a>
-                            </span>
+                    <span class="button_kecil">
+                        <a title="Ubah" href="<?php echo site_url("/admin/akses_kontrol/") . '/edit/' . $item->lavel ?>"'/>
+                            <img src="<?php echo base_url(); ?>images/edit.png"/>
+                        </a>
+                    </span>
+                    <span class="button_kecil">
+                        <a title="Lihat"
+                           href="<?php echo site_url("/admin/akses_kontrol/") . '/view/' . $item->lavel ?>">
+                            <img src="<?php echo base_url(); ?>images/view.png"/>
+                        </a>
+                    </span>
                 </td>
             </tr>
-                <?php endforeach;?>
+            <?php endforeach;?>
             </tbody>
         </table>
     </div>
