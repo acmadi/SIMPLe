@@ -23,7 +23,7 @@ switch ($this->uri->segment(2)) {
     case 'helpdesk':
         $nav_helpdesk = "current";
         break;
-    case 'frontDesk':
+    case 'frontdesk':
         $nav_frontdesk = "current";
         break;
     case 'histori':
@@ -46,7 +46,7 @@ switch ($this->uri->segment(2)) {
         <li class="<?php echo $nav_knowledge ?>"><?php echo anchor('admin/knowledge', 'Knowledge');?></li>
         <li class="<?php echo $nav_forum ?>"><?php echo anchor('admin/man_forum', 'Forum');?></li>
         <li class="<?php echo $nav_helpdesk ?>"><?php echo anchor('admin/helpdesk', 'Help Desk');?></li>
-        <li class="<?php echo $nav_frontdesk ?>"><?php echo anchor('admin/frontDesk', 'FrontDesk Sistem');?></li>
+        <li class="<?php echo $nav_frontdesk ?>"><?php echo anchor('admin/frontdesk', 'FrontDesk Sistem');?></li>
         <li class="<?php echo $nav_history ?>"><?php echo anchor('admin/histori', 'Histori');?></li>
         <li class="<?php echo $nav_system ?>"><?php echo anchor('admin/system', 'Sistem');?></li>
     </ul>

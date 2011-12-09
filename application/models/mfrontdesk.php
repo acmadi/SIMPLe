@@ -1,8 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Mhelpdesk extends CI_Model
+class Mfrontdesk extends CI_Model
 {
-
 
 	public function get_all_tiket($key = '', $value = '')
 	{
@@ -12,10 +11,9 @@ class Mhelpdesk extends CI_Model
 		endif;
 
 		$q = $this->db->query(
-			'SELECT *, concat(no_tiket_helpdesk, \' \', no_antrian) AS no_tiket
-			 FROM tb_tiket_helpdesk tkt JOIN tb_petugas_satker ptgs JOIN tb_satker stkr
-			 ON (tkt.id_petugas_satket = ptgs.id_petugas_satker)
-			 AND (ptgs.id_satker = stkr.id_satker)
+			'SELECT *
+			 FROM tb_tiket_frontdesk tkt JOIN tb_satker stkr
+			 ON (tkt.id_satker = stkr.id_satker)
 			' . $cond
 			);
 
