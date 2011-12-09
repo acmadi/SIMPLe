@@ -17,7 +17,15 @@
     <div id="header">Sistem Informasi Pusat Layanan DJA</div>
     <div id="navbar"><?php $this->load->view('navbar'); ?></div>
     <div id="container">
-        <div id="content"><?php $this->load->view($content); ?></div>
+        <div id="content">
+        <?php
+        if (isset($content)) :
+            $this->load->view($content); 
+        elseif (isset($content_html)) :
+            echo $content_html;
+        endif;
+        ?>
+        </div>
     </div>
     <div id="footer"><?php $this->load->view('footer'); ?></div>
 </div>

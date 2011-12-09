@@ -27,6 +27,16 @@ class Msatker extends CI_Model
         $this->db->query("INSERT INTO `antrian` (number, cs) VALUES ('{$antrian_terakhir}', '{$cs}')");
     }
 
+    /**
+     * Reset angka antrian
+     *
+     * @param $cs Nomer CS (A, B, C, D atau E)
+     * @return void
+     */
+    public function reset_antrian($cs)
+    {
+        
+    }
 
 
     /**
