@@ -5,6 +5,7 @@ class Akses_kontrol extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        $this->load->model('Makses', 'akses');
     }
 
     var $title = 'Akses Kontrol';
@@ -13,7 +14,6 @@ class Akses_kontrol extends CI_Controller
     {
         /*if ($this->session->userdata('login') == TRUE)
           {*/
-        $this->load->model('Makses', 'akses');
 
         $data['list_kontrol'] = $this->akses->get_all();
         $data['title'] = 'Akses Kontrol';
@@ -61,7 +61,6 @@ class Akses_kontrol extends CI_Controller
 
     public function delete($id)
     {
-        $this->load->model('Makses', 'akses');
         $info = $this->akses->delete($id);
 
         switch ($info) {
@@ -98,10 +97,17 @@ class Akses_kontrol extends CI_Controller
         $result = $this->db->query("SELECT * FROM tb_lavel");
         $result = $result->result();
         $data['ubah'] = $result[0];
-        
+
         $this->load->view('admin/template', $data);
     }
 
+    function view($id)
+    {
+        $data['list_kontrol'] = $this->akses->get_all_users_by_level($id);
+        $data['title'] = 'Akses Kontrol - Ubah';
+        $data['content'] = 'admin/akses_kontrol/akses_kontrol_lihat';
+        $this->load->view('admin/template', $data);
+    }
 
 }
 
