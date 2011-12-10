@@ -1,16 +1,19 @@
-    <ul id="nav">
-        <li><a href="#tab1">Forum</a></li>
-    </ul>
-    <div class="clear"></div>
-    <div id="konten">
-        <a href="#"><h3>Pengumuman Liburan</h3></a>
-        <em>Tanggal 11-11-11</em>
-            <p class="kiri">Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... 
-            <p class="kanan"><a href="#">Selengkapnya...</a></p><br /><br />
-            <div class="break"></div>
-         <a href="#"><h3>Adanya sistem baru</h3></a>
-        <em>Tanggal 12-12-11</em>
-            <p class="kiri">Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... Penjelasan... </p><br />
-       		<p class="kanan"><a href="#">Selengkapnya...</a></p><br /><br />
-                	<div class="break"></div>
+<div class="content">
+    <h1>Forum</h1>
+
+    <?php foreach ($forums->result() as $forum): ?>
+    <div style="margin-bottom: 20px;">
+        
+        <h2><a href="<?php echo site_url('/csa/man_forum/view/' . $forum->id_forum ) ?>"><?php echo $forum->judul_forum ?></a></h2>
+
+        <em>Tanggal: <?php echo date('d-m-Y', strtotime($forum->tanggal)) ?></em>
+
+        <div style="margin: 10px 0;">
+            <?php echo word_limiter($forum->isi_forum, 100) ?>
+        </div>
+
+        <div style="text-align: right;"><a href="<?php echo site_url('/csa/man_forum/view/' . $forum->id_forum ) ?>">Selengkapnya</a></div>
+
     </div>
+    <?php endforeach ?>
+</div>

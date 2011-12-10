@@ -5,23 +5,27 @@ class Man_forum extends CI_Controller
     function Man_forum()
     {
         parent::__construct();
+        $this->load->model('mforum');
+        $this->load->helper('text');
     }
-
-    var $title = 'Manajemen Forum';
 
     function index()
     {
-        /*if ($this->session->userdata('login') == TRUE)
-          {*/
+        $result = $this->mforum->get();
+
         $data['title'] = 'Manajemen Forum';
         $data['content'] = 'csa/man_forum/man_forum';
+        $data['forums'] = $result;
         $this->load->view('csa/template', $data);
-        /*}
-          else
-          {
-              $this->load->view('login/login_view');
-          }*/
+    }
+
+    function view($id)
+    {
+        $result = $this->mforum->get_one($id);
+
+        $data['title'] = 'Manajemen Forum';
+        $data['content'] = 'csa/man_forum/man_forum_view';
+        $data['forums'] = $result;
+        $this->load->view('csa/template', $data);
     }
 }
-
-?>
