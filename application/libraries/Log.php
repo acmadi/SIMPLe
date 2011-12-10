@@ -10,7 +10,7 @@ class Log
 
     /**
      * Buat user log.
-     * Data disimpan didalam table tb_logs atau file?!?
+     * Data disimpan didalam table tb_logs atau file juga?!?
      *
      * Format:
      * [Tanggal] [User]: [Pesan]
@@ -26,8 +26,10 @@ class Log
         $this->CI->load->library('session');
         $date = date('Y-m-d H:i:s');
         $user = $this->CI->session->userdata('user');
+        
         if (ENVIRONMENT == 'development') {
-            echo sprintf("%s %s: %s", $date, $user, $message);
+            $log = sprintf("%s %s: %s", $date, $user, $message);
+            //echo $log;
         }
 
         $data = array(
