@@ -102,12 +102,19 @@ class Identitas_satker extends CI_Controller
             if ($this->form_validation->run()) {
 
                 $tipe = $this->input->post('tipe');
-                $id_satker = $this->input->post('id_satker');
+                $nama_kl = $this->input->post('nama_kl');
+                $eselon = $this->input->post('eselon');
+
+                $kode_satker = $this->input->post('kode_satker');
                 $nama_petugas = $this->input->post('nama_petugas');
                 $jabatan_petugas = $this->input->post('jabatan_petugas');
+
                 $no_hp = $this->input->post('no_hp');
-                $email = $this->input->post('email');
                 $no_kantor = $this->input->post('no_kantor');
+                $email = $this->input->post('email');
+
+                // Parsing Kode dan Nama KL jadi ID
+                $id_satker = substr($kode_satker, 0, 6);
 
                 $sql = "INSERT INTO tb_petugas_satker
                     (id_satker, nama_petugas, jabatan_petugas, no_hp, email, no_kantor, tipe)
@@ -115,11 +122,22 @@ class Identitas_satker extends CI_Controller
 
                 $this->db->query($sql, array($id_satker, $nama_petugas, $jabatan_petugas, $no_hp, $email, $no_kantor, $tipe));
 
-                $sql = "INSERT INTO tb_tiket_helpdesk
-                    (id_satker, tanggal)
-                    VALUES (?, ?)";
+                $last_id = $this->db->query("SELECT MAX(id_petugas_satker) last_id FROM `tb_petugas_satker`");
+                $last_id = $last_id->result();
+                $last_id = $last_id[0]->last_id;
 
-                $this->db->query($sql, array($id_satker, date('Y-m-d')));
+                $sql = "INSERT INTO tb_tiket_helpdesk
+                    (id_satker, tanggal, id_petugas_satket)
+                    VALUES (?, ?, ?)";
+
+                $this->db->query($sql, array($id_satker, date('Y-m-d'), $last_id));
+
+                $last_id = $this->db->query("SELECT MAX(no_tiket_helpdesk) last_id FROM `tb_tiket_helpdesk`");
+                $last_id = $last_id->result();
+                $last_id = $last_id[0]->last_id;
+
+                // Set tiket untuk helpdesk
+                $this->session->set_userdata('tiket', (string) $last_id );
 
                 redirect('/csa/helpdesk_form_pertanyaan');
             }
