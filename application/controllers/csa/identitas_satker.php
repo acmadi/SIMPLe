@@ -90,14 +90,17 @@ class Identitas_satker extends CI_Controller
         if ($this->input->post('tipe') == 'kl') {
 
             $this->form_validation->set_rules('tipe', 'Tipe');
-            $this->form_validation->set_rules('id_satker', 'Identitas Satker', 'required');
+            $this->form_validation->set_rules('nama_kl', 'Kode - Nama K/L', 'required');
+            $this->form_validation->set_rules('eselon', 'Eselon', 'required');
+            $this->form_validation->set_rules('kode_satker', 'Kode Satker', 'required');
             $this->form_validation->set_rules('nama_petugas', 'Nama Petugas', 'required');
             $this->form_validation->set_rules('jabatan_petugas', 'Jabatan Petugas', 'required');
             $this->form_validation->set_rules('no_hp', 'No. HP', 'required');
-            $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
             $this->form_validation->set_rules('no_kantor', 'No. Kantor', 'required');
+            $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
 
             if ($this->form_validation->run()) {
+
                 $tipe = $this->input->post('tipe');
                 $id_satker = $this->input->post('id_satker');
                 $nama_petugas = $this->input->post('nama_petugas');
@@ -122,11 +125,11 @@ class Identitas_satker extends CI_Controller
             }
 
         } else {
-            $this->form_validation->set_rules('nama_petugas', 'Nama Petugas', 'required');
+            $this->form_validation->set_rules('nama_petugas', 'Nama', 'required');
             $this->form_validation->set_rules('instansi', 'Instansi', 'required');
             $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+            $this->form_validation->set_rules('no_hp', 'Telpon', 'required');
             $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
-            $this->form_validation->set_rules('no_hp', 'No HP', 'required');
 
 
             if ($this->form_validation->run()) {
