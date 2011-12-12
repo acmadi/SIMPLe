@@ -90,6 +90,13 @@
 
     <h1>Isi Identitas SatKer</h1>
 
+    <?php
+    $errors = validation_errors();
+    if (!empty($errors)) {
+        echo '<div class="error">' . validation_errors() . '</div>';
+    }
+    ?>
+
     <?php echo form_open('csa/identitas_satker/save_identitas') ?>
 
     <fieldset>
@@ -138,7 +145,7 @@
         </p>
         <p>
             <label>E-mail</label>
-        <td><input type="text" name="email" size="30"></td>
+        <td><input type="email" name="email" size="30"></td>
         </p>
     </fieldset>
 
@@ -150,19 +157,19 @@
         </p>
         <p class="kl">
             <label>Instansi</label>
-        <td><input type="text" id="instansi" size="30"></td>
+        <td><input type="text" id="instansi" name="instansi" size="30"></td>
         </p>
         <p>
             <label>Alamat</label>
-        <td><input type="text" id="alamat" name="" size="30"></td>
+        <td><input type="text" id="alamat" name="alamat" size="30"></td>
         </p>
         <p class="kl">
             <label>Telpon</label>
-        <td><input type="text" id="no_hp" name="" size="30"></td>
+        <td><input type="text" id="no_hp" name="no_hp" size="30"></td>
         </p>
         <p>
             <label>E-mail</label>
-        <td><input type="text" id="email" name="" size="30"></td>
+        <td><input type="email" id="email" name="email" size="30"></td>
         </p>
     </fieldset>
 

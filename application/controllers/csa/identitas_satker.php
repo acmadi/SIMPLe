@@ -61,7 +61,7 @@ class Identitas_satker extends CI_Controller
     function cari_satker()
     {
         if ($this->input->is_ajax_request()) {
-            
+
             $term = $this->input->get('term');
             $eselon = $this->input->get('eselon');
 
@@ -88,44 +88,67 @@ class Identitas_satker extends CI_Controller
     public function save_identitas()
     {
         if ($this->input->post('tipe') == 'kl') {
-            $tipe = $this->input->post('tipe');
-            $id_satker = $this->input->post('id_satker');
-            $nama_petugas = $this->input->post('nama_petugas');
-            $jabatan_petugas = $this->input->post('jabatan_petugas');
-            $no_hp = $this->input->post('no_hp');
-            $email = $this->input->post('email');
-            $no_kantor = $this->input->post('no_kantor');
 
-            $sql = "INSERT INTO tb_petugas_satker
+            $this->form_validation->set_rules('tipe', 'Tipe');
+            $this->form_validation->set_rules('id_satker', 'Identitas Satker', 'required');
+            $this->form_validation->set_rules('nama_petugas', 'Nama Petugas', 'required');
+            $this->form_validation->set_rules('jabatan_petugas', 'Jabatan Petugas', 'required');
+            $this->form_validation->set_rules('no_hp', 'No. HP', 'required');
+            $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+            $this->form_validation->set_rules('no_kantor', 'No. Kantor', 'required');
+
+            if ($this->form_validation->run()) {
+                $tipe = $this->input->post('tipe');
+                $id_satker = $this->input->post('id_satker');
+                $nama_petugas = $this->input->post('nama_petugas');
+                $jabatan_petugas = $this->input->post('jabatan_petugas');
+                $no_hp = $this->input->post('no_hp');
+                $email = $this->input->post('email');
+                $no_kantor = $this->input->post('no_kantor');
+
+                $sql = "INSERT INTO tb_petugas_satker
                     (id_satker, nama_petugas, jabatan_petugas, no_hp, email, no_kantor, tipe)
                     VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-            $this->db->query($sql, array($id_satker, $nama_petugas, $jabatan_petugas, $no_hp, $email, $no_kantor, $tipe));
+                $this->db->query($sql, array($id_satker, $nama_petugas, $jabatan_petugas, $no_hp, $email, $no_kantor, $tipe));
 
-            $sql = "INSERT INTO tb_tiket_helpdesk
+                $sql = "INSERT INTO tb_tiket_helpdesk
                     (id_satker, tanggal)
                     VALUES (?, ?)";
 
-            $this->db->query($sql, array($id_satker, date('Y-m-d')));
-            //            echo $this->db->affected_rows();
+                $this->db->query($sql, array($id_satker, date('Y-m-d')));
 
+                redirect('/csa/helpdesk_form_pertanyaan');
+            }
 
         } else {
-            $tipe = $this->input->post('tipe');
-            $nama_petugas = $this->input->post('nama_petugas');
-            $instansi = $this->input->post('instansi');
-            $alamat = $this->input->post('alamat');
-            $email = $this->input->post('email');
-            $no_hp = $this->input->post('no_hp');
+            $this->form_validation->set_rules('nama_petugas', 'Nama Petugas', 'required');
+            $this->form_validation->set_rules('instansi', 'Instansi', 'required');
+            $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+            $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+            $this->form_validation->set_rules('no_hp', 'No HP', 'required');
 
-            $sql = "INSERT INTO tb_petugas_satker
+
+            if ($this->form_validation->run()) {
+                $tipe = $this->input->post('tipe');
+                $nama_petugas = $this->input->post('nama_petugas');
+                $instansi = $this->input->post('instansi');
+                $alamat = $this->input->post('alamat');
+                $email = $this->input->post('email');
+                $no_hp = $this->input->post('no_hp');
+
+                $sql = "INSERT INTO tb_petugas_satker
                     (nama_petugas, instansi, alamat, email, no_hp, tipe)
                     VALUES (?, ?, ?, ?, ?, ?)";
 
-            $this->db->query($sql, array($nama_petugas, $instansi, $alamat, $email, $no_hp, $tipe));
+                $this->db->query($sql, array($nama_petugas, $instansi, $alamat, $email, $no_hp, $tipe));
+
+                redirect('/csa/helpdesk_form_pertanyaan');
+            }
         }
 
-        redirect('/csa/helpdesk_form_pertanyaan');
+        $this->index();
+
     }
 
 

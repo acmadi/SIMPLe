@@ -1192,7 +1192,7 @@ input[type="radio"] {
     margin: 0 10px;
 }
 
-input[type="text"], input[type="password"] {
+input[type="text"], input[type="password"], input[type="email"] {
     min-width: 300px;
 }
 
