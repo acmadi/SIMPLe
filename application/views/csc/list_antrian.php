@@ -1,48 +1,37 @@
-<div id="konten">
+<div class="content">
 
+    <h1></h1>
 
     <div class="table">
         <div id="head">
-            <span style="margin:0px 0px 0px -1250px; padding-left:10px; position:absolute; width:115px; height:10px; background:#FFF;">Cari Tiket Satker</span>
-
-            <div id="cari_unit" action="man_unit_cari"
-                 style="border: 1px solid #999; padding: 13px 30px 13px 13px; margin:5px 10px 0px 20px; width:96%; ">
-                <p>Kode Satker : <input type="text" size="60" value="292292"/>&nbsp;<input type="submit" value="cari"
-                                                                                           style="width:60px; height:25px; "/>
-                </p>
+            <div id="cari_unit" action="man_unit_cari">
+                <p>Kode Satker: <input type="text" size="60" value="292292"/>&nbsp;<input type="submit" value="cari" /></p>
             </div>
 
             <div id="tail">
                 <table id="tableOne" class="yui">
                     <thead>
                     <tr>
-                        <th>No</th>
+                        <th class="short">No</th>
                         <th>Tanggal</th>
                         <th>No Antrian</th>
                         <th>Kode Satker</th>
                         <th>Nama Satker</th>
-                        <th>Aksi</th>
+                        <th class="action">Aksi</th>
                     </tr>
                     </thead>
                     <tbody>
+                    <?php $i = 1 ?>
+                    <?php foreach ($antrian->result() as $value): ?>
                     <tr>
-                        <td>1</td>
-                        <td>22/06/2011</td>
-                        <td>C 21</td>
-                        <td>927192</td>
-                        <td>Dirjen Pajak</td>
-                        <td><a href="cek_tiket"><input type="submit" value="cek" style="width:60px; height:25px; "/></a>
-                        </td>
+                        <td class="short"><?php echo $i++ ?></td>
+                        <td><?php echo $value->tanggal ?></td>
+                        <td><?php echo $value->no_antrian ?></td>
+                        <td><?php echo $value->id_satker ?></td>
+                        <td><?php echo $value->nama_satker ?></td>
+                        <td class="action"><a class="button blue-pill" href="<?php echo site_url('/csc/cek_tiket/view/' . $value->no_tiket_frontdesk) ?>">Cek</a></td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>22/06/2011</td>
-                        <td>C 22</td>
-                        <td>728361</td>
-                        <td>Departemen Agama</td>
-                        <td><a href="cek_tiket"><input type="submit" value="cek" style="width:60px; height:25px; "/></a>
-                        </td>
-                    </tr>
+                    <?php endforeach ?>
                     </tbody>
                 </table>
             </div>
