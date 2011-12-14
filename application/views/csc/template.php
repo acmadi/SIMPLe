@@ -14,7 +14,7 @@
 </head>
 <body>
 <div id="wrapper">
-    <div id="header"></div>
+    <div id="header">Sistem Informasi Pusat Layanan DJA v1.0</div>
     <div id="navbar"><?php $this->load->view('navbar_csc'); ?></div>
     <div id="container">
         <div id="content"><?php $this->load->view($content); ?></div>
