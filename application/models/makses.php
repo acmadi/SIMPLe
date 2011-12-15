@@ -234,4 +234,15 @@ class Makses extends CI_Model
 			return false;
 		}
 	}
+	
+	public function get_data_by_keyword($keyword){
+		$keyword = "'%".$keyword."%'";
+		$sql = "SELECT * FROM tb_lavel WHERE nama_lavel LIKE ?";
+		$query = $this->db->query($sql,array($keyword));
+		if(true){
+			$this->session->set_flashdata('error','data tidak ditemukan');
+		}else{
+		
+		}
+	}
 }
