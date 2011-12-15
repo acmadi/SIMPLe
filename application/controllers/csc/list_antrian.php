@@ -2,27 +2,20 @@
 class List_antrian extends CI_Controller
 {
 
-    function List_antrian()
+    function __construct()
     {
         parent::__construct();
     }
 
-    var $title = 'List Antrian';
-
     function index()
     {
-        /*
-          if ($this->session->userdata('login') == TRUE)
-          {*/
         $data['title'] = 'List Antrian';
         $data['content'] = 'csc/list_antrian';
+        $sql = "SELECT * FROM tb_tiket_frontdesk JOIN tb_satker
+                ON tb_tiket_frontdesk.id_satker = tb_satker.id_satker
+
+                WHERE status = 'open'";
+        $data['antrian'] = $this->db->query($sql);
         $this->load->view('csc/template', $data);
-        /*}
-          else
-          {
-              $this->load->view('login');
-          }*/
     }
 }
-
-?>

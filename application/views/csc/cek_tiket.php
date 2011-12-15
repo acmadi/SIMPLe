@@ -6,7 +6,7 @@
 
     <div class="table">
         <div id="head">
-            <font style="float:right; font-weight:bold; color:#000">No Tiket : 2819</font>
+            <font style="float:right; font-weight:bold; color:#000">No Tiket : <?php echo sprintf('%05d', $tiket->no_tiket_frontdesk) ?></font>
             <span style="margin:0px 0px 0px -1250px; padding-left:10px; position:absolute; width:115px; height:10px; background:#FFF;">Identitas Satker</span>
 
             <div id="cari_unit" action="man_unit_cari"
@@ -14,28 +14,28 @@
                 <table>
                     <tr>
                         <td>Tanggal Surat Pengajuan</td>
-                        <td>:</td>
-                        <td>20 November 2011</td>
+
+                        <td><?php echo $tiket->tanggal ?></td>
                     </tr>
                     <tr>
                         <td>Kode Satker</td>
-                        <td>:</td>
-                        <td>836282</td>
+
+                        <td><?php echo $tiket->id_satker ?></td>
                     </tr>
                     <tr>
                         <td>Nama Satker</td>
-                        <td>:</td>
-                        <td>Dirjen Anggaran</td>
+
+                        <td><?php echo $tiket->nama_satker ?></td>
                     </tr>
                     <tr>
                         <td>Nama Petugas</td>
-                        <td>:</td>
-                        <td>Harjuna Comsky</td>
+
+                        <td><?php echo $tiket->nama_petugas ?></td>
                     </tr>
                     <tr>
                         <td>Jabatan Petugas</td>
-                        <td>:</td>
-                        <td>Kasi & Pelaksana</td>
+                        
+                        <td><?php echo $tiket->jabatan_petugas ?></td>
                     </tr>
                 </table>
             </div>

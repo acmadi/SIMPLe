@@ -1,20 +1,30 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE HTML>
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
     <title><?php echo isset($title) ? $title : ''; ?></title>
     <link rel="shortcut icon" href="<?php echo base_url() . 'images/icon.jpg';?>"/>
+
+    <link rel="stylesheet" href="<?php echo base_url() . 'css/ui-lightness/jquery-ui-1.8.16.custom.css';?>"/>
+
     <style type="text/css">@import url("<?php echo base_url() . 'css/style.css'; ?>");</style>
+    <style type="text/css">@import url("<?php echo base_url() . 'css/autoSuggest.css'; ?>");</style>
 
     <!--TABLE JQUERY-->
     <style type="text/css">@import url("<?php echo base_url() . 'css/table.css'; ?>");</style>
     <!--POP UP-->
     <style type="text/css">@import url("<?php echo base_url() . 'css/pop-up.css'; ?>");</style>
 
+    <script type="text/javascript" src="<?php echo base_url(); ?>js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>js/jquery-ui-1.8.16.custom.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.autoSuggest.minified.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>js/phpjs/substr.js"></script>
+
+
 </head>
 <body>
 <div id="wrapper">
-    <div id="header"></div>
+    <div id="header">Sistem Informasi Pusat Layanan DJA v1.0</div>
     <div id="container">
         <div id="content"><?php $this->load->view($content); ?></div>
     </div>
@@ -24,7 +34,6 @@
 </html>
 
 <!--TABS--GANTI MODEL EXTJS ! :) -->
-<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery-1.4.2.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         $('#tab1').fadeIn('slow'); //tab pertama ditampilkan
