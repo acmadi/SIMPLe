@@ -223,4 +223,15 @@ class Makses extends CI_Model
         $result = $this->db->query($sql, array($id));
         return $result;
     }
+	
+	public function update_akses($data){
+		$sql = "UPDATE tb_lavel SET nama_lavel = ? WHERE id_lavel = ? ";
+		$query = $this->db->query($sql, array($data['fnamalevel'],$data['fid']));
+		
+		if($this->db->affected_rows() > 0){
+			return true;
+		}else{
+			return false;
+		}
+	}
 }

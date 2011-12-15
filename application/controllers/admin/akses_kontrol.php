@@ -32,10 +32,9 @@ class Akses_kontrol extends CI_Controller
      * @param $id integer
      * @return void
      */
-    function save($id)
+    function update()
     {
-        if ($id) {
-            $this->form_validation->set_rules('fid', 'ID', 'required|numeric|min_length[16]|max_length[16]');
+            $this->form_validation->set_rules('fid', 'ID', 'required|numeric');
             $this->form_validation->set_rules('fnamalevel', 'Nama Level', 'required');
 
             if ($this->form_validation->run() == FALSE) {
@@ -46,9 +45,9 @@ class Akses_kontrol extends CI_Controller
             {
                 $data['fid'] = $this->input->post('fid', TRUE);
                 $data['fnamalevel'] = $this->input->post('fnamalevel', TRUE);
-
+	
                 $this->load->model('Makses', 'akses');
-                $info = $this->akses->add_akses($data);
+                $info = $this->akses->update_akses($data);
                 if ($info) {
                     $this->session->set_flashdata('success', "Akses baru telah diubah!");
                 } else {
@@ -56,7 +55,7 @@ class Akses_kontrol extends CI_Controller
                 }
                 redirect('/admin/akses_kontrol');
             }
-        }
+        
     }
 
     public function delete($id)
@@ -94,7 +93,7 @@ class Akses_kontrol extends CI_Controller
     {
         $data['title'] = 'Akses Kontrol - Ubah';
         $data['content'] = 'admin/akses_kontrol/akses_kontrol_ubah';
-        $result = $this->db->query("SELECT * FROM tb_lavel");
+        $result = $this->db->query("SELECT * FROM tb_lavel WHERE id_lavel = ?",array($id));
         $result = $result->result();
         $data['ubah'] = $result[0];
 
