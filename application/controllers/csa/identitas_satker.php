@@ -64,12 +64,16 @@ class Identitas_satker extends CI_Controller
 
             $term = $this->input->get('term');
             $eselon = $this->input->get('eselon');
-
+            $id_kementrian = substr($this->input->get('nama_kl'),0,3);
+			
+			
+			
             $sql = "SELECT * FROM tb_satker WHERE
                 id_unit = '{$eselon}' AND
+                id_kementrian = '{$id_kementrian}' AND
                 (id_satker LIKE '%{$term}%' OR nama_satker LIKE '%{$term}%')
                 ORDER BY id_unit";
-
+			
             $result = $this->db->query($sql);
 
             $array = array();

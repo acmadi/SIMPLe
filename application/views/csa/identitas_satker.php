@@ -63,7 +63,8 @@
 
                     data: {
                         term: request.term,
-                        eselon: $('#eselon').val()
+                        eselon: $('#eselon').val(),
+                        nama_kl: $('#nama_kl').val()
                     },
 
                     dataType: 'json',
