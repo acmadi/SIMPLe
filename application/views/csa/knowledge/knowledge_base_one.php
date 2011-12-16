@@ -1,7 +1,6 @@
 <style type="text/css">
     .bla2 {
         border: 1px solid #cecece;
-        width: 48%;
         padding: 10px;
         margin: 10px 0 10px 0;
         border-radius: 5px;
@@ -54,7 +53,7 @@
         <h1>Knowledge Base</h1>
 
         <form action="<?php echo site_url('/csa/knowledge_base/search_knowledge') ?>" id="search-form" method="post" style="text-align: right;">
-            <input type="text" name="fkat" placeholder="Pencarian" style="width: 400px !important;" autocomplete="off"/>
+            <input type="text" name="fkat" placeholder="Pencarian" style="width: 400px !important;" autocomplete="false"/>
             <input id="search" class="button blue-pill" type="submit" value="Cari">
         </form>
 
