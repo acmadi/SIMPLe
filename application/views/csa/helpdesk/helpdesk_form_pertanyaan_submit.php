@@ -16,8 +16,9 @@
                     <label for="Kategori">Kategori</label>
                     <select name="peraturan">
                     <option value="pilih">peraturan</option>
-                    <option value="kategori">kategori 1</option>
-                    <option value="kategori1">kategori 2</option>
+                    <?php foreach ($knowledges->result() as $knowledge): ?>
+						<option value="<?php echo $knowledge->id_kat_knowledge_base ?>"><?php echo $knowledge->kat_knowledge_base ?></option>
+					<?php endforeach ?>
                     </select>
                     </p>
                     <p class="ka">

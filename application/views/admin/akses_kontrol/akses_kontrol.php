@@ -22,13 +22,6 @@
 
 
     <h1>Akses Kontrol</h1>
-
-    <div style="float: right;">
-        <form id="textfield-search" action="knowledge_cari">
-            <input type="text" placeholder="Ketik kata pencarian"/>
-            <input class="button blue-pill" type="submit" value="Cari"/>
-        </form>
-    </div>
     <div style="clear: both;"></div>
 
     <div id="tail">
@@ -50,13 +43,13 @@
                 <td><?php echo $item->nama_lavel ?></td>
                 <td class="action">
                     <span class="button_kecil">
-                        <a title="Ubah" href="<?php echo site_url("/admin/akses_kontrol/") . '/edit/' . $item->lavel ?>"'/>
+                        <a title="Ubah" href="<?php echo site_url("/admin/akses_kontrol/") . '/edit/' . $item->id_lavel ?>"'/>
                             <img src="<?php echo base_url(); ?>images/edit.png"/>
                         </a>
                     </span>
                     <span class="button_kecil">
                         <a title="Lihat"
-                           href="<?php echo site_url("/admin/akses_kontrol/") . '/view/' . $item->lavel ?>">
+                           href="<?php echo site_url("/admin/akses_kontrol/") . '/view/' . $item->id_lavel ?>">
                             <img src="<?php echo base_url(); ?>images/view.png"/>
                         </a>
                     </span>

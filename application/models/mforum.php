@@ -19,6 +19,12 @@ class Mforum extends CI_Model
         $sql = "INSERT INTO tb_forum (id_kat_forum, judul_forum, isi_forum, file)
                 VALUES (?, ?, ?, ?)";
         return $this->db->query($sql, array($id_kat_forum, $judul_forum, $isi_forum, $file));
-        
+
+    }
+
+    public function get_one($id)
+    {
+        $sql = "SELECT * FROM `tb_forum` LEFT JOIN tb_kat_forum ON (tb_forum.id_kat_forum = tb_kat_forum.id_kat_forum) WHERE id_forum = '{$id}'";
+        return $this->db->query($sql);
     }
 }

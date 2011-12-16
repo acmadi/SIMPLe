@@ -61,15 +61,19 @@ class Identitas_satker extends CI_Controller
     function cari_satker()
     {
         if ($this->input->is_ajax_request()) {
-            
+
             $term = $this->input->get('term');
             $eselon = $this->input->get('eselon');
-
+            $id_kementrian = substr($this->input->get('nama_kl'),0,3);
+			
+			
+			
             $sql = "SELECT * FROM tb_satker WHERE
                 id_unit = '{$eselon}' AND
+                id_kementrian = '{$id_kementrian}' AND
                 (id_satker LIKE '%{$term}%' OR nama_satker LIKE '%{$term}%')
                 ORDER BY id_unit";
-
+			
             $result = $this->db->query($sql);
 
             $array = array();
@@ -88,44 +92,88 @@ class Identitas_satker extends CI_Controller
     public function save_identitas()
     {
         if ($this->input->post('tipe') == 'kl') {
-            $tipe = $this->input->post('tipe');
-            $id_satker = $this->input->post('id_satker');
-            $nama_petugas = $this->input->post('nama_petugas');
-            $jabatan_petugas = $this->input->post('jabatan_petugas');
-            $no_hp = $this->input->post('no_hp');
-            $email = $this->input->post('email');
-            $no_kantor = $this->input->post('no_kantor');
 
-            $sql = "INSERT INTO tb_petugas_satker
+            $this->form_validation->set_rules('tipe', 'Tipe');
+            $this->form_validation->set_rules('nama_kl', 'Kode - Nama K/L', 'required');
+            $this->form_validation->set_rules('eselon', 'Eselon', 'required');
+            $this->form_validation->set_rules('kode_satker', 'Kode Satker', 'required');
+            $this->form_validation->set_rules('nama_petugas', 'Nama Petugas', 'required');
+            $this->form_validation->set_rules('jabatan_petugas', 'Jabatan Petugas', 'required');
+            $this->form_validation->set_rules('no_hp', 'No. HP', 'required');
+            $this->form_validation->set_rules('no_kantor', 'No. Kantor', 'required');
+            $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+
+            if ($this->form_validation->run()) {
+
+                $tipe = $this->input->post('tipe');
+                $nama_kl = $this->input->post('nama_kl');
+                $eselon = $this->input->post('eselon');
+
+                $kode_satker = $this->input->post('kode_satker');
+                $nama_petugas = $this->input->post('nama_petugas');
+                $jabatan_petugas = $this->input->post('jabatan_petugas');
+
+                $no_hp = $this->input->post('no_hp');
+                $no_kantor = $this->input->post('no_kantor');
+                $email = $this->input->post('email');
+
+                // Parsing Kode dan Nama KL jadi ID
+                $id_satker = substr($kode_satker, 0, 6);
+
+                $sql = "INSERT INTO tb_petugas_satker
                     (id_satker, nama_petugas, jabatan_petugas, no_hp, email, no_kantor, tipe)
                     VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-            $this->db->query($sql, array($id_satker, $nama_petugas, $jabatan_petugas, $no_hp, $email, $no_kantor, $tipe));
+                $this->db->query($sql, array($id_satker, $nama_petugas, $jabatan_petugas, $no_hp, $email, $no_kantor, $tipe));
 
-            $sql = "INSERT INTO tb_tiket_helpdesk
-                    (id_satker, tanggal)
-                    VALUES (?, ?)";
+                $last_id = $this->db->query("SELECT MAX(id_petugas_satker) last_id FROM `tb_petugas_satker`");
+                $last_id = $last_id->result();
+                $last_id = $last_id[0]->last_id;
 
-            $this->db->query($sql, array($id_satker, date('Y-m-d')));
-            //            echo $this->db->affected_rows();
+                $sql = "INSERT INTO tb_tiket_helpdesk
+                    (id_satker, tanggal, id_petugas_satket)
+                    VALUES (?, ?, ?)";
 
+                $this->db->query($sql, array($id_satker, date('Y-m-d'), $last_id));
+
+                $last_id = $this->db->query("SELECT MAX(no_tiket_helpdesk) last_id FROM `tb_tiket_helpdesk`");
+                $last_id = $last_id->result();
+                $last_id = $last_id[0]->last_id;
+
+                // Set tiket untuk helpdesk
+                $this->session->set_userdata('tiket', (string) $last_id );
+
+                redirect('/csa/helpdesk_form_pertanyaan');
+            }
 
         } else {
-            $tipe = $this->input->post('tipe');
-            $nama_petugas = $this->input->post('nama_petugas');
-            $instansi = $this->input->post('instansi');
-            $alamat = $this->input->post('alamat');
-            $email = $this->input->post('email');
-            $no_hp = $this->input->post('no_hp');
+            $this->form_validation->set_rules('nama_petugas', 'Nama', 'required');
+            $this->form_validation->set_rules('instansi', 'Instansi', 'required');
+            $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+            $this->form_validation->set_rules('no_hp', 'Telpon', 'required');
+            $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
 
-            $sql = "INSERT INTO tb_petugas_satker
+
+            if ($this->form_validation->run()) {
+                $tipe = $this->input->post('tipe');
+                $nama_petugas = $this->input->post('nama_petugas');
+                $instansi = $this->input->post('instansi');
+                $alamat = $this->input->post('alamat');
+                $email = $this->input->post('email');
+                $no_hp = $this->input->post('no_hp');
+
+                $sql = "INSERT INTO tb_petugas_satker
                     (nama_petugas, instansi, alamat, email, no_hp, tipe)
                     VALUES (?, ?, ?, ?, ?, ?)";
 
-            $this->db->query($sql, array($nama_petugas, $instansi, $alamat, $email, $no_hp, $tipe));
+                $this->db->query($sql, array($nama_petugas, $instansi, $alamat, $email, $no_hp, $tipe));
+
+                redirect('/csa/helpdesk_form_pertanyaan');
+            }
         }
 
-        redirect('/csa/helpdesk_form_pertanyaan');
+        $this->index();
+
     }
 
 

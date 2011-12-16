@@ -45,11 +45,11 @@
         })
 
         var kementrian_list = [
-            <?php
-            foreach ($kementrian->result() as $value) {
-                echo sprintf("{ label: \"%s\", value: \"%s\" }, ", $value->id_kementrian . ' - ' . $value->nama_kementrian, $value->id_kementrian . ' - ' . $value->nama_kementrian);
-            }
-            ?>
+        <?php
+                    foreach ($kementrian->result() as $value) {
+            echo sprintf("{ label: \"%s\", value: \"%s\" }, ", $value->id_kementrian . ' - ' . $value->nama_kementrian, $value->id_kementrian . ' - ' . $value->nama_kementrian);
+        }
+        ?>
         ];
 
         $('#nama_kl').autocomplete({
@@ -63,12 +63,13 @@
 
                     data: {
                         term: request.term,
-                        eselon: $('#eselon').val()
+                        eselon: $('#eselon').val(),
+                        nama_kl: $('#nama_kl').val()
                     },
-                    
+
                     dataType: 'json',
 
-                    success: function(data){
+                    success: function(data) {
                         response(data);
                     }
                 })
@@ -77,7 +78,7 @@
             minLength: 3
         })
 
-        $('#clear_nama_kl').click(function(){
+        $('#clear_nama_kl').click(function() {
             $('#nama_kl').val('');
         })
     })
@@ -90,7 +91,12 @@
 
     <h1>Isi Identitas SatKer</h1>
 
-    <?php echo form_open('csa/identitas_satker/save_identitas') ?>
+        <?php
+            $errors = validation_errors();
+    if (!empty($errors)) {
+        echo '<div class="error">' . validation_errors() . '</div>';
+    }
+    ?>
 
     <fieldset>
         <legend>Pilih siapa anda</legend>
@@ -98,17 +104,22 @@
         <label><input type="radio" name="tipe" id="non_kl_btn" value="non_kl">Umum</label>
     </fieldset>
 
+    <?php echo form_open('csa/identitas_satker/save_identitas', array('id' => 'identitas_kl')) ?>
+
+    <?php echo form_hidden('tipe', 'kl') ?>
+
     <fieldset id="kl">
         <legend>Satker</legend>
 
         <p>
             <label>Kode - Nama K/L</label>
-            <input type="text" id="nama_kl" name="nama_kl" />
+            <input type="text" id="nama_kl" name="nama_kl" value="<?php echo set_value('nama_kl') ?>" />
             <a href="javascript:void(0)" class="clear_btn" id="clear_nama_kl">Hapus</a>
         </p>
+
         <p>
             <label>Nama Eselon 1</label>
-            <select id="eselon" name="eselon" class="kl"></select>
+            <select id="eselon" name="eselon" class="kl" value="<?php echo set_value('eselon') ?>"></select>
         </p>
 
         <p>
@@ -117,52 +128,32 @@
         </p>
     </fieldset>
 
-    <fieldset id="identitas_kl">
+    <fieldset>
         <!-- TODO: (simpan di tb_petugas_satker) field kurang tambahin -->
         <legend>Identitas</legend>
         <p>
             <label>Nama</label>
-        <td><input type="text" name="nama_petugas" size="30"></td>
+            <input type="text" name="nama_petugas" size="30" value="<?php echo set_value('nama_petugas') ?>">
         </p>
+
         <p>
             <label>Jabatan Petugas</label>
-        <td><input type="text" name"jabatan_petugas" size="30"></td>
+            <input type="text" name="jabatan_petugas" size="30" value="<?php echo set_value('jabatan_petugas') ?>">
         </p>
+
         <p>
             <label>No. Hp</label>
-        <td><input type="text" name="no_hp" size="30"></td>
+            <input type="text" name="no_hp" size="30" value="<?php echo set_value('no_hp') ?>">
         </p>
+
         <p>
             <label>No. Kantor</label>
-        <td><input type="text" name="no_kantor" size="30"></td>
+            <input type="text" name="no_kantor" size="30" value="<?php echo set_value('no_kantor') ?>">
         </p>
-        <p>
-            <label>E-mail</label>
-        <td><input type="text" name="email" size="30"></td>
-        </p>
-    </fieldset>
 
-    <fieldset id="identitas_umum" style="display: none">
-        <legend>Identitas</legend>
-        <p>
-            <label>Nama</label>
-        <td><input type="text" id="nama" name="" size="30"></td>
-        </p>
-        <p class="kl">
-            <label>Instansi</label>
-        <td><input type="text" id="instansi" size="30"></td>
-        </p>
-        <p>
-            <label>Alamat</label>
-        <td><input type="text" id="alamat" name="" size="30"></td>
-        </p>
-        <p class="kl">
-            <label>Telpon</label>
-        <td><input type="text" id="no_hp" name="" size="30"></td>
-        </p>
         <p>
             <label>E-mail</label>
-        <td><input type="text" id="email" name="" size="30"></td>
+            <input type="email" name="email" size="30" value="<?php echo set_value('email') ?>">
         </p>
     </fieldset>
 
@@ -173,5 +164,46 @@
     </div>
 
     </form>
+
+    <?php echo form_open('csa/identitas_satker/save_identitas', array('id' => 'identitas_umum', 'style' => 'display: none')) ?>
+
+    <?php echo form_hidden('tipe', 'non_kl') ?>
+
+    <fieldset>
+        <legend>Identitas</legend>
+        <p>
+            <label>Nama</label>
+            <input type="text" id="nama" name="nama_petugas" size="30" value="<?php echo set_value('nama_petugas') ?>">
+        </p>
+
+        <p class="kl">
+            <label>Instansi</label>
+            <input type="text" id="instansi" name="instansi" size="30" value="<?php echo set_value('instansi') ?>">
+        </p>
+
+        <p>
+            <label>Alamat</label>
+            <input type="text" id="alamat" name="alamat" size="30" value="<?php echo set_value('alamat') ?>">
+        </p>
+
+        <p class="kl">
+            <label>Telpon</label>
+            <input type="text" id="no_hp" name="no_hp" size="30" value="<?php echo set_value('no_hp') ?>">
+        </p>
+
+        <p>
+            <label>E-mail</label>
+            <input type="email" id="email" name="email" size="30" value="<?php echo set_value('email') ?>">
+        </p>
+    </fieldset>
+
+    <div style="text-align: center; margin-top: 20px;">
+        <input type="submit" class="button blue-pill" value="Help Desk">
+        <input type="submit" class="button blue-pill" value="Saluran Pengaduan">
+        <input type="reset" class="button gray-pill" value="Reset">
+    </div>
+
+    </form>
+
 
 </div>

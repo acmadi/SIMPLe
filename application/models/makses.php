@@ -223,4 +223,26 @@ class Makses extends CI_Model
         $result = $this->db->query($sql, array($id));
         return $result;
     }
+	
+	public function update_akses($data){
+		$sql = "UPDATE tb_lavel SET nama_lavel = ? WHERE id_lavel = ? ";
+		$query = $this->db->query($sql, array($data['fnamalevel'],$data['fid']));
+		
+		if($this->db->affected_rows() > 0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	public function get_data_by_keyword($keyword){
+		$keyword = "'%".$keyword."%'";
+		$sql = "SELECT * FROM tb_lavel WHERE nama_lavel LIKE ?";
+		$query = $this->db->query($sql,array($keyword));
+		if(true){
+			$this->session->set_flashdata('error','data tidak ditemukan');
+		}else{
+		
+		}
+	}
 }

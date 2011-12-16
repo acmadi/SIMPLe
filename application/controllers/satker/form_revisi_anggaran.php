@@ -7,21 +7,13 @@ class Form_revisi_anggaran extends CI_Controller
         parent::__construct();
     }
 
-    var $title = 'Form Revisi Anggaran';
-
     function index()
     {
-        /*
-          if ($this->session->userdata('login') == TRUE)
-          {*/
+        $data['kementrian'] = $this->db->query('SELECT * FROM tb_kementrian ORDER BY id_kementrian');
+        $data['kelengkapan_dokumen'] = $this->db->query('SELECT * FROM tb_kelengkapan_doc ORDER BY id_kelengkapan');
         $data['title'] = 'Form Revisi Anggaran';
         $data['content'] = 'satker/form_revisi_anggaran';
         $this->load->view('satker/template', $data);
-        /*}
-          else
-          {
-              $this->load->view('login');
-          }*/
     }
 
     public function add_revisi_anggaran()
@@ -75,5 +67,140 @@ class Form_revisi_anggaran extends CI_Controller
             $result = $this->db->query("SELECT * FROM `tb_satker` WHERE `id_satker` LIKE '%{$id_satker}' LIMIT 30");
             var_dump($result->result());
         }
+    }
+
+    function cari_satker()
+    {
+        if ($this->input->is_ajax_request()) {
+
+            $term = $this->input->get('q');
+            $eselon = $this->input->get('eselon');
+
+            $sql = "SELECT * FROM tb_satker WHERE
+                id_unit = '{$eselon}' AND
+                (id_satker LIKE '%{$term}%' OR nama_satker LIKE '%{$term}%')
+                ORDER BY id_unit";
+
+            $result = $this->db->query($sql);
+
+            $array = array();
+            $i = 0;
+            if ($result->num_rows() > 0) {
+                foreach ($result->result() as $value) {
+                    $array[$i] = $value->id_satker . ' - ' . $value->nama_satker;
+                    $i++;
+                }
+            }
+            //            echo json_encode($array);
+        }
+
+        $json = array(
+            array(
+                'name' => 'Namaa',
+                'value' => $_GET['q']
+            )
+        );
+
+        echo json_encode($json);
+
+        print_r($_GET);
+
+        exit();
+    }
+
+    /**
+     * AJAX
+     *
+     * @return void
+     */
+    function cari_kode_kon_unit_satker()
+    {
+        $kode_unit_satker = $this->input->get('kode_unit_satker');
+        $result = $this->db->query("SELECT * FROM tb_kon_unit_satker WHERE id_satker = '$kode_unit_satker'");
+
+        if ($result->num_rows() > 0) {
+            $result = $result->result();
+            $result = $result[0];
+            $kode_kon_unit_satker = substr($result->kode_unit, 4, 2);
+            switch ($kode_kon_unit_satker) {
+                case '01':
+                    echo 'A1';
+                    break;
+                case '02':
+                    echo 'A2';
+                    break;
+                case '03':
+                    echo 'A3';
+                    break;
+            }
+        }
+        exit();
+    }
+
+    function save_identitas()
+    {
+        $this->form_validation->set_message('required', '%s harus diisi');
+        
+        $this->form_validation->set_rules('nama_kl', 'Nama K/L', 'required');
+        $this->form_validation->set_rules('eselon', 'Eselon', 'required');
+        $this->form_validation->set_rules('kode_satker', 'Nama - Kode Satker', 'required');
+        $this->form_validation->set_rules('nama_petugas', 'Nama Petugas', 'required');
+        $this->form_validation->set_rules('jabatan_petugas', 'Jabatan Petugas', 'required');
+        $this->form_validation->set_rules('no_hp', 'No HP', 'required');
+        $this->form_validation->set_rules('no_kantor', 'No Kantor', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required');
+
+        if ($this->form_validation->run() == TRUE) {
+
+            $nama_petugas = $this->input->post('nama_petugas');
+            $jabatan_petugas = $this->input->post('jabatan_petugas');
+            $no_hp = $this->input->post('no_hp');
+            $email = $this->input->post('email');
+            $no_kantor = $this->input->post('no_kantor');
+            $tipe = $this->input->post('tipe');
+
+            $kode_satker = explode(', ', $this->input->post('kode_satker'));
+            array_pop($kode_satker);
+
+
+            // Save Identitas Petugas Satker
+            $sql = "INSERT INTO tb_petugas_satker (nama_petugas, jabatan_petugas, no_hp, email, no_kantor, tipe)
+                    VALUES ('{$nama_petugas}', '{$jabatan_petugas}', '{$no_hp}', '{$email}', '{$no_kantor}', '{$tipe}')";
+
+            $this->db->query($sql);
+
+            $sql = "SELECT *, MAX(id_petugas_satker) id_petugas_satker FROM tb_petugas_satker ";
+            $result = $this->db->query($sql);
+            $result = ($result->result());
+            $result = $result[0];
+
+
+            $temp = array();
+            $i = 0;
+            foreach ($kode_satker as $value) {
+                $value = substr($value, 0, 6);
+                $temp[$i] = $value;
+
+                $now = date('Y-m-d');
+
+                $sql = "INSERT INTO tb_tiket_frontdesk (id_satker, id_formulir, tanggal, status, lavel, id_petugas_satker)
+                        VALUES ('{$temp[$i]}', NULL, '{$now}', 'open', 1, {$result->id_petugas_satker})";
+                
+                $this->db->query($sql);
+
+
+                $i++;
+            }
+            $kode_satker = $temp;
+
+            redirect('/satker/form_revisi_anggaran/success');
+        }
+        else {
+            $this->index();
+        }
+    }
+
+    function success() {
+        $this->load->view('/satker/success');
     }
 }

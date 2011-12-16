@@ -1,118 +1,223 @@
-<script type="text/javascript " src="<?php echo base_url() . 'js/jquery-1.4.2.min.js' ?>"></script>
-<script type="text/javascript">
-    jQuery(function() {
-        $('#id_satker').keyup(function() {
-            var id_satker = $(this).val();
-            setTimeout(function() {
-                console.log(id_satker);
-                $.post('<?php echo site_url('/satker/form_revisi_anggaran/search_satker') ?>', id_satker, function(response) {
-                    console.log(response);
-                });
-            }, 2000);
+<style type="text/css">
+    .ui-autocomplete {
+        max-height: 300px;
+        overflow-y: auto;
+        /* prevent horizontal scrollbar */
+        overflow-x: hidden;
+        /* add padding to account for vertical scrollbar */
+        padding-right: 20px;
+    }
+</style>
 
+<script type="text/javascript">
+
+    function split(val) {
+        return val.split(/,\s*/);
+    }
+    function extractLast(term) {
+        return split(term).pop();
+    }
+
+    $(function() {
+        $('#nama_kl').blur(function() {
+            var nama_kl = $('#nama_kl').val();
+            $.get('<?php echo site_url('csa/identitas_satker/cari_kl/') ?>', {id_kementrian : nama_kl}, function(response) {
+                console.log(response);
+                $('#eselon').html(response);
+                $('#kode_satker').removeAttr('disabled');
+            })
         })
-    });
+
+//        $('#eselon').change(function() {
+        //$('#kode_satker').autoSuggest('<?php echo site_url('/satker/form_revisi_anggaran/cari_satker') ?>',
+        //        {
+        //            extraParams: '&eselon=' + $('#eselon').val()
+        //        }
+        //);
+//        })
+
+        $('form').submit(function() {
+            data = $(this).serialize();
+//            console.log(data);
+//            return false;
+        })
+
+        var kementrian_list = [
+        <?php
+                    foreach ($kementrian->result() as $value) {
+            echo sprintf("{ label: \"%s\", value: \"%s\" }, ", $value->id_kementrian . ' - ' . $value->nama_kementrian, $value->id_kementrian . ' - ' . $value->nama_kementrian);
+        }
+        ?>
+        ];
+
+        $('#nama_kl').autocomplete({
+            source: kementrian_list
+        });
+
+        $('#kode_satker')
+                .autocomplete({
+                    source: function(request, response) {
+                        $.ajax({
+                            url: "<?php echo site_url('/csa/identitas_satker/cari_satker') ?>",
+
+                            data: {
+                                term: extractLast(request.term),
+                                eselon: $('#eselon').val()
+                            },
+
+                            dataType: 'json',
+
+                            success: function(data) {
+                                $('#anggaran').html('A1');
+                                response(data);
+                            }
+                        })
+                    },
+                    search: function() {
+                        // custom minLength
+                        var term = extractLast(this.value);
+                        if (term.length < 2) {
+                            return false;
+                        }
+                    },
+                    focus: function() {
+                        // prevent value inserted on focus
+                        return false;
+                    },
+                    select: function(event, ui) {
+                        var terms = split(this.value);
+                        // remove the current input
+                        terms.pop();
+                        // add the selected item
+                        terms.push(ui.item.value);
+                        // add placeholder to get the comma-and-space at the end
+                        terms.push("");
+                        this.value = terms.join(", ");
+                        return false;
+                    },
+                    change: function(event, ui) {
+                        kode_unit_satker = (ui.item.label);
+                        kode_unit_satker = substr(kode_unit_satker, 0, 6);
+                        $.get('<?php echo site_url('/satker/form_revisi_anggaran/cari_kode_kon_unit_satker') ?>',
+                                {kode_unit_satker: kode_unit_satker},
+                                function(response) {
+                                    $('#anggaran').html(response);
+                                });
+                    },
+                    delay: 500,
+                    minLength: 3
+                })
+                .bind("keydown", function(event) {
+                    if (event.keyCode === $.ui.keyCode.TAB &&
+                            $(this).data("autocomplete").menu.active) {
+                        event.preventDefault();
+                    }
+                });
+
+        $('#clear_nama_kl').click(function() {
+            $('#nama_kl').val('');
+        })
+
+
+        $('legend').click(function() {
+            alert(eselon.val());
+        });
+    })
 </script>
 
-<?php if ($this->session->flashdata('msg')): ?>
-<div id="notice" style="padding: 4px; background: #ffffaa; text-align: center;">
-    <?php echo $this->session->flashdata('msg') ?>
-</div>
-<?php endif ?>
+<!--<ul id="nav">-->
+<!--    <li><a href="#tab1">Isi Identitas SatKer (simpan di tb_tiket_helpdesk)</a></li>-->
+<!--</ul>-->
+<div class="content">
 
-<div id="konten">
-    <div style="display: none;" id="tab1" class="tab_konten">
+    <h1>Form Revisi Anggaran</h1>
 
-        <h2 style="font-weight:bold; color:#000; text-align:center; ">FORMULIR ISIAN PENGAJUAN REVISI ANGGARAN</h2>
-        <br/>
+    <div style="float: right;"><?php echo date('d M Y') ?></div>
 
-        <form method="post" action="<?php echo site_url('/satker/form_revisi_anggaran/add_revisi_anggaran') ?>">
-            <div class="table">
-                <div id="head">
-                    <span style="margin:-5px 0px 0px -1420px; padding-left:10px; position:absolute; width:80px; height:10px; background:#FFF;">Data Satker</span>
+    <div class="clear"></div>
 
-                    <div id="cari_unit" action="man_unit_cari"
-                         style="border: 1px solid #999; padding: 13px 30px 13px 13px; margin:5px 0px 0px 20px; width:96%; margin:0px 20px 0px 20px; ">
-                        <table style="margin:10px; text-align:left; font-size:10px; ">
-                            <tr>
-                                <td>Tanggal Surat Pengajuan</td>
-                                <td>10 November 2011</td>
-                            </tr>
-                            <tr>
-                                <td>Kode Satker</td>
-                                <td><input type="text" validation="" id="id_satker" name="id_satker" value=""
-                                           placeholder="Masukkan Kode Satker" size="100"/></td>
-                            </tr>
-                            <tr>
-                                <td>Nama Satker</td>
-                                <td><input type="text" id="nama_satker" value="" size="100" disabled="disabled"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Nama Petugas</td>
-                                <td><input type="text" name="nama_petugas" value="" size="100"/></td>
-                            </tr>
-                            <tr>
-                                <td>Jabatan Petugas</td>
-                                <td><input type="text" name="jabatan" value="" size="100"/></td>
-                            </tr>
-                            <tr>
-                                <td>No HP</td>
-                                <td><input type="text" name="no_hp" value="" size="100"/></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
+        <?php
+            $errors = validation_errors();
+    if (!empty($errors)) {
+        echo '<div class="error">' . validation_errors() . '</div>';
+    }
+    ?>
 
-                <div id="tail">
-                    <span style="margin:-5px 0px 0px -1420px; padding-left:10px; position:absolute; width:80px; height:10px; background:#FFF;">Data Satker</span>
+    <?php echo form_open('satker/form_revisi_anggaran/save_identitas', array('id' => 'identitas_kl')) ?>
 
-                    <div id="cari_unit" action="man_unit_cari"
-                         style="border: 1px solid #999; padding: 13px 30px 13px 13px; margin:5px 0px 0px 20px; width:96%; margin:0px 20px 0px 20px; ">
-                        <table style="margin:10px; text-align:left; font-size:10px; ">
-                            <tr>
-                                <td><input id="kelengkapan1" name="kelengkapan[]" type="checkbox" value="1" /></td>
-                                <td><label for="kelengkapan1">Surat Pengajuan Revisi ANggaran</label></td>
-                            </tr>
-                            <tr>
-                                <td><input id="kelengkapan2" name="kelengkapan[]" type="checkbox" value="2" /></td>
-                                <td><label for="kelengkapan2">SP-RKA-K/L Sebelum Revisi</label></td>
-                            </tr>
-                            <tr>
-                                <td><input id="kelengkapan3" name="kelengkapan[]" type="checkbox" value="3" /></td>
-                                <td><label for="kelengkapan3">Konsep Usulan Revisi SP-RKA-K/L</label></td>
-                            </tr>
-                            <tr>
-                                <td><input id="kelengkapan4" name="kelengkapan[]" type="checkbox" value="4" /></td>
-                                <td><label for="kelengkapan4">Arsip Data Komputer RKA-K/L hasil revisi</label></td>
-                            </tr>
-                            <tr>
-                                <td><input id="kelengkapan5" name="kelengkapan[]" type="checkbox" value="5" /></td>
-                                <td><label for="kelengkapan5">TOR</label></td>
-                            </tr>
-                            <tr>
-                                <td><input id="kelengkapan6" name="kelengkapan[]" type="checkbox" value="6"/></td>
-                                <td><label for="kelengkapan6">RAB</label></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2"><input type="text" placeholder=".........." size="120"/></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2"><input type="text" placeholder=".........." size="120"/></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2"><input type="text" placeholder=".........." size="120"/></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2"><input type="text" placeholder=".........." size="120"/></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <input type="reset" value="reset" style="width:60px; height:25px; font-size:10px; float:left; margin-left:20px; margin-right:10px;"/>
-            <input type="submit" value="kirim" style="width:60px; height:25px; font-size:10px; float:none;"/>
+    <?php echo form_hidden('tipe', 'kl') ?>
 
-        </form>
+    <fieldset id="kl">
+        <legend>Satker</legend>
+
+        <div id="anggaran" style="padding: 20px; display: inline-block; float: right; font-size: 24px;"></div>
+
+        <p>
+            <label>Kode - Nama K/L</label>
+            <input type="text" id="nama_kl" name="nama_kl" value="<?php echo set_value('nama_kl') ?>"/>
+            <a href="javascript:void(0)" class="clear_btn" id="clear_nama_kl">Hapus</a>
+        </p>
+
+        <p>
+            <label>Nama Eselon 1</label>
+            <select id="eselon" name="eselon" class="kl" value="<?php echo set_value('eselon') ?>">
+            </select>
+        </p>
+
+        <p class="kode_satker_p">
+            <label>Kode - Nama Satker</label>
+            <input type="text" name="kode_satker" id="kode_satker" class="kl kode_satker" size="100%" style="width: 100%;" disabled/>
+        </p>
+
+    </fieldset>
+
+    <fieldset>
+        <!-- TODO: (simpan di tb_petugas_satker) field kurang tambahin -->
+        <legend>Identitas</legend>
+        <p>
+            <label>Nama</label>
+            <input type="text" name="nama_petugas" size="30" value="<?php echo set_value('nama_petugas') ?>">
+        </p>
+
+        <p>
+            <label>Jabatan Petugas</label>
+            <input type="text" name="jabatan_petugas" size="30" value="<?php echo set_value('jabatan_petugas') ?>">
+        </p>
+
+        <p>
+            <label>No. Hp</label>
+            <input type="text" name="no_hp" size="30" value="<?php echo set_value('no_hp') ?>">
+        </p>
+
+        <p>
+            <label>No. Kantor</label>
+            <input type="text" name="no_kantor" size="30" value="<?php echo set_value('no_kantor') ?>">
+        </p>
+
+        <p>
+            <label>E-mail</label>
+            <input type="email" name="email" size="30" value="<?php echo set_value('email') ?>">
+        </p>
+    </fieldset>
+
+    <fieldset>
+        <legend>Kelengkapan Dokumen</legend>
+
+        <?php foreach ($kelengkapan_dokumen->result() as $value): ?>
+        <p>
+            <label>
+                <input type="checkbox" name="dokumen[<?php echo $value->id_kelengkapan ?>]"/>
+                <?php echo $value->nama_kelengkapan ?>
+            </label>
+        </p>
+        <?php endforeach ?>
+
+    </fieldset>
+
+    <div style="text-align: center; margin-top: 20px;">
+        <input type="submit" class="button blue-pill" value="Submit">
+        <input type="reset" class="button gray-pill" value="Reset">
     </div>
+
+    </form>
 </div>

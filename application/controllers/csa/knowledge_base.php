@@ -2,66 +2,97 @@
 class Knowledge_base extends CI_Controller
 {
 
-    function Knowledge_base()
+    function __construct()
     {
         parent::__construct();
+        $this->load->model('Mknowledge', 'knowledge');
+        $this->load->library('Log');
+        $this->log->create('hello world!');
     }
-
-    var $title = 'Knowledge Base';
 
     function index()
     {
-        /*if ($this->session->userdata('login') == TRUE)
-          {*/
-		$this->load->model('Mknowledge', 'knowledge');
-		
-        $data['title'] 			= 'Knowledge Base';
-        $data['content'] 		= 'csa/knowledge/knowledge_base';
-		$data['result']			= $this->knowledge->get_all_data_category();
-		$data['idsearch']		= "";
+        $data['title'] = 'Knowledge Base';
+        $data['content'] = 'csa/knowledge/knowledge_base';
+        $data['result'] = $this->knowledge->get_all_data_category();
+        $data['idsearch'] = "";
         $this->load->view('csa/template', $data);
-        /*}
-          else
-          {
-              $this->load->view('login/login_view');
-          }*/
     }
-	
-	function search_knowledge(){
-		$this->form_validation->set_rules('fkat', 'Kategori', 'required');
-		if ($this->form_validation->run() == FALSE){
-			$this->session->set_flashdata('msg',"<div style='color:red;'>".validation_errors()."</div>");
-			redirect('/csa/knowledge_base');
-		}
-		else
-		{	
-			$category 	= $this->input->post('fkat', TRUE);
-			$this->load->model('Mknowledge', 'knowledge');
-			$data['result']		= $this->knowledge->search_by_keyword($category); 
-			$data['title'] 		= 'Knowledge Base';
-			$data['content'] 	= 'csa/knowledge/knowledge_base';
-			$data['part']		= 3;
-			$data['idsearch']	= $category;
-			$this->load->view('csa/template', $data);
-		}
-	}
-	
-	function search_all(){
-		$cat = $this->uri->segment(4, '');
-		$keyword = $this->uri->segment(5, '');
-		
-		if(!empty($cat) OR !empty($limit)){
-			$this->load->model('Mknowledge', 'knowledge');
-			$item 				= $this->knowledge->search_by_category($cat,$keyword);
-			$data['title'] 		= 'Knowledge Base';
-			$data['content'] 	= 'csa/knowledge/knowledge_base';
-			$data['result']		= $item;
-			$data['idsearch']	= $keyword;
-			$data['sel']		= true;
-			$this->load->view('csa/template', $data);
-		}
-		
-	}
+
+    function search_knowledge()
+    {
+        $this->form_validation->set_rules('fkat', 'Kategori', 'required');
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('error', validation_errors());
+            redirect('/csa/knowledge_base');
+        }
+        else
+        {
+            $category = $this->input->post('fkat', TRUE);
+            $data['result'] = $this->knowledge->search_by_keyword($category);
+            $data['title'] = 'Knowledge Base';
+            $data['content'] = 'csa/knowledge/knowledge_base';
+            $data['part'] = 3;
+            $data['idsearch'] = $category;
+            $this->load->view('csa/template', $data);
+        }
+    }
+
+    function search_all($cat = '', $keyword = '')
+    {
+        $cat = $this->uri->segment(4, '');
+        $keyword = $this->uri->segment(5, '');
+
+        if (!empty($cat) OR !empty($limit)) {
+            $item = $this->knowledge->search_by_category($cat, $keyword);
+            $data['title'] = 'Knowledge Base';
+
+            //            if (!empty($cat) {
+            //
+            //            }
+            $data['content'] = 'csa/knowledge/knowledge_base';
+            $data['result'] = $item;
+            $data['idsearch'] = $keyword;
+            $data['sel'] = true;
+            $this->load->view('csa/template', $data);
+        }
+
+    }
+
+
+    public function get_by_category_id($category_id)
+    {
+        $result = $this->knowledge->get_by_category_id($category_id);
+
+        foreach ($result->result() as $value) {
+            echo "<h1>{$value->kat_knowledge_base}</h1>";
+            echo "<h2>{$value->judul}</h2>";
+            echo "<div>{$value->desripsi}</div>";
+            echo "<div>{$value->jawaban}</div>";
+            echo "<div><input type=submit class='button blue-pill' value='Batal' /></div>";
+            echo "<div><input type=submit class='button blue-pill' value='Ekskalasi' /></div>";
+            echo "<div><input type=submit class='button blue-pill' value='Jawab' /></div>";
+        }
+        exit();
+    }
+
+    public function get_by_id($id)
+    {
+        $result = $this->knowledge->get_by_id($id);
+
+        foreach ($result->result() as $value) {
+
+            //            print_r($value);
+            echo "<h1>{$value->kat_knowledge_base}</h1>";
+            echo "<h2>{$value->judul}</h2>";
+            echo "<div>{$value->desripsi}</div>";
+            echo "<div>{$value->jawaban}</div>";
+            echo "<div><input type=submit class='button blue-pill' value='Batal' /></div>";
+            echo "<div><input type=submit class='button blue-pill' value='Ekskalasi' /></div>";
+            echo "<div><input type=submit class='button blue-pill' value='Jawab' /></div>";
+        }
+        exit();
+    }
 }
 
 ?>

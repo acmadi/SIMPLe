@@ -2,15 +2,14 @@
 class Dashboard extends CI_Controller
 {
 
-    function Dasboard()
+    function __construct()
     {
         parent::__construct();
     }
 
-    var $title = 'Dashboard';
-
     function index()
     {
+        redirect('/csc/list_antrian');
         /*
           if ($this->session->userdata('login') == TRUE)
           {*/

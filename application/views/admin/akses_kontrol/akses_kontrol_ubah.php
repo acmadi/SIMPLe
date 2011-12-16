@@ -24,7 +24,7 @@
         <div class="table">
             <div id="tail">
                 <form action="<?php echo site_url("/admin/akses_kontrol/update");?>" method="post">
-                    <?php if (isset($ubah->kode_unit)) echo form_hidden('fid', $ubah->lavel);?>
+                    <?php if (isset($ubah->id_lavel)) echo form_hidden('fid', $ubah->id_lavel);?>
                     <div class="form">
                         <p>
                             <label>Level</label>
