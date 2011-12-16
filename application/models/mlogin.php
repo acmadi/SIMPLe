@@ -5,9 +5,10 @@ class Mlogin extends CI_Model
 
     public function cekdb($user, $pass)
     {
-        $query = $this->db->from('member')
-                      ->where('user', $user)
-                      ->where('pass', $pass)
+        $query = $this->db->from('tb_user')
+                      ->where('username', $user)
+                      ->where('password', $pass)
+                      ->join('tb_lavel', 'tb_lavel.id_lavel = tb_user.id_lavel')
                       ->get();
 
         if ($query->num_rows() == 1) {

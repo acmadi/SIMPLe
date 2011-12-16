@@ -22,15 +22,27 @@ Class Login extends CI_Controller
 
         if ($login_data) {
 
-            $this->session->set_userdata('user', $login_data->user);
-            $this->session->set_userdata('level', $login_data->level);
+            $this->session->set_userdata('user', $login_data->username);
+            $this->session->set_userdata('lavel', $login_data->nama_lavel);
 
-            switch ($login_data->level) {
+            switch ( strtolower($login_data->nama_lavel) ) {
                 case 'admin':
                     redirect('admin/dashboard');
                     break;
-                case 'cs':
-                    redirect("{$login_data->user}/dashboard");
+                case 'cs a':
+                    redirect("csa/dashboard");
+                    break;
+                case 'cs b':
+                    redirect("csb/dashboard");
+                    break;
+                case 'cs c':
+                    redirect("csc/dashboard");
+                    break;
+                case 'cs d':
+                    redirect("csd/dashboard");
+                    break;
+                case 'cs e':
+                    redirect("cse/dashboard");
                     break;
                 case 'halodja':
                     redirect('halodja/dashboard');
@@ -38,7 +50,7 @@ Class Login extends CI_Controller
                 case 'supervisor':
                     redirect('supervisor/dashboard');
                     break;
-                case 'pelaksana':
+                case 'kasi pelaksana':
                     redirect('pelaksana/dashboard');
                     break;
                 case 'kasubdit':
