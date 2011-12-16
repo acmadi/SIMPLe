@@ -25,18 +25,18 @@ class Helpdesk_form_pertanyaan extends CI_Controller
         $result = $this->db->query($sql, array($this->session->userdata('tiket')));
         $result = $result->result();
         $result = $result[0];
-
         $data['identitas'] = $result;
 
         print_r($result);
 
-//        $this->mknowledge->get_tiket();
+        //        $this->mknowledge->get_tiket();
 
 
         $this->load->view('csa/template', $data);
     }
 
-    function submit() {
+    function submit()
+    {
         $data = array();
 
         if ($_POST) {
@@ -52,11 +52,23 @@ class Helpdesk_form_pertanyaan extends CI_Controller
 
             $this->db->query($sql, array($prioritas, $pertanyaan, $description, $no_tiket_helpdesk));
 
-//            $result = $this->db->query("SELECT * FROM tb_knowledge_base WHERE id_kat_knowledge_base = '$kategori_knowledge_base'");
+            // $result = $this->db->query("SELECT * FROM tb_knowledge_base WHERE id_kat_knowledge_base = '$kategori_knowledge_base'");
 
             $result = $this->mknowledge->get_all_data_category();
             $data['result'] = $result;
-            
+
+            $sql = "SELECT * FROM tb_tiket_helpdesk
+                JOIN tb_petugas_satker
+                ON tb_tiket_helpdesk.id_satker = tb_petugas_satker.id_satker
+                JOIN tb_satker
+                ON tb_tiket_helpdesk.id_satker = tb_satker.id_satker
+                WHERE no_tiket_helpdesk = ?";
+
+            $result = $this->db->query($sql, array($this->session->userdata('tiket')));
+            $result = $result->result();
+            $result = $result[0];
+            $data['identitas'] = $result;
+
         }
 
         $data['title'] = 'Helpdesk Form - Pertanyaan';
