@@ -4,13 +4,21 @@
     <div class="clear"></div>
     <div id="konten">
     	<div style="display: none;" id="tab1" class="tab_konten">
-            <div id="msg">
-			<?php
-				if ($this->session->flashdata('msg')){
-					echo $this->session->flashdata('msg');
-				}
+            <?php
+			// TODO: Satu paket ini untuk alerts. Nanti mau dipindah jadi hanya panggil satu method.
+			if ($this->session->flashdata('success')) {
+				echo '<div class="success">' . $this->session->flashdata('success') . '</div>';
+			}
+			if ($this->session->flashdata('error')) {
+				echo '<div class="error">' . $this->session->flashdata('error') . '</div>';
+			}
+			if ($this->session->flashdata('notice')) {
+				echo '<div class="notice">' . $this->session->flashdata('notice') . '</div>';
+			}
+			if ($this->session->flashdata('info')) {
+				echo '<div class="info">' . $this->session->flashdata('info') . '</div>';
+			}
 			?>
-			</div>
             <div class="table"> 
                 <div id="head">
                     <label class="label1" for="identitas">Identitas User</label>
@@ -131,7 +139,30 @@
 						<input id="simpan" type="submit" value="simpan"/>
                     </form>
         			
-                </div><br />
+                </div>
+				<div id="middle">
+					<div>History Masa Kerja</div>
+                    <table id="tableOne" class="yui">
+						<thead>
+						<tr>
+							<th class="short">No</th>
+							<th>Tanggal Mulai</th>
+							<th>Tanggal Selesai</th>
+						</tr>
+						</thead>
+						<tbody>
+						<?php $i = 1 ?>
+						<?php foreach ($history_maker as $item): ?>
+						<tr>
+							<td class="short"><?php echo $i++ ?></td>
+							<td><?php echo $item->tanggal_mulai ?></td>
+							<td><?php echo $item->tanggal_selesai ?></td>
+							
+						</tr>
+						<?php endforeach;?>
+						</tbody>
+					</table>
+				</div><br />
         	</div>
             
     </div>

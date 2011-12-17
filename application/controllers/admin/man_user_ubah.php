@@ -40,7 +40,7 @@ class Man_user_ubah extends CI_Controller
 		$this->form_validation->set_rules('edepartemen','Departemen','required');
 		
 		if($this->form_validation->run() == FALSE){
-			$this->session->set_flashdata('msg',"<div style='color:red;'>".validation_errors()."</div>");
+			$this->session->set_flashdata('error',validation_errors());
 			$id	= trim($this->input->post('id',TRUE));
 			redirect('admin/man_user_ubah/index/'.$id);
 		}else{
@@ -55,10 +55,10 @@ class Man_user_ubah extends CI_Controller
 			$info = $this->muser->edit_user($data);
 			
 			if($info){
-				$this->session->set_flashdata('msg',"<p style='color:blue;'>berhasil mengupdate user !!.</p>");
+				$this->session->set_flashdata('success',"berhasil mengupdate user !!");
 				redirect('admin/man_user');
 			}else{
-				$this->session->set_flashdata('msg',"<p style='color:red;'>gagal mengupdate !!.</p>");
+				$this->session->set_flashdata('error',"gagal mengupdate !!.");
 				redirect('admin/man_user');
 			}
 		}

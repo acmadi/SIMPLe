@@ -10,9 +10,19 @@
     <div id="tail"> 
 		<div id="msg">
 		<?php
-			if ($this->session->flashdata('msg')){
-				echo $this->session->flashdata('msg');
-			}
+		// TODO: Satu paket ini untuk alerts. Nanti mau dipindah jadi hanya panggil satu method.
+		if ($this->session->flashdata('success')) {
+			echo '<div class="success">' . $this->session->flashdata('success') . '</div>';
+		}
+		if ($this->session->flashdata('error')) {
+			echo '<div class="error">' . $this->session->flashdata('error') . '</div>';
+		}
+		if ($this->session->flashdata('notice')) {
+			echo '<div class="notice">' . $this->session->flashdata('notice') . '</div>';
+		}
+		if ($this->session->flashdata('info')) {
+			echo '<div class="info">' . $this->session->flashdata('info') . '</div>';
+		}
 		?>
 		</div>
         <form action="<?php echo site_url('admin/man_user_ubah/ubah')?>" method="post">
@@ -42,11 +52,12 @@
             	<td>Unit</td>
                 <td>:</td>
                 <td><select name="edepartemen">
+					<option value="">--pilih unit--</option>
                 	 <?php foreach($list_unit as $b):?>
-							<?php if($item->kode_unit == $b->kode_unit):?>
-								<option value="<?php echo $b->kode_unit?>" selected><?php echo $b->nama_unit?></option>
+							<?php if($item->id_unit_satker == $b->id_unit_satker):?>
+								<option value="<?php echo $b->id_unit_satker?>" selected><?php echo $b->nama_unit?></option>
 							<?php else:?>
-								<option value="<?php echo $b->kode_unit?>"><?php echo $b->nama_unit?></option>
+								<option value="<?php echo $b->id_unit_satker?>"><?php echo $b->nama_unit?></option>
 							<?php endif;?>
 					<?php endforeach;?>
                 </select></td>
@@ -56,8 +67,9 @@
                 <td>:</td>
                 <td>
                 	<select name="elevel">
+						<option value="">--pilih level--</option>
                     	<?php foreach($list_level as $a):?>
-							<?php if($item->id_lavel == $b->id_lavel):?>
+							<?php if($item->id_lavel == $a->id_lavel):?>
 								<option value="<?php echo $a->id_lavel?>" selected><?php echo $a->nama_lavel?></option>
 							<?php else:?>
 								<option value="<?php echo $a->id_lavel?>"><?php echo $a->nama_lavel?></option>
@@ -69,8 +81,8 @@
         </table>
 		<br />
         <div class="submit_right">
-            <input type="submit" class="button" value="reset" />
-            <a href="man_user"><input type="submit" class="button" value="simpan" /></a>
+            <input type="submit" class="button blue-pill" value="reset" />
+            <input type="submit" class="button blue-pill" value="simpan" />
         </div>
         </form>
 	</div>

@@ -8,13 +8,21 @@
 
         <div class="table">
             <div id="head">
-                <div id="msg">
-                    <?php
-                                if ($this->session->flashdata('msg')) {
-                    echo $this->session->flashdata('msg');
-                }
-                    ?>
-                </div>
+                <?php
+				// TODO: Satu paket ini untuk alerts. Nanti mau dipindah jadi hanya panggil satu method.
+				if ($this->session->flashdata('success')) {
+					echo '<div class="success">' . $this->session->flashdata('success') . '</div>';
+				}
+				if ($this->session->flashdata('error')) {
+					echo '<div class="error">' . $this->session->flashdata('error') . '</div>';
+				}
+				if ($this->session->flashdata('notice')) {
+					echo '<div class="notice">' . $this->session->flashdata('notice') . '</div>';
+				}
+				if ($this->session->flashdata('info')) {
+					echo '<div class="info">' . $this->session->flashdata('info') . '</div>';
+				}
+				?>
 
                 <form method="post" action="<?php echo site_url('admin/man_user_tambah/add')?>">
                     <table id="tableOne" class="yui">
@@ -67,7 +75,7 @@
                                 <select name="fdepartemen">
                                     <option value="" selected="selected">- Nama Departemen -</option>
                                     <?php foreach ($list_unit as $b): ?>
-                                    <option value="<?php echo $b->kode_unit?>"><?php echo $b->nama_unit?></option>
+                                    <option value="<?php echo $b->id_unit_satker?>"><?php echo $b->nama_unit?></option>
                                     <?php endforeach;?>
                                 </select>
                             </td>

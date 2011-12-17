@@ -37,7 +37,7 @@ class Man_user_tambah extends CI_Controller
 		$this->form_validation->set_rules('fdepartemen','Departemen','required');
 		
 		if($this->form_validation->run() == FALSE){
-			$this->session->set_flashdata('msg',"<div style='color:red;'>".validation_errors()."</div>");
+			$this->session->set_flashdata('error',validation_errors());
 			redirect('admin/man_user_tambah');
 		}else{
 			$data['usr']	= trim($this->input->post('fusername',TRUE));
@@ -51,10 +51,10 @@ class Man_user_tambah extends CI_Controller
 			$info = $this->muser->add_user($data);
 			
 			if($info){
-				$this->session->set_flashdata('msg',"<p style='color:blue;'>berhasil menambah user baru !!.</p>");
+				$this->session->set_flashdata('success',"berhasil menambah user baru !!");
 				redirect('admin/man_user');
 			}else{
-				$this->session->set_flashdata('msg',"<p style='color:red;'>gagal menambah user baru !!.</p>");
+				$this->session->set_flashdata('error',"gagal menambah user baru !!");
 				redirect('admin/man_user');
 			}
 		}

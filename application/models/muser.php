@@ -3,7 +3,7 @@ class Muser extends CI_Model
 {
     function get_all_user(){
 		$this->load->library('pagination');		
-		$sql = "SELECT id_user, username, nama, email, no_tlp, kode_unit, id_lavel
+		$sql = "SELECT id_user, username, nama, email, no_tlp, id_unit_satker, id_lavel
 				FROM tb_user 
 				ORDER BY nama ASC";
 		$query = $this->db->query($sql);
@@ -16,8 +16,8 @@ class Muser extends CI_Model
 
 		$offset = (int) $this->uri->segment(4, 0);
 		
-		$sqlb = "SELECT id_user, username, nama, email, no_tlp, kode_unit, id_lavel
-				FROM tb_user 
+		$sqlb = "SELECT id_user, username, nama, email, no_tlp, nama_unit, id_lavel
+				FROM tb_user a left join tb_unit_saker b on a.id_unit_satker = b.id_unit_satker
 				ORDER BY nama ASC
 				LIMIT ?,?";
 		$data["query"] = $this->db->query($sqlb, array($offset ,$config['per_page']));
@@ -61,8 +61,8 @@ class Muser extends CI_Model
 		
 		$where = " WHERE username LIKE '%".$keyword."%' OR nama LIKE '%".$keyword."%'";
 		
-		$sql = "SELECT id_user, username, nama, email, no_tlp, kode_unit, id_lavel
-				FROM tb_user $where
+		$sql = "SELECT id_user, username, nama, email, no_tlp, nama_unit, id_lavel
+				FROM tb_user a LEFT JOIN tb_unit_saker b on a.id_unit_satker = b.id_unit_satker $where
 				ORDER BY nama ASC";
 		$query = $this->db->query($sql);
 
@@ -74,8 +74,8 @@ class Muser extends CI_Model
 		
 		
 		
-		$sqlb = "SELECT id_user, username, nama, email, no_tlp, kode_unit, id_lavel
-				FROM tb_user $where
+		$sqlb = "SELECT id_user, username, nama, email, no_tlp, nama_unit, id_lavel
+				FROM tb_user a LEFT JOIN tb_unit_saker b on a.id_unit_satker = b.id_unit_satker $where
 				ORDER BY nama ASC
 				LIMIT ?,?";
 		$data["query"] = $this->db->query($sqlb, array($offset ,$config['per_page']));
@@ -124,7 +124,7 @@ class Muser extends CI_Model
 	}
 	
 	function add_user($d){
-		$sql = "INSERT INTO tb_user(username,password,nama,email,no_tlp,kode_unit,id_lavel) values(?,?,?,?,?,?,?)";
+		$sql = "INSERT INTO tb_user(username,password,nama,email,no_tlp,id_unit_satker,id_lavel) values(?,?,?,?,?,?,?)";
 		$this->db->query($sql,array($d['usr'],md5($d['pwd']),$d['nm'],$d['em'],$d['telp'],$d['dep'],$d['lev']));
 		
 		if($this->db->affected_rows() > 0){

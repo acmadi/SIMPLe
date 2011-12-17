@@ -30,10 +30,10 @@ class Man_user extends CI_Controller
 		if(!empty($user)){
 			$info = $this->muser->reset_password($user);
 			if($info){
-				$this->session->set_flashdata('msg',"<div style='color:blue;'>berhasil mereset password</div>");
+				$this->session->set_flashdata('success',"berhasil mereset password");
 				redirect('admin/man_user');
 			}else{
-				$this->session->set_flashdata('msg',"<div style='color:red;'>gagal mereset password</div>");
+				$this->session->set_flashdata('error',"gagal mereset password");
 				redirect('admin/man_user');
 			}
 		}
@@ -44,10 +44,10 @@ class Man_user extends CI_Controller
 		if(!empty($user)){
 			$info = $this->muser->delete_user($user);
 			if($info){
-				$this->session->set_flashdata('msg',"<div style='color:blue;'>berhasil menghapus user</div>");
+				$this->session->set_flashdata('success',"berhasil menghapus user");
 				redirect('admin/man_user');
 			}else{
-				$this->session->set_flashdata('msg',"<div style='color:red;'>gagal menghapus user</div>");
+				$this->session->set_flashdata('error',"gagal menghapus user");
 				redirect('admin/man_user');
 			}
 		}

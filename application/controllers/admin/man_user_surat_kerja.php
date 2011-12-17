@@ -19,7 +19,7 @@ class Man_user_surat_kerja extends CI_Controller
         $data['title']   = 'Manajemen User - Surat Kerja';
         $data['content'] = 'admin/man_user/man_user_surat_kerja';
 		$data['item']	 = $this->muser->get_user_by_id($user);
-		$data['masa_kerja'] = $this->muser->get_masa_kerja($user);
+		$data['history_maker'] = $this->muser->get_masa_kerja($user);
 		$data['bln']	 = array(1=>'Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember');
 		$data['thn']	 = date('Y');
 		$this->load->view('admin/template', $data);
@@ -31,6 +31,7 @@ class Man_user_surat_kerja extends CI_Controller
     }
 	
 	function save(){
+		//print_r($_POST);exit;
 		$this->form_validation->set_rules('id','ID','required');
 		$this->form_validation->set_rules('ftgl','Tanggal Awal','required');
 		$this->form_validation->set_rules('ftgl2','Tanggal Akhir','required');
@@ -40,7 +41,7 @@ class Man_user_surat_kerja extends CI_Controller
 		$this->form_validation->set_rules('fthn2','Tahun Akhir','required');
 		
 		if($this->form_validation->run() == FALSE){
-			$this->session->set_flashdata('msg',"<div style='color:red;'>".validation_errors()."</div>");
+			$this->session->set_flashdata('error',validation_errors());
 			$id	= trim($this->input->post('id',TRUE));
 			redirect('admin/man_user_surat_kerja/index/'.$id);
 		}else{
@@ -53,7 +54,8 @@ class Man_user_surat_kerja extends CI_Controller
 			$data['thn1'] = $this->input->post('fthn',TRUE);
 			$data['thn2'] = $this->input->post('fthn2',TRUE);
 			
-			$this->muser->set_surat_kerja($data);
+			$info = $this->muser->set_surat_kerja($data);
+			if($info) $this->session->set_flashdata('success',"sukses tambahkan masa kerja");
 			redirect('admin/man_user');
 		}
 	}
