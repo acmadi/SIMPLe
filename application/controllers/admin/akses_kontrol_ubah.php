@@ -63,6 +63,60 @@ class Akses_kontrol_ubah extends CI_Controller
 		}
 	}
 	
+	function user(){
+		$user	= trim($this->uri->segment(4,''));
+		$this->load->model('Muser','user');
+		
+		$data['title'] = 'Akses kontrol - Ubah Data';
+        $data['list_level']	= $this->user->get_list_level();
+		
+		$data['list_unit']	= $this->user->get_list_unit();
+        $data['item'] 		= $this->user->get_edited_by_id($user);
+        $data['level'] 		= trim($this->uri->segment(5,''));
+		
+        $data['content'] = 'admin/akses_kontrol/akses_kontrol_user_ubah';
+        $this->load->view('admin/template', $data);
+	}
+	
+	function ubah_user(){
+		$this->load->model('Muser','muser');
+		$this->form_validation->set_rules('enama','Nama','required');
+		$this->form_validation->set_rules('id','ID','required');
+		$this->form_validation->set_rules('eemail','Email','required|valid_email');
+		$this->form_validation->set_rules('eusername','Username','required');
+		$this->form_validation->set_rules('etelp','No Telp','required');
+		$this->form_validation->set_rules('elevel','Level','required');
+		$this->form_validation->set_rules('edepartemen','Departemen','required');
+		$this->form_validation->set_rules('level','ID Level','required');
+		
+		if($this->form_validation->run() == FALSE){
+			$this->session->set_flashdata('error',validation_errors());
+			$id	= trim($this->input->post('id',TRUE));
+			$level	= trim($this->input->post('level',TRUE));
+			redirect('admin/akses_kontrol_ubah/user/'.$id.'/'.$level);
+		}else{
+			$data['usr']	= trim($this->input->post('eusername',TRUE));
+			$data['nm'] 	= trim($this->input->post('enama',TRUE));
+			$data['id'] 	= trim($this->input->post('id',TRUE));
+			$data['em'] 	= trim($this->input->post('eemail',TRUE));
+			$data['telp'] 	= trim($this->input->post('etelp',TRUE));
+			$data['lev'] 	= trim($this->input->post('elevel',TRUE));
+			$data['dep'] 	= trim($this->input->post('edepartemen',TRUE));
+			$level			= trim($this->input->post('level',TRUE));
+			
+			$info = $this->muser->edit_user($data);
+			
+			if($info){
+				$this->log->create("merubah data user : ".$data['usr']);
+				$this->session->set_flashdata('success',"berhasil mengupdate user ".$data['usr']);
+				redirect('admin/akses_kontrol/view/'.$level);
+			}else{
+				$this->session->set_flashdata('error',"gagal mengupdate user".$data['usr']);
+				redirect('admin/akses_kontrol/view/'.$level);
+			}
+		}
+	}
+	
 }
 
 ?>

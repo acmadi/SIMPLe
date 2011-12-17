@@ -13,7 +13,7 @@
     <div id="header">Sistem Informasi Pusat Layanan DJA v1.0</div>
     <div id="navbar" style="text-align: right; vertical-align: middle; "><a href="<?php echo site_url('/satker/form_revisi_anggaran') ?>" >Form Revisi Anggaran</a></div>
 
-    <div id="mid" style="padding: 50px; background: #fff; border-radius: 10px; box-shadow: 0 0 20px -5px #333; text-align: center;">
+    <div id="mid" style="padding: 60px; background: #fff; border-radius: 10px; box-shadow: 0 0 20px -5px #333; text-align: center;">
 
         <h2 id="title_form_login">DJA SIMPEL</h2>
 

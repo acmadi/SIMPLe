@@ -55,7 +55,6 @@ class Akses_kontrol extends CI_Controller
                 }
                 redirect('/admin/akses_kontrol');
             }
-        
     }
 
     public function delete($id)
@@ -102,11 +101,46 @@ class Akses_kontrol extends CI_Controller
 
     function view($id)
     {
+		$data['info_kontrol'] = $this->akses->get_info_kontrol($id);
         $data['list_kontrol'] = $this->akses->get_all_users_by_level($id);
         $data['title'] = 'Akses Kontrol - Ubah';
         $data['content'] = 'admin/akses_kontrol/akses_kontrol_lihat';
         $this->load->view('admin/template', $data);
     }
+	
+	function reset_password(){
+		$user	= trim($this->uri->segment(4,''));
+		$level	= trim($this->uri->segment(5,''));
+		
+		if(!empty($user)){
+			$info = $this->akses->reset_password($user);
+			if($info){
+				$this->session->set_flashdata('success',"berhasil reset password");
+				redirect('admin/akses_kontrol/view/'.$level);
+			}else{
+				$this->session->set_flashdata('error',"gagal reset password");
+				redirect('admin/akses_kontrol/view'.$level);
+			}
+		}
+	}
+	
+	function delete_user(){
+		$user	= trim($this->uri->segment(4,''));
+		$level	= trim($this->uri->segment(5,''));
+		
+		if(!empty($user)){
+			$info = $this->akses->delete_user($user);
+			if($info){
+				$this->session->set_flashdata('success',"berhasil menghapus user");
+				redirect('admin/akses_kontrol/view/'.$level);
+			}else{
+				$this->session->set_flashdata('error',"gagal menghapus user");
+				redirect('admin/akses_kontrol/view'.$level);
+			}
+		}
+	}
+	
+	
 
 }
 

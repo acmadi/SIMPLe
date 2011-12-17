@@ -90,7 +90,7 @@ class Muser extends CI_Model
 	}
 	
 	function get_list_unit(){
-		return $this->db->query("SELECT kode_unit, nama_unit FROM tb_unit_saker")->result();
+		return $this->db->query("SELECT id_unit_satker,kode_unit, nama_unit FROM tb_unit_saker")->result();
 	}
 	
 	function reset_password($user){
@@ -135,17 +135,20 @@ class Muser extends CI_Model
 	}
 	
 	function get_edited_by_id($u){
-		$sql = "SELECT id_user,username,nama,email,no_tlp,kode_unit,id_lavel FROM tb_user WHERE id_user = ? LIMIT 0,1";
+		$sql = "SELECT id_user,username,nama,email,no_tlp,id_unit_satker,id_lavel FROM tb_user WHERE id_user = ? LIMIT 0,1";
 		return $this->db->query($sql,array($u))->row();
 	}
 	
 	function get_masa_kerja($u){
-		$sql = "SELECT id_user,username,nama,email,no_tlp,kode_unit,id_lavel FROM tb_user WHERE id_user = ? LIMIT 0,1";
-		return $this->db->query($sql,array($u))->row();
+		$sql = "SELECT id_user,tanggal_mulai,tanggal_selesai
+				FROM tb_masa_kerja
+				WHERE id_user = ?
+				ORDER BY id_masa_kerja DESC";
+		return $this->db->query($sql,array($u))->result();
 	}
 	
 	function edit_user($d){
-		$sql = "UPDATE tb_user SET username = ?, nama = ?,email = ?, no_tlp = ?,kode_unit = ?,id_lavel = ? WHERE id_user = ?";
+		$sql = "UPDATE tb_user SET username = ?, nama = ?,email = ?, no_tlp = ?,id_unit_satker = ?,id_lavel = ? WHERE id_user = ?";
 		$this->db->query($sql,array($d['usr'],$d['nm'],$d['em'],$d['telp'],$d['dep'],$d['lev'],$d['id']));
 		
 		if($this->db->affected_rows() > 0){
@@ -156,9 +159,9 @@ class Muser extends CI_Model
 	}
 	
 	function get_user_by_id($user){
-		$sql = "SELECT a.id_user,a.username,a.nama,a.email,a.no_tlp, nama_unit,nama_lavel 
-				FROM tb_user a, tb_unit_saker b, tb_lavel c 
-				WHERE a.kode_unit = b.kode_unit AND a.id_lavel = c.id_lavel AND a.id_user = ? LIMIT 0,1";
+		$sql = "SELECT a.id_user, a.username, a.nama, a.email, a.no_tlp, b.nama_unit, c.nama_lavel
+				FROM tb_lavel c, tb_user a LEFT JOIN tb_unit_saker b ON a.id_unit_satker = b.id_unit_satker 
+				WHERE a.id_lavel = c.id_lavel AND a.id_user = ? LIMIT 0,1";
 		return $this->db->query($sql,array($user))->row();
 	}
 	
@@ -178,19 +181,23 @@ class Muser extends CI_Model
 			$tgl_selesai	= $d['thn2'].'-'.$d['bln2'].'-'.$d['tgl2'];
 			
 			if(strtotime($tgl_mulai) > strtotime($tgl_selesai)){
-				$this->session->set_flashdata('msg',"<div style='color:red;'>tanggal awal lebih besar dari tanggal akhir</div>");
+				$this->session->set_flashdata('error',"tanggal awal lebih besar dari tanggal akhir");
 			}else{
 				$sql = "INSERT INTO tb_masa_kerja(id_user,tanggal_mulai,tanggal_selesai) VALUES(?,?,?)";
 				$this->db->query($sql,array($d['id'],$tgl_mulai,$tgl_selesai));
 				
 				if($this->db->affected_rows() > 0){
-					$this->session->set_flashdata('msg',"<div style='color:blue;'>sukses</div>");
+					$this->log->create("suksee menambahkan data masa kerja user : ".$d['id']);
+					$this->session->set_flashdata('success',"sukses");
+					return true;
 				}else{
-					$this->session->set_flashdata('msg',"<div style='color:red;'>gagal</div>");
+					$this->session->set_flashdata('success',"gagal");
+					return false;
 				}
 			}	
 		}else{
-			$this->session->set_flashdata('msg',"<div style='color:red;'>".implode(', ',$notvalid)."</div>");
+			$this->session->set_flashdata('error',implode(', ',$notvalid));
+			return false;
 		}
 		
 		

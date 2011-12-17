@@ -135,25 +135,16 @@ class Makses extends CI_Model
      * @return boolean
      */
 	public function delete($id){
-		$sql = "SELECT id_kon_unit_satker
-				FROM tb_kon_unit_satker
-				WHERE kode_unit = ?";
+		$sql = "DELETE * FROM tb_user WHERE id_user = ?";
 
 		$query	= $this->db->query($sql, array($id));
 
-		if($query->num_rows()>0){
-			return 3;
+		if($this->db->affected_rows() > 0){
+			$this->log->create("Menghapus user ".$id);
+			$this->session->set_flashdata('');
 		}else{
-			$sql2 = "DELETE FROM tb_unit_saker WHERE kode_unit = ?";
-			$this->db->query($sql2, array($id));
-
-			if($this->db->affected_rows() > 0){
-				return 1;
-			}else{
-				return 2;
-			}
+			return 2;
 		}
-
 	}
 
 	/**
@@ -219,10 +210,15 @@ class Makses extends CI_Model
      * @return Object
      */
     public function get_all_users_by_level($id) {
-        $sql = "SELECT * FROM tb_user JOIN tb_lavel ON tb_user.id_lavel = tb_lavel.id_lavel WHERE lavel = ?";
+        $sql = "SELECT * FROM tb_user JOIN tb_lavel ON tb_user.id_lavel = tb_lavel.id_lavel WHERE tb_user.id_lavel = ?";
         $result = $this->db->query($sql, array($id));
         return $result;
     }
+	
+	public function get_info_kontrol($id){
+		$query = $this->db->query("SELECT id_lavel,nama_lavel FROM tb_lavel WHERE id_lavel = ?", array($id));
+		return $query->row();
+	}
 	
 	public function update_akses($data){
 		$sql = "UPDATE tb_lavel SET nama_lavel = ? WHERE id_lavel = ? ";
@@ -234,15 +230,47 @@ class Makses extends CI_Model
 			return false;
 		}
 	}
-	
-	public function get_data_by_keyword($keyword){
-		$keyword = "'%".$keyword."%'";
-		$sql = "SELECT * FROM tb_lavel WHERE nama_lavel LIKE ?";
-		$query = $this->db->query($sql,array($keyword));
-		if(true){
-			$this->session->set_flashdata('error','data tidak ditemukan');
-		}else{
 		
-		}
+	function get_user_by_id($user){
+		$sql = "SELECT a.id_user,a.username,a.nama,a.email,a.no_tlp, c.nama_lavel 
+				FROM tb_user a, tb_lavel c
+				WHERE a.id_lavel = c.id_lavel AND a.id_user = ? LIMIT 0,1";
+		return $this->db->query($sql,array($user))->row();
 	}
+	
+	function get_masa_kerja($u){
+		$sql = "SELECT id_user,username,nama,email,no_tlp,kode_unit,id_lavel FROM tb_user WHERE id_user = ? LIMIT 0,1";
+		return $this->db->query($sql,array($u))->row();
+	}
+	
+	function reset_password($user){
+		$cek = $this->db->query("select id_user from tb_user where id_user = ?", array($user))->num_rows();
+		$info = false;
+
+		if($cek > 0){
+			if($this->db->query("UPDATE tb_user SET password = md5('12345') WHERE id_user = ?", array($user))){
+				$info = true;
+			}else{
+				$info = false;
+			}
+		}
+		
+		return $info;
+	}
+	
+	function delete_user($user){
+		$cek = $this->db->query("select id_user from tb_user where id_user = ?", array($user))->num_rows();
+		$info = false;
+
+		if($cek > 0){
+			if($this->db->query("DELETE FROM tb_user WHERE id_user = ?", array($user))){
+				$info = true;
+			}else{
+				$info = false;
+			}
+		}
+		
+		return $info;
+	}
+	
 }
