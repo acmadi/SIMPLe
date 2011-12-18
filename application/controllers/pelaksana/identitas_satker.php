@@ -14,8 +14,8 @@ class Identitas_satker extends CI_Controller
         /*if ($this->session->userdata('login') == TRUE)
           {*/
         $data['title'] = 'Isi Identitas Satker';
-        $data['content'] = 'csc/identitas_satker';
-        $this->load->view('csc/template', $data);
+        $data['content'] = 'pelaksana/identitas_satker';
+        $this->load->view('pelaksana/template', $data);
         /*}
           else
           {

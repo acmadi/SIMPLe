@@ -1,8 +1,8 @@
 <?php
-class HelpDesk extends CI_Controller
+class Konsultasi_helpDesk extends CI_Controller
 {
 
-    function HelpDesk()
+    function Konsultasi_helpDesk()
     {
         parent::__construct();
     }
@@ -14,8 +14,8 @@ class HelpDesk extends CI_Controller
         /*if ($this->session->userdata('login') == TRUE)
           {*/
         $data['title'] = 'Konsultasi Help Desk';
-        $data['content'] = 'csc/helpDesk';
-        $this->load->view('csc/template', $data);
+        $data['content'] = 'pelaksana/konsultasi_helpDesk';
+        $this->load->view('pelaksana/template', $data);
         /*}
           else
           {

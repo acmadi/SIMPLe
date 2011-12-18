@@ -1,22 +1,21 @@
 <?php
-class Dashboard_user_skip extends CI_Controller
+class Dashboard extends CI_Controller
 {
 
-    function Dashboard_user_skip()
+    function __construct()
     {
         parent::__construct();
     }
 
-    var $title = 'Dashboard';
-
     function index()
     {
+        redirect('/pelaksana/list_antrian');
         /*
           if ($this->session->userdata('login') == TRUE)
           {*/
         $data['title'] = 'Dashboard';
-        $data['content'] = 'csc/dashboard_skip';
-        $this->load->view('csc/template', $data);
+        $data['content'] = 'pelaksana/dashboard';
+        $this->load->view('pelaksana/template', $data);
         /*}
           else
           {

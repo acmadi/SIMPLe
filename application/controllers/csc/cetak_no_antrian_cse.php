@@ -1,5 +1,5 @@
 <?php
-class Cetak_no_antrian_csb extends CI_Controller
+class Cetak_no_antrian_cse extends CI_Controller
 {
 
     function __construct()
@@ -15,10 +15,10 @@ class Cetak_no_antrian_csb extends CI_Controller
           if ($this->session->userdata('login') == TRUE)
           {*/
         $this->load->model('msatker');
-        $data['antrian'] = $this->msatker->antrian_terakhir('B');
+        $data['antrian'] = $this->msatker->antrian_terakhir('E');
         $data['title'] = 'Cetak No Antrian';
-        $data['content'] = 'satker/cetak_no_antrian_csb';
-        $this->load->view('satker/template', $data);
+        $data['content'] = 'csc/cetak_no_antrian_cse';
+        $this->load->view('csc/template', $data);
         /*}
           else
           {

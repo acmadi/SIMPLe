@@ -1,21 +1,21 @@
 <?php
-class Knowledge_base extends CI_Controller
+class HelpDesk extends CI_Controller
 {
 
-    function Knowledge_base()
+    function HelpDesk()
     {
         parent::__construct();
     }
 
-    var $title = 'Knowledge Base';
+    var $title = 'Konsultasi Help Desk';
 
     function index()
     {
         /*if ($this->session->userdata('login') == TRUE)
           {*/
-        $data['title'] = 'Knowledge Base';
-        $data['content'] = 'csc/knowledge_base';
-        $this->load->view('csc/template', $data);
+        $data['title'] = 'Konsultasi Help Desk';
+        $data['content'] = 'pelaksana/helpDesk';
+        $this->load->view('pelaksana/template', $data);
         /*}
           else
           {

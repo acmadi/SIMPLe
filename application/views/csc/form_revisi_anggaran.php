@@ -29,7 +29,7 @@
         })
 
 //        $('#eselon').change(function() {
-        //$('#kode_satker').autoSuggest('<?php echo site_url('/satker/form_revisi_anggaran/cari_satker') ?>',
+        //$('#kode_satker').autoSuggest('<?php echo site_url('/csc/form_revisi_anggaran/cari_satker') ?>',
         //        {
         //            extraParams: '&eselon=' + $('#eselon').val()
         //        }
@@ -98,7 +98,7 @@
                     change: function(event, ui) {
                         kode_unit_satker = (ui.item.label);
                         kode_unit_satker = substr(kode_unit_satker, 0, 6);
-                        $.get('<?php echo site_url('/satker/form_revisi_anggaran/cari_kode_kon_unit_satker') ?>',
+                        $.get('<?php echo site_url('/csc/form_revisi_anggaran/cari_kode_kon_unit_satker') ?>',
                                 {kode_unit_satker: kode_unit_satker},
                                 function(response) {
                                     $('#anggaran').html(response);
@@ -143,7 +143,7 @@
     }
     ?>
 
-    <?php echo form_open('satker/form_revisi_anggaran/save_identitas', array('id' => 'identitas_kl')) ?>
+    <?php echo form_open('csc/form_revisi_anggaran/save_identitas', array('id' => 'identitas_kl')) ?>
 
     <?php echo form_hidden('tipe', 'kl') ?>
 

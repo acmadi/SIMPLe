@@ -15,7 +15,7 @@ class Cek_tiket extends CI_Controller
     function view($id)
     {
         $data['title'] = 'Cek Tiket';
-        $data['content'] = 'csc/cek_tiket';
+        $data['content'] = 'pelaksana/cek_tiket';
         $sql = "SELECT *
                 FROM tb_tiket_frontdesk
                 JOIN tb_petugas_satker
@@ -29,7 +29,7 @@ class Cek_tiket extends CI_Controller
         $result = $result[0];
         $data['tiket'] = $result;
 
-        $this->load->view('csc/template', $data);
+        $this->load->view('pelaksana/template', $data);
     }
 }
 

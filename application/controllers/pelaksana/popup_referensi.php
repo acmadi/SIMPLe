@@ -1,8 +1,8 @@
 <?php
-class HelpDesk_referensi extends CI_Controller
+class Popup_referensi extends CI_Controller
 {
 
-    function HelpDesk_referensi()
+    function Popup_referensi()
     {
         parent::__construct();
     }
@@ -14,8 +14,7 @@ class HelpDesk_referensi extends CI_Controller
         /*if ($this->session->userdata('login') == TRUE)
           {*/
         $data['title'] = 'Konsultasi Help Desk';
-        $data['content'] = 'csc/helpDesk_referensi';
-        $this->load->view('csc/template', $data);
+        $this->load->view('pelaksana/popup_referensi');
         /*}
           else
           {

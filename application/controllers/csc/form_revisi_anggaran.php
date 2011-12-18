@@ -12,8 +12,8 @@ class Form_revisi_anggaran extends CI_Controller
         $data['kementrian'] = $this->db->query('SELECT * FROM tb_kementrian ORDER BY id_kementrian');
         $data['kelengkapan_dokumen'] = $this->db->query('SELECT * FROM tb_kelengkapan_doc ORDER BY id_kelengkapan');
         $data['title'] = 'Form Revisi Anggaran';
-        $data['content'] = 'satker/form_revisi_anggaran';
-        $this->load->view('satker/template', $data);
+        $data['content'] = 'csc/form_revisi_anggaran';
+        $this->load->view('csc/template', $data);
     }
 
     public function add_revisi_anggaran()
@@ -55,7 +55,7 @@ class Form_revisi_anggaran extends CI_Controller
         }
 
         $this->session->set_flashdata('msg', 'Data telah masuk');
-        redirect('/satker/form_revisi_anggaran');
+        redirect('/csc/form_revisi_anggaran');
 
     }
 
@@ -193,7 +193,7 @@ class Form_revisi_anggaran extends CI_Controller
             }
             $kode_satker = $temp;
 
-            redirect('/satker/form_revisi_anggaran/success');
+            redirect('/csc/form_revisi_anggaran/success');
         }
         else {
             $this->index();
@@ -201,6 +201,6 @@ class Form_revisi_anggaran extends CI_Controller
     }
 
     function success() {
-        $this->load->view('/satker/success');
+        $this->load->view('/csc/success');
     }
 }
