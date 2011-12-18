@@ -1,11 +1,14 @@
 <?php
-$nav_dashboard = $nav_antrian = $nav_knowledge = $nav_forum = '';
+$nav_dashboard = $nav_helpdesk = $nav_frontdesk = $nav_knowledge = $nav_forum = '';
 switch ($this->uri->segment(2)) {
-    case 'identitas_satker':
+    case 'dashboard':
         $nav_dashboard = 'current';
         break;
-    case 'list_antrian':
-        $nav_antrian = 'current';
+    case 'helpdesk':
+        $nav_helpdesk = 'current';
+        break;
+    case 'frontdesk':
+        $nav_frontdesk = 'current';
         break;
     case 'knowledge_base':
         $nav_knowledge = 'current';
@@ -20,10 +23,10 @@ switch ($this->uri->segment(2)) {
 <div id="navbar" class="clearfloat">
     <ul class="sf-menu">
         <li class="<?php echo $nav_dashboard ?>"><?php echo anchor('pelaksana/dashboard', 'Dashboard');?></li>
-        <li class="<?php echo $nav_dashboard ?>"><?php echo anchor('pelaksana/list_helpDesk', 'Helpdesk');?></li>
-        <li class="<?php echo $nav_dashboard ?>"><?php echo anchor('pelaksana/list_frontDesk', 'Front Desk');?></li>
+        <li class="<?php echo $nav_helpdesk ?>"><?php echo anchor('pelaksana/helpdesk', 'Help Desk');?></li>
+        <li class="<?php echo $nav_frontdesk ?>"><?php echo anchor('pelaksana/frontdesk', 'Front Desk');?></li>
         <li class="<?php echo $nav_knowledge ?>"><?php echo anchor('pelaksana/knowledge_base', 'Knowledge Base');?></li>
         <li class=""><a href="<?php echo base_url() . 'upload/PMK-93.pdf' ?>" target="pdf">Referensi Peraturan</a></li>
-        <li class="<?php echo $nav_dashboard ?>"><?php echo anchor('pelaksana/man_forum', 'Forum');?></li>
+        <li class="<?php echo $nav_forum ?>"><?php echo anchor('pelaksana/man_forum', 'Forum');?></li>
     </ul>
 </div>
