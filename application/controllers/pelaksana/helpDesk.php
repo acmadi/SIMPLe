@@ -1,27 +1,32 @@
 <?php
-class HelpDesk extends CI_Controller
+class Helpdesk extends CI_Controller
 {
 
-    function HelpDesk()
+    function __construct()
     {
         parent::__construct();
+        $this->load->model('mhelpdesk');
     }
-
-    var $title = 'Konsultasi Help Desk';
 
     function index()
     {
-        /*if ($this->session->userdata('login') == TRUE)
-          {*/
+        $sql = "SELECT * FROM tb_tiket_helpdesk JOIN tb_satker
+                                ON tb_tiket_helpdesk.id_satker = tb_satker.id_satker
+                                WHERE status = 'open'";
+        $data['antrian'] = $this->db->query($sql);
+
         $data['title'] = 'Konsultasi Help Desk';
         $data['content'] = 'pelaksana/helpDesk';
         $this->load->view('pelaksana/template', $data);
-        /*}
-          else
-          {
-              $this->load->view('login/login_view');
-          }*/
     }
-}
 
-?>
+    function view($id)
+    {
+        $data['title'] = 'Cek Tiket';
+        $data['content'] = 'pelaksana/helpdesk_view';
+        $data['antrian'] = $this->mhelpdesk->get_by_id($id);
+
+        $this->load->view('pelaksana/template', $data);
+    }
+
+}
