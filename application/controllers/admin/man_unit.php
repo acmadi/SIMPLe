@@ -5,28 +5,38 @@ class Man_unit extends CI_Controller
     function __construct()
     {
         parent::__construct();
+		$this->load->model('Munit','unit');
     }
 
     var $title = 'Manajemen Unit';
 
     function index()
     {
-        // TODO: Nanti kapan-kapan pindahin ini ke model
-        $sql = "SELECT * FROM tb_unit_saker";
-        $result = $this->db->query($sql);
-        
-        /*if ($this->session->userdata('login') == TRUE)
-          {*/
+		$page		= $this->unit->get_all_unit();
+		$pageData	= $page['query']->result();
+		$pageLink	= $page['pagination1'];
+		
+		$data		= array('result'=>$pageData,'pageLink'=>$pageLink,);
+		
         $data['title'] = 'Manajemen Unit';
         $data['content'] = 'admin/man_unit/man_unit';
-        $data['units'] = $result;
         $this->load->view('admin/template', $data);
-        /*}
-          else
-          {
-              $this->load->view('login/login_view');
-          }*/
     }
+	
+	function delete($id){
+		$id = trim($this->uri->segment(4,''));
+		if(!empty($id)){
+			$info = $this->unit->delete_unit($id);
+			if($info){
+				$this->session->set_flashdata('success',"berhasil menghapus unit");
+				redirect('admin/man_unit');
+			}else{
+				$this->session->set_flashdata('error',"gagal menghapus unit");
+				redirect('admin/man_unit');
+			}
+		}
+	
+	}
 }
 
 ?>

@@ -24,13 +24,13 @@ SET time_zone = "+00:00";
 -- Dumping data for table `tb_user`
 --
 
-INSERT INTO `tb_user` (`id_user`, `username`, `password`, `nama`, `email`, `no_tlp`, `kode_unit`, `id_lavel`) VALUES
-(15, 'admin', 'admin', 'Admin Suradmin', 'admin@komuri.org', '1234567', '0203010100201101 ', 12),
-(16, 'csa', 'csa', 'csa', NULL, NULL, '0203010100201101 ', 1),
-(17, 'csb', 'csb', 'csb', NULL, NULL, '0203010100201101 ', 2),
-(18, 'csc', 'csc', 'csc', NULL, NULL, '0203010100201101 ', 3),
-(19, 'csd', 'csd', 'csd', NULL, NULL, '0203010100201101 ', 4),
-(20, 'cse', 'cse', 'cse', NULL, NULL, '0203010100201101 ', 5);
+INSERT INTO `tb_user` (`id_user`, `username`, `password`, `nama`, `email`, `no_tlp`, `id_unit_satker`, `id_lavel`) VALUES
+(15, 'admin', 'admin', 'Admin Suradmin', 'admin@komuri.org', '1234567', NULL, 12),
+(16, 'csa', 'csa', 'csa', NULL, NULL, NULL, 1),
+(17, 'csb', 'csb', 'csb', NULL, NULL, NULL, 2),
+(18, 'csc', 'csc', 'csc', NULL, NULL, NULL, 3),
+(19, 'csd', 'csd', 'csd', NULL, NULL, NULL, 4),
+(20, 'cse', 'cse', 'cse', NULL, NULL, NULL, 5);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

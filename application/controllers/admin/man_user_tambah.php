@@ -51,6 +51,7 @@ class Man_user_tambah extends CI_Controller
 			$info = $this->muser->add_user($data);
 			
 			if($info){
+				$this->log->create('berhasil menambah user : '.$data['nm']);
 				$this->session->set_flashdata('success',"berhasil menambah user baru !!");
 				redirect('admin/man_user');
 			}else{

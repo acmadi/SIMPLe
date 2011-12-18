@@ -22,7 +22,7 @@
         <div class="table"> 
             <div id="head">
                 <form id="form-cari" action="<?php echo site_url('admin/man_user_cari')?>" method="post">
-					Cari : <input id="teks-cari" type="text" name="fcari" value=""  /> <input class="button blue-pill" type="submit" value="Enter"/>
+					Cari : <input id="teks-cari" type="text" name="fcari" value="" placeholder="Pencarian user" /> <input class="button blue-pill" type="submit" value="Enter"/>
                 </form>
                 
                 <a href="<?php echo site_url('admin/man_user_tambah')?>"><input id="btn-kanan-atas" class='button blue-pill' type="submit" value="Tambah User"/></a>
