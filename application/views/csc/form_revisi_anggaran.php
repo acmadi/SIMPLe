@@ -58,11 +58,12 @@
                 .autocomplete({
                     source: function(request, response) {
                         $.ajax({
-                            url: "<?php echo site_url('/csa/identitas_satker/cari_satker') ?>",
+                            url: "<?php echo site_url('/csc/form_revisi_anggaran/cari_satker') ?>",
 
                             data: {
                                 term: extractLast(request.term),
-                                eselon: $('#eselon').val()
+                                eselon: $('#eselon').val(),
+                                nama_kl: $('#nama_kl').val()
                             },
 
                             dataType: 'json',

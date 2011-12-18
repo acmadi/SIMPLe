@@ -73,16 +73,18 @@ class Form_revisi_anggaran extends CI_Controller
     {
         if ($this->input->is_ajax_request()) {
 
-            $term = $this->input->get('q');
+            $term = $this->input->get('term');
             $eselon = $this->input->get('eselon');
+            $id_kementrian = substr($this->input->get('nama_kl'), 0, 3);
+
 
             $sql = "SELECT * FROM tb_satker WHERE
-                id_unit = '{$eselon}' AND
-                (id_satker LIKE '%{$term}%' OR nama_satker LIKE '%{$term}%')
-                ORDER BY id_unit";
+                    id_unit = '{$eselon}' AND
+                    id_kementrian = '{$id_kementrian}' AND
+                    (id_satker LIKE '%{$term}%' OR nama_satker LIKE '%{$term}%')
+                    ORDER BY id_unit";
 
             $result = $this->db->query($sql);
-
             $array = array();
             $i = 0;
             if ($result->num_rows() > 0) {
@@ -91,20 +93,8 @@ class Form_revisi_anggaran extends CI_Controller
                     $i++;
                 }
             }
-            //            echo json_encode($array);
+            echo json_encode($array);
         }
-
-        $json = array(
-            array(
-                'name' => 'Namaa',
-                'value' => $_GET['q']
-            )
-        );
-
-        echo json_encode($json);
-
-        print_r($_GET);
-
         exit();
     }
 
@@ -140,7 +130,7 @@ class Form_revisi_anggaran extends CI_Controller
     function save_identitas()
     {
         $this->form_validation->set_message('required', '%s harus diisi');
-        
+
         $this->form_validation->set_rules('nama_kl', 'Nama K/L', 'required');
         $this->form_validation->set_rules('eselon', 'Eselon', 'required');
         $this->form_validation->set_rules('kode_satker', 'Nama - Kode Satker', 'required');
@@ -185,7 +175,7 @@ class Form_revisi_anggaran extends CI_Controller
 
                 $sql = "INSERT INTO tb_tiket_frontdesk (id_satker, id_formulir, tanggal, status, lavel, id_petugas_satker)
                         VALUES ('{$temp[$i]}', NULL, '{$now}', 'open', 1, {$result->id_petugas_satker})";
-                
+
                 $this->db->query($sql);
 
 
@@ -200,7 +190,8 @@ class Form_revisi_anggaran extends CI_Controller
         }
     }
 
-    function success() {
+    function success()
+    {
         $this->load->view('/csc/success');
     }
 }
