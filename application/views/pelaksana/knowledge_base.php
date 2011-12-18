@@ -1,58 +1,72 @@
-    <ul id="nav">
-        <li><a href="#tab1">Deskripsi Peraturan</a></li>
-    </ul>
-    <div class="clear"></div>
+<ul id="nav">
+    <li><a href="#tab1" class="active">Deskripsi Peraturan</a></li>
+</ul>
+<div class="clear"></div>
+<form action="#" name="" method="post">
     <div id="konten">
-        <div class="garis">
-        <p class="judul">Cari</p>
-        <form action="#" id="knowledge" name="" method="post">
-            Keyword : <input type="text" size="48" />
-            <input type="submit" value="Cari"> //comment: auto sugest
-        </form>
-        </div><br /><br />
-        
-        <div class="garis" style="min-height:300px;">
-            <div style="float:left; width:40%; ">
-                <ul>
-                    <li><img src="<?php echo base_url(); ?>images/folder-closed.gif" style="height:16px;" alt="dir" />Kategori Knowledgebase A
-                        <ul>
-                            <li> - Knowledge Base Kategori Peraturan</li>
-                            <li> - Knowledge Base Kategori Peraturan</li>
-                            <li> - Knowledge Base Kategori Peraturan</li>
-                            <li style="text-align:right; "> >> Selengkapnya</li>
-                        </ul>
-                    </li>
-                    <li><img src="<?php echo base_url(); ?>images/folder-closed.gif" style="height:16px;" alt="dir" />Kategori Knowledgebase B
-                        <ul>
-                            <li> - Knowledge Base Kategori Peraturan</li>
-                            <li> - Knowledge Base Kategori Peraturan</li>
-                            <li> - Knowledge Base Kategori Peraturan</li>
-                            <li style="text-align:right; "> >> Selengkapnya</li>
-                        </ul>
-                    </li>
-                </ul>
+        <div style="display: none;" id="tab1" class="tab_konten">
+            <div class="table">
+                <div id="head">
+                </div>
+                <div id="tail" style="overflow:scroll; overflow-x:hidden; height:400px; ">
+                    <hr/>
+                    <h6 class="tilte"><a href="#">Jawaban 1</a></h6>
+
+                    <p>Penjelasan jawaban 1.. Penjelasan jawaban 1.. Penjelasan jawaban 1.. Penjelasan jawaban 1..
+                        Penjelasan jawaban 1.. Penjelasan jawaban 1.. Penjelasan jawaban 1.. Penjelasan jawaban 1..
+                        Penjelasan jawaban 1.. Penjelasan jawaban 1.. Penjelasan jawaban 1.. Penjelasan jawaban 1..
+                        Penjelasan jawaban 1.. Penjelasan jawaban 1.. Penjelasan jawaban 1.. Penjelasan jawaban 1..
+                        Penjelasan jawaban 1.. Penjelasan jawaban 1.. Penjelasan jawaban 1.. Penjelasan jawaban 1..
+                        Penjelasan jawaban 1.. Penjelasan jawaban 1.. Penjelasan jawaban 1.. Penjelasan jawaban 1..
+                        Penjelasan jawaban 1.. Penjelasan jawaban 1.. Penjelasan jawaban 1.. Penjelasan jawaban 1..
+                        Penjelasan jawaban 1.. Penjelasan jawaban 1.. Penjelasan jawaban 1.. Penjelasan jawaban 1..
+                    </p>
+                    <h6 class="more"><a href="#">read more....</a></h6><br/>
+                    <hr id="line"/>
+                    <br/>
+                    <h6 class="tilte"><a href="#">Jawaban 2</a></h6>
+
+                    <p>Penjelasan jawaban 2.. Penjelasan jawaban 2.. Penjelasan jawaban 2.. Penjelasan jawaban 2..
+                        Penjelasan jawaban 2.. Penjelasan jawaban 2.. Penjelasan jawaban 2.. Penjelasan jawaban 2..
+                        Penjelasan jawaban 2.. Penjelasan jawaban 2.. Penjelasan jawaban 2.. Penjelasan jawaban 2..
+                        Penjelasan jawaban 2.. Penjelasan jawaban 2.. Penjelasan jawaban 2.. Penjelasan jawaban 2..
+                        Penjelasan jawaban 2.. Penjelasan jawaban 2.. Penjelasan jawaban 2.. Penjelasan jawaban 2..
+                        Penjelasan jawaban 2.. Penjelasan jawaban 2.. Penjelasan jawaban 2.. Penjelasan jawaban 2..
+                        Penjelasan jawaban 2.. Penjelasan jawaban 2.. Penjelasan jawaban 2.. Penjelasan jawaban 2..
+                        Penjelasan jawaban 2.. Penjelasan jawaban 2.. Penjelasan jawaban 2.. Penjelasan jawaban 2..
+                    </p>
+                    <h6 class="more"><a href="#">read more....</a></h6><br/>
+                    <hr id="line"/>
+                    <br/>
+                    <h6 class="tilte"><a href="#">Jawaban 3</a></h6>
+
+                    <p>Penjelasan jawaban 3.. Penjelasan jawaban 3.. Penjelasan jawaban 3.. Penjelasan jawaban 3..
+                        Penjelasan jawaban 3.. Penjelasan jawaban 3.. Penjelasan jawaban 3.. Penjelasan jawaban 3..
+                        Penjelasan jawaban 3.. Penjelasan jawaban 3.. Penjelasan jawaban 3.. Penjelasan jawaban 3..
+                        Penjelasan jawaban 3.. Penjelasan jawaban 3.. Penjelasan jawaban 3.. Penjelasan jawaban 3..
+                        Penjelasan jawaban 3..
+                    </p>
+                    <h6 class="more"><a href="#">read more....</a></h6><br/>
+                    <hr id="line"/>
+                    <br/>
+                </div>
+                <div style="font-size:12px; margin-left: 10px">
+                    <input type="checkbox" name="check"/> Problem belum terselesaikan / tidak ada dalam penjelasan
+                    Knowledge Base
+                </div>
+                <table width="100%">
+                    <tr>
+                        <td align="right">
+                            <input type="button" value="Batal"
+                                   style="width:60px; height:24px; font-size:10px; margin-left: 5px; margin-right: 5px"/>
+                            <input type="button" value="Eksekusi"
+                                   style="width:60px; height:24px; font-size:10px; margin-left: 5px; margin-right: 5px"/>
+                            <input type="button" value="Jawab"
+                                   style="width:60px; height:24px; font-size:10px; margin-left: 5px; margin-right: 5px"/>
+                        </td>
+                    </tr>
+                </table>
             </div>
-            <div style="float:right; width:40%; ">
-                <ul>
-                    <li><img src="<?php echo base_url(); ?>images/folder-closed.gif" style="height:16px;" alt="dir" />Kategori Knowledgebase C
-                        <ul>
-                            <li> - Knowledge Base Kategori Peraturan</li>
-                            <li> - Knowledge Base Kategori Peraturan</li>
-                            <li> - Knowledge Base Kategori Peraturan</li>
-                            <li style="text-align:right; "> >> Selengkapnya</li>
-                        </ul>
-                    </li>
-                    <li><img src="<?php echo base_url(); ?>images/folder-closed.gif" style="height:16px;" alt="dir" />Kategori Knowledgebase D
-                        <ul>
-                            <li> - Knowledge Base Kategori Peraturan</li>
-                            <li> - Knowledge Base Kategori Peraturan</li>
-                            <li> - Knowledge Base Kategori Peraturan</li>
-                            <li style="text-align:right; "> >> Selengkapnya</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        <br /><br />
-    </div><br />
-	<div class="pagination">Halaman <a href="#"><<</a> <a href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <a href="#">6</a> <a href="#">>></a></div><br />
-</div>
+        </div>
+    </div>
+</form>

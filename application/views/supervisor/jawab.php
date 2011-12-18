@@ -1,74 +1,125 @@
-    <ul id="nav">
-        <li><a href="#tab1">Form Jawaban</a></li>
-    </ul>
-    <div class="clear"></div>
+<?php print_r($pertanyaan)?>
 
-    <div id="div_pertanyaan">
-        <div id="div_pertanyaan1">
-            <p class="identitas">Identitas Satker</p>
-            <ul class="left">
-                <li>
-                    <p><label for="no-tiket">Nama</label>Muki</p>
-                </li>
-                <li>
-                    <p><label for="">Kode Satker</label><b>401307</b></p>
-                </li>
-                <li>
-                    <p><label for="">Nama Satker</label>Pengadilan Agama Bojonegoro</p>
-                </li>
-            </ul>
-            <ul class="right">
-                <li>
-                    <p style="color:#fff;">&nbsp;</p>
-                </li>
-                <li>
-                    <p><label for="">Email</label>ady@gmail.com</p>
-                </li>
-            </ul>
-        </div> 
-        <div id="div_pertanyaan1">
-            <p class="identitas">Pertanyaan</p>
-            <ul class="left">
-                <li>
-                    <p><label for="no-tiket">Kategori</label>Peraturan</p>
-                </li>
-                <li>
-                    <p><label for="">Pertanyaan</label>Tanya struktur organisasi</p>
-                </li>
-                <li>
-                    <p><label for="">Deskripsi</label>Deskripsi dari semua pertanyaan struktur organisasi</p>
-                </li>
-            </ul>
-            <ul class="right">
-                <li>
-                    <p style="color:#fff;">&nbsp;</p>
-                </li>
-                <li>
-                    <p><label for="">Prioritas</label> <img src="<?php echo base_url(); ?>images/medium.png" style="width:30px; "/></p>
-                </li>
-            </ul>
-        </div>
-        <div id="div_pertanyaan1">
-            <p class="identitas">Jawab</p>
-			<textarea cols="120" rows="4">Jawaban....</textarea>
-            <ul class="left">
-                <li>
-                    <p><label for="no-tiket">Sumber</label><input type="text" size="48" value="Kasubdit" /></p>
-                </li>
-            </ul>
-        </div><br />
-        <div style="margin-left:25px;">
-		<input type="checkbox" /> Masukkan ke dalam knowledge database<br />
-		<input type="checkbox" /> Kirim jawaban ke email petugas satker
-        </div><br />
-        <div class="submit_right" style="margin:25px; ">
-            <a href="#"><input type="submit" class="button" value="Eskalasi" onclick="return eskalasi()"/>
-            <input type="submit" class="button" value="Kirim" onclick="return terkirim()" />
+<div class="content">
+
+    <h1>Jawab Pertanyaan</h1>
+
+    <fieldset>
+        <legend>Identitas</legend>
+        <div style="width: 600px; float: left;">
+            <p>
+                <label style="display: inline-block; width: 100px;">No Tiket</label>
+                <span><?php echo $pertanyaan->no_tiket_helpdesk ?></span>
+            </p>
+
+            <p>
+                <label style="display: inline-block; width: 100px;">No Satker</label>
+                <span><?php echo $pertanyaan->id_satker ?></span>
+            </p>
+
+            <p>
+                <label style="display: inline-block; width: 100px;">Nama Satker</label>
+                <span><?php echo $pertanyaan->nama_satker ?></span>
+            </p>
+
+            <p>
+                <label style="display: inline-block; width: 100px;">Nama Petugas</label>
+                <span><span><?php echo $pertanyaan->nama_petugas ?></span></span>
+            </p>
+
         </div>
 
+        <div style="width: 500px; float: left;">
+
+            <p>
+                <label style="display: inline-block; width: 100px;">No Kantor</label>
+                <span><?php echo $pertanyaan->no_kantor ?></span>
+            </p>
+
+            <p>
+                <label style="display: inline-block; width: 100px;">No HP</label>
+                <span><?php echo $pertanyaan->no_hp ?></span>
+            </p>
+
+            <p>
+                <label style="display: inline-block; width: 100px;">Email</label>
+                <span><?php echo $pertanyaan->email ?></span>
+            </p>
+        </div>
+    </fieldset>
+
+
+    <fieldset>
+        <legend>Pertanyaan</legend>
+        <div style="width: 600px; float: left;">
+
+            <p>
+                <label style="display: inline-block; width: 100px;">Kategori</label>
+                <span><?php echo $pertanyaan->kategori ?></span>
+            </p>
+
+            <p>
+                <label style="display: inline-block; width: 100px;">Pertanyaan</label>
+                <span><?php echo $pertanyaan->pertanyaan ?></span>
+            </p>
+
+            <p>
+                <label style="display: inline-block; width: 100px;">Deskripsi</label>
+                <span><?php echo $pertanyaan->description ?></span>
+            </p>
+
+        </div>
+
+        <div style="width: 500px; float: left;">
+
+            <p>
+                <label style="display: inline-block; width: 100px;">Prioritas</label>
+                <span><?php echo $pertanyaan->prioritas ?></span>
+            </p>
+
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Jawab</legend>
+
+        <p>
+            <label style="display: inline-block; width: 100px;">Jawaban</label><br/>
+            <label>
+                <textarea rows="7" cols="120"></textarea>
+            </label>
+        </p>
+
+        <p>
+            <label style="display: inline-block; width: 100px;">Nama Nara Sumber: </label>
+            <span><input type="text"/></span>
+        </p>
+
+        <p>
+            <label style="display: inline-block; width: 100px;">Jabatan</label>
+            <span><input type="text"/></span>
+        </p>
+
+        <p>
+            <label style="display: inline-block; width: 100px;">Bukti File</label>
+            <span><input type="file"/></span>
+        </p>
+
+    </fieldset>
+
+    <div>
+        <label><input type="checkbox" /> Kirim jawaban ke email petugas Satker </label>
     </div>
-    
-    
 
-<script type="text/javascript" src="<?php echo base_url(); ?>js/fungsi.js"></script>
-<script type="text/javascript"> function terkirim() { alert("Terkirim!"); window.location='list_pertanyaan'; } </script>
+    <div style="float: left;">
+        <input type="submit" value="Batal" class="button gray-pill"/>
+    </div>
+
+    <div style="float: right;">
+
+        <input type="submit" value="Ekskalasi" class="button blue-pill"/>
+        <input type="submit" value="Jawab" class="button blue-pill"/>
+    </div>
+
+    <div class="clear"></div>
+</div>
