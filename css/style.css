@@ -1237,6 +1237,7 @@ p {
 
 .innertxt{
 	border-bottom: dashed 1px #cccccc;
+	padding-left:12px;
 }
 
 #selected_unit{
@@ -1247,4 +1248,15 @@ p {
 	height: 300px;
 	float:left;
 	overflow:auto;
+}
+
+.cat_close {
+	background-image:url(../images/plus.gif);
+	background-repeat:no-repeat;
+	background-position:left;
+}
+.cat_open {
+	background-image:url(../images/minus.gif);
+	background-repeat:no-repeat;
+	background-position:left;
 }
