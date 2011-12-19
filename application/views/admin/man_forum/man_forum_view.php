@@ -1,5 +1,5 @@
 <ul id="nav">
-    <li><a href="#tab1" class="active">Manajemen Ubah Forum</a></li>
+    <li><a href="#tab1" class="active">View Forum</a></li>
 </ul>
 <div class="clear"></div>
     <div id="konten">
@@ -7,9 +7,7 @@
 
 
             <div class="table">
-                <form action="<?php echo site_url('/admin/man_forum/update_forum'); ?>" method="post" enctype="multipart/form-data" accept-charset="utf-8"
-                      style="border: 1px solid #999; padding: 13px 30px 13px 13px; margin:5px 0px 0px 20px; font-size:12px">
-					  <?php if (isset($forum->id_forum)) echo form_hidden('id', $forum->id_forum);?>
+               
                     <table>
                         <tr>
                             <td width="100px">Kategori Forum</td>
@@ -38,12 +36,11 @@
                         <tr>
                             <td valign="top">Lampiran</td>
                             <td valign="top">:</td>
-                            <td><input type="file" name="lampiran"><?php echo $forum->file?></td>
+                            <td><?php echo $forum->file?></td>
                         </tr>
                     </table>
-					<input class="button blue-pill" type="submit" value="Ubah"/>
-					<a href="<?php echo site_url('/admin/man_forum') ?>" class="button gray-pill">Batal</a>
-                </form>
+					<a href="<?php echo site_url('/admin/man_forum') ?>" class="button gray-pill">Kembali</a>
+            
                 
             </div>
 

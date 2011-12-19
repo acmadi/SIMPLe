@@ -12,32 +12,28 @@
 
         <?php
         if ($this->session->flashdata('success')) {
-        echo '<div class="success">' . $this->session->flashdata('success') . '</div>';
-    } elseif ($this->session->flashdata('error')) {
-        echo '<div class="error">' . $this->session->flashdata('error') . '</div>';
-    } elseif ($this->session->flashdata('info')) {
-        echo '<div class="info">' . $this->session->flashdata('info') . '</div>';
-    } elseif ($this->session->flashdata('notice')) {
-        echo '<div class="notice">' . $this->session->flashdata('notice') . '</div>';
-    }
+			echo '<div class="success">' . $this->session->flashdata('success') . '</div>';
+		} elseif ($this->session->flashdata('error')) {
+			echo '<div class="error">' . $this->session->flashdata('error') . '</div>';
+		} elseif ($this->session->flashdata('info')) {
+			echo '<div class="info">' . $this->session->flashdata('info') . '</div>';
+		} elseif ($this->session->flashdata('notice')) {
+			echo '<div class="notice">' . $this->session->flashdata('notice') . '</div>';
+		}
         ?>
 
         <div style="display: none;" id="tab1" class="tab_konten">
             <div class="table">
                 <div id="head">
-                    <form id="textfield-search" action="man_forum_cari">
-                        <input type="text" placeholder="Type Keywords in here"
-                               style="width:180px; height:16px; font-size:10px; padding:2px 4px 2px 4px; margin-right:5px; "/>
-
-                        <div id="search"><input type="submit" value="Search"
-                                                style="width:100px; height:23px; font-size:10px; "/></div>
+                    <form id="textfield-search" action="<?php echo site_url('/admin/man_forum_cari') ?>" method="post">
+                        <input type="text" placeholder="Type Keywords in here" name="fcari"/><input type="submit" class="button blue-pill" value="Search" />
                     </form>
                 </div>
                 <div id="tail">
                     <table id="tableOne" class="yui">
                         <thead>
                         <tr>
-                            <th style="width: 10px"><input type="checkbox"/></th>
+                           
                             <th>Judul</th>
                             <th>Kategori</th>
                             <th class="action">Aksi</th>
@@ -45,23 +41,23 @@
                         </thead>
                         <tbody>
 
-                        <?php foreach ($forums->result() as $forum): ?>
+                        <?php foreach ($result as $forum): ?>
                         <tr>
-                            <td class="short"><input type="checkbox"/></td>
+                           
                             <td><?php echo $forum->judul_forum ?></td>
                             <td><?php echo $forum->kat_forum ?></td>
                             <td class="action">
                                 <span class="button_kecil"><a title="View"
-                                                              href="<?php echo site_url('/admin/man_forum/man_forum_ubah') ?>"/><img
+                                                              href="<?php echo site_url('/admin/man_forum_ubah/index/'.$forum->id_forum) ?>"/><img
                                         src="<?php echo base_url(); ?>images/view.png"
                                         style="width:20px; height:20px; "/></a></span>
                                 <span class="button_kecil"><a title="Edit"
-                                                              href="<?php echo site_url('/admin/man_forum/edit_forum/' . $forum->id_kat_forum) ?>"/><img
+                                                              href="<?php echo site_url('/admin/man_forum/edit_forum/' . $forum->id_forum) ?>"/><img
                                         src="<?php echo base_url(); ?>images/edit.png"
                                         style="width:20px; height:20px; "/></a></span>
                                 <span class="button_kecil">
-                                    <a title="Delete" class="delete"
-                                       href="<?php echo site_url('/admin/man_forum/delete/' . $forum->id_kat_forum) ?>">
+                                    <a title="Delete" 
+                                       href="<?php echo site_url('/admin/man_forum/delete/' . $forum->id_forum) ?>" onclick="return yesOrNo()">
                                         <img src="<?php echo base_url(); ?>images/delete.png"
                                              style="width:20px; height:20px; "/>
                                     </a>
@@ -73,26 +69,18 @@
                         </tbody>
                     </table>
                 </div>
+				<div class="pagination"><?php echo ($pageLink)?'Halaman '.$pageLink:'';?></div><br />
             </div>
         </div>
 
 
         <div style="display: none;" id="tab2" class="tab_konten">
             <div class="table">
-                <div id="head">
-                    <form id="textfield-search" action="man_forum_cari">
-                        <input type="text" placeholder="Type Keywords in here"
-                               style="width:180px; height:16px; font-size:10px; padding:2px 4px 2px 4px; margin-right:5px; "/>
-
-                        <div id="search"><input type="submit" value="Search"
-                                                style="width:100px; height:23px; font-size:10px; "/></div>
-                    </form>
-                </div>
+                
                 <div id="tail">
                     <table id="tableOne" class="yui">
                         <thead>
                         <tr>
-                            <th style="width: 10px"><input type="checkbox"/></th>
                             <th>Kategori</th>
                             <th class="action">Aksi</th>
                         </tr>
@@ -101,15 +89,13 @@
 
                         <?php foreach ($categories->result() as $category): ?>
                         <tr>
-                            <td><input type="checkbox"/></td>
                             <td><?php echo $category->kat_forum ?></td>
                             <td class="action">
-                                <span class="button_kecil"><a title="Edit" href="man_forum_ubah"
-                                                              onclick='return yesOrNo()'/><img
+                                <span class="button_kecil"><a title="Edit" href="<?php echo site_url('/admin/man_forum/edit_kategori/'.$category->id_kat_forum) ?>"/><img
                                         src="<?php echo base_url(); ?>images/edit.png"
                                         style="width:20px; height:20px; "/></a></span>
                                 <span class="button_kecil">
-                                    <a title="Delete" class="delete" href="<?php echo site_url('/admin/man_forum/delete_category/' . $category->id_kat_forum) ?>">
+                                    <a title="Delete" href="<?php echo site_url('/admin/man_forum/delete_category/' . $category->id_kat_forum) ?>" onclick="return yesOrNo()">
                                         <img src="<?php echo base_url(); ?>images/delete.png" style="width:20px; height:20px; "/>
                                     </a>
                                 </span>
@@ -128,8 +114,7 @@
 
 
             <div class="table">
-                <form action="<?php echo site_url('/admin/man_forum/add_forum') ?>" method="post"
-                      enctype="multipart/form-data" accept-charset="utf-8"
+                <form action="<?php echo site_url('/admin/man_forum/add_forum'); ?>" method="post" enctype="multipart/form-data" accept-charset="utf-8"
                       style="border: 1px solid #999; padding: 13px 30px 13px 13px; margin:5px 0px 0px 20px; font-size:12px">
                     <table>
                         <tr>
@@ -151,7 +136,7 @@
                         <tr>
                             <td valign="top">Isi</td>
                             <td valign="top">:</td>
-                            <td><textarea name="isi_forum" cols="58" rows="15">Penjelasan Pertanyaan tersebut</textarea>
+                            <td><textarea name="isi_forum" cols="58" rows="15"></textarea>
                             </td>
                         </tr>
                         <tr>
@@ -160,11 +145,10 @@
                             <td><input type="file" name="lampiran"></td>
                         </tr>
                     </table>
-
-                    <input class="button" type="submit" value="Tambah"
-                           style="width:80px; height:25px; float:right; margin:20px 0px 0px 0px; font-size:10px; "/>
-                    <input type="button" value="reset"
-                           style="width:80px; height:25px; float:right; margin:20px 10px 0px 0px; font-size:10px; "/>
+					
+					<input class="button blue-pill" type="submit" value="Tambah"/>
+					<input type="button" value="reset" class="button gray-pill"/>
+                                        
                 </form>
             </div>
         </div>
@@ -181,9 +165,9 @@
                         </tr>
                     </table>
                     <br/>
-                    <input type="reset" style="width:70px; height:23px; margin:0px 76px 0px 20px; font-size:10px; "
+                    <input type="reset" class="button gray-pill"
                            value="Reset"/>
-                    <input type="submit" style="width:70px; height:23px; font-size:10px; " value="Tambah"/>
+                    <input type="submit" class="button blue-pill" value="Tambah"/>
                 </form>
             </div>
         </div>
