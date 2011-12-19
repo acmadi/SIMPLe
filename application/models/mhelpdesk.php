@@ -3,7 +3,7 @@
 class Mhelpdesk extends CI_Model
 {
 
-
+	/*
     public function get_all_tiket($key = '', $value = '')
     {
         $cond = '';
@@ -21,6 +21,7 @@ class Mhelpdesk extends CI_Model
 
         return $q->result();
     }
+	*/
 
     public function count_all_tiket($status = 'open')
     {
@@ -42,5 +43,30 @@ class Mhelpdesk extends CI_Model
         $result = $result->result();
         return $result[0];
     }
+	
+	function get_all_tiket(){
+		$this->load->library('pagination');		
+		$sql = "SELECT a.tanggal, a.no_tiket_helpdesk, b.nama_satker, a.pertanyaan, a.status
+				FROM tb_tiket_helpdesk a, tb_satker b WHERE a.id_satker = b.id_satker";
+		$query = $this->db->query($sql);
+
+		$config['base_url'] = site_url('admin/helpdesk/index');
+		$config['total_rows'] = $query->num_rows();
+		$config['per_page'] = 50;
+		$config['uri_segment'] = 4;
+		$this->pagination->initialize($config);
+
+		$offset = (int) $this->uri->segment(4, 0);
+		
+		$sqlb = "SELECT a.tanggal, a.no_tiket_helpdesk, b.nama_satker, a.pertanyaan, a.status
+				 FROM tb_tiket_helpdesk a, tb_satker b WHERE a.id_satker = b.id_satker LIMIT ?,?";
+		
+		$data["query"] = $this->db->query($sqlb, array($offset ,$config['per_page']));
+
+		$data['pagination1'] = $this->pagination->create_links();
+
+		return $data;
+		
+	}
 
 }

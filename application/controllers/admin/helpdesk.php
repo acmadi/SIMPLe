@@ -12,10 +12,13 @@ class Helpdesk extends CI_Controller
 
     function index()
     {
-      $tikets = $this->helpdesk->get_all_tiket();
+	  $page		= $this->helpdesk->get_all_tiket(); 
+	  $pageData	= $page['query']->result();
+	  $pageLink	= $page['pagination1'];
+	
+	  $data		= array('result'=>$pageData,'pageLink'=>$pageLink,);
       $data['title'] = 'Help Desk';
-      $data['content_html'] = $this->load->view('admin/helpdesk/helpdesk', 
-        array('tikets' => $tikets), TRUE);
+	  $data['content'] = 'admin/helpdesk/helpdesk';
       $this->load->view('admin/template', $data);
     }
     function search()
