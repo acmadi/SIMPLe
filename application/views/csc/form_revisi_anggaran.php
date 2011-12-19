@@ -106,7 +106,7 @@
                                 });
                     },
                     delay: 500,
-                    minLength: 3
+                    minLength: 1
                 })
                 .bind("keydown", function(event) {
                     if (event.keyCode === $.ui.keyCode.TAB &&

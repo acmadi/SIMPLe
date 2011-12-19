@@ -27,10 +27,25 @@ class Helpdesk_form_pertanyaan extends CI_Controller
         $result = $result[0];
         $data['identitas'] = $result;
 
-        print_r($result);
+        $this->load->view('csa/template', $data);
+    }
 
-        //        $this->mknowledge->get_tiket();
+    function umum()
+    {
+        $data['title'] = 'Helpdesk Form - Pertanyaan';
+        $data['content'] = 'csa/helpdesk/helpdesk_form_pertanyaan_umum';
+        $data['knowledges'] = $this->mknowledge->get_all_category();
 
+        $sql = "SELECT * FROM tb_tiket_helpdesk a
+                JOIN tb_petugas_satker b
+                ON a.id_petugas_satket = b.id_petugas_satker
+                WHERE no_tiket_helpdesk = ?";
+
+        $result = $this->db->query($sql, array($this->session->userdata('tiket')));
+        $result = $result->result();
+        $result = $result[0];
+
+        $data['identitas'] = $result;
 
         $this->load->view('csa/template', $data);
     }

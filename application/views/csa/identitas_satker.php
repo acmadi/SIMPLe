@@ -75,7 +75,7 @@
                 })
             },
             delay: 500,
-            minLength: 3
+            minLength: 1
         })
 
         $('#clear_nama_kl').click(function() {
