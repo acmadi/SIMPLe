@@ -52,7 +52,7 @@ class Knowledge extends CI_Controller
             $this->form_validation->set_rules('category', 'Kategori', 'required');
             if ($this->form_validation->run() == FALSE) {
                 $this->session->set_flashdata('error', validation_errors());
-                redirect('/admin/knowledge/index/3');
+                redirect('/admin/knowledge/add_category');
             }
             else
             {
@@ -75,17 +75,23 @@ class Knowledge extends CI_Controller
     }
 
     public function add_knowledge()
-    {
+    {	
+		/*
+		echo "<pre>";
+		print_r($_POST);
+		echo "</pre>";
+		exit;*/
         if ($_POST) {
             $this->form_validation->set_rules('flist2', 'Kategori', 'required|numeric');
-
             $this->form_validation->set_rules('fjudul2', 'Judul', 'required');
             $this->form_validation->set_rules('fdesripsi2', 'Deskripsi', 'required');
             $this->form_validation->set_rules('fjawaban2', 'Jawaban', 'required');
+            $this->form_validation->set_rules('fsumber2', 'Sumber', 'required');
+            $this->form_validation->set_rules('fjabatan2', 'Jabatan', 'required');
 
             if ($this->form_validation->run() == FALSE) {
                 $this->session->set_flashdata('error', validation_errors());
-                redirect('/admin/knowledge/index/4');
+                redirect('/admin/knowledge/add_knowledge');
             }
             else
             {
@@ -93,6 +99,9 @@ class Knowledge extends CI_Controller
                 $data['fjudul'] = $this->input->post('fjudul2', TRUE);
                 $data['fdesk'] = $this->input->post('fdesripsi2', TRUE);
                 $data['fjawab'] = $this->input->post('fjawaban2', TRUE);
+                $data['fsumb'] = $this->input->post('fsumber2', TRUE);
+                $data['fjab'] = $this->input->post('fjabatan2', TRUE);
+				
                 $info = $this->knowledge->add_knowledge($data);
                 if ($info) {
                     $this->session->set_flashdata('success', "Knowledge baru telah ditambahkan");

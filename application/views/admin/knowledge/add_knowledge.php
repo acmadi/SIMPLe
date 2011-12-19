@@ -1,9 +1,22 @@
 <div class="content">
+	    <h1>Tambah Knowledge Baru</h1>
+		<?php
+		// TODO: Satu paket ini untuk alerts. Nanti mau dipindah jadi hanya panggil satu method.
+		if ($this->session->flashdata('success')) {
+			echo '<div class="success">' . $this->session->flashdata('success') . '</div>';
+		}
+		if ($this->session->flashdata('error')) {
+			echo '<div class="error">' . $this->session->flashdata('error') . '</div>';
+		}
+		if ($this->session->flashdata('notice')) {
+			echo '<div class="notice">' . $this->session->flashdata('notice') . '</div>';
+		}
+		if ($this->session->flashdata('info')) {
+			echo '<div class="info">' . $this->session->flashdata('info') . '</div>';
+		}
+		?>
 
-    <h1>Tambah Knowledge Baru</h1>
-
-    <form action="<?php echo site_url('/admin/knowledge/add_knowledge') ?>" method="post">
-
+	<?php echo form_open_multipart('admin/knowledge/add_knowledge') ?>
         <p>
             <label>Kategori</label>
 
@@ -37,20 +50,20 @@
             <p>
                 <label>Nama Nara Sumber</label>
 
-                <input type="text"/>
+                <input type="text" name="fsumber2"/>
             </p>
 
 
             <p>
                 <label>Jabatan</label>
 
-                <input type="text"/>
+                <input type="text" name="fjabatan2"/>
             </p>
 
             <p>
                 <label>Bukti file</label>
 
-                <input type="file"/>
+                <input type="file" name="ffile2"/>
             </p>
         </fieldset>
 
@@ -58,5 +71,5 @@
             <input class="button blue-pill" type="submit" value="Simpan"/>
             <a href="<?php echo site_url('/admin/knowledge') ?>" class="button gray-pill">Batal</a>
         </p>
-    </form>
+    <?php echo form_close();?>
 </div>

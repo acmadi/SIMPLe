@@ -42,10 +42,17 @@ class Mknowledge extends CI_Model
      */
     public function add_knowledge($data = array())
     {
-        $sql = "INSERT INTO tb_knowledge_base(id_kat_knowledge_base,judul,desripsi,jawaban) 
-				VALUES(?,?,?,?);";
+		$nmBr = '';
+		if(!empty($_FILES['ffile2']['name'])):
+			$unik = date('isdm').'_';
+			$nmBr = $unik.$_FILES['ffile2']['name'];
+			move_uploaded_file($_FILES['ffile2']['tmp_name'], 'upload/'.$nmBr);
+		endif;
+		
+        $sql = "INSERT INTO tb_knowledge_base(id_kat_knowledge_base,judul,desripsi,jawaban,nama_narasumber,jabatan_narasumber,bukti_file) 
+				VALUES(?,?,?,?,?,?,?);";
 
-        $query = $this->db->query($sql,array($data['flist'],$data['fjudul'],$data['fdesk'],$data['fjawab']));
+        $query = $this->db->query($sql,array($data['flist'],$data['fjudul'],$data['fdesk'],$data['fjawab'],$data['fsumb'],$data['fjab'],$nmBr));
 		if($this->db->affected_rows() > 0){ 
 			return true;
 		}else{ 
