@@ -7,8 +7,7 @@
             <?php echo validation_errors(); ?>
 
             <div class="table">
-                <form action="<?php echo base_url()?>index.php/admin/knowledge_ubah/save" method="post"
-                      style="border: 1px solid #999; padding: 13px 30px 13px 13px; margin:5px 0px 0px 20px; font-size:12px">
+				<?php echo form_open_multipart('admin/knowledge_ubah/save',array('style'=>"border: 1px solid #999; padding: 13px 30px 13px 13px; margin:5px 0px 0px 20px; font-size:12px")); ?>  
                     <?php if (isset($ubah->id_knowledge_base)) echo form_hidden('id', $ubah->id_knowledge_base);?>
                     <table>
                         <tr>
@@ -46,11 +45,33 @@
                             <td><textarea name="fjawaban" cols="58" rows="6"><?php echo $ubah->jawaban?></textarea></td>
                         </tr>
                     </table>
+					<fieldset>
+						<legend>Sumber Jawaban</legend>
+
+						<p>
+							<label>Nama Nara Sumber</label>
+
+							<input type="text" name="fsumber" value="<?php echo $ubah->nama_narasumber?>"/>
+						</p>
+
+
+						<p>
+							<label>Jabatan</label>
+
+							<input type="text" name="fjabatan" value="<?php echo $ubah->jabatan_narasumber?>"/>
+						</p>
+
+						<p>
+							<label>Bukti file</label>
+
+							<input type="file" name="ffile" />
+						</p>
+					</fieldset>
                     <div>
                         <input class="button blue-pill" type="submit" value="simpan"/>
                         <a href="<?php echo site_url('/admin/knowledge') ?>" class="button gray-pill">Batal</a>
                     </div>
                     <div style="clear: both;"></div>
-                </form>
+                <?php echo form_close();?>
 
             </div>

@@ -36,6 +36,8 @@ class Knowledge_ubah extends CI_Controller
 		$this->form_validation->set_rules('fjudul', 'Judul', 'required');
 		$this->form_validation->set_rules('fdeskripsi', 'Deskripsi', 'required');
 		$this->form_validation->set_rules('fjawaban', 'Jawaban', 'required');
+		$this->form_validation->set_rules('fsumber', 'Sumber', 'required');
+        $this->form_validation->set_rules('fjabatan', 'Jabatan', 'required');
 		$id 	= $this->input->post('id',TRUE);
 		
 		if ($this->form_validation->run() == FALSE)
@@ -44,6 +46,8 @@ class Knowledge_ubah extends CI_Controller
 			$data1['judul'] 					= $this->input->post('fjudul',TRUE);
 			$data1['desripsi'] 					= $this->input->post('fdeskripsi',TRUE);
 			$data1['jawaban'] 					= $this->input->post('fjawaban',TRUE);
+			$data['nama_narasumber'] 			= $this->input->post('fsumber', TRUE);
+            $data['jabatan_narasumber'] 		= $this->input->post('fjabatan', TRUE);
 			$data1['id_knowledge_base'] 		= $id;
 			
 			$data['ubah']		= (object) $data1 ;
@@ -58,15 +62,17 @@ class Knowledge_ubah extends CI_Controller
 			$data['fjudul'] 	= $this->input->post('fjudul',TRUE);
 			$data['fdeskripsi'] = $this->input->post('fdeskripsi',TRUE);
 			$data['fjawaban'] 	= $this->input->post('fjawaban',TRUE);
+			$data['fsumb'] 		= $this->input->post('fsumber', TRUE);
+            $data['fjab'] 		= $this->input->post('fjabatan', TRUE);
 			$data['id'] 		= $id;
 	
 				
 			$info = $this->knowledge->edit_data_by_id($data);
 			if($info):
-				$this->session->set_flashdata('msg',"<p style='color:blue;'>Knowledge berhasil diupdate.</p>");
+				$this->session->set_flashdata('success',"Knowledge berhasil diupdate.");
 				redirect('/admin/knowledge/index/','location');
 			else:
-				$this->session->set_flashdata('msg',"<p style='color:red;'>Knowledge gagal diupdate atau tidak ada perubahan.</p>");
+				$this->session->set_flashdata('error',"Knowledge gagal diupdate atau tidak ada perubahan.");
 				redirect('/admin/knowledge/index/','location');
 			endif;
 			

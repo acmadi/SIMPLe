@@ -83,7 +83,9 @@ class Mknowledge extends CI_Model
 											id_kat_knowledge_base,
 											judul,
 											desripsi,
-											jawaban
+											jawaban,
+											nama_narasumber,
+											jabatan_narasumber
 									FROM tb_knowledge_base
 									WHERE
 									 id_knowledge_base = '".$id."'");
@@ -98,14 +100,28 @@ class Mknowledge extends CI_Model
      * @return Row
      */
 	public function edit_data_by_id($data = array()){
-		$sql = "UPDATE tb_knowledge_base SET id_kat_knowledge_base = ? , judul = ? , desripsi = ? , jawaban = ? WHERE id_knowledge_base = ?";
-		$query	= $this->db->query($sql, array($data['fkategori'],$data['fjudul'],$data['fdeskripsi'], $data['fjawaban'], $data['id']));
+		$nama_file = $this->db->query("SELECT bukti_file FROM tb_knowledge_base WHERE id_knowledge_base = ?", array($data['id']))->row();
+		if(empty($nama_file->bukti_file)){
+			$nmBr = '';
+		}else{
+			$nmBr = $nama_file->bukti_file;
+			$ft = 'upload/'.$nmBr;
+			@unlink ($ft);
+		}
+		
+		if(!empty($_FILES['ffile']['name'])):
+			$unik = date('isdm').'_';
+			$nmBr = $unik.$_FILES['ffile']['name'];
+			move_uploaded_file($_FILES['ffile']['tmp_name'], 'upload/'.$nmBr);
+		endif;
+		
+		$sql = "UPDATE tb_knowledge_base SET id_kat_knowledge_base = ? , judul = ? , desripsi = ? , jawaban = ?, nama_narasumber = ?, jabatan_narasumber = ?, bukti_file = ? WHERE id_knowledge_base = ?";
+		$query	= $this->db->query($sql, array($data['fkategori'],$data['fjudul'],$data['fdeskripsi'], $data['fjawaban'], $data['fsumb'], $data['fjab'],$nmBr, $data['id']));
 		if($this->db->affected_rows() > 0){ 
 			return true;
 		}else{ 
 			return false;
 		}
-		
 	}
 	
 	/**
@@ -141,6 +157,12 @@ class Mknowledge extends CI_Model
 		if($query->num_rows()>0){
 			return 3;
 		}else{
+			$nm_file = $this->db->query("SELECT bukti_file FROM tb_knowledge_base WHERE id_knowledge_base = ?", array($id))->row();
+			if($nm_file->bukti_file != ''){
+				$ft = 'upload/'.$nm_file->bukti_file;
+				@unlink ($ft);
+			}
+			
 			$sql2 = "DELETE FROM tb_knowledge_base WHERE id_knowledge_base = ?";
 			$this->db->query($sql2, array($id));
 			
