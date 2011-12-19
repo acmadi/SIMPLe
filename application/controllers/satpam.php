@@ -9,7 +9,7 @@ class Satpam extends CI_Controller
 
     function index()
     {
-        redirect('satker/dashboard');
+        redirect('csc/dashboard');
     }
 }
 

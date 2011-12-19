@@ -2,7 +2,7 @@
 class Dashboard extends CI_Controller
 {
 
-    function Dasboard()
+    function __construct()
     {
         parent::__construct();
     }
@@ -11,18 +11,8 @@ class Dashboard extends CI_Controller
 
     function index()
     {
-        /*
-          if ($this->session->userdata('login') == TRUE)
-          {*/
         $data['title'] = 'Dashboard';
         $data['content'] = 'supervisor/dashboard';
         $this->load->view('supervisor/template', $data);
-        /*}
-          else
-          {
-              $this->load->view('login');
-          }*/
     }
 }
-
-?>

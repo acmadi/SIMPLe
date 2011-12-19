@@ -1,7 +1,6 @@
 <style type="text/css">
     .bla2 {
         border: 1px solid #cecece;
-        width: 48%;
         padding: 10px;
         margin: 10px 0 10px 0;
         border-radius: 5px;
@@ -53,8 +52,8 @@
 
         <h1>Knowledge Base</h1>
 
-        <form action="<?php echo site_url('/supervisor/knowledge_base/search_knowledge') ?>" id="search-form" method="post" style="text-align: right;">
-            <input type="text" name="fkat" placeholder="Pencarian" style="width: 400px !important;" autocomplete="off"/>
+        <form action="<?php echo site_url('/csa/knowledge_base/search_knowledge') ?>" id="search-form" method="post" style="text-align: right;">
+            <input type="text" name="fkat" placeholder="Pencarian" style="width: 400px !important;" autocomplete="false"/>
             <input id="search" class="button blue-pill" type="submit" value="Cari">
         </form>
 
@@ -69,7 +68,7 @@
                     <div class="category-title">
                         <!--                                <img src="-->
                             <?php //echo base_url(); ?><!--images/folder-closed.gif" style="height:16px;" alt="dir" />-->
-                        <a href="<?php echo site_url('/supervisor/knowledge_base/search_all/' . $idx . '/' . $idsearch) ?>"><?php echo $res ?></a>
+                        <a href="<?php echo site_url('/csa/knowledge_base/search_all/' . $idx . '/' . $idsearch) ?>"><?php echo $res ?></a>
                     </div>
 
                     <ul style="list-style: disc outside; margin-left:20px;">
@@ -95,7 +94,7 @@
 
                     <?php if (!isset($sel)): ?>
                     <div style="text-align:right; border-top: 1px dotted #cecece; padding: 20px 0 10px; margin: 0px 0;">
-                        <a href="<?php echo site_url('/supervisor/knowledge_base/search_all/' . $idx . '/' . $idsearch) ?>"
+                        <a href="<?php echo site_url('/csa/knowledge_base/search_all/' . $idx . '/' . $idsearch) ?>"
                            class="button gray-pill" style="text-transform: capitalize;">Selengkapnya</a>
                     </div>
                     <?php endif;?>

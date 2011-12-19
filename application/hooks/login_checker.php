@@ -14,10 +14,10 @@ class Login_checker extends CI_Controller
     public function login_checker()
     {
 
-        if ($this->uri->segment(1) == 'satker' AND $this->uri->segment(2) != 'form_revisi_anggaran') {
+//        if ($this->uri->segment(1) == 'satker' AND $this->uri->segment(2) != 'form_revisi_anggaran') {
 //            echo "asdasdsa";
-            redirect('/satker/form_revisi_anggaran');
-        }
+//            redirect('/csc/form_revisi_anggaran');
+//        }
 
         if ($this->uri->segment(2) != 'form_revisi_anggaran') {
 

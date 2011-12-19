@@ -5,6 +5,7 @@ class Identitas_satker extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        $this->form_validation->set_message('required', '<strong>%s</strong> harus diisi.');
     }
 
     function index()
@@ -64,16 +65,15 @@ class Identitas_satker extends CI_Controller
 
             $term = $this->input->get('term');
             $eselon = $this->input->get('eselon');
-            $id_kementrian = substr($this->input->get('nama_kl'),0,3);
-			
-			
-			
+            $id_kementrian = substr($this->input->get('nama_kl'), 0, 3);
+
+
             $sql = "SELECT * FROM tb_satker WHERE
                 id_unit = '{$eselon}' AND
                 id_kementrian = '{$id_kementrian}' AND
                 (id_satker LIKE '%{$term}%' OR nama_satker LIKE '%{$term}%')
                 ORDER BY id_unit";
-			
+
             $result = $this->db->query($sql);
 
             $array = array();
@@ -120,6 +120,7 @@ class Identitas_satker extends CI_Controller
                 // Parsing Kode dan Nama KL jadi ID
                 $id_satker = substr($kode_satker, 0, 6);
 
+                // Simpan petugas Satker
                 $sql = "INSERT INTO tb_petugas_satker
                     (id_satker, nama_petugas, jabatan_petugas, no_hp, email, no_kantor, tipe)
                     VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -131,17 +132,16 @@ class Identitas_satker extends CI_Controller
                 $last_id = $last_id[0]->last_id;
 
                 $sql = "INSERT INTO tb_tiket_helpdesk
-                    (id_satker, tanggal, id_petugas_satket)
-                    VALUES (?, ?, ?)";
+                        (id_satker, tanggal, id_petugas_satket)
+                        VALUES (?, ?, ?)";
 
                 $this->db->query($sql, array($id_satker, date('Y-m-d'), $last_id));
 
+                // Set tiket untuk helpdesk
                 $last_id = $this->db->query("SELECT MAX(no_tiket_helpdesk) last_id FROM `tb_tiket_helpdesk`");
                 $last_id = $last_id->result();
                 $last_id = $last_id[0]->last_id;
-
-                // Set tiket untuk helpdesk
-                $this->session->set_userdata('tiket', (string) $last_id );
+                $this->session->set_userdata('tiket', (string)$last_id);
 
                 redirect('/csa/helpdesk_form_pertanyaan');
             }
@@ -162,13 +162,31 @@ class Identitas_satker extends CI_Controller
                 $email = $this->input->post('email');
                 $no_hp = $this->input->post('no_hp');
 
+                // Simpan Nama orang umum
                 $sql = "INSERT INTO tb_petugas_satker
-                    (nama_petugas, instansi, alamat, email, no_hp, tipe)
-                    VALUES (?, ?, ?, ?, ?, ?)";
+                        (nama_petugas, instansi, alamat, email, no_hp, tipe)
+                        VALUES (?, ?, ?, ?, ?, ?)";
 
                 $this->db->query($sql, array($nama_petugas, $instansi, $alamat, $email, $no_hp, $tipe));
 
-                redirect('/csa/helpdesk_form_pertanyaan');
+                $last_id = $this->db->query("SELECT MAX(id_petugas_satker) last_id FROM `tb_petugas_satker`");
+                $last_id = $last_id->result();
+                $last_id = $last_id[0]->last_id;
+
+                $sql = "INSERT INTO tb_tiket_helpdesk
+                        (id_satker, tanggal, id_petugas_satket)
+                        VALUES (?, ?, ?)";
+
+                $this->db->query($sql, array(NULL, date('Y-m-d'), $last_id));
+
+                // Set tiket untuk helpdesk
+                $last_id = $this->db->query("SELECT MAX(no_tiket_helpdesk) last_id FROM `tb_tiket_helpdesk`");
+
+                $last_id = $last_id->result();
+                $last_id = $last_id[0]->last_id;
+                $this->session->set_userdata('tiket', (string)$last_id);
+
+                redirect('/csa/helpdesk_form_pertanyaan/umum');
             }
         }
 
