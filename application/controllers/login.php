@@ -39,11 +39,8 @@ Class Login extends CI_Controller
                 case '2':
                     redirect("helpdesk/dashboard");
                     break;
-                case '2':
-                    redirect("csb/dashboard");
-                    break;
                 case '3':
-                    redirect("csc/dashboard");
+                    redirect("frontdesk/dashboard");
                     break;
                 case '4':
                     redirect("csd/dashboard");

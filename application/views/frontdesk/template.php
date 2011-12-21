@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
     <title><?php echo isset($title) ? $title : ''; ?></title>
     <link rel="shortcut icon" href="<?php echo base_url() . 'images/icon.jpg';?>"/>
 
@@ -24,39 +24,8 @@
 </head>
 <body>
 <div id="wrapper">
-    <div id="header"><img src="<?php echo base_url('images/logo.png') ?>"/>Sistem Informasi Pusat Layanan DJA</div>
-    <div id="navbar">
-        <?php
-
-        if ($this->uri->segment(1) == 'helpdesk') {
-            $this->load->view('navbar_helpdesk');
-        }
-        elseif ($this->uri->segment(1) == 'frontdesk') {
-            $this->load->view('navbar_frontdesk');
-        }
-        elseif ($this->uri->segment(1) == 'csd') {
-            $this->load->view('navbar_csd');
-        }
-        elseif ($this->uri->segment(1) == 'cse') {
-            $this->load->view('navbar_cse');
-        }
-        elseif ($this->uri->segment(1) == 'supervisor') {
-            $this->load->view('navbar_supervisor');
-        }
-        elseif ($this->uri->segment(1) == 'pelaksana') {
-            $this->load->view('navbar_pelaksana');
-        }
-        elseif ($this->uri->segment(1) == 'kasubdit') {
-            $this->load->view('navbar_kasubdit');
-        }
-        elseif ($this->uri->segment(1) == 'direktur') {
-            $this->load->view('navbar_direktur');
-        }
-        elseif ($this->uri->segment(1) == 'dirjen') {
-            $this->load->view('navbar_dirjen');
-        }
-        ?>
-    </div>
+    <div id="header"><img src="<?php echo base_url('images/logo.png') ?>"/>Sistem Informasi Pusat Layanan DJA v1.0</div>
+    <div id="navbar"><?php $this->load->view('navbar_csc'); ?></div>
     <div id="container">
         <div id="content"><?php $this->load->view($content); ?></div>
     </div>
@@ -67,9 +36,9 @@
 
 <!--TABS--GANTI MODEL EXTJS ! :) -->
 <script type="text/javascript">
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('#tab1').fadeIn('slow'); //tab pertama ditampilkan
-        $('ul#nav li a').click(function () { // jika link tab di klik
+        $('ul#nav li a').click(function() { // jika link tab di klik
             $('ul#nav li a').removeClass('active'); //menghilangkan class active (yang tampil)
             $(this).addClass("active"); // menambahkan class active pada link yang diklik
             $('.tab_konten').hide(); // menutup semua konten tab
@@ -84,22 +53,22 @@
 <!--TABLE JQUERY-->
 <script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.wjb.selectallrows.js"></script>
 <script type="text/javascript">
-    $(document).ready(function () {
-        $("#tableOne thead tr th:first input:checkbox").click(function () {
+    $(document).ready(function() {
+        $("#tableOne thead tr th:first input:checkbox").click(function() {
             var checkedStatus = this.checked;
-            $("#tableOne tbody tr td:first-child input:checkbox").each(function () {
+            $("#tableOne tbody tr td:first-child input:checkbox").each(function() {
                 this.checked = checkedStatus;
             });
         });
 
         $("#tableTwo").selectAllRows();
 
-        $("#tableThree").selectAllRows({ column:'last' });
+        $("#tableThree").selectAllRows({ column: 'last' });
 
         $("#tableFour").selectAllRows({
-            column:'2',
-            selectTip:'Select All Students',
-            unselectTip:'Un-Select All Students'
+            column: '2',
+            selectTip: 'Select All Students',
+            unselectTip: 'Un-Select All Students'
         })
                 .css("border-width", "10px");
     });
