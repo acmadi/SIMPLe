@@ -31,7 +31,7 @@ class List_pertanyaan extends CI_Controller
         $data['title'] = 'Knowledge Base';
         $data['content'] = 'supervisor/list_pertanyaan';
         $data['pertanyaan'] = $result;
-        $this->load->view('supervisor/template', $data);
+        $this->load->view('master-template', $data);
 
     }
 }

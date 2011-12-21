@@ -2,25 +2,17 @@
 class Helpdesk_form_pertanyaan_lanjut extends CI_Controller
 {
 
-    function Helpdesk_form_pertanyaan_lanjut()
+    function __construct()
     {
         parent::__construct();
     }
 
-    var $title = 'Helpdesk Form - Pertanyaan';
-
     function index()
     {
-        /*if ($this->session->userdata('login') == TRUE)
-          {*/
         $data['title'] = 'Helpdesk Form - Pertanyaan';
+        $data['result'] = $this->db->query("SELECT * FROM tb_knowledge_base WHERE judul LIKE '%{$pertanyaan}%' OR desripsi LIKE '%{$pertanyaan}%'");
         $data['content'] = 'csa/helpdesk/helpdesk_form_pertanyaan_lanjut';
-        $this->load->view('csa/template', $data);
-        /*}
-          else
-          {
-              $this->load->view('login/login_view');
-          }*/
+        $this->load->view('master-template', $data);
     }
 }
 

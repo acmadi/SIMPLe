@@ -5,6 +5,7 @@ class Form_revisi_anggaran extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        $this->form_validation->set_message('required', '%s harus diisi');
     }
 
     function index()
@@ -13,7 +14,7 @@ class Form_revisi_anggaran extends CI_Controller
         $data['kelengkapan_dokumen'] = $this->db->query('SELECT * FROM tb_kelengkapan_doc ORDER BY id_kelengkapan');
         $data['title'] = 'Form Revisi Anggaran';
         $data['content'] = 'csc/form_revisi_anggaran';
-        $this->load->view('csc/template', $data);
+        $this->load->view('master-template', $data);
     }
 
     public function add_revisi_anggaran()
@@ -33,7 +34,7 @@ class Form_revisi_anggaran extends CI_Controller
 
 
         // tb_tiket_frontdesk
-        $sql = "INSERT INTO tb_tiket_frontdesk (id_satker, id_formulir) VALUES (?, ?)";
+        $sql = "INSERT INTO tb_tiket_frontdesk (id_satker, id_formulir, lavel) VALUES (?, ?, 1)";
         $this->db->query($sql, array($id_satker, $id_formulir));
         $no_tiket_frontdesk = $this->db->query("SELECT no_tiket_frontdesk FROM tb_tiket_frontdesk ORDER BY no_tiket_frontdesk DESC LIMIT 1");
         $no_tiket_frontdesk = $no_tiket_frontdesk->result();
@@ -129,7 +130,7 @@ class Form_revisi_anggaran extends CI_Controller
 
     function save_identitas()
     {
-        $this->form_validation->set_message('required', '%s harus diisi');
+        $status = false;
 
         $this->form_validation->set_rules('nama_kl', 'Nama K/L', 'required');
         $this->form_validation->set_rules('eselon', 'Eselon', 'required');
@@ -157,11 +158,25 @@ class Form_revisi_anggaran extends CI_Controller
             $sql = "INSERT INTO tb_petugas_satker (nama_petugas, jabatan_petugas, no_hp, email, no_kantor, tipe)
                     VALUES ('{$nama_petugas}', '{$jabatan_petugas}', '{$no_hp}', '{$email}', '{$no_kantor}', '{$tipe}')";
 
-            $this->db->query($sql);
+            $result = $this->db->query($sql);
 
+            if ($result) {
+                $status = true;
+            } else {
+                $status = false;
+            }
+
+            // SELECT latest petugas_satker
             $sql = "SELECT *, MAX(id_petugas_satker) id_petugas_satker FROM tb_petugas_satker ";
             $result = $this->db->query($sql);
-            $result = ($result->result());
+
+            if ($result) {
+                $status = true;
+            } else {
+                $status = false;
+            }
+
+            $result = $result->result();
             $result = $result[0];
 
 
@@ -176,14 +191,69 @@ class Form_revisi_anggaran extends CI_Controller
                 $sql = "INSERT INTO tb_tiket_frontdesk (id_satker, id_formulir, tanggal, status, lavel, id_petugas_satker)
                         VALUES ('{$temp[$i]}', NULL, '{$now}', 'open', 1, {$result->id_petugas_satker})";
 
-                $this->db->query($sql);
+                $result = $this->db->query($sql);
 
+                if ($result) {
+                    $status = true;
+                } else {
+                    $status = false;
+                    break;
+                }
+
+                // Ambil nomor tiket
+                $sql = "SELECT MAX(no_tiket_frontdesk) no_tiket_frontdesk FROM tb_tiket_frontdesk";
+                $max_no_tiket_frontdesk = $this->db->query($sql);
+                $max_no_tiket_frontdesk = $max_no_tiket_frontdesk->result();
+                $max_no_tiket_frontdesk = $max_no_tiket_frontdesk[0]->no_tiket_frontdesk;
+
+                // Simpan dokumen di tb_kelengkapan_formulir
+                $dokumen = $this->input->post('dokumen');
+
+                if (count($dokumen) > 1) {
+                    foreach ($dokumen as $key => $value) {
+                        $sql = "INSERT INTO tb_kelengkapan_formulir
+                                            (no_tiket_frontdesk, id_kelengkapan)
+                                            VALUES ('{$max_no_tiket_frontdesk}', '{$key}')";
+
+                        $result = $this->db->query($sql);
+
+                        if ($result) {
+                            $status = true;
+                        } else {
+                            $status = false;
+                            break;
+                        }
+
+                    }
+                }
+
+                $dokumen_lainnya = $this->input->post('dokumen_lainnya');
+
+                if (isset($_POST['dokumen_lainnya'])) {
+                    $sql = "INSERT INTO tb_kelengkapan_formulir
+                                        (no_tiket_frontdesk, kelengkapan)
+                                        VALUES ('{$max_no_tiket_frontdesk}', '{$dokumen_lainnya}')";
+
+                    $result = $this->db->query($sql);
+
+                    if ($result) {
+                        $status = true;
+                    } else {
+                        $status = false;
+                        break;
+                    }
+                }
 
                 $i++;
             }
-            $kode_satker = $temp;
+            $kode_satker = $temp[0];
 
-            redirect('/csc/form_revisi_anggaran/success');
+            if ($status) {
+                redirect('/csc/form_revisi_anggaran/success');
+            } else {
+                redirect('/csc/form_revisi_anggaran/fail');
+            }
+
         }
         else {
             $this->index();
@@ -193,5 +263,10 @@ class Form_revisi_anggaran extends CI_Controller
     function success()
     {
         $this->load->view('/csc/success');
+    }
+
+    function fail()
+    {
+        $this->load->view('/csc/fail');
     }
 }

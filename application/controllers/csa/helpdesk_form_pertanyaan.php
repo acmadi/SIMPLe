@@ -15,19 +15,25 @@ class Helpdesk_form_pertanyaan extends CI_Controller
         $data['content'] = 'csa/helpdesk/helpdesk_form_pertanyaan';
         $data['knowledges'] = $this->mknowledge->get_all_category();
 
+        $result = $this->db->query("SELECT MAX(no_tiket_helpdesk) last_tiket FROM tb_tiket_helpdesk");
+        $result = $result->result();
+        $last_tiket = $result[0]->last_tiket;
+
         $sql = "SELECT * FROM tb_tiket_helpdesk
                 JOIN tb_petugas_satker
-                ON tb_tiket_helpdesk.id_satker = tb_petugas_satker.id_satker
+                ON tb_tiket_helpdesk.id_petugas_satket = tb_petugas_satker.id_petugas_satker
                 JOIN tb_satker
                 ON tb_tiket_helpdesk.id_satker = tb_satker.id_satker
                 WHERE no_tiket_helpdesk = ?";
 
-        $result = $this->db->query($sql, array($this->session->userdata('tiket')));
+        $result = $this->db->query($sql, array($last_tiket));
         $result = $result->result();
+
+        print_r($result);
         $result = $result[0];
         $data['identitas'] = $result;
 
-        $this->load->view('csa/template', $data);
+        $this->load->view('master-template', $data);
     }
 
     function umum()
@@ -47,7 +53,7 @@ class Helpdesk_form_pertanyaan extends CI_Controller
 
         $data['identitas'] = $result;
 
-        $this->load->view('csa/template', $data);
+        $this->load->view('master-template', $data);
     }
 
     function submit()
@@ -70,34 +76,52 @@ class Helpdesk_form_pertanyaan extends CI_Controller
             // $result = $this->db->query("SELECT * FROM tb_knowledge_base WHERE id_kat_knowledge_base = '$kategori_knowledge_base'");
 
             $result = $this->mknowledge->get_all_data_category();
-            $data['result'] = $result;
+
+            $data['result'] = $this->db->query("SELECT * FROM tb_knowledge_base WHERE judul LIKE '%{$pertanyaan}%' OR desripsi LIKE '%{$pertanyaan}%'");
 
             $sql = "SELECT * FROM tb_tiket_helpdesk
-                JOIN tb_petugas_satker
-                ON tb_tiket_helpdesk.id_satker = tb_petugas_satker.id_satker
-                JOIN tb_satker
-                ON tb_tiket_helpdesk.id_satker = tb_satker.id_satker
-                WHERE no_tiket_helpdesk = ?";
+                    JOIN tb_petugas_satker
+                    ON tb_tiket_helpdesk.id_satker = tb_petugas_satker.id_satker
+                    JOIN tb_satker
+                    ON tb_tiket_helpdesk.id_satker = tb_satker.id_satker
+                    WHERE no_tiket_helpdesk = ?";
 
             $result = $this->db->query($sql, array($this->session->userdata('tiket')));
             $result = $result->result();
             $result = $result[0];
             $data['identitas'] = $result;
-
         }
 
         $data['title'] = 'Helpdesk Form - Pertanyaan';
         $data['content'] = 'csa/helpdesk/helpdesk_form_pertanyaan_submit';
-        $data['knowledges'] = $this->mknowledge->get_all_category();
 
+        $knowledges = $this->db->query("SELECT * FROM tb_knowledge_base WHERE judul LIKE '%{$pertanyaan}%' OR desripsi LIKE '%{$pertanyaan}%' OR jawaban LIKE '%{$pertanyaan}%'");
+
+        // $knowledges = $knowledges->result();
+        $data['knowledges'] = $knowledges;
+
+        $data['kategori_knowledge_base'] = $kategori_knowledge_base;
         $data['prioritas'] = $prioritas;
         $data['pertanyaan'] = $pertanyaan;
         $data['description'] = $description;
 
 
-        $this->load->view('csa/template', $data);
+        $this->load->view('master-template', $data);
+    }
+
+    function popup_ref_jawaban($id)
+    {
+        $data['title'] = 'Helpdesk Form - Pertanyaan';
+
+        $result = $this->db->query("SELECT * FROM tb_knowledge_base WHERE id_knowledge_base = '$id'");
+        $result = $result->result();
+        $result = $result[0];
+
+        $data['judul'] = $result->judul;
+        $data['desripsi'] = $result->desripsi;
+        $data['jawaban'] = $result->jawaban;
+
+        $this->load->view('csa/helpdesk/popup-referensi-jawaban', $data);
     }
 
 }
-
-?>

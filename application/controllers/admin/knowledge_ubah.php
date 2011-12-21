@@ -36,8 +36,8 @@ class Knowledge_ubah extends CI_Controller
 		$this->form_validation->set_rules('fjudul', 'Judul', 'required');
 		$this->form_validation->set_rules('fdeskripsi', 'Deskripsi', 'required');
 		$this->form_validation->set_rules('fjawaban', 'Jawaban', 'required');
-		$this->form_validation->set_rules('fsumber', 'Sumber', 'required');
-        $this->form_validation->set_rules('fjabatan', 'Jabatan', 'required');
+//		$this->form_validation->set_rules('fsumber', 'Sumber', 'required');
+//        $this->form_validation->set_rules('fjabatan', 'Jabatan', 'required');
 		$id 	= $this->input->post('id',TRUE);
 		
 		if ($this->form_validation->run() == FALSE)

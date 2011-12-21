@@ -14,7 +14,7 @@
 </head>
 <body>
 <div id="wrapper">
-    <div id="header">Sistem Informasi Pusat Layanan DJA</div>
+    <div id="header"><img src="<?php echo base_url('images/logo.png') ?>"/>Sistem Informasi Pusat Layanan DJA</div>
     <div id="navbar"><?php $this->load->view('navbar'); ?></div>
     <div id="container">
         <div id="content">

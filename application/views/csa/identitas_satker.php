@@ -99,7 +99,7 @@
     ?>
 
     <fieldset>
-        <legend>Pilih siapa anda</legend>
+        <legend>Kategori</legend>
         <label><input type="radio" name="tipe" id="kl_btn" checked="checked" value="kl">K/L</label>
         <label><input type="radio" name="tipe" id="non_kl_btn" value="non_kl">Umum</label>
     </fieldset>
@@ -108,6 +108,7 @@
 
     <?php echo form_hidden('tipe', 'kl') ?>
 
+<!--    <fieldset id="kl" style="float: left; margin-right: 20px; width: 570px; height: 320px;">-->
     <fieldset id="kl">
         <legend>Satker</legend>
 
@@ -128,6 +129,7 @@
         </p>
     </fieldset>
 
+<!--    <fieldset style="float: right; width: 570px; height: 320px;">-->
     <fieldset>
         <!-- TODO: (simpan di tb_petugas_satker) field kurang tambahin -->
         <legend>Identitas</legend>
@@ -157,9 +159,11 @@
         </p>
     </fieldset>
 
-    <div style="text-align: center; margin-top: 20px;">
+    <div class="clear"></div>
+
+    <div style="text-align: right; margin-top: 20px;">
         <input type="submit" class="button blue-pill" value="Help Desk">
-        <input type="submit" class="button blue-pill" value="Saluran Pengaduan">
+<!--        <input type="submit" class="button blue-pill" value="Saluran Pengaduan">-->
         <input type="reset" class="button gray-pill" value="Reset">
     </div>
 
@@ -197,9 +201,9 @@
         </p>
     </fieldset>
 
-    <div style="text-align: center; margin-top: 20px;">
+    <div style="text-align: right; margin-top: 20px;">
         <input type="submit" class="button blue-pill" value="Help Desk">
-        <input type="submit" class="button blue-pill" value="Saluran Pengaduan">
+<!--        <input type="submit" class="button blue-pill" value="Saluran Pengaduan">-->
         <input type="reset" class="button gray-pill" value="Reset">
     </div>
 

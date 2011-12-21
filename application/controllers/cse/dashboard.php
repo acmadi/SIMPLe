@@ -26,7 +26,7 @@ class Dashboard extends CI_Controller {
 
         $data['title'] = 'Dashboard';
         $data['content_html'] = $this->load->view('cse/dashboard', $dt, TRUE);
-        $this->load->view('cse/template', $data);
+        $this->load->view('master-template', $data);
         /*}
           else
           {
@@ -50,7 +50,7 @@ class Dashboard extends CI_Controller {
 
         $data['title'] = 'Isi Identitas Satker';
         $data['content_html'] = $this->load->view('cse/identitas', $dt, TRUE);
-        $this->load->view('cse/template', $data);
+        $this->load->view('master-template', $data);
         /*}
      	else
       	{
@@ -78,7 +78,7 @@ class Dashboard extends CI_Controller {
 		
 		$tpl['title'] = 'Form Pengaduan';
         $tpl['content_html'] = $this->load->view('cse/form', $data, TRUE);
-		$this->load->view('cse/template', $tpl);
+		$this->load->view('master-template', $tpl);
 	}
 	public function kirim_pengaduan()
 	{

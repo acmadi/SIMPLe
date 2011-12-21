@@ -109,9 +109,8 @@ class Munit extends CI_Model {
 	}
 	
 	public function get_list_unit(){
-		//return $this->db->query("SELECT * FROM tb_unit LIMIT 0,50")->result();
 		$result = array();
-		$query = $this->db->query("SELECT * FROM tb_unit LIMIT 0,50")->result();
+		$query = $this->db->query("SELECT * FROM tb_unit")->result();
 		foreach($query as $d){
 			$result[$d->id_kementrian][$d->id_unit] = $d->nama_unit;
 		}

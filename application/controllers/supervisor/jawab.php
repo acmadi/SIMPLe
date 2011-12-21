@@ -22,7 +22,8 @@ class Jawab extends CI_Controller
 
         $data['title'] = 'Supervisor Jawab';
         $data['content'] = 'supervisor/jawab';
+
         $data['pertanyaan'] = $result;
-        $this->load->view('supervisor/template', $data);
+        $this->load->view('master-template', $data);
     }
 }

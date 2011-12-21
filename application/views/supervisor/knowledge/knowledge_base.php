@@ -84,7 +84,7 @@
                         <?php for ($n = 0; $n < $jml; $n++): ?>
 
                         <li style="padding: 4px 0;">
-                            <a href="#">
+                            <a href="<?php echo site_url('/supervisor/knowledge_base/one/' . $result[$idx][$n]['id_knowledge_base'])?>">
                                 <?php echo $result[$idx][$n]['judul']?>
                             </a>
                         </li>

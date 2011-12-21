@@ -16,7 +16,7 @@ class Man_forum extends CI_Controller
         $data['title'] = 'Manajemen Forum';
         $data['content'] = 'csc/man_forum/man_forum';
         $data['forums'] = $result;
-        $this->load->view('csc/template', $data);
+        $this->load->view('master-template', $data);
     }
 
     function view($id)
@@ -26,6 +26,6 @@ class Man_forum extends CI_Controller
         $data['title'] = 'Manajemen Forum';
         $data['content'] = 'csc/man_forum/man_forum_view';
         $data['forums'] = $result;
-        $this->load->view('csc/template', $data);
+        $this->load->view('master-template', $data);
     }
 }

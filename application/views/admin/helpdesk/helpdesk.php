@@ -75,6 +75,7 @@
             </table>
         </div>
 		<div class="pagination"><?php echo ($pageLink)?'Halaman '.$pageLink:'';?></div><br />
+
     </div>
 </div>
 </div>

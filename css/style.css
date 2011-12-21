@@ -2,12 +2,18 @@
 @import url(buttons.css);
 
 /* author: juna - em0hijau@yahoo.co.id */
+/* Modified by: mul14 - http://www.google.com/search?q=mul14 */
+
+@font-face {
+    font-family: 'Lucida Grande';
+    src: local('Lucida Grande'), local('Lucida Grande'), url(../fonts/LucidaGrande.ttc);
+}
 
 body {
     background: #d7ebef;
-    color: #000;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
+    color: #333;
+    font-family: 'Lucida Grande', Tahoma, Arial, sans-serif;
+    font-size: 13px;
 }
 
 /* SATPAM / SATKER */
@@ -42,8 +48,19 @@ body {
 
 #title_form_login {
     text-align: center;
+    vertical-align: middle;
     color: #333;
     margin-top: 0px;
+    margin-bottom: 10px;
+    font-weight: normal;
+    font-size: 20px;
+    text-shadow: 0 0 9px white;
+    font-weight: bold;
+}
+
+#title_form_login img {
+    vertical-align: middle;
+    margin-bottom: 10px;
 }
 
 #login_box {
@@ -67,29 +84,47 @@ body {
 }
 
 #header {
-    height: 35px;
-    width: auto;
+    height: 100px;
+    width: 100%;
     background-image: linear-gradient(left, rgb(109, 181, 232) 16%, rgb(194, 217, 242) 58%, rgb(112, 172, 235) 97%);
     background-image: -o-linear-gradient(left, rgb(109, 181, 232) 16%, rgb(194, 217, 242) 58%, rgb(112, 172, 235) 97%);
     background-image: -moz-linear-gradient(left, rgb(109, 181, 232) 16%, rgb(194, 217, 242) 58%, rgb(112, 172, 235) 97%);
     background-image: -webkit-linear-gradient(left, rgb(109, 181, 232) 16%, rgb(194, 217, 242) 58%, rgb(112, 172, 235) 97%);
     background-image: -ms-linear-gradient(left, rgb(109, 181, 232) 16%, rgb(194, 217, 242) 58%, rgb(112, 172, 235) 97%);
-
     background-image: -webkit-gradient(linear, left top, right top, color-stop(0.16, rgb(109, 181, 232)), color-stop(0.58, rgb(194, 217, 242)), color-stop(0.97, rgb(112, 172, 235)));
+    background: #131DDE url(../images/header-bg.png) right no-repeat;
     font-size: 18px;
     padding: 10px 0 5px 25px;
     color: #fff;
+    position: fixed;
+    z-index: 10;
+}
+
+#header img {
+    vertical-align: middle;
+    margin-right: 20px;
 }
 
 #mid {
-    height: 175px;
-    width: 300px;
-    margin: 0 auto;
-    margin-top: 100px;
+    height: 500px;
+    width: 760px;
+    margin: 100px auto;
+    vertical-align: middle;
+    /*padding: 150px;*/
+    border-radius: 10px;
+    box-shadow: 0 0 20px -5px #333;
+    text-align: center;
+    background: #fff url(../images/login.png) -12px;
 }
 
 #mid table tr {
     word-spacing: 2px;
+}
+
+#mid .inner {
+    position: relative;
+    top: 50px;
+    left: 180px;
 }
 
 /* begin: navbar */
@@ -101,8 +136,16 @@ body {
     background-image: -moz-linear-gradient(bottom, rgb(211, 209, 196) 9%, rgb(254, 251, 236) 55%, rgb(255, 255, 255) 78%);
     background-image: -webkit-linear-gradient(bottom, rgb(211, 209, 196) 9%, rgb(254, 251, 236) 55%, rgb(255, 255, 255) 78%);
     background-image: -ms-linear-gradient(bottom, rgb(211, 209, 196) 9%, rgb(254, 251, 236) 55%, rgb(255, 255, 255) 78%);
-
     background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.09, rgb(211, 209, 196)), color-stop(0.55, rgb(254, 251, 236)), color-stop(0.78, rgb(255, 255, 255)));
+    position: fixed;
+    width: 100%;
+    top: 115px;
+    z-index: 9;
+    box-shadow: 0 -10px 20px 4px gray;
+}
+
+#navbar a:hover {
+    text-decoration: none;
 }
 
 .sf-menu, .sf-menu * {
@@ -308,12 +351,11 @@ a > .sf-sub-indicator {
     height: auto;
     border-top: 1px solid #CCC;
     clear: both;
-    padding-top: 12px;
-    padding-left: 30px;
+    padding: 12px 20px;
 }
 
 #footer span {
-    word-spacing: 0em;
+    color: #999;
 }
 
 /* end: footer */
@@ -1102,7 +1144,7 @@ form p {
 }
 
 form label {
-    min-width: 100px;
+    min-width: 140px;
     display: inline-block;
     vertical-align: top;
     padding: 4px;
@@ -1159,9 +1201,10 @@ h1, h2, h3, h4 {
 }
 
 h1 {
-    color: #7c7c7c;
+    color: #9c9c9c;
     border-bottom: 1px dotted #cecece;
     margin-bottom: 30px;
+    text-shadow: 1px 1px 0 #333;
 }
 
 fieldset {
@@ -1169,6 +1212,7 @@ fieldset {
     padding: 10px;
     margin: 20px 0;
     border-radius: 5px;
+    box-shadow: 0 0 2px #d9d9d9;
 }
 
 legend {
@@ -1178,6 +1222,8 @@ legend {
     background: #cecece;
     color: black;
     text-shadow: 1px 1px 0 #fff;
+    background: -webkit-linear-gradient(top, #fcfcfc, #cecece);
+    background: -moz-linear-gradient(top, #fcfcfc, #cecece);
 }
 
 .content {
@@ -1224,39 +1270,67 @@ p {
     margin-bottom: 1em;
 }
 
+#container {
+    margin-top: 145px;
+}
+
+<<<<<<< Updated upstream
 /*F2D*/
-#list_satker{
-	color: #666;
-	padding:5px;
-	border: 1px solid #ccc;
-	width: 400px;
-	height: 300px;
-	float:left;
-	overflow:auto;
+#list_satker {
+    color: #666;
+    padding: 5px;
+    border: 1px solid #ccc;
+    width: 400px;
+    height: 300px;
+    float: left;
+    overflow: auto;
 }
 
-.innertxt{
-	border-bottom: dashed 1px #cccccc;
-	padding-left:12px;
+.innertxt {
+    border-bottom: dashed 1px #cccccc;
+    padding-left: 12px;
 }
 
-#selected_unit{
-	color: #666;
-	padding:5px;
-	border: 1px solid #ccc;
-	width: 400px;
-	height: 300px;
-	float:left;
-	overflow:auto;
+#selected_unit {
+    color: #666;
+    padding: 5px;
+    border: 1px solid #ccc;
+    width: 400px;
+    height: 300px;
+    float: left;
+    overflow: auto;
 }
 
 .cat_close {
-	background-image:url(../images/plus.gif);
-	background-repeat:no-repeat;
-	background-position:left;
+    background-image: url(../images/plus.gif);
+    background-repeat: no-repeat;
+    background-position: left;
 }
+
 .cat_open {
-	background-image:url(../images/minus.gif);
-	background-repeat:no-repeat;
-	background-position:left;
+    background-image: url(../images/minus.gif);
+    background-repeat: no-repeat;
+    background-position: left;
 }
+
+=
+=
+=
+=
+=
+=
+=
+hr {
+    margin: 25px 0;
+    border: none;
+    border-top: 1px dotted #cecece;
+}
+
+>
+>
+>
+>
+>
+>
+>
+Stashed changes

@@ -16,7 +16,7 @@ class Dashboard_user_skip extends CI_Controller
           {*/
         $data['title'] = 'Dashboard';
         $data['content'] = 'pelaksana/dashboard_skip';
-        $this->load->view('pelaksana/template', $data);
+        $this->load->view('master-template', $data);
         /*}
           else
           {

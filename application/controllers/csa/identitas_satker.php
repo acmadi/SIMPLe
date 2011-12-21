@@ -15,7 +15,7 @@ class Identitas_satker extends CI_Controller
           {*/
         $data['title'] = 'Isi Identitas Satker';
         $data['content'] = 'csa/identitas_satker';
-        $this->load->view('csa/template', $data);
+        $this->load->view('master-template', $data);
         /*}
           else
           {
@@ -132,8 +132,8 @@ class Identitas_satker extends CI_Controller
                 $last_id = $last_id[0]->last_id;
 
                 $sql = "INSERT INTO tb_tiket_helpdesk
-                        (id_satker, tanggal, id_petugas_satket)
-                        VALUES (?, ?, ?)";
+                        (id_satker, tanggal, id_petugas_satket, lavel)
+                        VALUES (?, ?, ?, 1)";
 
                 $this->db->query($sql, array($id_satker, date('Y-m-d'), $last_id));
 
@@ -174,8 +174,8 @@ class Identitas_satker extends CI_Controller
                 $last_id = $last_id[0]->last_id;
 
                 $sql = "INSERT INTO tb_tiket_helpdesk
-                        (id_satker, tanggal, id_petugas_satket)
-                        VALUES (?, ?, ?)";
+                        (id_satker, tanggal, id_petugas_satket, lavel)
+                        VALUES (?, ?, ?, 1)";
 
                 $this->db->query($sql, array(NULL, date('Y-m-d'), $last_id));
 

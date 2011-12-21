@@ -9,29 +9,32 @@
 </head>
 
 <body>
-<div id="login_box">
-    <div id="header">Sistem Informasi Pusat Layanan DJA v1.0</div>
+<div id="login_box" style="vertical-align: middle;">
+<!--    <div id="header"></div>-->
 
-    <div id="mid" style="padding: 60px; background: #fff; border-radius: 10px; box-shadow: 0 0 20px -5px #333; text-align: center;">
 
-        <h2 id="title_form_login">DJA SIMPEL</h2>
+    <div id="mid">
+        <div class="inner">
+
+        <div id="title_form_login"><img src="<?php echo base_url('images/logo.png') ?>" /><br/>Sistem Informasi Pusat Layanan DJA</div>
 
         <?php echo $this->session->flashdata('error') ?>
         <?php echo form_open("login/usermasuk"); ?>
 
-        <p style="text-align: center;">
+        <p>
             <label for="user" style="text-align: left; width: 300px; color: #666" >User ID</label><br/>
             <input type="text" id="user" name="user" size="24" class="form_field" style="width: 80px !important;"/>
         </p>
 
-        <p style="text-align: center;">
+        <p>
             <label for="pass" style="text-align: left; width: 300px; color: #666">Password</label><br/>
             <input type="password" id="pass" name="pass" size="24" class="form_field" style="width: 80px !important;"/>
         </p>
 
-        <p style="text-align: center;">
+        <p>
             <input type="submit" name="submit" class="button blue-pill" value="Login"/>
         </p>
+        </div>
 
         <div style="clear: both;"></div>
 

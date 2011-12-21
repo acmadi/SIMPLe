@@ -3,8 +3,10 @@ class Muser extends CI_Model
 {
     function get_all_user(){
 		$this->load->library('pagination');		
-		$sql = "SELECT id_user, username, nama, email, no_tlp, id_unit_satker, id_lavel
-				FROM tb_user 
+		$sql = "SELECT *
+				FROM tb_user
+				JOIN tb_lavel
+				ON tb_user.id_lavel = tb_lavel.id_lavel
 				ORDER BY nama ASC";
 		$query = $this->db->query($sql);
 
@@ -15,7 +17,7 @@ class Muser extends CI_Model
 		$this->pagination->initialize($config);
 
 		$offset = (int) $this->uri->segment(4, 0);
-		
+
 		$sqlb = "SELECT id_user, username, nama, email, no_tlp, nama_unit, id_lavel
 				FROM tb_user a left join tb_unit_saker b on a.id_unit_satker = b.id_unit_satker
 				ORDER BY nama ASC
@@ -26,6 +28,16 @@ class Muser extends CI_Model
 
 		return $data;
 	}
+
+    function get_all() {
+        $sql = "SELECT *
+                FROM tb_user
+                JOIN tb_lavel
+                ON tb_user.id_lavel = tb_lavel.id_lavel
+                ORDER BY lavel ASC";
+        $query = $this->db->query($sql);
+        return $query;
+    }
 	
 	function get_all_user_by_id($keyword){
 		$this->load->library('pagination');

@@ -19,7 +19,7 @@
                         </form>
                     </div>
 
-                    <input id="tambah" class='button' type="submit" value="17 tiket" style="background:#D65703; width:80px; color:#FFF; "/>
+                    <input id="tambah" class='button' type="submit" value="<?php echo $pertanyaan->num_rows() ?> tiket" style="background:#D65703; width:80px; color:#FFF; "/>
 
                 </div>
                 <div id="tail">
@@ -53,7 +53,7 @@
                                 <?php endif ?>
                             </td>
                             <td class="action">
-                                <a href="<?php echo site_url('supervisor/jawab/' . $value->no_tiket_helpdesk) ?>" class="button blue-pill" />Jawab</a>
+                                <a href="<?php echo site_url('supervisor/jawab/index/' . $value->no_tiket_helpdesk) ?>" class="button blue-pill" />Jawab</a>
                             </td>
                         </tr>
                         <?php endforeach ?>

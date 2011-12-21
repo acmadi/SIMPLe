@@ -16,7 +16,7 @@ class Dashboard extends CI_Controller
           {*/
         $data['title'] = 'Dashboard';
         $data['content'] = 'csa/dashboard';
-        $this->load->view('csa/template', $data);
+        $this->load->view('master-template', $data);
         /*}
           else
           {

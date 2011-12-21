@@ -26,45 +26,50 @@ Class Login extends CI_Controller
             $this->session->set_userdata('user', $login_data->username);
             $this->session->set_userdata('lavel', $login_data->nama_lavel);
 			$this->log->create("Login");
-            switch ( strtolower($login_data->nama_lavel) ) {
-                case 'admin':
+
+
+//            print_r($login_data);
+
+
+            switch ( strtolower($login_data->id_lavel) ) {
+                case '1':
                     redirect('admin/dashboard');
                     break;
-                case 'cs a':
+                case '2':
                     redirect("csa/dashboard");
                     break;
-                case 'cs b':
+                case '2':
                     redirect("csb/dashboard");
                     break;
-                case 'cs c':
+                case '3':
                     redirect("csc/dashboard");
                     break;
-                case 'cs d':
+                case '4':
                     redirect("csd/dashboard");
                     break;
-                case 'cs e':
+                case '5':
                     redirect("cse/dashboard");
                     break;
-                case 'halodja':
+                case '6':
                     redirect('halodja/dashboard');
                     break;
-                case 'supervisor':
+                case '7':
                     redirect('supervisor/dashboard');
                     break;
-                case 'kasi pelaksana':
+                case '8':
                     redirect('pelaksana/dashboard');
                     break;
-                case 'kasubdit':
+                case '9':
                     redirect('kasubdit/dashboard');
                     break;
-                case 'direktur':
+                case '10':
+                    redirect('kasubdit_dadutek/dashboard');
+                    break;
+                case '11':
                     redirect('direktur/dashboard');
                     break;
-                case 'dirjen':
+                case '12':
                     redirect('dirjen/dashboard');
-                    break;
-                case 'pelaksana':
-                    redirect('pelaksana/dashboard');
                     break;
             }
         } else {

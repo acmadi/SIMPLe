@@ -7,7 +7,6 @@ class Knowledge_base extends CI_Controller
         parent::__construct();
         $this->load->model('Mknowledge', 'knowledge');
         $this->load->library('Log');
-        $this->log->create('hello world!');
     }
 
     function index()
@@ -16,7 +15,7 @@ class Knowledge_base extends CI_Controller
         $data['content'] = 'csa/knowledge/knowledge_base';
         $data['result'] = $this->knowledge->get_all_data_category();
         $data['idsearch'] = "";
-        $this->load->view('csa/template', $data);
+        $this->load->view('master-template', $data);
     }
 
     function search_knowledge()
@@ -34,7 +33,7 @@ class Knowledge_base extends CI_Controller
             $data['content'] = 'csa/knowledge/knowledge_base';
             $data['part'] = 3;
             $data['idsearch'] = $category;
-            $this->load->view('csa/template', $data);
+            $this->load->view('master-template', $data);
         }
     }
 
@@ -54,7 +53,7 @@ class Knowledge_base extends CI_Controller
             $data['result'] = $item;
             $data['idsearch'] = $keyword;
             $data['sel'] = true;
-            $this->load->view('csa/template', $data);
+            $this->load->view('master-template', $data);
         }
 
     }
@@ -92,6 +91,18 @@ class Knowledge_base extends CI_Controller
             echo "<div><input type=submit class='button blue-pill' value='Jawab' /></div>";
         }
         exit();
+    }
+
+    public function search()
+    {
+        $pertanyaan = $this->input->get('cari');
+        $result = $this->db->query("SELECT * FROM tb_knowledge_base WHERE judul LIKE '%{$pertanyaan}%' OR desripsi LIKE '%{$pertanyaan}%' OR jawaban LIKE '%{$pertanyaan}%'");
+
+        foreach ($result->result() as $value) {
+            echo sprintf('<h2><a href="javascript:void(0)" onclick="popUpReferensiJawaban(%s)">%s</a></h2>', $value->id_knowledge_base, $value->judul );
+            echo sprintf('<p><em>%s</em></p>', $value->judul);
+            echo '<hr/>';
+        }
     }
 }
 

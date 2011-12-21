@@ -1,7 +1,7 @@
 <div id="konten">
 
     <div style="text-align: right;">
-        <input type="submit" class="button gray-pill" value="Batal" />
+        <a href="<?php echo site_url('pelaksana/frontdesk') ?>" class="button gray-pill">Batal</a>
     </div>
 
     <h1>Formulir Isian Pengajuan Revisi Anggaran</h1>
@@ -60,15 +60,26 @@
                     <li>RAB</li>
                 </ul>
             </div>
-            <div class="pagination">Halaman <a href="#"><<</a> <a href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a
-                    href="#">4</a> <a href="#">5</a> <a href="#">6</a> <a href="#">>></a></div>
+            <!--            <div class="pagination">Halaman <a href="#"><<</a> <a href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a-->
+            <!--                    href="#">4</a> <a href="#">5</a> <a href="#">6</a> <a href="#">>></a></div>-->
             <br/>
         </div>
 
     </div>
     <input type="submit" value="Print" style="width:100px; height:25px; float:left; margin-right:10px; "/>
-    <input type="submit" value="Diselesaikan" style="width:100px; height:25px; float:right; margin-right:10px; "/>
-    <input type="submit" value="Dilanjutkan" style="width:100px; height:25px; float:right; margin-right:10px; "/><br/>
+
+    <input type="submit" value="Dilanjutkan" onclick="alert('Data berhasil diekskalasi'); window.location.href='<?php echo site_url('pelaksana/frontdesk') ?>';" style="width:100px; height:25px; float:right; margin-right:10px; "/>
+    <input type="submit" value="Cetak BALD" style="width:100px; height:25px; float:right; margin-right:10px; "/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div class="clear"></div>
 
 </div>
 

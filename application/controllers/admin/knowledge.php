@@ -86,8 +86,8 @@ class Knowledge extends CI_Controller
             $this->form_validation->set_rules('fjudul2', 'Judul', 'required');
             $this->form_validation->set_rules('fdesripsi2', 'Deskripsi', 'required');
             $this->form_validation->set_rules('fjawaban2', 'Jawaban', 'required');
-            $this->form_validation->set_rules('fsumber2', 'Sumber', 'required');
-            $this->form_validation->set_rules('fjabatan2', 'Jabatan', 'required');
+//            $this->form_validation->set_rules('fsumber2', 'Sumber', 'required');
+//            $this->form_validation->set_rules('fjabatan2', 'Jabatan', 'required');
 
             if ($this->form_validation->run() == FALSE) {
                 $this->session->set_flashdata('error', validation_errors());
