@@ -25,6 +25,7 @@ Class Login extends CI_Controller
 			
             $this->session->set_userdata('user', $login_data->username);
             $this->session->set_userdata('lavel', $login_data->nama_lavel);
+            $this->session->set_userdata('id_user', $login_data->id_user);
 			$this->log->create("Login");
 
 
@@ -36,7 +37,7 @@ Class Login extends CI_Controller
                     redirect('admin/dashboard');
                     break;
                 case '2':
-                    redirect("csa/dashboard");
+                    redirect("helpdesk/dashboard");
                     break;
                 case '2':
                     redirect("csb/dashboard");
