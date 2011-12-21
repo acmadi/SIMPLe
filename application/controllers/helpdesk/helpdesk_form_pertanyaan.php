@@ -12,7 +12,7 @@ class Helpdesk_form_pertanyaan extends CI_Controller
     function index()
     {
         $data['title'] = 'Helpdesk Form - Pertanyaan';
-        $data['content'] = 'csa/helpdesk/helpdesk_form_pertanyaan';
+        $data['content'] = 'helpdesk/helpdesk/helpdesk_form_pertanyaan';
         $data['knowledges'] = $this->mknowledge->get_all_category();
 
         $result = $this->db->query("SELECT MAX(no_tiket_helpdesk) last_tiket FROM tb_tiket_helpdesk");
@@ -39,7 +39,7 @@ class Helpdesk_form_pertanyaan extends CI_Controller
     function umum()
     {
         $data['title'] = 'Helpdesk Form - Pertanyaan';
-        $data['content'] = 'csa/helpdesk/helpdesk_form_pertanyaan_umum';
+        $data['content'] = 'helpdesk/helpdesk/helpdesk_form_pertanyaan_umum';
         $data['knowledges'] = $this->mknowledge->get_all_category();
 
         $sql = "SELECT * FROM tb_tiket_helpdesk a
@@ -93,7 +93,7 @@ class Helpdesk_form_pertanyaan extends CI_Controller
         }
 
         $data['title'] = 'Helpdesk Form - Pertanyaan';
-        $data['content'] = 'csa/helpdesk/helpdesk_form_pertanyaan_submit';
+        $data['content'] = 'helpdesk/helpdesk/helpdesk_form_pertanyaan_submit';
 
         $knowledges = $this->db->query("SELECT * FROM tb_knowledge_base WHERE judul LIKE '%{$pertanyaan}%' OR desripsi LIKE '%{$pertanyaan}%' OR jawaban LIKE '%{$pertanyaan}%'");
 
@@ -121,7 +121,7 @@ class Helpdesk_form_pertanyaan extends CI_Controller
         $data['desripsi'] = $result->desripsi;
         $data['jawaban'] = $result->jawaban;
 
-        $this->load->view('csa/helpdesk/popup-referensi-jawaban', $data);
+        $this->load->view('helpdesk/helpdesk/popup-referensi-jawaban', $data);
     }
 
 }

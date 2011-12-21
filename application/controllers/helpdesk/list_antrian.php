@@ -9,7 +9,7 @@ class List_antrian extends CI_Controller
     public function index()
     {
         $data['title'] = 'List Antrian';
-        $data['content'] = 'csa/list_antrian';
+        $data['content'] = 'helpdesk/list_antrian';
         $this->load->view('master-template', $data);
     }
 }

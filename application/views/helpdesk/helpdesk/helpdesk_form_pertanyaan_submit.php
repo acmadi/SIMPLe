@@ -6,7 +6,7 @@
 
             console.log(data);
 
-            $.get('<?php echo site_url('/csa/knowledge_base/search') ?>', data, function(response){
+            $.get('<?php echo site_url('/helpdesk/knowledge_base/search') ?>', data, function(response){
                 $('#referensi_jawaban').html(response);
             });
             return false;

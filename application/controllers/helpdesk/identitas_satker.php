@@ -14,7 +14,7 @@ class Identitas_satker extends CI_Controller
         /*if ($this->session->userdata('login') == TRUE)
           {*/
         $data['title'] = 'Isi Identitas Satker';
-        $data['content'] = 'csa/identitas_satker';
+        $data['content'] = 'helpdesk/identitas_satker';
         $this->load->view('master-template', $data);
         /*}
           else
@@ -143,7 +143,7 @@ class Identitas_satker extends CI_Controller
                 $last_id = $last_id[0]->last_id;
                 $this->session->set_userdata('tiket', (string)$last_id);
 
-                redirect('/csa/helpdesk_form_pertanyaan');
+                redirect('/helpdesk/helpdesk_form_pertanyaan');
             }
 
         } else {
@@ -186,7 +186,7 @@ class Identitas_satker extends CI_Controller
                 $last_id = $last_id[0]->last_id;
                 $this->session->set_userdata('tiket', (string)$last_id);
 
-                redirect('/csa/helpdesk_form_pertanyaan/umum');
+                redirect('/helpdesk/helpdesk_form_pertanyaan/umum');
             }
         }
 

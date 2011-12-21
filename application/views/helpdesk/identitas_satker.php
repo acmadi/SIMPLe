@@ -13,7 +13,7 @@
     $(function() {
         $('#nama_kl').blur(function() {
             var nama_kl = $('#nama_kl').val();
-            $.get('<?php echo site_url('csa/identitas_satker/cari_kl/') ?>', {id_kementrian : nama_kl}, function(response) {
+            $.get('<?php echo site_url('helpdesk/identitas_satker/cari_kl/') ?>', {id_kementrian : nama_kl}, function(response) {
                 console.log(response);
                 $('#eselon').html(response);
                 $('#kode_satker').removeAttr('disabled');
@@ -59,7 +59,7 @@
         $('#kode_satker').autocomplete({
             source: function(request, response) {
                 $.ajax({
-                    url: "<?php echo site_url('/csa/identitas_satker/cari_satker') ?>",
+                    url: "<?php echo site_url('/helpdesk/identitas_satker/cari_satker') ?>",
 
                     data: {
                         term: request.term,
@@ -104,7 +104,7 @@
         <label><input type="radio" name="tipe" id="non_kl_btn" value="non_kl">Umum</label>
     </fieldset>
 
-    <?php echo form_open('csa/identitas_satker/save_identitas', array('id' => 'identitas_kl')) ?>
+    <?php echo form_open('helpdesk/identitas_satker/save_identitas', array('id' => 'identitas_kl')) ?>
 
     <?php echo form_hidden('tipe', 'kl') ?>
 
@@ -169,7 +169,7 @@
 
     </form>
 
-    <?php echo form_open('csa/identitas_satker/save_identitas', array('id' => 'identitas_umum', 'style' => 'display: none')) ?>
+    <?php echo form_open('helpdesk/identitas_satker/save_identitas', array('id' => 'identitas_umum', 'style' => 'display: none')) ?>
 
     <?php echo form_hidden('tipe', 'non_kl') ?>
 

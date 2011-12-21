@@ -15,13 +15,14 @@ class Dashboard extends CI_Controller
           if ($this->session->userdata('login') == TRUE)
           {*/
         $data['title'] = 'Dashboard';
-        $data['content'] = 'csb/dashboard';
-        $this->load->view('csb/template', $data);
+        $data['content'] = 'helpdesk/dashboard';
+        $this->load->view('master-template', $data);
         /*}
           else
           {
               $this->load->view('login');
           }*/
+        redirect('/helpdesk/identitas_satker');
     }
 }
 

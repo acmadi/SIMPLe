@@ -1,6 +1,6 @@
 <div class="content">
 
-    <h1>Konsultasi Help Desk - Umum</h1>
+    <h1>Konsultasi Help Desk</h1>
 
     <div style="text-align: right; text-decoration: underline; font-weight: bold; font-size: 14px;">
         No Tiket: <?php echo sprintf('%05d', $this->session->userdata('tiket')) ?>
@@ -10,20 +10,31 @@
         <legend>Identitas</legend>
 
         <div style="float: left; width: 500px">
+            <p>
+                <label style="display: inline-block; width: 100px;">No Tiket</label>
+                <span><?php echo sprintf('%05d', $this->session->userdata('tiket')) ?></span>
+            </p>
 
             <p>
-                <label style="display: inline-block; width: 100px;">Nama</label>
+                <label style="display: inline-block; width: 100px;">No Satker</label>
+                <span><?php echo $identitas->id_satker ?></span>
+            </p>
+
+            <p>
+                <label style="display: inline-block; width: 100px;">Nama Satker</label>
+                <span><?php echo $identitas->nama_satker ?></span>
+            </p>
+
+            <p>
+                <label style="display: inline-block; width: 100px;">Nama Petugas</label>
                 <span><?php echo $identitas->nama_petugas ?></span>
             </p>
-
-            <p>
-                <label style="display: inline-block; width: 100px;">Instansi</label>
-                <span><?php echo $identitas->instansi ?></span>
-            </p>
-
-
         </div>
         <div style="float: left; width: 500px;">
+            <p>
+                <label style="display: inline-block; width: 100px;">No Kantor</label>
+                <span><?php echo $identitas->no_kantor ?></span>
+            </p>
 
             <p>
                 <label style="display: inline-block; width: 100px;">No HP</label>
@@ -34,19 +45,13 @@
                 <label style="display: inline-block; width: 100px;">Email</label>
                 <span><?php echo $identitas->email ?></span>
             </p>
-
-            <p>
-                <label style="display: inline-block; width: 100px;">Alamat</label>
-                <span><?php echo $identitas->alamat ?></span>
-            </p>
-
         </div>
     </fieldset>
 
     <fieldset>
         <legend>Pertanyaan Stakeholder</legend>
 
-        <?php echo form_open('/csa/helpdesk_form_pertanyaan/submit'); ?>
+        <?php echo form_open('/helpdesk/helpdesk_form_pertanyaan/submit'); ?>
         <input type="hidden" name="no_tiket_helpdesk" value="<?php echo $this->session->userdata('tiket') ?>"/>
 
         <p>

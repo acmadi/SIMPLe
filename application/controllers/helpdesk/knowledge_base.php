@@ -12,7 +12,7 @@ class Knowledge_base extends CI_Controller
     function index()
     {
         $data['title'] = 'Knowledge Base';
-        $data['content'] = 'csa/knowledge/knowledge_base';
+        $data['content'] = 'helpdesk/knowledge/knowledge_base';
         $data['result'] = $this->knowledge->get_all_data_category();
         $data['idsearch'] = "";
         $this->load->view('master-template', $data);
@@ -23,14 +23,14 @@ class Knowledge_base extends CI_Controller
         $this->form_validation->set_rules('fkat', 'Kategori', 'required');
         if ($this->form_validation->run() == FALSE) {
             $this->session->set_flashdata('error', validation_errors());
-            redirect('/csa/knowledge_base');
+            redirect('/helpdesk/knowledge_base');
         }
         else
         {
             $category = $this->input->post('fkat', TRUE);
             $data['result'] = $this->knowledge->search_by_keyword($category);
             $data['title'] = 'Knowledge Base';
-            $data['content'] = 'csa/knowledge/knowledge_base';
+            $data['content'] = 'helpdesk/knowledge/knowledge_base';
             $data['part'] = 3;
             $data['idsearch'] = $category;
             $this->load->view('master-template', $data);
@@ -49,7 +49,7 @@ class Knowledge_base extends CI_Controller
             //            if (!empty($cat) {
             //
             //            }
-            $data['content'] = 'csa/knowledge/knowledge_base';
+            $data['content'] = 'helpdesk/knowledge/knowledge_base';
             $data['result'] = $item;
             $data['idsearch'] = $keyword;
             $data['sel'] = true;

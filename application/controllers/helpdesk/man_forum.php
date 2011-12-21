@@ -14,7 +14,7 @@ class Man_forum extends CI_Controller
         $result = $this->mforum->get();
 
         $data['title'] = 'Manajemen Forum';
-        $data['content'] = 'csa/man_forum/man_forum';
+        $data['content'] = 'helpdesk/man_forum/man_forum';
         $data['forums'] = $this->db->query("SELECT * FROM tb_forum ORDER BY tanggal DESC");
 
         $this->load->view('master-template', $data);
@@ -25,7 +25,7 @@ class Man_forum extends CI_Controller
         $result = $this->mforum->get_one($id);
 
         $data['title'] = 'Manajemen Forum';
-        $data['content'] = 'csa/man_forum/man_forum_view';
+        $data['content'] = 'helpdesk/man_forum/man_forum_view';
         $data['forums'] = $result;
         $this->load->view('master-template', $data);
     }
