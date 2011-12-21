@@ -28,14 +28,11 @@
     <div id="navbar">
         <?php
 
-        if ($this->uri->segment(1) == 'csa') {
-            $this->load->view('navbar_csa');
+        if ($this->uri->segment(1) == 'helpdesk') {
+            $this->load->view('navbar_helpdesk');
         }
-        elseif ($this->uri->segment(1) == 'csb') {
-            $this->load->view('navbar_csb');
-        }
-        elseif ($this->uri->segment(1) == 'csc') {
-            $this->load->view('navbar_csc');
+        elseif ($this->uri->segment(1) == 'frontdesk') {
+            $this->load->view('navbar_frontdesk');
         }
         elseif ($this->uri->segment(1) == 'csd') {
             $this->load->view('navbar_csd');

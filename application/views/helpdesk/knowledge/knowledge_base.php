@@ -54,7 +54,7 @@
         <h1>Knowledge Base</h1>
 
         <form action="<?php echo site_url('/helpdesk/knowledge_base/search_knowledge') ?>" id="search-form" method="post" style="text-align: right;">
-            <input type="text" name="fkat" placeholder="Pencarian" style="width: 400px !important;" autocomplete="false"/>
+            <input type="text" name="fkat" placeholder="Pencarian" style="width: 400px !important;" autocomplete="off"/>
             <input id="search" class="button blue-pill" type="submit" value="Cari">
         </form>
 
@@ -106,10 +106,10 @@
             <?php endif;?>
             <div class="clear"></div>
         </div>
-
-        <div class="pagination" style="margin:10px 10px -10px 0px;">Halaman <a href="#"><<</a> <a href="#">1</a> <a
-                href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <a href="#">6</a> <a
-                href="#">>></a>
+<!---->
+<!--        <div class="pagination" style="margin:10px 10px -10px 0px;">Halaman <a href="#"><<</a> <a href="#">1</a> <a-->
+<!--                href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <a href="#">6</a> <a-->
+<!--                href="#">>></a>-->
         </div>
     </div>
 </div>

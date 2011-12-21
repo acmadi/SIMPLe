@@ -43,7 +43,7 @@ class Msatker extends CI_Model
      * Mencari semua petugas_satker berdasarkan id_satker-nya
      *
      * @param $id_satker dari tb_satker
-     * @return array dari semua petugas dari csc tsb
+     * @return array dari semua petugas dari frontdesk tsb
      * 
      * ini pake javadoc ya? sori gak pake IDE, asal kopas aja yg penting bisa dipahami :p
      * -akhyar
@@ -57,7 +57,7 @@ class Msatker extends CI_Model
     }
 
     /**
-     * Get csc info
+     * Get frontdesk info
      *
      * @param $id_satker dari tb_satker
      * @return object satker tsb 

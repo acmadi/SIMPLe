@@ -26,7 +26,8 @@ class Log
         $this->CI->load->library('session');
         $date = date('Y-m-d H:i:s');
         $user = $this->CI->session->userdata('user');
-        
+        $id_user = $this->CI->session->userdata('id_user');
+
         if (ENVIRONMENT == 'development') {
             $log = sprintf("%s %s: %s", $date, $user, $message);
             //echo $log;
@@ -35,6 +36,7 @@ class Log
         $data = array(
             'created' => $date,
             'user' => $user,
+            'id_user' => $id_user,
             'message' => $message
         );
         $this->CI->db->insert('tb_logs', $data);
