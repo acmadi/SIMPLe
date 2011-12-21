@@ -18,7 +18,7 @@ class Cetak_no_antrian_csb extends CI_Controller
         $data['antrian'] = $this->msatker->antrian_terakhir('B');
         $data['title'] = 'Cetak No Antrian';
         $data['content'] = 'csc/cetak_no_antrian_csb';
-        $this->load->view('csc/template', $data);
+        $this->load->view('master-template', $data);
         /*}
           else
           {

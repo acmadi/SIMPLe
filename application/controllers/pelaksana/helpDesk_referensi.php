@@ -15,7 +15,7 @@ class HelpDesk_referensi extends CI_Controller
           {*/
         $data['title'] = 'Konsultasi Help Desk';
         $data['content'] = 'pelaksana/helpDesk_referensi';
-        $this->load->view('pelaksana/template', $data);
+        $this->load->view('master-template', $data);
         /*}
           else
           {

@@ -15,7 +15,7 @@ class Helpdesk_saluran_pengaduan extends CI_Controller
           {*/
         $data['title'] = 'Helpdesk Form - Saluran Pengaduan';
         $data['content'] = 'csa/helpdesk/helpdesk_saluran_pengaduan';
-        $this->load->view('csa/template', $data);
+        $this->load->view('master-template', $data);
         /*}
           else
           {

@@ -16,6 +16,6 @@ class List_antrian extends CI_Controller
 
                 WHERE status = 'open'";
         $data['antrian'] = $this->db->query($sql);
-        $this->load->view('pelaksana/template', $data);
+        $this->load->view('master-template', $data);
     }
 }

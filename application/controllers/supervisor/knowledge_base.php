@@ -7,7 +7,6 @@ class Knowledge_base extends CI_Controller
         parent::__construct();
         $this->load->model('Mknowledge', 'knowledge');
         $this->load->library('Log');
-        $this->log->create('hello world!');
     }
 
     function index()
@@ -16,7 +15,7 @@ class Knowledge_base extends CI_Controller
         $data['content'] = 'supervisor/knowledge/knowledge_base';
         $data['result'] = $this->knowledge->get_all_data_category();
         $data['idsearch'] = "";
-        $this->load->view('supervisor/template', $data);
+        $this->load->view('master-template', $data);
     }
 
     function search_knowledge()
@@ -34,7 +33,7 @@ class Knowledge_base extends CI_Controller
             $data['content'] = 'supervisor/knowledge/knowledge_base';
             $data['part'] = 3;
             $data['idsearch'] = $category;
-            $this->load->view('supervisor/template', $data);
+            $this->load->view('master-template', $data);
         }
     }
 
@@ -54,7 +53,7 @@ class Knowledge_base extends CI_Controller
             $data['result'] = $item;
             $data['idsearch'] = $keyword;
             $data['sel'] = true;
-            $this->load->view('supervisor/template', $data);
+            $this->load->view('master-template', $data);
         }
 
     }
@@ -92,6 +91,19 @@ class Knowledge_base extends CI_Controller
             echo "<div><input type=submit class='button blue-pill' value='Jawab' /></div>";
         }
         exit();
+    }
+
+    public function one($id)
+    {
+        $data['title'] = 'Knowledge Base';
+        $data['content'] = 'supervisor/knowledge/knowledge_base_one';
+
+        $result = $this->db->query("SELECT * FROM tb_knowledge_base WHERE id_knowledge_base = '{$id}' LIMIT 1");
+        $result = $result->result();
+        $result = $result[0];
+        $data['result'] = $result;
+
+        $this->load->view('master-template', $data);
     }
 }
 

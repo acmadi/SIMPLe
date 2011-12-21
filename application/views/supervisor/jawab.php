@@ -1,4 +1,4 @@
-<?php print_r($pertanyaan)?>
+<?php //print_r($pertanyaan)?>
 
 <div class="content">
 
@@ -53,10 +53,10 @@
         <legend>Pertanyaan</legend>
         <div style="width: 600px; float: left;">
 
-            <p>
-                <label style="display: inline-block; width: 100px;">Kategori</label>
-                <span><?php echo $pertanyaan->kategori ?></span>
-            </p>
+<!--            <p>-->
+<!--                <label style="display: inline-block; width: 100px;">Kategori</label>-->
+<!--                <span>--><?php //echo $pertanyaan->kategori ?><!--</span>-->
+<!--            </p>-->
 
             <p>
                 <label style="display: inline-block; width: 100px;">Pertanyaan</label>
@@ -117,6 +117,7 @@
 
     <div style="float: right;">
 
+        <input type="button" onclick="window.print()" value="Print" class="button gray-pill"/>
         <input type="submit" value="Ekskalasi" class="button blue-pill"/>
         <input type="submit" value="Jawab" class="button blue-pill"/>
     </div>

@@ -15,7 +15,7 @@ class Identitas_satker extends CI_Controller
           {*/
         $data['title'] = 'Isi Identitas Satker';
         $data['content'] = 'csd/identitas_satker';
-        $this->load->view('csd/template', $data);
+        $this->load->view('master-template', $data);
         /*}
           else
           {

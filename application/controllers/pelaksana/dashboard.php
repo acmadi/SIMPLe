@@ -14,9 +14,21 @@ class Dashboard extends CI_Controller
         $data['helpdesk_total'] = $this->mhelpdesk->count_all_tiket();
         $data['frontdesk_total'] = $this->mfrontdesk->count_all_tiket();
 
+        $result = $this->db->query("SELECT * FROM tb_tiket_frontdesk WHERE lavel = 1");
+        $data['total_tiket_diterima_cs'] = $result->num_rows();
+
+        $result = $this->db->query("SELECT * FROM tb_tiket_frontdesk WHERE lavel = 2");
+        $data['total_tiket_diteruskan_cs'] = $result->num_rows();
+
+        $result = $this->db->query("SELECT * FROM tb_tiket_frontdesk WHERE lavel = 3");
+        $data['total_tiket_diterima_pelaksana'] = $result->num_rows();
+
+        $result = $this->db->query("SELECT * FROM tb_tiket_frontdesk WHERE lavel > 3");
+        $data['total_tiket_diteruskan_pelaksana'] = $result->num_rows();
+
         $data['title'] = 'Dashboard';
         $data['content'] = 'pelaksana/dashboard';
-        $this->load->view('pelaksana/template', $data);
+        $this->load->view('master-template', $data);
     }
 }
 

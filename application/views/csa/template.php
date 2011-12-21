@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="<?php echo base_url() . 'css/ui-lightness/jquery-ui-1.8.16.custom.css';?>"/>
 
     <style type="text/css">@import url("<?php echo base_url() . 'css/style.css'; ?>");</style>
+    <style type="text/css">@import url("<?php echo base_url() . 'css/autoSuggest.css'; ?>");</style>
 
     <!--TABLE JQUERY-->
     <style type="text/css">@import url("<?php echo base_url() . 'css/table.css'; ?>");</style>
@@ -16,12 +17,14 @@
 
     <script type="text/javascript" src="<?php echo base_url(); ?>js/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url(); ?>js/jquery-ui-1.8.16.custom.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.autoSuggest.minified.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>js/phpjs/substr.js"></script>
 
 
 </head>
 <body>
 <div id="wrapper">
-    <div id="header">Sistem Informasi Pusat Layanan DJA v1.0</div>
+    <div id="header"><img src="<?php echo base_url('images/logo.png') ?>"/>Sistem Informasi Pusat Layanan DJA v1.0</div>
     <div id="navbar"><?php $this->load->view('navbar_csa'); ?></div>
     <div id="container">
         <div id="content"><?php $this->load->view($content); ?></div>

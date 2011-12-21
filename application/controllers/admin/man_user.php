@@ -20,7 +20,7 @@ class Man_user extends CI_Controller
 		
         $data['title'] 		= 'Manajemen User';
         $data['content'] 	= 'admin/man_user/man_user';
-		
+        $data['users']      = $this->muser->get_all();
         $this->load->view('admin/template', $data);
        
     }

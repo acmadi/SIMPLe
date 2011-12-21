@@ -15,7 +15,7 @@ class Konsultasi_helpDesk extends CI_Controller
           {*/
         $data['title'] = 'Konsultasi Help Desk';
         $data['content'] = 'csd/konsultasi_helpDesk';
-        $this->load->view('csd/template', $data);
+        $this->load->view('master-template', $data);
         /*}
           else
           {

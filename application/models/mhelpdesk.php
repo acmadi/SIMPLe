@@ -43,4 +43,18 @@ class Mhelpdesk extends CI_Model
         return $result[0];
     }
 
+
+    // TODO: Ganti supaya bisa detect CS berdasarkan tb_level
+    public function count_all_closed_ticket_by($level = 'cs')
+    {
+        // TODO: Ubah ke SQL biasa
+        $result = $this->db->from("tb_histori_tiket")
+                ->join('tb_user', 'tb_histori_tiket.id_user = tb_user.id_user')
+                ->where('username', 'csa')
+                ->or_where('username', 'csb')
+                ->get();
+        return $result->num_rows();
+
+    }
+
 }
