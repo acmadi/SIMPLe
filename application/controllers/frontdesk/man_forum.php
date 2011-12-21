@@ -14,7 +14,7 @@ class Man_forum extends CI_Controller
         $result = $this->mforum->get();
 
         $data['title'] = 'Manajemen Forum';
-        $data['content'] = 'csc/man_forum/man_forum';
+        $data['content'] = 'frontdesk/man_forum/man_forum';
         $data['forums'] = $result;
         $this->load->view('master-template', $data);
     }
@@ -24,7 +24,7 @@ class Man_forum extends CI_Controller
         $result = $this->mforum->get_one($id);
 
         $data['title'] = 'Manajemen Forum';
-        $data['content'] = 'csc/man_forum/man_forum_view';
+        $data['content'] = 'frontdesk/man_forum/man_forum_view';
         $data['forums'] = $result;
         $this->load->view('master-template', $data);
     }

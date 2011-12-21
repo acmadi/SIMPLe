@@ -13,7 +13,7 @@ class Form_revisi_anggaran extends CI_Controller
         $data['kementrian'] = $this->db->query('SELECT * FROM tb_kementrian ORDER BY id_kementrian');
         $data['kelengkapan_dokumen'] = $this->db->query('SELECT * FROM tb_kelengkapan_doc ORDER BY id_kelengkapan');
         $data['title'] = 'Form Revisi Anggaran';
-        $data['content'] = 'csc/form_revisi_anggaran';
+        $data['content'] = 'frontdesk/form_revisi_anggaran';
         $this->load->view('master-template', $data);
     }
 
@@ -56,7 +56,7 @@ class Form_revisi_anggaran extends CI_Controller
         }
 
         $this->session->set_flashdata('msg', 'Data telah masuk');
-        redirect('/csc/form_revisi_anggaran');
+        redirect('/frontdesk/form_revisi_anggaran');
 
     }
 
@@ -205,10 +205,10 @@ class Form_revisi_anggaran extends CI_Controller
 
             if ($this->db->trans_status() == FALSE) {
                 $this->db->trans_rollback();
-                redirect('/csc/form_revisi_anggaran/fail');
+                redirect('/frontdesk/form_revisi_anggaran/fail');
             } else {
                 $this->db->trans_commit();
-                redirect('/csc/form_revisi_anggaran/success');
+                redirect('/frontdesk/form_revisi_anggaran/success');
             }
 
         }
@@ -219,11 +219,11 @@ class Form_revisi_anggaran extends CI_Controller
 
     function success()
     {
-        $this->load->view('/csc/success');
+        $this->load->view('/frontdesk/success');
     }
 
     function fail()
     {
-        $this->load->view('/csc/fail');
+        $this->load->view('/frontdesk/fail');
     }
 }

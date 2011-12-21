@@ -12,7 +12,7 @@ class Dashboard extends CI_Controller
 
     function index()
     {
-        redirect('/csc/form_revisi_anggaran');
+        redirect('/frontdesk/form_revisi_anggaran');
         $this->_plusone();
 
         /*
@@ -25,7 +25,7 @@ class Dashboard extends CI_Controller
         $data['antrian_cse'] = $this->msatker->antrian_terakhir('E');
 
         $data['title'] = 'Dashboard';
-        $data['content'] = 'csc/dashboard';
+        $data['content'] = 'frontdesk/dashboard';
         $this->load->view('master-template', $data);
         /*}
           else
