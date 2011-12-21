@@ -145,7 +145,7 @@ function extractLast(term) {
 $(function () {
     $('#nama_kl').blur(function () {
         var nama_kl = $('#nama_kl').val();
-        $.get('<?php echo site_url('csa/identitas_satker/cari_kl/') ?>', {id_kementrian:nama_kl}, function (response) {
+        $.get('<?php echo site_url('helpdesk/identitas_satker/cari_kl/') ?>', {id_kementrian:nama_kl}, function (response) {
             console.log(response);
             $('#eselon').html(response);
             $('#kode_satker').removeAttr('disabled');
