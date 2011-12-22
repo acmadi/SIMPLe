@@ -1,3 +1,22 @@
+	<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery-1.4.2.min.js"></script>
+	<script src="<?php echo base_url(); ?>js/jquery.ui.core.min.js"></script>
+	<script src="<?php echo base_url(); ?>js/jquery.ui.widget.min.js"></script>
+	<script src="<?php echo base_url(); ?>js/jquery.ui.position.min.js"></script>
+	<script src="<?php echo base_url(); ?>js/jquery.ui.autocomplete.min.js"></script>
+	<link rel="stylesheet" href="<?php echo base_url() . 'css/ui-lightness/jquery-ui-1.8.16.custom.css';?>"/>
+<style type="text/css">
+    .ui-autocomplete {
+        max-height: 300px;
+        overflow-y: auto;
+        /* prevent horizontal scrollbar */
+        overflow-x: hidden;
+        /* add padding to account for vertical scrollbar */
+        padding-right: 20px;
+    }
+</style>
+
+
+
 <ul id="nav">
     <li><a href="#tab1">Manajemen User</a></li>
 </ul>
@@ -42,7 +61,7 @@
                     </thead>
                     <tbody>
 
-					<?php $i = 1;foreach($users->result() as $d): ?>
+					<?php $i = 1;foreach($result as $d): ?>
                         <tr>
                             <td class="short"><?php echo $d->id_user?></td>
                             <td><?php echo $d->username?></td>
@@ -80,3 +99,25 @@
     
     
 <script type="text/javascript" src="<?php echo base_url(); ?>js/fungsi.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $('#teks-cari').autocomplete({
+            source: function(request, response) {
+                $.ajax({
+                    url: "<?php echo site_url('/admin/man_user/cari') ?>",
+                    data: {
+                        term: request.term
+                    },
+
+                    dataType: 'json',
+
+                    success: function(data) {
+                        response(data);
+                    }
+                })
+            },
+            delay: 500,
+            minLength: 1
+        });
+    });
+</script>

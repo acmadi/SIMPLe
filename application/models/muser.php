@@ -79,7 +79,15 @@ class Muser extends CI_Model
 		
 		}
 		
-		$where = " WHERE username LIKE '%".$keyword."%' OR nama LIKE '%".$keyword."%' OR id_user LIKE '%".$keyword."%' ";
+		//if from suggest
+		$num_key = (!empty($keyword))?explode('-',$keyword):array();
+		if(count($num_key)>1){
+			$where = " WHERE id_user = '".trim($num_key[0])."' ";
+		}else{
+			$where = " WHERE username LIKE '%".$keyword."%' OR nama LIKE '%".$keyword."%' OR id_user LIKE '%".$keyword."%' ";
+		}
+		
+		
 		
 		$sql = "SELECT id_user, username, nama, email, no_tlp, nama_unit, id_lavel
 				FROM tb_user a LEFT JOIN tb_unit_saker b on a.id_unit_satker = b.id_unit_satker $where

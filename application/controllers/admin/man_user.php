@@ -20,7 +20,6 @@ class Man_user extends CI_Controller
 		
         $data['title'] 		= 'Manajemen User';
         $data['content'] 	= 'admin/man_user/man_user';
-        $data['users']      = $this->muser->get_all();
         $this->load->view('admin/template', $data);
        
     }
@@ -52,6 +51,31 @@ class Man_user extends CI_Controller
 			}
 		}
 	}
+	
+	function cari()
+    {
+        if ($this->input->is_ajax_request()) {
+
+            $term = $this->input->get('term');
+            
+            $sql = "SELECT id_user, username
+					FROM tb_user WHERE id_user LIKE '%{$term}%' OR username LIKE '%{$term}%' ORDER BY id_user"; 
+			
+
+            $result = $this->db->query($sql);
+
+            $array = array();
+            $i = 0;
+            if ($result->num_rows() > 0) {
+                foreach ($result->result() as $value) {
+                    $array[$i] = $value->id_user . '-' . $value->username;
+                    $i++;
+                }
+            }
+            echo json_encode($array);
+        }
+        exit();
+    }
 }
 
 ?>
