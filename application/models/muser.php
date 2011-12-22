@@ -34,7 +34,9 @@ class Muser extends CI_Model
                 FROM tb_user
                 JOIN tb_lavel
                 ON tb_user.id_lavel = tb_lavel.id_lavel
-                ORDER BY lavel ASC";
+                JOIN tb_unit_saker
+                ON tb_unit_saker.id_unit_satker = tb_user.id_unit_satker
+                ORDER BY id_user ASC";
         $query = $this->db->query($sql);
         return $query;
     }

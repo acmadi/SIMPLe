@@ -9,8 +9,7 @@ Class Login extends CI_Controller
 
     public function index()
     {
-        $data['optionlist'] = $this->mlogin->getdropdownsup();
-        $this->load->view("login", $data);
+        $this->load->view("login");
     }
 
     public function usermasuk()
@@ -26,6 +25,7 @@ Class Login extends CI_Controller
             $this->session->set_userdata('user', $login_data->username);
             $this->session->set_userdata('lavel', $login_data->nama_lavel);
             $this->session->set_userdata('id_user', $login_data->id_user);
+            $this->session->set_userdata('nama', $login_data->nama);
 			$this->log->create("Login");
 
 

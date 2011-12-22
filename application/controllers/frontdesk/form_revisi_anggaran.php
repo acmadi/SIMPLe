@@ -5,7 +5,7 @@ class Form_revisi_anggaran extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        $this->form_validation->set_message('required', '%s harus diisi');
+        $this->form_validation->set_message('required', '<strong>%s</strong> harus diisi.');
     }
 
     function index()
@@ -194,8 +194,8 @@ class Form_revisi_anggaran extends CI_Controller
 
                 if (isset($_POST['dokumen_lainnya'])) {
                     $sql = "INSERT INTO tb_kelengkapan_formulir
-                                        (no_tiket_frontdesk, kelengkapan)
-                                        VALUES ('{$no_tiket_frontdesk}', '{$dokumen_lainnya}')";
+                                        (no_tiket_frontdesk, kelengkapan, id_kelengkapan)
+                                        VALUES ('{$no_tiket_frontdesk}', '{$dokumen_lainnya}', 0)";
 
                     $this->db->query($sql);
                 }
@@ -203,12 +203,16 @@ class Form_revisi_anggaran extends CI_Controller
                 $i++;
             }
 
+            // Masukkan data ke tb_histori_tiket
+            $sql = "INSERT INTO tb_histori_tiket VALUES(NULL, ?, ?, NOW())";
+            $this->db->query($sql, array($no_tiket_frontdesk, $this->session->userdata('id_user')));
+
             if ($this->db->trans_status() == FALSE) {
                 $this->db->trans_rollback();
                 redirect('/frontdesk/form_revisi_anggaran/fail');
             } else {
                 $this->db->trans_commit();
-                redirect('/frontdesk/form_revisi_anggaran/success');
+                redirect('/frontdesk/form_revisi_anggaran/success/' . $no_tiket_frontdesk);
             }
 
         }
@@ -217,9 +221,36 @@ class Form_revisi_anggaran extends CI_Controller
         }
     }
 
-    function success()
+    function success($no_tiket_frontdesk = '')
     {
-        $this->load->view('/frontdesk/success');
+        // TODO: Gak optimal ini query nya. Suatu saat nanti harus dioptimalkan.
+        $result = $this->db->from('tb_tiket_frontdesk')
+                ->join('tb_petugas_satker', 'tb_petugas_satker.id_petugas_satker = tb_tiket_frontdesk.id_petugas_satker')
+                ->join('tb_satker', 'tb_satker.id_satker = tb_tiket_frontdesk.id_satker')
+                ->join('tb_kelengkapan_formulir', 'tb_kelengkapan_formulir.no_tiket_frontdesk = tb_tiket_frontdesk.no_tiket_frontdesk')
+                ->join('tb_kelengkapan_doc', 'tb_kelengkapan_doc.id_kelengkapan = tb_kelengkapan_formulir.id_kelengkapan')
+                //->join('tb_kementrian', 'tb_kementrian.id_kementrian = tb_satker.id_kementrian')
+                //->join('tb_unit', 'tb_unit.id_unit = tb_satker.id_unit')
+                ->where('tb_tiket_frontdesk.no_tiket_frontdesk', $no_tiket_frontdesk)
+                ->get();
+
+        $data['identitas'] = $result->result();
+
+        $temp = $result->row();
+        $id_kementrian = $temp->id_kementrian;
+        $id_unit = $temp->id_unit;
+
+        $result = $this->db->from('tb_kementrian')->where('id_kementrian', $id_kementrian)->get();
+        $data['kementrian'] = $result->row();
+
+        $result = $this->db->from('tb_unit')->where('id_unit', $id_unit)->get();
+        $data['unit'] = $result->row();
+
+        $data['no_tiket_frontdesk'] = $no_tiket_frontdesk;
+
+        //echo $this->db->last_query();
+
+        $this->load->view('/frontdesk/success2', $data);
     }
 
     function fail()

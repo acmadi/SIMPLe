@@ -6,6 +6,7 @@ class Man_unit_tambah extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Munit', 'unit');
+        $this->form_validation->set_message('required', '<strong>%s</strong> harus diisi.');
     }
 
     var $title = 'Manajemen Unit - Tambah';

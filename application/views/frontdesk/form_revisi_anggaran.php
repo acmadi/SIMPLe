@@ -339,12 +339,15 @@ $(function () {
         <legend>Kelengkapan Dokumen</legend>
 
         <?php foreach ($kelengkapan_dokumen->result() as $value): ?>
+
+            <?php if ($value->id_kelengkapan != 0): ?>
         <p>
             <label>
                 <input type="checkbox" name="dokumen[<?php echo $value->id_kelengkapan ?>]"/>
                 <?php echo $value->nama_kelengkapan ?>
             </label>
         </p>
+            <?php endif ?>
         <?php endforeach ?>
         <p>
             <label>Dokumen Lainnya
