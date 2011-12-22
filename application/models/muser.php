@@ -7,7 +7,9 @@ class Muser extends CI_Model
 				FROM tb_user
 				JOIN tb_lavel
 				ON tb_user.id_lavel = tb_lavel.id_lavel
-				ORDER BY nama ASC";
+				JOIN tb_unit_saker
+				ON tb_unit_saker.id_unit_satker = tb_user.id_unit_satker
+				ORDER BY id_user ASC";
 		$query = $this->db->query($sql);
 
 		$config['base_url'] = site_url('admin/man_user/index');
@@ -18,9 +20,13 @@ class Muser extends CI_Model
 
 		$offset = (int) $this->uri->segment(4, 0);
 
-		$sqlb = "SELECT id_user, username, nama, email, no_tlp, nama_unit, id_lavel
-				FROM tb_user a left join tb_unit_saker b on a.id_unit_satker = b.id_unit_satker
-				ORDER BY nama ASC
+		$sqlb = "SELECT *
+				FROM tb_user
+				JOIN tb_lavel
+				ON tb_user.id_lavel = tb_lavel.id_lavel
+				JOIN tb_unit_saker
+				ON tb_unit_saker.id_unit_satker = tb_user.id_unit_satker
+				ORDER BY id_user ASC
 				LIMIT ?,?";
 		$data["query"] = $this->db->query($sqlb, array($offset ,$config['per_page']));
 
@@ -47,7 +53,7 @@ class Muser extends CI_Model
 		$offset = (int) $this->uri->segment($uri_segment,0);	
 		
 		
-		$total_seg = $this->uri->total_segments(); //print_r($total_seg);exit();
+		$total_seg = $this->uri->total_segments();
 		$default = array("keyword");
 		
 		if($total_seg > 4){
@@ -73,16 +79,16 @@ class Muser extends CI_Model
 		
 		}
 		
-		$where = " WHERE username LIKE '%".$keyword."%' OR nama LIKE '%".$keyword."%'";
+		$where = " WHERE username LIKE '%".$keyword."%' OR nama LIKE '%".$keyword."%' OR id_user LIKE '%".$keyword."%' ";
 		
 		$sql = "SELECT id_user, username, nama, email, no_tlp, nama_unit, id_lavel
 				FROM tb_user a LEFT JOIN tb_unit_saker b on a.id_unit_satker = b.id_unit_satker $where
-				ORDER BY nama ASC";
+				ORDER BY id_user ASC";
 		$query = $this->db->query($sql);
 
 		$config['base_url'] = site_url('admin/man_user_cari/index').'/'.$url_add.'/';
 		$config['total_rows'] = $query->num_rows();
-		$config['per_page'] = 50;
+		$config['per_page'] = 3;
 		$config['uri_segment'] = $uri_segment;
 		$this->pagination->initialize($config);
 		
@@ -90,7 +96,7 @@ class Muser extends CI_Model
 		
 		$sqlb = "SELECT id_user, username, nama, email, no_tlp, nama_unit, id_lavel
 				FROM tb_user a LEFT JOIN tb_unit_saker b on a.id_unit_satker = b.id_unit_satker $where
-				ORDER BY nama ASC
+				ORDER BY id_user ASC
 				LIMIT ?,?";
 		$data["query"] = $this->db->query($sqlb, array($offset ,$config['per_page']));
 
