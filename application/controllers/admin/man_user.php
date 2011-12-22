@@ -44,10 +44,10 @@ class Man_user extends CI_Controller
 		if(!empty($user)){
 			$info = $this->muser->delete_user($user);
 			if($info){
-				$this->session->set_flashdata('success',"berhasil menghapus user");
+				$this->session->set_flashdata('success',"berhasil menghapus ID user : ".$user);
 				redirect('admin/man_user');
 			}else{
-				$this->session->set_flashdata('error',"gagal menghapus user");
+				$this->session->set_flashdata('error',"gagal menghapus ID user : ".$user);
 				redirect('admin/man_user');
 			}
 		}
