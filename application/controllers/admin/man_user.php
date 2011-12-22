@@ -30,10 +30,10 @@ class Man_user extends CI_Controller
 		if(!empty($user)){
 			$info = $this->muser->reset_password($user);
 			if($info){
-				$this->session->set_flashdata('success',"berhasil mereset password");
+				$this->session->set_flashdata('success',"berhasil mereset password ID User : ".$user);
 				redirect('admin/man_user');
 			}else{
-				$this->session->set_flashdata('error',"gagal mereset password");
+				$this->session->set_flashdata('error',"gagal mereset password ID User : ".$user);
 				redirect('admin/man_user');
 			}
 		}
