@@ -182,33 +182,47 @@ class Muser extends CI_Model
 	function set_surat_kerja($d){
 		$notvalid = array();
 		
-		if(!(checkdate($d['bln1'],$d['tgl1'],$d['thn1']))){
+		$mulai = explode('-',$d['tgl_mulai']);
+		$akhir = explode('-',$d['tgl_selesai']);
+		
+		if(!(checkdate($mulai[1],$mulai[0],$mulai[2]))){
 			$notvalid[] = "tanggal awal tidak valid"; 
 		}
 		
-		if(!(checkdate($d['bln2'],$d['tgl2'],$d['thn2']))){
+		if(!(checkdate($akhir[1],$akhir[0],$akhir[2]))){
 			$notvalid[] = "tanggal akhir tidak valid"; 
 		}
 		
 		if(count($notvalid) < 1){
-			$tgl_mulai		= $d['thn1'].'-'.$d['bln1'].'-'.$d['tgl1'];
-			$tgl_selesai	= $d['thn2'].'-'.$d['bln2'].'-'.$d['tgl2'];
 			
-			if(strtotime($tgl_mulai) > strtotime($tgl_selesai)){
-				$this->session->set_flashdata('error',"tanggal awal lebih besar dari tanggal akhir");
-			}else{
-				$sql = "INSERT INTO tb_masa_kerja(id_user,tanggal_mulai,tanggal_selesai) VALUES(?,?,?)";
-				$this->db->query($sql,array($d['id'],$tgl_mulai,$tgl_selesai));
-				
-				if($this->db->affected_rows() > 0){
-					$this->log->create("suksee menambahkan data masa kerja user : ".$d['id']);
-					$this->session->set_flashdata('success',"sukses");
-					return true;
+			$tgl_mulai		= $mulai[2].'-'.$mulai[1].'-'.$mulai[0];
+			$tgl_selesai	= $akhir[2].'-'.$akhir[1].'-'.$akhir[0];
+			
+			$cek_tanggal_db = $this->db->query("SELECT id_user FROM tb_masa_kerja WHERE (( ?  BETWEEN tanggal_mulai AND tanggal_selesai) 
+												OR ( ? BETWEEN tanggal_mulai AND tanggal_selesai)) AND id_user = ?",array($tgl_mulai,$tgl_selesai,$d['id']))->num_rows();
+			
+			if($cek_tanggal_db < 1){
+				if(strtotime($tgl_mulai) > strtotime($tgl_selesai)){
+					$this->session->set_flashdata('error',"tanggal awal lebih besar dari tanggal akhir");
 				}else{
-					$this->session->set_flashdata('success',"gagal");
-					return false;
+					$sql = "INSERT INTO tb_masa_kerja(id_user,tanggal_mulai,tanggal_selesai) VALUES(?,?,?)";
+					$this->db->query($sql,array($d['id'],$tgl_mulai,$tgl_selesai));
+					
+					if($this->db->affected_rows() > 0){
+						$this->log->create("suksee menambahkan data masa kerja user : ".$d['id']);
+						$this->session->set_flashdata('success',"sukses");
+						return true;
+					}else{
+						$this->session->set_flashdata('success',"gagal");
+						return false;
+					}
 				}
-			}	
+			}else{
+				$this->session->set_flashdata('error',"terdapat tanggal yang bersinggungan dengan tanggal masa kerja sebelumnya");
+				return false;
+			}
+
+			
 		}else{
 			$this->session->set_flashdata('error',implode(', ',$notvalid));
 			return false;
