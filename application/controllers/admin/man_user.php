@@ -68,7 +68,7 @@ class Man_user extends CI_Controller
             $i = 0;
             if ($result->num_rows() > 0) {
                 foreach ($result->result() as $value) {
-                    $array[$i] = $value->id_user . '-' . $value->username;
+                    $array[$i] = $value->id_user . ' - ' . $value->username;
                     $i++;
                 }
             }
