@@ -210,7 +210,12 @@ class Makses extends CI_Model
      * @return Object
      */
     public function get_all_users_by_level($id) {
-        $sql = "SELECT * FROM tb_user JOIN tb_lavel ON tb_user.id_lavel = tb_lavel.id_lavel WHERE tb_user.id_lavel = ?";
+        $sql = "SELECT * FROM tb_user
+                JOIN tb_lavel
+                ON tb_user.id_lavel = tb_lavel.id_lavel
+                JOIN tb_unit_saker
+                ON tb_unit_saker.id_unit_satker = tb_user.id_unit_satker
+                WHERE tb_user.id_lavel = ?";
         $result = $this->db->query($sql, array($id));
         return $result;
     }

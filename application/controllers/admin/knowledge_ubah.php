@@ -5,6 +5,7 @@ class Knowledge_ubah extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        $this->form_validation->set_message('required', '<strong>%s</strong> harus diisi.');
     }
 
     var $title = 'Knowledge Ubah';

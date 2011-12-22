@@ -6,6 +6,7 @@ class Akses_kontrol_surat_kerja extends CI_Controller
     {
         parent::__construct();
 		$this->load->model('Muser','user');
+        $this->form_validation->set_message('required', '<strong>%s</strong> harus diisi.');
     }
 
     var $title = 'Akses Kontrol - Surat Kerja';

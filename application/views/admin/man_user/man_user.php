@@ -53,7 +53,7 @@
                                 <a title="surat kerja" href="<?php echo site_url('admin/man_user_surat_kerja/index/'.$d->id_user)?>"  /><img src="<?php echo base_url(); ?>images/icon_suratkerja.png"/></a>
                                 <a title="reset password" href="<?php echo site_url('admin/man_user/reset_password/'.$d->id_user)?>"  onclick='return resetpassword()' /><img src="<?php echo base_url(); ?>images/reload.png"/></a>
                                 <a title="ubah" href="<?php echo site_url('admin/man_user_ubah/index/'.$d->id_user)?>" /><img src="<?php echo base_url(); ?>images/edit.png"/></a>
-                                <?php if ($d->lavel != 7): ?>
+                                <?php if ($d->id_lavel != 1): ?>
                                     <a title="hapus" href="<?php echo site_url('admin/man_user/delete/'.$d->id_user)?>"  onclick="return hapus()" /><img src="<?php echo base_url(); ?>images/icon_delete.png"/></a>
                                 <?php endif ?>
                             </td>

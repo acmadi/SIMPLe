@@ -7,6 +7,7 @@ class Man_forum extends CI_Controller
         parent::__construct();
         $this->load->model('mforum');
         $this->load->library('form_validation');
+        $this->form_validation->set_message('required', '<strong>%s</strong> harus diisi.');
     }
 
     var $title = 'Manajemen Forum';

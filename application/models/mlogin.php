@@ -19,7 +19,7 @@ class Mlogin extends CI_Model
 
     public function getdropdownsup()
     {
-        $dbres = $this->db->get('levelid');
+        $dbres = $this->db->get('tb_lavel');
         $ddmenu = array();
         foreach ($dbres->result_array() as $tablerow) {
             $ddmenu[0] = '--Choose Mode--';
@@ -32,11 +32,11 @@ class Mlogin extends CI_Model
     {
         $data = array();
         $options = array('id' => $id);
-        $Q = $this->db->get_where('member', $options, 1);
-        if ($Q->num_rows() > 0) {
-            $data = $Q->row_array();
-        }
-        $Q->free_result();
+//        $Q = $this->db->get_where('member', $options, 1);
+//        if ($Q->num_rows() > 0) {
+//            $data = $Q->row_array();
+//        }
+//        $Q->free_result();
         return $data;
     }
 }

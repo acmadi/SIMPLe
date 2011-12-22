@@ -6,6 +6,7 @@ class Knowledge extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Mknowledge', 'knowledge');
+        $this->form_validation->set_message('required', '<strong>%s</strong> harus diisi.');
     }
 
     var $title = 'Knowledge';

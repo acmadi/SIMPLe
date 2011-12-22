@@ -61,8 +61,8 @@
                         <td class="short"><?php echo $item->id_user?></td>
                         <td><?php echo $item->username?></td>
                         <td><?php echo $item->nama?></td>
-                        <td><?php echo $item->id_unit_satker?></td>
-                        <td><?php echo $item->lavel?></td>
+                        <td><?php echo $item->nama_unit ?></td>
+                        <td><?php echo $item->nama_lavel?></td>
                         <td class="action">
                             <span class="button_kecil">
                                 <a title="Surat kerja" href="<?php echo site_url('admin/akses_kontrol_surat_kerja/index/'.$item->id_user.'/'.$item->id_lavel)?>"/>
@@ -80,9 +80,11 @@
                                 </a>
                             </span>
                             <span class="button_kecil">
+                                <?php if ($item->id_lavel != 1): ?>
                                 <a title="Delete" href="<?php echo site_url('admin/akses_kontrol/delete_user/'.$item->id_user.'/'.$item->id_lavel)?>" onclick="return hapus()"/>
                                     <img src="<?php echo base_url(); ?>images/icon_delete.png" />
                                 </a>
+                                <?php endif ?>
                             </span>
                         </td>
                     </tr>
