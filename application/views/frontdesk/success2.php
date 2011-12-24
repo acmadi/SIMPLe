@@ -52,6 +52,23 @@
 <?php //print_r($identitas) ?>
 
 <div class="container_12 clearfix">
+
+    <table style="width: 100%; border-bottom: 1px solid #333;">
+        <tr>
+            <td style="text-align: right; width: 120px;">
+                <img src="<?php echo base_url('images/logo.png') ?>"/>
+            </td>
+            <td style="text-align: center; padding: 0;">
+                <span style="font-size: 13pt">KEMENTERIAN KEUANGAN REPUBLIK INDONESIA</span><br/>
+                <span style="font-size: 11pt">DIREKTORAT JENDERAL ANGGARAN</span><br/>
+                <span style="font-size: 7pt">GEDUNG SUTIKNO SLAMET LT. 4, JALAN DR. WAHIDIN NOMOR 1, JAKARTA 10710, KOTAK POS 2435</span><br/>
+                <span style="font-size: 7pt">TELEPON (021) 3849315; FAKSIMILE (021) 3847157; SITUS www.anggaran.depkeu.go.id</span><br/>
+            </td>
+        </tr>
+    </table>
+
+    <br/>
+
     <h1>Tanda Terima Pengajuan Revisi Anggaran #<?php echo sprintf('%05d', $no_tiket_frontdesk) ?></h1>
 
     <div class="grid_6" style="float: left;">
