@@ -46,7 +46,7 @@ Class Login extends CI_Controller
                     redirect("csd/dashboard");
                     break;
                 case '5':
-                    redirect("cse/dashboard");
+                    redirect("pengaduan/dashboard");
                     break;
                 case '6':
                     redirect('halodja/dashboard');
