@@ -58,7 +58,7 @@
 </style>
 
 <div class="content">
-    <h1>Supervisor</h1>
+    <h1>Penyelia</h1>
 
     <fieldset>
         <legend>Report Help Desk</legend>
