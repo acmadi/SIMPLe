@@ -29,7 +29,6 @@ class Helpdesk_form_pertanyaan extends CI_Controller
         $result = $this->db->query($sql, array($last_tiket));
         $result = $result->result();
 
-        print_r($result);
         $result = $result[0];
         $data['identitas'] = $result;
 
