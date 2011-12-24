@@ -37,7 +37,7 @@
         elseif ($this->uri->segment(1) == 'csd') {
             $this->load->view('navbar_csd');
         }
-        elseif ($this->uri->segment(1) == 'cse') {
+        elseif ($this->uri->segment(1) == 'pengaduan') {
             $this->load->view('navbar_cse');
         }
         elseif ($this->uri->segment(1) == 'supervisor') {
