@@ -85,9 +85,7 @@ class Helpdesk_form_pertanyaan extends CI_Controller
                     ON tb_tiket_helpdesk.id_satker = tb_satker.id_satker
                     WHERE no_tiket_helpdesk = ?";
 
-            $result = $this->db->query($sql, array($this->session->userdata('tiket')));
-            $result = $result->result();
-            $result = $result[0];
+            $result = $this->db->query($sql, array($this->session->userdata('tiket')))->row();
             $data['identitas'] = $result;
         }
 
@@ -96,10 +94,12 @@ class Helpdesk_form_pertanyaan extends CI_Controller
 
         $knowledges = $this->db->query("SELECT * FROM tb_knowledge_base WHERE judul LIKE '%{$pertanyaan}%' OR desripsi LIKE '%{$pertanyaan}%' OR jawaban LIKE '%{$pertanyaan}%'");
 
-        // $knowledges = $knowledges->result();
         $data['knowledges'] = $knowledges;
 
-        $data['kategori_knowledge_base'] = $kategori_knowledge_base;
+        // Kategori Knowledge Base
+        $result = $this->db->query("SELECT * FROM tb_kat_knowledge_base WHERE id_kat_knowledge_base = '{$kategori_knowledge_base}'")->row();
+        $data['kategori_knowledge_base'] = $result->kat_knowledge_base;
+
         $data['prioritas'] = $prioritas;
         $data['pertanyaan'] = $pertanyaan;
         $data['description'] = $description;

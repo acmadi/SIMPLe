@@ -13,9 +13,10 @@ class Knowledge_base extends CI_Controller
     function index()
     {
         $data['title'] = 'Knowledge Base';
-        $data['content'] = 'helpdesk/knowledge/knowledge_base';
+        $data['content'] = 'base';
         $data['result'] = $this->knowledge->get_all_data_category();
         $data['idsearch'] = "";
+        $data['categories'] = $this->knowledge->get_all_category();
         $this->load->view('master-template', $data);
     }
 
@@ -78,19 +79,17 @@ class Knowledge_base extends CI_Controller
 
     public function get_by_id($id)
     {
-        $result = $this->knowledge->get_by_id($id);
+        $result = $this->db->from('tb_knowledge_base')
+                ->join('tb_kat_knowledge_base', 'tb_knowledge_base.id_kat_knowledge_base = tb_kat_knowledge_base.id_kat_knowledge_base')
+                ->where('id_knowledge_base', $id)
+                ->get();
 
-        foreach ($result->result() as $value) {
+        $value = $result->row();
 
-            //            print_r($value);
-            echo "<h1>{$value->kat_knowledge_base}</h1>";
-            echo "<h2>{$value->judul}</h2>";
-            echo "<div>{$value->desripsi}</div>";
-            echo "<div>{$value->jawaban}</div>";
-            echo "<div><input type=submit class='button blue-pill' value='Batal' /></div>";
-            echo "<div><input type=submit class='button blue-pill' value='Ekskalasi' /></div>";
-            echo "<div><input type=submit class='button blue-pill' value='Jawab' /></div>";
-        }
+        echo "<div style='font-weight: bold; margin-bottom: 20px;'>{$value->judul}</div>";
+        echo "<div>{$value->jawaban}</div>";
+        echo "<input type='hidden' value='{$id}' />";
+
         exit();
     }
 
@@ -99,11 +98,16 @@ class Knowledge_base extends CI_Controller
         $pertanyaan = $this->input->get('cari');
         $result = $this->db->query("SELECT * FROM tb_knowledge_base WHERE judul LIKE '%{$pertanyaan}%' OR desripsi LIKE '%{$pertanyaan}%' OR jawaban LIKE '%{$pertanyaan}%'");
 
+        echo '<ul>';
         foreach ($result->result() as $value) {
-            echo sprintf('<h2><a href="javascript:void(0)" onclick="popUpReferensiJawaban(%s)">%s</a></h2>', $value->id_knowledge_base, $value->judul );
-            echo sprintf('<p><em>%s</em></p>', $value->judul);
-            echo '<hr/>';
+            echo sprintf('<li><a href="javascript:void(0)" class="referensi-jawaban" title="%s">%s</a></li>', $value->id_knowledge_base, $value->judul);
+//            echo sprintf('<p><em>%s</em></p>', $value->judul);
         }
+        echo '</ul>';
+    }
+
+    public function done($id) {
+        echo $id;
     }
 }
 
