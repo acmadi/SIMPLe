@@ -60,11 +60,11 @@ class Knowledge extends CI_Controller
                 $category = $this->input->post('category', TRUE);
                 $info = $this->knowledge->add_category($category);
                 if ($info) {
-                    $this->session->set_flashdata('success', "Kategori baru telah ditambahkan");
-                    redirect('/admin/knowledge/index/2');
+                    $this->session->set_flashdata('success', "Kategori : ".$category." telah ditambahkan");
+                    redirect('/admin/knowledge/add_category');
                 } else {
-                    $this->session->set_flashdata('error', "Kategori gagal ditambahkan");
-                    redirect('/admin/knowledge/index/3');
+                    $this->session->set_flashdata('error', "Kategori : ".$category." gagal ditambahkan");
+                    redirect('/admin/knowledge/add_category');
                 }
 
             }
@@ -105,11 +105,11 @@ class Knowledge extends CI_Controller
 				
                 $info = $this->knowledge->add_knowledge($data);
                 if ($info) {
-                    $this->session->set_flashdata('success', "Knowledge baru telah ditambahkan");
-                    redirect('/admin/knowledge');
+                    $this->session->set_flashdata('success', "Knowledge baru berjudul '".$data['fjudul']."' telah ditambahkan");
+                    redirect('/admin/knowledge/add_knowledge');
                 } else {
-                    $this->session->set_flashdata('error', "Knowledge baru gagal ditambahkan");
-                    redirect('/admin/knowledge');
+                    $this->session->set_flashdata('error', "Knowledge baru berjudul '".$data['fjudul']."' gagal ditambahkan");
+                    redirect('/admin/knowledge/add_knowledge');
                 }
             }
         } else {
