@@ -2,24 +2,33 @@
 <html>
 <head>
     <title>Tanda Terima Pengajuan Revisi Anggaran - #<?php echo sprintf('%05d', $dokumen->no_tiket_frontdesk) ?></title>
-    <!--    <link href="--><?php //echo base_url('css/960gs/reset.css') ?><!--" type="text/css" rel="stylesheet"/>-->
-    <!--        <link href="--><?php //echo base_url('css/960gs/text.css') ?><!--" type="text/css" rel="stylesheet"/>-->
-    <!--    <link href="--><?php //echo base_url('css/960gs/960.css') ?><!--" type="text/css" rel="stylesheet"/>-->
-    <link href="<?php echo base_url('css/print.css') ?>" type="text/css" rel="stylesheet" media="print"/>
+    <link href="<?php echo base_url('css/print.css') ?>" type="text/css" rel="stylesheet" media="all"/>
     <style>
         body {
-            font-family: "Lucida Grande", Tahoma, Arial, sans-serif;
+            font-family: Arial, sans-serif;
+            font-size: 10pt;
         }
 
         h1 {
+            font-size: 14pt;
             text-align: center;
             font-weight: normal;
             margin-bottom: 2em;
-            border-bottom: 1px dotted #cecece;
         }
 
         .clear {
             clear: both;
+        }
+
+        table {
+            margin: 0;
+            padding: 0;
+        }
+
+        table tr td {
+            padding: 0;
+            margin: 0;
+            border: none;
         }
 
         fieldset {
@@ -28,11 +37,11 @@
         }
 
         legend {
-            font-size: 22px;
+            font-size: 14pt;
         }
 
         label {
-            width: 200px;
+            width: 100px;
             display: inline-block;
             font-weight: bold;
         }
@@ -49,71 +58,96 @@
     </style>
 </head>
 <body>
-<?php // print_r($dokumen) ?>
 
-<div class="container_12 clearfix">
-    <h1>Tanda Terima Pengajuan Revisi Anggaran #<?php echo sprintf('%05d', $dokumen->no_tiket_frontdesk) ?></h1>
+<div>
+    <table style="width: 100%; border-bottom: 1px solid #333;">
+        <tr>
+            <td style="text-align: right; width: 120px;">
+                <img src="<?php echo base_url('images/logo.png') ?>"/>
+            </td>
+            <td style="text-align: center; padding: 0;">
+                <span style="font-size: 13pt">KEMENTERIAN KEUANGAN REPUBLIK INDONESIA</span><br/>
+                <span style="font-size: 11pt">DIREKTORAT JENDERAL ANGGARAN</span><br/>
+                <span style="font-size: 7pt">GEDUNG SUTIKNO SLAMET LT. 4, JALAN DR. WAHIDIN NOMOR 1, JAKARTA 10710, KOTAK POS 2435</span><br/>
+                <span style="font-size: 7pt">TELEPON (021) 3849315; FAKSIMILE (021) 3847157; SITUS www.anggaran.depkeu.go.id</span><br/>
+            </td>
+        </tr>
+    </table>
 
-    <div class="grid_6" style="float: left;">
-        <div><label class="short">ID Petugas</label> <?php echo $this->session->userdata('id_user') ?></div>
-        <div><label class="short">Nama Petugas</label> <?php echo $this->session->userdata('nama') ?></div>
-        <div><label class="short">No. Tiket</label> <strong><?php echo sprintf('#%05d', $dokumen->no_tiket_frontdesk) ?></strong></div>
-    </div>
+    <br/>
 
-    <div class="grid_6" style="text-align: right; float: right;">
-        <label class="short">Tanggal</label>
-        <?php echo date('d-m-Y H:i') ?>
-    </div>
-    <div class="clear"></div>
+    <h1>Tanda Terima Pengambilan Dokumen Revisi Anggaran #<?php echo sprintf('%05d', $dokumen->no_tiket_frontdesk) ?></h1>
+
+    <table style="width: 100%;">
+        <tr>
+            <td style="width: 120px;">ID Petugas</td>
+            <td style="width: 320px;"><?php echo $this->session->userdata('id_user') ?></td>
+
+            <td style="text-align: left; padding-right: 10px;">Tanggal</td>
+            <td style="text-align: left;"><?php echo date('d-m-Y H:i') ?></td>
+        </tr>
+        <tr>
+            <td style="width: 120px;">Nama Petugas</label></td>
+            <td style="width: 320px;"><?php echo $this->session->userdata('nama') ?></td>
+
+            <td style="text-align: left; padding-right: 10px;">No. Tiket</label> </td>
+            <td style="text-align: left;"><?php echo sprintf('#%05d', $dokumen->no_tiket_frontdesk) ?></td>
+        </tr>
+        <tr>
+
+        </tr>
+    </table>
 
     <div>
-        <fieldset>
-            <legend>Identitas Satker</legend>
 
-<!--            <p>-->
-<!--                <label>Kode - Nama K/L</label><br/>-->
-<!--                <span>--><?php //echo $kementrian->id_kementrian . ' - ' . $kementrian->nama_kementrian ?><!--</span>-->
-<!--            </p>-->
 
-<!--            <p>-->
-<!--                <label>Nama Eselon I</label><br/>-->
-<!--                <span>--><?php //echo $unit->nama_unit ?><!--</span>-->
-<!--            </p>-->
+        <!--            <tr>-->
+        <!--                <td>Kode - Nama K/L</td><br/>-->
+        <!--                <td>--><?php //echo $kementrian->id_kementrian . ' - ' . $kementrian->nama_kementrian ?><!--</td>-->
+        <!--            </tr>-->
 
-            <p>
-                <label>Nama Satker</label><br/>
-                <span><?php echo $dokumen->id_satker . ' - ' . $dokumen->nama_satker ?></span>
-            </p>
+        <!--            <tr>-->
+        <!--                <td>Nama Eselon I</td><br/>-->
+        <!--                <td>--><?php //echo $unit->nama_unit ?><!--</td>-->
+        <!--            </tr>-->
 
-            <p>
-                <label>Nama</label>
-                <span><?php echo $dokumen->nama_petugas ?></span>
-            </p>
+        <table style="width: 100%; margin-top: 24pt">
+            <tr>
+                <td colspan="2">
+                    <strong>Identitas Satker</strong>
+                </td>
+            </tr>
+            <tr>
+                <td>Nama Satker</td>
+                <td>: <?php echo $dokumen->id_satker . ' - ' . $dokumen->nama_satker ?></td>
+            </tr>
 
-            <p>
-                <label>Jabatan</label>
-                <span><?php echo $dokumen->jabatan_petugas ?></span>
-            </p>
+            <tr>
+                <td>Nama</td>
+                <td>: <?php echo $dokumen->nama_petugas ?></td>
+            </tr>
 
-            <p>
-                <label>No. HP</label>
-                <span><?php echo $dokumen->no_hp ?></span>
-            </p>
+            <tr>
+                <td>Jabatan</td>
+                <td>: <?php echo $dokumen->jabatan_petugas ?></td>
+            </tr>
 
-            <p>
-                <label>No. Kantor</label>
-                <span><?php echo $dokumen->no_kantor ?></span>
-            </p>
+            <tr>
+                <td>No. HP</td>
+                <td>: <?php echo $dokumen->no_hp ?></td>
+            </tr>
 
-            <p>
-                <label>Email</label>
-                <span><?php echo $dokumen->email ?></span>
-            </p>
+            <tr>
+                <td>No. Kantor</td>
+                <td>: <?php echo $dokumen->no_kantor ?></td>
+            </tr>
 
-        </fieldset>
+            <tr>
+                <td>Email</td>
+                <td>: <?php echo $dokumen->email ?></td>
+            </tr>
+        </table>
     </div>
-
-
 
 
     <p style="margin: 50px 0; text-align: right;">
@@ -121,8 +155,6 @@
         <br/><br/><br/><br/><br/>
         (............................)
     </p>
-
-
 
 
     <button onclick="window.print()" class="cetak">Cetak</button>

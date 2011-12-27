@@ -42,6 +42,15 @@
 </script>
 
 <div class="content">
+
+
+
+
+
+
+
+
+
     <div id="msg">
         <?php
                 if ($this->session->flashdata('msg')) {
@@ -49,14 +58,24 @@
     }
         ?>
     </div>
-    <div style="display: none;" id="tab1" class="tab_konten">
+
+    <div class="container_12">
 
         <h1>Knowledge Base</h1>
 
         <form action="<?php echo site_url('/helpdesk/knowledge_base/search_knowledge') ?>" id="search-form" method="post" style="text-align: right;">
-            <input type="text" name="fkat" placeholder="Pencarian" style="width: 400px !important;" autocomplete="off"/>
+            <input type="text" name="fkat" placeholder="Pencarian" autocomplete="off"/>
             <input id="search" class="button blue-pill" type="submit" value="Cari">
         </form>
+
+        <div class="grid_3">
+            <ul>
+                <li>Semua</li>
+                <?php foreach ($categories->result() as $value): ?>
+                <li><?php echo anchor('/frontdesk/knowledge_base/' . $value->id_kat_knowledge_base , $value->kat_knowledge_base) ?></li>
+                <?php endforeach ?>
+            </ul>
+        </div>
 
         <div style="margin: 20px 0;">
 

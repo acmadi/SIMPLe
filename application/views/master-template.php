@@ -5,7 +5,11 @@
     <title><?php echo isset($title) ? $title : ''; ?></title>
     <link rel="shortcut icon" href="<?php echo base_url() . 'images/icon.jpg';?>"/>
 
-    <link rel="stylesheet" href="<?php echo base_url() . 'css/ui-lightness/jquery-ui-1.8.16.custom.css';?>"/>
+    <link rel="stylesheet" href="<?php echo base_url() . 'css/cupertino/jquery-ui-1.8.16.custom.css';?>"/>
+
+    <style type="text/css">@import url("<?php echo base_url() . 'css/960gs/reset.css'; ?>");</style>
+    <style type="text/css">@import url("<?php echo base_url() . 'css/960gs/text.css'; ?>");</style>
+    <style type="text/css">@import url("<?php echo base_url() . 'css/960gs/960.css'; ?>");</style>
 
     <style type="text/css">@import url("<?php echo base_url() . 'css/style.css'; ?>");</style>
     <style type="text/css">@import url("<?php echo base_url() . 'css/autoSuggest.css'; ?>");</style>
@@ -28,6 +32,15 @@
     <div id="navbar">
         <?php
 
+        /* NOTE: Digunakan kalau butuh menu CS semua digabung */
+
+        //switch ($this->session->userdata('id_lavel')) {
+        //    case 1:
+        //        $this->load->view('navbar_cs');
+        //        break;
+        //}
+
+
         if ($this->uri->segment(1) == 'helpdesk') {
             $this->load->view('navbar_helpdesk');
         }
@@ -37,7 +50,7 @@
         elseif ($this->uri->segment(1) == 'csd') {
             $this->load->view('navbar_csd');
         }
-        elseif ($this->uri->segment(1) == 'cse') {
+        elseif ($this->uri->segment(1) == 'pengaduan') {
             $this->load->view('navbar_cse');
         }
         elseif ($this->uri->segment(1) == 'supervisor') {

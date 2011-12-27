@@ -261,8 +261,6 @@ $(function () {
 
     <h1>Form Revisi Anggaran</h1>
 
-    <div style="float: right;"><?php echo date('d M Y') ?></div>
-
     <div class="clear"></div>
 
     <?php

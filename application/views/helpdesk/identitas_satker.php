@@ -93,10 +93,10 @@
 
         <?php
             $errors = validation_errors();
-    if (!empty($errors)) {
-        echo '<div class="error">' . validation_errors() . '</div>';
-    }
-    ?>
+            if (!empty($errors)) {
+                echo '<div class="error">' . validation_errors() . '</div>';
+            }
+        ?>
 
     <fieldset>
         <legend>Kategori</legend>

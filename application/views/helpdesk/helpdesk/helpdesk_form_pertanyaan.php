@@ -49,7 +49,7 @@
     </fieldset>
 
     <fieldset>
-        <legend>Pertanyaan Stakeholder</legend>
+        <legend>Pertanyaan</legend>
 
         <?php echo form_open('/helpdesk/helpdesk_form_pertanyaan/submit'); ?>
         <input type="hidden" name="no_tiket_helpdesk" value="<?php echo $this->session->userdata('tiket') ?>"/>
