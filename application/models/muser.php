@@ -7,7 +7,9 @@ class Muser extends CI_Model
 				FROM tb_user
 				JOIN tb_lavel
 				ON tb_user.id_lavel = tb_lavel.id_lavel
-				ORDER BY nama ASC";
+				JOIN tb_unit_saker
+				ON tb_unit_saker.id_unit_satker = tb_user.id_unit_satker
+				ORDER BY id_user ASC";
 		$query = $this->db->query($sql);
 
 		$config['base_url'] = site_url('admin/man_user/index');
@@ -18,9 +20,13 @@ class Muser extends CI_Model
 
 		$offset = (int) $this->uri->segment(4, 0);
 
-		$sqlb = "SELECT id_user, username, nama, email, no_tlp, nama_unit, id_lavel
-				FROM tb_user a left join tb_unit_saker b on a.id_unit_satker = b.id_unit_satker
-				ORDER BY nama ASC
+		$sqlb = "SELECT *
+				FROM tb_user
+				JOIN tb_lavel
+				ON tb_user.id_lavel = tb_lavel.id_lavel
+				JOIN tb_unit_saker
+				ON tb_unit_saker.id_unit_satker = tb_user.id_unit_satker
+				ORDER BY id_user ASC
 				LIMIT ?,?";
 		$data["query"] = $this->db->query($sqlb, array($offset ,$config['per_page']));
 
@@ -47,7 +53,7 @@ class Muser extends CI_Model
 		$offset = (int) $this->uri->segment($uri_segment,0);	
 		
 		
-		$total_seg = $this->uri->total_segments(); //print_r($total_seg);exit();
+		$total_seg = $this->uri->total_segments();
 		$default = array("keyword");
 		
 		if($total_seg > 4){
@@ -73,16 +79,24 @@ class Muser extends CI_Model
 		
 		}
 		
-		$where = " WHERE username LIKE '%".$keyword."%' OR nama LIKE '%".$keyword."%'";
+		//if from suggest
+		$num_key = (!empty($keyword))?explode('-',$keyword):array();
+		if(count($num_key)>1){
+			$where = " WHERE id_user = '".trim($num_key[0])."' ";
+		}else{
+			$where = " WHERE username LIKE '%".$keyword."%' OR nama LIKE '%".$keyword."%' OR id_user LIKE '%".$keyword."%' ";
+		}
+		
+		
 		
 		$sql = "SELECT id_user, username, nama, email, no_tlp, nama_unit, id_lavel
 				FROM tb_user a LEFT JOIN tb_unit_saker b on a.id_unit_satker = b.id_unit_satker $where
-				ORDER BY nama ASC";
+				ORDER BY id_user ASC";
 		$query = $this->db->query($sql);
 
 		$config['base_url'] = site_url('admin/man_user_cari/index').'/'.$url_add.'/';
 		$config['total_rows'] = $query->num_rows();
-		$config['per_page'] = 50;
+		$config['per_page'] = 3;
 		$config['uri_segment'] = $uri_segment;
 		$this->pagination->initialize($config);
 		
@@ -90,7 +104,7 @@ class Muser extends CI_Model
 		
 		$sqlb = "SELECT id_user, username, nama, email, no_tlp, nama_unit, id_lavel
 				FROM tb_user a LEFT JOIN tb_unit_saker b on a.id_unit_satker = b.id_unit_satker $where
-				ORDER BY nama ASC
+				ORDER BY id_user ASC
 				LIMIT ?,?";
 		$data["query"] = $this->db->query($sqlb, array($offset ,$config['per_page']));
 
@@ -182,33 +196,47 @@ class Muser extends CI_Model
 	function set_surat_kerja($d){
 		$notvalid = array();
 		
-		if(!(checkdate($d['bln1'],$d['tgl1'],$d['thn1']))){
+		$mulai = explode('-',$d['tgl_mulai']);
+		$akhir = explode('-',$d['tgl_selesai']);
+		
+		if(!(checkdate($mulai[1],$mulai[0],$mulai[2]))){
 			$notvalid[] = "tanggal awal tidak valid"; 
 		}
 		
-		if(!(checkdate($d['bln2'],$d['tgl2'],$d['thn2']))){
+		if(!(checkdate($akhir[1],$akhir[0],$akhir[2]))){
 			$notvalid[] = "tanggal akhir tidak valid"; 
 		}
 		
 		if(count($notvalid) < 1){
-			$tgl_mulai		= $d['thn1'].'-'.$d['bln1'].'-'.$d['tgl1'];
-			$tgl_selesai	= $d['thn2'].'-'.$d['bln2'].'-'.$d['tgl2'];
 			
-			if(strtotime($tgl_mulai) > strtotime($tgl_selesai)){
-				$this->session->set_flashdata('error',"tanggal awal lebih besar dari tanggal akhir");
-			}else{
-				$sql = "INSERT INTO tb_masa_kerja(id_user,tanggal_mulai,tanggal_selesai) VALUES(?,?,?)";
-				$this->db->query($sql,array($d['id'],$tgl_mulai,$tgl_selesai));
-				
-				if($this->db->affected_rows() > 0){
-					$this->log->create("suksee menambahkan data masa kerja user : ".$d['id']);
-					$this->session->set_flashdata('success',"sukses");
-					return true;
+			$tgl_mulai		= $mulai[2].'-'.$mulai[1].'-'.$mulai[0];
+			$tgl_selesai	= $akhir[2].'-'.$akhir[1].'-'.$akhir[0];
+			
+			$cek_tanggal_db = $this->db->query("SELECT id_user FROM tb_masa_kerja WHERE (( ?  BETWEEN tanggal_mulai AND tanggal_selesai) 
+												OR ( ? BETWEEN tanggal_mulai AND tanggal_selesai)) AND id_user = ?",array($tgl_mulai,$tgl_selesai,$d['id']))->num_rows();
+			
+			if($cek_tanggal_db < 1){
+				if(strtotime($tgl_mulai) > strtotime($tgl_selesai)){
+					$this->session->set_flashdata('error',"tanggal awal lebih besar dari tanggal akhir");
 				}else{
-					$this->session->set_flashdata('success',"gagal");
-					return false;
+					$sql = "INSERT INTO tb_masa_kerja(id_user,tanggal_mulai,tanggal_selesai) VALUES(?,?,?)";
+					$this->db->query($sql,array($d['id'],$tgl_mulai,$tgl_selesai));
+					
+					if($this->db->affected_rows() > 0){
+						$this->log->create("suksee menambahkan data masa kerja user : ".$d['id']);
+						$this->session->set_flashdata('success',"sukses");
+						return true;
+					}else{
+						$this->session->set_flashdata('success',"gagal");
+						return false;
+					}
 				}
-			}	
+			}else{
+				$this->session->set_flashdata('error',"terdapat tanggal yang bersinggungan dengan tanggal masa kerja sebelumnya");
+				return false;
+			}
+
+			
 		}else{
 			$this->session->set_flashdata('error',implode(', ',$notvalid));
 			return false;

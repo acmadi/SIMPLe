@@ -65,7 +65,15 @@ class Munit extends CI_Model {
 		
 		}
 		
-		$where = " WHERE nama_unit LIKE '%".$keyword."%' OR kode_unit LIKE '%".$keyword."%'";
+		//if from suggest
+		$num_key = (!empty($keyword))?explode('-',$keyword):array();
+		if(count($num_key)>1){
+			$where = " WHERE id_unit_satker = '".trim($num_key[0])."' ";
+		}else{
+			$where = " WHERE nama_unit LIKE '%".$keyword."%' OR kode_unit LIKE '%".$keyword."%'";
+		}
+		
+		
 		
 		$sql = "SELECT * FROM tb_unit_saker $where
 				ORDER BY id_unit_satker ASC";

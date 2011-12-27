@@ -54,32 +54,28 @@
                     <th style="width: 20px">#</th>
                     <th style="width: 20px">Tanggal</th>
                     <th style="width: 20px">No.Tiket</th>
-                    <th style="width: 50px">Nama Petugas</th>
-                    <th>Satker</th>
-                    <th>Subyek</th>
+                    <th style="width: 50px">Nama Satker</th>
+                    <th>Pertanyaan</th>
                     <th  style="width: 30px">Status</th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php $i = 1 ?>
-                <?php foreach($tikets as $tiket) : ?>
+                <?php foreach($result as $tiket) : ?>
                 <tr>
                     <td style="width: 20px"><?php echo $i ?></td>
                     <td style="width: 20px"><?php echo $tiket->tanggal ?></td>
-                    <td style="width: 20px"><?php echo $tiket->no_tiket ?></td>
-                    <td style="width: 50px"><?php echo $tiket->nama_petugas ?></td>
-                    <td><?php echo $tiket->nama_satker ?></td>
-                    <td><?php echo $tiket->judul ?></td>
+                    <td style="width: 20px"><?php echo $tiket->no_tiket_helpdesk ?></td>
+                    <td style="width: 50px"><?php echo $tiket->nama_satker ?></td>
+                    <td><?php echo $tiket->pertanyaan ?></td>
                     <td  style="width: 30px"><?php echo $tiket->status ?></td>
                 </tr>
                 <?php $i++; endforeach; ?>
                 </tbody>
             </table>
         </div>
-        <br/>
+		<div class="pagination"><?php echo ($pageLink)?'Halaman '.$pageLink:'';?></div><br />
 
-<!--        <div class="pagination">Halaman <a href="#">&laquo;</a> <a href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a-->
-<!--                href="#">4</a> <a href="#">5</a> <a href="#">6</a> <a href="#">&raquo;</a></div>-->
     </div>
 </div>
 </div>

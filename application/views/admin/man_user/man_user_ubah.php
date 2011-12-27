@@ -81,7 +81,7 @@
         </table>
 		<br />
         <div class="submit_right">
-            <input type="submit" class="button blue-pill" value="reset" />
+			<a href="<?php echo site_url('/admin/man_user') ?>" class="button gray-pill">Batal</a>
             <input type="submit" class="button blue-pill" value="simpan" />
         </div>
         </form>

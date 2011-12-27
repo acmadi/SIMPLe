@@ -11,6 +11,7 @@ class Man_user_cari extends CI_Controller {
 	function index()
 	{		
 		$keyword = $this->input->post('fcari',TRUE);
+		
 		$this->load->model('Muser','muser');
 		$page		= $this->muser->get_all_user_by_id($keyword);
 		$pageData	= $page['query']->result();

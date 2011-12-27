@@ -1,3 +1,9 @@
+	<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery-1.4.2.min.js"></script>
+	<script src="<?php echo base_url(); ?>js/jquery.ui.core.min.js"></script>
+	<script src="<?php echo base_url(); ?>js/jquery.ui.widget.min.js"></script>
+	<script src="<?php echo base_url(); ?>js/jquery.ui.position.min.js"></script>
+	<script src="<?php echo base_url(); ?>js/jquery.ui.autocomplete.min.js"></script>
+	<link rel="stylesheet" href="<?php echo base_url() . 'css/ui-lightness/jquery-ui-1.8.16.custom.css';?>"/>
 <ul id="nav">
     <li><a href="#tab1">Manajemen User</a></li>
 </ul>
@@ -62,3 +68,25 @@
     
     
 <script type="text/javascript" src="<?php echo base_url(); ?>js/fungsi.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $('#teks-cari').autocomplete({
+            source: function(request, response) {
+                $.ajax({
+                    url: "<?php echo site_url('/admin/man_user/cari') ?>",
+                    data: {
+                        term: request.term
+                    },
+
+                    dataType: 'json',
+
+                    success: function(data) {
+                        response(data);
+                    }
+                })
+            },
+            delay: 500,
+            minLength: 1
+        });
+    });
+</script>

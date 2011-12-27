@@ -37,6 +37,31 @@ class Man_unit extends CI_Controller
 		}
 	
 	}
+	
+	function cari(){
+		if ($this->input->is_ajax_request()) {
+
+            $term = $this->input->get('term');
+            
+            $sql = "SELECT id_unit_satker, nama_unit
+					FROM tb_unit_saker WHERE id_unit_satker LIKE '%{$term}%' OR nama_unit LIKE '%{$term}%'"; 
+			
+
+            $result = $this->db->query($sql);
+
+            $array = array();
+            $i = 0;
+            if ($result->num_rows() > 0) {
+                foreach ($result->result() as $value) {
+                    $array[$i] = $value->id_unit_satker . ' - ' . $value->nama_unit;
+                    $i++;
+                }
+            }
+            echo json_encode($array);
+        }
+        exit();
+	}
+	
 }
 
 ?>
