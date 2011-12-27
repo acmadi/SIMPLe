@@ -16,23 +16,20 @@ Class Login extends CI_Controller
     {
         $user = $this->input->post('user');
         $pass = $this->input->post('pass');
-		
-	
+
+
         $login_data = $this->mlogin->cekdb($user, $pass);
 
         if ($login_data) {
-			
+
             $this->session->set_userdata('user', $login_data->username);
             $this->session->set_userdata('lavel', $login_data->nama_lavel);
             $this->session->set_userdata('id_user', $login_data->id_user);
+            $this->session->set_userdata('id_lavel', $login_data->lavel);
             $this->session->set_userdata('nama', $login_data->nama);
-			$this->log->create("Login");
+            $this->log->create("Login");
 
-
-//            print_r($login_data);
-
-
-            switch ( strtolower($login_data->id_lavel) ) {
+            switch (strtolower($login_data->id_lavel)) {
                 case '1':
                     redirect('admin/dashboard');
                     break;
@@ -43,7 +40,7 @@ Class Login extends CI_Controller
                     redirect("frontdesk/dashboard");
                     break;
                 case '4':
-                    redirect("csd/dashboard");
+                    redirect("cs/dashboard");
                     break;
                 case '5':
                     redirect("pengaduan/dashboard");
@@ -79,7 +76,7 @@ Class Login extends CI_Controller
 
     public function process_logout()
     {
-		$this->log->create("Logout");
+        $this->log->create("Logout");
         $this->session->unset_userdata('user');
         $this->session->unset_userdata('level');
         $this->session->sess_destroy();
