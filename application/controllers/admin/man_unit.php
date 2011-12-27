@@ -27,11 +27,11 @@ class Man_unit extends CI_Controller
 		$id = trim($this->uri->segment(4,''));
 		if(!empty($id)){
 			$info = $this->unit->delete_unit($id);
-			if($info){
-				$this->session->set_flashdata('success',"berhasil menghapus unit");
+			if($info['status']){
+				$this->session->set_flashdata('success',"berhasil menghapus unit : ".$info['item']);
 				redirect('admin/man_unit');
 			}else{
-				$this->session->set_flashdata('error',"gagal menghapus unit");
+				$this->session->set_flashdata('error',"gagal menghapus unit : ".$info['item']);
 				redirect('admin/man_unit');
 			}
 		}

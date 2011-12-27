@@ -57,7 +57,7 @@
 
                         <div id="list_satker" style="float: left; overflow: scroll; height: 300px;">
                             <?php foreach ($list_kementrian as $lk): ?>
-                            <div><a href='javascript:void(0);' childid='selkem_<?php echo $lk->id_kementrian?>' class='cat_close category'>&nbsp;&nbsp;&nbsp;&nbsp;</a><?php echo $lk->nama_kementrian?>
+                            <div><a href='javascript:void(0);' childid='selkem_<?php echo $lk->id_kementrian?>' class='cat_close category'>&nbsp;&nbsp;&nbsp;<input type="checkbox" class="selkem" value="<?php echo $lk->id_kementrian?>">&nbsp;</a><?php echo $lk->nama_kementrian?>
                             </div>
                             <div id="selkem_<?php echo $lk->id_kementrian?>" class="selkem">
                                 <?php
@@ -65,7 +65,7 @@
                                     foreach ($list_unit[$lk->id_kementrian] as $idx => $lu):?>
                                         <div id="unit<?php echo $lk->id_kementrian . $idx?>" satker="<?php echo $lk->id_kementrian . $idx?>" class="innertxt">
                                             <input type="checkbox" id="select<?php echo $lk->id_kementrian . $idx?>" value="<?php echo $lk->id_kementrian . $idx?>"
-                                                   class="selectit"/>&nbsp;&nbsp;<?php echo $lk->id_kementrian . '-' . $lu;?>
+                                                   class="selectit" kemen="<?php echo $lk->id_kementrian;?>" />&nbsp;&nbsp;<?php echo $lk->id_kementrian . '-' . $lu;?>
                                         </div>
                                         <?php
                                     endforeach;
@@ -108,6 +108,10 @@
         $('#selected_unit .selectit').each(function () {
             this.checked = false;
         });
+		
+		$('.selkem').each(function () {
+            this.checked = false;
+        });
 
         $('#list_satker .selectit').click(function () {
             var userid = $(this).val();
@@ -118,6 +122,15 @@
             var userid = $(this).val();
             $('#user' + userid).toggleClass('innertxt_bg');
         });
+		
+		$('.selkem').click(function(){
+			var kemid = $(this).val();
+			if($(this).is(':checked')){
+				$("INPUT[type='checkbox'][kemen='"+kemid+"']").attr('checked', $(this).is(':checked')).parent().toggleClass('innertxt_bg'); 
+			}else{
+				$("INPUT[type='checkbox'][kemen='"+kemid+"']").attr('checked', $(this).is(':checked')).parent().removeClass('innertxt_bg'); 
+			}
+		});
 
         $("#move_right").click(function () {
             var users = $('#selected_unit .innertxt2').size();
@@ -130,9 +143,8 @@
 
             $('#list_satker .innertxt_bg').each(function () {
                 var user_id = $(this).attr('satker');
-                $('#select' + user_id).each(function () {
-                    this.checked = false;
-                });
+                $('#select' + user_id).each(function() {this.checked = false;});
+                $('.selkem').each(function() {this.checked = false;});
 
                 var user_clone = $(this).clone(true);
                 $(user_clone).removeClass('innertxt');
@@ -143,6 +155,11 @@
 
                 $('#selected_unit').find('#unit' + user_id).remove();
                 $('#selected_unit').append(user_clone);
+				$(this).removeClass('innertxt_bg');
+				
+				/*$('#select' + user_id).each(function () {
+                    this.checked = false;
+                });*/
                 //$(this).remove();
             });
         });
@@ -158,7 +175,6 @@
                 //$(user_clone).find("input").removeAttr('name');
                 //$(user_clone).find("input").removeAttr('checked');
                 //$(user_clone).addClass('innertxt');
-
                 //$('#list_satker').append(user_clone);
                 $(this).remove();
             });

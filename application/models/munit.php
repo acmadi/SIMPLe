@@ -98,22 +98,29 @@ class Munit extends CI_Model {
 	}
 	
 	public function delete_unit($u){
-		$cek = $this->db->query('SELECT id_unit_satker FROM tb_user WHERE id_unit_satker = ?
-								 UNION 
-								 SELECT id_unit_satker FROM tb_kon_unit_satker WHERE id_unit_satker = ?',array($u,$u))->num_rows();
+		$item_to_del = $this->db->query('SELECT nama_unit from tb_unit_saker WHERE id_unit_satker = ?',array($u))->row();
+		$d['item'] = $item_to_del->nama_unit;
+		
+		$cek = $this->db->query('SELECT id_unit_satker FROM tb_user WHERE id_unit_satker = ?',array($u))->num_rows();
 								 
 		if($cek > 0){
 			$this->session->set_flashdata('error','terdapat keterkaitan dengan data yang lain');
-			return false;
+			$d['status'] =  FALSE;
 		}else{
+			
+			
+			$this->db->query('DELETE FROM tb_kon_unit_satker WHERE id_unit_satker = ?',array($u));
 			$this->db->query('DELETE FROM tb_unit_saker WHERE id_unit_satker = ?',array($u));
+			
 			if($this->db->affected_rows() > 0){
-				$this->log->create('berhasil menghapus ID unit_satker : '.$u);
-				return TRUE;
+				$this->log->create('berhasil menghapus satker : '.$item_to_del->nama_unit);
+				$d['status'] =  TRUE;
 			}else{
-				return FALSE;
+				$d['status'] =  FALSE;
 			}
 		}
+		
+		return $d;
 	}
 	
 	public function get_list_unit(){

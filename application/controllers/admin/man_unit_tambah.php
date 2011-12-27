@@ -41,11 +41,11 @@ class Man_unit_tambah extends CI_Controller
 
             if ($info) {
                 $this->log->create('berhasil menambah unit : ' . $data['nm']);
-                $this->session->set_flashdata('success', "berhasil menambah unit baru !!");
-                redirect('admin/man_unit');
+                $this->session->set_flashdata('success', "berhasil menambah unit : ".$data['nm']);
+                redirect('admin/man_unit_tambah');
             } else {
-                $this->session->set_flashdata('error', "gagal menambah unit baru !!");
-                redirect('admin/man_unit');
+                $this->session->set_flashdata('error', "gagal menambah unit : ".$data['nm']);
+                redirect('admin/man_unit_tambah');
             }
 
         }

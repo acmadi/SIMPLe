@@ -69,7 +69,7 @@
                                 <a href="<?php echo site_url('/admin/man_unit_ubah/index/' . $unit->id_unit_satker) ?>">
                                     <img src="<?php echo base_url('images/edit.png') ?>" />
                                 </a>
-                                <a href="<?php echo site_url('/admin/man_unit/delete/' . $unit->id_unit_satker) ?>">
+                                <a href="<?php echo site_url('/admin/man_unit/delete/' . $unit->id_unit_satker) ?>" onclick="return yesOrNo()">
                                     <img src="<?php echo base_url('images/delete.png') ?>" />
                                 </a>
                             </td>
@@ -104,3 +104,4 @@
         });
     });
 </script>
+<script type="text/javascript" src="<?php echo base_url(); ?>js/fungsi.js"></script>

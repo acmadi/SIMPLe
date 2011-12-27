@@ -53,10 +53,10 @@ class Man_unit_ubah extends CI_Controller
 			
 			if($info){
 				$this->log->create('berhasil mengubah unit : '.$data['nm']);
-				$this->session->set_flashdata('success',"berhasil mengubah unit !!");
+				$this->session->set_flashdata('success',"berhasil mengubah unit : ".$data['nm']);
 				redirect('admin/man_unit');
 			}else{
-				$this->session->set_flashdata('error',"gagal mengubah unit !!");
+				$this->session->set_flashdata('error',"gagal mengubah unit : ".$data['nm']);
 				redirect('admin/man_unit_ubah/index/'.$fid);
 			}
 		
