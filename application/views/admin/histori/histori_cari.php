@@ -2,8 +2,8 @@
     <h1>Histori</h1>
     <div style="clear: both;"></div>
 	<form action="<?php echo site_url('admin/histori/filter')?>" method="post" >
-		 <input  name="ftglmulai"  id="datepicker1" value="" type="text" size="30"> -
-		 <input  name="ftglselesai"  id="datepicker2" value="" type="text" size="30">     
+		 <input  name="ftglmulai"  id="datepicker1" value="<?php echo $mulai;?>" type="text" size="30"> -
+		 <input  name="ftglselesai"  id="datepicker2" value="<?php echo $akhir;?>" type="text" size="30">     
 		 <input id="simpan" type="submit" class="button blue-pill" value="filter"/>
 	</form>
     <div id="tail">
