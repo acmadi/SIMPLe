@@ -47,7 +47,8 @@ class Mhelpdesk extends CI_Model
 	function get_all_tiket(){
 		$this->load->library('pagination');		
 		$sql = "SELECT a.tanggal, a.no_tiket_helpdesk, b.nama_satker, a.pertanyaan, a.status
-				FROM tb_tiket_helpdesk a, tb_satker b WHERE a.id_satker = b.id_satker";
+				FROM tb_satker b, tb_tiket_helpdesk a LEFT JOIN tb_petugas_satker c ON a.id_petugas_satket = c.id_petugas_satker
+				WHERE a.id_satker = b.id_satker";
 		$query = $this->db->query($sql);
 
 		$config['base_url'] = site_url('admin/helpdesk/index');
@@ -59,14 +60,98 @@ class Mhelpdesk extends CI_Model
 		$offset = (int) $this->uri->segment(4, 0);
 		
 		$sqlb = "SELECT a.tanggal, a.no_tiket_helpdesk, b.nama_satker, a.pertanyaan, a.status
-				 FROM tb_tiket_helpdesk a, tb_satker b WHERE a.id_satker = b.id_satker LIMIT ?,?";
+				FROM tb_satker b, tb_tiket_helpdesk a LEFT JOIN tb_petugas_satker c ON a.id_petugas_satket = c.id_petugas_satker
+				WHERE a.id_satker = b.id_satker LIMIT ?,?";
 		
 		$data["query"] = $this->db->query($sqlb, array($offset ,$config['per_page']));
 
 		$data['pagination1'] = $this->pagination->create_links();
+		$data['nomor_item'] = $offset;
 
 		return $data;
 		
+	}
+	
+	function get_all_tiket_by_keyword($keyword){
+		$this->load->library('pagination');
+		$uri_segment = 6;
+		$offset = (int) $this->uri->segment($uri_segment,0);	
+		
+		
+		$total_seg = $this->uri->total_segments();
+		$default = array("keyword");
+		
+		if($total_seg > 4){
+			$this->terms = $this->uri->uri_to_assoc(4,$default);
+			
+			if($this->terms['keyword'] != ''){
+				$keyword = $this->terms['keyword'];
+			}else{
+				$this->terms['keyword'] = $keyword;
+			}
+			
+			$uriparams['keyword'] = $this->terms['keyword'];
+			
+			if(($total_seg % 2) > 0){
+				$offset = (int) $this->uri->segment(6, 0);
+			}
+			
+			$url_add = $this->uri->assoc_to_uri($uriparams);
+		}else{
+			$searchparams = array();
+			$searchparams['keyword'] 	= $keyword; 
+			$url_add = $this->uri->assoc_to_uri($searchparams);
+		
+		}
+		
+		//if from suggest
+		$num_key = (!empty($keyword))?explode('_',$keyword):array();
+		if(count($num_key)>1){
+			switch($num_key[0]){
+				case 'tiket':
+					$kolom = 'a.no_tiket_helpdesk';
+					break;
+				case 'petugas':
+					$kolom = 'c.nama_petugas';
+					break;
+				default:
+					$kolom = 'b.nama_satker';
+					break;
+					
+			}
+			
+			$where = " AND $kolom LIKE '%".$num_key[1]."%'";
+		}else{
+			$where = " ";
+		}
+		
+		
+		
+		$sql = "SELECT a.tanggal, a.no_tiket_helpdesk, b.nama_satker, a.pertanyaan, a.status
+				FROM tb_satker b, tb_tiket_helpdesk a LEFT JOIN tb_petugas_satker c ON a.id_petugas_satket = c.id_petugas_satker
+				WHERE a.id_satker = b.id_satker $where "; 
+		$query = $this->db->query($sql);
+
+		$config['base_url'] = site_url('admin/helpdesk/search').'/'.$url_add.'/';
+		$config['total_rows'] = $query->num_rows();
+		$config['per_page'] = 50;
+		$config['uri_segment'] = $uri_segment;
+		$this->pagination->initialize($config);
+		
+		
+		
+		$sqlb = "SELECT a.tanggal, a.no_tiket_helpdesk, b.nama_satker, a.pertanyaan, a.status
+				FROM tb_satker b, tb_tiket_helpdesk a LEFT JOIN tb_petugas_satker c ON a.id_petugas_satket = c.id_petugas_satker
+				WHERE a.id_satker = b.id_satker $where
+				LIMIT ?,?";
+		$data["query"] = $this->db->query($sqlb, array($offset ,$config['per_page']));
+
+		$data['pagination1'] = $this->pagination->create_links();
+		$data['nomor_item'] = $offset;
+		$data['cari'] = $num_key[0];
+		$data['keyword'] = $num_key[1];
+
+		return $data;
 	}
 
 
