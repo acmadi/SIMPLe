@@ -33,10 +33,11 @@
                 <table id="tableOne" class="yui">
                     <thead>
                     <tr>
-<!--                        <th class="short"><input type="checkbox"/></th>-->
+                        <!--                        <th class="short"><input type="checkbox"/></th>-->
                         <th class="short">No</th>
-                        <th>Kategori</th>
+                        <th class="short">Kategori</th>
                         <th>Pertanyaan</th>
+                        <th class="short">Ranah</th>
                         <th class="action">Aksi</th>
                     </tr>
                     </thead>
@@ -45,10 +46,18 @@
                     <?php $i = 0 ?>
                     <?php foreach ($knowledges->result() as $knowledge): ?>
                     <tr>
-<!--                        <td class="short"><input type="checkbox"/></td>-->
+                        <!--                        <td class="short"><input type="checkbox"/></td>-->
                         <td class="short"><?php echo ++$i?></td>
                         <td><?php echo $knowledge->kat_knowledge_base ?></td>
                         <td><?php echo $knowledge->judul?></td>
+                        <td class="short">
+                            <?php
+                            if ($knowledge->is_public)
+                                echo 'Publik';
+                            else
+                                echo 'Privat';
+                            ?>
+                        </td>
                         <td class="action">
                             <a href="<?php echo base_url()?>index.php/admin/knowledge_ubah/index/<?php echo $knowledge->id_knowledge_base?>">
                                 <img src="<?php echo base_url() . 'images/edit.png' ?>" title="Ubah"/>
@@ -76,7 +85,7 @@
             <table id="tableOne" class="yui">
                 <thead>
                 <tr>
-<!--                    <th class="short"><input type="checkbox"/></th>-->
+                    <!--                    <th class="short"><input type="checkbox"/></th>-->
                     <th class="short">No</th>
                     <th>Kategori</th>
                     <th class="action">Aksi</th>
@@ -86,7 +95,7 @@
                 <?php $i = 1 ?>
                 <?php foreach ($categories->result() as $category): ?>
                 <tr>
-<!--                    <td class="short"><input type="checkbox"/></td>-->
+                    <!--                    <td class="short"><input type="checkbox"/></td>-->
 
                     <td class="short"><?php echo $i++ ?></td>
                     <td><?php echo $category->kat_knowledge_base ?></td>

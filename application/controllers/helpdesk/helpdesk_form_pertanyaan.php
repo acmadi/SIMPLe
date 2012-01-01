@@ -15,9 +15,8 @@ class Helpdesk_form_pertanyaan extends CI_Controller
         $data['content'] = 'helpdesk/helpdesk/helpdesk_form_pertanyaan';
         $data['knowledges'] = $this->mknowledge->get_all_category();
 
-        $result = $this->db->query("SELECT MAX(no_tiket_helpdesk) last_tiket FROM tb_tiket_helpdesk");
-        $result = $result->result();
-        $last_tiket = $result[0]->last_tiket;
+        $id_tiket = $this->session->userdata('id_tiket');
+        $no_tiket = $this->session->userdata('no_tiket');
 
         $sql = "SELECT * FROM tb_tiket_helpdesk
                 JOIN tb_petugas_satker
@@ -26,11 +25,26 @@ class Helpdesk_form_pertanyaan extends CI_Controller
                 ON tb_tiket_helpdesk.id_satker = tb_satker.id_satker
                 WHERE no_tiket_helpdesk = ?";
 
-        $result = $this->db->query($sql, array($last_tiket));
-        $result = $result->result();
-
-        $result = $result[0];
+        $result = $this->db->query($sql, array($no_tiket))->row();
         $data['identitas'] = $result;
+
+
+        // List Pertanyaan Sebelumnya
+        $result = $this->db->from('tb_tiket_helpdesk')
+                ->join('tb_knowledge_base', 'tb_tiket_helpdesk.id_knowledge_base = tb_knowledge_base.id_knowledge_base')
+                ->where('no_tiket_helpdesk', $this->session->userdata('no_tiket'))
+                ->where('tb_tiket_helpdesk.id_knowledge_base !=', 'NULL')
+                ->or_where('parent_id', sprintf('%05d', $this->session->userdata('id_tiket')))
+                ->order_by('tanggal', 'DESC')
+                ->get();
+
+//        echo $this->db->last_query() . "\n\n";
+
+//        print_r($result->result());
+
+        if ($result->num_rows() > 0) {
+            $data['pertanyaan_sebelumnya'] = $result;
+        }
 
         $this->load->view('master-template', $data);
     }
@@ -46,9 +60,7 @@ class Helpdesk_form_pertanyaan extends CI_Controller
                 ON a.id_petugas_satket = b.id_petugas_satker
                 WHERE no_tiket_helpdesk = ?";
 
-        $result = $this->db->query($sql, array($this->session->userdata('tiket')));
-        $result = $result->result();
-        $result = $result[0];
+        $result = $this->db->query($sql, array($this->session->userdata('tiket')))->row();
 
         $data['identitas'] = $result;
 
@@ -66,11 +78,42 @@ class Helpdesk_form_pertanyaan extends CI_Controller
             $pertanyaan = $this->input->post('pertanyaan');
             $description = $this->input->post('description');
 
-            $sql = "UPDATE tb_tiket_helpdesk SET
-                    prioritas = ?, pertanyaan = ?, description = ?
-                    WHERE no_tiket_helpdesk = ?";
+            $result = $this->db->from('tb_tiket_helpdesk')
+                    ->where('id', $this->session->userdata('id_tiket'))
+                    ->get();
 
-            $this->db->query($sql, array($prioritas, $pertanyaan, $description, $no_tiket_helpdesk));
+            if ($result->num_rows() == 0) {
+
+//                $sql = "INSERT INTO tb_tiket_helpdesk (prioritas, pertanyaan, description, id_satker, parent_id, tanggal)
+//                        VALUES(?, ?, ?, ?, ?, ?)";
+//
+//                $this->db->query($sql, array($prioritas, $pertanyaan, $description, $this->session->userdata('id_satker'), $no_tiket_helpdesk, date('Y-m-d H:i:s')));
+
+//                echo "insert"; echo $this->db->last_query(); exit();
+
+                $data = array(
+                    'prioritas' => $prioritas,
+                    'pertanyaan' => $pertanyaan,
+                    'description' => $description,
+                    'id_satker' => $this->session->userdata('id_satker'),
+                    'parent_id' => $this->session->userdata('id_tiket'),
+                    'tanggal' => date('Y-m-d H:i:s'),
+                    'no_tiket_helpdesk' => $this->session->userdata('no_tiket')
+                );
+
+                $this->db->insert('tb_tiket_helpdesk', $data);
+                $this->session->set_userdata('id_tiket', $this->db->insert_id());
+
+            } else {
+
+//                echo "update"; echo $this->db->last_query(); exit();
+
+                $sql = "UPDATE tb_tiket_helpdesk SET
+                        prioritas = ?, pertanyaan = ?, description = ?
+                        WHERE id = ?";
+                $this->db->query($sql, array($prioritas, $pertanyaan, $description, $this->session->userdata('id_tiket')));
+
+            }
 
             // $result = $this->db->query("SELECT * FROM tb_knowledge_base WHERE id_kat_knowledge_base = '$kategori_knowledge_base'");
 
@@ -85,8 +128,9 @@ class Helpdesk_form_pertanyaan extends CI_Controller
                     ON tb_tiket_helpdesk.id_satker = tb_satker.id_satker
                     WHERE no_tiket_helpdesk = ?";
 
-            $result = $this->db->query($sql, array($this->session->userdata('tiket')))->row();
+            $result = $this->db->query($sql, array($this->session->userdata('no_tiket')))->row();
             $data['identitas'] = $result;
+            $this->log->create("Pertanyaan baru di Helpdesk #{$no_tiket_helpdesk}");
         }
 
         $data['title'] = 'Helpdesk Form - Pertanyaan';

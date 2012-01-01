@@ -3,7 +3,7 @@
     <h1>Konsultasi Help Desk</h1>
 
     <div style="text-align: right; text-decoration: underline; font-weight: bold; font-size: 14px;">
-        No Tiket: <?php echo sprintf('%05d', $this->session->userdata('tiket')) ?>
+        No Tiket: <?php echo sprintf('%05d', $this->session->userdata('no_tiket')) ?>
     </div>
 
     <fieldset>
@@ -12,7 +12,7 @@
         <div style="float: left; width: 500px">
             <p>
                 <label style="display: inline-block; width: 100px;">No Tiket</label>
-                <span><?php echo sprintf('%05d', $this->session->userdata('tiket')) ?></span>
+                <span><?php echo sprintf('%05d', $this->session->userdata('no_tiket')) ?></span>
             </p>
 
             <p>
@@ -82,7 +82,7 @@
                 <input type="text" name="cari"/><input type="submit" value="Cari"/>
             </div>
             <div style="float: right;">
-                <select name="sort">
+                <select>
                     <option>Paling banyak dibuka</option>
                     <option>Terbaru</option>
                 </select>
@@ -108,14 +108,14 @@
     </fieldset>
 
     <div style="text-align: right;">
-        <a href="<?php echo site_url("/helpdesk/ekskalasi/{$this->session->userdata('tiket')}")  ?>" class="button blue-pill">Ekskalasi</a>
+        <a href="<?php echo site_url('/helpdesk/helpdesk/ekskalasi/' . $this->session->userdata('id_tiket') ) ?>" class="button blue-pill">Ekskalasi</a>
     </div>
 </div>
 
 <div id="jawaban" style="display: none;"></div>
 
 <script type="text/javascript">
-    var jawaban_id = null;
+    var jawaban_id = null; // Knowledge Base ID
 
     $(function () {
         // Cari Knowledge
@@ -140,7 +140,7 @@
             resizable:false,
             draggable:false,
             width:700,
-            height:200,
+            height:600,
             dialogClass:'centered-dialog',
             buttons:[
                 {
@@ -152,22 +152,24 @@
                 {
                     text:'Jawab',
                     click:function () {
-                        var status = confirm('Apakah ada pertanyaan lain?');
-                        if (status) {
-                            window.location.href = '<?php echo site_url("/helpdesk/pertanyaan/{$this->session->userdata('tiket')}") ?>/' + jawaban_id;
+//                        var status = confirm('Apakah ada pertanyaan lain?');
+                        status = false;
+                        if (status === true) {
+                            window.location.href = '<?php echo site_url("/helpdesk/helpdesk/next/{$this->session->userdata('id_tiket')}") ?>/' + jawaban_id;
                         } else {
-                            window.location.href = '<?php echo site_url("/helpdesk/helpdesk/done/{$this->session->userdata('tiket')}") ?>/' + jawaban_id;
+                            window.location.href = '<?php echo site_url("/helpdesk/helpdesk/done/{$this->session->userdata('id_tiket')}") ?>/' + jawaban_id;
                         }
                     }
                 },
                 {
                     text:'Ekskalasi',
                     click:function () {
-                        var status = confirm('Apakah ada pertanyaan lain?');
-                        if (status) {
-                            window.location.href('<?php echo site_url('/helpdesk/ekskalasi/') ?>' + jawaban_id);
+//                        var status = confirm('Apakah ada pertanyaan lain?');
+                        status = false;
+                        if (status === true) {
+                            window.location.href = '<?php echo site_url("/helpdesk/helpdesk/ekskalasi_next/{$this->session->userdata('id_tiket')}") ?>/';
                         } else {
-                            window.location.href('<?php echo site_url('/helpdesk/ekskalasi/') ?>' + jawaban_id);
+                            window.location.href = '<?php echo site_url('/helpdesk/helpdesk/ekskalasi/' . $this->session->userdata('id_tiket') ) ?>/';
                         }
                     }
                 }

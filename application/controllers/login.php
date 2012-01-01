@@ -23,9 +23,10 @@ Class Login extends CI_Controller
         if ($login_data) {
 
             $this->session->set_userdata('user', $login_data->username);
-            $this->session->set_userdata('lavel', $login_data->nama_lavel);
             $this->session->set_userdata('id_user', $login_data->id_user);
-            $this->session->set_userdata('id_lavel', $login_data->lavel);
+            $this->session->set_userdata('id_lavel', $login_data->id_lavel);
+            $this->session->set_userdata('lavel', $login_data->lavel);
+            $this->session->set_userdata('nama_lavel', $login_data->nama_lavel);
             $this->session->set_userdata('nama', $login_data->nama);
             $this->log->create("Login");
 
@@ -65,6 +66,9 @@ Class Login extends CI_Controller
                     break;
                 case '12':
                     redirect('dirjen/dashboard');
+                    break;
+                case '13':
+                    redirect('kb_koordinator/dashboard');
                     break;
             }
         } else {

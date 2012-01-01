@@ -35,16 +35,24 @@ class Ambil_dokumen extends CI_Controller
                         WHERE status = 'close' AND is_active = 1 AND no_tiket_frontdesk = '$no_tiket_frontdesk'";
         $result = $this->db->query($sql);
 
-        $data['dokumen'] = $result->row();
+        if ($result->num_rows() == 1) {
 
-        $data['title'] = 'Pengambilan Dokumen';
-        $data['content'] = 'frontdesk/ambil_dokumen_cetak';
-        $this->load->view('frontdesk/ambil_dokumen_cetak', $data);
+            $data['dokumen'] = $result->row();
+
+            $data['title'] = 'Pengambilan Dokumen';
+            $data['content'] = 'frontdesk/ambil_dokumen_cetak';
+            $this->load->view('frontdesk/ambil_dokumen_cetak', $data);
+        } else {
+            // TODO: Mungkin sebaiknya ditambahkan informasi kalau data yang mau dicetak, sudah dicetak CS lain.
+            redirect('/frontdesk/ambil_dokumen');
+        }
     }
 
-    function selesai($no_tiket_frontdesk) {
+    function selesai($no_tiket_frontdesk)
+    {
         $sql = "UPDATE tb_tiket_frontdesk SET is_active = 3 WHERE no_tiket_frontdesk = '$no_tiket_frontdesk'";
         $this->db->query($sql);
+        $this->log->create("Cetak bukti pengambilan dokumen");
         redirect('/frontdesk/ambil_dokumen');
     }
 }

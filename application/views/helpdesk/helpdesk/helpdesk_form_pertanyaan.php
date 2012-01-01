@@ -3,7 +3,7 @@
     <h1>Konsultasi Help Desk</h1>
 
     <div style="text-align: right; text-decoration: underline; font-weight: bold; font-size: 14px;">
-        No Tiket: <?php echo sprintf('%05d', $this->session->userdata('tiket')) ?>
+        No Tiket: <?php echo sprintf('%05d', $this->session->userdata('no_tiket')) ?>
     </div>
 
     <fieldset>
@@ -12,7 +12,7 @@
         <div style="float: left; width: 500px">
             <p>
                 <label style="display: inline-block; width: 100px;">No Tiket</label>
-                <span><?php echo sprintf('%05d', $this->session->userdata('tiket')) ?></span>
+                <span><?php echo sprintf('%05d', $this->session->userdata('no_tiket')) ?></span>
             </p>
 
             <p>
@@ -48,11 +48,22 @@
         </div>
     </fieldset>
 
+    <?php if (isset($pertanyaan_sebelumnya)): ?>
+    <fieldset>
+        <legend>Pertanyaan Sebelumnya</legend>
+        <ul>
+        <?php foreach ($pertanyaan_sebelumnya->result() as $value): ?>
+            <li><?php echo $value->judul ?></li>
+        <?php endforeach ?>
+        </ul>
+    </fieldset>
+    <?php endif ?>
+
     <fieldset>
         <legend>Pertanyaan</legend>
 
         <?php echo form_open('/helpdesk/helpdesk_form_pertanyaan/submit'); ?>
-        <input type="hidden" name="no_tiket_helpdesk" value="<?php echo $this->session->userdata('tiket') ?>"/>
+        <input type="hidden" name="no_tiket_helpdesk" value="<?php echo $this->session->userdata('no_tiket') ?>"/>
 
         <p>
             <label for="kategori">Kategori</label>

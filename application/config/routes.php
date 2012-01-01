@@ -44,5 +44,8 @@ $route['default_controller'] = "login";
 $route['scaffolding_trigger'] = "";
 
 
+$route['tiket'] = 'tiket/cek_tiket';
+
+
 /* End of file routes.php */
 /* Location: ./system/application/config/routes.php */

@@ -13,9 +13,10 @@ class Knowledge_base extends CI_Controller
     function index()
     {
         $data['title'] = 'Knowledge Base';
-        $data['content'] = 'supervisor/knowledge/knowledge_base';
+        $data['content'] = 'helpdesk/knowledge/knowledge_base';
         $data['result'] = $this->knowledge->get_all_data_category();
         $data['idsearch'] = "";
+        $data['categories'] = $this->knowledge->get_all_category();
         $this->load->view('master-template', $data);
     }
 
@@ -24,14 +25,14 @@ class Knowledge_base extends CI_Controller
         $this->form_validation->set_rules('fkat', 'Kategori', 'required');
         if ($this->form_validation->run() == FALSE) {
             $this->session->set_flashdata('error', validation_errors());
-            redirect('/supervisor/knowledge_base');
+            redirect('/helpdesk/knowledge_base');
         }
         else
         {
             $category = $this->input->post('fkat', TRUE);
             $data['result'] = $this->knowledge->search_by_keyword($category);
             $data['title'] = 'Knowledge Base';
-            $data['content'] = 'supervisor/knowledge/knowledge_base';
+            $data['content'] = 'helpdesk/knowledge/knowledge_base';
             $data['part'] = 3;
             $data['idsearch'] = $category;
             $this->load->view('master-template', $data);
@@ -50,7 +51,7 @@ class Knowledge_base extends CI_Controller
             //            if (!empty($cat) {
             //
             //            }
-            $data['content'] = 'supervisor/knowledge/knowledge_base';
+            $data['content'] = 'helpdesk/knowledge/knowledge_base';
             $data['result'] = $item;
             $data['idsearch'] = $keyword;
             $data['sel'] = true;
@@ -94,17 +95,16 @@ class Knowledge_base extends CI_Controller
         exit();
     }
 
-    public function one($id)
+    public function search()
     {
-        $data['title'] = 'Knowledge Base';
-        $data['content'] = 'supervisor/knowledge/knowledge_base_one';
+        $pertanyaan = $this->input->get('cari');
+        $result = $this->db->query("SELECT * FROM tb_knowledge_base WHERE judul LIKE '%{$pertanyaan}%' OR desripsi LIKE '%{$pertanyaan}%' OR jawaban LIKE '%{$pertanyaan}%'");
 
-        $result = $this->db->query("SELECT * FROM tb_knowledge_base WHERE id_knowledge_base = '{$id}' LIMIT 1");
-        $result = $result->result();
-        $result = $result[0];
-        $data['result'] = $result;
-
-        $this->load->view('master-template', $data);
+        foreach ($result->result() as $value) {
+            echo sprintf('<h2><a href="javascript:void(0)" onclick="popUpReferensiJawaban(%s)">%s</a></h2>', $value->id_knowledge_base, $value->judul );
+            echo sprintf('<p><em>%s</em></p>', $value->judul);
+            echo '<hr/>';
+        }
     }
 }
 

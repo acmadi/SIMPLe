@@ -102,8 +102,10 @@ class Knowledge extends CI_Controller
                 $data['fjawab'] = $this->input->post('fjawaban2', TRUE);
                 $data['fsumb'] = $this->input->post('fsumber2', TRUE);
                 $data['fjab'] = $this->input->post('fjabatan2', TRUE);
-				
+                $data['is_public'] = $this->input->post('is_public', TRUE);
+
                 $info = $this->knowledge->add_knowledge($data);
+
                 if ($info) {
                     $this->session->set_flashdata('success', "Knowledge baru berjudul '".$data['fjudul']."' telah ditambahkan");
                     redirect('/admin/knowledge/add_knowledge');

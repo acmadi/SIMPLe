@@ -10,6 +10,7 @@ class Form_revisi_anggaran extends CI_Controller
 
     function index()
     {
+        //        echo "asdadas";exit();
         $data['kementrian'] = $this->db->query('SELECT * FROM tb_kementrian ORDER BY id_kementrian');
         $data['kelengkapan_dokumen'] = $this->db->query('SELECT * FROM tb_kelengkapan_doc ORDER BY id_kelengkapan');
         $data['title'] = 'Form Revisi Anggaran';
@@ -66,7 +67,7 @@ class Form_revisi_anggaran extends CI_Controller
 
         if ($id_satker >= 3 AND is_numeric($id_satker)) {
             $result = $this->db->query("SELECT * FROM `tb_satker` WHERE `id_satker` LIKE '%{$id_satker}' LIMIT 30");
-            var_dump($result->result());
+//            var_dump($result->result());
         }
     }
 
@@ -229,8 +230,8 @@ class Form_revisi_anggaran extends CI_Controller
                 ->join('tb_satker', 'tb_satker.id_satker = tb_tiket_frontdesk.id_satker')
                 ->join('tb_kelengkapan_formulir', 'tb_kelengkapan_formulir.no_tiket_frontdesk = tb_tiket_frontdesk.no_tiket_frontdesk')
                 ->join('tb_kelengkapan_doc', 'tb_kelengkapan_doc.id_kelengkapan = tb_kelengkapan_formulir.id_kelengkapan')
-                //->join('tb_kementrian', 'tb_kementrian.id_kementrian = tb_satker.id_kementrian')
-                //->join('tb_unit', 'tb_unit.id_unit = tb_satker.id_unit')
+        //->join('tb_kementrian', 'tb_kementrian.id_kementrian = tb_satker.id_kementrian')
+        //->join('tb_unit', 'tb_unit.id_unit = tb_satker.id_unit')
                 ->where('tb_tiket_frontdesk.no_tiket_frontdesk', $no_tiket_frontdesk)
                 ->get();
 
@@ -250,11 +251,20 @@ class Form_revisi_anggaran extends CI_Controller
 
         //echo $this->db->last_query();
 
+        $this->log->create("Cetak tanda terima pengajuan revisi anggaran #{$no_tiket_frontdesk}");
+
         $this->load->view('/frontdesk/success2', $data);
     }
 
     function fail()
     {
         $this->load->view('/frontdesk/fail');
+    }
+
+    function selesai($no_tiket)
+    {
+        $this->log->create("Cetak Dokumen BALD #{$no_tiket}");
+        $data['no_tiket'] = $no_tiket;
+        $this->load->view('/frontdesk/cetak_bald', $data);
     }
 }

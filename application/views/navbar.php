@@ -1,6 +1,7 @@
 <?php
 $nav_dashboard = $nav_aksescontrol = $nav_manunit = $nav_manuser =
-    $nav_helpdesk = $nav_history = $nav_system = $nav_knowledge = $nav_frontdesk = $nav_forum = '';
+$nav_helpdesk = $nav_history = $nav_system = $nav_knowledge =
+$nav_frontdesk = $nav_forum = $nav_satker = $nav_calendar = $nav_sms = '';
 switch ($this->uri->segment(2)) {
     case 'dashboard':
         $nav_dashboard = "current";
@@ -12,7 +13,7 @@ switch ($this->uri->segment(2)) {
         $nav_manuser = "current";
         break;
     case 'man_unit':
-        $nav_manunit= "current";
+        $nav_manunit = "current";
         break;
     case 'knowledge':
         $nav_knowledge = "current";
@@ -32,6 +33,15 @@ switch ($this->uri->segment(2)) {
     case 'system':
         $nav_system = "current";
         break;
+    case 'satker':
+        $nav_satker = "current";
+        break;
+    case 'calendar':
+        $nav_calendar = "current";
+        break;
+    case 'sms':
+        $nav_sms = "current";
+        break;
 }
 
 ?>
@@ -48,6 +58,9 @@ switch ($this->uri->segment(2)) {
         <li class="<?php echo $nav_frontdesk ?>"><?php echo anchor('admin/frontdesk', 'FrontDesk Sistem');?></li>
         <li class="<?php echo $nav_history ?>"><?php echo anchor('admin/histori', 'Histori');?></li>
         <li class="<?php echo $nav_system ?>"><?php echo anchor('admin/system', 'Sistem');?></li>
+        <li class="<?php echo $nav_satker ?>"><?php echo anchor('admin/satker', 'Satker');?></li>
+        <li class="<?php echo $nav_calendar ?>"><?php echo anchor('admin/calendar', 'Calendar');?></li>
+        <li class="<?php echo $nav_sms ?>"><?php echo anchor('admin/sms', 'SMS');?></li>
     </ul>
-    <div id="logout"><?php echo anchor("login/process_logout", 'Logout') ?> &nbsp; <em><?php echo date('d-m-Y') ?></em></div>
+    <div id="logout"><?php echo $this->session->userdata('nama') ?> &nbsp; | &nbsp; <?php echo anchor("login/process_logout", 'Logout') ?> &nbsp; <em><?php //echo date('d-m-Y') ?></em></div>
 </div>

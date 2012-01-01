@@ -13,10 +13,9 @@ class Knowledge_base extends CI_Controller
     function index()
     {
         $data['title'] = 'Knowledge Base';
-        $data['content'] = 'base';
+        $data['content'] = 'pelaksana/knowledge/knowledge_base';
         $data['result'] = $this->knowledge->get_all_data_category();
         $data['idsearch'] = "";
-        $data['categories'] = $this->knowledge->get_all_category();
         $this->load->view('master-template', $data);
     }
 
@@ -25,14 +24,14 @@ class Knowledge_base extends CI_Controller
         $this->form_validation->set_rules('fkat', 'Kategori', 'required');
         if ($this->form_validation->run() == FALSE) {
             $this->session->set_flashdata('error', validation_errors());
-            redirect('/helpdesk/knowledge_base');
+            redirect('/pelaksana/knowledge_base');
         }
         else
         {
             $category = $this->input->post('fkat', TRUE);
             $data['result'] = $this->knowledge->search_by_keyword($category);
             $data['title'] = 'Knowledge Base';
-            $data['content'] = 'helpdesk/knowledge/knowledge_base';
+            $data['content'] = 'pelaksana/knowledge/knowledge_base';
             $data['part'] = 3;
             $data['idsearch'] = $category;
             $this->load->view('master-template', $data);
@@ -51,7 +50,7 @@ class Knowledge_base extends CI_Controller
             //            if (!empty($cat) {
             //
             //            }
-            $data['content'] = 'helpdesk/knowledge/knowledge_base';
+            $data['content'] = 'pelaksana/knowledge/knowledge_base';
             $data['result'] = $item;
             $data['idsearch'] = $keyword;
             $data['sel'] = true;
@@ -79,35 +78,52 @@ class Knowledge_base extends CI_Controller
 
     public function get_by_id($id)
     {
-        $result = $this->db->from('tb_knowledge_base')
-                ->join('tb_kat_knowledge_base', 'tb_knowledge_base.id_kat_knowledge_base = tb_kat_knowledge_base.id_kat_knowledge_base')
-                ->where('id_knowledge_base', $id)
-                ->get();
+        $result = $this->db->query("SELECT * FROM tb_knowledge_base WHERE id_knowledge_base = '$id'");
 
-        $value = $result->row();
+        foreach ($result->result() as $value) {
 
-        echo "<div style='font-weight: bold; margin-bottom: 20px;'>{$value->judul}</div>";
-        echo "<div>{$value->jawaban}</div>";
-        echo "<input type='hidden' value='{$id}' />";
-
+            //            print_r($value);
+            //            echo "<h1>{$value->kat_knowledge_base}</h1>";
+            echo "<h2>{$value->judul}</h2>";
+            //            echo "<div>{$value->desripsi}</div>";
+            echo "<div>{$value->jawaban}</div>";
+            //            echo "<div><input type=submit class='button blue-pill' value='Batal' /></div>";
+            //            echo "<div><input type=submit class='button blue-pill' value='Ekskalasi' /></div>";
+            //            echo "<div><input type=submit class='button blue-pill' value='Jawab' /></div>";
+            echo "<input type='hidden' name='jawaban' value='$value->id_knowledge_base' />";
+        }
         exit();
+    }
+
+    public function one($id)
+    {
+        $data['title'] = 'Knowledge Base';
+        $data['content'] = 'pelaksana/knowledge/knowledge_base_one';
+
+        $result = $this->db->query("SELECT * FROM tb_knowledge_base WHERE id_knowledge_base = '{$id}' LIMIT 1");
+        $result = $result->result();
+        $result = $result[0];
+        $data['result'] = $result;
+
+        $this->load->view('master-template', $data);
     }
 
     public function search()
     {
-        $pertanyaan = $this->input->get('cari');
-        $result = $this->db->query("SELECT * FROM tb_knowledge_base WHERE judul LIKE '%{$pertanyaan}%' OR desripsi LIKE '%{$pertanyaan}%' OR jawaban LIKE '%{$pertanyaan}%'");
+        $cari = $this->input->get('cari');
+        $result = $this->db->from('tb_knowledge_base a')
+                ->like('judul', $cari)
+                ->or_like('judul', $cari)
+                ->get();
 
+        //        echo json_encode($result->result(), JSON_FORCE_OBJECT);
         echo '<ul>';
         foreach ($result->result() as $value) {
-            echo sprintf('<li><a href="javascript:void(0)" class="referensi-jawaban" title="%s">%s</a></li>', $value->id_knowledge_base, $value->judul);
-//            echo sprintf('<p><em>%s</em></p>', $value->judul);
+            echo "<li>
+                    <a href=\"javascript:void(0)\" class=\"referensi-jawaban\" title=\"{$value->id_knowledge_base}\">{$value->judul}</a>
+                 </li>";
         }
         echo '</ul>';
-    }
-
-    public function done($id) {
-        echo $id;
     }
 }
 

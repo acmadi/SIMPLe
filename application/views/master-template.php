@@ -41,7 +41,22 @@
         //}
 
 
-        if ($this->uri->segment(1) == 'helpdesk') {
+        if ($this->session->userdata('lavel') == '2') {
+            $this->load->view('navbar_supervisor');
+        }
+        elseif ($this->session->userdata('lavel') == '3') {
+            $this->load->view('navbar_pelaksana');
+        }
+        elseif ($this->uri->segment(1) == 'kasubdit') {
+            $this->load->view('navbar_kasubdit');
+        }
+        elseif ($this->session->userdata('lavel') == '5') {
+            $this->load->view('navbar_direktur');
+        }
+        elseif ($this->session->userdata('lavel') == '6') {
+            $this->load->view('navbar_dirjen');
+        }
+        elseif ($this->uri->segment(1) == 'helpdesk') {
             $this->load->view('navbar_helpdesk');
         }
         elseif ($this->uri->segment(1) == 'frontdesk') {
@@ -53,21 +68,10 @@
         elseif ($this->uri->segment(1) == 'pengaduan') {
             $this->load->view('navbar_cse');
         }
-        elseif ($this->uri->segment(1) == 'supervisor') {
-            $this->load->view('navbar_supervisor');
+        elseif ($this->uri->segment(1) == 'kb_koordinator') {
+            $this->load->view('navbar_kb_koordinator');
         }
-        elseif ($this->uri->segment(1) == 'pelaksana') {
-            $this->load->view('navbar_pelaksana');
-        }
-        elseif ($this->uri->segment(1) == 'kasubdit') {
-            $this->load->view('navbar_kasubdit');
-        }
-        elseif ($this->uri->segment(1) == 'direktur') {
-            $this->load->view('navbar_direktur');
-        }
-        elseif ($this->uri->segment(1) == 'dirjen') {
-            $this->load->view('navbar_dirjen');
-        }
+
         ?>
     </div>
     <div id="container">

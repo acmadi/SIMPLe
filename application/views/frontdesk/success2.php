@@ -79,7 +79,7 @@
 
     <div class="grid_6" style="text-align: right; float: right;">
         <label class="short">Tanggal</label>
-        <?php echo date('d-m-Y H:i', strtotime($identitas[0]->tanggal)) ?>
+        <?php echo date('d-m-Y', strtotime($identitas[0]->tanggal)) ?>
     </div>
     <div class="clear"></div>
 
@@ -136,17 +136,27 @@
 
         <ul>
             <?php foreach ($identitas as $value): ?>
-            <?php if ($value->id_kelengkapan == 0): ?>
-                <li><?php echo $value->kelengkapan ?></li>
+
+                <?php if ($value->id_kelengkapan == 0): ?>
+
+                    <?php if ($value->kelengkapan != ''): ?>
+
+                        <li> <?php echo $value->kelengkapan ?> </li>
+
+                    <?php endif ?>
+
                 <?php else: ?>
-                <li><?php echo $value->nama_kelengkapan ?></li>
+
+                        <li><?php echo $value->nama_kelengkapan ?></li>
+
                 <?php endif ?>
+
             <?php endforeach ?>
         </ul>
     </fieldset>
 
     <button onclick="window.print()" class="cetak">Cetak</button>
-    <button onclick="window.location.href='<?php echo site_url('frontdesk/form_revisi_anggaran') ?>'" class="cetak">Selesai</button>
+    <button onclick="window.location.href='<?php echo site_url('frontdesk/form_revisi_anggaran/selesai/' . sprintf('%05d', $no_tiket_frontdesk)) ?>'" class="cetak">Selesai</button>
 </div>
 </body>
 </html>

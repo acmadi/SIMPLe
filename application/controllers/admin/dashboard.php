@@ -11,17 +11,9 @@ class Dashboard extends CI_Controller
 
     function index()
     {
-        /*
-          if ($this->session->userdata('login') == TRUE)
-          {*/
         $data['title'] = 'Dashboard';
         $data['content'] = 'admin/dashboard';
         $this->load->view('admin/template', $data);
-        /*}
-          else
-          {
-              $this->load->view('login');
-          }*/
     }
 
     function database_backup()

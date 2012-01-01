@@ -1,11 +1,34 @@
+<?php
+$nav_dashboard = $nav_helpdesk = $nav_frontdesk = $nav_knowledge_base = $nav_forum = '';
+
+switch ($this->uri->segment(2)) {
+    case 'dashboard':
+        $nav_dashboard = 'current';
+        break;
+    case 'helpdesk':
+        $nav_helpdesk = 'current';
+        break;
+    case 'frontdesk':
+        $nav_frontdesk = 'current';
+        break;
+    case 'knowledge_base':
+        $nav_knowledge_base = 'current';
+        break;
+    case 'man_forum':
+        $nav_forum = 'current';
+        break;
+}
+?>
+
+
 <div id="navbar" class="clearfloat">
     <ul class="sf-menu">
-        <li class="current "><?php echo anchor('dirjen/dashboard', 'Dashboard');?></li>
-        <li class="current "><?php echo anchor('dirjen/list_helpdesk', 'Helpdesk');?></li>
-        <li class="current "><?php echo anchor('dirjen/list_frontdesk', 'Front Desk');?></li>
-        <li class="current "><?php echo anchor('dirjen/knowledge_base', 'Knowledge Base');?></li>
-        <li class="current "><?php echo anchor('dirjen/referensi_peraturan', 'Referensi Peraturan');?></li>
-        <li class="current "><?php echo anchor('dirjen/man_forum', 'Forum');?></li>
+        <li class="<?php echo $nav_dashboard ?>"><?php echo anchor('dirjen/dashboard', 'Dashboard');?></li>
+        <li class="<?php echo $nav_helpdesk ?>"><?php echo anchor('pelaksana/helpdesk', 'Helpdesk');?></li>
+        <li class="<?php echo $nav_frontdesk ?>"><?php echo anchor('pelaksana/frontdesk', 'Front Desk');?></li>
+        <li class="<?php echo $nav_knowledge_base ?>"><?php echo anchor('frontdesk/knowledge_base', 'Knowledge Base');?></li>
+        <li class=""><?php echo anchor('upload/PMK-93.pdf', 'Referensi Peraturan', array('target'=>'_blank'));?></li>
+        <li class="<?php echo $nav_forum ?>"><?php echo anchor('frontdesk/man_forum', 'Forum');?></li>
     </ul>
-    <div id="logout"><?php echo anchor("login/process_logout", 'Logout') ?> &nbsp; <em><?php echo date('d-m-Y') ?></em></div>
+    <div id="logout"><?php echo $this->session->userdata('nama') ?> &nbsp; | &nbsp; <?php echo anchor("login/process_logout", 'Logout') ?> &nbsp; <em><?php echo date('d-m-Y') ?></em></div>
 </div>

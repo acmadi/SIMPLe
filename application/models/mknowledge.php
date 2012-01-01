@@ -8,7 +8,7 @@ class Mknowledge extends CI_Model
      * @return Object
      */
     public function get_all() {
-        $sql = "SELECT a.id_knowledge_base,a.judul,a.desripsi,a.jawaban,b.kat_knowledge_base
+        $sql = "SELECT *
 				FROM tb_knowledge_base a,tb_kat_knowledge_base b
 				WHERE a.id_kat_knowledge_base = b.id_kat_knowledge_base";
         return $this->db->query($sql);
@@ -49,10 +49,10 @@ class Mknowledge extends CI_Model
 			move_uploaded_file($_FILES['ffile2']['tmp_name'], 'upload/'.$nmBr);
 		endif;
 		
-        $sql = "INSERT INTO tb_knowledge_base(id_kat_knowledge_base,judul,desripsi,jawaban,nama_narasumber,jabatan_narasumber,bukti_file) 
-				VALUES(?,?,?,?,?,?,?);";
+        $sql = "INSERT INTO tb_knowledge_base(id_kat_knowledge_base,judul,desripsi,jawaban,nama_narasumber,jabatan_narasumber,bukti_file, is_public)
+				VALUES(?,?,?,?,?,?,?,?);";
 
-        $query = $this->db->query($sql,array($data['flist'],$data['fjudul'],$data['fdesk'],$data['fjawab'],$data['fsumb'],$data['fjab'],$nmBr));
+        $query = $this->db->query($sql,array($data['flist'],$data['fjudul'],$data['fdesk'],$data['fjawab'],$data['fsumb'],$data['fjab'],$nmBr,$data['is_public']));
 		if($this->db->affected_rows() > 0){ 
 			return true;
 		}else{ 
@@ -211,7 +211,7 @@ class Mknowledge extends CI_Model
      */
 	public function search_by_keyword($id){
 		$id = '%'.$id.'%';
-		$sql = "SELECT a.judul,a.id_kat_knowledge_base,b.kat_knowledge_base,a.id_knowledge_base
+		$sql = "SELECT *
 				FROM tb_knowledge_base a,tb_kat_knowledge_base b
 				WHERE a.id_kat_knowledge_base = b.id_kat_knowledge_base AND 
 					 (a.judul LIKE ? OR b.kat_knowledge_base LIKE ? OR a.desripsi LIKE ? OR jawaban LIKE ?)";
@@ -236,7 +236,7 @@ class Mknowledge extends CI_Model
 	
 	public function search_by_category($id,$keyword){
 		$keyword = '%'.$keyword.'%';
-		$sql = "SELECT a.judul,a.id_kat_knowledge_base,b.kat_knowledge_base,a.id_knowledge_base
+		$sql = "SELECT *
 				FROM tb_knowledge_base a,tb_kat_knowledge_base b
 				WHERE a.id_kat_knowledge_base = b.id_kat_knowledge_base AND a.id_kat_knowledge_base = ? AND 
 					 (a.judul LIKE ? OR b.kat_knowledge_base LIKE ? OR a.desripsi LIKE ? OR jawaban LIKE ?)";
@@ -260,7 +260,7 @@ class Mknowledge extends CI_Model
 	}
 	
 	public function get_all_data_category(){
-		$sql = "SELECT a.judul,a.id_kat_knowledge_base,b.kat_knowledge_base,a.id_knowledge_base
+		$sql = "SELECT *
 				FROM tb_knowledge_base a,tb_kat_knowledge_base b
 				WHERE a.id_kat_knowledge_base = b.id_kat_knowledge_base";
 		
