@@ -3,26 +3,33 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <title><?php echo isset($title) ? $title : ''; ?></title>
-    <link rel="shortcut icon" href="<?php echo base_url() . 'images/icon.jpg';?>"/>
+    <link rel="shortcut icon" href="<?php echo base_url('images/icon.jpg') ?>"/>
 
-    <link rel="stylesheet" href="<?php echo base_url() . 'css/cupertino/jquery-ui-1.8.16.custom.css';?>"/>
+    <link rel="stylesheet" href="<?php echo base_url('css/cupertino/jquery-ui-1.8.16.custom.css') ?>"/>
 
-    <style type="text/css">@import url("<?php echo base_url() . 'css/960gs/reset.css'; ?>");</style>
-    <style type="text/css">@import url("<?php echo base_url() . 'css/960gs/text.css'; ?>");</style>
-    <style type="text/css">@import url("<?php echo base_url() . 'css/960gs/960.css'; ?>");</style>
+    <!--    <link href="--><?php //echo base_url('css/960gs/reset.css'); ?><!--" rel="stylesheet"/>-->
+    <!--    <link href="--><?php //echo base_url('css/960gs/text.css'); ?><!--" rel="stylesheet"/>-->
+    <!--    <link href="--><?php //echo base_url('css/960gs/960.css'); ?><!--" rel="stylesheet"/>-->
 
-    <style type="text/css">@import url("<?php echo base_url() . 'css/style.css'; ?>");</style>
-    <style type="text/css">@import url("<?php echo base_url() . 'css/autoSuggest.css'; ?>");</style>
+    <link href="<?php echo base_url('css/buttons.css'); ?>" rel="stylesheet"/>
+
+    <link href="<?php echo base_url('js/jQuery-Visualize/css/visualize.css'); ?>" rel="stylesheet"/>
+    <link href="<?php echo base_url('js/jQuery-Visualize/css/visualize-light.css'); ?>" rel="stylesheet"/>
+
+    <link href="<?php echo base_url('css/style.css') ?>" rel="stylesheet"/>
+    <link href="<?php echo base_url('css/autoSuggest.css') ?>" rel="stylesheet"/>
 
     <!--TABLE JQUERY-->
-    <style type="text/css">@import url("<?php echo base_url() . 'css/table.css'; ?>");</style>
+    <!--    <style type="text/css">@import url("--><?php //echo base_url() . 'css/table.css'; ?><!--");</style>-->
     <!--POP UP-->
-    <style type="text/css">@import url("<?php echo base_url() . 'css/pop-up.css'; ?>");</style>
+    <!--    <style type="text/css">@import url("--><?php //echo base_url() . 'css/pop-up.css'; ?><!--");</style>-->
 
-    <script type="text/javascript" src="<?php echo base_url(); ?>js/jquery-1.7.1.min.js"></script>
-    <script type="text/javascript" src="<?php echo base_url(); ?>js/jquery-ui-1.8.16.custom.min.js"></script>
-    <script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.autoSuggest.minified.js"></script>
-    <script type="text/javascript" src="<?php echo base_url(); ?>js/phpjs/substr.js"></script>
+    <script type="text/javascript" src="<?php echo base_url('js/jquery-1.7.1.min.js') ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('js/jquery-ui-1.8.16.custom.min.js') ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('js/jquery.autoSuggest.minified.js') ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('js/jQuery-Visualize/js/visualize.jQuery.js') ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('js/phpjs/substr.js') ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('js/scripts.js') ?>"></script>
 
 
 </head>
@@ -71,6 +78,9 @@
         elseif ($this->uri->segment(1) == 'kb_koordinator') {
             $this->load->view('navbar_kb_koordinator');
         }
+        elseif ($this->uri->segment(1) == 'kasubdit_dadutek') {
+            $this->load->view('navbar_dadutek');
+        }
 
         ?>
     </div>
@@ -79,8 +89,7 @@
     </div>
     <div id="footer"><?php $this->load->view('footer'); ?></div>
 </div>
-</body>
-</html>
+
 
 <!--TABS--GANTI MODEL EXTJS ! :) -->
 <script type="text/javascript">
@@ -98,29 +107,7 @@
     });
 </script>
 
-<!--TABLE JQUERY-->
-<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.wjb.selectallrows.js"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#tableOne thead tr th:first input:checkbox").click(function () {
-            var checkedStatus = this.checked;
-            $("#tableOne tbody tr td:first-child input:checkbox").each(function () {
-                this.checked = checkedStatus;
-            });
-        });
-
-        $("#tableTwo").selectAllRows();
-
-        $("#tableThree").selectAllRows({ column:'last' });
-
-        $("#tableFour").selectAllRows({
-            column:'2',
-            selectTip:'Select All Students',
-            unselectTip:'Un-Select All Students'
-        })
-                .css("border-width", "10px");
-    });
-</script>
-
+</body>
+</html>
 
 

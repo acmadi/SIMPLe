@@ -1,12 +1,11 @@
 @charset "utf-8";
-@import url(buttons.css);
 
 /* author: juna - em0hijau@yahoo.co.id */
 /* Modified by: mul14 - http://www.google.com/search?q=mul14 */
 
 @font-face {
     font-family: 'Lucida Grande';
-    src: local('Lucida Grande'), local('Lucida Grande'), url(../fonts/LucidaGrande.ttc);
+    src: local('Lucida Grande'), local('Lucida-Grande'), url("../fonts/Lucida Grande.ttf");
 }
 
 body {
@@ -526,15 +525,15 @@ td {
     color: #000;
 }
 
-table .short {
+.table .short {
     width: 10px;
 }
 
-table thead th {
+.table thead th {
     text-align: left;
 }
 
-table .action {
+.table .action {
     text-align: right;
     width: 75px;
 }
@@ -649,15 +648,15 @@ table .action {
     padding-bottom: 3px;
 }
 
-table.title {
+.table.title {
     margin-left: 10px;
 }
 
-table.title .title1 {
+.table.title .title1 {
     width: 100px;
 }
 
-table.title .title2 {
+.table.title .title2 {
     width: 20px;
 }
 
@@ -1334,4 +1333,8 @@ hr {
 
 .ui-dialog {
     font-size: 12px;
+}
+
+.chart {
+    font-size: 12px !important;
 }
