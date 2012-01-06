@@ -249,6 +249,21 @@ $(function () {
 
 //    $("#kode_satker").combobox();
 
+    // Tambah Dokumen Lainnya
+    $('#other-doc-btn').live('click', function () {
+        $('#other-docs').append('<p><input type="text" name="dokumen_lainnya[]"/></p>');
+    })
+
+    // Jangan sampai udah banyak ngetik,
+    // ehh... ternyata kepencet enter.
+    // Bubar semuanya, ngetik dari awal lagi deh (T_T)
+    $('form').keypress(function(e){
+        if (e.which == 13) {
+            e.preventDefault();
+        }
+
+    })
+
 })
 
 
@@ -293,12 +308,12 @@ $(function () {
 
         <p class="kode_satker_p">
             <label>Kode - Nama Satker</label>
-<!--            <select name="kode_satker" id="kode_satker" disabled style="width: 700px;">-->
-<!--                <option>1</option>-->
-<!--                <option>2</option>-->
-<!--                <option>3</option>-->
-<!--                <option>4</option>-->
-<!--            </select>-->
+            <!--            <select name="kode_satker" id="kode_satker" disabled style="width: 700px;">-->
+            <!--                <option>1</option>-->
+            <!--                <option>2</option>-->
+            <!--                <option>3</option>-->
+            <!--                <option>4</option>-->
+            <!--            </select>-->
             <input type="text" name="kode_satker" id="kode_satker" class="kl kode_satker" style="width: 700px;" disabled/>
         </p>
 
@@ -336,23 +351,23 @@ $(function () {
     <fieldset style="float: right; width: 47%; height: 310px;">
         <legend>Kelengkapan Dokumen</legend>
 
-        <?php foreach ($kelengkapan_dokumen->result() as $value): ?>
+        <div style="overflow: auto; height: 280px; margin: 0;">
+            <?php foreach ($kelengkapan_dokumen->result() as $value): ?>
 
             <?php if ($value->id_kelengkapan != 0): ?>
-        <p>
-            <label>
-                <input type="checkbox" name="dokumen[<?php echo $value->id_kelengkapan ?>]"/>
-                <?php echo $value->nama_kelengkapan ?>
-            </label>
-        </p>
-            <?php endif ?>
-        <?php endforeach ?>
-        <p>
-            <label>Dokumen Lainnya
-                <input type="text" name="dokumen_lainnya"/>
-            </label>
-        </p>
+                <p>
+                    <label>
+                        <input type="checkbox" name="dokumen[<?php echo $value->id_kelengkapan ?>]"/>
+                        <?php echo $value->nama_kelengkapan ?>
+                    </label>
+                </p>
+                <?php endif ?>
+            <?php endforeach ?>
 
+            <input type="button" id="other-doc-btn" class="button blue-pill" value="Tambah Dokumen Lain"/>
+
+            <p id="other-docs"></p>
+        </div>
     </fieldset>
 
     <div style="text-align: center; margin-top: 20px; clear: both;">
