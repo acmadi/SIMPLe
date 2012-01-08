@@ -58,27 +58,81 @@ class Calendar extends CI_Controller
     public function add()
     {
         if ($this->input->post('submit')) {
-            $calendar = explode('/', $this->input->post('calendar'));
-            $cal = array();
 
-            $cal['month'] = $calendar[0];
-            $cal['day'] = $calendar[1];
-            $cal['year'] = $calendar[2];
-            $cal['holiday'] = "{$calendar[2]}-{$calendar[0]}-{$calendar[1]}";
-            $cal['keterangan'] = $this->input->post('keterangan');
+            $this->form_validation->set_rules('calendar', 'Tanggal', 'required');
+            $this->form_validation->set_rules('keterangan', 'Keterangan', 'required');
 
-            $result = $this->db->insert('tb_calendar', $cal);
-            if ($result) {
-                $this->session->set_flashdata('success', 'Kalendar baru berhasil ditambahkan');
+            if ($this->form_validation->run()) {
 
-            } else {
-                $this->session->set_flashdata('error', 'Kalendar baru gagal ditambahkan');
+                // Seharusnya ini gak perlu. Tapi males ngubah view di calendar/calendar.
+                // Jadi yaa sementara gini aja dulu lahh...
+                $exploded = explode('-', $this->input->post('calendar'));
+                $cal['year'] = $exploded[0];
+                $cal['month'] = $exploded[1];
+                $cal['day'] = $exploded[2];
+
+
+                $cal['holiday'] = $this->input->post('calendar');
+                $cal['keterangan'] = $this->input->post('keterangan');
+
+                $result = $this->db->insert('tb_calendar', $cal);
+                if ($result) {
+                    $this->session->set_flashdata('success', 'Kalendar baru berhasil ditambahkan');
+                    $this->log->create("Kalendar baru ID {$this->db->insert_id()} berhasil ditambahkan");
+
+                } else {
+                    $this->session->set_flashdata('error', 'Kalendar baru gagal ditambahkan');
+                    $this->log->create("Kalendar baru gagal ditambahkan");
+                }
+                redirect('/admin/calendar/add');
             }
-            redirect('/admin/calendar/add');
+
         }
 
         $data['title'] = 'Calendar';
         $data['content'] = 'admin/calendar/add';
+        $this->load->view('admin/template', $data);
+    }
+
+    public function edit($id)
+    {
+        if ($this->input->post('submit')) {
+
+            $this->form_validation->set_rules('calendar', 'Tanggal', 'required');
+            $this->form_validation->set_rules('keterangan', 'Keterangan', 'required');
+
+            if ($this->form_validation->run()) {
+
+                // Seharusnya ini gak perlu. Tapi males ngubah view di calendar/calendar.
+                // Jadi yaa sementara gini aja dulu lahh...
+                $exploded = explode('-', $this->input->post('calendar'));
+                $cal['year'] = $exploded[0];
+                $cal['month'] = $exploded[1];
+                $cal['day'] = $exploded[2];
+
+                $cal['holiday'] = $this->input->post('calendar');
+                $cal['keterangan'] = $this->input->post('keterangan');
+
+                $result = $this->db->update('tb_calendar', $cal, array('id' => $id));
+
+                if ($result) {
+                    $this->session->set_flashdata('success', "Kalendar ID $id berhasil diubah");
+                    $this->log->create("Kalendar ID $id berhasil diubah");
+                } else {
+                    $this->session->set_flashdata('error', "Kalendar ID $id gagal ditambahkan");
+                    $this->log->create("Kalendar ID $id gagal ditambahkan");
+                }
+                redirect('/admin/calendar/edit/' . $id);
+            }
+        }
+
+        $data['title'] = 'Calendar';
+        $data['content'] = 'admin/calendar/edit';
+
+        $data['row'] = $this->db->from('tb_calendar')
+                ->where('id', $id)
+                ->get()->row();
+
         $this->load->view('admin/template', $data);
     }
 
@@ -90,6 +144,7 @@ class Calendar extends CI_Controller
             'day' => $day
         ));
         $this->session->set_flashdata('success', 'Tanggal berhasil dihapus');
+        $this->log->create("Menghapus tanggal $year-$month-$day");
         redirect(site_url('admin/calendar/'));
     }
 }

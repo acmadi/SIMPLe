@@ -79,7 +79,7 @@
             <td><?php echo $value->day ?></td>
             <td><?php echo $value->keterangan ?></td>
             <td>
-                <a href="<?php echo site_url("/admin/calendar/edit/{$value->year}/{$value->month}/{$value->day}") ?>" class="button gray-pill">Edit</a>
+                <a href="<?php echo site_url("/admin/calendar/edit/{$value->id}") ?>" class="button gray-pill">Edit</a>
                 <a href="<?php echo site_url("/admin/calendar/delete/{$value->year}/{$value->month}/{$value->day}") ?>" class="button gray-pill">Hapus</a>
             </td>
         </tr>
