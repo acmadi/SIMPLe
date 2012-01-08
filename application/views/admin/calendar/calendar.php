@@ -65,6 +65,7 @@
             <td class="short">Tahun</td>
             <td class="short">Bulan</td>
             <td class="short">Hari</td>
+            <td class="short">Keterangan</td>
             <td class="action">Aksi</td>
         </tr>
         </thead>
@@ -76,6 +77,7 @@
             <td><?php echo $value->year ?></td>
             <td><?php echo $value->month ?></td>
             <td><?php echo $value->day ?></td>
+            <td><?php echo $value->keterangan ?></td>
             <td>
                 <a href="<?php echo site_url("/admin/calendar/delete/{$value->year}/{$value->month}/{$value->day}") ?>" class="button gray-pill">Hapus</a>
             </td>

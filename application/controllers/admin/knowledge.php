@@ -60,6 +60,7 @@ class Knowledge extends CI_Controller
                 $category = $this->input->post('category', TRUE);
                 $info = $this->knowledge->add_category($category);
                 if ($info) {
+                    $this->log->create('Menambah kategori baru ' . $category);
                     $this->session->set_flashdata('success', "Kategori : ".$category." telah ditambahkan");
                     redirect('/admin/knowledge/add_category');
                 } else {
@@ -107,6 +108,7 @@ class Knowledge extends CI_Controller
                 $info = $this->knowledge->add_knowledge($data);
 
                 if ($info) {
+                    $this->log->create('Menambah knowledge baru ' . $data['fjudul']);
                     $this->session->set_flashdata('success', "Knowledge baru berjudul '".$data['fjudul']."' telah ditambahkan");
                     redirect('/admin/knowledge/add_knowledge');
                 } else {
@@ -127,6 +129,7 @@ class Knowledge extends CI_Controller
         $info = $this->knowledge->delete_category($id);
         switch ($info) {
             case 1:
+                $this->log->create('Menghapus kategori ID ' . $id);
                 $this->session->set_flashdata('success', "Berhasil dihapus");
                 break;
             case 2:
@@ -146,6 +149,7 @@ class Knowledge extends CI_Controller
 
         switch ($info) {
             case 1:
+                $this->log->create('Menghapus ID ' . $id);
                 $this->session->set_flashdata('success', "Berhasil dihapus");
                 break;
             case 2:
@@ -174,6 +178,7 @@ class Knowledge extends CI_Controller
             $data['id'] = $this->input->post('pidkat', TRUE);
             $info = $this->knowledge->do_edit_category($data);
             if ($info) {
+                $this->log->create('Mengubah kategori ID ' . $data['id']);
                 $this->session->set_flashdata('success', "Kategori berhasil diubah");
                 redirect('/admin/knowledge/index/2');
             } else {

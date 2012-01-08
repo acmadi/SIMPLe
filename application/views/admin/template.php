@@ -5,7 +5,9 @@
     <title><?php echo isset($title) ? $title : ''; ?></title>
     <link rel="shortcut icon" href="<?php echo base_url() . 'images/icon.jpg';?>"/>
     <style type="text/css">@import url("<?php echo base_url() . 'css/style.css'; ?>");</style>
-    <link rel="stylesheet" href="<?php echo base_url() . 'css/cupertino/jquery-ui-1.8.16.custom.css';?>"/>
+    <link href="<?php echo base_url('css/buttons.css'); ?>" rel="stylesheet"/>
+    <link rel="stylesheet" href="<?php echo base_url('css/cupertino/jquery-ui-1.8.16.custom.css');?>" />
+    <link rel="stylesheet" href="<?php echo base_url('/js/tufte-graph/tufte-graph.css');?>" />
 
     <!--TABLE JQUERY-->
     <style type="text/css">@import url("<?php echo base_url() . 'css/table.css'; ?>");</style>
