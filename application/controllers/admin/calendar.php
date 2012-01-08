@@ -65,6 +65,7 @@ class Calendar extends CI_Controller
             $cal['day'] = $calendar[1];
             $cal['year'] = $calendar[2];
             $cal['holiday'] = "{$calendar[2]}-{$calendar[0]}-{$calendar[1]}";
+            $cal['keterangan'] = $this->input->post('keterangan');
 
             $result = $this->db->insert('tb_calendar', $cal);
             if ($result) {
