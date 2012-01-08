@@ -12,24 +12,51 @@ class Frontdesk extends CI_Controller
 
     function index()
     {
-      $tikets = $this->frontdesk->get_all_tiket();
-      $data['title'] = $this->title;
-      $data['content_html'] = $this->load->view('admin/frontdesk/frontdesk', 
-        array('tikets' => $tikets), TRUE);
+	  $page		= $this->frontdesk->get_all_tiket(); 
+	  $pageData	= $page['query']->result();
+	  $pageLink	= $page['pagination1'];
+	  $nomor	= $page['nomor_item'];
+	
+	  $data		= array('result'=>$pageData,'pageLink'=>$pageLink,'nomor'=>$nomor,);
+      $data['title'] = 'Help Desk';
+	  $data['pilihan'] = array(
+                  'noantrian'  => 'No Tiket',
+                  'namasatker'    => 'Nama Satker',
+                  'status'   => 'Status',
+                );
+	  $data['cari'] ='';$data['keyword'] = '';
+	  $data['content'] = 'admin/frontdesk/frontdesk';
       $this->load->view('admin/template', $data);
     }
+	
     function search()
     {
       /*if ($this->session->userdata('login') == TRUE)
         {*/
-      $key = $this->input->post('key');
-      $value = $this->input->post('value');
+      $key = $this->input->post('fcari');
+      $value = $this->input->post('fkeyword');
 
-      $tikets = $this->frontdesk->get_all_tiket($key, $value);
-      $data['title'] = $this->title;
-      $data['content_html'] = $this->load->view('admin/frontdesk/frontdesk', 
-        array('tikets' => $tikets), TRUE);
-      $this->load->view('admin/template', $data);
+	  $keyword = $key.'_'.$value;
+	    
+		$page		= $this->frontdesk->get_all_tiket_by_keyword($keyword);
+		$pageData	= $page['query']->result();
+		$pageLink	= $page['pagination1'];
+		$nomor	= $page['nomor_item'];
+		$cari	= $page['cari'];
+		$keyword	= $page['keyword'];
+		
+		
+		
+		$data		= array('result'=>$pageData,'pageLink'=>$pageLink,'nomor'=>$nomor,'cari'=>$cari,'keyword'=>$keyword,);
+		
+		$data['title'] 	 = 'Histori Cari';
+		$data['pilihan'] = array(
+                  'noantrian'  => 'No Tiket',
+                  'namasatker'    => 'Nama Satker',
+                  'status'   => 'Status',
+                );
+		$data['content'] = 'admin/frontdesk/frontdesk';
+		$this->load->view('admin/template', $data);
       /*}
         else
         {

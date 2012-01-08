@@ -1,79 +1,87 @@
 <ul id="nav">
-    <li><a href="#tab1" class="active">FrontDesk</a></li>
+    <li><a href="#tab1" class="active">Frontdesk</a></li>
 </ul>
 <div class="clear"></div>
-<div id="konten">
-    <div style="display: none;" id="tab1" class="tab_konten">
+    <div id="konten">
+        <div style="display: none;" id="tab1" class="tab_konten">
+			<?php
+			// TODO: Satu paket ini untuk alerts. Nanti mau dipindah jadi hanya panggil satu method.
+			if ($this->session->flashdata('success')) {
+				echo '<div class="success">' . $this->session->flashdata('success') . '</div>';
+			}
+			if ($this->session->flashdata('error')) {
+				echo '<div class="error">' . $this->session->flashdata('error') . '</div>';
+			}
+			if ($this->session->flashdata('notice')) {
+				echo '<div class="notice">' . $this->session->flashdata('notice') . '</div>';
+			}
+			if ($this->session->flashdata('info')) {
+				echo '<div class="info">' . $this->session->flashdata('info') . '</div>';
+			}
+			?>
 
-
-        <div class="table">
-            <div class="head">
-                <span style="margin:0px 0px 0px -400px; padding-left:10px; width:50px; height:10px; background:#FFF; font-size: 11px; margin-top: -10px">Tiket</span>
-
-                <?php 
-                    echo form_open('admin/frontdesk/search', 
-                        array(
-                            'id' => 'cari_unit',
-                            'style' => 'border: 1px solid #999; padding: 33px 30px 13px 13px; margin:5px 0px 20px 20px; font-size:10px;'
-                            )
-                        );
-                        
-                ?>
-                    <table>
+            <div class="table">
+                <div id="head">
+                    <div style="float: left;">
+                        <form id="cari_unit" action="<?php echo site_url('/admin/frontdesk/search') ?>" method="post">
+							<table>
+								<tr>
+									<td>
+									Cari Berdasarkan
+									</td>
+									<td>
+										<?php echo form_dropdown('fcari', $pilihan, $cari);?>
+									</td>
+									<td>
+									</td>
+								</tr>
+								<tr>
+									<td>
+									Keyword
+									</td>
+									<td>
+										<input type="text" value="<?php echo $keyword;?>" placeholder="Keyword" name="fkeyword" id="teks-cari" />
+										
+									</td>
+									<td>
+										<input class="button blue-pill" type="submit" value="Cari Frontdesk" />
+									</td>
+								</tr>
+							</table>
+                            
+                        </form>
+                    </div>
+                </div>
+                <div id="tail">
+                    <table id="tableOne" class="yui">
+                        <thead>
                         <tr>
-                            <td>Cari Berdasarkan</td>
-                            <td>:</td>
-                            <td colspan="2">
-                            <select name="key">
-                                <option value="no_antrian">No Tiket</option>
-                                <option value="nama_satker">Nama Satker</option>
-                                <option value="status">Status</option>
-                            </select>
-                            </td>
+                            <th>No. Tiket</th>
+                            <th>Tanggal</th>
+                            <th>Tanggal Selesai</th>
+                            <th>Nama Satker</th>
+                            <th>Status</th>
                         </tr>
+                        </thead>
+                        <tbody>
+
+
+                        <?php $i = $nomor +1; foreach ($result as $tiket): ?>
                         <tr>
-                            <td>Keyword</td>
-                            <td>:</td>
-                            <td><input name="value" type="text"
-                                       style="width:180px; height:16px; font-size:10px; padding:2px 4px 2px 4px; margin-right:5px; "/>
-                            </td>
-                            <td><input type="submit" value="Cari" style="width:60px; height:24px; font-size:10px; "/>
-                            </td>
+                            <td><?php echo $tiket->no_tiket_frontdesk . ' ' . $tiket->no_antrian ?></td>
+                            <td><?php echo $tiket->tanggal ?></td>
+                            <td><?php echo $tiket->tanggal_selesai ?></td>
+                            <td><?php echo $tiket->nama_satker ?></td>
+                            <td><?php echo $tiket->status ?></td>
+                            
                         </tr>
+                        <?php endforeach ?>
+
+                        </tbody>
                     </table>
-                <?php echo form_close() ?>
+                </div>
+                <div class="pagination"><?php echo ($pageLink)?'Halaman '.$pageLink:'';?></div><br />
             </div>
         </div>
-        <div class="tail">
-            <!--
-            <p style="padding-top: 110px; position:absolute; padding-left: 10px;">Status Tiket</p><br/>
-            -->
-            <table id="tableOne" class="yui">
-                <thead>
-                    <tr>
-                        <th>No.Tiket</th>
-                        <th>Tanggal</th>
-                        <th>Tanggal Selesai</th>
-                        <th>Nama Satker</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach($tikets as $tiket) : ?>
-                    <tr>
-                        <td><?php echo $tiket->no_tiket_frontdesk . ' ' . $tiket->no_antrian ?></td>
-                        <td><?php echo $tiket->tanggal ?></td>
-                        <td><?php echo $tiket->tanggal_selesai ?></td>
-                        <td><?php echo $tiket->nama_satker ?></td>
-                        <td><?php echo $tiket->status ?></td>
-                    </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
 
-<!--        <div class="pagination">Halaman <a href="#">&laquo;</a> <a href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a-->
-<!--                href="#">4</a> <a href="#">5</a> <a href="#">6</a> <a href="#">&raquo;</a></div>-->
-    </div>
-</div>
-</div>
+<script type="text/javascript" src="<?php echo base_url(); ?>js/fungsi.js"></script>
