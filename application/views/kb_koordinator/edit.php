@@ -55,6 +55,14 @@
         </p>
 
         <p>
+            <label>Tipe</label>
+            <select name="tipe">
+                <option>Permanent</option>
+                <option>Workaround</option>
+            </select>
+        </p>
+
+        <p>
             <label>Pertanyaan</label>
             <input type="text" name="judul" value="<?php echo $kb->judul ?>"/>
         </p>

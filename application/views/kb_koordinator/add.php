@@ -1,5 +1,5 @@
 <div class="content">
-    <h1>Edit Knowledge Base</h1>
+    <h1>Tambah Knowledge Base</h1>
 
     <?php
     $errors = validation_errors();
@@ -53,6 +53,14 @@
                 <option value="0" selected>Privat</option>
                 <option value="1">Publik</option>
                 <?php endif ?>
+            </select>
+        </p>
+        
+        <p>
+            <label>Tipe</label>
+            <select name="tipe">
+                <option>Permanent</option>
+                <option>Workaround</option>
             </select>
         </p>
 

@@ -12,6 +12,7 @@
             <th class="short">No</th>
             <th>Pertanyaan</th>
             <th>Jawaban</th>
+            <th>Tipe</th>
             <th>Ranah</th>
             <th>Aksi</th>
         </tr>
@@ -23,6 +24,15 @@
             <td class="short"><?php echo $i++ ?></td>
             <td><?php echo $value->judul ?></td>
             <td><?php echo $value->jawaban ?></td>
+            <td>
+                <?php
+                if ($value->tipe == 0) {
+                    echo 'Permanent';
+                } else {
+                    echo 'Workarond';
+                }
+                ?>
+            </td>
             <td>
                 <?php
                 if ($value->is_public) {
