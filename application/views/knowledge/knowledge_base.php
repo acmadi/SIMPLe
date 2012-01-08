@@ -1,96 +1,62 @@
-<script type="">
+<script type="text/javascript">
     $(function () {
-        $('#search-form').submit(function () {
-            if ($('#search-form input').val() == '') {
-                return false;
-            }
-        })
+        $('#jawaban').dialog('destroy');
+
+        $('#jawaban').dialog({
+            autoOpen:false,
+            title:'Referensi Jawaban',
+            modal:true,
+            resizable:false,
+            draggable:false,
+            width:700,
+            height:400,
+            dialogClass:'centered-dialog'
+        });
+
+        $('.referensi-jawaban').live('click', function () {
+            var knowledge_base_id = $(this).attr('title');
+            var url = '<?php echo site_url('helpdesk/knowledge_base/get_by_id/') ?>/' + knowledge_base_id;
+
+            $.get(url, function (response) {
+                $('#jawaban').html(response).dialog('open');
+                jawaban_id = $('#jawaban input[type="hidden"]').val();
+            });
+        });
     })
 </script>
 
 <div class="content">
+    <h1>Knowledge Base</h1>
 
+    <div style="float: left; width: 170px; padding-right: 20px;">
 
-    <div id="msg">
-        <?php
-        if ($this->session->flashdata('msg')) {
-            echo $this->session->flashdata('msg');
-        }
-        ?>
+        <strong>Kategori</strong>
+        <ul>
+            <li><a href="<?php echo site_url($this->uri->segment(1) . '/knowledge_base/lists') ?>">Semua Kategori</a></li>
+            <?php foreach ($categories as $value): ?>
+            <li style="margin-bottom: 5px;">
+                <?php
+                echo anchor(
+                    $this->uri->segment(1) . '/knowledge_base/lists/' . $value->id_kat_knowledge_base,
+                    $value->kat_knowledge_base
+                )
+                ?>
+            </li>
+            <?php endforeach ?>
+        </ul>
+
     </div>
 
-    <div class="container_12">
-
-        <h1>Knowledge Base</h1>
-
-        <div class="grid_12">
-            <form action="<?php echo site_url('/helpdesk/knowledge_base/search_knowledge') ?>" id="search-form" method="post" style="text-align: right;">
-                <input type="text" name="fkat" placeholder="Pencarian" autocomplete="off"/>
-                <input id="search" class="button blue-pill" type="submit" value="Cari">
-            </form>
-        </div>
-
-        <div class="grid_3">
-            <ul>
-                <li><a href="<?php echo site_url('frontdesk/knowledge_base/') ?>">Semua</a></li>
-                <?php foreach ($categories->result() as $value): ?>
-                    <?php if ($this->uri->segment('3') == $value->id_kat_knowledge_base || $this->uri->segment('3') == ''): ?>
-                        <li><?php echo anchor('/frontdesk/knowledge_base/' . $value->id_kat_knowledge_base, $value->kat_knowledge_base) ?></li>
-                    <?php else: ?>
-                        <li><?php echo anchor('/frontdesk/knowledge_base/' . $value->id_kat_knowledge_base, $value->kat_knowledge_base) ?></li>
-                    <?php endif ?>
-                <?php endforeach ?>
-            </ul>
-        </div>
-
-        <div class="grid_9">
-
-            <?php if (!empty($result)): ?>
-
-            <?php foreach ($result['dir'] as $idx => $res): ?>
-
-                <div class="">
-
-                    <h1 class="category-title">
-                        <a href="<?php echo site_url('/helpdesk/knowledge_base/search_all/' . $idx . '/' . $idsearch) ?>"><?php echo $res ?></a>
-                    </h1>
-
-                    <ul style="list-style: disc outside; margin-left:20px;">
-                        <?php
-                        if (isset($part)) {
-                            $jml = count($result[$idx]) > 3 ? 3 : count($result[$idx]);
-                        } else {
-                            $jml = count($result[$idx]);
-                        }
-                        ?>
-
-                        <?php for ($n = 0; $n < $jml; $n++): ?>
-
-                        <li style="padding: 4px 0;">
-                            <a href="#">
-                                <?php echo $result[$idx][$n]['judul']?>
-                            </a>
-                        </li>
-
-                        <?php endfor ?>
-
-                    </ul>
-
-                    <?php if (!isset($sel)): ?>
-                    <!--                    <div style="text-align:right; border-top: 1px dotted #cecece; padding: 20px 0 10px; margin: 0px 0;">-->
-                    <!--                        <a href="--><?php //echo site_url('/helpdesk/knowledge_base/search_all/' . $idx . '/' . $idsearch) ?><!--"-->
-                    <!--                           class="button gray-pill" style="text-transform: capitalize;">Selengkapnya</a>-->
-                    <!--                    </div>-->
-                    <?php endif;?>
-
-                </div>
-                <?php endforeach; ?>
-
-            <?php endif;?>
-            <div class="clear"></div>
-        </div>
-
-        <?php echo $this->pagination->create_links() ?>
+    <div style="float: left; width: 800px;">
+        <ul>
+            <?php foreach ($kb as $value): ?>
+            <li style="margin-bottom: 10px;">
+                <a class="referensi-jawaban" href="javascript:void(0)" title="<?php echo $value->id_knowledge_base ?>"><?php echo $value->judul ?></a>
+            </li>
+            <?php endforeach ?>
+        </ul>
     </div>
-</div>
+
+    <div id="jawaban" style="display: none;"></div>
+
 </div>
