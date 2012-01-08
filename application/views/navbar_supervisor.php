@@ -20,7 +20,7 @@ switch ($this->uri->segment(2)) {
     <ul class="sf-menu">
         <li class="<?php echo $nav_dashboard ?>"><?php echo anchor('supervisor/dashboard', 'Dashboard');?></li>
         <li class="<?php echo $nav_list_pertanyaan ?>"><?php echo anchor('supervisor/list_pertanyaan', 'List Pertanyaan');?></li>
-        <li class="<?php echo $nav_knowledge ?>"><?php echo anchor('supervisor/knowledge_base', 'Knowledge Base');?></li>
+        <li class="<?php echo $nav_knowledge ?>"><?php echo anchor('supervisor/knowledge_base/lists', 'Knowledge Base');?></li>
         <li class=""><a href="<?php echo base_url() . 'upload/PMK-93.pdf' ?>" target="pdf">Referensi Peraturan</a></li>
         <li class="<?php echo $nav_forum ?>"><?php echo anchor('supervisor/man_forum', 'Forum');?></li>
     </ul>

@@ -26,7 +26,7 @@ switch ($this->uri->segment(2)) {
         <li class="<?php echo $nav_dashboard ?>"><?php echo anchor('direktur/dashboard', 'Dashboard');?></li>
         <li class="<?php echo $nav_helpdesk ?>"><?php echo anchor('direktur/helpdesk', 'Helpdesk');?></li>
         <li class="<?php echo $nav_frontdesk ?>"><?php echo anchor('direktur/frontdesk', 'Front Desk');?></li>
-        <li class="<?php echo $nav_knowledge ?>"><?php echo anchor('direktur/knowledge_base', 'Knowledge Base');?></li>
+        <li class="<?php echo $nav_knowledge ?>"><?php echo anchor('direktur/knowledge_base/lists', 'Knowledge Base');?></li>
         <li class=""><a href="<?php echo base_url() . 'upload/PMK-93.pdf' ?>" target="pdf">Referensi Peraturan</a></li>
         <li class="<?php echo $nav_forum ?>"><?php echo anchor('direktur/man_forum', 'Forum');?></li>
     </ul>
