@@ -4,6 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="shortcut icon" href="<?php echo base_url() . 'images/icon.jpg';?>"/>
     <link href="<?php echo base_url('/css/style.css') ?>" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url('css/buttons.css'); ?>" rel="stylesheet"/>
     <style type="text/css">@import url("<?php echo base_url() . 'css/style.css'; ?>");</style>
     <title>Login</title>
 </head>
