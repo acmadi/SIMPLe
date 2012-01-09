@@ -21,13 +21,17 @@ Class Login extends CI_Controller
         $login_data = $this->mlogin->cekdb($user, $pass);
 
         if ($login_data) {
-
+			$this->db->query("DELETE FROM ci_sessions WHERE id_user = ?",array($login_data->id_user));
+			
             $this->session->set_userdata('user', $login_data->username);
             $this->session->set_userdata('id_user', $login_data->id_user);
             $this->session->set_userdata('id_lavel', $login_data->id_lavel);
             $this->session->set_userdata('lavel', $login_data->lavel);
             $this->session->set_userdata('nama_lavel', $login_data->nama_lavel);
             $this->session->set_userdata('nama', $login_data->nama);
+			
+			$this->db->query("UPDATE ci_sessions SET id_user = ? WHERE session_id = ?",array($this->session->userdata('id_user'),$this->session->userdata('session_id')));
+			
             $this->log->create("Login");
 
             switch (strtolower($login_data->id_lavel)) {
@@ -81,8 +85,9 @@ Class Login extends CI_Controller
     public function process_logout()
     {
         $this->log->create("Logout");
-        $this->session->unset_userdata('user');
-        $this->session->unset_userdata('level');
+		//$this->db->query("DELETE FROM ci_sessions WHERE id_user = ?",array($this->session->userdata('id_user')));
+        //$this->session->unset_userdata('user');
+        //$this->session->unset_userdata('level');
         $this->session->sess_destroy();
         unset($_SESSION);
         $this->session->set_flashdata("anda telah berhasil logout");

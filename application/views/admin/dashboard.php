@@ -32,23 +32,59 @@
 <div class="content">
     <h1>Dashboard</h1>
 
-    <fieldset style="padding: 40px; float: left; width: 500px;">
+    <fieldset style=" float: left; width: 500px; ">
         <legend>Statistik</legend>
-        <div id="graph" style="width: 500px; height: 200px;"></div>
+        <img src="<?=base_url()?>images/dashboard_bar_admin.png"/>
     </fieldset>
 
-    <fieldset style="float: left; width: 500px; margin-left: 20px; height: 200px;">
-        <legend>Knowledge Base</legend>
-        <div style="height: 200px; overflow: scroll;">
+    <fieldset style="float: left; width: 500px; margin-left: 20px; height: 255px;">
+        <legend>User yang sedang online</legend>
+        <div style="height: 240px;">
             <dl>
                 <?php
-                $result = $this->db->from('tb_knowledge_base')->limit(5)->get()->result();
+                
+				$result = $this->db->query("SELECT user_data FROM ci_sessions WHERE user_data != ''")->result();
                 foreach ($result as $val) {
-                    echo '<dd>' . anchor('admin/knowledge', $val->judul) . '</dd>';
+					$udata = unserialize($val->user_data);
+                    echo "<dd ><img src='".base_url()."images/user.png' > " . $udata['user'] . "</dd>";
+                }
+				
+                ?>
+            </dl>
+        </div>
+    </fieldset>
+	
+	<div class="clear"></div>
+
+    <fieldset style="float: left; width: 500px; height: 255px;">
+        <legend>Forum</legend>
+        <div style="height: 240px;">
+            <dl>
+                <?php
+                $result = $this->db->from('tb_forum')->limit(5)->get()->result();
+                foreach ($result as $val) {
+                    echo '<dd>' . anchor('admin/man_forum_ubah/index/'.$val->id_forum, $val->judul_forum) . '</dd>';
                 }
                 ?>
             </dl>
         </div>
     </fieldset>
+	
+	<fieldset style="float: left; width: 500px;margin-left: 20px; height: 255px;">
+        <legend>Knowledge Base</legend>
+        <div style="height: 240px; ">
+            <dl>
+                <?php
+                $result = $this->db->from('tb_knowledge_base')->limit(5)->get()->result();
+                foreach ($result as $val) {
+                    echo '<dd>' . anchor('admin/knowledge_ubah/index/'.$val->id_knowledge_base, $val->judul) . '</dd>';
+                }
+                ?>
+            </dl>
+        </div>
+    </fieldset>
+	
+	
+	
     <div class="clear"></div>
 </div>
