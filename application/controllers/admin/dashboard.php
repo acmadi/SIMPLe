@@ -21,28 +21,29 @@ class Dashboard extends CI_Controller
 		  
 		  $result_statistik = $this->mdashboard->get_info_statistik();
 		  
-		  //print_r($result_statistik);exit;
+		  $tmp = array();
+		  $tmp2 = array();
+		  
+		  foreach($result_statistik['tahun'] as $th):
+			if(isset($result_statistik['front'][$th])){
+				$tmp[] =  $result_statistik['front'][$th];
+			}else{
+				$tmp[] = 0;
+			}
+			
+			if(isset($result_statistik['help'][$th])){
+				$tmp2[] =  $result_statistik['help'][$th];
+			}else{
+				$tmp2[] = 0;
+			}
+		  endforeach;
+		  
 		  
 		  // Dataset definition 
 		  $DataSet = new pData;
-		  
-		  foreach($result_statistik['tahun'] as $th){
-			  if(isset($result_statistik['front'][$th])){
-				$DataSet->AddPoint($result_statistik['front'][$th],"Serie1");
-			  }else{
-				$DataSet->AddPoint(0,"Serie1");
-			  }
-			  
-			  
-			  if(isset($result_statistik['help'][$th])){
-				$DataSet->AddPoint($result_statistik['help'][$th],"Serie2");
-			  }else{
-				$DataSet->AddPoint(0,"Serie2");
-			  }
-			  
-			  
-		  }
-		  
+		  $DataSet->AddPoint($tmp,"Serie1");
+		  $DataSet->AddPoint($tmp2,"Serie2");
+		 
 		  $DataSet->AddAllSeries();
 		  $DataSet->AddPoint($result_statistik['tahun'],"serie3");
 		  $DataSet->SetAbsciseLabelSerie("serie3");
