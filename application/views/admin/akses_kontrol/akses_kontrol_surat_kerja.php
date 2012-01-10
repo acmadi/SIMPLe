@@ -4,7 +4,7 @@
     <div class="clear"></div>
     <div id="konten">
     	<div style="display: none;" id="tab1" class="tab_konten">
-             <?php
+            <?php
 			// TODO: Satu paket ini untuk alerts. Nanti mau dipindah jadi hanya panggil satu method.
 			if ($this->session->flashdata('success')) {
 				echo '<div class="success">' . $this->session->flashdata('success') . '</div>';
@@ -58,87 +58,14 @@
                     </table>
                     </form>
                 </div>
-				
                 <div id="tail">
                     <label class="label2" for="masakerja">Masa Kerja</label>
                     <form action="<?php echo site_url('admin/akses_kontrol_surat_kerja/save')?>" method="post" id="surat_kerja" style="min-height:100px;">
                         <?php echo form_hidden('id',$item->id_user);?>
-                        <?php echo form_hidden('level',$level);?>
-						<table style=" margin-left: 150px; margin-top: 10px; float:left; ">
-                            <thead>
-                                <tr>
-                                    <td colspan="5" style="text-align:center;">Tanggal Awal</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <select style="font-size:10px;"  name="ftgl">
-                                        <option selected="selected" value="">Tgl</option>
-											<?php for($i=1; $i<32; $i++):?>
-													<option value="<?php echo $i;?>"><?php echo (strlen($i)<2)?'0'.$i:$i?></option>
-											<?php endfor;?>
-                                        </select>
-                                    </td>
-                                    <td> - </td>
-                                    <td>
-                                        <select style="font-size:10px; "  name="fbln">
-                                        <option selected="selected" value="">Bulan</option>
-										<?php for($t=1; $t<=count($bln); $t++):?>
-													<option value="<?php echo $t;?>"><?php echo $bln[$t]?></option>
-										<?php endfor;?>	
-                                        </select>
-                                    </td>
-                                    <td> - </td>
-                                    <td>
-                                        <select style="font-size:10px; " name="fthn">
-                                        <option selected="selected" value="">Tahun</option>
-										<?php for($u=$thn; $u<$thn+10; $u++):?>
-												<option value="<?php echo $u;?>"><?php echo $u?></option>
-										<?php endfor;?>	
-                                        </select>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>      
-                        <table style=" margin-left: 150px; margin-top: 10px; float:left; ">
-                            <thead>
-                                <tr>
-                                    <td colspan="5" style="text-align:center;">Tanggal Akhir</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <select style="font-size:10px; " name="ftgl2">
-                                        <option selected="selected" value="" >Tgl</option>
-											<?php for($i2=1; $i2<32; $i2++):?>
-													<option value="<?php echo $i2;?>"><?php echo (strlen($i2)<2)?'0'.$i2:$i2?></option>
-											<?php endfor;?>
-                                        </select>
-                                    </td>
-                                    <td> - </td>
-                                    <td>
-                                        <select style="font-size:10px; " name="fbln2">
-                                        <option selected="selected" value="" >Bulan</option>
-                                        <?php for($t2=1; $t2<=count($bln); $t2++):?>
-													<option value="<?php echo $t2;?>"><?php echo $bln[$t2]?></option>
-										<?php endfor;?>
-                                        </select>
-                                    </td>
-                                    <td> - </td>
-                                    <td>
-                                        <select style="font-size:10px; " name="fthn2">
-                                        <option selected="selected" value="">Tahun</option>
-                                        <?php for($u2=$thn; $u2<$thn+10; $u2++):?>
-												<option value="<?php echo $u2;?>"><?php echo $u2?></option>
-										<?php endfor;?>
-                                        </select>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table> 
-						<input id="simpan" type="submit" value="simpan"/>
+						<?php echo form_hidden('level',$level);?>
+						 <input  name="ftglmulai"  id="datepicker1" value="" type="text"> -
+						 <input  name="ftglselesai"  id="datepicker2" value="" type="text">     
+						 <input id="simpan" type="submit" class="button blue-pill" value="simpan"/>
                     </form>
         			
                 </div>
@@ -168,4 +95,15 @@
         	</div>
             
     </div>
+	
 </div>
+<link type="text/css" href="<?php echo base_url()?>css/ui-lightness/jquery-ui-1.8.16.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="<?php echo base_url()?>js/jquery.ui.core.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url()?>js/jquery.ui.datepicker.min.js"></script>
+<script type="text/javascript"> 
+			$(document).ready(function(){
+				$("#datepicker1").datepicker({ dateFormat: 'dd-mm-yy' });
+				$("#datepicker2").datepicker({ dateFormat: 'dd-mm-yy' });
+				$("div.ui-datepicker").css('font-size','12px');	
+			}); 
+</script>
