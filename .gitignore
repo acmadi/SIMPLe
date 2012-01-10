@@ -7,11 +7,12 @@
 
 # Ignore junk files for Windows, Mac, Linux
 .DS_Store
+._*
 Thumbs.db
 desktop.ini
-
 # KDE
 .directory
-
 # Backup Files (gedit)
 *~
+/.idea/
+nbproject
