@@ -62,6 +62,12 @@ class Mforum extends CI_Model
 	    	 ORDER BY tanggal ASC"
 	    	)->result();	
     }
+    public function count_childs($id_parent)
+    {
+    	$this->db->where('id_parent', $id_parent);
+		$this->db->from('tb_forum');
+		return $this->db->count_all_results();
+    }
 
     public function add_forum($id_kat_forum, $judul_forum, $isi_forum, $file = '')
     {

@@ -1,8 +1,7 @@
 <div class="content">
 
     <h1>Forum</h1>
-    <?php $forums = $forums->result() ?>
-    <?php foreach ($forums as $forum): ?>
+    <?php $forum = $forums->row() ?>
     <div>
 
         <h2><?php echo $forum->judul_forum ?></h2>
@@ -13,17 +12,22 @@
             <?php echo $forum->isi_forum ?>
         </div>
 
+        <div>
+            File: 
+            <?php echo anchor('upload/forum/' . $forum->file, $forum->file)?>
+        </div>
+
     </div>
-    <?php endforeach ?>
     
     <hr/>
 
     <h2>Balas</h2>
     <?php 
-    $data['id_parent']    = $forums[0]->id_forum;
-    $data['id_kat_forum'] = $forums[0]->id_kat_forum;
-    $data['judul_forum']  = $forums[0]->judul_forum;
-    $data['referrer']     = 'frontdesk/man_forum/view/' . $forums[0]->id_forum;
+    $data['kat_forum']    = NULL;
+    $data['id_parent']    = $forum->id_forum;
+    $data['id_kat_forum'] = $forum->id_kat_forum;
+    $data['judul_forum']  = 'Balas: ' . $forum->judul_forum;
+    $data['referrer']     = 'frontdesk/man_forum/view/' . $forum->id_forum;
     $this->load->view('frontdesk/man_forum/form', $data) 
     ?>
     

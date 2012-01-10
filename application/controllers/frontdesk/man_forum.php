@@ -37,11 +37,14 @@ class Man_forum extends CI_Controller
 
     function kirim()
     {
+
+        $id_parent = ( ! $this->input->post('id_parent') ) ? NULL : $this->input->post('id_parent');
+
         $arr = array(
             'id_kat_forum' => $this->input->post('id_kat_forum'),
             'judul_forum' => $this->input->post('judul_forum'),
             'isi_forum'   => $this->input->post('isi_forum'),
-            'id_parent'   => $this->input->post('id_parent'),
+            'id_parent'   => $id_parent,
             'id_user'     => $this->session->userdata('id_user'),
             );
 
