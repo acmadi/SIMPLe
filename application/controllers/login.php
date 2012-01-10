@@ -85,9 +85,9 @@ Class Login extends CI_Controller
     public function process_logout()
     {
         $this->log->create("Logout");
-		//$this->db->query("DELETE FROM ci_sessions WHERE id_user = ?",array($this->session->userdata('id_user')));
-        //$this->session->unset_userdata('user');
-        //$this->session->unset_userdata('level');
+		$this->db->query("DELETE FROM ci_sessions WHERE id_user = ?",array($this->session->userdata('id_user')));
+        $this->session->unset_userdata('user');
+        $this->session->unset_userdata('level');
         $this->session->sess_destroy();
         unset($_SESSION);
         $this->session->set_flashdata("anda telah berhasil logout");

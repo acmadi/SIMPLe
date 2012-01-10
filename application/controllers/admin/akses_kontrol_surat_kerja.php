@@ -28,31 +28,26 @@ class Akses_kontrol_surat_kerja extends CI_Controller
 	
 	function save(){
 		$this->form_validation->set_rules('id','ID','required');
-		$this->form_validation->set_rules('ftgl','Tanggal Awal','required');
-		$this->form_validation->set_rules('ftgl2','Tanggal Akhir','required');
-		$this->form_validation->set_rules('fbln','Bulan Awal','required');
-		$this->form_validation->set_rules('fbln2','Bulan Akhir','required');
-		$this->form_validation->set_rules('fthn','Tahun Awal','required');
-		$this->form_validation->set_rules('fthn2','Tahun Akhir','required');
+		$this->form_validation->set_rules('ftglmulai','Tanggal Mulai','required');
+		$this->form_validation->set_rules('ftglselesai','Tanggal Selesai','required');
 		
 		$level = $this->input->post('level',TRUE);
-		$id	= trim($this->input->post('id',TRUE));
 		
 		if($this->form_validation->run() == FALSE){
 			$this->session->set_flashdata('error',validation_errors());
+			$id	= trim($this->input->post('id',TRUE));
+			//redirect('admin/man_user_surat_kerja/index/'.$id);
 			redirect('admin/akses_kontrol_surat_kerja/index/'.$id.'/'.$level);
 		}else{
+		
 			$data['id']   = $this->input->post('id',TRUE);
-			$data['tgl1'] = $this->input->post('ftgl',TRUE);
-			$data['tgl2'] = $this->input->post('ftgl2',TRUE);
-			$data['bln1'] = $this->input->post('fbln',TRUE);
-			$data['bln2'] = $this->input->post('fbln2',TRUE);
-			$data['thn1'] = $this->input->post('fthn',TRUE);
-			$data['thn2'] = $this->input->post('fthn2',TRUE);
+			$data['tgl_mulai']   = $this->input->post('ftglmulai',TRUE);
+			$data['tgl_selesai']   = $this->input->post('ftglselesai',TRUE);
+			
 			
 			$info = $this->user->set_surat_kerja($data);
-			if($info) $this->session->set_flashdata('success',"sukses tambahkan masa kerja");
-			redirect('admin/akses_kontrol/view/'.$level);
+			if($info) $this->session->set_flashdata('success',"sukses tambahkan masa kerja ID user : ".$data['id']);
+			redirect('admin/akses_kontrol_surat_kerja/index/'.$data['id'].'/'.$level);
 		}
 	}
 }
