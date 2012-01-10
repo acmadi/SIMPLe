@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html manifest="manifest.txt">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <title><?php echo isset($title) ? $title : ''; ?></title>
@@ -18,6 +18,7 @@
 
     <link href="<?php echo base_url('css/style.css') ?>" rel="stylesheet"/>
     <link href="<?php echo base_url('css/autoSuggest.css') ?>" rel="stylesheet"/>
+    <link href="<?php echo base_url('js/FlexBox/css/jquery.flexbox.css') ?>" rel="stylesheet"/>
 
     <!--TABLE JQUERY-->
     <!--    <style type="text/css">@import url("--><?php //echo base_url() . 'css/table.css'; ?><!--");</style>-->
@@ -29,6 +30,7 @@
     <script type="text/javascript" src="<?php echo base_url('js/jquery.autoSuggest.minified.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/jQuery-Visualize/js/visualize.jQuery.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/phpjs/substr.js') ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('js/FlexBox/js/jquery.flexbox.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/scripts.js') ?>"></script>
 
 

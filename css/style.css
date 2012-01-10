@@ -96,7 +96,7 @@ body {
     padding: 10px 0 5px 25px;
     color: #fff;
     position: fixed;
-    z-index: 10;
+    z-index: 99999;
 }
 
 #header img {
@@ -139,7 +139,7 @@ body {
     position: fixed;
     width: 100%;
     top: 115px;
-    z-index: 9;
+    z-index: 99990;
     box-shadow: 0 -10px 20px 4px gray;
 }
 
@@ -1139,7 +1139,7 @@ a img {
 }
 
 form p {
-    padding: 10px 0;
+    /*padding: 10px 0;*/
 }
 
 form label {
