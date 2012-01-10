@@ -53,12 +53,26 @@ class Mforum extends CI_Model
         return $this->db->query($sql);
     }
 
+    public function get_childs($id_parent)
+    {
+    	// c = child
+    	// p = parent
+    	return $this->db->query(
+	    	"SELECT * FROM tb_forum WHERE id_parent = $id_parent
+	    	 ORDER BY tanggal ASC"
+	    	)->result();	
+    }
+
     public function add_forum($id_kat_forum, $judul_forum, $isi_forum, $file = '')
     {
         $sql = "INSERT INTO tb_forum (id_kat_forum, judul_forum, isi_forum, file)
                 VALUES (?, ?, ?, ?)";
         return $this->db->query($sql, array($id_kat_forum, $judul_forum, $isi_forum, $file));
+    }
 
+    public function add_forum_by_array($arr)
+    {
+    	return $this->db->insert('tb_forum', $arr);
     }
 	
 	public function update_forum($id_kat_forum, $judul_forum, $isi_forum, $file = '',$id){
