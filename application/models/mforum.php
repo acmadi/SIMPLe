@@ -64,7 +64,9 @@ class Mforum extends CI_Model
     	// c = child
     	// p = parent
     	return $this->db->query(
-	    	"SELECT * FROM tb_forum WHERE id_parent = $id_parent
+	    	"SELECT f.*, u.nama AS nama FROM tb_forum f LEFT JOIN tb_user u
+             ON (f.id_user = u.id_user)
+             WHERE f.id_parent = '$id_parent'
 	    	 ORDER BY tanggal ASC"
 	    	)->result();	
     }
@@ -103,6 +105,14 @@ class Mforum extends CI_Model
         return $this->db->query($sql);
     }
 	
+	public function get_one_with_poster($id)
+	{
+		$sql = 
+			"SELECT f.*, u.nama AS nama FROM tb_forum f LEFT JOIN tb_user u
+             ON (f.id_user = u.id_user)
+             WHERE f.id_forum = $id";
+		return $this->db->query($sql);
+	}
 	public function get_by_id($id){
 		return $this->db->query("SELECT a.id_forum,b.kat_forum, a.judul_forum, a.isi_forum, a.file, a.id_kat_forum
 								FROM tb_forum a, tb_kat_forum b WHERE a.id_kat_forum = b.id_kat_forum AND a.id_forum = ?",array($id))->row();

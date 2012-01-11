@@ -2,13 +2,14 @@
 
     <h1>Forum</h1>
     <?php $forum = $forums->row() ?>
-    <div>
+    <div class="agan_ts">
 
         <h2 class="entry-title"><?php echo $forum->judul_forum ?></h2>
 
-        <em class="meta">dikirim pada <?php echo date('d-m-Y', strtotime($forum->tanggal)) ?></em>
+        <em class="meta">dikirim pada tanggal <?php echo date('d-m-Y', strtotime($forum->tanggal)) ?>,
+         oleh <?php echo $forum->nama ?></em>
 
-        <div>
+        <div class="isi_forum">
             <?php echo $forum->isi_forum ?>
         </div>
 
@@ -52,9 +53,10 @@
 
         <h3 class="entry-title"><?php echo $child->judul_forum ?></h3>
 
-        <em class="meta">dikirim pada <?php echo date('d-m-Y', strtotime($child->tanggal)) ?></em>
+        <em class="meta">dikirim pada tanggal <?php echo date('d-m-Y', strtotime($forum->tanggal)) ?>,
+         oleh <?php echo $child->nama ?></em>
 
-        <div>
+        <div class="isi_forum">
             <?php echo $child->isi_forum ?>
         </div>
         

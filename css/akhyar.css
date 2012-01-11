@@ -10,6 +10,15 @@ div.form{
 	padding: 1.5em;
 }
 
+.agan_ts{
+	border: 2px solid #ddd;
+	padding: 10px;
+	border-radius: 10px;
+	background-color: #fafafa;
+}
+.isi_forum{
+	margin: 10px 0px;
+}
 em.meta{
 	color: #999;
 	margin: 10px 0px 10px;	
