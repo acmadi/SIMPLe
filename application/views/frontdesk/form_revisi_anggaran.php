@@ -23,14 +23,25 @@
 
         $(function () {
 			
-            $('#nama_kl_input').live('blur', function () {
+            $('#nama_kl_input').live('focusin', function () {
                 var nama_kl = $('#nama_kl_input').val();
                 $.get('<?php echo site_url('helpdesk/identitas_satker/cari_kl/') ?>', {id_kementrian:nama_kl}, function (response) {
                     console.log(response);
+                    response = '<option> - Pilih Eselon - </option>' + response;
                     $('#eselon').html(response);
                     $('#kode_satker').removeAttr('disabled');
                 })
             })
+
+            $('#eselon').change(function(){
+                id_kementrian = substr($('#nama_kl_input').val(), 0, 3);
+
+                url = '<?php echo site_url('frontdesk/form_revisi_anggaran/anggaran') ?>/' + id_kementrian;
+                console.log(url);
+                $.get(url, function(response){
+                    $('#anggaran').html('A' + response);
+                });
+            });
 					
 			$('#kode_satker').autocomplete({
 				source:function (request, response) {
@@ -78,6 +89,7 @@
             // Tombol hapus
             $('#clear_nama_kl').click(function () {
                 $('#nama_kl_input').val('');
+                $('#eselon').html('');
             })
 
             // Tambah Dokumen Lainnya
