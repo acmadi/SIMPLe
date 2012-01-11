@@ -4,22 +4,21 @@ class Status_tiket extends CI_Controller
     function __construct()
     {
         parent::__construct();
+		$this->load->model('Mtiket','tiket');
 
     }
 
     function index()
     {
-        $sql = "SELECT * FROM tb_tiket_frontdesk
-                JOIN tb_satker
-                ON tb_satker.id_satker = tb_tiket_frontdesk.id_satker
-                ORDER BY status";
-
-        $result = $this->db->query($sql);
-
-        $data['dokumen'] = $result;
-
-        $data['title'] = 'Status Tiket';
-        $data['content'] = 'frontdesk/status_tiket';
+        $page		= $this->tiket->get_list_tiket();
+		$pageData	= $page['query']->result();
+		$pageLink	= $page['pagination1'];
+		
+		$data		= array('result'=>$pageData,'pageLink'=>$pageLink,);
+        $data['title'] 		= 'Status Tiket';
+        $data['isian_form']	= $page['isian_form1'];
+        $data['content'] 	= 'frontdesk/status_tiket';
+		
         $this->load->view('master-template', $data);
     }
 }
