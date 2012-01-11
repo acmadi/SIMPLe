@@ -5,6 +5,7 @@ class Form_revisi_anggaran extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        $this->config->load('appconfig');
         $this->form_validation->set_message('required', '<strong>%s</strong> harus diisi.');
     }
 
@@ -282,22 +283,27 @@ class Form_revisi_anggaran extends CI_Controller
 
         $data['no_tiket_frontdesk'] = $no_tiket_frontdesk;
 
-        //echo $this->db->last_query();
-
         $this->log->create("Cetak tanda terima pengajuan revisi anggaran #{$no_tiket_frontdesk}");
 
-//        $this->load->view('/frontdesk/success2', $data);
-
         $this->load->library('odtphp');
+
         $input_filename = $this->odtphp->create($no_tiket_frontdesk, 'tanggal', '10:00');
 
         $output = preg_replace('/.odt/', '.pdf', $input_filename['full_filename']);
-        $command = sprintf('"c:\Program Files (x86)\LibreOffice 3.4\program\python.exe" DocumentConverter.py %s %s', $input_filename['full_filename'], $output);
+
+        $command = sprintf('"%s" DocumentConverter.py "%s" "%s"',
+            $this->config->item('libreoffice_python'),
+            $input_filename['full_filename'],
+            $output);
+
         exec($command);
 
-        echo $command;
+        $data['title'] = '';
+        $data['content'] = 'frontdesk/success2';
+        $pdf_file = preg_replace('/.odt/', '.pdf', $input_filename['filename']);
+        $data['pdf_file'] = base_url() . 'output/' . $pdf_file;
 
-//        redirect(base_url('/output/' . $filename));
+        $this->load->view('frontdesk/success2', $data);
     }
 
     function fail()
