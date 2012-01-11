@@ -23,6 +23,14 @@ class Man_forum_cari extends CI_Controller
         $data['content'] = 'admin/man_forum/man_forum_cari';
 		$data['categories'] = $this->mforum->get_categories();
 		
+        $bc[0]->link = 'admin/dashboard';
+        $bc[0]->label = 'Home';
+        $bc[1]->link = 'admin/man_forum';
+        $bc[1]->label = 'Forum';
+        $bc[2]->link = $this->uri->uri_string();
+        $bc[2]->label = 'Hasil Pencarian';
+        $data['breadcrumb'] = $bc;
+
         $this->load->view('admin/template', $data);
     }
 }

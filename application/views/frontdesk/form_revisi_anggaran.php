@@ -1,277 +1,77 @@
-<style type="text/css">
-    .ui-autocomplete {
-        max-height: 300px;
-        overflow-y: auto;
-        /* prevent horizontal scrollbar */
-        overflow-x: hidden;
-        /* add padding to account for vertical scrollbar */
-        padding-right: 20px;
-    }
-
-    .ui-autocomplete-input {
-        width: 700px;
-    }
-
-    .ui-button {
-        margin-left: -1px;
-        position: relative;
-        top: 10px;
-        height: 29px;
-    }
-
-    .ui-button-icon-only .ui-button-text {
-        padding: 0.35em;
-    }
-
-    .ui-autocomplete-input {
-        margin: 0;
-        padding: 0.48em 0 0.47em 0.45em;
-    }
-</style>
-
 <script type="text/javascript">
+    $(function ($) {
 
-
-(function ($) {
-    $.widget("ui.combobox", {
-        _create:function () {
-            var self = this,
-                    select = this.element.hide(),
-                    selected = select.children(":selected"),
-                    value = selected.val() ? selected.text() : "";
-            var input = this.input = $("<input>")
-                    .insertAfter(select)
-                    .val(value)
-                    .autocomplete({
-                        delay:0,
-                        minLength:0,
-                        source:function (request, response) {
-                            var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i");
-                            response(select.children("option").map(function () {
-                                var text = $(this).text();
-                                if (this.value && ( !request.term || matcher.test(text) ))
-                                    return {
-                                        label:text.replace(
-                                                new RegExp(
-                                                        "(?![^&;]+;)(?!<[^<>]*)(" +
-                                                                $.ui.autocomplete.escapeRegex(request.term) +
-                                                                ")(?![^<>]*>)(?![^&;]+;)", "gi"
-                                                ), "<strong>$1</strong>"),
-                                        value:text,
-                                        option:this
-                                    };
-                            }));
-                        },
-                        select:function (event, ui) {
-                            ui.item.option.selected = true;
-                            self._trigger("selected", event, {
-                                item:ui.item.option
-                            });
-                        },
-                        change:function (event, ui) {
-                            if (!ui.item) {
-                                var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex($(this).val()) + "$", "i"),
-                                        valid = false;
-                                select.children("option").each(function () {
-                                    if ($(this).text().match(matcher)) {
-                                        this.selected = valid = true;
-                                        return false;
-                                    }
-                                });
-                                if (!valid) {
-                                    // remove invalid value, as it didn't match anything
-                                    $(this).val("");
-                                    select.val("");
-                                    input.data("autocomplete").term = "";
-                                    return false;
-                                }
-                            }
-                        }
-                    })
-                    .addClass("ui-widget ui-widget-content ui-corner-left");
-
-            input.data("autocomplete")._renderItem = function (ul, item) {
-                return $("<li></li>")
-                        .data("item.autocomplete", item)
-                        .append("<a>" + item.label + "</a>")
-                        .appendTo(ul);
-            };
-
-            this.button = $("<button type='button'>&nbsp;</button>")
-                    .attr("tabIndex", -1)
-                    .attr("title", "Show All Items")
-                    .insertAfter(input)
-                    .button({
-                        icons:{
-                            primary:"ui-icon-triangle-1-s"
-                        },
-                        text:false
-                    })
-                    .removeClass("ui-corner-all")
-                    .addClass("ui-corner-right ui-button-icon")
-                    .click(function () {
-                        // close if already visible
-                        if (input.autocomplete("widget").is(":visible")) {
-                            input.autocomplete("close");
-                            return;
-                        }
-
-                        // work around a bug (likely same cause as #5265)
-                        $(this).blur();
-
-                        // pass empty string as value to search for, displaying all results
-                        input.autocomplete("search", "");
-                        input.focus();
-                    });
-        },
-
-        destroy:function () {
-            this.input.remove();
-            this.button.remove();
-            this.element.show();
-            $.Widget.prototype.destroy.call(this);
+        function split(val) {
+            return val.split(/,\s*/);
         }
-    });
-})(jQuery);
 
+        function extractLast(term) {
+            return split(term).pop();
+        }
 
-function split(val) {
-    return val.split(/,\s*/);
-}
-function extractLast(term) {
-    return split(term).pop();
-}
+        $(function () {
+            $('#nama_kl_input').live('blur', function () {
+                var nama_kl = $('#nama_kl_input').val();
+                $.get('<?php echo site_url('helpdesk/identitas_satker/cari_kl/') ?>', {id_kementrian:nama_kl}, function (response) {
+                    console.log(response);
+                    $('#eselon').html(response);
+                    $('#kode_satker').removeAttr('disabled');
+                })
+            })
 
-$(function () {
-    $('#nama_kl').blur(function () {
-        var nama_kl = $('#nama_kl').val();
-        $.get('<?php echo site_url('helpdesk/identitas_satker/cari_kl/') ?>', {id_kementrian:nama_kl}, function (response) {
-            console.log(response);
-            $('#eselon').html(response);
-            $('#kode_satker').removeAttr('disabled');
-        })
-    })
-
-//        $('#eselon').change(function() {
-    //$('#kode_satker').autoSuggest('<?php echo site_url('/frontdesk/form_revisi_anggaran/cari_satker') ?>',
-    //        {
-    //            extraParams: '&eselon=' + $('#eselon').val()
-    //        }
-    //);
-//        })
-
-    $('form').submit(function () {
-        data = $(this).serialize();
+            $('form').submit(function () {
+                data = $(this).serialize();
 //            console.log(data);
 //            return false;
-    })
-
-    var kementrian_list = [
-    <?php
-    foreach ($kementrian->result() as $value) {
-        echo sprintf("{ label: \"%s\", value: \"%s\" }, ", $value->id_kementrian . ' - ' . $value->nama_kementrian, $value->id_kementrian . ' - ' . $value->nama_kementrian);
-    }
-    ?>
-    ];
-
-    $('#nama_kl').autocomplete({
-        source:kementrian_list
-    });
-
-    $('#kode_satker')
-            .autocomplete({
-                source:function (request, response) {
-                    $.ajax({
-                        url:"<?php echo site_url('/frontdesk/form_revisi_anggaran/cari_satker') ?>",
-
-                        data:{
-                            term:extractLast(request.term),
-                            eselon:$('#eselon').val(),
-                            nama_kl:$('#nama_kl').val()
-                        },
-
-                        dataType:'json',
-
-                        success:function (data) {
-                            $('#anggaran').html('A1');
-                            response(data);
-                        }
-                    })
-                },
-                search:function () {
-                    // custom minLength
-                    var term = extractLast(this.value);
-                    if (term.length <= 0) {
-                        return false;
-                    }
-                },
-                focus:function () {
-                    // prevent value inserted on focus
-                    return false;
-                },
-                select:function (event, ui) {
-                    var terms = split(this.value);
-                    // remove the current input
-                    terms.pop();
-                    // add the selected item
-                    terms.push(ui.item.value);
-                    // add placeholder to get the comma-and-space at the end
-                    terms.push("");
-                    this.value = terms.join(", ");
-                    return false;
-                },
-                change:function (event, ui) {
-                    kode_unit_satker = (ui.item.label);
-                    kode_unit_satker = substr(kode_unit_satker, 0, 6);
-                    $.get('<?php echo site_url('/frontdesk/form_revisi_anggaran/cari_kode_kon_unit_satker') ?>',
-                            {kode_unit_satker:kode_unit_satker},
-                            function (response) {
-                                $('#anggaran').html(response);
-                            });
-                },
-                minLength:1
             })
-            .bind("keydown", function (event) {
-                if (event.keyCode === $.ui.keyCode.TAB &&
-                        $(this).data("autocomplete").menu.active) {
-                    event.preventDefault();
+
+
+            // Daftar Kementrian Statis aja biar cepet
+            var kementrian_list = {};
+            kementrian_list.results = [
+            <?php
+            foreach ($kementrian->result() as $value) {
+                echo sprintf("{id:\"%s\",name:\"%s\"},\n", $value->id_kementrian, $value->id_kementrian . ' - ' . $value->nama_kementrian);
+            }
+            ?>
+            ];
+            kementrian_list.total = kementrian_list.results.length;
+
+            // Tombol hapus
+            $('#clear_nama_kl').click(function () {
+                $('#nama_kl_input').val('');
+            })
+
+            // Tambah Dokumen Lainnya
+            $('#other-doc-btn').live('click', function () {
+                $('#other-docs').append('<p><input type="text" name="dokumen_lainnya[]"/></p>');
+                $('#other-docs input:last-child').focus();
+            })
+
+            // Jangan sampai udah banyak ngetik,
+            // ehh... ternyata kepencet enter.
+            // Bubar semuanya, ngetik dari awal lagi deh (T_T)
+            $('form').keypress(function (e) {
+                if (e.which == 13) {
+                    e.preventDefault();
+                }
+
+            })
+
+            $('#nama_kl').flexbox(kementrian_list, {
+                width:600,
+                paging:true,
+                onSelect:function () {
                 }
             });
 
-    $('#clear_nama_kl').click(function () {
-        $('#nama_kl').val('');
+            $('#tanggal_surat_usulan').datepicker({
+                dateFormat: 'dd-mm-yy'
+            });
+        })
     })
-
-
-    $('legend').click(function () {
-        alert(eselon.val());
-    });
-
-//    $("#kode_satker").combobox();
-
-    // Tambah Dokumen Lainnya
-    $('#other-doc-btn').live('click', function () {
-        $('#other-docs').append('<p><input type="text" name="dokumen_lainnya[]"/></p>');
-    })
-
-    // Jangan sampai udah banyak ngetik,
-    // ehh... ternyata kepencet enter.
-    // Bubar semuanya, ngetik dari awal lagi deh (T_T)
-    $('form').keypress(function(e){
-        if (e.which == 13) {
-            e.preventDefault();
-        }
-
-    })
-
-})
-
-
 </script>
 
-<!--<ul id="nav">-->
-<!--    <li><a href="#tab1">Isi Identitas SatKer (simpan di tb_tiket_helpdesk)</a></li>-->
-<!--</ul>-->
 <div class="content">
 
     <h1>Form Revisi Anggaran</h1>
@@ -290,38 +90,50 @@ $(function () {
     <?php echo form_hidden('tipe', 'kl') ?>
 
     <fieldset id="kl">
-        <legend>Satker</legend>
+        <legend>Kementrian / Lembaga</legend>
 
         <div id="anggaran" style="padding: 20px; display: inline-block; float: right; font-size: 24px;"></div>
 
         <p>
-            <label>Kode - Nama K/L</label>
-            <input type="text" id="nama_kl" name="nama_kl" value="<?php echo set_value('nama_kl') ?>"/>
-            <a href="javascript:void(0)" class="clear_btn" id="clear_nama_kl">Hapus</a>
+            <div style="float: left;">
+                <label>Nomor Surat Usulan</label>
+                <input type="text" id="nomor_surat_usulan" name="nomor_surat_usulan" value="<?php echo set_value('nomor_surat_usulan') ?>" />
+            </div>
+            <div style="float: left; margin-left: 50px;">
+                <label>Tanggal Surat Usulan</label>
+                <input type="text" id="tanggal_surat_usulan" name="tanggal_surat_usulan" value="<?php echo set_value('tanggal_surat_usulan') ?>" />
+            </div>
+            <div class="clear"></div>
+        </p>
+        
+        <p>
+
+        <div style="float: left; width: 150px;">Kode - Nama K/L</div>
+        <div style="float: left;">
+            <div id="nama_kl"></div>
+        </div>
+        <a href="javascript:void(0)" class="clear_btn" id="clear_nama_kl">Hapus</a>
         </p>
 
         <p>
             <label>Nama Eselon 1</label>
-            <select id="eselon" name="eselon" class="kl" value="<?php echo set_value('eselon') ?>">
+            <select id="eselon" name="eselon" class="kl" value="<?php echo set_value('eselon') ?>" style="width: 710px;">
             </select>
         </p>
 
         <p class="kode_satker_p">
             <label>Kode - Nama Satker</label>
-            <!--            <select name="kode_satker" id="kode_satker" disabled style="width: 700px;">-->
-            <!--                <option>1</option>-->
-            <!--                <option>2</option>-->
-            <!--                <option>3</option>-->
-            <!--                <option>4</option>-->
-            <!--            </select>-->
             <input type="text" name="kode_satker" id="kode_satker" class="kl kode_satker" style="width: 700px;" disabled/>
         </p>
 
     </fieldset>
 
     <fieldset style="float: left; margin-right: 10px; width: 47%; height: 310px;">
-        <!-- TODO: (simpan di tb_petugas_satker) field kurang tambahin -->
         <legend>Identitas</legend>
+        <p>
+            <label>NIP</label>
+            <input type="text" name="nip" size="30" value="<?php echo set_value('nip') ?>">
+        </p>
         <p>
             <label>Nama</label>
             <input type="text" name="nama_petugas" size="30" value="<?php echo set_value('nama_petugas') ?>">
@@ -338,7 +150,7 @@ $(function () {
         </p>
 
         <p>
-            <label>No. Kantor</label>
+            <label>No. Telpon Kantor</label>
             <input type="text" name="no_kantor" size="30" value="<?php echo set_value('no_kantor') ?>">
         </p>
 
@@ -364,9 +176,9 @@ $(function () {
                 <?php endif ?>
             <?php endforeach ?>
 
-            <input type="button" id="other-doc-btn" class="button blue-pill" value="Tambah Dokumen Lain"/>
-
             <p id="other-docs"></p>
+
+            <input type="button" id="other-doc-btn" class="button blue-pill" value="Tambah Dokumen Lain"/>
         </div>
     </fieldset>
 

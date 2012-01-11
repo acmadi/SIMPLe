@@ -13,6 +13,7 @@
     <style type="text/css">@import url("<?php echo base_url() . 'css/table.css'; ?>");</style>
     <!--POP UP-->
     <style type="text/css">@import url("<?php echo base_url() . 'css/pop-up.css'; ?>");</style>
+    <style type="text/css">@import url("<?php echo base_url() . 'css/akhyar.css'; ?>");</style>
     <script type="text/javascript" src="<?php echo base_url(); ?>js/jquery-1.4.2.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url(); ?>js/jquery-ui-1.8.16.custom.min.js"></script>
 </head>
@@ -21,7 +22,17 @@
     <div id="header"><img src="<?php echo base_url('images/logo.png') ?>"/>Sistem Informasi Pusat Layanan DJA</div>
     <div id="navbar"><?php $this->load->view('navbar'); ?></div>
     <div id="container">
+
         <div id="content">
+            <?php if(isset($breadcrumb) && $breadcrumb != '') : ?>
+            <div id="breadcrumb">
+                <?php
+                $this->load->helper('breadcrumb_helper');
+                breadcrumb($breadcrumb); 
+                ?>
+            </div>
+            <?php endif;?>
+
             <?php
             if (isset($content)) :
                 $this->load->view($content);

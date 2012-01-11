@@ -19,6 +19,13 @@ class Akses_kontrol extends CI_Controller
         $data['list_kontrol'] = $this->akses->get_all();
         $data['title'] = 'Akses Kontrol';
         $data['content'] = 'admin/akses_kontrol/akses_kontrol';
+
+        $bc[0]->link = 'admin/dashboard';
+        $bc[0]->label = 'Home';
+        $bc[1]->link = 'admin/akses_kontrol';
+        $bc[1]->label = 'Akses Kontrol';
+        $data['breadcrumb'] = $bc;
+
         $this->load->view('admin/template', $data);
         /*}
           else
@@ -97,6 +104,13 @@ class Akses_kontrol extends CI_Controller
         $result = $result->result();
         $data['ubah'] = $result[0];
 
+        $bc[0]->link = 'admin/dashboard';
+        $bc[0]->label = 'Home';
+        $bc[1]->link = 'admin/akses_kontrol';
+        $bc[1]->label = 'Akses Kontrol';
+        $bc[2]->link = $this->uri->uri_string();
+        $bc[2]->label = 'Edit Lavel: ' . $result[0]->nama_lavel;
+        $data['breadcrumb'] = $bc;
         $this->load->view('admin/template', $data);
     }
 
@@ -106,6 +120,14 @@ class Akses_kontrol extends CI_Controller
         $data['list_kontrol'] = $this->akses->get_all_users_by_level($id);
         $data['title'] = 'Akses Kontrol - Ubah';
         $data['content'] = 'admin/akses_kontrol/akses_kontrol_lihat';
+
+        $bc[0]->link = 'admin/dashboard';
+        $bc[0]->label = 'Home';
+        $bc[1]->link = 'admin/akses_kontrol';
+        $bc[1]->label = 'Akses Kontrol';
+        $bc[2]->link = $this->uri->uri_string();
+        $bc[2]->label = 'Lihat Lavel';
+        $data['breadcrumb'] = $bc;
         $this->load->view('admin/template', $data);
     }
 	

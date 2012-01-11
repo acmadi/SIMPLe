@@ -21,6 +21,13 @@ class Histori extends CI_Controller
 		
         $data['title'] = 'Histori';
         $data['content'] = 'admin/histori/histori';
+
+        $bc[0]->link = 'admin/dashboard';
+	    $bc[0]->label = 'Home';
+	    $bc[1]->link = 'admin/histori';
+	    $bc[1]->label = 'Histori';
+	    $data['breadcrumb'] = $bc;
+
         $this->load->view('admin/template', $data);
     }
 	
@@ -43,6 +50,15 @@ class Histori extends CI_Controller
 		
 		$data['title'] 	 = 'Histori Cari';
 		$data['content'] = 'admin/histori/histori_cari';
+
+		$bc[0]->link = 'admin/dashboard';
+	    $bc[0]->label = 'Home';
+	    $bc[1]->link = 'admin/histori';
+	    $bc[1]->label = 'Histori';
+	    $bc[2]->link = $this->uri->uri_string();
+	    $bc[2]->label = 'Hasil Pencarian';
+	    $data['breadcrumb'] = $bc;
+
 		$this->load->view('admin/template', $data);
 	}
 }

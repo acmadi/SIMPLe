@@ -26,7 +26,14 @@ class Helpdesk extends CI_Controller
                 );
 	  $data['cari'] ='';$data['keyword'] = '';
 	  $data['content'] = 'admin/helpdesk/helpdesk';
-      $this->load->view('admin/template', $data);
+
+    $bc[0]->link = 'admin/dashboard';
+    $bc[0]->label = 'Home';
+    $bc[1]->link = 'admin/helpdesk';
+    $bc[1]->label = 'Helpdesk';
+    $data['breadcrumb'] = $bc;
+
+    $this->load->view('admin/template', $data);
     }
     function search()
     {
@@ -55,6 +62,15 @@ class Helpdesk extends CI_Controller
                   'satker'   => 'Nama Satker',
                 );
 		$data['content'] = 'admin/helpdesk/helpdesk';
+
+    $bc[0]->link = 'admin/dashboard';
+    $bc[0]->label = 'Home';
+    $bc[1]->link = 'admin/helpdesk';
+    $bc[1]->label = 'Helpdesk';
+    $bc[2]->link = $this->uri->uri_string();
+    $bc[2]->label = 'Hasil Pencarian';
+    $data['breadcrumb'] = $bc;
+
 		$this->load->view('admin/template', $data);
 	  
       /*}

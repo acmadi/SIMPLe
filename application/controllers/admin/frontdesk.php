@@ -26,6 +26,13 @@ class Frontdesk extends CI_Controller
                 );
 	  $data['cari'] ='';$data['keyword'] = '';
 	  $data['content'] = 'admin/frontdesk/frontdesk';
+
+    $bc[0]->link = 'admin/dashboard';
+    $bc[0]->label = 'Home';
+    $bc[1]->link = 'admin/frontdesk';
+    $bc[1]->label = 'Frontdesk';
+    $data['breadcrumb'] = $bc;
+
       $this->load->view('admin/template', $data);
     }
 	
@@ -56,6 +63,15 @@ class Frontdesk extends CI_Controller
                   'status'   => 'Status',
                 );
 		$data['content'] = 'admin/frontdesk/frontdesk';
+
+    $bc[0]->link = 'admin/dashboard';
+    $bc[0]->label = 'Home';
+    $bc[1]->link = 'admin/frontdesk';
+    $bc[1]->label = 'Frontdesk';
+    $bc[2]->link = $this->uri->uri_string();
+    $bc[2]->label = 'Hasil Pencarian';
+    $data['breadcrumb'] = $bc;
+
 		$this->load->view('admin/template', $data);
       /*}
         else

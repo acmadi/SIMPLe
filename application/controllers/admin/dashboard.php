@@ -79,6 +79,13 @@ class Dashboard extends CI_Controller
 		 
         $data['title'] = 'Dashboard';
         $data['content'] = 'admin/dashboard';
+
+        $bc[0]->link = 'admin/dashboard';
+        $bc[0]->label = 'Home';
+        $bc[1]->link = 'admin/dashboard';
+        $bc[1]->label = 'Dashboard';
+        $data['breadcrumb'] = $bc;
+        	
         $this->load->view('admin/template', $data);
        
     }

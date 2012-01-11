@@ -67,7 +67,7 @@ class Form_revisi_anggaran extends CI_Controller
 
         if ($id_satker >= 3 AND is_numeric($id_satker)) {
             $result = $this->db->query("SELECT * FROM `tb_satker` WHERE `id_satker` LIKE '%{$id_satker}' LIMIT 30");
-//            var_dump($result->result());
+            //            var_dump($result->result());
         }
     }
 
@@ -135,7 +135,6 @@ class Form_revisi_anggaran extends CI_Controller
 
         $this->form_validation->set_rules('nama_kl', 'Nama K/L', 'required');
         $this->form_validation->set_rules('eselon', 'Eselon', 'required');
-        $this->form_validation->set_rules('kode_satker', 'Nama - Kode Satker', 'required');
         $this->form_validation->set_rules('nama_petugas', 'Nama Petugas', 'required');
         $this->form_validation->set_rules('jabatan_petugas', 'Jabatan Petugas', 'required');
         $this->form_validation->set_rules('no_hp', 'No HP', 'required');
@@ -191,14 +190,19 @@ class Form_revisi_anggaran extends CI_Controller
                     }
                 }
 
-                $dokumen_lainnya = $this->input->post('dokumen_lainnya');
+                if (isset($dokumen_lainnya) AND count($dokumen_lainnya) > 1) {
+                    $dokumen_lainnya = $this->input->post('dokumen_lainnya');
 
-                if (isset($_POST['dokumen_lainnya'])) {
-                    $sql = "INSERT INTO tb_kelengkapan_formulir
+                    foreach ($dokumen_lainnya as $value) {
+
+                        if (isset($_POST['dokumen_lainnya'])) {
+                            $sql = "INSERT INTO tb_kelengkapan_formulir
                                         (no_tiket_frontdesk, kelengkapan, id_kelengkapan)
-                                        VALUES ('{$no_tiket_frontdesk}', '{$dokumen_lainnya}', 0)";
+                                        VALUES ('{$no_tiket_frontdesk}', '{$value}', 0)";
 
-                    $this->db->query($sql);
+                            $this->db->query($sql);
+                        }
+                    }
                 }
 
                 $i++;
@@ -222,7 +226,7 @@ class Form_revisi_anggaran extends CI_Controller
         }
     }
 
-    function success($no_tiket_frontdesk = '')
+    function success($no_tiket_frontdesk)
     {
         // TODO: Gak optimal ini query nya. Suatu saat nanti harus dioptimalkan.
         $result = $this->db->from('tb_tiket_frontdesk')
@@ -253,7 +257,18 @@ class Form_revisi_anggaran extends CI_Controller
 
         $this->log->create("Cetak tanda terima pengajuan revisi anggaran #{$no_tiket_frontdesk}");
 
-        $this->load->view('/frontdesk/success2', $data);
+//        $this->load->view('/frontdesk/success2', $data);
+
+        $this->load->library('odtphp');
+        $input_filename = $this->odtphp->create($no_tiket_frontdesk, 'tanggal', '10:00');
+
+        $output = preg_replace('/.odt/', '.pdf', $input_filename['full_filename']);
+        $command = sprintf('"c:\Program Files (x86)\LibreOffice 3.4\program\python.exe" DocumentConverter.py %s %s', $input_filename['full_filename'], $output);
+        exec($command);
+
+        echo $command;
+
+//        redirect(base_url('/output/' . $filename));
     }
 
     function fail()

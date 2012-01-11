@@ -8,6 +8,12 @@ class System extends CI_Controller {
         $data['title'] = 'System';
         $data['content'] = 'admin/system';
 
+        $bc[0]->link = 'admin/dashboard';
+	    $bc[0]->label = 'Home';
+	    $bc[1]->link = 'admin/system';
+	    $bc[1]->label = 'Sistem';
+	    $data['breadcrumb'] = $bc;
+
         $this->load->view('admin/template', $data);
     }
 }

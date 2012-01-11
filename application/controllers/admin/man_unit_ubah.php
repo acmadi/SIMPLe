@@ -9,7 +9,7 @@ class Man_unit_ubah extends CI_Controller
         $this->form_validation->set_message('required', '<strong>%s</strong> harus diisi.');
     }
 
-    var $title = 'Manajemen Unit - Ubah Data';
+    var $title = 'Ubah Data Unit';
 
     function index()
     {
@@ -23,6 +23,16 @@ class Man_unit_ubah extends CI_Controller
 		$data['list_kementrian'] = $this->unit->get_list_kementrian();
 		$data['item'] = $this->unit->get_edited_by_id($id);
 		$data['opt_a'] = array(1=>'Anggaran 1',2=>'Anggaran 2',3=>'Anggaran 3');
+
+		$bc[0]->link = 'admin/dashboard';
+        $bc[0]->label = 'Home';
+        $bc[1]->link = 'admin/man_unit';
+        $bc[1]->label = 'Manajemen Unit';
+        $bc[2]->link = $this->uri->uri_string();
+        $bc[2]->label = $this->title;
+        $data['breadcrumb'] = $bc;
+
+
         $this->load->view('admin/template', $data);
         /*}
           else
