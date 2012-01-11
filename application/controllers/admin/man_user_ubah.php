@@ -9,7 +9,7 @@ class Man_user_ubah extends CI_Controller
         $this->form_validation->set_message('required', '<strong>%s</strong> harus diisi.');
     }
 
-    var $title = 'Manajemen User - Ubah Data';
+    var $title = 'Ubah Data';
 
     function index()
     {
@@ -23,6 +23,15 @@ class Man_user_ubah extends CI_Controller
         $data['item'] = $this->muser->get_edited_by_id($user);
 		
         $data['content'] = 'admin/man_user/man_user_ubah';
+
+        $bc[0]->link = 'admin/dashboard';
+        $bc[0]->label = 'Home';
+        $bc[1]->link = 'admin/man_user';
+        $bc[1]->label = 'Manajemen User';
+        $bc[2]->link = $this->uri->uri_string();
+        $bc[2]->label = $this->title;
+        $data['breadcrumb'] = $bc;
+
         $this->load->view('admin/template', $data);
         /*}
           else

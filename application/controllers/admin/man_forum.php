@@ -16,7 +16,7 @@ class Man_forum extends CI_Controller
     {
         /*if ($this->session->userdata('login') == TRUE)
           {*/
-		$page		= $this->mforum->get();
+		$page		= $this->mforum->get_parents();
 		$pageData	= $page['query']->result();
 		$pageLink	= $page['pagination1'];
 		
@@ -26,7 +26,12 @@ class Man_forum extends CI_Controller
         $data['content'] = 'admin/man_forum/man_forum';
         $data['categories'] = $this->mforum->get_categories();
         
-		
+		$bc[0]->link = 'admin/dashboard';
+        $bc[0]->label = 'Home';
+        $bc[1]->link = $this->uri->uri_string();
+        $bc[1]->label = 'Forum';
+        $data['breadcrumb'] = $bc;
+
         $this->load->view('admin/template', $data);
         /*}
           else
@@ -121,6 +126,15 @@ class Man_forum extends CI_Controller
         $data['content'] = 'admin/man_forum/man_forum_ubah';
         $data['categories'] = $this->mforum->get_categories();
         $data['forum'] = $this->mforum->get_by_id($id);
+
+        $bc[0]->link = 'admin/dashboard';
+        $bc[0]->label = 'Home';
+        $bc[1]->link = 'admin/man_forum';
+        $bc[1]->label = 'Forum';
+        $bc[2]->link = $this->uri->uri_string();
+        $bc[2]->label = 'Edit Forum';
+        $data['breadcrumb'] = $bc;
+
         $this->load->view('admin/template', $data);
     }
 	
@@ -129,6 +143,15 @@ class Man_forum extends CI_Controller
         $data['title'] = 'Manajemen Forum';
         $data['content'] = 'admin/man_forum/man_forum_kategori_ubah';
         $data['item'] = $this->mforum->get_kategori_by_id($id);
+
+        $bc[0]->link = 'admin/dashboard';
+        $bc[0]->label = 'Home';
+        $bc[1]->link = 'admin/man_forum';
+        $bc[1]->label = 'Forum';
+        $bc[2]->link = $this->uri->uri_string();
+        $bc[2]->label = 'Edit Kategori';
+        $data['breadcrumb'] = $bc;
+
         $this->load->view('admin/template', $data);
 	}
 	

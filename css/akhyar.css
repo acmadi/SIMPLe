@@ -1,8 +1,13 @@
+/* my additional style */
+
 div.attachment{
 	margin: 10px 0 15px;
 	padding: 10px;
 	border: 1px solid #ddd;
 	border-radius: 5px;
+}
+div.form{
+	padding: 1.5em;
 }
 
 em.meta{
@@ -13,3 +18,42 @@ em.meta{
 .entry-title{
 	font-weight: bold;
 }
+
+#breadcrumb ul, 
+#breadcrumb ul li {
+	list-style-type:none;
+	padding:0;
+	margin:0;
+}
+
+#breadcrumb {
+	height:2.3em;
+	/*border-top:1px solid #dedede;*/
+	border-bottom:1px solid #dedede;
+	}
+#breadcrumb li {
+	float:left;
+	line-height:2.3em;
+	color:#777;
+	padding-left:.75em;
+	}		
+#breadcrumb li a {
+	background:url(../images/breadcrumb.gif) no-repeat right center;
+	display:block;
+	padding:0 25px 0 20px;
+	}		
+	#breadcrumb li:last-child a {
+		background: none;
+		font-weight: bold;
+	}				
+#breadcrumb li a:link,
+#breadcrumb li a:visited {
+	color:#777;
+	text-decoration:none;
+	}	
+#breadcrumb a:link, 
+#breadcrumb a:visited,	
+#breadcrumb li a:hover,
+#breadcrumb li a:focus {
+	color:#dd2c0d;
+	}

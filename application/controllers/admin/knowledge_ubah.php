@@ -22,6 +22,14 @@ class Knowledge_ubah extends CI_Controller
         $data['title'] 		= 'Knowledge Ubah';
         $data['content'] 	= 'admin/knowledge/knowledge_ubah';
 		
+		$bc[0]->link = 'admin/dashboard';
+        $bc[0]->label = 'Home';
+        $bc[1]->link = 'admin/knowledge';
+        $bc[1]->label = 'Knowledge Base';
+        $bc[2]->link = $this->uri->uri_string();
+        $bc[2]->label = 'Ubah';
+        $data['breadcrumb'] = $bc;
+
         $this->load->view('admin/template', $data);
         /*}
           else

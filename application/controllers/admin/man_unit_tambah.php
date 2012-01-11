@@ -9,7 +9,7 @@ class Man_unit_tambah extends CI_Controller
         $this->form_validation->set_message('required', '<strong>%s</strong> harus diisi.');
     }
 
-    var $title = 'Manajemen Unit - Tambah';
+    var $title = 'Tambah Unit Baru';
 
     function index()
     {
@@ -17,6 +17,15 @@ class Man_unit_tambah extends CI_Controller
         $data['content'] = 'admin/man_unit/man_unit_tambah';
         $data['list_unit'] = $this->unit->get_list_unit();
         $data['list_kementrian'] = $this->unit->get_list_kementrian();
+
+        $bc[0]->link = 'admin/dashboard';
+        $bc[0]->label = 'Home';
+        $bc[1]->link = 'admin/man_unit';
+        $bc[1]->label = 'Manajemen Unit';
+        $bc[2]->link = $this->uri->uri_string();
+        $bc[2]->label = $this->title;
+        $data['breadcrumb'] = $bc;
+
         $this->load->view('admin/template', $data);
     }
 

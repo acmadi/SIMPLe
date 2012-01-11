@@ -89,6 +89,11 @@
         ?>
     </div>
     <div id="container">
+        <?php if(isset($breadcrumb) && $breadcrumb != '') : ?>
+        <div id="breadcrumb">
+            <?php echo $breadcrumb ?>
+        </div>
+        <?php endif;?>
         <div id="content"><?php $this->load->view($content); ?></div>
     </div>
     <div id="footer"><?php $this->load->view('footer'); ?></div>

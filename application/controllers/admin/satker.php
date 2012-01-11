@@ -42,6 +42,12 @@ class Satker extends CI_Controller
         $data['title'] = 'Daftar Satker';
         $data['content'] = 'admin/satker';
 
+        $bc[0]->link = 'admin/dashboard';
+        $bc[0]->label = 'Home';
+        $bc[1]->link = 'admin/satker';
+        $bc[1]->label = 'Satker';
+        $data['breadcrumb'] = $bc;
+
         $this->load->view('admin/template', $data);
     }
 
@@ -89,6 +95,14 @@ class Satker extends CI_Controller
         $data['title'] = 'Ubah Satker';
         $data['content'] = 'admin/edit_satker';
 
+        $bc[0]->link = 'admin/dashboard';
+        $bc[0]->label = 'Home';
+        $bc[1]->link = 'admin/satker';
+        $bc[1]->label = 'Satker';
+        $bc[2]->link = $this->uri->uri_string();
+        $bc[2]->label = 'Ubah Data';
+        $data['breadcrumb'] = $bc;
+
         $this->load->view('admin/template', $data);
     }
 
@@ -124,6 +138,14 @@ class Satker extends CI_Controller
 
         $data['title'] = 'Tambah Satker';
         $data['content'] = 'admin/add_satker';
+
+        $bc[0]->link = 'admin/dashboard';
+        $bc[0]->label = 'Home';
+        $bc[1]->link = 'admin/satker';
+        $bc[1]->label = 'Satker';
+        $bc[2]->link = $this->uri->uri_string();
+        $bc[2]->label = 'Tambah Baru';
+        $data['breadcrumb'] = $bc;
 
         $this->load->view('admin/template', $data);
     }

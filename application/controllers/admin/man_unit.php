@@ -20,6 +20,14 @@ class Man_unit extends CI_Controller
 		
         $data['title'] = 'Manajemen Unit';
         $data['content'] = 'admin/man_unit/man_unit';
+
+        $bc[0]->link = 'admin/dashboard';
+        $bc[0]->label = 'Home';
+        $bc[1]->link = $this->uri->uri_string();
+        $bc[1]->label = $this->title;
+        $data['breadcrumb'] = $bc;
+
+
         $this->load->view('admin/template', $data);
     }
 	

@@ -9,7 +9,7 @@ class Man_user_surat_kerja extends CI_Controller
         $this->form_validation->set_message('required', '<strong>%s</strong> harus diisi.');
     }
 
-    var $title = 'Manajemen User - Surat Kerja';
+    var $title = 'Surat Kerja';
 
     function index()
     {
@@ -23,6 +23,15 @@ class Man_user_surat_kerja extends CI_Controller
 		$data['history_maker'] = $this->muser->get_masa_kerja($user);
 		$data['bln']	 = array(1=>'Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember');
 		$data['thn']	 = date('Y');
+
+		$bc[0]->link = 'admin/dashboard';
+        $bc[0]->label = 'Home';
+        $bc[1]->link = 'admin/man_user';
+        $bc[1]->label = 'Manajemen User';
+        $bc[2]->link = $this->uri->uri_string();
+        $bc[2]->label = $this->title;
+        $data['breadcrumb'] = $bc;
+
 		$this->load->view('admin/template', $data);
         /*}
           else

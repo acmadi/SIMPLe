@@ -9,7 +9,7 @@ class Knowledge extends CI_Controller
         $this->form_validation->set_message('required', '<strong>%s</strong> harus diisi.');
     }
 
-    var $title = 'Knowledge';
+    var $title = 'Knowledge Base';
 
     function index()
     {
@@ -39,6 +39,13 @@ class Knowledge extends CI_Controller
         $data['tabAktif'] = $tabAktif;
         $data['content'] = 'admin/knowledge/knowledge';
         $data['categories'] = $this->knowledge->get_all_category();
+
+        $bc[0]->link = 'admin/dashboard';
+        $bc[0]->label = 'Home';
+        $bc[1]->link = $this->uri->uri_string();
+        $bc[1]->label = $this->title;
+        $data['breadcrumb'] = $bc;
+
         $this->load->view('admin/template', $data);
         /*}
           else
@@ -72,6 +79,15 @@ class Knowledge extends CI_Controller
         } else {
             $data['title'] = 'Tambah Knowledge Baru';
             $data['content'] = 'admin/knowledge/add_category';
+
+            $bc[0]->link = 'admin/dashboard';
+            $bc[0]->label = 'Home';
+            $bc[1]->link = 'admin/knowledge';
+            $bc[1]->label = 'Knowledge Base';
+            $bc[2]->link = $this->uri->uri_string();
+            $bc[2]->label = 'Tambah Kategori';
+            $data['breadcrumb'] = $bc;
+
             $this->load->view('admin/template', $data);
         }
     }
@@ -83,6 +99,15 @@ class Knowledge extends CI_Controller
 		print_r($_POST);
 		echo "</pre>";
 		exit;*/
+
+        $bc[0]->link = 'admin/dashboard';
+        $bc[0]->label = 'Home';
+        $bc[1]->link = 'admin/knowledge';
+        $bc[1]->label = 'Knowledge Base';
+        $bc[2]->link = $this->uri->uri_string();
+        $bc[2]->label = 'Tambah Baru';
+        $data['breadcrumb'] = $bc;
+
         if ($_POST) {
             $this->form_validation->set_rules('flist2', 'Kategori', 'required|numeric');
             $this->form_validation->set_rules('fjudul2', 'Judul', 'required');
@@ -120,6 +145,8 @@ class Knowledge extends CI_Controller
             $data['title'] = 'Tambah Knowledge Baru';
             $data['content'] = 'admin/knowledge/add_knowledge';
             $data['categories'] = $this->knowledge->get_all_category();
+
+
             $this->load->view('admin/template', $data);
         }
     }

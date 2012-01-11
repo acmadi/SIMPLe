@@ -1,8 +1,10 @@
 <?php
 class Mforum extends CI_Model
 {
-    public function get(){
-		$this->load->library('pagination');		
+    public function get($parent_only = FALSE){
+		$this->load->library('pagination');
+		
+		$cond = ($parent_only) ? 'WHERE id_parent IS NULL' : '';	
 		$sql = "SELECT * FROM `tb_forum` LEFT JOIN tb_kat_forum ON (tb_forum.id_kat_forum = tb_kat_forum.id_kat_forum)";
 		$query = $this->db->query($sql);
 
@@ -14,13 +16,17 @@ class Mforum extends CI_Model
 
 		$offset = (int) $this->uri->segment(4, 0);
 		
-		$sqlb = "SELECT * FROM `tb_forum` LEFT JOIN tb_kat_forum ON (tb_forum.id_kat_forum = tb_kat_forum.id_kat_forum) LIMIT ?,?";
+		$sqlb = "SELECT * FROM `tb_forum` LEFT JOIN tb_kat_forum ON (tb_forum.id_kat_forum = tb_kat_forum.id_kat_forum) $cond LIMIT ?,?";
 		
 		$data["query"] = $this->db->query($sqlb, array($offset ,$config['per_page']));
 
 		$data['pagination1'] = $this->pagination->create_links();
 
 		return $data;
+	}
+	public function get_parents()
+	{
+		return $this->get(TRUE);
 	}
 	
 	public function get_by_keyword($keyword){
