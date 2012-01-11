@@ -13,6 +13,7 @@
 
     <link href="<?php echo base_url('css/buttons.css'); ?>" rel="stylesheet"/>
 
+    <link href="<?php echo base_url('/css/table.css'); ?>" rel="stylesheet"/>
     <link href="<?php echo base_url('js/jQuery-Visualize/css/visualize.css'); ?>" rel="stylesheet"/>
     <link href="<?php echo base_url('js/jQuery-Visualize/css/visualize-light.css'); ?>" rel="stylesheet"/>
 
