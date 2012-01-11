@@ -166,7 +166,7 @@
 
     </fieldset>
 
-    <fieldset style="float: left; margin-right: 10px; width: 47%; height: 310px;">
+    <fieldset style="float: left; margin-right: 10px; width: 47%; height: 230px;">
         <legend>Identitas</legend>
         <p>
             <label>NIP</label>
@@ -198,10 +198,10 @@
         </p>
     </fieldset>
 
-    <fieldset style="float: right; width: 47%; height: 310px;">
+    <fieldset style="float: right; width: 47%; height: 230px;">
         <legend>Kelengkapan Dokumen</legend>
 
-        <div style="overflow: auto; height: 280px; margin: 0;">
+        <div style="overflow: auto; height: 218px; margin: 0;">
             <?php foreach ($kelengkapan_dokumen->result() as $value): ?>
 
             <?php if ($value->id_kelengkapan != 0): ?>
