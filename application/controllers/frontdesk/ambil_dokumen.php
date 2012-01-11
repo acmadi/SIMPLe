@@ -5,42 +5,34 @@ class Ambil_dokumen extends CI_Controller
     function __construct()
     {
         parent::__construct();
+		$this->load->model('Mtiket','tiket');
     }
 
     var $title = 'Ambil Dokumen';
 
     function index()
     {
-        $sql = "SELECT * FROM tb_tiket_frontdesk
-                JOIN tb_satker
-                ON tb_satker.id_satker = tb_tiket_frontdesk.id_satker
-                WHERE status = 'close' AND is_active = 1";
-        $result = $this->db->query($sql);
-
-
-        $data['dokumen'] = $result;
-
-        $data['title'] = 'Pengambilan Dokumen';
-        $data['content'] = 'frontdesk/ambil_dokumen';
+        $page		= $this->tiket->get_list_ambil_dokumen();
+		$pageData	= $page['query']->result();
+		$pageLink	= $page['pagination1'];
+		
+		$data				= array('result'=>$pageData,'pageLink'=>$pageLink,);
+        $data['title'] 		= 'Pengambilan Dokumen';
+		$data['isian_form']	= $page['isian_form1'];
+        $data['content'] 	= 'frontdesk/ambil_dokumen';
         $this->load->view('master-template', $data);
     }
 
     function cetak($no_tiket_frontdesk)
     {
-        $sql = "SELECT * FROM tb_tiket_frontdesk
-                        JOIN tb_petugas_satker
-                        ON tb_petugas_satker.id_petugas_satker = tb_tiket_frontdesk.id_petugas_satker
-                        JOIN tb_satker
-                        ON tb_satker.id_satker = tb_tiket_frontdesk.id_satker
-                        WHERE status = 'close' AND is_active = 1 AND no_tiket_frontdesk = '$no_tiket_frontdesk'";
-        $result = $this->db->query($sql);
+        $result = $this->tiket->get_detail_tiket_by_id($no_tiket_frontdesk);
 
         if ($result->num_rows() == 1) {
 
             $data['dokumen'] = $result->row();
 
-            $data['title'] = 'Pengambilan Dokumen';
-            $data['content'] = 'frontdesk/ambil_dokumen_cetak';
+            $data['title'] 		= 'Pengambilan Dokumen';
+            $data['content'] 	= 'frontdesk/ambil_dokumen_cetak';
             $this->load->view('frontdesk/ambil_dokumen_cetak', $data);
         } else {
             // TODO: Mungkin sebaiknya ditambahkan informasi kalau data yang mau dicetak, sudah dicetak CS lain.
@@ -50,9 +42,7 @@ class Ambil_dokumen extends CI_Controller
 
     function selesai($no_tiket_frontdesk)
     {
-        $sql = "UPDATE tb_tiket_frontdesk SET is_active = 3 WHERE no_tiket_frontdesk = '$no_tiket_frontdesk'";
-        $this->db->query($sql);
-        $this->log->create("Cetak bukti pengambilan dokumen");
+        $this->tiket->set_selesai($no_tiket_frontdesk);
         redirect('/frontdesk/ambil_dokumen');
     }
 }

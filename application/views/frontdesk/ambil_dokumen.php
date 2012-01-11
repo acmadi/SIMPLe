@@ -3,13 +3,11 @@
 <div id="konten">
 
     <h1>Daftar Pengambilan Dokumen</h1>
-
-    <?php if ($dokumen->num_rows() > 0): ?>
-
     <div class="table">
         <div id="head">
-            <form id="form-cari" action="list_antrian_cari">
-                <input id="teks-cari" type="text" placeholder="Pencarian"/> <input type="submit" value="Cari" class="button blue-pill"/>
+            <form id="form-cari" action="<?php echo site_url('/frontdesk/ambil_dokumen/index');?>" method="post">
+                <input id="teks-cari" type="text" placeholder="Pencarian" name="keyword" value="<?php echo $isian_form;?>"/> <input type="submit" value="Cari" class="button blue-pill"/>
+				<a href="<?php echo site_url('/frontdesk/ambil_dokumen/index');?>" class="button gray-pill">Reset</a>
             </form>
         </div>
 
@@ -20,6 +18,8 @@
                     <tr>
                         <th class="short">No Tiket</th>
                         <th class="short">Tanggal</th>
+						<th class="short">Kode Unit</th>
+						<th class="short">Nama Unit</th>
                         <th class="short">Kode Satker</th>
                         <th>Nama Satker</th>
                         <th class="short">Status</th>
@@ -27,10 +27,12 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($dokumen->result() as $value): ?>
+                        <?php foreach ($result as $value): ?>
                     <tr>
                         <td class="short"><?php echo sprintf('%05d', $value->no_tiket_frontdesk) ?></td>
                         <td class="short"><?php echo $value->tanggal ?></td>
+						<td class="short"><?php echo $value->id_unit ?></td>
+						<td class="short"><?php echo $value->nama_unit ?></td>
                         <td class="short"><?php echo $value->id_satker ?></td>
                         <td><?php echo $value->nama_satker ?></td>
                         <td class="short"><?php echo $value->status ?></td>
@@ -43,14 +45,7 @@
                 </table>
             </div>
         </div>
-
-        <div class="pagination">Halaman <a href="#"><<</a> <a href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <a href="#">6</a> <a href="#">>></a></div>
+        <div class="pagination"><?php echo ($pageLink)?'Halaman '.$pageLink:'';?></div><br />
         <br/>
     </div>
-
-    <?php else: ?>
-
-    Tidak ada dokumen
-
-    <?php endif ?>
 </div>
