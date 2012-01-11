@@ -38,18 +38,12 @@
         
         <h2><a href="<?php echo site_url('/helpdesk/man_forum/view/' . $forum->id_forum ) ?>"><?php echo $forum->judul_forum ?></a></h2>
 
-        <em>Tanggal: <?php echo date('d-m-Y', strtotime($forum->tanggal)) ?></em>
+        <em class="meta">dikirim pada tanggal <?php echo date('d-m-Y', strtotime($forum->tanggal)) ?>,
+         oleh <?php echo $forum->nama ?></em>
 
-        <div style="margin: 10px 0;">
+        <div  class="isi_forum" style="margin: 10px 0;">
             <?php echo word_limiter($forum->isi_forum, 100) ?>
         </div>
-
-        <?php if($forum->file != '') : ?>
-        <div class="attachment">
-            File terlampir: 
-            <?php echo anchor(base_url() . 'upload/forum/' . $forum->file, $forum->file)?>
-        </div>
-        <?php endif; ?>
         
         <div style="text-align: right;"><a href="<?php echo site_url('/helpdesk/man_forum/view/' . $forum->id_forum ) ?>">Selengkapnya</a></div>
 

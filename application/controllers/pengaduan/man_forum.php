@@ -14,7 +14,7 @@ class Man_forum extends CI_Controller
         $result = $this->mforum->get();
 
         $data['title'] = 'Manajemen Forum';
-        $data['content'] = 'direktur/man_forum/man_forum';
+        $data['content'] = 'pengaduan/man_forum/man_forum';
         $data['forums'] = $this->db->query(
             "SELECT f.*, u.nama FROM tb_forum f LEFT JOIN tb_user u
              ON (f.id_user = u.id_user)
@@ -30,7 +30,7 @@ class Man_forum extends CI_Controller
         $result_childs = $this->mforum->get_childs($id);
 
         $data['title'] = 'Manajemen Forum';
-        $data['content'] = 'direktur/man_forum/man_forum_view';
+        $data['content'] = 'pengaduan/man_forum/man_forum_view';
         $data['forums'] = $result_forum;
         $data['childs'] = $result_childs;
         $this->load->view('master-template', $data);

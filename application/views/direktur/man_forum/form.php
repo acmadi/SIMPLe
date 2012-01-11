@@ -4,7 +4,7 @@
 <br/>
 <?php
 
-echo form_open_multipart('helpdesk/man_forum/kirim');
+echo form_open_multipart('direktur/man_forum/kirim');
 
 if ($id_parent != NULL)
 echo form_hidden('id_parent', $id_parent);

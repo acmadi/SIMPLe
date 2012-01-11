@@ -16,8 +16,9 @@ class Man_forum extends CI_Controller
         $data['title'] = 'Manajemen Forum';
         $data['content'] = 'helpdesk/man_forum/man_forum';
         $data['forums'] = $this->db->query(
-            "SELECT * FROM tb_forum
-             WHERE id_parent IS NULL
+            "SELECT f.*, u.nama FROM tb_forum f LEFT JOIN tb_user u
+             ON (f.id_user = u.id_user)
+             WHERE f.id_parent IS NULL
              ORDER BY tanggal DESC ");
 
         $this->load->view('master-template', $data);
@@ -25,7 +26,7 @@ class Man_forum extends CI_Controller
 
     function view($id)
     {
-        $result_forum = $this->mforum->get_one($id);
+        $result_forum = $this->mforum->get_one_with_poster($id);
         $result_childs = $this->mforum->get_childs($id);
 
         $data['title'] = 'Manajemen Forum';
