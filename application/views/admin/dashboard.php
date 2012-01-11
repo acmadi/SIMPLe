@@ -34,7 +34,7 @@
 
     <fieldset style=" float: left; width: 500px; ">
         <legend>Statistik</legend>
-        <img src="<?=base_url()?>images/dashboard_bar_admin.png"/>
+        <img src="<?php echo base_url()?>images/dashboard_bar_admin.png"/>
     </fieldset>
 
     <fieldset style="float: left; width: 500px; margin-left: 20px; height: 255px;">

@@ -7,7 +7,7 @@
 
 
     <table width="100%">
-        <thead>
+        <thead width="100%">
         <tr>
             <th class="short">No</th>
             <th>Pertanyaan</th>
@@ -17,7 +17,7 @@
             <th>Aksi</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody width="100%">
         <?php $i = 1 ?>
         <?php foreach ($knowledge_base->result() as $value): ?>
         <tr>
