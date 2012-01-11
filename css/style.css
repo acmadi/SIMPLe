@@ -12,7 +12,7 @@ body {
     background: #d7ebef;
     color: #333;
     font-family: 'Lucida Grande', Tahoma, Arial, sans-serif;
-    font-size: 13px;
+    font-size: 11px;
 }
 
 /* SATPAM / SATKER */
@@ -83,7 +83,7 @@ body {
 }
 
 #header {
-    height: 100px;
+    height: 50px;
     width: 100%;
     background-image: linear-gradient(left, rgb(109, 181, 232) 16%, rgb(194, 217, 242) 58%, rgb(112, 172, 235) 97%);
     background-image: -o-linear-gradient(left, rgb(109, 181, 232) 16%, rgb(194, 217, 242) 58%, rgb(112, 172, 235) 97%);
@@ -91,7 +91,7 @@ body {
     background-image: -webkit-linear-gradient(left, rgb(109, 181, 232) 16%, rgb(194, 217, 242) 58%, rgb(112, 172, 235) 97%);
     background-image: -ms-linear-gradient(left, rgb(109, 181, 232) 16%, rgb(194, 217, 242) 58%, rgb(112, 172, 235) 97%);
     background-image: -webkit-gradient(linear, left top, right top, color-stop(0.16, rgb(109, 181, 232)), color-stop(0.58, rgb(194, 217, 242)), color-stop(0.97, rgb(112, 172, 235)));
-    background: #131DDE url(../images/header-bg.png) right no-repeat;
+    background: #131DDE url(../images/header-bg.png) 100% -50px no-repeat;
     font-size: 18px;
     padding: 10px 0 5px 25px;
     color: #fff;
@@ -128,7 +128,6 @@ body {
 
 /* begin: navbar */
 #navbar {
-    height: 30px;
     width: auto;
     background-image: linear-gradient(bottom, rgb(211, 209, 196) 9%, rgb(254, 251, 236) 55%, rgb(255, 255, 255) 78%);
     background-image: -o-linear-gradient(bottom, rgb(211, 209, 196) 9%, rgb(254, 251, 236) 55%, rgb(255, 255, 255) 78%);
@@ -138,7 +137,7 @@ body {
     background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.09, rgb(211, 209, 196)), color-stop(0.55, rgb(254, 251, 236)), color-stop(0.78, rgb(255, 255, 255)));
     position: fixed;
     width: 100%;
-    top: 115px;
+    top: 65px;
     z-index: 99990;
     box-shadow: 0 -10px 20px 4px gray;
 }
@@ -151,7 +150,7 @@ body {
     margin: 0;
     padding: 0;
     list-style: none;
-    font-size: 12px;
+    font-size: 10px;
     padding-bottom: 0px;
     margin-left: -2px;
 }
@@ -1200,16 +1199,17 @@ h1, h2, h3, h4 {
 }
 
 h1 {
+    font-size: 18px;
     color: #9c9c9c;
     border-bottom: 1px dotted #cecece;
-    margin-bottom: 30px;
-    text-shadow: 1px 1px 0 #333;
+    margin-bottom: 10px;
+    /*text-shadow: 1px 1px 0 #333;*/
 }
 
 fieldset {
     border: 1px solid #cecece;
     padding: 10px;
-    margin: 20px 0;
+    margin: 4px 0;
     border-radius: 5px;
     box-shadow: 0 0 0px #d9d9d9;
 }
@@ -1276,7 +1276,7 @@ p {
 }
 
 #container {
-    margin-top: 145px;
+    margin-top: 80px;
 }
 
 /*F2D*/
