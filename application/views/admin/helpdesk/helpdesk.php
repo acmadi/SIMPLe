@@ -1,9 +1,8 @@
-<ul id="nav">
-    <li><a href="#tab1" class="active">Helpdesk</a></li>
-</ul>
-<div class="clear"></div>
-    <div id="konten">
-        <div style="display: none;" id="tab1" class="tab_konten">
+
+	<div class="clear"></div>
+    <div id="" class="content">
+	<h1>Helpdesk</h1>
+        
 			<?php
 			// TODO: Satu paket ini untuk alerts. Nanti mau dipindah jadi hanya panggil satu method.
 			if ($this->session->flashdata('success')) {
@@ -84,6 +83,6 @@
                 </div>
                 <div class="pagination"><?php echo ($pageLink)?'Halaman '.$pageLink:'';?></div><br />
             </div>
-        </div>
+    </div>
 
 <script type="text/javascript" src="<?php echo base_url(); ?>js/fungsi.js"></script>

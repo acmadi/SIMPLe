@@ -28,8 +28,8 @@
         <table id="tableOne" class="yui">
             <thead>
             <tr>
-                <th class="short">No</th>
-                <th>Level</th>
+                <th class="small">No</th>
+                <th class="small">Level</th>
                 <th>Nama Level</th>
                 <th class="action">Aksi</th>
             </tr>
@@ -38,8 +38,8 @@
             <?php $i = 1 ?>
             <?php foreach ($list_kontrol->result() as $item): ?>
             <tr>
-                <td class="short"><?php echo $i++ ?></td>
-                <td><?php echo $item->lavel ?></td>
+                <td class="small"><?php echo $i++ ?></td>
+                <td class="small"><?php echo $item->lavel ?></td>
                 <td><?php echo $item->nama_lavel ?></td>
                 <td class="action">
                     <span class="button_kecil">

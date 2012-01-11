@@ -1,5 +1,13 @@
 /* my additional style */
 
+dd{
+	margin: 0.5em 0;
+}
+
+th.small,
+td.small{
+	width: 50px;
+}
 div.attachment{
 	margin: 10px 0 15px;
 	padding: 10px;
