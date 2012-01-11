@@ -3,6 +3,8 @@
 <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
 <title><?php echo isset($title) ? $title : ''; ?></title>
 <link rel="shortcut icon" href="<?php echo base_url().'images/icon.jpg';?>" />
+
+<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/buttons.css" media="screen">
 <style type="text/css">@import url("<?php echo base_url() . 'css/style.css'; ?>");</style>
 
 <!--TABLE JQUERY-->
@@ -118,7 +120,7 @@ $(document).ready(function() {
 <body>
 <div id="wrapper">
 	<div id="header"></div>
-    <div id="navbar"><?php $this->load->view('navbar_cse'); ?></div>
+    <div id="navbar"><?php $this->load->view('navbar_admin_pengaduan'); ?></div>
     <div id="container">
     	<div id="content"><?php 
         if (isset($content_html)) :

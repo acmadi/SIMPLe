@@ -16,6 +16,23 @@ class mpengaduan extends CI_Model {
 			return FALSE;
 		endif;
 	}
+	
+	function get_list_pengaduan(){
+		$query = $this->db->query('SELECT * FROM tb_lavel tbl,tb_pengaduan tbp
+								   LEFT JOIN tb_petugas_satker tbs ON tbs.id_petugas_satker = tbp.id_petugas_satker	
+								   WHERE tbp.id_lavel = tbl.id_lavel')->result();
+								   
+		return $query;
+	}
+	
+	function get_detail_pengaduan_by_id($id){
+		$query = $this->db->query('SELECT * FROM tb_lavel tbl,tb_pengaduan tbp
+								   LEFT JOIN tb_petugas_satker tbs ON tbs.id_petugas_satker = tbp.id_petugas_satker	
+								   WHERE tbp.id_lavel = tbl.id_lavel AND tbp.id_pengaduan = ? ',array($id))->row();
+								   
+		return $query;
+	}
+	
 	function get_one()
 	{
 		$query = $this->db->query(
