@@ -58,6 +58,8 @@ class Identitas_satker extends CI_Controller
         }
         exit();
     }
+	
+	
 
     function cari_satker()
     {

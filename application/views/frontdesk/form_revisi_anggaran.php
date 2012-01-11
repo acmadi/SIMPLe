@@ -1,3 +1,13 @@
+<style type="text/css">
+    .ui-autocomplete {
+        max-height: 300px;
+        overflow-y: auto;
+        /* prevent horizontal scrollbar */
+        overflow-x: hidden;
+        /* add padding to account for vertical scrollbar */
+        padding-right: 20px;
+    }
+</style>
 <script type="text/javascript">
     $(function ($) {
 
@@ -8,8 +18,11 @@
         function extractLast(term) {
             return split(term).pop();
         }
+		
+		
 
         $(function () {
+			
             $('#nama_kl_input').live('blur', function () {
                 var nama_kl = $('#nama_kl_input').val();
                 $.get('<?php echo site_url('helpdesk/identitas_satker/cari_kl/') ?>', {id_kementrian:nama_kl}, function (response) {
@@ -18,6 +31,31 @@
                     $('#kode_satker').removeAttr('disabled');
                 })
             })
+					
+			$('#kode_satker').autocomplete({
+				source:function (request, response) {
+					$.ajax({
+						url:"<?php echo site_url('/helpdesk/identitas_satker/cari_satker') ?>",
+
+						data:{
+							term:request.term,
+							eselon:$('#eselon').val(),
+							nama_kl:$('#nama_kl_input').val()
+						},
+
+						dataType:'json',
+
+						success:function (data) {
+							response(data);
+						}
+					})
+				},
+				delay:500,
+				minLength:1
+			})
+			
+			
+			
 
             $('form').submit(function () {
                 data = $(this).serialize();
@@ -123,7 +161,7 @@
 
         <p class="kode_satker_p">
             <label>Kode - Nama Satker</label>
-            <input type="text" name="kode_satker" id="kode_satker" class="kl kode_satker" style="width: 700px;" disabled/>
+			<input type="text" name="kode_satker" id="kode_satker" class="kl" size="30" disabled/>
         </p>
 
     </fieldset>

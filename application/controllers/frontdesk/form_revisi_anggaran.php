@@ -10,7 +10,6 @@ class Form_revisi_anggaran extends CI_Controller
 
     function index()
     {
-        //        echo "asdadas";exit();
         $data['kementrian'] = $this->db->query('SELECT * FROM tb_kementrian ORDER BY id_kementrian');
         $data['kelengkapan_dokumen'] = $this->db->query('SELECT * FROM tb_kelengkapan_doc ORDER BY id_kelengkapan');
         $data['title'] = 'Form Revisi Anggaran';
@@ -128,9 +127,18 @@ class Form_revisi_anggaran extends CI_Controller
         }
         exit();
     }
-
+	
+	public function dokumen_check($data){
+		if(count($data)<3):
+			$this->form_validation->set_message('dokumen_check', 'Kelengkapan <b>%s</b> tidak terpenuhi');
+			return FALSE;
+		else:
+			return TRUE;
+		endif;
+	}
+	
     function save_identitas()
-    {
+    {	
         $status = false;
 
         $this->form_validation->set_rules('nama_kl', 'Nama K/L', 'required');
@@ -140,6 +148,15 @@ class Form_revisi_anggaran extends CI_Controller
         $this->form_validation->set_rules('no_hp', 'No HP', 'required');
         $this->form_validation->set_rules('no_kantor', 'No Kantor', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required');
+		
+        $this->form_validation->set_rules('tipe', 'Kategori', 'required');
+		
+        $this->form_validation->set_rules('nomor_surat_usulan', 'Nomor Surat Usulan', 'required');
+        $this->form_validation->set_rules('tanggal_surat_usulan', 'Tanggal Surat Usulan', 'required');
+        $this->form_validation->set_rules('nip', 'NIP', 'required');
+		
+		
+        $this->form_validation->set_rules('dokumen', 'Dokumen', 'callback_dokumen_check');
 
         if ($this->form_validation->run() == TRUE) {
 
@@ -149,64 +166,76 @@ class Form_revisi_anggaran extends CI_Controller
             $email = $this->input->post('email');
             $no_kantor = $this->input->post('no_kantor');
             $tipe = $this->input->post('tipe');
-
-            $kode_satker = explode(', ', $this->input->post('kode_satker'));
-            array_pop($kode_satker);
-
+            $nomor_surat_usulan = $this->input->post('nomor_surat_usulan');
+            $tanggal_surat_usulan = $this->input->post('tanggal_surat_usulan');
+            $kode_satker = $this->input->post('kode_satker');
+			
+			$this->load->helper('tanggal_helper');
+			
+			$tanggal_surat_usulan = set_tanggal_mysql($tanggal_surat_usulan);
+			
+            $nip = $this->input->post('nip');
+			
+            $nama_kl = $this->input->post('nama_kl');
+            $eselon = $this->input->post('eselon');
+			
+            $kode_satker = explode(' - ', $this->input->post('kode_satker'));
+			
+			if(count($kode_satker) == 2):
+				$kode_satker_select = $kode_satker[0];
+			else:
+				$kode_satker_select = 'NULL';
+			endif;
+			
             $this->db->trans_begin();
 
             // Save Identitas Petugas Satker
-            $sql = "INSERT INTO tb_petugas_satker (nama_petugas, jabatan_petugas, no_hp, email, no_kantor, tipe)
-                    VALUES ('{$nama_petugas}', '{$jabatan_petugas}', '{$no_hp}', '{$email}', '{$no_kantor}', '{$tipe}')";
-
+            $sql = "INSERT INTO tb_petugas_satker (nama_petugas, jabatan_petugas, no_hp, email, no_kantor, tipe, nip)
+                    VALUES ('{$nama_petugas}', '{$jabatan_petugas}', '{$no_hp}', '{$email}', '{$no_kantor}', '{$tipe}','{$nip}')";
+			
             $this->db->query($sql);
 
             $tiket_id = $this->db->insert_id();
+			
 
-            $temp = array();
-            $i = 0;
-            foreach ($kode_satker as $value) {
-                $value = substr($value, 0, 6);
-                $temp[$i] = $value;
+			$now = date('Y-m-d');
 
-                $now = date('Y-m-d');
+			$sql = "INSERT INTO tb_tiket_frontdesk (id_satker, id_formulir, tanggal, status, lavel, id_petugas_satker, id_unit, id_kementrian,nomor_surat_usulan,tanggal_surat_usulan)
+					VALUES ({$kode_satker_select}, NULL, '{$now}', 'open', 1, {$tiket_id},'{$eselon}','{$nama_kl}','{$nomor_surat_usulan}','{$tanggal_surat_usulan}')";
+			
+			
+			$this->db->query($sql);
 
-                $sql = "INSERT INTO tb_tiket_frontdesk (id_satker, id_formulir, tanggal, status, lavel, id_petugas_satker)
-                        VALUES ('{$temp[$i]}', NULL, '{$now}', 'open', 1, {$tiket_id})";
+			// Simpan dokumen di tb_kelengkapan_formulir
+			$dokumen = $this->input->post('dokumen');
+			$no_tiket_frontdesk = $this->db->insert_id();
 
-                $this->db->query($sql);
+			if (count($dokumen) > 1) {
+				foreach ($dokumen as $key => $value) {
+					$sql = "INSERT INTO tb_kelengkapan_formulir
+										(no_tiket_frontdesk, id_kelengkapan)
+										VALUES ('{$no_tiket_frontdesk}', '{$key}')";
 
-                // Simpan dokumen di tb_kelengkapan_formulir
-                $dokumen = $this->input->post('dokumen');
-                $no_tiket_frontdesk = $this->db->insert_id();
+					$this->db->query($sql);
+				}
+			}
 
-                if (count($dokumen) > 1) {
-                    foreach ($dokumen as $key => $value) {
-                        $sql = "INSERT INTO tb_kelengkapan_formulir
-                                            (no_tiket_frontdesk, id_kelengkapan)
-                                            VALUES ('{$no_tiket_frontdesk}', '{$key}')";
+			if (isset($dokumen_lainnya) AND count($dokumen_lainnya) > 1) {
+				$dokumen_lainnya = $this->input->post('dokumen_lainnya');
 
-                        $this->db->query($sql);
-                    }
-                }
+				foreach ($dokumen_lainnya as $value) {
 
-                if (isset($dokumen_lainnya) AND count($dokumen_lainnya) > 1) {
-                    $dokumen_lainnya = $this->input->post('dokumen_lainnya');
+					if (isset($_POST['dokumen_lainnya'])) {
+						$sql = "INSERT INTO tb_kelengkapan_formulir
+									(no_tiket_frontdesk, kelengkapan, id_kelengkapan)
+									VALUES ('{$no_tiket_frontdesk}', '{$value}', 0)";
 
-                    foreach ($dokumen_lainnya as $value) {
+						$this->db->query($sql);
+					}
+				}
+			}
 
-                        if (isset($_POST['dokumen_lainnya'])) {
-                            $sql = "INSERT INTO tb_kelengkapan_formulir
-                                        (no_tiket_frontdesk, kelengkapan, id_kelengkapan)
-                                        VALUES ('{$no_tiket_frontdesk}', '{$value}', 0)";
-
-                            $this->db->query($sql);
-                        }
-                    }
-                }
-
-                $i++;
-            }
+                
 
             // Masukkan data ke tb_histori_tiket
             $sql = "INSERT INTO tb_histori_tiket VALUES(NULL, ?, ?, NOW())";
@@ -219,7 +248,6 @@ class Form_revisi_anggaran extends CI_Controller
                 $this->db->trans_commit();
                 redirect('/frontdesk/form_revisi_anggaran/success/' . $no_tiket_frontdesk);
             }
-
         }
         else {
             $this->index();
@@ -230,17 +258,18 @@ class Form_revisi_anggaran extends CI_Controller
     {
         // TODO: Gak optimal ini query nya. Suatu saat nanti harus dioptimalkan.
         $result = $this->db->from('tb_tiket_frontdesk')
+				->join('tb_satker', 'tb_satker.id_satker = tb_tiket_frontdesk.id_satker','left')
                 ->join('tb_petugas_satker', 'tb_petugas_satker.id_petugas_satker = tb_tiket_frontdesk.id_petugas_satker')
-                ->join('tb_satker', 'tb_satker.id_satker = tb_tiket_frontdesk.id_satker')
                 ->join('tb_kelengkapan_formulir', 'tb_kelengkapan_formulir.no_tiket_frontdesk = tb_tiket_frontdesk.no_tiket_frontdesk')
                 ->join('tb_kelengkapan_doc', 'tb_kelengkapan_doc.id_kelengkapan = tb_kelengkapan_formulir.id_kelengkapan')
+                ->join('tb_unit', 'tb_unit.id_unit = tb_tiket_frontdesk.id_unit AND tb_unit.id_kementrian = tb_tiket_frontdesk.id_kementrian')
         //->join('tb_kementrian', 'tb_kementrian.id_kementrian = tb_satker.id_kementrian')
         //->join('tb_unit', 'tb_unit.id_unit = tb_satker.id_unit')
                 ->where('tb_tiket_frontdesk.no_tiket_frontdesk', $no_tiket_frontdesk)
                 ->get();
 
         $data['identitas'] = $result->result();
-
+		
         $temp = $result->row();
         $id_kementrian = $temp->id_kementrian;
         $id_unit = $temp->id_unit;
