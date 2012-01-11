@@ -4,21 +4,34 @@
 
     <h1>Forum</h1>
 
-    <h2>Buat Forum Baru</h2>
-    <?php 
+    <script>
+    $(document).ready(function(){
+        $('#postbutton').click(function(){
+            $('#postbox').slideToggle();
+        })
+    });
+    </script>
+    
+    
+    <button id="postbutton" class="button gray-pill">Tulis Forum Baru</button>
 
-    $q_kat = $this->mforum->get_categories();
-    foreach($q_kat->result_array() as $row){
-        $kat_forum[$row['id_kat_forum']] = $row['kat_forum'];
-    }
+    <br/><br/>
+    <div id="postbox" style="display:none">
+        <?php 
 
-    $data['kat_forum']    = $kat_forum;
-    $data['id_parent']    = NULL;
-    $data['id_kat_forum'] = NULL;
-    $data['judul_forum']  = NULL;
-    $data['referrer']     = 'frontdesk/man_forum';
-    $this->load->view('frontdesk/man_forum/form', $data) 
-    ?>
+        $q_kat = $this->mforum->get_categories();
+        foreach($q_kat->result_array() as $row){
+            $kat_forum[$row['id_kat_forum']] = $row['kat_forum'];
+        }
+
+        $data['kat_forum']    = $kat_forum;
+        $data['id_parent']    = NULL;
+        $data['id_kat_forum'] = NULL;
+        $data['judul_forum']  = NULL;
+        $data['referrer']     = 'frontdesk/man_forum';
+        $this->load->view('frontdesk/man_forum/form', $data) 
+        ?>
+    </div>
     <hr/>
     <?php foreach ($forums->result() as $forum): ?>
     <div style="margin-bottom: 20px;">
@@ -31,6 +44,13 @@
             <?php echo word_limiter($forum->isi_forum, 100) ?>
         </div>
 
+        <?php if($forum->file != '') : ?>
+        <div class="attachment">
+            File terlampir: 
+            <?php echo anchor(base_url() . 'upload/forum/' . $forum->file, $forum->file)?>
+        </div>
+        <?php endif; ?>
+        
         <div style="text-align: right;"><a href="<?php echo site_url('/frontdesk/man_forum/view/' . $forum->id_forum ) ?>">Selengkapnya</a></div>
 
     </div>

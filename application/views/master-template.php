@@ -18,6 +18,7 @@
 
     <link href="<?php echo base_url('css/style.css') ?>" rel="stylesheet"/>
     <link href="<?php echo base_url('css/autoSuggest.css') ?>" rel="stylesheet"/>
+    <link href="<?php echo base_url('css/akhyar.css') ?>" rel="stylesheet"/>
 
     <!--TABLE JQUERY-->
     <!--    <style type="text/css">@import url("--><?php //echo base_url() . 'css/table.css'; ?><!--");</style>-->

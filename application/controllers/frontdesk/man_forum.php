@@ -39,16 +39,34 @@ class Man_forum extends CI_Controller
     {
 
         $id_parent = ( ! $this->input->post('id_parent') ) ? NULL : $this->input->post('id_parent');
+        $referrer = $this->input->post('referrer');
+
+        // upload file
+        // $config['file_name'] = date('isdm') . '_' . $_FILES['file']['name'];
+        // $config['upload_path'] = BASEPATH . 'upload/forum/';
+        // $config['allowed_types'] = 'doc|docx|xls|xlsx|ppt|pptx|txt|rtf|jpg';
+        // $config['max_size'] = '10000';
+
+        // $this->load->library('upload', $config);
+
+        // $this->upload->do_upload();
+
+        $nmBr = '';
+        if (isset($_FILES['file']['name'])){
+            $unik = date('isdm').'_';
+            $nmBr = $unik . $_FILES['file']['name'];
+            move_uploaded_file($_FILES['file']['tmp_name'], 'upload/forum/'. $nmBr);
+        }
 
         $arr = array(
             'id_kat_forum' => $this->input->post('id_kat_forum'),
-            'judul_forum' => $this->input->post('judul_forum'),
-            'isi_forum'   => $this->input->post('isi_forum'),
-            'id_parent'   => $id_parent,
-            'id_user'     => $this->session->userdata('id_user'),
+            'judul_forum'  => $this->input->post('judul_forum'),
+            'isi_forum'    => $this->input->post('isi_forum'),
+            'id_parent'    => $id_parent,
+            'id_user'      => $this->session->userdata('id_user'),
+            'file'         => $nmBr,
             );
 
-        $referrer = $this->input->post('referrer');
 
         $this->mforum->add_forum_by_array($arr);
 

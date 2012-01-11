@@ -1,0 +1,15 @@
+div.attachment{
+	margin: 10px 0 15px;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+}
+
+em.meta{
+	color: #999;
+	margin: 10px 0px 10px;	
+}
+
+.entry-title{
+	font-weight: bold;
+}
