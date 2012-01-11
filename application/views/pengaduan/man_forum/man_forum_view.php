@@ -40,8 +40,8 @@
         $data['id_parent']    = $forum->id_forum;
         $data['id_kat_forum'] = $forum->id_kat_forum;
         $data['judul_forum']  = 'Balas: ' . $forum->judul_forum;
-        $data['referrer']     = 'frontdesk/man_forum/view/' . $forum->id_forum;
-        $this->load->view('frontdesk/man_forum/form', $data) 
+        $data['referrer']     = 'pengaduan/man_forum/view/' . $forum->id_forum;
+        $this->load->view('pengaduan/man_forum/form', $data) 
         ?>
     </div>
 

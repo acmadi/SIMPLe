@@ -17,11 +17,12 @@
 
 
 
-<ul id="nav">
+<ul id="navxxx" style="display:none">
     <li><a href="#tab1">Manajemen User</a></li>
 </ul>
 <div class="clear"></div>
-<div id="konten">
+<div class="content" id="kontenxxx">
+    <h1>Manajemen User</h1>
 	<?php
     // TODO: Satu paket ini untuk alerts. Nanti mau dipindah jadi hanya panggil satu method.
     if ($this->session->flashdata('success')) {
@@ -37,7 +38,7 @@
         echo '<div class="info">' . $this->session->flashdata('info') . '</div>';
     }
     ?>
-    <div style="display: none;" id="tab1" class="tab_konten">
+    <div style="" id="tab1" class="tab_konten">
         <div class="table"> 
             <div id="head">
                 <form id="form-cari" action="<?php echo site_url('admin/man_user_cari')?>" method="post">

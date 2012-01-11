@@ -83,16 +83,19 @@
                 <td>&nbsp;</td>
                 <td>Diterima</td>
                 <td>Diteruskan</td>
+                <td>Open</td>
             </tr>
             <tr>
                 <td>CS</td>
                 <td><span class="message_box glow_green"><?php echo $total_tiket_diterima_cs ?></span></td>
                 <td><span class="message_box glow_green"><?php echo $total_tiket_diteruskan_cs?></span></td>
+                <td><span class="message_box glow_green"><?php echo 19 ?></span></td>
             </tr>
             <tr>
                 <td>Kasi & Pelaksana</td>
                 <td><span class="message_box glow_green"><?php echo $total_tiket_diterima_pelaksana ?></span></td>
                 <td><span class="message_box glow_green"><?php echo $total_tiket_diteruskan_pelaksana ?></span></td>
+                <td><span class="message_box glow_green"><?php echo 9 ?></span></td>
             </tr>
         </table>
     </fieldset>

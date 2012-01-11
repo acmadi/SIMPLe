@@ -28,13 +28,24 @@
                         <td class="short"><?php echo $value->tanggal ?></td>
                         <td class="short">
                             <?php
-                            $date1 = new DateTime();
+                            $date1 = new DateTime(date('Y-m-d H:i:s'));
                             $date2 = new DateTime($value->tanggal);
-                            $day = $date2->diff($date1);
+                            //                            $day = $date1->diff($date2);
+                            $day = date_diff($date1, $date2);
+
+                            $hari = $day->days;
+
+                            //TODO: Algoritmanya kemungkinan salah
+                            $hari_kerja = (int) ($day->days / 7) * 2;
+                            $hari_kerja = $hari - $hari_kerja;
+
+                            $sql = "select * from tb_calendar WHERE holiday BETWEEN '{$value->tanggal}' AND NOW()";
+                            $hari_kerja = $hari_kerja - $this->db->query($sql)->num_rows();
+
                             if ($day->days > 4) {
-                                echo '<span style="font-weight: bold; font-size: 13px; color: tomato;">' . $day->days . '</span>';
+                                echo '<span style="font-weight: bold; font-size: 13px; color: white; background: tomato; padding: 0 4px;">' . $hari_kerja . '</span>';
                             } elseif ($day->days == 4) {
-                                echo '<span style="font-weight: bold; font-size: 13px; color: yellow; background: black; padding: 0 4px;">' . $day->days . '</span>';
+                                echo '<span style="font-weight: bold; font-size: 13px; color: yellow; background: black; padding: 0 4px;">' . $hari_kerja . '</span>';
                             } else {
                                 echo '<span style="">' . $day->days . '</span>';
                             }
@@ -44,9 +55,9 @@
                         <td><?php echo $value->nama_satker ?></td>
                         <td class="">
                             <a class="bla button blue-pill" href="<?php echo site_url('/pelaksana/frontdesk/diterima/' . $value->no_tiket_frontdesk) ?>">Diterima</a>
-                            <!--                            <a id="bla2" class="button gray-pill" href="-->
-                            <input type="button" class="bla2 button gray-pill" link="<?php echo site_url('/pelaksana/frontdesk/diteruskan/' . $value->no_tiket_frontdesk) ?>" disabled value="Ditetapkan"/>
-                            <a class="button gray-pill" href="<?php echo site_url('/pelaksana/frontdesk/reject/' . $value->no_tiket_frontdesk) ?>">Ditolak</a>
+                            <input type="button" class="bla2 button gray-pill" link="<?php echo site_url('/pelaksana/frontdesk/diteruskan/' . $value->no_tiket_frontdesk) ?>" disabled
+                                   value="Diteruskan"/>
+                            <a class="button gray-pill" href="<?php echo site_url('/pelaksana/frontdesk/reject/' . $value->no_tiket_frontdesk) ?>">Kurang Lengkap</a>
                         </td>
                     </tr>
                         <?php endforeach ?>
