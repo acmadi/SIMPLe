@@ -64,6 +64,10 @@
                 onSelect:function () {
                 }
             });
+
+            $('#tanggal_surat_usulan').datepicker({
+                dateFormat: 'dd-mm-yy'
+            });
         })
     })
 </script>
@@ -86,10 +90,22 @@
     <?php echo form_hidden('tipe', 'kl') ?>
 
     <fieldset id="kl">
-        <legend>Satker</legend>
+        <legend>Kementrian / Lembaga</legend>
 
         <div id="anggaran" style="padding: 20px; display: inline-block; float: right; font-size: 24px;"></div>
 
+        <p>
+            <div style="float: left;">
+                <label>Nomor Surat Usulan</label>
+                <input type="text" id="nomor_surat_usulan" name="nomor_surat_usulan" value="<?php echo set_value('nomor_surat_usulan') ?>" />
+            </div>
+            <div style="float: left; margin-left: 50px;">
+                <label>Tanggal Surat Usulan</label>
+                <input type="text" id="tanggal_surat_usulan" name="tanggal_surat_usulan" value="<?php echo set_value('tanggal_surat_usulan') ?>" />
+            </div>
+            <div class="clear"></div>
+        </p>
+        
         <p>
 
         <div style="float: left; width: 150px;">Kode - Nama K/L</div>
@@ -115,6 +131,10 @@
     <fieldset style="float: left; margin-right: 10px; width: 47%; height: 310px;">
         <legend>Identitas</legend>
         <p>
+            <label>NIP</label>
+            <input type="text" name="nip" size="30" value="<?php echo set_value('nip') ?>">
+        </p>
+        <p>
             <label>Nama</label>
             <input type="text" name="nama_petugas" size="30" value="<?php echo set_value('nama_petugas') ?>">
         </p>
@@ -130,7 +150,7 @@
         </p>
 
         <p>
-            <label>No. Kantor</label>
+            <label>No. Telpon Kantor</label>
             <input type="text" name="no_kantor" size="30" value="<?php echo set_value('no_kantor') ?>">
         </p>
 

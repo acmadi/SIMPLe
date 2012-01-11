@@ -74,6 +74,9 @@ Class Login extends CI_Controller
                 case '13':
                     redirect('kb_koordinator/dashboard');
                     break;
+				case '14':
+                    redirect('admin_pengaduan/dashboard');
+					break;
             }
         } else {
             $this->session->set_flashdata('error', 'Login gagal');
