@@ -134,7 +134,7 @@ class Knowledge_base extends CI_Controller
                 ->get();
 
         //        echo json_encode($result->result(), JSON_FORCE_OBJECT);
-        echo '<ul>';
+        echo '<ul style="list-style: inside;">';
         foreach ($result->result() as $value) {
             echo "<li>
                     <a href=\"javascript:void(0)\" class=\"referensi-jawaban\" title=\"{$value->id_knowledge_base}\">{$value->judul}</a>

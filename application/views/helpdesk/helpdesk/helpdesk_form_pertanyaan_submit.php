@@ -140,7 +140,7 @@
             resizable:false,
             draggable:false,
             width:700,
-            height:600,
+            height:400,
             dialogClass:'centered-dialog',
             buttons:[
                 {
