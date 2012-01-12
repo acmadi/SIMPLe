@@ -15,7 +15,7 @@ class Form_revisi_anggaran extends CI_Controller
         $data['kelengkapan_dokumen'] = $this->db->query('SELECT * FROM tb_kelengkapan_doc ORDER BY id_kelengkapan');
         $data['title'] = 'Form Revisi Anggaran';
         $data['content'] = 'frontdesk/form_revisi_anggaran';
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);
     }
 
     public function add_revisi_anggaran()

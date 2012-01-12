@@ -19,9 +19,22 @@
     <link type="text/css" rel="stylesheet" href="<?php echo base_url('css/960gs/text.css') ?>"/>
     <link type="text/css" rel="stylesheet" href="<?php echo base_url('css/960gs/960.css') ?>"/>
     <link type="text/css" rel="stylesheet" href="<?php echo base_url('css/mul14.css') ?>"/>
+    <link type="text/css" rel="stylesheet" href="<?php echo base_url('css/akhyar-v2.css') ?>"/>
+
+    <link rel="stylesheet" href="<?php echo base_url('css/cupertino/jquery-ui-1.8.16.custom.css') ?>"/>
+    <link href="<?php echo base_url('css/autoSuggest.css') ?>" rel="stylesheet"/>
+    <link href="<?php echo base_url('css/akhyar.css') ?>" rel="stylesheet"/>
+    <link href="<?php echo base_url('js/FlexBox/css/jquery.flexbox.css') ?>" rel="stylesheet"/>
     <!-- end CSS-->
 
     <script src="<?php echo base_url('js/modernizr-2.0.6.min.js') ?>"></script>
+    <script src="<?php echo base_url('js/jquery-1.7.1.min.js') ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('js/jquery-ui-1.8.16.custom.min.js') ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('js/jquery.autoSuggest.minified.js') ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('js/jQuery-Visualize/js/visualize.jQuery.js') ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('js/phpjs/substr.js') ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('js/FlexBox/js/jquery.flexbox.js') ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('js/scripts.js') ?>"></script>
     <?php //echo $scripts_for_layout ?>
 
 
@@ -35,7 +48,7 @@
             <div style="padding: 20px;">
                 <img src="<?php echo base_url('images/logo.png') ?>" width="40" height="40" />Sistem Informasi Pusat Layanan DJA
             </div>
-            <nav class="grid_9 alpha">
+            <nav class="grid_10 alpha omega">
 
                 <?php
 
@@ -91,7 +104,7 @@
                 ?>
 
             </nav>
-            <div class="grid_3 omega" style="text-align: right;">
+            <div class="grid_2 alpha omega" style="text-align: right;">
                 <div class="profile-menu">
                     <a href="javascript:void(0)"><?php echo $this->session->userdata('nama') ?></a>
                     <ul>
@@ -166,12 +179,12 @@
 
 
 <!--  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>-->
-<script>window.jQuery || document.write('<script src="<?php echo base_url() ?>/js/jquery-1.7.1.min.js"><\/script>')</script>
+<!--<script>window.jQuery || document.write('<script src="--><?php //echo base_url() ?><!--/js/jquery-1.7.1.min.js"><\/script>')</script>-->
 
 
 <!-- scripts concatenated and minified via ant build script-->
-<script defer src="<?php echo base_url('/js/plugins.js') ?>"></script>
-<script defer src="<?php echo base_url('/js/script.js') ?>"></script>
+<!--<script defer src="--><?php //echo base_url('/js/plugins.js') ?><!--"></script>-->
+<!--<script defer src="--><?php //echo base_url('/js/script.js') ?><!--"></script>-->
 <!-- end scripts-->
 
 

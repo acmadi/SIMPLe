@@ -19,6 +19,6 @@ class Status_tiket extends CI_Controller
         $data['isian_form']	= $page['isian_form1'];
         $data['content'] 	= 'frontdesk/status_tiket';
 		
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);
     }
 }

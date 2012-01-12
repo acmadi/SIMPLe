@@ -17,7 +17,7 @@ class Knowledge_base extends CI_Controller
         $data['result'] = $this->knowledge->get_all_data_category();
         $data['idsearch'] = "";
         $data['categories'] = $this->knowledge->get_all_category();
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);
     }
 
     function lists($id_kat_knowledge_base = '')
@@ -34,7 +34,7 @@ class Knowledge_base extends CI_Controller
         $data['categories'] = $this->db->from('tb_kat_knowledge_base')->get()->result();
         $data['title'] = 'Knowledge Base';
         $data['content'] = 'knowledge/knowledge_base';
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);
     }
 
 
@@ -53,7 +53,7 @@ class Knowledge_base extends CI_Controller
             $data['content'] = 'helpdesk/knowledge/knowledge_base';
             $data['part'] = 3;
             $data['idsearch'] = $category;
-            $this->load->view('master-template', $data);
+            $this->load->view('new-template', $data);
         }
     }
 
@@ -73,7 +73,7 @@ class Knowledge_base extends CI_Controller
             $data['result'] = $item;
             $data['idsearch'] = $keyword;
             $data['sel'] = true;
-            $this->load->view('master-template', $data);
+            $this->load->view('new-template', $data);
         }
 
     }

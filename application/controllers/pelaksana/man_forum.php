@@ -21,7 +21,7 @@ class Man_forum extends CI_Controller
              WHERE f.id_parent IS NULL
              ORDER BY tanggal DESC ");
 
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);
     }
 
     function view($id)
@@ -33,7 +33,7 @@ class Man_forum extends CI_Controller
         $data['content'] = 'pelaksana/man_forum/man_forum_view';
         $data['forums'] = $result_forum;
         $data['childs'] = $result_childs;
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);
     }
 
     function kirim()

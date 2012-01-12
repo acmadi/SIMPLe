@@ -11,8 +11,8 @@ class Dashboard extends CI_Controller
 
     function index()
     {
-        $data['helpdesk_total'] = $this->mhelpdesk->count_all_tiket();
-        $data['frontdesk_total'] = $this->mfrontdesk->count_all_tiket();
+        $data['helpdesk_total'] = $this->mhelpdesk->count_all_tiket('open', 4);
+        $data['frontdesk_total'] = $this->mfrontdesk->count_all_tiket('open', 4);
 
         $result = $this->db->query("SELECT * FROM tb_tiket_frontdesk WHERE lavel = 1");
         $data['total_tiket_diterima_cs'] = $result->num_rows();
@@ -28,7 +28,7 @@ class Dashboard extends CI_Controller
 
         $data['title'] = 'Dashboard';
         $data['content'] = 'kasubdit/dashboard';
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);
     }
 }
 

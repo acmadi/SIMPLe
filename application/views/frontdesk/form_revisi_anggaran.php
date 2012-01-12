@@ -7,6 +7,16 @@
         /* add padding to account for vertical scrollbar */
         padding-right: 20px;
     }
+
+    .identitas label {
+        width: 100px;
+        display: inline-block;
+    }
+
+    #kl label {
+        width: 150px;
+        display: inline-block;
+    }
 </style>
 <script type="text/javascript">
     $(function ($) {
@@ -18,11 +28,10 @@
         function extractLast(term) {
             return split(term).pop();
         }
-		
-		
+
 
         $(function () {
-			
+
             $('#nama_kl_input').live('focusin', function () {
                 var nama_kl = $('#nama_kl_input').val();
                 $.get('<?php echo site_url('helpdesk/identitas_satker/cari_kl/') ?>', {id_kementrian:nama_kl}, function (response) {
@@ -33,40 +42,38 @@
                 })
             })
 
-            $('#eselon').change(function(){
+            $('#eselon').change(function () {
                 id_kementrian = substr($('#nama_kl_input').val(), 0, 3);
 
                 url = '<?php echo site_url('frontdesk/form_revisi_anggaran/anggaran') ?>/' + id_kementrian;
                 console.log(url);
-                $.get(url, function(response){
+                $.get(url, function (response) {
                     $('#anggaran').html('A' + response);
                 });
             });
-					
-			$('#kode_satker').autocomplete({
-				source:function (request, response) {
-					$.ajax({
-						url:"<?php echo site_url('/helpdesk/identitas_satker/cari_satker') ?>",
 
-						data:{
-							term:request.term,
-							eselon:$('#eselon').val(),
-							nama_kl:$('#nama_kl_input').val()
-						},
+            $('#kode_satker').autocomplete({
+                source:function (request, response) {
+                    $.ajax({
+                        url:"<?php echo site_url('/helpdesk/identitas_satker/cari_satker') ?>",
 
-						dataType:'json',
+                        data:{
+                            term:request.term,
+                            eselon:$('#eselon').val(),
+                            nama_kl:$('#nama_kl_input').val()
+                        },
 
-						success:function (data) {
-							response(data);
-						}
-					})
-				},
-				delay:500,
-				minLength:1
-			})
-			
-			
-			
+                        dataType:'json',
+
+                        success:function (data) {
+                            response(data);
+                        }
+                    })
+                },
+                delay:500,
+                minLength:1
+            })
+
 
             $('form').submit(function () {
                 data = $(this).serialize();
@@ -116,7 +123,7 @@
             });
 
             $('#tanggal_surat_usulan').datepicker({
-                dateFormat: 'dd-mm-yy'
+                dateFormat:'dd-mm-yy'
             });
         })
     })
@@ -145,17 +152,18 @@
         <div id="anggaran" style="padding: 20px; display: inline-block; float: right; font-size: 24px;"></div>
 
         <p>
-            <div style="float: left;">
-                <label>Nomor Surat Usulan</label>
-                <input type="text" id="nomor_surat_usulan" name="nomor_surat_usulan" value="<?php echo set_value('nomor_surat_usulan') ?>" />
-            </div>
-            <div style="float: left; margin-left: 50px;">
-                <label>Tanggal Surat Usulan</label>
-                <input type="text" id="tanggal_surat_usulan" name="tanggal_surat_usulan" value="<?php echo set_value('tanggal_surat_usulan') ?>" />
-            </div>
-            <div class="clear"></div>
+
+        <div style="float: left;">
+            <label>Nomor Surat Usulan</label>
+            <input type="text" id="nomor_surat_usulan" name="nomor_surat_usulan" value="<?php echo set_value('nomor_surat_usulan') ?>"/>
+        </div>
+        <div style="float: left; margin-left: 50px;">
+            <label>Tanggal Surat Usulan</label>
+            <input type="text" id="tanggal_surat_usulan" name="tanggal_surat_usulan" value="<?php echo set_value('tanggal_surat_usulan') ?>"/>
+        </div>
+        <div class="clear"></div>
         </p>
-        
+
         <p>
 
         <div style="float: left; width: 150px;">Kode - Nama K/L</div>
@@ -173,17 +181,18 @@
 
         <p class="kode_satker_p">
             <label>Kode - Nama Satker</label>
-			<input type="text" name="kode_satker" id="kode_satker" class="kl" size="30" disabled/>
+            <input type="text" name="kode_satker" id="kode_satker" class="kl" size="30" disabled/>
         </p>
 
     </fieldset>
 
-    <fieldset style="float: left; margin-right: 10px; width: 47%; height: 230px;">
+    <fieldset style="float: left; margin-right: 10px; width: 47%;" class="identitas">
         <legend>Identitas</legend>
         <p>
             <label>NIP</label>
             <input type="text" name="nip" size="30" value="<?php echo set_value('nip') ?>">
         </p>
+
         <p>
             <label>Nama</label>
             <input type="text" name="nama_petugas" size="30" value="<?php echo set_value('nama_petugas') ?>">
@@ -210,10 +219,10 @@
         </p>
     </fieldset>
 
-    <fieldset style="float: right; width: 47%; height: 230px;">
+    <fieldset style="float: right; width: 47%; height: 280px;">
         <legend>Kelengkapan Dokumen</legend>
 
-        <div style="overflow: auto; height: 218px; margin: 0;">
+        <div style="overflow: auto; height: 260px; margin: 0;">
             <?php foreach ($kelengkapan_dokumen->result() as $value): ?>
 
             <?php if ($value->id_kelengkapan != 0): ?>

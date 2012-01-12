@@ -1,5 +1,5 @@
 <?php
-class Supervisors extends CI_Controller
+class Kasubdits extends CI_Controller
 {
     public $template = 'new-template.php';
 
@@ -7,7 +7,6 @@ class Supervisors extends CI_Controller
     {
         parent::__construct();
         $this->load->model('mhelpdesk');
-        $this->load->model('mknowledge');
         $this->load->helper('tanggal');
     }
 
@@ -18,10 +17,10 @@ class Supervisors extends CI_Controller
 
     public function dashboard()
     {
-        $data['helpdesk_total'] = $this->mhelpdesk->count_all_tiket('open', 2);
+        $data['helpdesk_total'] = $this->mhelpdesk->count_all_tiket('open', 3);
         $data['total_selesai_oleh_cs'] = $this->mhelpdesk->count_all_closed_ticket_by();
         $data['title'] = 'Dashboard';
-        $data['content'] = 'supervisor/dashboard';
+        $data['content'] = 'kasubdit/dashboard';
         $this->load->view($this->template, $data);
     }
 
@@ -51,7 +50,7 @@ class Supervisors extends CI_Controller
         $result = $this->db->query($sql);
 
         $data['title'] = 'Knowledge Base';
-        $data['content'] = 'supervisor/list_pertanyaan';
+        $data['content'] = 'kasubdit/list_pertanyaan';
         $data['pertanyaan'] = $result;
         $this->load->view($this->template, $data);
 
@@ -70,8 +69,8 @@ class Supervisors extends CI_Controller
         $result = $this->db->query($sql);
         $result = $result->row();
 
-        $data['title'] = 'Supervisor Jawab';
-        $data['content'] = 'supervisor/jawab';
+        $data['title'] = 'Kasubdit Jawab';
+        $data['content'] = 'kasubdit/jawab';
 
         $data['pertanyaan'] = $result;
         $this->load->view($this->template, $data);
@@ -87,7 +86,7 @@ class Supervisors extends CI_Controller
                 'no_tiket_helpdesk' => $this->input->post('no_tiket_helpdesk')
             ));
 
-            $this->_success(site_url('supervisor/list_pertanyaan'), 'Pertanyaan berhasil dieskalasi ke Kasi & Pelaksana', 5);
+            $this->_success(site_url('kasubdit/list_pertanyaan'), 'Pertanyaan berhasil dieskalasi ke Kasi & Pelaksana', 5);
 
         }
     }
@@ -99,15 +98,5 @@ class Supervisors extends CI_Controller
         $data['time'] = $time;
 
         $this->load->view('helpdesk/success', $data);
-    }
-
-    function kb_index()
-    {
-        $data['title'] = 'Knowledge Base';
-        $data['content'] = 'knowledge/knowledge_base';
-        $data['result'] = $this->mknowledge->get_all_data_category();
-        $data['idsearch'] = "";
-        $data['categories'] = $this->mknowledge->get_all_category();
-        $this->load->view('new-template', $data);
     }
 }
