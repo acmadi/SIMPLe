@@ -14,7 +14,7 @@ class Dashboard extends CI_Controller
     {
         $data['title'] = 'Dashboard';
         $data['content'] = 'frontdesk/dashboard';
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);
     }
 
     protected function _plusone()

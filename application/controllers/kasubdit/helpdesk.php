@@ -19,7 +19,7 @@ class Helpdesk extends CI_Controller
 
         $data['title'] = 'Konsultasi Help Desk';
         $data['content'] = 'kasubdit/helpdesk';
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);
     }
 
     function view($id)
@@ -28,7 +28,7 @@ class Helpdesk extends CI_Controller
         $data['content'] = 'kasubdit/helpdesk_view';
         $data['antrian'] = $this->mhelpdesk->get_by_id($id);
 
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);
     }
 
 }

@@ -10,6 +10,6 @@ class Dashboard extends CI_Controller
     {
         $data['title'] = 'Dashboard';
         $data['content'] = 'cs/dashboard';
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);
     }
 }

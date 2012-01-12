@@ -24,7 +24,7 @@ class Dashboard extends CI_Controller
 
         $data['title'] = 'Dashboard';
         $data['content'] = 'pengaduan/index';
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);
     }
 
     public function save_identitas()
@@ -89,7 +89,7 @@ class Dashboard extends CI_Controller
 
         $data['title'] = 'Dashboard';
         $data['content_html'] = $this->load->view('pengaduan/dashboard', $dt, TRUE);
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);
         /*}
           else
           {
@@ -116,7 +116,7 @@ class Dashboard extends CI_Controller
 
         $data['title'] = 'Isi Identitas Satker';
         $data['content_html'] = $this->load->view('pengaduan/identitas', $dt, TRUE);
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);
         /*}
        else
         {
@@ -144,7 +144,7 @@ class Dashboard extends CI_Controller
 
         $tpl['title'] = 'Form Pengaduan';
         $tpl['content_html'] = $this->load->view('pengaduan/form', $data, TRUE);
-        $this->load->view('master-template', $tpl);
+        $this->load->view('new-template', $tpl);
     }
 
     public function kirim_pengaduan()

@@ -22,7 +22,7 @@ Class Referensi extends CI_Controller
         $data['title'] = 'Referensi Peraturan';
         $data['categories'] = $this->mreferensi->get_categories();
         $data['content'] = 'referensi/category';
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);
     }
 
     public function search()
@@ -33,6 +33,6 @@ Class Referensi extends CI_Controller
     	$data['keyword'] = $keyword;
     	$data['result_array'] = $this->mreferensi->cari($keyword);
         $data['content'] = 'referensi/search';
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);
     }
 }

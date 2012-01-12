@@ -23,12 +23,12 @@ class Jawab extends CI_Controller
         $data['content'] = 'supervisor/jawab';
 
         $data['pertanyaan'] = $result;
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);
     }
 
     public function eskalasi()
     {
-        if ($this->input->post('Eskalasi')) {
+        if ($this->input->post('submit') == 'Eskalasi') {
 
             $this->db->update('tb_tiket_helpdesk', array(
                 'lavel' => 3
@@ -36,7 +36,7 @@ class Jawab extends CI_Controller
                 'no_tiket_helpdesk' => $this->input->post('no_tiket_helpdesk')
             ));
 
-            $this->_success(site_url('supervisor/list_pertanyaan'), 'Pertanyaan berhasil dieskalasi ke Kasi & Pelaksana', 5);
+            $this->_success(site_url('supervisors/list_pertanyaan'), 'Pertanyaan berhasil dieskalasi ke Kasi & Pelaksana', 5);
 
         }
     }

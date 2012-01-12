@@ -20,7 +20,7 @@ class Ambil_dokumen extends CI_Controller
         $data['title'] 		= 'Pengambilan Dokumen';
 		$data['isian_form']	= $page['isian_form1'];
         $data['content'] 	= 'frontdesk/ambil_dokumen';
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);
     }
 
     function cetak($no_tiket_frontdesk)

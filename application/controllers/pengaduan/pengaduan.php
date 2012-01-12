@@ -33,7 +33,7 @@ class Pengaduan extends CI_Controller {
 		
 		$tpl['title'] = 'Dashboard';
         $tpl['content_html'] = $this->load->view('pengaduan/form', $data, TRUE);
-		$this->load->view('master-template', $tpl);
+		$this->load->view('new-template', $tpl);
 	}
 	public function kirim()
 	{

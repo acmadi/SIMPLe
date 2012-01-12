@@ -10,6 +10,6 @@ class List_antrian extends CI_Controller
     {
         $data['title'] = 'List Antrian';
         $data['content'] = 'helpdesk/list_antrian';
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);
     }
 }

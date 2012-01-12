@@ -15,7 +15,7 @@ class Knowledge_base extends CI_Controller
           {*/
         $data['title'] = 'Knowledge Base';
         $data['content'] = 'csd/knowledge_base';
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);
         /*}
           else
           {

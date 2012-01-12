@@ -14,6 +14,6 @@ class Dashboard extends CI_Controller
         $data['total_selesai_oleh_cs'] = $this->mhelpdesk->count_all_closed_ticket_by();
         $data['title'] = 'Dashboard';
         $data['content'] = 'supervisor/dashboard';
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);
     }
 }
