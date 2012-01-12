@@ -5,7 +5,7 @@
     <div class="table">
         <div id="head">
             <div id="cari_unit" action="man_unit_cari">
-                <p>Kode Satker: <input type="text" size="60" value="292292"/>&nbsp;<input type="submit" value="cari"/></p>
+                <p><input type="text" size="60" value="292292"/>&nbsp;<input type="submit" value="cari"/></p>
             </div>
 
             <div id="tail">
@@ -13,10 +13,10 @@
                     <thead>
                     <tr>
                         <th class="short">No</th>
-                        <th class="short">Tanggal</th>
-                        <th class="short">Hari</th>
-                        <th>Kode Satker</th>
-                        <th>Nama Satker</th>
+                        <th class="short">Tanggal Pengajuan</th>
+                        <th class="short">Proses (Hari)</th>
+                        <th>Kode Eselon</th>
+                        <th>Nama Eselon</th>
                         <th class="action">Aksi</th>
                     </tr>
                     </thead>
@@ -57,7 +57,7 @@
                             <a class="bla button blue-pill" href="<?php echo site_url('/pelaksana/frontdesk/diterima/' . $value->no_tiket_frontdesk) ?>">Diterima</a>
                             <input type="button" class="bla2 button gray-pill" link="<?php echo site_url('/pelaksana/frontdesk/diteruskan/' . $value->no_tiket_frontdesk) ?>" disabled
                                    value="Diteruskan"/>
-                            <a class="button gray-pill" href="<?php echo site_url('/pelaksana/frontdesk/reject/' . $value->no_tiket_frontdesk) ?>">Kurang Lengkap</a>
+                            <a class="button gray-pill" href="<?php echo site_url('/pelaksana/frontdesk/reject/' . $value->no_tiket_frontdesk) ?>">Dikembalikan</a>
                         </td>
                     </tr>
                         <?php endforeach ?>
