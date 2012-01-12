@@ -58,7 +58,7 @@
                             <th style="width: 20px">No</th>
                             <th style="width: 30px">Tanggal</th>
                             <th style="width: 50px">No. Tiket</th>
-                            <th style="width: 100px">Nama Satker</th>
+                            <th style="width: 150px">Nama Satker</th>
                             <th>Pertanyaan</th>
                             <th style="width: 20px">Status</th>
                         </tr>
@@ -68,12 +68,12 @@
 
                         <?php $i = $nomor +1; foreach ($result as $tiket): ?>
                         <tr>
-                            <td><?php echo $i++ ?></td>
-                            <td><?php echo $tiket->tanggal ?></td>
-                            <td><?php echo $tiket->no_tiket_helpdesk ?></td>
-                            <td><?php echo $tiket->nama_satker ?></td>
+                            <td style="width: 20px"><?php echo $i++ ?></td>
+                            <td style="width: 30px"><?php echo $tiket->tanggal ?></td>
+                            <td style="width: 50px"><?php echo $tiket->no_tiket_helpdesk ?></td>
+                            <td style="width: 150px"><?php echo $tiket->nama_satker ?></td>
                             <td><?php echo $tiket->pertanyaan ?></td>
-                            <td><?php echo $tiket->status ?></td>
+                            <td style="width: 20px"><?php echo $tiket->status ?></td>
                             
                         </tr>
                         <?php endforeach ?>
