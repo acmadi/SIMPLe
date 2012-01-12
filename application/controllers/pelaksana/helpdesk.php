@@ -51,9 +51,7 @@ class Helpdesk extends CI_Controller
                 'no_tiket_helpdesk' => $this->input->post('no_tiket_helpdesk')
             ));
 
-            echo $this->db->last_query();
-
-            $this->_success(site_url('pelaksana/list_pertanyaan'), 'Pertanyaan berhasil dieskalasi ke Kasubdit Anggaran', 5);
+            $this->_success(site_url('pelaksana/helpdesk'), 'Pertanyaan berhasil dieskalasi ke Kasubdit Anggaran', 5);
 
         }
     }
