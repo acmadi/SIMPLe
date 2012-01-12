@@ -16,7 +16,7 @@ class Frontdesk extends CI_Controller
 
         $data['title'] = 'Konsultasi Front Desk';
         $data['content'] = 'kasubdit/frontdesk';
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);
     }
 
     function diterima($id)
@@ -25,7 +25,7 @@ class Frontdesk extends CI_Controller
         $data['content'] = 'kasubdit/frontdesk_view';
         $data['tiket'] = $this->mfrontdesk->get_by_id($id);
 
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);
     }
 
     function diteruskan($id)
@@ -34,6 +34,6 @@ class Frontdesk extends CI_Controller
         $data['content'] = 'kasubdit/frontdesk_view';
         $data['tiket'] = $this->mfrontdesk->get_by_id($id);
 
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);
     }
 }

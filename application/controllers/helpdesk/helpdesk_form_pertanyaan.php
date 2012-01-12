@@ -46,7 +46,7 @@ class Helpdesk_form_pertanyaan extends CI_Controller
             $data['pertanyaan_sebelumnya'] = $result;
         }
 
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);
     }
 
     function umum()
@@ -64,7 +64,7 @@ class Helpdesk_form_pertanyaan extends CI_Controller
 
         $data['identitas'] = $result;
 
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);
     }
 
     function submit()
@@ -149,7 +149,7 @@ class Helpdesk_form_pertanyaan extends CI_Controller
         $data['description'] = $description;
 
 
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);
     }
 
     function popup_ref_jawaban($id)

@@ -17,7 +17,7 @@ class Kb_koordinator extends CI_Controller
         $data['title'] = 'Tambah Knowledge Baru';
         $data['content'] = 'kb_koordinator/dashboard';
         // $data['categories'] = $this->knowledge->get_all_category();
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);
     }
 
     public function knowledge_base()
@@ -31,7 +31,7 @@ class Kb_koordinator extends CI_Controller
         $data['title'] = 'Daftar Knowledge Baru';
         $data['content'] = 'kb_koordinator/knowledge_base';
         // $data['categories'] = $this->knowledge->get_all_category();
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);
 
     }
 
@@ -73,7 +73,7 @@ class Kb_koordinator extends CI_Controller
         $data['title'] = 'Ubah Knowledge Base';
         $data['content'] = 'kb_koordinator/edit';
         $data['categories'] = $this->knowledge->get_all_category();
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);
     }
 
     public function add()
@@ -96,7 +96,7 @@ class Kb_koordinator extends CI_Controller
         $data['title'] = 'Tambah Knowledge Baru';
         $data['content'] = 'kb_koordinator/add';
         $data['categories'] = $this->knowledge->get_all_category();
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);
 
     }
 }

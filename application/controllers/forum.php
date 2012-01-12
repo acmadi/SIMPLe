@@ -29,7 +29,7 @@ class Forum extends CI_Controller
 
         $this->pagination->initialize($config);
 
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);
     }
 
     function view($id)
@@ -39,6 +39,6 @@ class Forum extends CI_Controller
         $data['title'] = 'Manajemen Forum';
         $data['content'] = 'frontdesk/man_forum/man_forum_view';
         $data['forums'] = $result;
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);
     }
 }

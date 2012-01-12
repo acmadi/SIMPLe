@@ -16,7 +16,7 @@ class Dashboard_user_skip extends CI_Controller
           {*/
         $data['title'] = 'Dashboard';
         $data['content'] = 'kasubdit/dashboard_skip';
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);
         /*}
           else
           {

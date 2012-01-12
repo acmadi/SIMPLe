@@ -117,7 +117,7 @@ class Dirjen extends CI_Controller
 
         $data['title'] = 'Dirjen';
         $data['content'] = 'dirjen/dashboard';
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);
     }
 
     public function lists($anggaran, $level_id, $is_active)
@@ -137,7 +137,7 @@ class Dirjen extends CI_Controller
 
         $data['title'] = 'Dirjen';
         $data['content'] = 'dirjen/list_tiket';
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);
     }
 
     public function list_argo()
@@ -184,7 +184,7 @@ class Dirjen extends CI_Controller
 
         $data['title'] = 'Dirjen';
         $data['content'] = 'dirjen/list_argo';
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);
     }
 
     public function view($level, $id)
