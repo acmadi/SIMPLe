@@ -81,6 +81,7 @@ class mreferensi extends CI_Model
 
 		foreach($tds as &$td) :
 			foreach($td->find('a') as $a) :
+				$a->target="_blank";
 				$a->href = 'http://www.kemenkumham.go.id' . $a->href;
 			endforeach;
 		endforeach;

@@ -25,6 +25,7 @@ class Pengembalian_dokumen extends CI_Controller
     {
         $result = $this->tiket->get_detail_pengembalian_by_id($id);
         if ($result->num_rows() == 1) {
+			$this->load->helper('tanggal_helper');
             $data['dokumen']	= $result->row();
             $data['title'] 		= 'Pengambilan Dokumen';
             $data['content'] 	= 'frontdesk/pengembalian_dokumen_cetak';
