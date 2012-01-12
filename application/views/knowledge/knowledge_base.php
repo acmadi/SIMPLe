@@ -28,13 +28,15 @@
 <div class="content">
     <h1>Knowledge Base</h1>
 
-    <div style="float: left; width: 170px; padding-right: 20px;">
+    <div id="ref_cat" style="float: left; width: 150px; padding-left: 0">
 
         <strong>Kategori</strong>
-        <ul style="list-style: inside">
-            <li style="margin-bottom: 5px;"><a href="<?php echo site_url($this->uri->segment(1) . '/knowledge_base/lists') ?>">Semua Kategori</a></li>
+        <ul style="list-style: none">
+            <li style="margin-left: 0; margin-bottom: 5px;">
+            <a href="<?php echo site_url($this->uri->segment(1) . '/knowledge_base/lists') ?>">Semua Kategori</a>
+            </li>
             <?php foreach ($categories as $value): ?>
-            <li style="margin-bottom: 5px;">
+            <li style="margin-left: 0; margin-bottom: 5px;">
                 <?php
                 echo anchor(
                     $this->uri->segment(1) . '/knowledge_base/lists/' . $value->id_kat_knowledge_base,
@@ -47,14 +49,14 @@
 
     </div>
 
-    <div style="float: left; width: 800px;">
-        <ul>
+    <div style="padding-left:160px">
+        <ol>
             <?php foreach ($kb as $value): ?>
             <li style="margin-bottom: 10px;">
                 <a class="referensi-jawaban" href="javascript:void(0)" title="<?php echo $value->id_knowledge_base ?>"><?php echo $value->judul ?></a>
             </li>
             <?php endforeach ?>
-        </ul>
+        </ol>
     </div>
 
     <div id="jawaban" style="display: none;"></div>

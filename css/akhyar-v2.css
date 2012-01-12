@@ -18,7 +18,11 @@ ul li.current a
 	background-color: #555;
 }
 
-
+.content a,
+#content a
+{
+  color: #aa8300;
+}
 
 
 
