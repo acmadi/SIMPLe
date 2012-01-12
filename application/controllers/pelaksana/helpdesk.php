@@ -41,9 +41,10 @@ class Helpdesk extends CI_Controller
         $this->load->view('new-template', $data);
     }
 
+    // TODO: Untuk konsistensi, mungkin sebaiknya eskalasi dan jawab dipisah. Atau ganti nama eskalasi() dengan nama tertentu
     function eskalasi()
     {
-        if ($this->input->post()) {
+        if ($this->input->post('submit') == 'Eskalasi') {
 
             $this->db->update('tb_tiket_helpdesk', array(
                 'lavel' => 4
@@ -53,6 +54,18 @@ class Helpdesk extends CI_Controller
 
             $this->_success(site_url('pelaksana/helpdesk'), 'Pertanyaan berhasil dieskalasi ke Kasubdit Anggaran', 5);
 
+        }
+
+        if ($this->input->post('submit') == 'Jawab') {
+
+            $this->db->insert('tb_knowledge_base', array(
+                'judul' => $this->input->post('pertanyaan'),
+                'jawaban' => $this->input->post('jawaban'),
+                'nama_narasumber' => $this->input->post('nama_narasumber'),
+                'jabatan_narasumber' => $this->input->post('jabatan')
+            ));
+
+            $this->_success(site_url('pelaksana/helpdesk'), 'Pertanyaan telah berhasil dijawab dan telah dimasukkan ke knowledge base', 5);
         }
     }
 
