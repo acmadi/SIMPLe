@@ -26,9 +26,8 @@ if ($this->uri->segment(1) == 'referensi') {
 <ul class="sf-menu">
     <li class="<?php echo $nav_dashboard ?>"><?php echo anchor('helpdesk/dashboard', 'Dashboard');?></li>
     <li class="<?php echo $nav_identitas_satker ?>"><?php echo anchor('helpdesk/identitas_satker', 'Isi Identitas Satker');?></li>
-    <li class="<?php echo $nav_knowledge ?>"><?php echo anchor('helpdesk/knowledge_base', 'Knowledge Base');?></li>
+    <li class="<?php echo $nav_knowledge ?>"><?php echo anchor('knowledge', 'Knowledge Base');?></li>
     <li class="<?php echo $nav_referensi ?>"><?php echo anchor('referensi', 'Referensi Peraturan') ?></li>
     <li class="<?php echo $nav_forum ?>"><?php echo anchor('helpdesk/man_forum', 'Forum');?></li>
 </ul>
-<div id="logout"><?php echo $this->session->userdata('nama') ?> &nbsp; | &nbsp;  &nbsp; <em><?php echo date('d-m-Y') ?></em></div>
 

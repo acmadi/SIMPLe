@@ -30,9 +30,8 @@ if ($this->uri->segment(1) == 'referensi') {
         <li class="<?php echo $nav_dashboard ?>"><?php echo anchor('kasubdit/dashboard', 'Dashboard');?></li>
         <li class="<?php echo $nav_helpdesk ?>"><?php echo anchor('kasubdit/helpdesk', 'Helpdesk');?></li>
         <li class="<?php echo $nav_frontdesk ?>"><?php echo anchor('kasubdit/frontdesk', 'Front Desk');?></li>
-        <li class="<?php echo $nav_knowledge ?>"><?php echo anchor('kasubdit/knowledge_base/lists', 'Knowledge Base');?></li>
+        <li class="<?php echo $nav_knowledge ?>"><?php echo anchor('knowledge', 'Knowledge Base');?></li>
         <li class="<?php echo $nav_referensi ?>"><?php echo anchor('referensi', 'Referensi Peraturan') ?></li>
         <li class="<?php echo $nav_forum ?>"><?php echo anchor('kasubdit/man_forum', 'Forum');?></li>
     </ul>
-    <div id="logout"><?php echo anchor("login/process_logout", 'Logout') ?> &nbsp; <em><?php echo date('d-m-Y') ?></em></div>
 </div>
