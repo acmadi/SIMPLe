@@ -15,12 +15,12 @@ class Helpdesk extends CI_Controller
 
     function search($keyword = NULL)
     {
-        $keyword = ($this->input->post('keyword')) 
-            ? $this->input->post('keyword')
-            : NULL;
-        $keyword = ($keyword != NULL) 
-            ? "AND tb_satker.id_satker LIKE '%$keyword%'"
-            : '';
+        $keyword = ($this->input->post('keyword'))
+                ? $this->input->post('keyword')
+                : NULL;
+        $keyword = ($keyword != NULL)
+                ? "AND tb_satker.id_satker LIKE '%$keyword%'"
+                : '';
         $sql = "SELECT * FROM tb_tiket_helpdesk JOIN tb_satker
                                 ON tb_tiket_helpdesk.id_satker = tb_satker.id_satker
                                 WHERE status = 'open' AND
@@ -39,6 +39,32 @@ class Helpdesk extends CI_Controller
         $data['antrian'] = $this->mhelpdesk->get_by_id($id);
 
         $this->load->view('new-template', $data);
+    }
+
+    function eskalasi()
+    {
+        if ($this->input->post()) {
+
+            $this->db->update('tb_tiket_helpdesk', array(
+                'lavel' => 4
+            ), array(
+                'no_tiket_helpdesk' => $this->input->post('no_tiket_helpdesk')
+            ));
+
+            echo $this->db->last_query();
+
+            $this->_success(site_url('pelaksana/list_pertanyaan'), 'Pertanyaan berhasil dieskalasi ke Kasubdit Anggaran', 5);
+
+        }
+    }
+
+    private function _success($url, $message, $time)
+    {
+        $data['url'] = $url;
+        $data['message'] = $message;
+        $data['time'] = $time;
+
+        $this->load->view('helpdesk/success', $data);
     }
 
 }
