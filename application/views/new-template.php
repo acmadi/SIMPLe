@@ -22,6 +22,7 @@
     <!-- end CSS-->
 
     <script src="<?php echo base_url('js/modernizr-2.0.6.min.js') ?>"></script>
+    <script src="<?php echo base_url('js/jquery-1.7.1.min.js') ?>"></script>
     <?php //echo $scripts_for_layout ?>
 
 
@@ -166,7 +167,7 @@
 
 
 <!--  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>-->
-<script>window.jQuery || document.write('<script src="<?php echo base_url() ?>/js/jquery-1.7.1.min.js"><\/script>')</script>
+<!--<script>window.jQuery || document.write('<script src="--><?php //echo base_url() ?><!--/js/jquery-1.7.1.min.js"><\/script>')</script>-->
 
 
 <!-- scripts concatenated and minified via ant build script-->
