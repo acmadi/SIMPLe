@@ -58,6 +58,14 @@ class Helpdesk extends CI_Controller
 
         if ($this->input->post('submit') == 'Jawab') {
 
+            $this->db->update('', array(
+                'jawaban' => $this->input->post('jawaban'),
+                'nama_narasumber' => $this->input->post('nama_narasumber'),
+                'jabatan_narasumber' => $this->input->post('jabatan')
+            ), array(
+                'no_tiket_helpdesk' => $this->input->post('no_tiket_helpdesk')
+            ));
+
             $this->db->insert('tb_knowledge_base', array(
                 'judul' => $this->input->post('pertanyaan'),
                 'jawaban' => $this->input->post('jawaban'),
