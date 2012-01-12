@@ -54,7 +54,7 @@ Class Login extends CI_Controller
                     redirect('halodja/dashboard');
                     break;
                 case '7':
-                    redirect('supervisor/dashboard');
+                    redirect('supervisors/dashboard');
                     break;
                 case '8':
                     redirect('pelaksana/dashboard');
