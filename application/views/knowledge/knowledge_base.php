@@ -31,8 +31,8 @@
     <div style="float: left; width: 170px; padding-right: 20px;">
 
         <strong>Kategori</strong>
-        <ul>
-            <li><a href="<?php echo site_url($this->uri->segment(1) . '/knowledge_base/lists') ?>">Semua Kategori</a></li>
+        <ul style="list-style: inside">
+            <li style="margin-bottom: 5px;"><a href="<?php echo site_url($this->uri->segment(1) . '/knowledge_base/lists') ?>">Semua Kategori</a></li>
             <?php foreach ($categories as $value): ?>
             <li style="margin-bottom: 5px;">
                 <?php
