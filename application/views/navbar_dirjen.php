@@ -22,6 +22,9 @@ $nav_referensi = '';
 if ($this->uri->segment(1) == 'referensi') {
     $nav_referensi = 'current';
 }
+if ($this->uri->segment(1) == 'knowledge') {
+    $nav_knowledge = 'current';
+}
 ?>
 
 

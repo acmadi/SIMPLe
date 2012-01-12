@@ -10,6 +10,9 @@ switch ($this->uri->segment(2)) {
         $nav_knowledge = 'current';
         break;
 }
+if ($this->uri->segment(1) == 'knowledge') {
+    $nav_knowledge = 'current';
+}
 ?>
 
 <div id="navbar" class="clearfloat">
