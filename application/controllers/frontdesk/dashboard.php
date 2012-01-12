@@ -12,26 +12,9 @@ class Dashboard extends CI_Controller
 
     function index()
     {
-        redirect('/frontdesk/form_revisi_anggaran');
-        $this->_plusone();
-
-        /*
-          if ($this->session->userdata('login') == TRUE)
-          {*/
-        $data['antrian_csa'] = $this->msatker->antrian_terakhir('A');
-        $data['antrian_csb'] = $this->msatker->antrian_terakhir('B');
-        $data['antrian_csc'] = $this->msatker->antrian_terakhir('C');
-        $data['antrian_csd'] = $this->msatker->antrian_terakhir('D');
-        $data['antrian_cse'] = $this->msatker->antrian_terakhir('E');
-
         $data['title'] = 'Dashboard';
         $data['content'] = 'frontdesk/dashboard';
         $this->load->view('master-template', $data);
-        /*}
-          else
-          {
-              $this->load->view('login');
-          }*/
     }
 
     protected function _plusone()

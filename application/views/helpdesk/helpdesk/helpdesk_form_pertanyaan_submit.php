@@ -94,7 +94,7 @@
 
         <div id="referensi_jawaban">
             <?php if ($knowledges->num_rows() > 0): ?>
-            <ul>
+            <ul style="list-style: inside">
                 <?php foreach ($knowledges->result() as $value): ?>
                 <li>
                     <a href="javascript:void(0)" class="referensi-jawaban" title="<?php echo $value->id_knowledge_base ?>"><?php echo $value->judul ?></a>
@@ -108,7 +108,7 @@
     </fieldset>
 
     <div style="text-align: right;">
-        <a href="<?php echo site_url('/helpdesk/helpdesk/ekskalasi/' . $this->session->userdata('id_tiket') ) ?>" class="button blue-pill">Ekskalasi</a>
+        <a href="<?php echo site_url('/helpdesk/helpdesk/eskalasi/' . $this->session->userdata('id_tiket') ) ?>" class="button blue-pill">Eskalasi</a>
     </div>
 </div>
 
@@ -140,7 +140,7 @@
             resizable:false,
             draggable:false,
             width:700,
-            height:600,
+            height:400,
             dialogClass:'centered-dialog',
             buttons:[
                 {
@@ -162,14 +162,14 @@
                     }
                 },
                 {
-                    text:'Ekskalasi',
+                    text:'Eskalasi',
                     click:function () {
 //                        var status = confirm('Apakah ada pertanyaan lain?');
                         status = false;
                         if (status === true) {
-                            window.location.href = '<?php echo site_url("/helpdesk/helpdesk/ekskalasi_next/{$this->session->userdata('id_tiket')}") ?>/';
+                            window.location.href = '<?php echo site_url("/helpdesk/helpdesk/eskalasi_next/{$this->session->userdata('id_tiket')}") ?>/';
                         } else {
-                            window.location.href = '<?php echo site_url('/helpdesk/helpdesk/ekskalasi/' . $this->session->userdata('id_tiket') ) ?>/';
+                            window.location.href = '<?php echo site_url('/helpdesk/helpdesk/eskalasi/' . $this->session->userdata('id_tiket') ) ?>/';
                         }
                     }
                 }

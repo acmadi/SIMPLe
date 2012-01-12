@@ -40,8 +40,9 @@ class Mhelpdesk extends CI_Model
                 WHERE no_tiket_helpdesk = ?";
 
         $result = $this->db->query($sql, array($id));
-        $result = $result->result();
-        return $result[0];
+
+        print_r($result->row());
+        return $result->row();
     }
 	
 	function get_all_tiket(){

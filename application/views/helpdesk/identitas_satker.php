@@ -149,7 +149,7 @@
         </p>
 
         <p>
-            <label>No. Kantor</label>
+            <label>No. Telpon Kantor</label>
             <input type="text" name="no_kantor" size="30" value="<?php echo set_value('no_kantor') ?>">
         </p>
 

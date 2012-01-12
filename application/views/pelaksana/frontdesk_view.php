@@ -68,7 +68,7 @@
     </div>
     <input type="submit" value="Print" style="width:100px; height:25px; float:left; margin-right:10px; "/>
 
-    <input type="submit" value="Dilanjutkan" onclick="alert('Data berhasil diekskalasi'); window.location.href='<?php echo site_url('pelaksana/frontdesk') ?>';" style="width:100px; height:25px; float:right; margin-right:10px; "/>
+    <input type="submit" value="Dilanjutkan" onclick="alert('Data berhasil dieskalasi'); window.location.href='<?php echo site_url('pelaksana/frontdesk') ?>';" style="width:100px; height:25px; float:right; margin-right:10px; "/>
     <input type="submit" value="Cetak BALD" style="width:100px; height:25px; float:right; margin-right:10px; "/>
     <br/>
     <br/>

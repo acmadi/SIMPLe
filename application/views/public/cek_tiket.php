@@ -22,7 +22,7 @@
         <form method="post" action="<?php echo site_url('/tiket/cek_tiket') ?>">
             <p>Nomer Tiket <input type="text" name="no_tiket"/></p>
 
-            <p>Kode Satker <input type="text" name="id_satker"/></p>
+            <p>Kode Eselon <input type="text" name="id_unit"/></p>
             <input type="submit" value="Cek" class="button blue-pill"/>
         </form>
     </fieldset>
@@ -36,7 +36,7 @@
         </p>
 
         <p>
-            <span>Kode Satker</span>
+            <span>Kode Eselon</span>
             <span><?php echo $tiket->id_satker ?></span>
         </p>
 
