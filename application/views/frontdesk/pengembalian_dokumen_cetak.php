@@ -158,11 +158,11 @@
 
     <p>
         <ul>
-            <?php foreach ($dokumen_lama->result() as $value): ?>
+            <?php //foreach ($dokumen_lama->result() as $value): ?>
             <?php if ($value->nama_kelengkapan != ''): ?>
             <li><?php echo $value->nama_kelengkapan ?></li>
                 <?php endif ?>
-            <?php endforeach ?>
+            <?php //endforeach ?>
         </ul>
         </p>
 
