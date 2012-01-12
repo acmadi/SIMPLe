@@ -100,6 +100,10 @@
                     $navbar = $this->session->userdata('navbar');
                     $this->load->view($navbar);
                 }
+                elseif ($this->uri->segment(1) == 'knowledge') {
+                    $navbar = $this->session->userdata('navbar');
+                    $this->load->view($navbar);
+                }
 
                 ?>
 
