@@ -19,6 +19,7 @@
     <link type="text/css" rel="stylesheet" href="<?php echo base_url('css/960gs/text.css') ?>"/>
     <link type="text/css" rel="stylesheet" href="<?php echo base_url('css/960gs/960.css') ?>"/>
     <link type="text/css" rel="stylesheet" href="<?php echo base_url('css/mul14.css') ?>"/>
+    <link type="text/css" rel="stylesheet" href="<?php echo base_url('css/akhyar-v2.css') ?>"/>
     <!-- end CSS-->
 
     <script src="<?php echo base_url('js/modernizr-2.0.6.min.js') ?>"></script>

@@ -113,18 +113,18 @@
         <legend>Satker</legend>
 
         <p>
-            <label>Kode - Nama K/L</label>
+            <label>Kode - Nama K/L </label> &nbsp;
             <input type="text" id="nama_kl" name="nama_kl" value="<?php echo set_value('nama_kl') ?>" />
             <a href="javascript:void(0)" class="clear_btn" id="clear_nama_kl">Hapus</a>
         </p>
 
         <p>
-            <label>Nama Eselon 1</label>
+            <label>Nama Eselon 1 </label>&nbsp;
             <select id="eselon" name="eselon" class="kl" value="<?php echo set_value('eselon') ?>"></select>
         </p>
 
         <p>
-            <label>Kode - Nama Satker</label>
+            <label>Kode - Nama Satker </label>&nbsp;
             <input type="text" name="kode_satker" id="kode_satker" class="kl" size="30" disabled />
         </p>
     </fieldset>
@@ -134,27 +134,27 @@
         <!-- TODO: (simpan di tb_petugas_satker) field kurang tambahin -->
         <legend>Identitas</legend>
         <p>
-            <label>Nama</label>
+            <label>Nama </label>&nbsp;
             <input type="text" name="nama_petugas" size="30" value="<?php echo set_value('nama_petugas') ?>">
         </p>
 
         <p>
-            <label>Jabatan Petugas</label>
+            <label>Jabatan Petugas </label>&nbsp;
             <input type="text" name="jabatan_petugas" size="30" value="<?php echo set_value('jabatan_petugas') ?>">
         </p>
 
         <p>
-            <label>No. Hp</label>
+            <label>No. Handphone </label>&nbsp; 
             <input type="text" name="no_hp" size="30" value="<?php echo set_value('no_hp') ?>">
         </p>
 
         <p>
-            <label>No. Telpon Kantor</label>
+            <label>No. Telpon Kantor </label>&nbsp; 
             <input type="text" name="no_kantor" size="30" value="<?php echo set_value('no_kantor') ?>">
         </p>
 
         <p>
-            <label>E-mail</label>
+            <label>E-mail </label>&nbsp; 
             <input type="email" name="email" size="30" value="<?php echo set_value('email') ?>">
         </p>
     </fieldset>
