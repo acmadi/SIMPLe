@@ -36,7 +36,7 @@ class Jawab extends CI_Controller
                 'no_tiket_helpdesk' => $this->input->post('no_tiket_helpdesk')
             ));
 
-            $this->_success(site_url('supervisor/list_pertanyaan'), 'Pertanyaan berhasil dieskalasi ke Kasubdit Anggaran', 5);
+            $this->_success(site_url('supervisor/list_pertanyaan'), 'Pertanyaan berhasil dieskalasi ke Kasi & Pelaksana', 5);
 
         }
     }
