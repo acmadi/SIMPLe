@@ -1,11 +1,16 @@
 <div class="content">
 
     <h1>Front Desk</h1>
-
+	
+	<?php if ($result->num_rows() > 0): ?>
     <div class="table">
         <div id="head">
-            <div id="cari_unit" action="man_unit_cari">
-                <p><input type="text" size="60" value="292292"/>&nbsp;<input type="submit" value="cari"/></p>
+            <form id="form-cari" action="<?php echo site_url('/pelaksana/frontdesk/index');?>" method="post">
+                <p><input type="text" size="60" placeholder="Pencarian" name="keyword" value="<?php echo $isian_form;?>"/>
+				&nbsp;<input type="submit" value="cari" class="button blue-pill"/>
+				<a href="<?php echo site_url('/pelaksana/frontdesk/index');?>" class="button gray-pill">Reset</a>
+				</p>
+			</form>
             </div>
 
             <div id="tail">
@@ -15,17 +20,19 @@
                         <th class="short">No</th>
                         <th class="short">Tanggal Pengajuan</th>
                         <th class="short">Proses (Hari)</th>
-                        <th>Kode Eselon</th>
+                        <th>Nama K/L</th>
                         <th>Nama Eselon</th>
                         <th class="action">Aksi</th>
                     </tr>
                     </thead>
                     <tbody>
                     <?php $i = 1 ?>
-                    <?php foreach ($antrian->result() as $value): ?>
+                    <?php foreach ($result->result() as $value): ?>
                     <tr>
                         <td class="short"><?php echo $i++ ?></td>
-                        <td class="short"><?php echo $value->tanggal ?></td>
+                        <td class="short"><?php 
+							$tmp_tgl = explode(' ',$value->tanggal);
+							echo set_tanggal_normal($tmp_tgl[0]).' '.$tmp_tgl[1] ?></td>
                         <td class="short">
                             <?php
                             $date1 = new DateTime(date('Y-m-d H:i:s'));
@@ -51,8 +58,8 @@
                             }
                             ?>
                         </td>
-                        <td class="short"><?php echo $value->id_satker ?></td>
-                        <td><?php echo $value->nama_satker ?></td>
+                        <td class="short"><?php echo $value->nama_kementrian ?></td>
+                        <td><?php echo $value->nama_unit ?></td>
                         <td class="">
                             <a class="bla button blue-pill" href="<?php echo site_url('/pelaksana/frontdesk/diterima/' . $value->no_tiket_frontdesk) ?>">Diterima</a>
                             <input type="button" class="bla2 button gray-pill" link="<?php echo site_url('/pelaksana/frontdesk/diteruskan/' . $value->no_tiket_frontdesk) ?>" disabled
@@ -64,12 +71,16 @@
                     </tbody>
                 </table>
             </div>
-            <!--            <div class="pagination">Halaman <a href="#"><<</a> <a href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a-->
-            <!--                    href="#">4</a> <a href="#">5</a> <a href="#">6</a> <a href="#">>></a></div>-->
+            <div class="pagination"><?php echo ($pageLink)?'Halaman '.$pageLink:'';?></div><br />
             <br/>
-        </div>
     </div>
+	<?php else: ?>
+
+    Tidak ada dokumen
+
+    <?php endif ?>
 </div>
+
 <script type="text/javascript">
     $(function () {
         $('.bla').click(function () {
