@@ -4,7 +4,7 @@
     <fieldset>
         <legend>Report Help Desk</legend>
         <div class="message_box">
-            <a href="<?php echo site_url('/supervisor/list_pertanyaan') ?>"><?php echo $helpdesk_total ?> Pertanyaan</a>
+            <a href="<?php echo site_url('/supervisors/list_pertanyaan') ?>"><?php echo $helpdesk_total ?> Pertanyaan</a>
         </div>
         <dl>
             <dd><span class="label">Langsung terselesaikan oleh CS</span> <span class="number"><?php echo $total_selesai_oleh_cs ?></span></dd>
