@@ -2,7 +2,7 @@
 
     <h1>Daftar Pertanyaan</h1>
 
-    <?php if ($pertanyaan->num_rows() > 1): ?>
+    <?php if ($pertanyaan->num_rows() > 0): ?>
             <div class="table">
                 <div id="head">
                     <div id="form-cari">

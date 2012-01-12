@@ -16,7 +16,7 @@ class Helpdesk extends CI_Controller
         $data['antrian'] = $this->db->query($sql);
 
         $data['title'] = 'Konsultasi Help Desk';
-        $data['content'] = 'kasubdit/helpDesk';
+        $data['content'] = 'kasubdit/helpdesk';
         $this->load->view('master-template', $data);
     }
 

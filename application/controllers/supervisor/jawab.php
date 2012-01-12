@@ -28,7 +28,7 @@ class Jawab extends CI_Controller
 
     public function eskalasi()
     {
-        if ($this->input->post()) {
+        if ($this->input->post('Eskalasi')) {
 
             $this->db->update('tb_tiket_helpdesk', array(
                 'lavel' => 3
