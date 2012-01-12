@@ -10,8 +10,21 @@ Class Referensi extends CI_Controller
 
     public function index()
     {
-    	redirect('referensi/search');
+    	redirect('referensi/category');
     }
+
+    public function category($cat = NULL)
+    {
+        if($cat != NULL) :
+            $data['items'] = $this->mreferensi->get_by_category($cat);
+        endif;
+
+        $data['title'] = 'Referensi Peraturan';
+        $data['categories'] = $this->mreferensi->get_categories();
+        $data['content'] = 'referensi/category';
+        $this->load->view('master-template', $data);
+    }
+
     public function search()
     {
         $keyword = $this->input->post('keyword');

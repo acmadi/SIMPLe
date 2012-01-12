@@ -84,3 +84,20 @@ em.meta{
 #search_result ol {
 	padding-left: 15px;
 }
+
+#ref_cat{
+	width: 200px;
+	float: left;
+}
+	#ref_cat h3{
+		font-weight: bold;
+		margin-bottom: 7px;
+	}
+	#ref_cat li{
+		list-style: none;
+		font-weight: bold;
+		font-size: 1.1em;
+	}
+#ref_item{
+	padding-left: 250px;
+}

@@ -17,7 +17,6 @@ class mreferensi extends CI_Model
 
 	public function cari($keyword)
 	{
-				
 		$url = 
 			'http://www.kemenkumham.go.id/pencarian?searchword=' . 
 			$keyword . 
@@ -30,7 +29,7 @@ class mreferensi extends CI_Model
 		$html = new simple_html_dom();
 		$html->load($raw_string);
 		
-		// parsing dom
+		// ekstraksi tahap satu
 		$temp = $html->find('table[class="contentpaneopen"]', 1);
 
 		// ekstraksi tahap dua
@@ -44,5 +43,48 @@ class mreferensi extends CI_Model
 		endif;
 		
 		return $result_array;
+	}
+
+	function get_categories()
+	{
+		$url = 'http://www.kemenkumham.go.id/produk-hukum';
+
+		// tarik dari website menkumham
+		$raw_string = $this->fetch_url($url);
+
+		// parsing html
+		$html = new simple_html_dom();
+		$html->load($raw_string);
+
+		$links = $html->find('a[class="category"]');
+
+		foreach($links as &$link) :
+			$tmp = explode('/produk-hukum/', $link->href);
+			$link->href = base_url() . index_page() . '/referensi/category/' . $tmp[1];
+		endforeach;
+
+		return $links;
+	}
+
+	function get_by_category($cat)
+	{
+		$url = 'http://www.kemenkumham.go.id/produk-hukum/' . $cat;
+
+		// tarik dari website menkumham
+		$raw_string = $this->fetch_url($url);
+
+		// parsing html
+		$html = new simple_html_dom();
+		$html->load($raw_string);
+
+		$tds = $html->find('td[headers="tableOrdering"]');
+
+		foreach($tds as &$td) :
+			foreach($td->find('a') as $a) :
+				$a->href = 'http://www.kemenkumham.go.id' . $a->href;
+			endforeach;
+		endforeach;
+
+		return $tds;
 	}
 }
