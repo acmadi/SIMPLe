@@ -31,6 +31,7 @@ class List_pertanyaan extends CI_Controller
         }
         
         $result = $this->db->query($sql);
+        echo $this->db->last_query();
 
         $data['title'] = 'Knowledge Base';
         $data['content'] = 'supervisor/list_pertanyaan';

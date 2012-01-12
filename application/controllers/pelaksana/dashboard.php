@@ -11,7 +11,7 @@ class Dashboard extends CI_Controller
 
     function index()
     {
-        $data['helpdesk_total'] = $this->mhelpdesk->count_all_tiket();
+        $data['helpdesk_total'] = $this->mhelpdesk->count_all_tiket('open', 3);
         $data['frontdesk_total'] = $this->db->query("SELECT * FROM tb_tiket_frontdesk JOIN tb_satker
                                                     ON tb_tiket_frontdesk.id_satker = tb_satker.id_satker
                                                     WHERE status = 'open' AND
