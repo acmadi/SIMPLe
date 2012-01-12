@@ -6,8 +6,8 @@ a, a:visited {
 body {
     background: #fff;
     color: #393939;
-    font-family: 'Lucida Grande';
-    font-size: 10px;
+    font-family: 'Lucida Grande', Tahoma, Arial, sans-serif;
+    font-size: 11px;
 }
 
 ul {
