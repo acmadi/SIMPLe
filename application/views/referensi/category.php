@@ -3,7 +3,7 @@
 	<?php $this->load->view('referensi/form'); ?>
 	<hr/>
 	<div id="ref_cat">
-		<h3>Kategori Referensi</h3>
+		<h6>Kategori Referensi</h6>
 		<ul>
 		<?php foreach($categories as $cat) : ?>
 			<li><?php echo $cat->outertext ?></li>
@@ -23,5 +23,7 @@
 	<?php endif; ?>
 	</div>
 
-	<div style="clear:both"
+	<div style="clear:both">
+	<br/>
+	<br/></div>
 </div>
