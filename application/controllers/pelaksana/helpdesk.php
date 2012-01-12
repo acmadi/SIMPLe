@@ -10,10 +10,21 @@ class Helpdesk extends CI_Controller
 
     function index()
     {
+        $this->search(NULL);
+    }
+
+    function search($keyword = NULL)
+    {
+        $keyword = ($this->input->post('keyword')) 
+            ? $this->input->post('keyword')
+            : NULL;
+        $keyword = ($keyword != NULL) 
+            ? "AND tb_satker.id_satker LIKE '%$keyword%'"
+            : '';
         $sql = "SELECT * FROM tb_tiket_helpdesk JOIN tb_satker
                                 ON tb_tiket_helpdesk.id_satker = tb_satker.id_satker
                                 WHERE status = 'open' AND
-                                lavel = 3";
+                                lavel = 3 $keyword";
         $data['antrian'] = $this->db->query($sql);
 
         $data['title'] = 'Konsultasi Help Desk';
