@@ -3,6 +3,73 @@
 class Mfrontdesk extends CI_Model
 {
 
+	public function get_all_tiket_frontdesk(){
+		//@F2D
+		$keyword = $this->input->post('keyword',TRUE);
+		
+		$this->load->library('pagination');
+			
+		$total_seg = $this->uri->total_segments();
+		$default = array("keyword");
+		$this->terms = $this->uri->uri_to_assoc(4,$default);
+		
+		if(($this->terms['keyword'] != '') OR ($keyword != '')){
+			$uri_segment = 6;
+			$offset = (int) $this->uri->segment($uri_segment,0);
+			
+			if($this->terms['keyword'] != ''){
+				$keyword = $this->terms['keyword'];
+			}else{
+				$this->terms['keyword'] = $keyword;
+			}
+			
+			$uriparams['keyword'] = $this->terms['keyword'];
+			
+			if(($total_seg % 2) > 0){
+				$offset = (int) $this->uri->segment(6, 0);
+			}
+			
+			$url_add = $this->uri->assoc_to_uri($uriparams).'/';
+		}else{
+			$uri_segment = 4;
+			$offset = (int) $this->uri->segment($uri_segment,0);
+			$url_add = '';
+		
+		}
+		
+		//if from suggest
+		$where = '';
+		if(!empty($keyword)){
+			$where = " AND tu.nama_unit LIKE '%".$keyword."%'";
+		}
+		
+		$sql = "SELECT tf.no_tiket_frontdesk, tf.tanggal,tf.id_unit, tu.nama_unit, tm.nama_kementrian
+				FROM tb_tiket_frontdesk tf, tb_unit tu, tb_kementrian tm 
+				WHERE tu.id_unit = tf.id_unit AND tu.id_kementrian = tf.id_kementrian AND tf.status = 'open' 
+				AND tf.lavel <= 2 AND tf.is_active = 1 AND tm.id_kementrian = tf.id_kementrian $where ORDER BY tf.status";
+				
+		$query = $this->db->query($sql);
+
+		$config['base_url'] = site_url('/pelaksana/frontdesk/index').'/'.$url_add;
+		$config['total_rows'] = $query->num_rows();
+		$config['per_page'] = 10;
+		$config['uri_segment'] = $uri_segment;
+		$this->pagination->initialize($config);
+		
+		
+		$sqlb = "SELECT tf.no_tiket_frontdesk, tf.tanggal,tf.id_unit, tu.nama_unit, tm.nama_kementrian
+				FROM tb_tiket_frontdesk tf, tb_unit tu, tb_kementrian tm 
+				WHERE tu.id_unit = tf.id_unit AND tu.id_kementrian = tf.id_kementrian AND tf.status = 'open' 
+				AND tf.lavel <= 2 AND tf.is_active = 1 AND tm.id_kementrian = tf.id_kementrian $where ORDER BY tf.status
+				LIMIT ?,?";
+		$data["query"] = $this->db->query($sqlb, array($offset ,$config['per_page']));
+
+		$data['isian_form1'] = $keyword;
+		$data['pagination1'] = $this->pagination->create_links();
+
+		return $data;
+	}
+	
     public function get_all_tiket($key = '', $value = '')
     {
 		$this->load->library('pagination');		

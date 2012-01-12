@@ -12,5 +12,5 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 		$data = $tgl.'-'.$bln.'-'.$thn;
         return $data;
 	}
-
+	
 ?>

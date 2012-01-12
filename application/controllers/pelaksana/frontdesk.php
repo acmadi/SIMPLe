@@ -9,15 +9,15 @@ class Frontdesk extends CI_Controller
 
     public function index()
     {
-        $sql = "SELECT * FROM tb_tiket_frontdesk JOIN tb_satker
-                        ON tb_tiket_frontdesk.id_satker = tb_satker.id_satker
-                        WHERE status = 'open' AND
-                        lavel <= 2 AND
-                        is_active = 1";
-        $data['antrian'] = $this->db->query($sql);
-
-        $data['title'] = 'Konsultasi Front Desk';
-        $data['content'] = 'pelaksana/frontdesk';
+		$this->load->helper('tanggal_helper');
+        $page		= $this->mfrontdesk->get_all_tiket_frontdesk();
+		$pageData	= $page['query'];
+		$pageLink	= $page['pagination1'];
+		
+		$data				= array('result'=>$pageData,'pageLink'=>$pageLink,);
+        $data['title'] 		= 'Konsultasi Front Desk';
+        $data['content'] 	= 'pelaksana/frontdesk';
+		$data['isian_form']	= $page['isian_form1'];
         $this->load->view('master-template', $data);
     }
 
