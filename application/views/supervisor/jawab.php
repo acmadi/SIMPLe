@@ -8,51 +8,51 @@
 
         <fieldset>
             <legend>Identitas</legend>
-            <div style="width: 600px; float: left;">
+            <div class="grid_6 alpha omega">
                 <p>
                     <label style="display: inline-block; width: 100px;">No Tiket</label>
                     <span><?php echo $pertanyaan->no_tiket_helpdesk ?></span>
-                    <input type="hidden" name="no_tiket_helpdesk" value="<?php echo $pertanyaan->no_tiket_helpdesk ?>" />
+                    <input type="hidden" name="no_tiket_helpdesk" value="<?php echo $pertanyaan->no_tiket_helpdesk ?>"/>
                 </p>
 
                 <p>
                     <label style="display: inline-block; width: 100px;">No Satker</label>
                     <span><?php echo $pertanyaan->id_satker ?></span>
-                    <input type="hidden" name="id_satker" value="<?php echo $pertanyaan->id_satker ?>" />
+                    <input type="hidden" name="id_satker" value="<?php echo $pertanyaan->id_satker ?>"/>
                 </p>
 
                 <p>
                     <label style="display: inline-block; width: 100px;">Nama Satker</label>
                     <span><?php echo $pertanyaan->nama_satker ?></span>
-                    <input type="hidden" name="nama_satker" value="<?php echo $pertanyaan->nama_satker ?>" />
+                    <input type="hidden" name="nama_satker" value="<?php echo $pertanyaan->nama_satker ?>"/>
                 </p>
 
                 <p>
                     <label style="display: inline-block; width: 100px;">Nama Petugas</label>
                     <span><span><?php echo $pertanyaan->nama_petugas ?></span></span>
-                    <input type="hidden" name="nama_petugas" value="<?php echo $pertanyaan->nama_petugas ?>" />
+                    <input type="hidden" name="nama_petugas" value="<?php echo $pertanyaan->nama_petugas ?>"/>
                 </p>
 
             </div>
 
-            <div style="width: 500px; float: left;">
+            <div class="grid_6 alpha omega">
 
                 <p>
                     <label style="display: inline-block; width: 100px;">No Kantor</label>
                     <span><?php echo $pertanyaan->no_kantor ?></span>
-                    <input type="hidden" name="no_kantor" value="<?php echo $pertanyaan->no_kantor ?>" />
+                    <input type="hidden" name="no_kantor" value="<?php echo $pertanyaan->no_kantor ?>"/>
                 </p>
 
                 <p>
                     <label style="display: inline-block; width: 100px;">No HP</label>
                     <span><?php echo $pertanyaan->no_hp ?></span>
-                    <input type="hidden" name="no_hp" value="<?php echo $pertanyaan->no_hp ?>" />
+                    <input type="hidden" name="no_hp" value="<?php echo $pertanyaan->no_hp ?>"/>
                 </p>
 
                 <p>
                     <label style="display: inline-block; width: 100px;">Email</label>
                     <span><?php echo $pertanyaan->email ?></span>
-                    <input type="hidden" name="email" value="<?php echo $pertanyaan->email ?>" />
+                    <input type="hidden" name="email" value="<?php echo $pertanyaan->email ?>"/>
                 </p>
             </div>
         </fieldset>
@@ -60,34 +60,34 @@
 
         <fieldset>
             <legend>Pertanyaan</legend>
-            <div style="width: 600px; float: left;">
+            <div class="grid_6 alpha omega">
 
                 <p>
                     <label style="display: inline-block; width: 100px;">Kategori</label>
                     <span><?php //echo $pertanyaan->kategori ?></span>
-                    <input type="hidden" name="kategori" value="<?php //echo $pertanyaan->kategori ?>" />
+                    <input type="hidden" name="kategori" value="<?php //echo $pertanyaan->kategori ?>"/>
                 </p>
 
                 <p>
                     <label style="display: inline-block; width: 100px;">Pertanyaan</label>
                     <span><?php echo $pertanyaan->pertanyaan ?></span>
-                    <input type="hidden" name="pertanyaan" value="<?php echo $pertanyaan->pertanyaan ?>" />
-                </p>
-
-                <p>
-                    <label style="display: inline-block; width: 100px;">Deskripsi</label>
-                    <span><?php echo $pertanyaan->description ?></span>
-                    <input type="hidden" name="description" value="<?php echo $pertanyaan->description ?>" />
+                    <input type="hidden" name="pertanyaan" value="<?php echo $pertanyaan->pertanyaan ?>"/>
                 </p>
 
             </div>
 
-            <div style="width: 500px; float: left;">
+            <div class="grid_6 alpha omega">
+
+                <p>
+                    <label style="display: inline-block; width: 100px;">Deskripsi</label>
+                    <span><?php echo $pertanyaan->description ?></span>
+                    <input type="hidden" name="description" value="<?php echo $pertanyaan->description ?>"/>
+                </p>
 
                 <p>
                     <label style="display: inline-block; width: 100px;">Prioritas</label>
                     <span><?php echo $pertanyaan->prioritas ?></span>
-                    <input type="hidden" name="prioritas" value="<?php echo $pertanyaan->prioritas ?>" />
+                    <input type="hidden" name="prioritas" value="<?php echo $pertanyaan->prioritas ?>"/>
                 </p>
 
             </div>
@@ -130,9 +130,9 @@
 
         <div style="float: right;">
 
-            <input type="button" onclick="window.print()" value="Print" class="button gray-pill"/>
-            <input type="submit" value="Eskalasi" class="button blue-pill"/>
-            <input type="submit" value="Jawab" class="button blue-pill"/>
+            <input type="button" onclick="window.print()" value="Print" class="button"/>
+            <input type="submit" name="submit" value="Eskalasi" class="button green"/>
+            <input type="submit" name="submit" value="Jawab" class="button green"/>
         </div>
 
         <div class="clear"></div>
