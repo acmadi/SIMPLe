@@ -2,6 +2,7 @@
 
     <h1>Help Desk</h1>
 
+    <?php if ($antrian->num_rows() > 0): ?>
     <div class="table">
         <div id="head">
             <div id="cari_unit" action="man_unit_cari">
@@ -44,6 +45,9 @@
             <br/>
         </div>
     </div>
+    <?php else: ?>
+    Tidak ada pertanyaan yang dieskalasi
+    <?php endif ?>
 </div>
 
 
