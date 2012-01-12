@@ -16,7 +16,7 @@ class Log
      * [Tanggal] [User]: [Pesan]
      *
      * Example:
-     * 2011-12-10 12:04:30 csa: Melakukan ekskalasi ke supervisor - tiket #022
+     * 2011-12-10 12:04:30 csa: Melakukan eskalasi ke supervisor - tiket #022
      *
      * @param $message String
      * @return void

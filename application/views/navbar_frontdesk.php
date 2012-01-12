@@ -1,5 +1,5 @@
 <?php
-$nav_dashboard = $nav_form = $nav_knowledge = $nav_forum = $nav_ambil_dokumen = $nav_status_tiket = $nav_pengembalian_dokumen = '';
+$nav_dashboard = $nav_form = $nav_knowledge = $nav_forum = $nav_ambil_dokumen = $nav_status_tiket = $nav_pengembalian_dokumen = $nav_referensi = '';
 switch ($this->uri->segment(2)) {
 
     case 'dashboard':
@@ -23,6 +23,9 @@ switch ($this->uri->segment(2)) {
     case 'pengembalian_dokumen':
         $nav_pengembalian_dokumen = 'current';
 }
+if ($this->uri->segment(1) == 'referensi') {
+    $nav_referensi = 'current';
+}
 ?>
 
 <div id="navbar" class="clearfloat">
@@ -32,6 +35,7 @@ switch ($this->uri->segment(2)) {
         <li class="<?php echo $nav_status_tiket ?>"><?php echo anchor('frontdesk/status_tiket', 'Status Tiket');?></li>
         <li class="<?php echo $nav_ambil_dokumen ?>"><?php echo anchor('frontdesk/ambil_dokumen', 'Pengambilan Dokumen');?></li>
         <li class="<?php echo $nav_pengembalian_dokumen ?>"><?php echo anchor('frontdesk/pengembalian_dokumen', 'Pengembalian Dokumen');?></li>
+        <li class="<?php echo $nav_referensi ?>"><?php echo anchor('referensi', 'Referensi Peraturan') ?></li>
         <li class="<?php echo $nav_forum ?>"><?php echo anchor('frontdesk/man_forum', 'Forum');?></li>
     </ul>
     <div id="logout"><?php echo $this->session->userdata('nama') ?> &nbsp; | &nbsp; <?php echo anchor("login/process_logout", 'Logout') ?> &nbsp; <em><?php echo date('d-m-Y') ?></em></div>

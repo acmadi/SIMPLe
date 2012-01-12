@@ -3,23 +3,6 @@
 <div id="konten">
 
     <h1>Daftar Pengambilan Dokumen</h1>
-	<?php
-    // TODO: Satu paket ini untuk alerts. Nanti mau dipindah jadi hanya panggil satu method.
-    if ($this->session->flashdata('success')) {
-        echo '<div class="success">' . $this->session->flashdata('success') . '</div>';
-    }
-    if ($this->session->flashdata('error')) {
-        echo '<div class="error">' . $this->session->flashdata('error') . '</div>';
-    }
-    if ($this->session->flashdata('notice')) {
-        echo '<div class="notice">' . $this->session->flashdata('notice') . '</div>';
-    }
-    if ($this->session->flashdata('info')) {
-        echo '<div class="info">' . $this->session->flashdata('info') . '</div>';
-    }
-    ?>
-	<?php if ($result->num_rows() > 0): ?>
-	
     <div class="table">
         <div id="head">
             <form id="form-cari" action="<?php echo site_url('/frontdesk/ambil_dokumen/index');?>" method="post">
@@ -35,8 +18,8 @@
                     <tr>
                         <th class="short">No Tiket</th>
                         <th class="short">Tanggal</th>
-						<th class="short">Kode Eselon</th>
-						<th class="short">Nama Eselon</th>
+						<th class="short">Kode Unit</th>
+						<th class="short">Nama Unit</th>
                         <th class="short">Kode Satker</th>
                         <th>Nama Satker</th>
                         <th class="short">Status</th>
@@ -44,7 +27,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($result->result() as $value): ?>
+                        <?php foreach ($result as $value): ?>
                     <tr>
                         <td class="short"><?php echo sprintf('%05d', $value->no_tiket_frontdesk) ?></td>
                         <td class="short"><?php echo $value->tanggal ?></td>
@@ -65,10 +48,4 @@
         <div class="pagination"><?php echo ($pageLink)?'Halaman '.$pageLink:'';?></div><br />
         <br/>
     </div>
-	
-	<?php else: ?>
-
-    Tidak ada dokumen
-
-    <?php endif ?>
 </div>

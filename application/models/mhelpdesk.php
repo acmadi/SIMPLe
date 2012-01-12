@@ -23,9 +23,9 @@ class Mhelpdesk extends CI_Model
     }
 	*/
 
-    public function count_all_tiket($status = 'open')
+    public function count_all_tiket($status = 'open', $lavel)
     {
-        $result = $this->db->query("SELECT no_tiket_helpdesk FROM tb_tiket_helpdesk WHERE status = '{$status}'");
+        $result = $this->db->query("SELECT no_tiket_helpdesk FROM tb_tiket_helpdesk WHERE status = '{$status}' AND lavel = '$lavel'");
         return $result->num_rows();
     }
 

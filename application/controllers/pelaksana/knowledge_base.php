@@ -88,7 +88,7 @@ class Knowledge_base extends CI_Controller
             echo "<div>{$value->desripsi}</div>";
             echo "<div>{$value->jawaban}</div>";
             echo "<div><input type=submit class='button blue-pill' value='Batal' /></div>";
-            echo "<div><input type=submit class='button blue-pill' value='Ekskalasi' /></div>";
+            echo "<div><input type=submit class='button blue-pill' value='Eskalasi' /></div>";
             echo "<div><input type=submit class='button blue-pill' value='Jawab' /></div>";
         }
         exit();
@@ -106,7 +106,7 @@ class Knowledge_base extends CI_Controller
             echo "<div>{$value->desripsi}</div>";
             echo "<div>{$value->jawaban}</div>";
             echo "<div><input type=submit class='button blue-pill' value='Batal' /></div>";
-            echo "<div><input type=submit class='button blue-pill' value='Ekskalasi' /></div>";
+            echo "<div><input type=submit class='button blue-pill' value='Eskalasi' /></div>";
             echo "<div><input type=submit class='button blue-pill' value='Jawab' /></div>";
         }
         exit();

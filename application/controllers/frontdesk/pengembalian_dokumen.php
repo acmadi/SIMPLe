@@ -13,7 +13,7 @@ class Pengembalian_dokumen extends CI_Controller
 		$page		= $this->tiket->get_list_pengembalian_dokumen();
 		$pageData	= $page['query'];
 		$pageLink	= $page['pagination1'];
-		
+
 		$data				= array('result'=>$pageData,'pageLink'=>$pageLink,);
         $data['title'] 		= 'Pengambilan Dokumen';
 		$data['isian_form']	= $page['isian_form1'];
@@ -25,7 +25,6 @@ class Pengembalian_dokumen extends CI_Controller
     {
         $result = $this->tiket->get_detail_pengembalian_by_id($id);
         if ($result->num_rows() == 1) {
-			$this->load->helper('tanggal_helper');
             $data['dokumen']	= $result->row();
             $data['title'] 		= 'Pengambilan Dokumen';
             $data['content'] 	= 'frontdesk/pengembalian_dokumen_cetak';

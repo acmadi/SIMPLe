@@ -17,13 +17,36 @@ class Jawab extends CI_Controller
                 WHERE no_tiket_helpdesk = '{$id}'";
 
         $result = $this->db->query($sql);
-        $result = $result->result();
-        $result = $result[0];
+        $result = $result->row();
 
         $data['title'] = 'Supervisor Jawab';
         $data['content'] = 'supervisor/jawab';
 
         $data['pertanyaan'] = $result;
         $this->load->view('master-template', $data);
+    }
+
+    public function eskalasi()
+    {
+        if ($this->input->post('Eskalasi')) {
+
+            $this->db->update('tb_tiket_helpdesk', array(
+                'lavel' => 3
+            ), array(
+                'no_tiket_helpdesk' => $this->input->post('no_tiket_helpdesk')
+            ));
+
+            $this->_success(site_url('supervisor/list_pertanyaan'), 'Pertanyaan berhasil dieskalasi ke Kasi & Pelaksana', 5);
+
+        }
+    }
+
+    private function _success($url, $message, $time)
+    {
+        $data['url'] = $url;
+        $data['message'] = $message;
+        $data['time'] = $time;
+
+        $this->load->view('helpdesk/success', $data);
     }
 }

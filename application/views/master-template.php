@@ -54,37 +54,52 @@
 
 
         if ($this->session->userdata('lavel') == '2') {
+            $this->session->set_userdata('navbar', 'navbar_supervisor');
             $this->load->view('navbar_supervisor');
         }
         elseif ($this->session->userdata('lavel') == '3') {
+            $this->session->set_userdata('navbar', 'navbar_pelaksana');
             $this->load->view('navbar_pelaksana');
         }
         elseif ($this->uri->segment(1) == 'kasubdit') {
+            $this->session->set_userdata('navbar', 'navbar_pelaksana');
             $this->load->view('navbar_kasubdit');
         }
         elseif ($this->session->userdata('lavel') == '5') {
+            $this->session->set_userdata('navbar', 'navbar_direktur');
             $this->load->view('navbar_direktur');
         }
         elseif ($this->session->userdata('lavel') == '6') {
+            $this->session->set_userdata('navbar', 'navbar_dirjen');
             $this->load->view('navbar_dirjen');
         }
         elseif ($this->uri->segment(1) == 'helpdesk') {
+            $this->session->set_userdata('navbar', 'navbar_helpdesk');
             $this->load->view('navbar_helpdesk');
         }
         elseif ($this->uri->segment(1) == 'frontdesk') {
+            $this->session->set_userdata('navbar', 'navbar_frontdesk');
             $this->load->view('navbar_frontdesk');
         }
         elseif ($this->uri->segment(1) == 'csd') {
+            $this->session->set_userdata('navbar', 'navbar_csd');
             $this->load->view('navbar_csd');
         }
         elseif ($this->uri->segment(1) == 'pengaduan') {
+            $this->session->set_userdata('navbar', 'navbar_cse');
             $this->load->view('navbar_cse');
         }
         elseif ($this->uri->segment(1) == 'kb_koordinator') {
+            $this->session->set_userdata('navbar', 'navbar_kb_koordinator');
             $this->load->view('navbar_kb_koordinator');
         }
         elseif ($this->uri->segment(1) == 'kasubdit_dadutek') {
+            $this->session->set_userdata('navbar', 'navbar_dadutek');
             $this->load->view('navbar_dadutek');
+        }
+        elseif ($this->uri->segment(1) == 'referensi') {
+            $navbar = $this->session->userdata('navbar');
+            $this->load->view($navbar);
         }
 
         ?>

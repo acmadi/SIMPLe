@@ -12,11 +12,13 @@ class Helpdesk extends CI_Controller
     {
         $sql = "SELECT * FROM tb_tiket_helpdesk JOIN tb_satker
                                 ON tb_tiket_helpdesk.id_satker = tb_satker.id_satker
-                                WHERE status = 'open'";
+                                WHERE status = 'open' AND
+                                lavel = 4";
+
         $data['antrian'] = $this->db->query($sql);
 
         $data['title'] = 'Konsultasi Help Desk';
-        $data['content'] = 'kasubdit/helpDesk';
+        $data['content'] = 'kasubdit/helpdesk';
         $this->load->view('master-template', $data);
     }
 
