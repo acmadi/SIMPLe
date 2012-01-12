@@ -110,7 +110,7 @@
     </p>
     
     <p style="float: right;">
-        <input type="submit" name="ekskalasi" value="Ekskalasi" class="button blue-pill" />
+        <input type="submit" name="eskalasi" value="Eskalasi" class="button blue-pill" />
         <input type="submit" name="jawab" value="Jawab" class="button blue-pill" />
     </p>
 </div>

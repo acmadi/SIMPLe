@@ -15,7 +15,7 @@
                 }
             })
 
-            $('#ekskalasi_btn').click(function () {
+            $('#eskalasi_btn').click(function () {
                 var answer = confirm("Apakah ada pertanyaan lain?");
 
                 if (answer) {
@@ -98,7 +98,7 @@
         <br>
         <br>
     </div>
-    <input class="button" type="button" value="Ekskalasi" id="ekskalasi_btn" style=" float:right; margin:10px 3px 10px 10px;"/>
+    <input class="button" type="button" value="Eskalasi" id="eskalasi_btn" style=" float:right; margin:10px 3px 10px 10px;"/>
     <input class="button" type="button" value="Jawab" id="jawab_btn" style=" float:right; margin:10px 3px 10px 10px;"/>
     <input class="button" type="button" value="Batal" onclick="window.close();" style=" float:right; margin:10px 3px 10px 10px;"/>
 </div>

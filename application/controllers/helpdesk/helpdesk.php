@@ -53,7 +53,7 @@ class Helpdesk extends CI_Controller
         $this->_success(site_url('/helpdesk/helpdesk_form_pertanyaan'), 'Jawaban berhasil dimasukkan', 100);
     }
 
-    public function ekskalasi($id_tiket)
+    public function eskalasi($id_tiket)
     {
         $query = $this->db->get_where('tb_tiket_helpdesk', array('id' => $id_tiket))->row();
 
@@ -63,11 +63,11 @@ class Helpdesk extends CI_Controller
             'lavel' => $lavel + 1
         );
         $this->db->update('tb_tiket_helpdesk', $data, array('id' => $id_tiket));
-        $this->log->create("Pertanyaan dengan tiket #{$id_tiket} telah diekskalasi");
-        $this->_success(site_url('/helpdesk/dashboard'), 'Pertanyaan berhasil diekskalasi', 3);
+        $this->log->create("Pertanyaan dengan tiket #{$id_tiket} telah dieskalasi");
+        $this->_success(site_url('/helpdesk/dashboard'), 'Pertanyaan berhasil dieskalasi', 3);
     }
 
-    public function ekskalasi_next($id)
+    public function eskalasi_next($id)
     {
 
     }

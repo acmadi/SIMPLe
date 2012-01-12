@@ -11,13 +11,13 @@ class Tiket extends CI_Controller
         if ($_POST) {
             $result = $this->db->from('tb_tiket_frontdesk')
                     ->select('no_tiket_frontdesk,
-                                  id_satker,
+                                  id_unit,
                                   keputusan,
                                   status,
                                   tanggal_selesai
                                   ')
                     ->where('no_tiket_frontdesk', $this->input->post('no_tiket'))
-                    ->where('id_satker', $this->input->post('id_satker'))
+                    ->where('id_unit', $this->input->post('id_unit'))
                     ->get();
 
             if ($result->num_rows() == 0) {

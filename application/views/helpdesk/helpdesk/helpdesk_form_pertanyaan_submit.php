@@ -108,7 +108,7 @@
     </fieldset>
 
     <div style="text-align: right;">
-        <a href="<?php echo site_url('/helpdesk/helpdesk/ekskalasi/' . $this->session->userdata('id_tiket') ) ?>" class="button blue-pill">Ekskalasi</a>
+        <a href="<?php echo site_url('/helpdesk/helpdesk/eskalasi/' . $this->session->userdata('id_tiket') ) ?>" class="button blue-pill">Eskalasi</a>
     </div>
 </div>
 
@@ -162,14 +162,14 @@
                     }
                 },
                 {
-                    text:'Ekskalasi',
+                    text:'Eskalasi',
                     click:function () {
 //                        var status = confirm('Apakah ada pertanyaan lain?');
                         status = false;
                         if (status === true) {
-                            window.location.href = '<?php echo site_url("/helpdesk/helpdesk/ekskalasi_next/{$this->session->userdata('id_tiket')}") ?>/';
+                            window.location.href = '<?php echo site_url("/helpdesk/helpdesk/eskalasi_next/{$this->session->userdata('id_tiket')}") ?>/';
                         } else {
-                            window.location.href = '<?php echo site_url('/helpdesk/helpdesk/ekskalasi/' . $this->session->userdata('id_tiket') ) ?>/';
+                            window.location.href = '<?php echo site_url('/helpdesk/helpdesk/eskalasi/' . $this->session->userdata('id_tiket') ) ?>/';
                         }
                     }
                 }

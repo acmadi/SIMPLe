@@ -67,7 +67,7 @@
         </div>
         <dl>
             <dd><span class="label">Langsung terselesaikan oleh CS</span> <span class="number"><?php echo $total_selesai_oleh_cs ?></span></dd>
-            <dd><span class="label">Ekskalasi</span> <span class="number"><?php echo $helpdesk_total ?></span></dd>
+            <dd><span class="label">Eskalasi</span> <span class="number"><?php echo $helpdesk_total ?></span></dd>
         </dl>
     </fieldset>
 </div>

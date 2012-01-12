@@ -45,7 +45,6 @@ class Pengembalian_dokumen extends CI_Controller
 
             $data['dokumen'] = $result->row();
 
-
             $sql = "SELECT * FROM tb_kelengkapan_formulir
             JOIN tb_kelengkapan_doc
             ON tb_kelengkapan_doc.id_kelengkapan = tb_kelengkapan_formulir.id_kelengkapan
@@ -62,7 +61,7 @@ class Pengembalian_dokumen extends CI_Controller
             $data['content'] = 'frontdesk/pengembalian_dokumen_cetak';
             $this->load->view('frontdesk/pengembalian_dokumen_cetak', $data);
         } else {
-            //            redirect('/frontdesk/pengembalian_dokumen');
+            // redirect('/frontdesk/pengembalian_dokumen');
         }
     }
 
