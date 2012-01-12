@@ -65,9 +65,9 @@ class Mknowledge extends CI_Model
      *
      * @return Object
      */
-    public function get_all_category()
+    public function get_all_category($cond = '')
     {
-        $sql = "SELECT * FROM tb_kat_knowledge_base ORDER BY kat_knowledge_base";
+        $sql = "SELECT * FROM tb_kat_knowledge_base $cond ORDER BY kat_knowledge_base";
         return $this->db->query($sql);
     }
 	
