@@ -18,5 +18,4 @@ switch ($this->uri->segment(2)) {
         <li class="<?php echo $nav_pengaduan ?>"><?php echo anchor('pengaduan/dashboard', 'Pengaduan');?></li>
         <li class="<?php echo $nav_forum ?>"><?php echo anchor('pengaduan/man_forum', 'Forum');?></li>
     </ul>
-    <div id="logout"><?php echo anchor("login/process_logout", 'Logout') ?> &nbsp; <em>23 Nov 2011</em></div>
 </div>

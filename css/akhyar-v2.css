@@ -94,15 +94,6 @@ textarea {
   font-weight: normal;
   line-height: normal;
 }
-label {
-  padding-top: 6px;
-  font-size: 13px;
-  line-height: 18px;
-  float: left;
-  width: 130px;
-  text-align: right;
-  color: #404040;
-}
 form .input {
   margin-left: 150px;
 }

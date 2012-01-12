@@ -89,7 +89,7 @@ em.meta{
 	width: 200px;
 	float: left;
 }
-	#ref_cat h3{
+	#ref_cat h6{
 		font-weight: bold;
 		margin-bottom: 7px;
 	}
@@ -97,6 +97,8 @@ em.meta{
 		list-style: none;
 		font-weight: bold;
 		font-size: 1.1em;
+		margin-left: 0;
+		margin-bottom: 7px;
 	}
 #ref_item{
 	padding-left: 250px;
