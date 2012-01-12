@@ -217,11 +217,14 @@ class Mtiket extends CI_Model {
 	}
 	
 	public function get_detail_pengembalian_by_id($id){
-		return $this->db->query("SELECT  ttf.no_tiket_frontdesk, ttf.tanggal, ttf.id_satker, ts.nama_satker, tpd.id_pengembalian_doc, ttf.id_unit, tu.nama_unit
-								FROM tb_pengembalian_doc tpd, tb_tiket_frontdesk ttf 
+		return $this->db->query("SELECT  ttf.no_tiket_frontdesk, ttf.tanggal, ttf.id_satker, ts.nama_satker, tpd.id_pengembalian_doc, 
+											ttf.id_unit, tu.nama_unit,ttf.id_kementrian, tm.nama_kementrian, tbs.nip, tbs.nama_petugas, tbs.jabatan_petugas, 
+											tbs.no_hp, tbs.no_kantor, tbs.email, tpd.catatan
+								FROM tb_pengembalian_doc tpd, tb_kementrian tm, tb_petugas_satker tbs, tb_tiket_frontdesk ttf 
 								LEFT JOIN tb_satker ts ON ts.id_satker = ttf.id_satker
 								LEFT JOIN tb_unit tu ON tu.id_unit = ttf.id_unit AND tu.id_kementrian = ttf.id_kementrian
 								WHERE tpd.no_tiket_frontdesk = ttf.no_tiket_frontdesk AND tpd.sudah_diambil = 0 AND tpd.id_pengembalian_doc = ?
+									  AND ttf.id_kementrian = tm.id_kementrian AND ttf.id_petugas_satker = tbs.id_petugas_satker
 								GROUP BY tpd.no_tiket_frontdesk ",array($id));
 	
 	}

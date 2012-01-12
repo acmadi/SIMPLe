@@ -43,6 +43,7 @@ class Ambil_dokumen extends CI_Controller
 
     function selesai($no_tiket_frontdesk)
     {
+		$this->session->set_flashdata('success','Berhasil melakukan perubahan ');
         $this->tiket->set_selesai($no_tiket_frontdesk);
         redirect('/frontdesk/ambil_dokumen');
     }
