@@ -6,7 +6,17 @@
     <div class="table">
         <div id="head">
             <div id="cari_unit" action="man_unit_cari">
-                <p>Kode Satker: <input type="text" size="60" value="292292"/>&nbsp;<input type="submit" value="cari" /></p>
+            <p>
+                <?php 
+                echo form_open('pelaksana/helpdesk/search'); 
+                    
+                echo 'Kode Satker: ' .
+                     form_input('keyword', '', 'placeholder="Masukkan kode satker"') . ' ';
+                echo form_submit('submit', 'CARI', 'class="button blue-pill"');
+
+                echo form_close();
+                ?>
+            </p>
             </div>
 
             <div id="tail">
@@ -46,9 +56,7 @@
         </div>
     </div>
     <?php else: ?>
-    Tidak ada pertanyaan yang dieskalasi
+        Tidak ada pertanyaan yang dieskalasi atau tidak ditemukan pertanyaan.
     <?php endif ?>
 </div>
 
-
-</div>
