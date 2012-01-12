@@ -29,8 +29,8 @@ if ($this->uri->segment(1) == 'knowledge') {
 <div id="navbar" class="clearfloat">
     <ul class="sf-menu">
         <li class="<?php echo $nav_dashboard ?>"><?php echo anchor('pelaksana/dashboard', 'Dashboard');?></li>
-        <li class="<?php echo $nav_helpdesk ?>"><?php echo anchor('pelaksana/helpdesk', 'Help Desk');?></li>
         <li class="<?php echo $nav_frontdesk ?>"><?php echo anchor('pelaksana/frontdesk', 'Front Desk');?></li>
+        <li class="<?php echo $nav_helpdesk ?>"><?php echo anchor('pelaksana/helpdesk', 'Help Desk');?></li>
         <li class="<?php echo $nav_knowledge ?>"><?php echo anchor('knowledge', 'Knowledge Base');?></li>
         <li class="<?php echo $nav_referensi ?>"><?php echo anchor('referensi', 'Referensi Peraturan') ?></li>
         <li class="<?php echo $nav_forum ?>"><?php echo anchor('pelaksana/man_forum', 'Forum');?></li>
