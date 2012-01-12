@@ -1,5 +1,5 @@
 <?php
-$nav_dashboard = $nav_identitas_satker = $nav_antrian = $nav_knowledge = $nav_forum = '';
+$nav_dashboard = $nav_identitas_satker = $nav_antrian = $nav_knowledge = $nav_forum = $nav_referensi = '';
 switch ($this->uri->segment(2)) {
     case 'dashboard':
         $nav_dashboard = 'current';
@@ -17,6 +17,9 @@ switch ($this->uri->segment(2)) {
         $nav_forum = 'current';
         break;
 }
+if ($this->uri->segment(1) == 'referensi') {
+    $nav_referensi = 'current';
+}
 ?>
 
 
@@ -24,7 +27,7 @@ switch ($this->uri->segment(2)) {
     <li class="<?php echo $nav_dashboard ?>"><?php echo anchor('helpdesk/dashboard', 'Dashboard');?></li>
     <li class="<?php echo $nav_identitas_satker ?>"><?php echo anchor('helpdesk/identitas_satker', 'Isi Identitas Satker');?></li>
     <li class="<?php echo $nav_knowledge ?>"><?php echo anchor('helpdesk/knowledge_base', 'Knowledge Base');?></li>
-    <li class=""><a href="<?php echo base_url() . 'upload/PMK-93.pdf' ?>" target="pdf">Referensi Peraturan</a></li>
+    <li class="<?php echo $nav_referensi ?>"><?php echo anchor('referensi', 'Referensi Peraturan') ?></li>
     <li class="<?php echo $nav_forum ?>"><?php echo anchor('helpdesk/man_forum', 'Forum');?></li>
 </ul>
 <div id="logout"><?php echo $this->session->userdata('nama') ?> &nbsp; | &nbsp; <?php echo anchor("login/process_logout", 'Logout') ?> &nbsp; <em><?php echo date('d-m-Y') ?></em></div>
