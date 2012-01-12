@@ -19,6 +19,7 @@
     <link type="text/css" rel="stylesheet" href="<?php echo base_url('css/960gs/text.css') ?>"/>
     <link type="text/css" rel="stylesheet" href="<?php echo base_url('css/960gs/960.css') ?>"/>
     <link type="text/css" rel="stylesheet" href="<?php echo base_url('css/mul14.css') ?>"/>
+    <link type="text/css" rel="stylesheet" href="<?php echo base_url('css/akhyar-v2.css') ?>"/>
 
     <link rel="stylesheet" href="<?php echo base_url('css/cupertino/jquery-ui-1.8.16.custom.css') ?>"/>
     <link href="<?php echo base_url('css/autoSuggest.css') ?>" rel="stylesheet"/>
@@ -96,6 +97,10 @@
                     $this->load->view('navbar_dadutek');
                 }
                 elseif ($this->uri->segment(1) == 'referensi') {
+                    $navbar = $this->session->userdata('navbar');
+                    $this->load->view($navbar);
+                }
+                elseif ($this->uri->segment(1) == 'knowledge') {
                     $navbar = $this->session->userdata('navbar');
                     $this->load->view($navbar);
                 }
