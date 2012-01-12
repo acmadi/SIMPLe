@@ -94,7 +94,7 @@
 
         <div id="referensi_jawaban">
             <?php if ($knowledges->num_rows() > 0): ?>
-            <ul>
+            <ul style="list-style: inside">
                 <?php foreach ($knowledges->result() as $value): ?>
                 <li>
                     <a href="javascript:void(0)" class="referensi-jawaban" title="<?php echo $value->id_knowledge_base ?>"><?php echo $value->judul ?></a>

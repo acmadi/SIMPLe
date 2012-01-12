@@ -137,7 +137,7 @@ class Identitas_satker extends CI_Controller
                 $sql = "INSERT INTO tb_tiket_helpdesk
                         (no_tiket_helpdesk, id_satker, tanggal, id_petugas_satket, lavel)
                         VALUES (?, ?, ?, ?, 1)";
-                $this->db->query($sql, array($last_tiket_number, $id_satker, date('Y-m-d'), $this->db->insert_id()));
+                $this->db->query($sql, array($last_tiket_number, $id_satker, date('Y-m-d'), $id_petugas_satker));
                 $id_tiket = $this->db->insert_id();
 
                 $sql = "SELECT no_tiket_helpdesk FROM tb_tiket_helpdesk WHERE id='{$id_tiket}'";

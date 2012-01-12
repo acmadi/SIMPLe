@@ -13,13 +13,13 @@
         <tbody>
         <tr>
             <td scope="row">
-                <?php echo $this->db->from('tb_tiket_frontdesk')->like('tanggal', date('Y-m-d'))->get()->num_rows(); ?>
+                <?php echo $this->db->from('tb_tiket_helpdesk')->like('tanggal', date('Y-m-d'))->get()->num_rows(); ?>
             </td>
             <td scope="row">
-                <?php echo $this->db->from('tb_tiket_frontdesk')->where('status', 'close')->where('is_active', 1)->get()->num_rows(); ?>
+                <?php echo $this->db->from('tb_tiket_helpdesk')->where('status', 'close')->get()->num_rows(); ?>
             </td>
             <td scope="row">
-                <?php echo $this->db->from('tb_tiket_frontdesk')->where('is_active', 3)->get()->num_rows(); ?>
+                <?php echo $this->db->from('tb_tiket_helpdesk')->get()->num_rows(); ?>
             </td>
         </tr>
         </tbody>
