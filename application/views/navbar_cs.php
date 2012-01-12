@@ -17,5 +17,4 @@ switch ($this->uri->segment(2)) {
         <li class=""><a href="<?php echo base_url() . 'upload/PMK-93.pdf' ?>" target="pdf">Referensi Peraturan</a></li>
         <li class="<?php echo $nav_forum ?>"><?php echo anchor('forum/index', 'Forum');?></li>
     </ul>
-    <div id="logout"><?php echo $this->session->userdata('nama') ?> &nbsp; | &nbsp; <?php echo anchor("login/process_logout", 'Logout') ?> &nbsp; <em><?php echo date('d-m-Y') ?></em></div>
 </div>
