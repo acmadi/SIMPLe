@@ -71,34 +71,20 @@ class Form_revisi_anggaran extends CI_Controller
         }
     }
 
-    function cari_satker()
+    function cari_satker($id_kementrian, $eselon)
     {
-        if ($this->input->is_ajax_request()) {
-
-            $term = $this->input->get('term');
-            $eselon = $this->input->get('eselon');
-            $id_kementrian = substr($this->input->get('nama_kl'), 0, 3);
-
-
-            $sql = "SELECT * FROM tb_satker WHERE
+        $sql = "SELECT * FROM tb_satker WHERE
                     id_unit = '{$eselon}' AND
-                    id_kementrian = '{$id_kementrian}' AND
-                    (id_satker LIKE '%{$term}%' OR nama_satker LIKE '%{$term}%')
+                    id_kementrian = '{$id_kementrian}'
                     ORDER BY id_unit";
 
-            $result = $this->db->query($sql);
-            $array = array();
-            $i = 0;
-            if ($result->num_rows() > 0) {
-                foreach ($result->result() as $value) {
-                    $array[$i] = $value->id_satker . ' - ' . $value->nama_satker;
-                    $i++;
-                }
-            }
-            echo json_encode($array);
+        $result = $this->db->query($sql);
+
+        foreach ($result->result() as $value) {
+            echo sprintf('<option value="%s">%s</option>', $value->id_satker, $value->nama_satker);
         }
-        exit();
     }
+
 
     /**
      * AJAX
@@ -129,7 +115,8 @@ class Form_revisi_anggaran extends CI_Controller
         exit();
     }
 
-    public function dokumen_check($data)
+    public
+    function dokumen_check($data)
     {
         if (count($data) < 3):
             $this->form_validation->set_message('dokumen_check', 'Kelengkapan <b>%s</b> tidak terpenuhi');
@@ -143,6 +130,7 @@ class Form_revisi_anggaran extends CI_Controller
     {
         $status = false;
 
+
         $this->form_validation->set_rules('nama_kl', 'Nama K/L', 'required');
         $this->form_validation->set_rules('eselon', 'Eselon', 'required');
         $this->form_validation->set_rules('nama_petugas', 'Nama Petugas', 'required');
@@ -151,8 +139,7 @@ class Form_revisi_anggaran extends CI_Controller
         $this->form_validation->set_rules('no_kantor', 'No Kantor', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required');
 
-        $this->form_validation->set_rules('tipe', 'Kategori', 'required');
-
+//        $this->form_validation->set_rules('tipe', 'Kategori', 'required');
         $this->form_validation->set_rules('nomor_surat_usulan', 'Nomor Surat Usulan', 'required');
         $this->form_validation->set_rules('tanggal_surat_usulan', 'Tanggal Surat Usulan', 'required');
         $this->form_validation->set_rules('nip', 'NIP', 'required');

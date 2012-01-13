@@ -18,6 +18,7 @@
     <link type="text/css" rel="stylesheet" href="<?php echo base_url('css/960gs/reset.css') ?>"/>
     <link type="text/css" rel="stylesheet" href="<?php echo base_url('css/960gs/text.css') ?>"/>
     <link type="text/css" rel="stylesheet" href="<?php echo base_url('css/960gs/960.css') ?>"/>
+    <link type="text/css" rel="stylesheet" href="<?php echo base_url('js/chosen/chosen.css') ?>"/>
     <link type="text/css" rel="stylesheet" href="<?php echo base_url('css/mul14.css') ?>"/>
     <link type="text/css" rel="stylesheet" href="<?php echo base_url('css/akhyar-v2.css') ?>"/>
 
@@ -30,6 +31,7 @@
     <script src="<?php echo base_url('js/modernizr-2.0.6.min.js') ?>"></script>
     <script src="<?php echo base_url('js/jquery-1.7.1.min.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/jquery-ui-1.8.16.custom.min.js') ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('js/chosen/chosen.jquery.min.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/jquery.autoSuggest.minified.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/jQuery-Visualize/js/visualize.jQuery.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/phpjs/substr.js') ?>"></script>

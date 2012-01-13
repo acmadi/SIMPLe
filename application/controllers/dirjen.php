@@ -145,7 +145,7 @@ class Dirjen extends CI_Controller
 
         if ($this->input->get('cari')) {
 
-            $cari =  $this->input->get('cari');
+            $cari = $this->input->get('cari');
             $cari_tiket = sprintf('%05d', $this->input->get('cari'));
 
 
@@ -205,5 +205,25 @@ class Dirjen extends CI_Controller
                 ->where('is_active', $is_active)
                 ->get();
 
+    }
+
+    function frontdesk()
+    {
+        $data['title'] = 'Dirjen';
+        $data['content'] = 'dirjen/frontdesk';
+        $this->load->view('new-template', $data);
+    }
+
+    function helpdesk()
+    {
+        $sql = "SELECT * FROM tb_tiket_frontdesk JOIN tb_satker
+                        ON tb_tiket_frontdesk.id_satker = tb_satker.id_satker
+
+                        WHERE status = 'open' AND lavel = 6";
+        $data['antrian'] = $this->db->query($sql);
+
+        $data['title'] = 'Dirjen';
+        $data['content'] = 'dirjen/helpdesk';
+        $this->load->view('new-template', $data);
     }
 }

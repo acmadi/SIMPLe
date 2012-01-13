@@ -1,4 +1,8 @@
 <style type="text/css">
+    td a {
+        color: white !important;
+    }
+
     td {
         /*border: 1px solid #eee;*/
         vertical-align: middle;

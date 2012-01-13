@@ -41,7 +41,7 @@ class Mhelpdesk extends CI_Model
 
         $result = $this->db->query($sql, array($id));
 
-        print_r($result->row());
+
         return $result->row();
     }
 	
