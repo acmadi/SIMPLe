@@ -113,11 +113,12 @@
     <?php
     $errors = validation_errors();
     if (!empty($errors)) {
-        echo '<div class="error">' . validation_errors() . '</div>';
+        echo '<div class="notification red">' . validation_errors() . '</div>';
     }
     ?>
 
-    <?php echo form_open('frontdesk/form_revisi_anggaran/save_identitas', array('id' => 'identitas_kl')) ?>
+    <?php echo form_open('frontdesk/form_revisi_anggaran/save_identitas', 
+        array('id'   => 'identitas_kl')) ?>
 
     <?php echo form_hidden('tipe', 'kl') ?>
 
@@ -220,7 +221,7 @@
     </fieldset>
 
     <div style="float: right; width: 47%; text-align: center; margin-top: 20px;">
-        <a style="padding: 20px 40px; font-size: 1.5em; font-weight: bold" class="button green" onclick="submit()">Kirim</a>
+        <a style="padding: 20px 40px; font-size: 1.5em; font-weight: bold" class="button green" onclick="identitas_kl.submit()">Kirim</a>
         <a style="padding: 20px 40px; font-size: 1.5em; font-weight: bold" href="<?php echo site_url('/frontdesk/form_revisi_anggaran') ?>" class="button gray-pill">Reset</a>
     </div>
 
