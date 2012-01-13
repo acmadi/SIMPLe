@@ -98,6 +98,10 @@
                     $this->session->set_userdata('navbar', 'navbar_dadutek');
                     $this->load->view('navbar_dadutek');
                 }
+                elseif ($this->uri->segment(1) == 'pelaksana') {
+                    $this->session->set_userdata('navbar', 'navbar_pelaksana');
+                    $this->load->view('navbar_pelaksana');
+                }
                 elseif ($this->uri->segment(1) == 'referensi') {
                     $navbar = $this->session->userdata('navbar');
                     $this->load->view($navbar);
