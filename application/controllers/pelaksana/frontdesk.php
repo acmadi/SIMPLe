@@ -18,16 +18,19 @@ class Frontdesk extends CI_Controller
         $data['title'] 		= 'Konsultasi Front Desk';
         $data['content'] 	= 'pelaksana/frontdesk';
 		$data['isian_form']	= $page['isian_form1'];
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);
     }
 
     function diterima($id)
     {
-        $data['title'] = 'Cek Tiket';
+		$this->db->query("UPDATE tb_tiket_frontdesk SET is_active = 1 WHERE no_tiket_frontdesk = ?",array($id));
+        
+		/*$data['title'] = 'Cek Tiket';
         $data['content'] = 'pelaksana/frontdesk_view';
         $data['tiket'] = $this->mfrontdesk->get_by_id($id);
-
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);*/
+		
+		redirect('pelaksana/frontdesk');
     }
 
     function diteruskan($id)
@@ -39,7 +42,6 @@ class Frontdesk extends CI_Controller
         ), array(
             'no_tiket_frontdesk' => $id
         ));
-		
 		
         $this->_success(site_url('/helpdesk/dashboard'), 'Tiket berhasil diteruskan', 3);
     }
@@ -68,7 +70,7 @@ class Frontdesk extends CI_Controller
 
         $data['title'] = 'Cek Tiket';
         $data['content'] = 'pelaksana/reject';
-        $this->load->view('master-template', $data);
+        $this->load->view('new-template', $data);
     }
 
     private function _success($url, $message, $time)

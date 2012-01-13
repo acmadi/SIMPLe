@@ -50,10 +50,10 @@ class Mfrontdesk extends CI_Model
 			$where = " AND tu.nama_unit LIKE '%".$keyword."%'";
 		}
 		
-		$sql = "SELECT tf.no_tiket_frontdesk, tf.tanggal,tf.id_unit, tu.nama_unit, tm.nama_kementrian
+		$sql = "SELECT tf.no_tiket_frontdesk, tf.tanggal,tf.id_unit, tu.nama_unit, tm.nama_kementrian,tf.is_active
 				FROM tb_tiket_frontdesk tf, tb_unit tu, tb_kementrian tm 
 				WHERE tu.id_unit = tf.id_unit AND tu.id_kementrian = tf.id_kementrian AND tf.status = 'open' 
-				AND tf.lavel <= 2 AND tf.is_active = 1 AND tm.id_kementrian = tf.id_kementrian $where ORDER BY tf.status";
+				AND tf.lavel <= 2 AND tm.id_kementrian = tf.id_kementrian $where ORDER BY tf.status";
 				
 		$query = $this->db->query($sql);
 
@@ -64,10 +64,10 @@ class Mfrontdesk extends CI_Model
 		$this->pagination->initialize($config);
 		
 		
-		$sqlb = "SELECT tf.no_tiket_frontdesk, tf.tanggal,tf.id_unit, tu.nama_unit, tm.nama_kementrian
+		$sqlb = "SELECT tf.no_tiket_frontdesk, tf.tanggal,tf.id_unit, tu.nama_unit, tm.nama_kementrian,tf.is_active
 				FROM tb_tiket_frontdesk tf, tb_unit tu, tb_kementrian tm 
 				WHERE tu.id_unit = tf.id_unit AND tu.id_kementrian = tf.id_kementrian AND tf.status = 'open' 
-				AND tf.lavel <= 2 AND tf.is_active = 1 AND tm.id_kementrian = tf.id_kementrian $where ORDER BY tf.status
+				AND tf.lavel <= 2  AND tm.id_kementrian = tf.id_kementrian $where ORDER BY tf.status
 				LIMIT ?,?";
 		$data["query"] = $this->db->query($sqlb, array($offset ,$config['per_page']));
 
