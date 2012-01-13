@@ -113,7 +113,7 @@
     <?php
     $errors = validation_errors();
     if (!empty($errors)) {
-        echo '<div class="notification red">' . validation_errors() . '</div>';
+        echo notification(validation_errors(), 'Error', 'red');
     }
     ?>
 

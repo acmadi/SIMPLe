@@ -134,56 +134,62 @@
     <footer>
         <div class="container_12">
             <div class="grid_3 alpha">
-                <dl>
-                    <dt>Pusat Layanan DJA</dt>
-                    <dd>Lobby Gedung Sutikno Slamet</dd>
-                    <dd>Jln. Wahidin No. 1</dd>
-                    <dd>Jakarta Pusat</dd>
-                </dl>
+                <h1>Pusat Layanan DJA</h1>
+                <ul>
+                    <li>Lobby Gedung Sutikno Slamet</li>
+                    <li>Jln. Wahidin No. 1</li>
+                    <li>Jakarta Pusat</li>
+                </ul>
 
-                <dl>
-                    <dt>Email</dt>
-                    <dd>pusatlayanan@anggaran.depkeu.go.id</dd>
-                    <dd>pusatlayanan.dja@gmail.com</dd>
-                </dl>
+                <h1>Email</h1>
+                <ul>
+                    <li>pusatlayanan@anggaran.depkeu.go.id</li>
+                    <li>pusatlayanan.dja@gmail.com</li>
+                </ul>
 
-                <dl>
-                    <dt>Line</dt>
-                    <dd>021-34 83 25 11 (Call Center)</dd>
-                    <dd>021-34 83 25 16 (Customer Service)</dd>
-                    <dd>021-34 83 25 15 (Fax)</dd>
-                </dl>
+                <h1>Line</h1>
+                <ul>
+                    <li>021-34 83 25 11 (Call Center)</li>
+                    <li>021-34 83 25 16 (Customer Service)</li>
+                    <li>021-34 83 25 15 (Fax)</li>
+                </ul>
             </div>
 
             <div class="grid_3">
-                <dl>
-                    <dt>Online Customer Service</dt>
-                    <dd>Customer Service 1</dd>
-                    <dd>Customer Service 2</dd>
-                    <dd>Customer Service 3</dd>
-                    <dd>Customer Service 4</dd>
-                </dl>
+                <h1>Online Customer Service</h1>
+                <ul>
+                    <li>Customer Service 1</li>
+                    <li>Customer Service 2</li>
+                    <li>Customer Service 3</li>
+                    <li>Customer Service 4</li>
+                </ul>
             </div>
 
             <div class="grid_3">
-                <dl>
-                    <dt>Pusat Layanan DJA</dt>
-                    <dd>Lobby Gedung Sutikno Slamet</dd>
-                    <dd>Jln. Wahidin No. 1</dd>
-                    <dd>Jakarta Pusat</dd>
-                </dl>
+                <h1>Pusat Layanan DJA</h1>
+                <ul>
+                    <li>Lobby Gedung Sutikno Slamet</li>
+                    <li>Jln. Wahidin No. 1</li>
+                    <li>Jakarta Pusat</li>
+                </ul>
 
-                <dl>
-                    <dt>Email</dt>
-                    <dd>pusatlayanan@anggaran.depkeu.go.id</dd>
-                    <dd>pusatlayanan.dja@gmail.com</dd>
-                </dl>
+                <h1>Email</h1>
+                <ul>
+                    <li>pusatlayanan@anggaran.depkeu.go.id</li>
+                    <li>pusatlayanan.dja@gmail.com</li>
+                </ul>
+            </div>
+
+            <div class="grid_3 omega">
 
             </div>
         </div>
-        <div style="background: #69006b; padding: 10px 0; text-align: right; font-size: 10px; color: #f0f0f0;">
+
+        <div id="attribution">
             <div class="container_12">
-                Copyright&copy;2011 Komuri & Ortala DJA
+            <div class="grid_12 alpha omega">
+                Copyright &copy; 2011 Komuri & Ortala DJA
+            </div>
             </div>
         </div>
     </footer>

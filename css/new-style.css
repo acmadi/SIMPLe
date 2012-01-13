@@ -20,14 +20,46 @@ header {
 		font-size: 20px; 
 		font-weight: bold; 
 	}
+footer {
+    color: #fcfcfc;
+    padding: 20px 0;
+    background: #2a0038 url(../images/tribal_flower_white.png) right bottom no-repeat;
+    box-shadow: 1px 0 5px #333;
+}
+
+	footer ul{
+		list-style:none;
+	}
+	footer ul li
+	{
+		margin-left: 0;
+		margin-bottom: 5px;
+	}
+
+#attribution{
+	margin: 25px 0 0;
+	text-align: right;
+	color: white;
+
+}
+
+
 
 .content > h1:first-child{
 	/* Titel teratas setiap halaman */
+	text-align: center;
 	text-transform: uppercase;
 	color: #555;
 	font-family: helvetica, verdana, arial, sans-serif;
-	border-bottom: 2px solid #ddd;
+	background: url('../images/title-shadow.png') no-repeat bottom center;
+	/*border-bottom: 2px solid #ddd;*/
+	padding-bottom: 10px;
 	margin-bottom: 20px;
+}
+.content a,
+#content a
+{
+  color: #142f74;
 }
 
 /* NAVIGASI */
@@ -67,6 +99,7 @@ fieldset {
     margin: 4px 0;
     border-radius: 5px;
     box-shadow: 0 0 0px #d9d9d9;
+    background: white;
 }
 
 legend {
@@ -83,6 +116,30 @@ legend {
     /*background: -moz-linear-gradient(top, #fcfcfc, #cecece);*/
 }
 
+
+/* LABEL */
+
+span.xxlabel{
+	display: inline-block;
+	padding: 3px 15px;
+	margin: 2px;
+	color: white;
+	font-weight: bold;
+	border-radius: 10px;
+	background-color: #5588dd !important;
+}
+span.xxlabel.red{
+	background-color: #dd5588 !important;
+}
+
+.message_box
+{
+	color: gold;
+	font-size: 1.3em;
+	font-weight: bold;
+
+}
+
 /* DUA KOLOM */
 
 .col-1 h1,
@@ -91,12 +148,25 @@ legend {
 	font-weight:bold;
 	font-size: 14px;
 }
+.col-1 li a,
+.col-2 li a
+{
+	margin-bottom: 5px;
+}
+.col-1 li a:hover,
+.col-2 li a:hover
+{
+	border-bottom: 1px dotted gray;
+}
 
 .col-1{
 	width: 160px;
 	float: left;
 	text-align: right;
 }
+	.col-1 ul{
+		list-style: none;
+	}
 .col-2{
 	padding-left: 200px;
 }
@@ -105,3 +175,73 @@ legend {
 		margin-left: 20px;
 		padding-left: 0;
 	}
+
+/* NOTIFICATION */
+
+
+.notification {
+    padding: 4px 8px;
+    margin: 8px 0;
+    border-radius: 4px;
+    background: #cecece;
+    background: -webkit-linear-gradient(top, #d9d9d9, #c0c0c0);
+    text-shadow: 1px 1px #fff;
+}
+
+.notification .message {
+    float: left;
+}
+
+.notification .close {
+    float: right;
+    color: black;
+    text-shadow: none;
+    font-weight: bold;
+}
+
+.notification.green {
+    background: #57A957;
+    background: -webkit-linear-gradient(top, #62c462, #57A957);
+    color: white !important;
+    text-shadow: 1px 1px #666;
+}
+
+.notification.green .message:before {
+    content: " ✓ ";
+}
+
+.notification.blue {
+    background: -webkit-linear-gradient(top, #5bc0de, #339bb9);
+    color: white !important;
+    text-shadow: 1px 1px #666;
+}
+
+.notification.yellow {
+    background: #EEDC94;
+    background: -webkit-linear-gradient(top, #fceec1, #EEDC94);
+    color: #333 !important;
+    text-shadow: 1px 1px #fff;
+}
+
+.notification.yellow .message:before {
+    content: " ! ";
+}
+
+.notification.red {
+    background: -webkit-linear-gradient(top, #ee5f5b, #C43C35);
+    color: white !important;
+    text-shadow: 1px 1px #666;
+}
+
+
+/*TABLE*/
+caption{
+	font-weight: bold;
+	font-size: 1em;
+}
+table{
+	margin: 15px 0;
+}
+td.head{
+	font-weight: bold;
+}

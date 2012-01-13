@@ -91,10 +91,10 @@
     <br/>
     </div>
     <?php else: ?>
-
-Tidak ada dokumen
-
-<?php endif ?>
+    <div class="notification yellow">
+    Tidak ada dokumen
+    </div>
+    <?php endif ?>
 </div>
 
 <script type="text/javascript">

@@ -1,5 +1,10 @@
-jQuery(function(){
+jQuery(function () {
     $('.chart').visualize({
-        type: 'bar'
+        type:'bar'
     });
+
+    $('.close').live('click', function () {
+        $(this).parent().fadeOut('fast');
+    })
+
 })
