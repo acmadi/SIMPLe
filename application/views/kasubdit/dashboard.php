@@ -59,8 +59,9 @@
 
 <div class="content">
     <h1>Kasubdit Dashboard</h1>
-
-    <fieldset style="width: 500px; float:left; margin-right: 50px;">
+    
+    <div class="grid_6 alpha">
+    <fieldset>
         <legend>Report Help Desk</legend>
         <div class="message_box">
             <a href="<?php echo site_url('/kasubdit/helpdesk') ?>"><?php echo $helpdesk_total ?> Pertanyaan</a>
@@ -72,8 +73,10 @@
             <dd><span class="label">Kasi & kasubdit</span> <span class="number">0</span></dd>
         </dl>
     </fieldset>
+    </div>
 
-    <fieldset style="width: 500px; float:left;">
+    <div class="grid_6 omega">
+    <fieldset class="grid_6 alpha omega">
         <legend>Report Front Desk</legend>
         <div class="message_box">
             <a href="<?php echo site_url('/kasubdit/frontdesk') ?>"><?php echo $frontdesk_total ?> Tiket</a>
@@ -96,5 +99,6 @@
             </tr>
         </table>
     </fieldset>
+    </div>
 
 </div>

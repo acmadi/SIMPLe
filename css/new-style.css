@@ -20,6 +20,30 @@ header {
 		font-size: 20px; 
 		font-weight: bold; 
 	}
+footer {
+    color: #fcfcfc;
+    padding: 20px 0;
+    background: #2a0038;
+    box-shadow: 1px 0 5px #333;
+}
+
+	footer ul{
+		list-style:none;
+	}
+	footer ul li
+	{
+		margin-left: 0;
+		margin-bottom: 5px;
+	}
+
+#attribution{
+	margin: 25px 0 0;
+	text-align: right;
+	color: white;
+
+}
+
+
 
 .content > h1:first-child{
 	/* Titel teratas setiap halaman */
@@ -150,3 +174,73 @@ span.xxlabel.red{
 		margin-left: 20px;
 		padding-left: 0;
 	}
+
+/* NOTIFICATION */
+
+
+.notification {
+    padding: 4px 8px;
+    margin: 8px 0;
+    border-radius: 4px;
+    background: #cecece;
+    background: -webkit-linear-gradient(top, #d9d9d9, #c0c0c0);
+    text-shadow: 1px 1px #fff;
+}
+
+.notification .message {
+    float: left;
+}
+
+.notification .close {
+    float: right;
+    color: black;
+    text-shadow: none;
+    font-weight: bold;
+}
+
+.notification.green {
+    background: #57A957;
+    background: -webkit-linear-gradient(top, #62c462, #57A957);
+    color: white !important;
+    text-shadow: 1px 1px #666;
+}
+
+.notification.green .message:before {
+    content: " ✓ ";
+}
+
+.notification.blue {
+    background: -webkit-linear-gradient(top, #5bc0de, #339bb9);
+    color: white !important;
+    text-shadow: 1px 1px #666;
+}
+
+.notification.yellow {
+    background: #EEDC94;
+    background: -webkit-linear-gradient(top, #fceec1, #EEDC94);
+    color: #333 !important;
+    text-shadow: 1px 1px #fff;
+}
+
+.notification.yellow .message:before {
+    content: " ! ";
+}
+
+.notification.red {
+    background: -webkit-linear-gradient(top, #ee5f5b, #C43C35);
+    color: white !important;
+    text-shadow: 1px 1px #666;
+}
+
+
+/*TABLE*/
+caption{
+	font-weight: bold;
+	font-size: 1em;
+}
+table{
+	margin: 15px 0;
+}
+td.head{
+	font-weight: bold;
+}
