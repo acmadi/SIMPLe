@@ -10,7 +10,7 @@ class Mfrontdesk extends CI_Model
                                                     is_active = 1",array($stat,$lav))->num_rows();
 	}
 	
-	public function get_all_tiket_frontdesk(){
+	public function get_all_tiket_frontdesk($level = 2){
 		//@F2D
 		$keyword = $this->input->post('keyword',TRUE);
 		
@@ -53,9 +53,9 @@ class Mfrontdesk extends CI_Model
 		$sql = "SELECT tf.no_tiket_frontdesk, tf.tanggal,tf.id_unit, tu.nama_unit, tm.nama_kementrian,tf.is_active
 				FROM tb_tiket_frontdesk tf, tb_unit tu, tb_kementrian tm 
 				WHERE tu.id_unit = tf.id_unit AND tu.id_kementrian = tf.id_kementrian AND tf.status = 'open' 
-				AND tf.lavel <= 2 AND tm.id_kementrian = tf.id_kementrian $where ORDER BY tf.status";
+				AND tf.lavel = ? AND tm.id_kementrian = tf.id_kementrian $where ORDER BY tf.status";
 				
-		$query = $this->db->query($sql);
+		$query = $this->db->query($sql,array($level));
 
 		$config['base_url'] = site_url('/pelaksana/frontdesk/index').'/'.$url_add;
 		$config['total_rows'] = $query->num_rows();
@@ -67,9 +67,9 @@ class Mfrontdesk extends CI_Model
 		$sqlb = "SELECT tf.no_tiket_frontdesk, tf.tanggal,tf.id_unit, tu.nama_unit, tm.nama_kementrian,tf.is_active
 				FROM tb_tiket_frontdesk tf, tb_unit tu, tb_kementrian tm 
 				WHERE tu.id_unit = tf.id_unit AND tu.id_kementrian = tf.id_kementrian AND tf.status = 'open' 
-				AND tf.lavel <= 2  AND tm.id_kementrian = tf.id_kementrian $where ORDER BY tf.status
+				AND tf.lavel = ?  AND tm.id_kementrian = tf.id_kementrian $where ORDER BY tf.status
 				LIMIT ?,?";
-		$data["query"] = $this->db->query($sqlb, array($offset ,$config['per_page']));
+		$data["query"] = $this->db->query($sqlb, array($level,$offset ,$config['per_page']));
 
 		$data['isian_form1'] = $keyword;
 		$data['pagination1'] = $this->pagination->create_links();

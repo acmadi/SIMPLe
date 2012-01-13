@@ -23,13 +23,7 @@ class Frontdesk extends CI_Controller
 
     function diterima($id)
     {
-		$this->db->query("UPDATE tb_tiket_frontdesk SET is_active = 1 WHERE no_tiket_frontdesk = ?",array($id));
-        
-		/*$data['title'] = 'Cek Tiket';
-        $data['content'] = 'pelaksana/frontdesk_view';
-        $data['tiket'] = $this->mfrontdesk->get_by_id($id);
-        $this->load->view('new-template', $data);*/
-		
+		$this->db->query("UPDATE tb_tiket_frontdesk SET is_active = 1 WHERE no_tiket_frontdesk = ?",array($id));		
 		redirect('pelaksana/frontdesk');
     }
 
@@ -38,7 +32,7 @@ class Frontdesk extends CI_Controller
         $query = $this->db->get_where('tb_tiket_frontdesk', array('no_tiket_frontdesk' => $id))->row();
 		
         $this->db->update('tb_tiket_frontdesk', array(
-            'lavel' => $query->lavel + 1
+            'lavel' => $query->lavel + 1,'is_active' => 2
         ), array(
             'no_tiket_frontdesk' => $id
         ));
