@@ -19,17 +19,15 @@
     <link type="text/css" rel="stylesheet" href="<?php echo base_url('css/960gs/text.css') ?>"/>
     <link type="text/css" rel="stylesheet" href="<?php echo base_url('css/960gs/960.css') ?>"/>
     <link type="text/css" rel="stylesheet" href="<?php echo base_url('js/chosen/chosen.css') ?>"/>
+    <link type="text/css" rel="stylesheet" href="<?php echo base_url('css/cupertino/jquery-ui-1.8.16.custom.css') ?>"/>
+    <link type="text/css" rel="stylesheet" href="<?php echo base_url('js/jQuery-Visualize/css/visualize.css'); ?>"/>
+    <link type="text/css" rel="stylesheet" href="<?php echo base_url('js/jQuery-Visualize/css/visualize-light.css'); ?>"/>
     <link type="text/css" rel="stylesheet" href="<?php echo base_url('css/mul14.css') ?>"/>
     <link type="text/css" rel="stylesheet" href="<?php echo base_url('css/akhyar-v2.css') ?>"/>
-
-    <link rel="stylesheet" href="<?php echo base_url('css/cupertino/jquery-ui-1.8.16.custom.css') ?>"/>
-    <link href="<?php echo base_url('css/autoSuggest.css') ?>" rel="stylesheet"/>
-    <link href="<?php echo base_url('css/akhyar.css') ?>" rel="stylesheet"/>
-    <link href="<?php echo base_url('js/FlexBox/css/jquery.flexbox.css') ?>" rel="stylesheet"/>
     <!-- end CSS-->
 
-    <script src="<?php echo base_url('js/modernizr-2.0.6.min.js') ?>"></script>
-    <script src="<?php echo base_url('js/jquery-1.7.1.min.js') ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('js/modernizr-2.0.6.min.js') ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('js/jquery-1.7.1.min.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/jquery-ui-1.8.16.custom.min.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/chosen/chosen.jquery.min.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/jquery.autoSuggest.minified.js') ?>"></script>
