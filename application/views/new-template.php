@@ -8,10 +8,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <title><?php echo $title ?></title>
+    <title>Sistem Informasi Pusat Layanan DJA - <?php echo $title ?></title>
     <meta name="description" content="">
     <meta name="author" content="">
-
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
     <!-- CSS concatenated and minified via ant build script-->
@@ -22,22 +21,23 @@
     <link type="text/css" rel="stylesheet" href="<?php echo base_url('css/cupertino/jquery-ui-1.8.16.custom.css') ?>"/>
     <link type="text/css" rel="stylesheet" href="<?php echo base_url('js/jQuery-Visualize/css/visualize.css'); ?>"/>
     <link type="text/css" rel="stylesheet" href="<?php echo base_url('js/jQuery-Visualize/css/visualize-light.css'); ?>"/>
+    <link type="text/css" rel="stylesheet" href="<?php echo base_url('css/new-style.css') ?>"/>
     <link type="text/css" rel="stylesheet" href="<?php echo base_url('css/mul14.css') ?>"/>
     <link type="text/css" rel="stylesheet" href="<?php echo base_url('css/akhyar-v2.css') ?>"/>
     <!-- end CSS-->
 
+    <!-- JavaScript START -->
     <script type="text/javascript" src="<?php echo base_url('js/modernizr-2.0.6.min.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/jquery-1.7.1.min.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/jquery-ui-1.8.16.custom.min.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/chosen/chosen.jquery.min.js') ?>"></script>
-    <script type="text/javascript" src="<?php echo base_url('js/jquery.autoSuggest.minified.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/jQuery-Visualize/js/visualize.jQuery.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/phpjs/substr.js') ?>"></script>
-    <script type="text/javascript" src="<?php echo base_url('js/FlexBox/js/jquery.flexbox.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/scripts.js') ?>"></script>
+    <!-- JavaScript END -->
+
+
     <?php //echo $scripts_for_layout ?>
-
-
 </head>
 
 <body>
@@ -45,8 +45,8 @@
 <div id="container">
     <header>
         <div class="container_12">
-            <div style="padding: 20px; font-size: 20px; font-weight: bold; ">
-                <img src="<?php echo base_url('images/logo.png') ?>" width="40" height="40" />
+            <div id="logo">
+                <img src="<?php echo base_url('images/logo.png') ?>" width="50" height="50" />
                 &nbsp;&nbsp; Sistem Informasi Pusat Layanan DJA
             </div>
             <nav class="grid_10 alpha omega">

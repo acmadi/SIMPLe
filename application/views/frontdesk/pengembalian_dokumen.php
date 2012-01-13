@@ -1,4 +1,4 @@
-<div id="konten">
+<div class="content">
 
     <h1>Daftar Pengembalian Dokumen</h1>
 	<?php
@@ -37,17 +37,22 @@
                         <th class="short">Nama Eselon</th>
                         <th class="short">Kode Satker</th>
                         <th>Nama Satker</th>
-                        <th class="action">Aksi</th>
+                        <th>&nbsp;</th>
                     </tr>
                     </thead>
+                    <tfoot>
+                        <tr>
+                            <td colspan="7">&nbsp;</td>
+                        </tr>
+                    </tfoot>
                     <tbody>
                         <?php foreach ($result->result() as $value): ?>
                     <tr>
-                        <td class="short"><?php echo sprintf('%05d', $value->no_tiket_frontdesk) ?></td>
-                        <td class="short"><?php echo $value->tanggal ?></td>
-                        <td class="short"><?php echo $value->id_unit ?></td>
-                        <td class="short"><?php echo $value->nama_unit ?></td>
-                        <td class="short"><?php echo $value->id_satker ?></td>
+                        <td><?php echo sprintf('%05d', $value->no_tiket_frontdesk) ?></td>
+                        <td><?php echo table_tanggal($value->tanggal) ?></td>
+                        <td><?php echo $value->id_unit ?></td>
+                        <td><?php echo $value->nama_unit ?></td>
+                        <td><?php echo $value->id_satker ?></td>
                         <td><?php echo $value->nama_satker ?></td>
                         <td class="action">
                             <a href="<?php echo site_url('/frontdesk/pengembalian_dokumen/cetak/' . $value->id_pengembalian_doc) ?>" class="button blue-pill">Kembalikan Dokumen</a>

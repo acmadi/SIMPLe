@@ -1,0 +1,107 @@
+a, a:visited {
+    color: gold;
+    text-decoration: none;
+}
+
+body {
+    background: #fff;
+    color: #393939;
+    font-family: 'Lucida Grande', Tahoma, Arial, sans-serif;
+    font-size: 11px;
+}
+
+header {
+    color: #fcfcfc;
+    background: #2a0038;
+    background: -webkit-linear-gradient(top, #2a0038 50%, #080027);
+}
+	#logo {
+		padding: 20px; 
+		font-size: 20px; 
+		font-weight: bold; 
+	}
+
+.content > h1:first-child{
+	/* Titel teratas setiap halaman */
+	text-transform: uppercase;
+	color: #555;
+	font-family: helvetica, verdana, arial, sans-serif;
+	border-bottom: 2px solid #ddd;
+	margin-bottom: 20px;
+}
+
+/* NAVIGASI */
+
+nav li {
+    display: inline-block;
+    margin: 0;
+}
+
+nav a {
+    display: inline-block;
+    background: #e6f2ff;
+    color: #666 !important;
+    padding: 4px 8px;
+    border-radius: 4px 4px 0 0;
+    box-shadow: inset 0px -3px 5px rgba(0,0,0, 0.2);
+}
+
+nav a:hover {
+    background: white;
+    box-shadow: none;
+    color: #666;
+}
+
+nav a.current {
+	color: black !important;
+    box-shadow: inset 0px 3px 0px rgba(255,200,0, 0.9);
+    background: white;
+}
+
+
+/* FIELDSET */
+
+fieldset {
+    border: 1px solid #cecece;
+    padding: 10px;
+    margin: 4px 0;
+    border-radius: 5px;
+    box-shadow: 0 0 0px #d9d9d9;
+}
+
+legend {
+	font-weight: bold;
+    border: 1px solid #cecece;
+    margin-left: 10px;
+    padding: 4px 20px;
+    border-radius: 12px;
+    color: #cecece;
+    /*background: #cecece;*/
+    color: black;
+    text-shadow: 1px 1px 0 #fff;
+    /*background: -webkit-linear-gradient(top, #fcfcfc, #cecece);*/
+    /*background: -moz-linear-gradient(top, #fcfcfc, #cecece);*/
+}
+
+/* DUA KOLOM */
+
+.col-1 h1,
+.col-2 h1
+{
+	font-weight:bold;
+	font-size: 14px;
+}
+
+.col-1{
+	width: 160px;
+	float: left;
+	text-align: right;
+}
+.col-2{
+	padding-left: 200px;
+}
+	.col-2 ol li
+	{
+		margin-left: 20px;
+		padding-left: 0;
+	}
