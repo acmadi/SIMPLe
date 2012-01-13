@@ -75,6 +75,7 @@ fieldset {
     margin: 4px 0;
     border-radius: 5px;
     box-shadow: 0 0 0px #d9d9d9;
+    background: white;
 }
 
 legend {
