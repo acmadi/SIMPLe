@@ -259,8 +259,7 @@ class Dirjen extends CI_Controller
             ), array(
                 'no_tiket_frontdesk' => $this->input->post('no_tiket_frontdesk'),
             ));
-
-            redirect('dirjen/frontdesk');
+			redirect('dirjen/frontdesk');
         }
 
 
@@ -280,5 +279,14 @@ class Dirjen extends CI_Controller
         $data['title'] = 'Dirjen';
         $data['content'] = 'dirjen/helpdesk';
         $this->load->view('new-template', $data);
+    }
+	
+	private function _success($url, $message, $time)
+    {
+        $data['url'] = $url;
+        $data['message'] = $message;
+        $data['time'] = $time;
+
+        $this->load->view('helpdesk/success', $data);
     }
 }
