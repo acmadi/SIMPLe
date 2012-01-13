@@ -5,10 +5,10 @@
 <?php if ($result->num_rows() > 0): ?>
     <div class="table">
         <div id="head">
-            <form id="form-cari" action="<?php echo site_url('/kasubdit/frontdesk/index');?>" method="post">
+            <form id="form-cari" action="<?php echo site_url('/kasubdit_dadutek/frontdesk/index');?>" method="post">
                 <p><input type="text" size="60" placeholder="Pencarian" name="keyword" value="<?php echo $isian_form;?>"/>
                     &nbsp;<input type="submit" value="cari" class="button blue-pill"/>
-                    <a href="<?php echo site_url('/kasubdit/frontdesk/index');?>" class="button gray-pill">Reset</a>
+                    <a href="<?php echo site_url('/kasubdit_dadutek/frontdesk/index');?>" class="button gray-pill">Reset</a>
                 </p>
             </form>
         </div>
@@ -72,13 +72,13 @@
 					<?php
 						$disabled =  $onclick = '';
 						$style_button = 'gray-pill';
-						if($value->is_active == 2){
+						if($value->is_active == 4){
 							$disabled = 'disabled';
 							$style_button = 'blue-pill';
 						}
 					?>
-					<a class="button <?php echo $style_button;?>" href="<?php echo site_url('/kasubdit/frontdesk/diterima/' . $value->no_tiket_frontdesk) ?>">Diterima</a>
-                    <input type="button" class="button <?php echo $style_button;?>" onclick="window.location.href='<?php echo site_url('/kasubdit/frontdesk/diteruskan/' . $value->no_tiket_frontdesk); ?>'" <?php echo $disabled;?>
+					<a class="button <?php echo $style_button;?>" href="<?php echo site_url('/kasubdit_dadutek/frontdesk/diterima/' . $value->no_tiket_frontdesk) ?>">Diterima</a>
+                    <input type="button" class="button <?php echo $style_button;?>" onclick="window.location.href='<?php echo site_url('/kasubdit_dadutek/frontdesk/diteruskan/' . $value->no_tiket_frontdesk); ?>'" <?php echo $disabled;?>
                            value="Diteruskan"/>
  
                 </td>

@@ -69,8 +69,16 @@
                 <td><?php echo $value->nama_kementrian ?></td>
                 <td><?php echo $value->nama_unit ?></td>
                 <td class="action">
-                    <a class="bla button " href="<?php echo site_url('/pelaksana/frontdesk/diterima/' . $value->no_tiket_frontdesk) ?>">Diterima</a>
-                    <input type="button" class="bla2 button " link="<?php echo site_url('/pelaksana/frontdesk/diteruskan/' . $value->no_tiket_frontdesk) ?>" disabled
+					<?php
+						$disabled =  $onclick = '';
+						$style_button = 'gray-pill';
+						if($value->is_active == 2){
+							$disabled = 'disabled';
+							$style_button = 'blue-pill';
+						}
+					?>
+					<a class="button <?php echo $style_button;?>" href="<?php echo site_url('/pelaksana/frontdesk/diterima/' . $value->no_tiket_frontdesk) ?>">Diterima</a>
+                    <input type="button" class="button <?php echo $style_button;?>" onclick="window.location.href='<?php echo site_url('/pelaksana/frontdesk/diteruskan/' . $value->no_tiket_frontdesk); ?>'" <?php echo $disabled;?>
                            value="Diteruskan"/>
                     <a class="button " href="<?php echo site_url('/pelaksana/frontdesk/reject/' . $value->no_tiket_frontdesk) ?>">Dikembalikan</a>
                 </td>
