@@ -53,7 +53,7 @@
             <nav class="grid_10 alpha omega">
 
                 <?php
-
+				
                 if ($this->session->userdata('lavel') == '2') {
                     $this->session->set_userdata('navbar', 'navbar_supervisor');
                     $this->load->view('navbar_supervisor');
@@ -65,6 +65,10 @@
                 elseif ($this->uri->segment(1) == 'kasubdit') {
                     $this->session->set_userdata('navbar', 'navbar_pelaksana');
                     $this->load->view('navbar_kasubdit');
+                }
+				elseif ($this->uri->segment(1) == 'kasubdit_dadutek') {
+                    $this->session->set_userdata('navbar', 'navbar_dadutek');
+                    $this->load->view('navbar_dadutek');
                 }
                 elseif ($this->session->userdata('lavel') == '5') {
                     $this->session->set_userdata('navbar', 'navbar_direktur');
