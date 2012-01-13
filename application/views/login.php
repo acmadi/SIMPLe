@@ -3,8 +3,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="shortcut icon" href="<?php echo base_url() . 'images/icon.jpg';?>"/>
-    <link href="<?php echo base_url('/css/style.css') ?>" rel="stylesheet" type="text/css" />
-    <link href="<?php echo base_url('css/buttons.css'); ?>" rel="stylesheet"/>
+    <link href="<?php echo base_url('/css/admin-style.css') ?>" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url('css/admin-buttons.css'); ?>" rel="stylesheet"/>
     <script src="<?php echo base_url('js/jquery-1.7.1.min.js') ?>"></script>
     <style type="text/css">@import url("<?php echo base_url() . 'css/style.css'; ?>");</style>
     <title>Login</title>

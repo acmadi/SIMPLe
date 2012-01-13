@@ -28,12 +28,12 @@
 <div class="content">
     <h1>Knowledge Base</h1>
 
-    <div>
+    <div class="col-2">
     <?php $this->load->view('knowledge/searchform') ?>
     </div>
-    <div id="ref_cat" style="float: left; width: 150px; padding-left: 0">
+    <div class="col-1">
 
-        <strong>Kategori</strong>
+        <h1>Kategori</h1>
         <ul style="list-style: none">
             <li style="margin-left: 0; margin-bottom: 5px;">
             <a href="<?php echo site_url($this->uri->segment(1)) ?>">Semua Kategori</a>
@@ -52,8 +52,8 @@
 
     </div>
 
-    <div style="padding-left:160px">
-        <h6>
+    <div class="col-2">
+        <h1>
         <?php if(isset($active_cat)) : ?>
             Menampilkan kategori <?php echo $active_cat ?>
         <?php elseif(isset($keyword)) : ?>
@@ -61,7 +61,7 @@
         <?php else : ?>
             Menampilkan semua kategori
         <?php endif; ?>
-        </h6>
+        </h1>
         <ol>
             <?php foreach ($kb as $value): ?>
             <li style="margin-bottom: 10px;">
