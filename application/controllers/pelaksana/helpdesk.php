@@ -15,12 +15,12 @@ class Helpdesk extends CI_Controller
 
     function search($keyword = NULL)
     {
-        $keyword = ($this->input->post('keyword')) 
-            ? $this->input->post('keyword')
-            : NULL;
-        $keyword = ($keyword != NULL) 
-            ? "AND tb_satker.id_satker LIKE '%$keyword%'"
-            : '';
+        $keyword = ($this->input->post('keyword'))
+                ? $this->input->post('keyword')
+                : NULL;
+        $keyword = ($keyword != NULL)
+                ? "AND tb_satker.id_satker LIKE '%$keyword%'"
+                : '';
         $sql = "SELECT * FROM tb_tiket_helpdesk JOIN tb_satker
                                 ON tb_tiket_helpdesk.id_satker = tb_satker.id_satker
                                 WHERE status = 'open' AND
@@ -39,6 +39,43 @@ class Helpdesk extends CI_Controller
         $data['antrian'] = $this->mhelpdesk->get_by_id($id);
 
         $this->load->view('new-template', $data);
+    }
+
+    // TODO: Untuk konsistensi, mungkin sebaiknya eskalasi dan jawab dipisah. Atau ganti nama eskalasi() dengan nama tertentu
+    function eskalasi()
+    {
+        if ($this->input->post('submit') == 'Eskalasi') {
+
+            $this->db->update('tb_tiket_helpdesk', array(
+                'lavel' => 4
+            ), array(
+                'no_tiket_helpdesk' => $this->input->post('no_tiket_helpdesk')
+            ));
+
+            $this->_success(site_url('pelaksana/helpdesk'), 'Pertanyaan berhasil dieskalasi ke Kasubdit Anggaran', 5);
+
+        }
+
+        if ($this->input->post('submit') == 'Jawab') {
+
+            $this->db->insert('tb_knowledge_base', array(
+                'judul' => $this->input->post('pertanyaan'),
+                'jawaban' => $this->input->post('jawaban'),
+                'nama_narasumber' => $this->input->post('nama_narasumber'),
+                'jabatan_narasumber' => $this->input->post('jabatan')
+            ));
+
+            $this->_success(site_url('pelaksana/helpdesk'), 'Pertanyaan telah berhasil dijawab dan telah dimasukkan ke knowledge base', 5);
+        }
+    }
+
+    private function _success($url, $message, $time)
+    {
+        $data['url'] = $url;
+        $data['message'] = $message;
+        $data['time'] = $time;
+
+        $this->load->view('helpdesk/success', $data);
     }
 
 }

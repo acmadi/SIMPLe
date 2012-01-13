@@ -53,7 +53,7 @@
                 <?php endif ?>
             </td>
             <td class="action">
-                <a href="<?php echo site_url('supervisor/jawab/index/' . $value->no_tiket_helpdesk) ?>" class="button blue-pill"/>Jawab</a>
+                <a href="<?php echo site_url('supervisors/jawab/' . $value->no_tiket_helpdesk) ?>" class="button blue-pill"/>Jawab</a>
             </td>
         </tr>
             <?php endforeach ?>
