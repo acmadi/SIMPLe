@@ -129,8 +129,6 @@ class Form_revisi_anggaran extends CI_Controller
     function save_identitas()
     {
         $status = false;
-
-
         $this->form_validation->set_rules('nama_kl', 'Nama K/L', 'required');
         $this->form_validation->set_rules('eselon', 'Eselon', 'required');
         $this->form_validation->set_rules('nama_petugas', 'Nama Petugas', 'required');
@@ -190,7 +188,7 @@ class Form_revisi_anggaran extends CI_Controller
             $now = date('Y-m-d');
 
             $sql = "INSERT INTO tb_tiket_frontdesk (id_satker, id_formulir, tanggal, status, lavel, id_petugas_satker, id_unit, id_kementrian,nomor_surat_usulan,tanggal_surat_usulan)
-					VALUES ({$kode_satker_select}, NULL, '{$now}', 'open', 1, {$tiket_id},'{$eselon}','{$nama_kl}','{$nomor_surat_usulan}','{$tanggal_surat_usulan}')";
+					VALUES ({$kode_satker_select}, NULL, '{$now}', 'open', 2, {$tiket_id},'{$eselon}','{$nama_kl}','{$nomor_surat_usulan}','{$tanggal_surat_usulan}')";
 
 
             $this->db->query($sql);
@@ -213,7 +211,6 @@ class Form_revisi_anggaran extends CI_Controller
                 $dokumen_lainnya = $this->input->post('dokumen_lainnya');
 
                 foreach ($dokumen_lainnya as $value) {
-
                     if (isset($_POST['dokumen_lainnya'])) {
                         $sql = "INSERT INTO tb_kelengkapan_formulir
 									(no_tiket_frontdesk, kelengkapan, id_kelengkapan)

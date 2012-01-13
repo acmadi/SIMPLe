@@ -32,7 +32,7 @@ class Frontdesk extends CI_Controller
         $query = $this->db->get_where('tb_tiket_frontdesk', array('no_tiket_frontdesk' => $id))->row();
 		
         $this->db->update('tb_tiket_frontdesk', array(
-            'lavel' => $query->lavel + 1,'is_active' => 2
+            'lavel' => 4,'is_active' => 2
         ), array(
             'no_tiket_frontdesk' => $id
         ));
