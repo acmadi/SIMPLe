@@ -1,50 +1,13 @@
-a, a:visited {
-    color: gold;
-    text-decoration: none;
-}
 
-body {
-    background: #fff;
-    color: #393939;
-    font-family: 'Lucida Grande', Tahoma, Arial, sans-serif;
-    font-size: 11px;
-}
 
 ul {
     margin: 0;
     padding: 0;
 }
 
-header {
-    color: #fcfcfc;
-    background: #2a0038;
-    /*background: -webkit-linear-gradient(top, #2a0038 80%, #c38ffe);*/
-    /*box-shadow: 0 1px 5px #333;*/
-    /*border: 1px solid red;*/
-}
 
-nav li {
-    display: inline-block;
-    margin: 0;
-}
 
-nav a {
-    /*font-weight: bold;*/
-    display: inline-block;
-    background: #e6f2ff;
-    color: #666 !important;
-    padding: 4px 8px;
-    border-radius: 4px 4px 0 0;
-}
 
-nav a:hover {
-    background: white;
-    color: #666;
-}
-
-nav a.current {
-    background: white;
-}
 
 .profile-menu {
     text-align: right;
