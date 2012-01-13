@@ -1,13 +1,15 @@
+body {
+    background: #fff url(../images/tribal_flower_black.png) right bottom no-repeat;
+}
 
+header {
+    background: #2a0038 url(../images/tribal_flower_white.png) right bottom no-repeat;
+}
 
 ul {
     margin: 0;
     padding: 0;
 }
-
-
-
-
 
 .profile-menu {
     text-align: right;
@@ -53,7 +55,7 @@ ul {
 footer {
     color: #fcfcfc;
     padding: 20px 0 0;
-    background: #2a0038;
+    background: #2a0038 url(../images/tribal_flower_white.png) right bottom no-repeat;
     box-shadow: 1px 0 5px #333;
 }
 
