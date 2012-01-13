@@ -24,7 +24,14 @@ ul li.current a
   color: #aa8300;
 }
 
+dt {
+  font-weight: bold;
+  font-size: 1.2em;
+}
 
+p {
+  margin-bottom: 7px;
+}
 
 /*STRIPPED FROM BOOTSTRAP*/
 
