@@ -11,7 +11,7 @@ class Dashboard extends CI_Controller
 
     function index()
     {
-        $data['helpdesk_total'] = $this->mhelpdesk->count_all_tiket();
+        $data['helpdesk_total'] = $this->mhelpdesk->count_all_tiket('open',4);
         $data['frontdesk_total'] = $this->db->query("SELECT * FROM tb_tiket_frontdesk JOIN tb_satker
                                                     ON tb_tiket_frontdesk.id_satker = tb_satker.id_satker
                                                     WHERE status = 'open' AND
@@ -31,7 +31,7 @@ class Dashboard extends CI_Controller
         $data['total_tiket_diteruskan_pelaksana'] = $result->num_rows();
 
         $data['title'] = 'Dashboard';
-        $data['content'] = 'pelaksana/dashboard';
+        $data['content'] = 'kasubdit_dadutek/dashboard';
         $this->load->view('new-template', $data);
     }
 }

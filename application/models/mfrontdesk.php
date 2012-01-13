@@ -10,7 +10,7 @@ class Mfrontdesk extends CI_Model
                                                     is_active = 1",array($stat,$lav))->num_rows();
 	}
 	
-	public function get_all_tiket_frontdesk($level = 2,$optional = ''){
+	public function get_all_tiket_frontdesk($level = 3,$optional = ''){
 		//@F2D
 		$keyword = $this->input->post('keyword',TRUE);
 		

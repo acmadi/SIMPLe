@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <title><?php echo $title ?></title>
+    <title>Sistem Informasi Pusat Layanan DJA - <?php echo $title ?></title>
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -52,7 +52,7 @@
             <nav class="grid_10 alpha omega">
 
                 <?php
-
+				
                 if ($this->session->userdata('lavel') == '2') {
                     $this->session->set_userdata('navbar', 'navbar_supervisor');
                     $this->load->view('navbar_supervisor');
@@ -64,6 +64,10 @@
                 elseif ($this->uri->segment(1) == 'kasubdit') {
                     $this->session->set_userdata('navbar', 'navbar_pelaksana');
                     $this->load->view('navbar_kasubdit');
+                }
+				elseif ($this->uri->segment(1) == 'kasubdit_dadutek') {
+                    $this->session->set_userdata('navbar', 'navbar_dadutek');
+                    $this->load->view('navbar_dadutek');
                 }
                 elseif ($this->session->userdata('lavel') == '5') {
                     $this->session->set_userdata('navbar', 'navbar_direktur');

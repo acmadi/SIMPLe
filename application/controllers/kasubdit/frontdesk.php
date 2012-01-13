@@ -10,7 +10,7 @@ class Frontdesk extends CI_Controller
     public function index()
     {
 		$this->load->helper('tanggal_helper');
-        $page		= $this->mfrontdesk->get_all_tiket_frontdesk(3,'  AND (tf.is_active = 1 OR tf.is_active = 2 ) ');
+        $page		= $this->mfrontdesk->get_all_tiket_frontdesk(4,'  AND (tf.is_active = 1 OR tf.is_active = 2 ) ');
 		$pageData	= $page['query'];
 		$pageLink	= $page['pagination1'];
 		
