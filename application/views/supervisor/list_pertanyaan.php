@@ -1,22 +1,24 @@
+<div class="content">
 <h1>Penyelia - Daftar Pertanyaan</h1>
 
 <?php if ($pertanyaan->num_rows() > 0): ?>
-            <div class="table">
-                <div id="head">
-                    <div id="form-cari">
-                        Urutkan berdasar :
-                        <form action="<?php echo '' ?>" method="get" name="form">
-                            <select name="sort" onchange="javascript: $('form').submit() ">
-                                <option value="" selected="selected"> -</option>
-                                <option value="tanggal">Tanggal</option>
-                                <option value="prioritas">Prioritas</option>
-                            </select>
-                        </form>
-                    </div>
+    <div class="table">
+        <div id="head">
+            <div id="form-cari">
+                Urutkan berdasar :
+                <form action="<?php echo '' ?>" method="get" name="form">
+                    <select name="sort" onchange="javascript: $('form').submit() ">
+                        <option value="" selected="selected"> -</option>
+                        <option value="tanggal">Tanggal</option>
+                        <option value="prioritas">Prioritas</option>
+                    </select>
+                </form>
+            </div>
 
-                    <input id="tambah" class='button' type="submit" value="<?php echo $pertanyaan->num_rows() ?> tiket" style="background:#D65703; width:80px; color:#FFF; "/>
-
-                </div>
+            <span id="tambah" class="xxlabel"><?php echo $pertanyaan->num_rows() ?> TIKET</span>
+            <br/><br/>
+        </div>
+    </div>
 
     <table class="table">
         <thead>
@@ -29,11 +31,13 @@
             <th class="">&nbsp;</th>
         </tr>
         </thead>
+
         <tfoot>
         <tr>
             <td colspan="6">&nbsp;</td>
         </tr>
         </tfoot>
+
         <tbody>
 
             <?php $i = 1 ?>
@@ -62,9 +66,9 @@
     </table>
 
 
-    <?php else: ?>
+<?php else: ?>
     Tidak ada pertanyaan yang dieskalasi
-    <?php endif ?>
+<?php endif; ?>
 
 </div>
 <script type="text/javascript" src="<?php echo base_url(); ?>js/fungsi.js"></script>

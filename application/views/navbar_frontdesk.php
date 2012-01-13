@@ -33,12 +33,12 @@ if ($this->uri->segment(1) == 'knowledge') {
 
 <div id="navbar" class="clearfloat">
     <ul class="sf-menu">
-        <li class="<?php echo $nav_dashboard ?>"><?php echo anchor('frontdesk/dashboard', 'Dashboard');?></li>
-        <li class="<?php echo $nav_form ?>"><?php echo anchor('frontdesk/form_revisi_anggaran', 'Form Revisi Anggaran');?></li>
-        <li class="<?php echo $nav_status_tiket ?>"><?php echo anchor('frontdesk/status_tiket', 'Status Tiket');?></li>
-        <li class="<?php echo $nav_ambil_dokumen ?>"><?php echo anchor('frontdesk/ambil_dokumen', 'Pengambilan Dokumen');?></li>
-        <li class="<?php echo $nav_pengembalian_dokumen ?>"><?php echo anchor('frontdesk/pengembalian_dokumen', 'Pengembalian Dokumen');?></li>
-        <li class="<?php echo $nav_referensi ?>"><?php echo anchor('referensi', 'Referensi Peraturan') ?></li>
-        <li class="<?php echo $nav_forum ?>"><?php echo anchor('frontdesk/man_forum', 'Forum');?></li>
+        <li><?php echo anchor('frontdesk/dashboard', 'Dashboard', "class='$nav_dashboard'");?></li>
+        <li><?php echo anchor('frontdesk/form_revisi_anggaran', 'Form Revisi Anggaran', "class='$nav_form'");?></li>
+        <li><?php echo anchor('frontdesk/status_tiket', 'Status Tiket', "class='$nav_status_tiket'");?></li>
+        <li><?php echo anchor('frontdesk/ambil_dokumen', 'Pengambilan Dokumen', "class='$nav_ambil_dokumen'");?></li>
+        <li><?php echo anchor('frontdesk/pengembalian_dokumen', 'Pengembalian Dokumen', "class='$nav_pengembalian_dokumen'");?></li>
+        <li><?php echo anchor('referensi', 'Referensi Peraturan', "class='$nav_referensi'") ?></li>
+        <li><?php echo anchor('frontdesk/man_forum', 'Forum', "class='$nav_forum'");?></li>
     </ul>
 </div>

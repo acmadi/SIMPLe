@@ -34,8 +34,8 @@
     <div class="col-1">
 
         <h1>Kategori</h1>
-        <ul style="list-style: none">
-            <li style="margin-left: 0; margin-bottom: 5px;">
+        <ul>
+            <li>
             <a href="<?php echo site_url($this->uri->segment(1)) ?>">Semua Kategori</a>
             </li>
             <?php foreach ($categories as $value): ?>

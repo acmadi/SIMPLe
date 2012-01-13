@@ -27,10 +27,10 @@ if ($this->uri->segment(1) == 'knowledge') {
 
 
 <ul class="sf-menu">
-    <li class="<?php echo $nav_dashboard ?>"><?php echo anchor('helpdesk/dashboard', 'Dashboard');?></li>
-    <li class="<?php echo $nav_identitas_satker ?>"><?php echo anchor('helpdesk/identitas_satker', 'Isi Identitas Satker');?></li>
-    <li class="<?php echo $nav_knowledge ?>"><?php echo anchor('knowledge', 'Knowledge Base');?></li>
-    <li class="<?php echo $nav_referensi ?>"><?php echo anchor('referensi', 'Referensi Peraturan') ?></li>
-    <li class="<?php echo $nav_forum ?>"><?php echo anchor('helpdesk/man_forum', 'Forum');?></li>
+    <li><?php echo anchor('helpdesk/dashboard', 'Dashboard', "class='$nav_dashboard'");?></li>
+    <li><?php echo anchor('helpdesk/identitas_satker', 'Isi Identitas Satker', "class='$nav_identitas_satker'");?></li>
+    <li><?php echo anchor('knowledge', 'Knowledge Base', "class='$nav_knowledge'");?></li>
+    <li><?php echo anchor('referensi', 'Referensi Peraturan', "class='$nav_referensi'")?></li>
+    <li><?php echo anchor('helpdesk/man_forum', 'Forum', "class='$nav_forum'");?></li>
 </ul>
 
