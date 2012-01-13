@@ -182,12 +182,12 @@
         </p>
 
         <p>
-            <label>No. Hp</label>
+            <label>Nomor HP</label>
             <input type="text" name="no_hp" size="30" value="<?php echo set_value('no_hp') ?>">
         </p>
 
         <p>
-            <label>No. Telpon Kantor</label>
+            <label>Telepon Kantor</label>
             <input type="text" name="no_kantor" size="30" value="<?php echo set_value('no_kantor') ?>">
         </p>
 
@@ -197,10 +197,10 @@
         </p>
     </fieldset>
 
-    <fieldset style="float: right; width: 47%; height: 280px;">
+    <fieldset style="float: right; width: 47%;">
         <legend>Kelengkapan Dokumen</legend>
 
-        <div style="overflow: auto; height: 260px; margin: 0;">
+        <div style="overflow: auto; margin: 0;">
             <?php foreach ($kelengkapan_dokumen->result() as $value): ?>
 
             <?php if ($value->id_kelengkapan != 0): ?>
@@ -219,9 +219,9 @@
         </div>
     </fieldset>
 
-    <div style="text-align: center; margin-top: 20px; clear: both;">
-        <input type="submit" class="button blue-pill" value="Submit">
-        <a href="<?php echo site_url('/frontdesk/form_revisi_anggaran') ?>" class="button gray-pill">Reset</a>
+    <div style="float: right; width: 47%; text-align: center; margin-top: 20px;">
+        <a style="padding: 20px 40px; font-size: 1.5em; font-weight: bold" class="button green" onclick="submit()">Kirim</a>
+        <a style="padding: 20px 40px; font-size: 1.5em; font-weight: bold" href="<?php echo site_url('/frontdesk/form_revisi_anggaran') ?>" class="button gray-pill">Reset</a>
     </div>
 
     </form>
