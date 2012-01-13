@@ -1,6 +1,6 @@
 <meta http-equiv="refresh" content="10; url=<?php echo site_url('/frontdesk/ambil_dokumen')  ?>">
 
-<div id="konten">
+<div class="content">
 
     <h1>Daftar Pengambilan Dokumen</h1>
 	<?php

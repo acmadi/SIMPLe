@@ -1,5 +1,6 @@
-<div id="konten">
+<div class="content">
 
+    <h1>Status Tiket</h1>
 
     <div class="table">
         <div id="head">
@@ -25,6 +26,11 @@
                     <th class="short">Status Dokumen</th>
 				</tr>
 			</thead>
+            <tfoot>
+                <tr>
+                    <td colspan="8">&nbsp;</td>
+                </tr>
+            </tfoot>
 			<tbody>
             <?php foreach ($result as $value): ?>
 				<tr>
