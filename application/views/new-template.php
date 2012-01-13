@@ -11,7 +11,6 @@
     <title><?php echo $title ?></title>
     <meta name="description" content="">
     <meta name="author" content="">
-
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
     <!-- CSS concatenated and minified via ant build script-->
@@ -22,22 +21,23 @@
     <link type="text/css" rel="stylesheet" href="<?php echo base_url('css/cupertino/jquery-ui-1.8.16.custom.css') ?>"/>
     <link type="text/css" rel="stylesheet" href="<?php echo base_url('js/jQuery-Visualize/css/visualize.css'); ?>"/>
     <link type="text/css" rel="stylesheet" href="<?php echo base_url('js/jQuery-Visualize/css/visualize-light.css'); ?>"/>
+    <link type="text/css" rel="stylesheet" href="<?php echo base_url('css/new-style.css') ?>"/>
     <link type="text/css" rel="stylesheet" href="<?php echo base_url('css/mul14.css') ?>"/>
     <link type="text/css" rel="stylesheet" href="<?php echo base_url('css/akhyar-v2.css') ?>"/>
     <!-- end CSS-->
 
+    <!-- JavaScript START -->
     <script type="text/javascript" src="<?php echo base_url('js/modernizr-2.0.6.min.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/jquery-1.7.1.min.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/jquery-ui-1.8.16.custom.min.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/chosen/chosen.jquery.min.js') ?>"></script>
-    <script type="text/javascript" src="<?php echo base_url('js/jquery.autoSuggest.minified.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/jQuery-Visualize/js/visualize.jQuery.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/phpjs/substr.js') ?>"></script>
-    <script type="text/javascript" src="<?php echo base_url('js/FlexBox/js/jquery.flexbox.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/scripts.js') ?>"></script>
+    <!-- JavaScript END -->
+
+
     <?php //echo $scripts_for_layout ?>
-
-
 </head>
 
 <body>
