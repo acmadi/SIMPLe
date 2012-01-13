@@ -14,7 +14,7 @@
     }
 
     #kl label {
-        width: 150px;
+        width: 180px;
         display: inline-block;
     }
 </style>
@@ -32,47 +32,33 @@
 
         $(function () {
 
-            $('#nama_kl_input').live('focusin', function () {
-                var nama_kl = $('#nama_kl_input').val();
+            $('#nama_kl').chosen().change(function(){
+                var nama_kl = $(this).val();
                 $.get('<?php echo site_url('helpdesk/identitas_satker/cari_kl/') ?>', {id_kementrian:nama_kl}, function (response) {
                     console.log(response);
-                    response = '<option> - Pilih Eselon - </option>' + response;
                     $('#eselon').html(response);
+                    $('#eselon').trigger('liszt:updated');
                     $('#kode_satker').removeAttr('disabled');
                 })
             })
 
-            $('#eselon').change(function () {
-                id_kementrian = substr($('#nama_kl_input').val(), 0, 3);
 
+            $('#eselon').chosen().change(function () {
+                id_kementrian = substr($('#nama_kl').val(), 0, 3);
                 url = '<?php echo site_url('frontdesk/form_revisi_anggaran/anggaran') ?>/' + id_kementrian;
                 console.log(url);
                 $.get(url, function (response) {
                     $('#anggaran').html('A' + response);
                 });
+
+                url = '<?php echo site_url('frontdesk/form_revisi_anggaran/cari_satker') ?>/' + id_kementrian + '/' + $(this).val();
+                console.log(url);
+                $.get(url, function(response){
+                    $('#kode_satker').html(response);
+                    $('#kode_satker').trigger('liszt:updated');
+                    console.log(response);
+                });
             });
-
-            $('#kode_satker').autocomplete({
-                source:function (request, response) {
-                    $.ajax({
-                        url:"<?php echo site_url('/helpdesk/identitas_satker/cari_satker') ?>",
-
-                        data:{
-                            term:request.term,
-                            eselon:$('#eselon').val(),
-                            nama_kl:$('#nama_kl_input').val()
-                        },
-
-                        dataType:'json',
-
-                        success:function (data) {
-                            response(data);
-                        }
-                    })
-                },
-                delay:500,
-                minLength:1
-            })
 
 
             $('form').submit(function () {
@@ -93,12 +79,6 @@
             ];
             kementrian_list.total = kementrian_list.results.length;
 
-            // Tombol hapus
-            $('#clear_nama_kl').click(function () {
-                $('#nama_kl_input').val('');
-                $('#eselon').html('');
-            })
-
             // Tambah Dokumen Lainnya
             $('#other-doc-btn').live('click', function () {
                 $('#other-docs').append('<p><input type="text" name="dokumen_lainnya[]"/></p>');
@@ -115,17 +95,12 @@
 
             })
 
-            $('#nama_kl').flexbox(kementrian_list, {
-                width:600,
-                paging:true,
-                onSelect:function () {
-                }
-            });
-
             $('#tanggal_surat_usulan').datepicker({
                 dateFormat:'dd-mm-yy'
             });
         })
+
+        $(".chzn-select").chosen();
     })
 </script>
 
@@ -165,23 +140,26 @@
         </p>
 
         <p>
-
-        <div style="float: left; width: 150px;">Kode - Nama K/L</div>
-        <div style="float: left;">
-            <div id="nama_kl"></div>
-        </div>
-        <a href="javascript:void(0)" class="clear_btn" id="clear_nama_kl">Hapus</a>
+            <label>Kode - Nama K/L</label>
+            <select name="nama_kl" id="nama_kl" type="text" class="chzn-select" data-placeholder="Pilih nama K/L" style="width: 700px;">
+                <?php
+                foreach ($kementrian->result() as $value) {
+                    echo sprintf("<option value='%s'>%s</option>", $value->id_kementrian, $value->id_kementrian . ' - ' . $value->nama_kementrian);
+                }
+                ?>
+            </select>
         </p>
 
         <p>
             <label>Nama Eselon 1</label>
-            <select id="eselon" name="eselon" class="kl" value="<?php echo set_value('eselon') ?>" style="width: 710px;">
+            <select id="eselon" name="eselon" class="kl chzn-select" value="<?php echo set_value('eselon') ?>" style="width: 700px;">
             </select>
         </p>
 
         <p class="kode_satker_p">
             <label>Kode - Nama Satker</label>
-            <input type="text" name="kode_satker" id="kode_satker" class="kl" size="30" disabled/>
+            <select name="kode_satker" id="kode_satker" class="kl chzn-select" multiple style="width: 700px;">
+            </select>
         </p>
 
     </fieldset>
