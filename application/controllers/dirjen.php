@@ -209,8 +209,63 @@ class Dirjen extends CI_Controller
 
     function frontdesk()
     {
-        $data['title'] = 'Dirjen';
-        $data['content'] = 'dirjen/frontdesk';
+		$this->load->model('mfrontdesk');
+		$this->load->helper('tanggal_helper');
+        $page		= $this->mfrontdesk->get_all_tiket_frontdesk(6,'');
+		$pageData	= $page['query'];
+		$pageLink	= $page['pagination1'];
+		
+		$data				= array('result'=>$pageData,'pageLink'=>$pageLink,);
+        $data['title'] 		= 'Konsultasi Front Desk';
+        $data['content'] 	= 'dirjen/frontdesk';
+		$data['isian_form']	= $page['isian_form1'];
+        $this->load->view('new-template', $data);
+    }
+	
+	function diterima($id)
+    {
+		$this->db->query("UPDATE tb_tiket_frontdesk SET is_active = 1 WHERE no_tiket_frontdesk = ?",array($id));		
+		redirect('dirjen/frontdesk');
+    }
+	
+	function accept($id)
+    {
+        $query = $this->db->get_where('tb_tiket_frontdesk', array('no_tiket_frontdesk' => $id))->row();
+		
+        $this->db->update('tb_tiket_frontdesk', array(
+            'status' => 'close','is_active' => 6
+        ), array(
+            'no_tiket_frontdesk' => $id
+        ));
+		
+        $this->_success(site_url('/dirjen/frontdesk'), 'Tiket berhasil ditetapkan', 3);
+    }
+	
+	function reject($id)
+    {
+		$this->load->model('mfrontdesk');
+        if (!$_POST) {
+            $data['data'] = $this->mfrontdesk->get_tiket_frontdesk_by_id($id);
+        } else {
+            $this->db->insert('tb_pengembalian_doc', array(
+                'no_tiket_frontdesk' => $this->input->post('no_tiket_frontdesk'),
+                'id_user' => $this->input->post('id_user'),
+                'catatan' => $this->input->post('catatan'),
+            ));
+
+            $this->db->update('tb_tiket_frontdesk', array(
+                'is_active' => 3,
+                'status' => 'close'
+            ), array(
+                'no_tiket_frontdesk' => $this->input->post('no_tiket_frontdesk'),
+            ));
+
+            redirect('dirjen/frontdesk');
+        }
+
+
+        $data['title'] = 'Cek Tiket';
+        $data['content'] = 'dirjen/reject';
         $this->load->view('new-template', $data);
     }
 
