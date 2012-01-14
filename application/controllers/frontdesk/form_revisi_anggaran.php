@@ -179,20 +179,21 @@ class Form_revisi_anggaran extends CI_Controller
             // Save Identitas Petugas Satker
             $sql = "INSERT INTO tb_petugas_satker (nama_petugas, jabatan_petugas, no_hp, email, no_kantor, tipe, nip)
                     VALUES ('{$nama_petugas}', '{$jabatan_petugas}', '{$no_hp}', '{$email}', '{$no_kantor}', '{$tipe}','{$nip}')";
-
+		
             $this->db->query($sql);
 
             $tiket_id = $this->db->insert_id();
 
-
             $now = date('Y-m-d');
 
-            $sql = "INSERT INTO tb_tiket_frontdesk (id_satker, id_formulir, tanggal, status, lavel, id_petugas_satker, id_unit, id_kementrian,nomor_surat_usulan,tanggal_surat_usulan)
-					VALUES ({$kode_satker_select}, NULL, '{$now}', 'open', 2, {$tiket_id},'{$eselon}','{$nama_kl}','{$nomor_surat_usulan}','{$tanggal_surat_usulan}')";
+            $sql = "INSERT INTO tb_tiket_frontdesk (id_satker, id_formulir, tanggal, status, lavel, id_petugas_satker, id_unit, id_kementrian,nomor_surat_usulan,tanggal_surat_usulan,is_active)
+					VALUES ({$kode_satker_select}, NULL, '{$now}', 'open', 3, {$tiket_id},'{$eselon}','{$nama_kl}','{$nomor_surat_usulan}','{$tanggal_surat_usulan}',2)";
 
 
             $this->db->query($sql);
-
+			
+			
+			
             // Simpan dokumen di tb_kelengkapan_formulir
             $dokumen = $this->input->post('dokumen');
             $no_tiket_frontdesk = $this->db->insert_id();

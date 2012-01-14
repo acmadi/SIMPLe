@@ -5,10 +5,10 @@
 <?php if ($result->num_rows() > 0): ?>
     <div class="table">
         <div id="head">
-            <form id="form-cari" action="<?php echo site_url('/direktur/frontdesk/index');?>" method="post">
+            <form id="form-cari" action="<?php echo site_url('/dirjen/frontdesk/index');?>" method="post">
                 <p><input type="text" size="60" placeholder="Pencarian" name="keyword" value="<?php echo $isian_form;?>"/>
                     &nbsp;<input type="submit" value="cari" class="button blue-pill"/>
-                    <a href="<?php echo site_url('/direktur/frontdesk/index');?>" class="button gray-pill">Reset</a>
+                    <a href="<?php echo site_url('/dirjen/frontdesk/index');?>" class="button gray-pill">Reset</a>
                 </p>
             </form>
         </div>
@@ -77,11 +77,9 @@
 							$style_button = 'blue-pill';
 						}
 					?>
-					<a class="button <?php echo $style_button;?>" href="<?php echo site_url('/direktur/frontdesk/diterima/' . $value->no_tiket_frontdesk) ?>">Diterima</a>
-                    <input type="button" class="button <?php echo $style_button;?>" onclick="window.location.href='<?php echo site_url('/direktur/frontdesk/diteruskan/' . $value->no_tiket_frontdesk); ?>'" <?php echo $disabled;?>
-                           value="Diteruskan"/>
-                    <a class="button " href="<?php echo site_url('/direktur/frontdesk/reject/' . $value->no_tiket_frontdesk) ?>">Dikembalikan</a>
-                    <a class="button <?php echo $style_button;?>" href="<?php echo site_url('/direktur/frontdesk/accept/' . $value->no_tiket_frontdesk) ?>">Ditetapkan</a>
+					<a class="button <?php echo $style_button;?>" href="<?php echo site_url('/dirjen/diterima/' . $value->no_tiket_frontdesk) ?>">Diterima</a>                  
+                    <a class="button " href="<?php echo site_url('/dirjen/reject/' . $value->no_tiket_frontdesk) ?>">Dikembalikan</a>
+                    <a class="button <?php echo $style_button;?>" href="<?php echo site_url('/dirjen/accept/' . $value->no_tiket_frontdesk) ?>">Ditetapkan</a>
                 </td>
             </tr>
                 <?php endforeach ?>

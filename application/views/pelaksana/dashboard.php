@@ -15,18 +15,18 @@
         <table class="table">
             <tr>
                 <td>&nbsp;</td>
-                <td>Diterima</td>
-                <td>Diteruskan</td>
-                <td>Open</td>
+                <td class="head">Diterima</td>
+                <td class="head">Diteruskan</td>
+                <td class="head">Open</td>
             </tr>
             <tr>
-                <td>CS</td>
+                <td class="head">CS</td>
                 <td><span class="message_box glow_green"><?php echo $total_tiket_diterima_cs ?></span></td>
                 <td><span class="message_box glow_green"><?php echo $total_tiket_diteruskan_cs?></span></td>
                 <td><span class="message_box glow_green"><?php echo 19 ?></span></td>
             </tr>
             <tr>
-                <td>Kasi & Pelaksana</td>
+                <td class="head">Kasi & Pelaksana</td>
                 <td><span class="message_box glow_green"><?php echo $total_tiket_diterima_pelaksana ?></span></td>
                 <td><span class="message_box glow_green"><?php echo $total_tiket_diteruskan_pelaksana ?></span></td>
                 <td><span class="message_box glow_green"><?php echo 9 ?></span></td>
@@ -40,18 +40,18 @@
             <a class="button green" href="<?php echo site_url('/pelaksana/helpdesk') ?>"><?php echo $helpdesk_total ?> Pertanyaan</a>
         </div>
         <table class="table">
-            <caption>Jumlah pertanyaan yang langsung diselesaikan oleh</caption>
+            <caption>Jumlah pertanyaan yang langsung diselesaikan oleh: </caption>
             <tr>
-                <td><span class="label">CS</span></td>
-                <td><span class="number">12</span></td>
+                <td class="head"><span class="label">CS</span></td>
+                <td><span class="message_box glow_green number">12</span></td>
             </tr>
             <tr>
-                <td><span class="label">Supervisor</span></td>
-                <td><span class="number">6</span></td>
+                <td class="head"><span class="label">Supervisor</span></td>
+                <td><span class="message_box glow_green number">6</span></td>
             </tr>
             <tr>
-                <td><span class="label">Kasi & Pelaksana</span></td>
-                <td><span class="number">0</span></td>
+                <td class="head"><span class="label">Kasi & Pelaksana</span></td>
+                <td><span class="message_box glow_green number">0</span></td>
             </tr>
         </table>
     </fieldset>

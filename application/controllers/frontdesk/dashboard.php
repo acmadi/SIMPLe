@@ -12,6 +12,9 @@ class Dashboard extends CI_Controller
 
     function index()
     {
+		$data['jml_tiket_skrg'] = $this->msatker->get_jml_tkt_hr_ini();
+		$data['jml_tiket_selesai'] = $this->msatker->get_jml_dokumen_selesai();
+		$data['jml_tiket_kembali'] = $this->msatker->get_jml_dokumen_kembali();
         $data['title'] = 'Dashboard';
         $data['content'] = 'frontdesk/dashboard';
         $this->load->view('new-template', $data);
