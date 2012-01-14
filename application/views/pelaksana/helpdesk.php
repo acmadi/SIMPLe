@@ -7,15 +7,7 @@
         <div id="head">
             <div id="cari_unit" action="man_unit_cari">
                 <p>
-                    <?php
-                    echo form_open('pelaksana/helpdesk/search');
-
-                    echo 'Kode Satker: ' .
-                            form_input('keyword', '', 'placeholder="Masukkan kode satker"') . ' ';
-                    echo form_submit('submit', 'CARI', 'class="button blue-pill"');
-
-                    echo form_close();
-                    ?>
+                    <?php echo search('pelaksana/helpdesk/search'); ?>
                 </p>
             </div>
 
