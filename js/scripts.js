@@ -7,4 +7,6 @@ jQuery(function () {
         $(this).parent().fadeOut('fast');
     })
 
+    $(".chzn-select").chosen();
+
 })

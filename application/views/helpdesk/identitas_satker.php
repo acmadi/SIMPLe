@@ -19,66 +19,40 @@
             })
         })
 
-       $('#kl_btn').click(function() {
-           $('#kl').slideDown('fast');
-           $('#kl').attr('disabled', false);
-           $('#identitas_kl').show();
-           $('#identitas_kl input').attr('disabled', false);
-           $('#identitas_umum').hide();
-           $('#identitas_umum input').attr('disabled', true);
-       })
+        $('#eselon').chosen().change(function () {
+            id_kementrian = substr($('#nama_kl').val(), 0, 3);
+            url = '<?php echo site_url('frontdesk/form_revisi_anggaran/anggaran') ?>/' + id_kementrian;
+            console.log(url);
+            $.get(url, function (response) {
+                $('#anggaran').html('A' + response);
+            });
 
-       $('#non_kl_btn').click(function() {
-           $('#kl').slideUp('fast');
-           $('#kl').attr('disabled', true);
-           $('#identitas_kl').hide();
-           $('#identitas_kl input').attr('disabled', true);
-           $('#identitas_umum').show();
-           $('#identitas_umum input').attr('disabled', false);
-       })
+            url = '<?php echo site_url('frontdesk/form_revisi_anggaran/cari_satker') ?>/' + id_kementrian + '/' + $(this).val();
+            console.log(url);
+            $.get(url, function(response){
+                $('#kode_satker').html(response);
+                $('#kode_satker').trigger('liszt:updated');
+                console.log(response);
+            });
+        });
 
-        $('form').submit(function() {
-            data = $(this).serialize();
-//            console.log(data);
-//            return false;
+        $('#kl_btn').click(function() {
+            $('#kl').slideDown('fast');
+            $('#kl').attr('disabled', false);
+            $('#identitas_kl').show();
+            $('#identitas_kl input').attr('disabled', false);
+            $('#identitas_umum').hide();
+            $('#identitas_umum input').attr('disabled', true);
         })
 
-        var kementrian_list = [
-        <?php
-                    foreach ($kementrian->result() as $value) {
-            echo sprintf("{ label: \"%s\", value: \"%s\" }, ", $value->id_kementrian . ' - ' . $value->nama_kementrian, $value->id_kementrian . ' - ' . $value->nama_kementrian);
-        }
-        ?>
-        ];
-
-//        $('#nama_kl').autocomplete({
-//            source: kementrian_list
-//        });
-
-//        $('#kode_satker').autocomplete({
-//            source: function(request, response) {
-//                $.ajax({
-//                    url: "<?php echo site_url('/helpdesk/identitas_satker/cari_satker') ?>",
-
-//                    data: {
-//                        term: request.term,
-//                        eselon: $('#eselon').val(),
-//                        nama_kl: $('#nama_kl').val()
-//                    },
-
-//                    dataType: 'json',
-
-//                    success: function(data) {
-//                        response(data);
-//                    }
-//                })
-//            },
-//            delay: 500,
-//            minLength: 1
-//        })
-
-        $('select.chzn-select').chosen();
-
+        $('#non_kl_btn').click(function() {
+            $('#kl').slideUp('fast');
+            $('#kl').attr('disabled', true);
+            $('#identitas_kl').hide();
+            $('#identitas_kl input').attr('disabled', true);
+            $('#identitas_umum').show();
+            $('#identitas_umum input').attr('disabled', false);
+        })
     })
 </script>
 
