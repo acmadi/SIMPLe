@@ -61,34 +61,19 @@ class Identitas_satker extends CI_Controller
 	
 	
 
-    function cari_satker()
+    function cari_satker($id_kementrian, $eselon)
     {
-        if ($this->input->is_ajax_request()) {
-
-            $term = $this->input->get('term');
-            $eselon = $this->input->get('eselon');
-            $id_kementrian = substr($this->input->get('nama_kl'), 0, 3);
-
-
             $sql = "SELECT * FROM tb_satker WHERE
-                id_unit = '{$eselon}' AND
-                id_kementrian = '{$id_kementrian}' AND
-                (id_satker LIKE '%{$term}%' OR nama_satker LIKE '%{$term}%')
+                id_kementrian = ? AND id_unit = ?
                 ORDER BY id_unit";
 
-            $result = $this->db->query($sql);
+            $result = $this->db->query($sql, array($id_kementrian, $eselon));
 
-            $array = array();
-            $i = 0;
             if ($result->num_rows() > 0) {
                 foreach ($result->result() as $value) {
-                    $array[$i] = $value->id_satker . ' - ' . $value->nama_satker;
-                    $i++;
+                    echo sprintf('<option value="%s">%s</option>', $value->id_satker, $value->nama_satker);
                 }
             }
-            echo json_encode($array);
-        }
-        exit();
     }
 
     public function save_identitas()
