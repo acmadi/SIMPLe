@@ -46,8 +46,9 @@
     <header>
         <div class="container_12">
             <div id="logo">
-                <img src="<?php echo base_url('images/logo.png') ?>" width="50" height="50" />
-                &nbsp;&nbsp; Sistem Informasi Pusat Layanan DJA
+                <img src="<?php echo base_url('images/header-logo.png') ?>" />
+                <!-- <img src="<?php echo base_url('images/logo.png') ?>" width="50" height="50" />
+                &nbsp;&nbsp; Sistem Informasi Pusat Layanan DJA -->
             </div>
             <nav class="grid_10 alpha omega">
 

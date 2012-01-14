@@ -43,24 +43,30 @@ switch ($this->uri->segment(2)) {
         $nav_sms = "current";
         break;
 }
+if ($this->uri->segment(1) == 'referensi') {
+    $nav_referensi = 'current';
+}
+if ($this->uri->segment(1) == 'knowledge') {
+    $nav_knowledge = 'current';
+}
 
 ?>
 
 <div id="navbar" class="clearfloat">
     <ul class="sf-menu">
-        <li class="<?php echo $nav_dashboard ?>"><?php echo anchor('admin/dashboard', 'Dashboard');?></li>
-        <li class="<?php echo $nav_aksescontrol ?>"><?php echo anchor('admin/akses_kontrol', 'Akses Kontrol');?></li>
-        <li class="<?php echo $nav_manuser ?>"><?php echo anchor('admin/man_user', 'Manajemen User');?></li>
-        <li class="<?php echo $nav_manunit ?>"><?php echo anchor('admin/man_unit', 'Manajemen Unit');?></li>
-        <li class="<?php echo $nav_knowledge ?>"><?php echo anchor('admin/knowledge', 'Knowledge');?></li>
-        <li class="<?php echo $nav_forum ?>"><?php echo anchor('admin/man_forum', 'Forum');?></li>
-        <li class="<?php echo $nav_helpdesk ?>"><?php echo anchor('admin/helpdesk', 'Help Desk');?></li>
-        <li class="<?php echo $nav_frontdesk ?>"><?php echo anchor('admin/frontdesk', 'FrontDesk Sistem');?></li>
-        <li class="<?php echo $nav_history ?>"><?php echo anchor('admin/histori', 'Histori');?></li>
-        <li class="<?php echo $nav_system ?>"><?php echo anchor('admin/system', 'Sistem');?></li>
-        <li class="<?php echo $nav_satker ?>"><?php echo anchor('admin/satker', 'Satker');?></li>
-        <li class="<?php echo $nav_calendar ?>"><?php echo anchor('admin/calendar', 'Calendar');?></li>
-        <li class="<?php echo $nav_sms ?>"><?php echo anchor('admin/sms', 'SMS');?></li>
+        <li><?php echo anchor('admin/dashboard', 'Dashboard', "class='$nav_dashboard'");?></li>
+        <li><?php echo anchor('admin/akses_kontrol', 'Akses Kontrol', "class='$nav_aksescontrol'");?></li>
+        <li><?php echo anchor('admin/man_user', 'Manajemen User', "class='$nav_manuser'");?></li>
+        <li><?php echo anchor('admin/man_unit', 'Manajemen Unit', "class='$nav_manunit'");?></li>
+        <li><?php echo anchor('admin/knowledge', 'Knowledge', "class='$nav_knowledge'");?></li>
+        <li><?php echo anchor('admin/man_forum', 'Forum', "class='$nav_forum'");?></li>
+        <li><?php echo anchor('admin/helpdesk', 'Help Desk', "class='$nav_helpdesk'");?></li>
+        <li><?php echo anchor('admin/frontdesk', 'FrontDesk Sistem', "class='$nav_frontdesk'");?></li>
+        <li><?php echo anchor('admin/histori', 'Histori', "class='$nav_history'");?></li>
+        <li><?php echo anchor('admin/system', 'Sistem', "class='$nav_system'");?></li>
+        <li><?php echo anchor('admin/satker', 'Satker', "class='$nav_satker'");?></li>
+        <li><?php echo anchor('admin/calendar', 'Calendar', "class='$nav_calendar'");?></li>
+        <li><?php echo anchor('admin/sms', 'SMS', "class='$nav_sms'");?></li>
     </ul>
     <div id="logout"><?php echo $this->session->userdata('nama') ?> &nbsp; | &nbsp; <?php echo anchor("login/process_logout", 'Logout') ?> &nbsp; <em><?php //echo date('d-m-Y') ?></em></div>
 </div>

@@ -30,11 +30,11 @@ if ($this->uri->segment(1) == 'knowledge') {
 
 <div id="navbar" class="clearfloat">
     <ul class="sf-menu">
-        <li class="<?php echo $nav_dashboard ?>"><?php echo anchor('direktur/dashboard', 'Dashboard');?></li>
-        <li class="<?php echo $nav_helpdesk ?>"><?php echo anchor('direktur/helpdesk', 'Helpdesk');?></li>
-        <li class="<?php echo $nav_frontdesk ?>"><?php echo anchor('direktur/frontdesk', 'Front Desk');?></li>
-        <li class="<?php echo $nav_knowledge ?>"><?php echo anchor('knowledge', 'Knowledge Base');?></li>
-        <li class="<?php echo $nav_referensi ?>"><?php echo anchor('referensi', 'Referensi Peraturan') ?></li>
-        <li class="<?php echo $nav_forum ?>"><?php echo anchor('direktur/man_forum', 'Forum');?></li>
+        <li><?php echo anchor('direktur/dashboard', 'Dashboard', "class='$nav_dashboard'");?></li>
+        <li><?php echo anchor('direktur/helpdesk', 'Helpdesk', "class='$nav_helpdesk'");?></li>
+        <li><?php echo anchor('direktur/frontdesk', 'Front Desk', "class='$nav_frontdesk'");?></li>
+        <li><?php echo anchor('knowledge', 'Knowledge Base', "class='$nav_knowledge'");?></li>
+        <li><?php echo anchor('referensi', 'Referensi Peraturan', "class='$nav_referensi'") ?></li>
+        <li><?php echo anchor('direktur/man_forum', 'Forum', "class='$nav_forum'");?></li>
     </ul>
 </div>
