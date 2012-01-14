@@ -35,7 +35,7 @@
             <?php foreach ($result as $value): ?>
 				<tr>
 					<td class="short"><?php echo sprintf('%05d', $value->no_tiket_frontdesk) ?></td>
-					<td class="short"><?php echo $value->tanggal ?></td>
+					<td class="short"><?php echo table_tanggal($value->tanggal) ?></td>
 					<td class="short"><?php echo $value->id_unit ?></td>
 					<td class="short"><?php echo $value->nama_unit ?></td>
 					<td class="short"><?php echo $value->id_satker ?></td>
@@ -48,7 +48,7 @@
 									echo 'diterima '.$value->nama_lavel;
 									break;
 								case '2':
-									echo 'diteruskan '.$value->nama_lavel;
+									echo 'diteruskan ke '.$value->nama_lavel;
 									break;
 								case '3':
 									echo 'dikembalikan '.$value->nama_lavel;
@@ -57,10 +57,10 @@
 									echo 'diterima '.$value->nama_lavel;
 									break;
 								case '5':
-									echo 'diteruskan '.$value->nama_lavel;
+									echo 'diteruskan ke '.$value->nama_lavel;
 									break;
 								case '6':
-									echo 'diterima '.$value->nama_lavel;
+									echo 'disetujui '.$value->nama_lavel;
 									break;
 								default :
 									echo '-';
