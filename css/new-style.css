@@ -36,6 +36,10 @@ footer {
 		margin-bottom: 5px;
 	}
 
+.align-right{
+    text-align: right;
+}
+
 #attribution{
 	margin: 25px 0 0;
 	text-align: right;
@@ -243,6 +247,7 @@ td.head{
     border-radius: 5px 5px 0 0;
     text-align: right;
     background: #333;
+    background: -webkit-linear-gradient(bottom, #333 20%, #444);
     display: inline-block;
     position: relative;
     padding: 4px 8px;
@@ -322,4 +327,15 @@ fieldset.left{
 fieldset.right{
     width: 450px;
     float: right;
+}
+
+label{
+    color: #777;
+    font-weight: bold !important;
+    padding: 0 5px;
+}
+label.aligned{
+    display: inline-block;
+    width: 150px;
+    text-align: right;
 }

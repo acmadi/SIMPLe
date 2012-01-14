@@ -1,5 +1,14 @@
 <script type="text/javascript">
     $(function() {
+//        $('#nama_kl').blur(function() {
+//            var nama_kl = $('#nama_kl').val();
+//            $.get('<?php echo site_url('helpdesk/identitas_satker/cari_kl/') ?>', {id_kementrian : nama_kl}, function(response) {
+//                console.log(response);
+//                $('#eselon').html(response);
+//                $('#kode_satker').removeAttr('disabled');
+//            })
+//        })
+
         $('#nama_kl').chosen().change(function(){
             var nama_kl = $(this).val();
             $.get('<?php echo site_url('helpdesk/identitas_satker/cari_kl/') ?>', {id_kementrian:nama_kl}, function (response) {
@@ -75,7 +84,7 @@
 
         <p>
             <label>Kode - Nama K/L </label> &nbsp;
-            <select name="nama_kl" id="nama_kl" class="chzn-select" style="width: 700px;">
+            <select name="nama_kl" id="nama_kl" class="chzn-select" style="width: 400px;">
                 <?php
                 foreach ($kementrian->result() as $value) {
                     echo sprintf("<option value='%s'>%s</option>", $value->id_kementrian, $value->id_kementrian . ' - ' . $value->nama_kementrian);
@@ -86,12 +95,12 @@
 
         <p>
             <label>Nama Eselon 1 </label>&nbsp;
-            <select id="eselon" name="eselon" class="kl chzn-select" style="width: 700px;"></select>
+            <select id="eselon" name="eselon" class="kl chzn-select" style="width: 400px;"></select>
         </p>
 
         <p class="kode_satker_p">
             <label>Kode - Nama Satker</label>
-            <select name="kode_satker" id="kode_satker" class="kl chzn-select" style="width: 700px;"></select>
+            <select name="kode_satker" id="kode_satker" class="kl chzn-select" style="width: 400px;"></select>
         </p>
     </fieldset>
 
@@ -100,27 +109,27 @@
         <!-- TODO: (simpan di tb_petugas_satker) field kurang tambahin -->
         <legend>Identitas</legend>
         <p>
-            <label>Nama </label>
+            <label class="aligned">Nama </label>
             <input type="text" name="nama_petugas" size="30" value="<?php echo set_value('nama_petugas') ?>">
         </p>
 
         <p>
-            <label>Jabatan Petugas </label>
+            <label class="aligned">Jabatan Petugas </label>
             <input type="text" name="jabatan_petugas" size="30" value="<?php echo set_value('jabatan_petugas') ?>">
         </p>
 
         <p>
-            <label>No. Handphone </label>
+            <label class="aligned">No. Handphone </label>
             <input type="text" name="no_hp" size="30" value="<?php echo set_value('no_hp') ?>">
         </p>
 
         <p>
-            <label>No. Telpon Kantor </label>
+            <label class="aligned">No. Telpon Kantor </label>
             <input type="text" name="no_kantor" size="30" value="<?php echo set_value('no_kantor') ?>">
         </p>
 
         <p>
-            <label>E-mail </label>
+            <label class="aligned">E-mail </label>
             <input type="email" name="email" size="30" value="<?php echo set_value('email') ?>">
         </p>
     </fieldset>
@@ -143,27 +152,27 @@
     <fieldset>
         <legend>Identitas</legend>
         <p>
-            <label>Nama</label>
+            <label class="aligned">Nama</label>
             <input type="text" id="nama" name="nama_petugas" size="30" value="<?php echo set_value('nama_petugas') ?>">
         </p>
 
         <p class="kl">
-            <label>Instansi</label>
+            <label class="aligned">Instansi</label>
             <input type="text" id="instansi" name="instansi" size="30" value="<?php echo set_value('instansi') ?>">
         </p>
 
         <p>
-            <label>Alamat</label>
+            <label class="aligned">Alamat</label>
             <input type="text" id="alamat" name="alamat" size="30" value="<?php echo set_value('alamat') ?>">
         </p>
 
         <p class="kl">
-            <label>Telpon</label>
+            <label class="aligned">Telpon</label>
             <input type="text" id="no_hp" name="no_hp" size="30" value="<?php echo set_value('no_hp') ?>">
         </p>
 
         <p>
-            <label>E-mail</label>
+            <label class="aligned">E-mail</label>
             <input type="email" id="email" name="email" size="30" value="<?php echo set_value('email') ?>">
         </p>
     </fieldset>
