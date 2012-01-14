@@ -1,42 +1,41 @@
-<style type="text/css">
-    .ui-autocomplete {
-        max-height: 300px;
-        overflow-y: auto;
-        /* prevent horizontal scrollbar */
-        overflow-x: hidden;
-        /* add padding to account for vertical scrollbar */
-        padding-right: 20px;
-    }
-</style>
-
 <script type="text/javascript">
     $(function() {
-        $('#nama_kl').blur(function() {
-            var nama_kl = $('#nama_kl').val();
-            $.get('<?php echo site_url('helpdesk/identitas_satker/cari_kl/') ?>', {id_kementrian : nama_kl}, function(response) {
+//        $('#nama_kl').blur(function() {
+//            var nama_kl = $('#nama_kl').val();
+//            $.get('<?php echo site_url('helpdesk/identitas_satker/cari_kl/') ?>', {id_kementrian : nama_kl}, function(response) {
+//                console.log(response);
+//                $('#eselon').html(response);
+//                $('#kode_satker').removeAttr('disabled');
+//            })
+//        })
+
+        $('#nama_kl').chosen().change(function(){
+            var nama_kl = $(this).val();
+            $.get('<?php echo site_url('helpdesk/identitas_satker/cari_kl/') ?>', {id_kementrian:nama_kl}, function (response) {
                 console.log(response);
                 $('#eselon').html(response);
+                $('#eselon').trigger('liszt:updated');
                 $('#kode_satker').removeAttr('disabled');
             })
         })
 
-        $('#kl_btn').click(function() {
-            $('#kl').slideDown('fast');
-            $('#kl').attr('disabled', false);
-            $('#identitas_kl').show();
-            $('#identitas_kl input').attr('disabled', false);
-            $('#identitas_umum').hide();
-            $('#identitas_umum input').attr('disabled', true);
-        })
+//        $('#kl_btn').click(function() {
+//            $('#kl').slideDown('fast');
+//            $('#kl').attr('disabled', false);
+//            $('#identitas_kl').show();
+//            $('#identitas_kl input').attr('disabled', false);
+//            $('#identitas_umum').hide();
+//            $('#identitas_umum input').attr('disabled', true);
+//        })
 
-        $('#non_kl_btn').click(function() {
-            $('#kl').slideUp('fast');
-            $('#kl').attr('disabled', true);
-            $('#identitas_kl').hide();
-            $('#identitas_kl input').attr('disabled', true);
-            $('#identitas_umum').show();
-            $('#identitas_umum input').attr('disabled', false);
-        })
+//        $('#non_kl_btn').click(function() {
+//            $('#kl').slideUp('fast');
+//            $('#kl').attr('disabled', true);
+//            $('#identitas_kl').hide();
+//            $('#identitas_kl input').attr('disabled', true);
+//            $('#identitas_umum').show();
+//            $('#identitas_umum input').attr('disabled', false);
+//        })
 
         $('form').submit(function() {
             data = $(this).serialize();
@@ -52,41 +51,37 @@
         ?>
         ];
 
-        $('#nama_kl').autocomplete({
-            source: kementrian_list
-        });
+//        $('#nama_kl').autocomplete({
+//            source: kementrian_list
+//        });
 
-        $('#kode_satker').autocomplete({
-            source: function(request, response) {
-                $.ajax({
-                    url: "<?php echo site_url('/helpdesk/identitas_satker/cari_satker') ?>",
+//        $('#kode_satker').autocomplete({
+//            source: function(request, response) {
+//                $.ajax({
+//                    url: "<?php echo site_url('/helpdesk/identitas_satker/cari_satker') ?>",
 
-                    data: {
-                        term: request.term,
-                        eselon: $('#eselon').val(),
-                        nama_kl: $('#nama_kl').val()
-                    },
+//                    data: {
+//                        term: request.term,
+//                        eselon: $('#eselon').val(),
+//                        nama_kl: $('#nama_kl').val()
+//                    },
 
-                    dataType: 'json',
+//                    dataType: 'json',
 
-                    success: function(data) {
-                        response(data);
-                    }
-                })
-            },
-            delay: 500,
-            minLength: 1
-        })
+//                    success: function(data) {
+//                        response(data);
+//                    }
+//                })
+//            },
+//            delay: 500,
+//            minLength: 1
+//        })
 
-        $('#clear_nama_kl').click(function() {
-            $('#nama_kl').val('');
-        })
+        $('select.chzn-select').chosen();
+
     })
 </script>
 
-<!--<ul id="nav">-->
-<!--    <li><a href="#tab1">Isi Identitas SatKer (simpan di tb_tiket_helpdesk)</a></li>-->
-<!--</ul>-->
 <div class="content">
 
     <h1>Isi Identitas SatKer</h1>
@@ -94,7 +89,7 @@
         <?php
             $errors = validation_errors();
             if (!empty($errors)) {
-                echo '<div class="error">' . validation_errors() . '</div>';
+                echo notification(validation_errors(), 'Error', 'red');
             }
         ?>
 
@@ -114,18 +109,23 @@
 
         <p>
             <label>Kode - Nama K/L </label> &nbsp;
-            <input type="text" id="nama_kl" name="nama_kl" value="<?php echo set_value('nama_kl') ?>" />
-            <a href="javascript:void(0)" class="clear_btn" id="clear_nama_kl">Hapus</a>
+            <select name="nama_kl" id="nama_kl" class="chzn-select" style="width: 700px;">
+                <?php
+                foreach ($kementrian->result() as $value) {
+                    echo sprintf("<option value='%s'>%s</option>", $value->id_kementrian, $value->id_kementrian . ' - ' . $value->nama_kementrian);
+                }
+                ?>
+            </select>
         </p>
 
         <p>
             <label>Nama Eselon 1 </label>&nbsp;
-            <select id="eselon" name="eselon" class="kl" value="<?php echo set_value('eselon') ?>"></select>
+            <select id="eselon" name="eselon" class="kl chzn-select" style="width: 700px;"></select>
         </p>
 
-        <p>
-            <label>Kode - Nama Satker </label>&nbsp;
-            <input type="text" name="kode_satker" id="kode_satker" class="kl" size="30" disabled />
+        <p class="kode_satker_p">
+            <label>Kode - Nama Satker</label>
+            <select name="kode_satker" id="kode_satker" class="kl chzn-select" style="width: 700px;"></select>
         </p>
     </fieldset>
 
@@ -134,27 +134,27 @@
         <!-- TODO: (simpan di tb_petugas_satker) field kurang tambahin -->
         <legend>Identitas</legend>
         <p>
-            <label>Nama </label>&nbsp;
+            <label>Nama </label>
             <input type="text" name="nama_petugas" size="30" value="<?php echo set_value('nama_petugas') ?>">
         </p>
 
         <p>
-            <label>Jabatan Petugas </label>&nbsp;
+            <label>Jabatan Petugas </label>
             <input type="text" name="jabatan_petugas" size="30" value="<?php echo set_value('jabatan_petugas') ?>">
         </p>
 
         <p>
-            <label>No. Handphone </label>&nbsp; 
+            <label>No. Handphone </label>
             <input type="text" name="no_hp" size="30" value="<?php echo set_value('no_hp') ?>">
         </p>
 
         <p>
-            <label>No. Telpon Kantor </label>&nbsp; 
+            <label>No. Telpon Kantor </label>
             <input type="text" name="no_kantor" size="30" value="<?php echo set_value('no_kantor') ?>">
         </p>
 
         <p>
-            <label>E-mail </label>&nbsp; 
+            <label>E-mail </label>
             <input type="email" name="email" size="30" value="<?php echo set_value('email') ?>">
         </p>
     </fieldset>
