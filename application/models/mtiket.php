@@ -109,7 +109,7 @@ class Mtiket extends CI_Model {
 
 		$sql = "SELECT tbf.no_tiket_frontdesk,tbf.tanggal,tbu.nama_unit, tbf.id_satker, ts.nama_satker, tbf.is_active,tbf.status,tbf.id_unit
 				FROM tb_unit tbu, tb_tiket_frontdesk tbf LEFT JOIN tb_satker ts ON ts.id_satker = tbf.id_satker
-				WHERE tbu.id_unit =  tbf.id_unit AND tbu.id_kementrian = tbf.id_kementrian AND tbf.status = 'close' AND tbf.is_active = 1 $where 
+				WHERE tbu.id_unit =  tbf.id_unit AND tbu.id_kementrian = tbf.id_kementrian AND tbf.status = 'close' AND tbf.is_active = 6 $where 
 				ORDER BY tbf.status";
 		$query = $this->db->query($sql);
 
@@ -122,7 +122,7 @@ class Mtiket extends CI_Model {
 
 		$sqlb = "SELECT tbf.no_tiket_frontdesk,tbf.tanggal,tbu.nama_unit, tbf.id_satker, ts.nama_satker, tbf.is_active,tbf.status,tbf.id_unit
 				FROM tb_unit tbu, tb_tiket_frontdesk tbf LEFT JOIN tb_satker ts ON ts.id_satker = tbf.id_satker
-				WHERE tbu.id_unit =  tbf.id_unit AND tbu.id_kementrian = tbf.id_kementrian AND tbf.status = 'close' AND tbf.is_active = 1 $where 
+				WHERE tbu.id_unit =  tbf.id_unit AND tbu.id_kementrian = tbf.id_kementrian AND tbf.status = 'close' AND tbf.is_active = 6 $where 
 				ORDER BY tbf.status
 				LIMIT ?,?";
 		$data["query"] = $this->db->query($sqlb, array($offset ,$config['per_page']));
@@ -138,7 +138,7 @@ class Mtiket extends CI_Model {
 									   tbs.nama_petugas,tbs.jabatan_petugas,tbs.no_hp,tbs.no_kantor,tbs.email, tbf.id_kementrian, tm.nama_kementrian
 								FROM tb_unit tbu, tb_petugas_satker tbs, tb_kementrian tm, tb_tiket_frontdesk tbf LEFT JOIN tb_satker ts ON ts.id_satker = tbf.id_satker
 								WHERE tbu.id_unit =  tbf.id_unit AND tbu.id_kementrian = tbf.id_kementrian AND tbf.id_petugas_satker = tbs.id_petugas_satker
-									  AND tbf.id_kementrian = tm.id_kementrian AND tbf.status = 'close' AND tbf.is_active = 1 AND tbf.no_tiket_frontdesk = ?
+									  AND tbf.id_kementrian = tm.id_kementrian AND tbf.status = 'close' AND tbf.is_active = 6 AND tbf.no_tiket_frontdesk = ?
 								ORDER BY tbf.status ",array($no_tiket));
 	}
 
@@ -192,7 +192,7 @@ class Mtiket extends CI_Model {
 				FROM tb_pengembalian_doc tpd, tb_tiket_frontdesk ttf 
 				LEFT JOIN tb_satker ts ON ts.id_satker = ttf.id_satker
 				LEFT JOIN tb_unit tu ON tu.id_unit = ttf.id_unit AND tu.id_kementrian = ttf.id_kementrian
-				WHERE tpd.no_tiket_frontdesk = ttf.no_tiket_frontdesk AND tpd.sudah_diambil = 0 $where
+				WHERE tpd.no_tiket_frontdesk = ttf.no_tiket_frontdesk AND tpd.sudah_diambil = 0 AND ttf.is_active = 3 AND ttf.status = 'close' $where
 				GROUP BY tpd.no_tiket_frontdesk";
 		$query = $this->db->query($sql);
 
@@ -207,7 +207,7 @@ class Mtiket extends CI_Model {
 				FROM tb_pengembalian_doc tpd, tb_tiket_frontdesk ttf 
 				LEFT JOIN tb_satker ts ON ts.id_satker = ttf.id_satker
 				LEFT JOIN tb_unit tu ON tu.id_unit = ttf.id_unit AND tu.id_kementrian = ttf.id_kementrian
-				WHERE tpd.no_tiket_frontdesk = ttf.no_tiket_frontdesk AND tpd.sudah_diambil = 0 $where
+				WHERE tpd.no_tiket_frontdesk = ttf.no_tiket_frontdesk AND tpd.sudah_diambil = 0 AND ttf.is_active = 3 AND ttf.status = 'close' $where
 				GROUP BY tpd.no_tiket_frontdesk
 				LIMIT ?,?";
 		$data["query"] = $this->db->query($sqlb, array($offset ,$config['per_page']));

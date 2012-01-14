@@ -1,104 +1,65 @@
-<style type="text/css">
+<style>
     .message_box {
-        margin: auto;
-        width: 300px;
         text-align: center;
-        padding: 10px;
-        font-size: 24px;
-        color: #1c94c4;
-        border: 2px solid #1fd2ff;
-        border-left: none;
-        border-right: none;
-        background: #ccf5ff;
-        text-shadow: 1px 1px 0 white;
-        box-shadow: 0 0 10px 2px #ccf5ff;
-    }
-
-    dl {
-        padding: 4px;
-        margin: 10px;
-    }
-
-    dt {
-        padding: 10px 0;
-        /*font-size: 14px;*/
-        font-weight: bold;
-    }
-
-    dd {
-        padding: 10px 0;
-        /*font-size: 14px;*/
-    }
-
-    dd .number {
-        display: inline-block;
-        padding: 10px;
-        background: #ccf5ff;
-        min-width: 14px;
-        text-align: center;
-        color: #1c94c4;
-        border: 2px solid #1fd2ff;
-        border-radius: 25px;
-        text-shadow: 1px 1px 0 white;
-        box-shadow: 0 0 10px 2px #ccf5ff;
-    }
-
-    dd .label {
-        display: inline-block;
-        width: 200px;
-    }
-
-    .glow_green {
-        background: #daffb8;
-        border-color: #56b300;
-        box-shadow: 0 0 10px 2px #daffb8;
-        color: #56b300;
-        text-shadow: 1px 1px 0 rgba(0,0,0,0.5);
     }
 </style>
 
 <div class="content">
-    <h1>Kasubdit Dashboard</h1>
-    
-    <div class="grid_6 alpha">
-    <fieldset>
-        <legend>Report Help Desk</legend>
-        <div class="message_box">
-            <a href="<?php echo site_url('/kasubdit/helpdesk') ?>"><?php echo $helpdesk_total ?> Pertanyaan</a>
-        </div>
-        <dl>
-            <dt>Jumlah pertanyaan yang langsung diselesaikan oleh:</dt>
-            <dd><span class="label">CS</span> <span class="number">12</span></dd>
-            <dd><span class="label">Supervisor</span> <span class="number">6</span></dd>
-            <dd><span class="label">Kasi & kasubdit</span> <span class="number">0</span></dd>
-        </dl>
-    </fieldset>
-    </div>
+    <h1>Kasubdit Anggaran Dashboard</h1>
 
-    <div class="grid_6 omega">
-    <fieldset class="grid_6 alpha omega">
+    <fieldset class="grid_5">
         <legend>Report Front Desk</legend>
         <div class="message_box">
-            <a href="<?php echo site_url('/kasubdit/frontdesk') ?>"><?php echo $frontdesk_total ?> Tiket</a>
+            <a class="button green" href="<?php echo site_url('/kasubdit/frontdesk') ?>"><?php echo $frontdesk_total ?> Tiket</a>
         </div>
-        <table border="0" style="margin-top: 2em;">
+        <table class="table">
             <tr>
                 <td>&nbsp;</td>
-                <td>Diterima</td>
-                <td>Diteruskan</td>
+                <td class="head">Diterima</td>
+                <td class="head">Diteruskan</td>
+                <td class="head">Open</td>
             </tr>
             <tr>
-                <td>CS</td>
+                <td class="head">CS</td>
                 <td><span class="message_box glow_green"><?php echo $total_tiket_diterima_cs ?></span></td>
                 <td><span class="message_box glow_green"><?php echo $total_tiket_diteruskan_cs?></span></td>
+                <td><span class="message_box glow_green"><?php echo $total_tiket_open_cs ?></span></td>
             </tr>
             <tr>
-                <td>Kasi & kasubdit</td>
+                <td class="head">Kasi & Pelaksana</td>
+                <td><span class="message_box glow_green"><?php echo $total_tiket_diterima_pelaksana ?></span></td>
+                <td><span class="message_box glow_green"><?php echo $total_tiket_diteruskan_pelaksana ?></span></td>
+                <td><span class="message_box glow_green"><?php echo $total_tiket_open_pelaksana ?></span></td>
+            </tr>
+			<tr>
+                <td class="head">Kasubdit Anggaran</td>
                 <td><span class="message_box glow_green"><?php echo $total_tiket_diterima_kasubdit ?></span></td>
                 <td><span class="message_box glow_green"><?php echo $total_tiket_diteruskan_kasubdit ?></span></td>
+                <td><span class="message_box glow_green"><?php echo $total_tiket_open_kasubdit ?></span></td>
             </tr>
         </table>
     </fieldset>
-    </div>
+
+    <fieldset class="grid_5">
+        <legend>Report Help Desk</legend>
+        <div class="message_box">
+            <a class="button green" href="<?php echo site_url('/kasubdit/helpdesk') ?>"><?php echo $helpdesk_total ?> Pertanyaan</a>
+        </div>
+        <table class="table">
+            <caption>Jumlah pertanyaan yang langsung diselesaikan oleh: </caption>
+            <tr>
+                <td class="head"><span class="label">CS</span></td>
+                <td><span class="message_box glow_green number">12</span></td>
+            </tr>
+            <tr>
+                <td class="head"><span class="label">Supervisor</span></td>
+                <td><span class="message_box glow_green number">6</span></td>
+            </tr>
+            <tr>
+                <td class="head"><span class="label">Kasi & Pelaksana</span></td>
+                <td><span class="message_box glow_green number">0</span></td>
+            </tr>
+        </table>
+    </fieldset>
 
 </div>

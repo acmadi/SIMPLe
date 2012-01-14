@@ -12,6 +12,7 @@ class Ambil_dokumen extends CI_Controller
 
     function index()
     {
+		$this->load->helper('tanggal_helper');
         $page		= $this->tiket->get_list_ambil_dokumen();
 		$pageData	= $page['query'];
 		$pageLink	= $page['pagination1'];

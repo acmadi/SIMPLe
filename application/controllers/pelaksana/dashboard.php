@@ -11,20 +11,15 @@ class Dashboard extends CI_Controller
 
     function index()
     {
+		//status, lavel, is_active
         $data['helpdesk_total'] = $this->mhelpdesk->count_all_tiket('open', 3);
-        $data['frontdesk_total'] = $this->mfrontdesk->count_all_tiket_frontdesk('open',2);
-
-        $result = $this->db->query("SELECT * FROM tb_tiket_frontdesk WHERE lavel = 1");
-        $data['total_tiket_diterima_cs'] = $result->num_rows();
-
-        $result = $this->db->query("SELECT * FROM tb_tiket_frontdesk WHERE lavel = 2");
-        $data['total_tiket_diteruskan_cs'] = $result->num_rows();
-
-        $result = $this->db->query("SELECT * FROM tb_tiket_frontdesk WHERE lavel = 3");
-        $data['total_tiket_diterima_pelaksana'] = $result->num_rows();
-
-        $result = $this->db->query("SELECT * FROM tb_tiket_frontdesk WHERE lavel > 3");
-        $data['total_tiket_diteruskan_pelaksana'] = $result->num_rows();
+        $data['frontdesk_total'] = $this->mfrontdesk->count_all_tiket_frontdesk('open',3); 
+        $data['total_tiket_diterima_cs'] = $this->mfrontdesk->count_all_tiket_frontdesk('open',1,1); 
+        $data['total_tiket_diteruskan_cs'] = $this->mfrontdesk->count_all_tiket_frontdesk('open',3,2);
+        $data['total_tiket_diterima_pelaksana'] = $this->mfrontdesk->count_all_tiket_frontdesk('open',3,1);
+        $data['total_tiket_diteruskan_pelaksana'] = $this->mfrontdesk->count_all_tiket_frontdesk('open',4,2);
+		$data['total_tiket_open_cs'] = $this->mfrontdesk->count_all_tiket_frontdesk('open',1);
+		$data['total_tiket_open_pelaksana'] = $this->mfrontdesk->count_all_tiket_frontdesk('open',3);
 
         $data['title'] = 'Dashboard';
         $data['content'] = 'pelaksana/dashboard';

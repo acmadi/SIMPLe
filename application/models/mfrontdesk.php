@@ -2,6 +2,25 @@
 
 class Mfrontdesk extends CI_Model
 {
+	public function count_all_tiket_frontdesk($stat = '',$lav = '',$act=''){
+		$where = array();
+		if(!empty($stat)) $where[] = " status = '".$stat."'";
+		if(!empty($lav)) $where[] = " lavel = '".$lav."'";
+		if(!empty($act)){
+			$tmp_act = explode(',',$act);
+			$where[] = " is_active IN ('".implode("','",$tmp_act)."')";
+		}
+		
+		if(count($where) > 0){
+			$where = ' WHERE '.implode(' AND ',$where);
+		}else{
+			$where = '';
+		}
+		
+		return $this->db->query("SELECT * FROM tb_tiket_frontdesk $where")->num_rows();
+	}
+	
+	/*
 	public function count_all_tiket_frontdesk($stat,$lav){
 		return $this->db->query("SELECT * FROM tb_tiket_frontdesk JOIN tb_satker
                                                     ON tb_tiket_frontdesk.id_satker = tb_satker.id_satker
@@ -9,6 +28,7 @@ class Mfrontdesk extends CI_Model
                                                     lavel <= ? AND
                                                     is_active = 1",array($stat,$lav))->num_rows();
 	}
+	*/
 	
 	public function get_all_tiket_frontdesk($level = 3,$optional = ''){
 		//@F2D

@@ -47,7 +47,7 @@
                         <?php foreach ($result->result() as $value): ?>
                     <tr>
                         <td class="short"><?php echo sprintf('%05d', $value->no_tiket_frontdesk) ?></td>
-                        <td class="short"><?php echo $value->tanggal ?></td>
+                        <td class="short"><?php echo table_tanggal($value->tanggal) ?></td>
 						<td class="short"><?php echo $value->id_unit ?></td>
 						<td class="short"><?php echo $value->nama_unit ?></td>
                         <td class="short"><?php echo $value->id_satker ?></td>

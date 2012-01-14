@@ -37,7 +37,7 @@ class Frontdesk extends CI_Controller
             'no_tiket_frontdesk' => $id
         ));
 		
-        $this->_success(site_url('/helpdesk/dashboard'), 'Tiket berhasil diteruskan', 3);
+        $this->_success(site_url('/pelaksana/dashboard'), 'Tiket berhasil diteruskan', 3);
     }
 
     function reject($id)
