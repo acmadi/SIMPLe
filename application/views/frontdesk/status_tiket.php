@@ -18,8 +18,8 @@
 				<tr>
 					<th class="short">No Tiket</th>
 					<th class="short">Tanggal</th>
-                    <th class="short">Kode Unit</th>
-                    <th class="short">Nama Unit</th>
+                    <th class="short">Kode Eselon</th>
+                    <th class="short">Nama Eselon</th>
                     <th class="short">Kode Satker</th>
                     <th>Nama Satker</th>
                     <th class="short">Status Tiket</th>
@@ -43,11 +43,29 @@
 					<td class="short"><?php echo $value->status ?></td>
                     <td class="short">
                         <?php
-                            if ($value->is_active == 3) {
-                                echo 'Sudah diambil';
-                            } else {
-                                echo '-';
-                            }
+							switch($value->is_active){
+								case '1':
+									echo 'diterima '.$value->nama_lavel;
+									break;
+								case '2':
+									echo 'diteruskan '.$value->nama_lavel;
+									break;
+								case '3':
+									echo 'dikembalikan '.$value->nama_lavel;
+									break;
+								case '4':
+									echo 'diterima '.$value->nama_lavel;
+									break;
+								case '5':
+									echo 'diteruskan '.$value->nama_lavel;
+									break;
+								case '6':
+									echo 'diterima '.$value->nama_lavel;
+									break;
+								default :
+									echo '-';
+									break;
+							}
                         ?>
                     </td>
 				</tr>

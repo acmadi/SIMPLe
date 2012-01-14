@@ -85,4 +85,16 @@ class Msatker extends CI_Model
 
         return $result;
     }
+	
+	public function get_jml_tkt_hr_ini(){
+		return $this->db->from('tb_tiket_frontdesk')->like('tanggal', date('Y-m-d'))->get()->num_rows();
+	}
+	
+	public function get_jml_dokumen_selesai(){
+		return $this->db->from('tb_tiket_frontdesk')->where('status', 'close')->where('is_active', 6)->get()->num_rows();
+	}
+	
+	public function get_jml_dokumen_kembali(){
+		return $this->db->from('tb_tiket_frontdesk')->where('is_active', 3)->get()->num_rows();
+	}
 }
