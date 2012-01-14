@@ -41,8 +41,8 @@
     <div style="" id="tab1" class="tab_konten">
         <div class="table"> 
             <div id="head">
-                <form id="form-cari" action="<?php echo site_url('admin/man_user_cari')?>" method="post">
-					Cari : <input id="teks-cari" type="text" name="fcari" value="" placeholder="Pencarian user" /> <input class="button blue-pill" type="submit" value="Enter"/>
+                <form id="form-cari" action="<?php echo site_url('admin/man_user/index')?>" method="post">
+					Cari : <input id="teks-cari" type="text" name="keyword" value="<?php echo $isian_form;?>" placeholder="Pencarian user" /> <input class="button blue-pill" type="submit" value="Enter"/>
                 </form>
                 
                 <a href="<?php echo site_url('admin/man_user_tambah')?>"><input id="btn-kanan-atas" class='button blue-pill' type="submit" value="Tambah User"/></a>

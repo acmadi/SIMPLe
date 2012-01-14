@@ -20,7 +20,8 @@ class Man_user extends CI_Controller
 		
         $data['title'] 		= 'Manajemen User';
         $data['content'] 	= 'admin/man_user/man_user';
-
+		$data['isian_form']	= $page['isian_form1'];
+		
         $bc[0]->link = 'admin/dashboard';
         $bc[0]->label = 'Home';
         $bc[1]->link = $this->uri->uri_string();

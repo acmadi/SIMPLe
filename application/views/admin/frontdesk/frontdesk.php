@@ -23,7 +23,7 @@
             <div class="table">
                 <div id="head">
                     <div style="float: left;">
-                        <form id="cari_unit" action="<?php echo site_url('/admin/frontdesk/search') ?>" method="post">
+                        <form id="cari_unit" action="<?php echo site_url('/admin/frontdesk/index') ?>" method="post">
 							<table>
 								<tr>
 									<td>
@@ -59,6 +59,8 @@
                             <th>No. Tiket</th>
                             <th>Tanggal</th>
                             <th>Tanggal Selesai</th>
+                            <th>Nama K/L</th>
+                            <th>Nama Eselon</th>
                             <th>Nama Satker</th>
                             <th>Status</th>
                         </tr>
@@ -71,6 +73,8 @@
                             <td><?php echo $tiket->no_tiket_frontdesk . ' ' . $tiket->no_antrian ?></td>
                             <td><?php echo $tiket->tanggal ?></td>
                             <td><?php echo $tiket->tanggal_selesai ?></td>
+                            <td><?php echo $tiket->nama_kementrian ?></td>
+                            <td><?php echo $tiket->nama_unit ?></td>
                             <td><?php echo $tiket->nama_satker ?></td>
                             <td><?php echo $tiket->status ?></td>
                             

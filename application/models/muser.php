@@ -2,34 +2,66 @@
 class Muser extends CI_Model
 {
     function get_all_user(){
-		$this->load->library('pagination');		
-		$sql = "SELECT *
-				FROM tb_user
-				JOIN tb_lavel
-				ON tb_user.id_lavel = tb_lavel.id_lavel
-				JOIN tb_unit_saker
-				ON tb_unit_saker.id_unit_satker = tb_user.id_unit_satker
-				ORDER BY id_user ASC";
+		//@F2D
+		$keyword = $this->input->post('keyword',TRUE);
+
+		$this->load->library('pagination');
+
+		$total_seg = $this->uri->total_segments();
+		$default = array("keyword");
+		$this->terms = $this->uri->uri_to_assoc(4,$default);
+
+		if(($this->terms['keyword'] != '') OR ($keyword != '')){
+			$uri_segment = 6;
+			$offset = (int) $this->uri->segment($uri_segment,0);
+
+			if($this->terms['keyword'] != ''){
+				$keyword = $this->terms['keyword'];
+			}else{
+				$this->terms['keyword'] = $keyword;
+			}
+
+			$uriparams['keyword'] = $this->terms['keyword'];
+
+			if(($total_seg % 2) > 0){
+				$offset = (int) $this->uri->segment(6, 0);
+			}
+
+			$url_add = $this->uri->assoc_to_uri($uriparams).'/';
+		}else{
+			$uri_segment = 4;
+			$offset = (int) $this->uri->segment($uri_segment,0);
+			$url_add = '';
+
+		}
+
+		//if from suggest
+		$num_key = (!empty($keyword))?explode('-',$keyword):array();
+		if(count($num_key)>1){
+			$where = " AND id_user = '".trim($num_key[0])."' ";
+		}else{
+			$where = " AND (username LIKE '%".$keyword."%' OR nama LIKE '%".$keyword."%' OR id_user LIKE '%".$keyword."%' ) ";
+		}
+
+		$sql = "SELECT a.id_user, a.username, a.nama, a.email, a.no_tlp, b.nama_unit, a.id_lavel, c.nama_lavel
+				FROM tb_user a, tb_unit_saker b,tb_lavel c WHERE a.id_lavel = c.id_lavel AND a.id_unit_satker = b.id_unit_satker
+				 $where ORDER BY id_user ASC";
 		$query = $this->db->query($sql);
 
-		$config['base_url'] = site_url('admin/man_user/index');
+		$config['base_url'] = site_url('/admin/man_user/index').'/'.$url_add;
 		$config['total_rows'] = $query->num_rows();
-		$config['per_page'] = 50;
-		$config['uri_segment'] = 4;
+		$config['per_page'] = 10;
+		$config['uri_segment'] = $uri_segment;
 		$this->pagination->initialize($config);
 
-		$offset = (int) $this->uri->segment(4, 0);
 
-		$sqlb = "SELECT *
-				FROM tb_user
-				JOIN tb_lavel
-				ON tb_user.id_lavel = tb_lavel.id_lavel
-				JOIN tb_unit_saker
-				ON tb_unit_saker.id_unit_satker = tb_user.id_unit_satker
-				ORDER BY id_user ASC
+		$sqlb = "SELECT a.id_user, a.username, a.nama, a.email, a.no_tlp, b.nama_unit, a.id_lavel, c.nama_lavel
+				FROM tb_user a, tb_unit_saker b,tb_lavel c WHERE a.id_lavel = c.id_lavel AND a.id_unit_satker = b.id_unit_satker
+				 $where ORDER BY id_user ASC
 				LIMIT ?,?";
 		$data["query"] = $this->db->query($sqlb, array($offset ,$config['per_page']));
 
+		$data['isian_form1'] = $keyword;
 		$data['pagination1'] = $this->pagination->create_links();
 
 		return $data;
@@ -86,6 +118,7 @@ class Muser extends CI_Model
 		}else{
 			$where = " WHERE username LIKE '%".$keyword."%' OR nama LIKE '%".$keyword."%' OR id_user LIKE '%".$keyword."%' ";
 		}
+		
 		
 		
 		
