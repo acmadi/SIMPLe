@@ -1,22 +1,3 @@
-ul li.current a
-{
-	background-color: white;
-}
-
-.profile-menu{
-	border-radius: 5px 5px 0 0;
-}
-
-.profile-menu ul{
-	border-radius: 0 0 10px 10px;
-}
-.profile-menu li,
-.profile-menu ul:last-child{
-	padding: 5px;
-}
-.profile-menu li:hover{
-	background-color: #555;
-}
 
 
 

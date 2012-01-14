@@ -64,12 +64,13 @@
         <label><input type="radio" name="tipe" id="non_kl_btn" value="non_kl">Umum</label>
     </fieldset>
 
-    <?php echo form_open('helpdesk/identitas_satker/save_identitas', array('id' => 'identitas_kl')) ?>
+    <?php echo form_open('helpdesk/identitas_satker/save_identitas', 
+        array('id' => 'identitas_kl')) ?>
 
     <?php echo form_hidden('tipe', 'kl') ?>
 
 <!--    <fieldset id="kl" style="float: left; margin-right: 20px; width: 570px; height: 320px;">-->
-    <fieldset id="kl">
+    <fieldset id="kl" class="left">
         <legend>Satker</legend>
 
         <p>
@@ -95,7 +96,7 @@
     </fieldset>
 
 <!--    <fieldset style="float: right; width: 570px; height: 320px;">-->
-    <fieldset>
+    <fieldset class="right">
         <!-- TODO: (simpan di tb_petugas_satker) field kurang tambahin -->
         <legend>Identitas</legend>
         <p>
@@ -134,6 +135,7 @@
 
     </form>
 
+    <!-- IDENTITAS UMUM -->
     <?php echo form_open('helpdesk/identitas_satker/save_identitas', array('id' => 'identitas_umum', 'style' => 'display: none')) ?>
 
     <?php echo form_hidden('tipe', 'non_kl') ?>
