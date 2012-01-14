@@ -11,24 +11,24 @@ class Dashboard extends CI_Controller
 
     function index()
     {
-        $data['helpdesk_total'] = $this->mhelpdesk->count_all_tiket('open',4);
-        $data['frontdesk_total'] = $this->db->query("SELECT * FROM tb_tiket_frontdesk JOIN tb_satker
-                                                    ON tb_tiket_frontdesk.id_satker = tb_satker.id_satker
-                                                    WHERE status = 'open' AND
-                                                    lavel <= 2 AND
-                                                    is_active = 1")->num_rows();
-
-        $result = $this->db->query("SELECT * FROM tb_tiket_frontdesk WHERE lavel = 1");
-        $data['total_tiket_diterima_cs'] = $result->num_rows();
-
-        $result = $this->db->query("SELECT * FROM tb_tiket_frontdesk WHERE lavel = 2");
-        $data['total_tiket_diteruskan_cs'] = $result->num_rows();
-
-        $result = $this->db->query("SELECT * FROM tb_tiket_frontdesk WHERE lavel = 3");
-        $data['total_tiket_diterima_pelaksana'] = $result->num_rows();
-
-        $result = $this->db->query("SELECT * FROM tb_tiket_frontdesk WHERE lavel > 3");
-        $data['total_tiket_diteruskan_pelaksana'] = $result->num_rows();
+        //status, lavel, is_active
+        $data['helpdesk_total'] = $this->mhelpdesk->count_all_tiket('open', 4);
+        $data['frontdesk_total'] = $this->mfrontdesk->count_all_tiket_frontdesk('open',4,'4,5'); 
+        $data['total_tiket_diterima_cs'] = $this->mfrontdesk->count_all_tiket_frontdesk('open',1,1); 
+        $data['total_tiket_diteruskan_cs'] = $this->mfrontdesk->count_all_tiket_frontdesk('open',3,2);
+        $data['total_tiket_diterima_pelaksana'] = $this->mfrontdesk->count_all_tiket_frontdesk('open',3,1);
+        $data['total_tiket_diteruskan_pelaksana'] = $this->mfrontdesk->count_all_tiket_frontdesk('open',4,2);
+		
+		$data['total_tiket_diterima_kasubdit'] = $this->mfrontdesk->count_all_tiket_frontdesk('open',4,1);
+        $data['total_tiket_diteruskan_kasubdit'] = $this->mfrontdesk->count_all_tiket_frontdesk('open',4,4);
+		
+		$data['total_tiket_diterima_dadutek'] = $this->mfrontdesk->count_all_tiket_frontdesk('open',4,5);
+        $data['total_tiket_diteruskan_dadutek'] = $this->mfrontdesk->count_all_tiket_frontdesk('open',5,2);
+		
+		$data['total_tiket_open_cs'] = $this->mfrontdesk->count_all_tiket_frontdesk('open',1);
+		$data['total_tiket_open_pelaksana'] = $this->mfrontdesk->count_all_tiket_frontdesk('open',3);
+		$data['total_tiket_open_kasubdit'] = $this->mfrontdesk->count_all_tiket_frontdesk('open',4,'1,2');
+		$data['total_tiket_open_dadutek'] = $this->mfrontdesk->count_all_tiket_frontdesk('open',4,'4,5');
 
         $data['title'] = 'Dashboard';
         $data['content'] = 'kasubdit_dadutek/dashboard';
