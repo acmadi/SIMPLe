@@ -15,7 +15,7 @@ switch ($this->uri->segment(2)) {
 <div id="navbar" class="clearfloat">
     <ul class="sf-menu">
 <!--        <li class="current ">--><?php //echo anchor('pengaduan/dashboard', 'Dashboard');?><!--</li>-->
-        <li class="<?php echo $nav_pengaduan ?>"><?php echo anchor('pengaduan/dashboard', 'Pengaduan');?></li>
-        <li class="<?php echo $nav_forum ?>"><?php echo anchor('pengaduan/man_forum', 'Forum');?></li>
+        <li><?php echo anchor('pengaduan/dashboard', 'Pengaduan', "class='$nav_pengaduan'");?></li>
+        <li><?php echo anchor('pengaduan/man_forum', 'Forum', "class='$nav_forum'");?></li>
     </ul>
 </div>

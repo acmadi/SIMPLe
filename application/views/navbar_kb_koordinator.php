@@ -17,9 +17,8 @@ if ($this->uri->segment(1) == 'knowledge') {
 
 <div id="navbar" class="clearfloat">
     <ul class="sf-menu">
-        <li class="<?php echo $nav_dashboard ?>"><?php echo anchor('kb_koordinator/dashboard', 'Dashboard');?></li>
+        <li><?php echo anchor('kb_koordinator/dashboard', 'Dashboard', "class='$nav_dashboard'");?></li>
 <!--        <li class="--><?php //echo $nav_knowledge ?><!--">--><?php //echo anchor('kb_koordinator/knowledge_base/lists', 'Lihat Knowledge Base');?><!--</li>-->
-        <li class="<?php echo $nav_knowledge ?>"><?php echo anchor('kb_koordinator/knowledge_base', 'Manajemen Knowledge Base');?></li>
+        <li><?php echo anchor('kb_koordinator/knowledge_base', 'Manajemen Knowledge Base', "class='$nav_knowledge'");?></li>
     </ul>
-    <div id="logout"><?php echo $this->session->userdata('nama') ?> &nbsp; | &nbsp; <?php echo anchor("login/process_logout", 'Logout') ?> &nbsp; <em><?php echo date('d-m-Y') ?></em></div>
 </div>
