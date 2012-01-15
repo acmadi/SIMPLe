@@ -97,7 +97,12 @@ class Helpdesk_form_pertanyaan extends CI_Controller
             $prioritas = $this->input->post('prioritas');
             $pertanyaan = $this->input->post('pertanyaan');
             $description = $this->input->post('description');
+<<<<<<< HEAD
+			
+		
+=======
 
+>>>>>>> c2f480f8efdb1ba0faff97f8f602bfeb0119cc81
             $result = $this->db->from('tb_tiket_helpdesk')
                     ->where('id', $this->session->userdata('id_tiket'))
                     ->get();
@@ -167,6 +172,13 @@ class Helpdesk_form_pertanyaan extends CI_Controller
         $data['pertanyaan'] = $pertanyaan;
         $data['description'] = $description;
 
+<<<<<<< HEAD
+		$this->load->view('new-template', $data);
+
+    }
+	
+function masuk()
+=======
         $cari = $this->input->post('pertanyaan');
 
         $array = explode(' ', $cari);
@@ -213,6 +225,7 @@ class Helpdesk_form_pertanyaan extends CI_Controller
     }
 
     function masuk()
+>>>>>>> c2f480f8efdb1ba0faff97f8f602bfeb0119cc81
     {
         $data = array();
 
