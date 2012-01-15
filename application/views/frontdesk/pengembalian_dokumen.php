@@ -1,8 +1,8 @@
 <div class="content">
 
     <h1>Daftar Pengembalian Dokumen</h1>
-	<?php
-    // TODO: Satu paket ini untuk alerts. Nanti mau dipindah jadi hanya panggil satu method.
+    <?php
+// TODO: Satu paket ini untuk alerts. Nanti mau dipindah jadi hanya panggil satu method.
     if ($this->session->flashdata('success')) {
         echo '<div class="success">' . $this->session->flashdata('success') . '</div>';
     }
@@ -18,55 +18,43 @@
     ?>
     <?php if ($result->num_rows() > 0): ?>
 
-    <div class="table">
-        <div id="head">
-            <form id="form-cari" action="<?php echo site_url('/frontdesk/pengembalian_dokumen/index');?>" method="post">
-                <input id="teks-cari" type="text" placeholder="Pencarian" name="keyword" value="<?php echo $isian_form;?>"/> <input type="submit" value="Cari" class="button blue-pill"/>
-				<a href="<?php echo site_url('/frontdesk/pengembalian_dokumen/index');?>" class="button gray-pill">Reset</a>
-            </form>
-        </div>
+    <?php echo search('/frontdesk/pengembalian_dokumen/index') ?>
 
-        <div id="tail">
-            <div class="tab">
-                <table id="tableOne" class="yui">
-                    <thead>
-                    <tr>
-                        <th class="short">No Tiket</th>
-                        <th class="short">Tanggal</th>
-                        <th class="short">Kode Eselon</th>
-                        <th class="short">Nama Eselon</th>
-                        <th class="short">Kode Satker</th>
-                        <th>Nama Satker</th>
-                        <th>&nbsp;</th>
-                    </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <td colspan="7">&nbsp;</td>
-                        </tr>
-                    </tfoot>
-                    <tbody>
-                        <?php foreach ($result->result() as $value): ?>
-                    <tr>
-                        <td><?php echo sprintf('%05d', $value->no_tiket_frontdesk) ?></td>
-                        <td><?php echo table_tanggal($value->tanggal) ?></td>
-                        <td><?php echo $value->id_unit ?></td>
-                        <td><?php echo $value->nama_unit ?></td>
-                        <td><?php echo $value->id_satker ?></td>
-                        <td><?php echo $value->nama_satker ?></td>
-                        <td class="action">
-                            <a href="<?php echo site_url('/frontdesk/pengembalian_dokumen/cetak/' . $value->id_pengembalian_doc) ?>" class="button blue-pill">Kembalikan Dokumen</a>
-                        </td>
-                    </tr>
-                        <?php endforeach ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th class="short">No Tiket</th>
+            <th class="short">Tanggal</th>
+            <th class="short">Kode Eselon</th>
+            <th class="short">Nama Eselon</th>
+            <th class="short">Kode Satker</th>
+            <th>Nama Satker</th>
+            <th>&nbsp;</th>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+            <td colspan="7">&nbsp;</td>
+        </tr>
+        </tfoot>
+        <tbody>
+            <?php foreach ($result->result() as $value): ?>
+        <tr>
+            <td><?php echo sprintf('%05d', $value->no_tiket_frontdesk) ?></td>
+            <td><?php echo table_tanggal($value->tanggal) ?></td>
+            <td><?php echo $value->id_unit ?></td>
+            <td><?php echo $value->nama_unit ?></td>
+            <td><?php echo $value->id_satker ?></td>
+            <td><?php echo $value->nama_satker ?></td>
+            <td class="action">
+                <a href="<?php echo site_url('/frontdesk/pengembalian_dokumen/cetak/' . $value->id_pengembalian_doc) ?>" class="button blue-pill">Kembalikan Dokumen</a>
+            </td>
+        </tr>
+            <?php endforeach ?>
+        </tbody>
+    </table>
 
-        <div class="pagination"><?php echo ($pageLink)?'Halaman '.$pageLink:'';?></div><br />
-        <br/>
-    </div>
+    <div class="pagination"><?php echo ($pageLink) ? 'Halaman ' . $pageLink : '';?></div>
 
     <?php else: ?>
 
