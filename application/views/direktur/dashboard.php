@@ -5,7 +5,7 @@
 </style>
 
 <div class="content">
-    <h1>Kasubdit Anggaran Dashboard</h1>
+    <h1>Direktur Dashboard</h1>
 
     <fieldset class="grid_6">
         <legend>Report Front Desk</legend>
