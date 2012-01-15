@@ -60,14 +60,20 @@
 
     <h1>Isi Identitas SatKer</h1>
 
-        
+    <?php
+    $error = validation_errors();
+    if ($error) {
+        echo notification(validation_errors(), 'ERROR', 'red');
+    }
+    ?>
+
     <fieldset>
         <legend>Kategori</legend>
         <label><input type="radio" name="tipe" id="kl_btn" checked="checked" value="kl">K/L</label>
         <label><input type="radio" name="tipe" id="non_kl_btn" value="non_kl">Umum</label>
     </fieldset>
 
-    <?php echo form_open('helpdesk/identitas_satker/save_identitas', 
+    <?php echo form_open('helpdesk/identitas_satker/save_identitas',
         array('id' => 'identitas_kl')) ?>
 
     <?php echo form_hidden('tipe', 'kl') ?>
@@ -132,9 +138,9 @@
     <div class="clear"></div>
 
     <div style="text-align: right; margin-top: 20px;">
-        <input type="submit" class="button blue-pill" value="Help Desk">
+        <input type="submit" class="button green" value="Help Desk">
 <!--        <input type="submit" class="button blue-pill" value="Saluran Pengaduan">-->
-        <input type="reset" class="button gray-pill" value="Reset">
+        <input type="reset" class="button" value="Reset">
     </div>
 
     </form>
@@ -178,9 +184,9 @@
     </fieldset>
 
     <div style="text-align: right; margin-top: 20px;">
-        <input type="submit" class="button blue-pill" value="Help Desk">
+        <input type="submit" class="button green" value="Help Desk">
 <!--        <input type="submit" class="button blue-pill" value="Saluran Pengaduan">-->
-        <input type="reset" class="button gray-pill" value="Reset">
+        <input type="reset" class="button" value="Reset">
     </div>
 
     </form>
