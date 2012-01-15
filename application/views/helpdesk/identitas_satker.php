@@ -78,7 +78,8 @@
 
         <p>
             <label>Kode - Nama K/L </label> &nbsp;
-            <select name="nama_kl" id="nama_kl" class="chzn-select" style="width: 400px;">
+            <select name="nama_kl" id="nama_kl" class="chzn-select" data-placeholder="Pilih K/L" style="width: 400px;">
+                <option></option>
                 <?php
                 foreach ($kementrian->result() as $value) {
                     echo sprintf("<option value='%s'>%s</option>", $value->id_kementrian, $value->id_kementrian . ' - ' . $value->nama_kementrian);
@@ -89,12 +90,12 @@
 
         <p>
             <label>Nama Eselon 1 </label>&nbsp;
-            <select id="eselon" name="eselon" class="kl chzn-select" style="width: 400px;"></select>
+            <select id="eselon" name="eselon" class="kl chzn-select" data-placeholder="Pilih Eselon I" style="width: 400px;"></select>
         </p>
 
         <p class="kode_satker_p">
             <label>Kode - Nama Satker</label>
-            <select name="kode_satker" id="kode_satker" class="kl chzn-select" style="width: 400px;"></select>
+            <select name="kode_satker" id="kode_satker" class="kl chzn-select" data-placeholder="Pilih Satker" style="width: 400px;"></select>
         </p>
     </fieldset>
 
