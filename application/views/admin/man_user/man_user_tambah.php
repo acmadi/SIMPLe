@@ -1,3 +1,19 @@
+<script type="text/javascript">
+    $(function () {
+//        $('#flevel').chosen().change(function () {
+//            var level = $(this).val();
+//            $.get('<?php echo site_url('/admin/man_user_tambah/pilih_departemen') ?>' + '/' + level,
+//                    function (response) {;
+//                        response = '<option></option>' + response;
+//                        $('#fdepartemen').html(response);
+//                        $('#fdepartemen').trigger('liszt:updated');
+//                        console.log(response);
+//                    })
+//        });
+    })
+</script>
+
+
 <ul id="nav">
     <li><a href="#tab1">Manajemen User / Tambah</a></li>
 </ul>
@@ -9,20 +25,20 @@
         <div class="table">
             <div id="head">
                 <?php
-				// TODO: Satu paket ini untuk alerts. Nanti mau dipindah jadi hanya panggil satu method.
-				if ($this->session->flashdata('success')) {
-					echo '<div class="success">' . $this->session->flashdata('success') . '</div>';
-				}
-				if ($this->session->flashdata('error')) {
-					echo '<div class="error">' . $this->session->flashdata('error') . '</div>';
-				}
-				if ($this->session->flashdata('notice')) {
-					echo '<div class="notice">' . $this->session->flashdata('notice') . '</div>';
-				}
-				if ($this->session->flashdata('info')) {
-					echo '<div class="info">' . $this->session->flashdata('info') . '</div>';
-				}
-				?>
+                // TODO: Satu paket ini untuk alerts. Nanti mau dipindah jadi hanya panggil satu method.
+                if ($this->session->flashdata('success')) {
+                    echo '<div class="success">' . $this->session->flashdata('success') . '</div>';
+                }
+                if ($this->session->flashdata('error')) {
+                    echo '<div class="error">' . $this->session->flashdata('error') . '</div>';
+                }
+                if ($this->session->flashdata('notice')) {
+                    echo '<div class="notice">' . $this->session->flashdata('notice') . '</div>';
+                }
+                if ($this->session->flashdata('info')) {
+                    echo '<div class="info">' . $this->session->flashdata('info') . '</div>';
+                }
+                ?>
 
                 <form method="post" action="<?php echo site_url('admin/man_user_tambah/add')?>">
                     <table id="tableOne" class="yui">
@@ -60,8 +76,8 @@
                             <td>Level</td>
                             <td>:</td>
                             <td>
-                                <select name="flevel">
-                                    <option value="" selected="selected">- Level -</option>
+                                <select name="flevel" id="flevel" class="chzn-single" data-placeholder="Pilih Level" style="width: 500px;">
+                                    <option></option>
                                     <?php foreach ($list_level as $a): ?>
                                     <option value="<?php echo $a->id_lavel?>"><?php echo $a->nama_lavel?></option>
                                     <?php endforeach;?>
@@ -84,7 +100,7 @@
                     <br/>
 
                     <div>
-                        <input type="submit" class="button blue-pill" value="simpan" />
+                        <input type="submit" class="button blue-pill" value="simpan"/>
                         <a href="<?php echo site_url('/admin/man_user') ?>" class="button gray-pill">Batal</a>
                     </div>
                 </form>
