@@ -26,6 +26,9 @@ if ($this->uri->segment(1) == 'referensi') {
 if ($this->uri->segment(1) == 'knowledge') {
     $nav_knowledge = 'current';
 }
+if ($this->uri->segment(1) == 'forum') {
+    $nav_forum = 'current';
+}
 ?>
 
 <div id="navbar" class="clearfloat">
@@ -35,6 +38,6 @@ if ($this->uri->segment(1) == 'knowledge') {
         <li><?php echo anchor('kasubdit/frontdesk', 'Front Desk', "class='$nav_frontdesk'");?></li>
         <li><?php echo anchor('knowledge', 'Knowledge Base', "class='$nav_knowledge'");?></li>
         <li><?php echo anchor('referensi', 'Referensi Peraturan', "class='$nav_referensi'") ?></li>
-        <li><?php echo anchor('kasubdit/man_forum', 'Forum', "class='$nav_forum'");?></li>
+        <li><?php echo anchor('forum', 'Forum', "class='$nav_forum'");?></li>
     </ul>
 </div>

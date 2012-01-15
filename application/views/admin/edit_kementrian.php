@@ -1,6 +1,6 @@
 <div class="content">
 
-    <h1>Ubah Nama Satker <?php echo $satker->id_satker ?></h1>
+    <h1>Ubah Nama Kementrian <?php echo $kementrian->id_kementrian ?></h1>
 				<?php
 				// TODO: Satu paket ini untuk alerts. Nanti mau dipindah jadi hanya panggil satu method.
 				if ($this->session->flashdata('success')) {
@@ -17,17 +17,17 @@
 					echo '<div class="info">' . $this->session->flashdata('info') . '</div>';
 				}
 				?>
-    <form method="post" action="<?php site_url('/admin/satker/edit/' . $satker->id_satker) ?>">
+    <form method="post" action="<?php site_url('/admin/kementrian/edit/' . $kementrian->id_kementrian) ?>">
 
         <p>
-            <label>Kode Satker</label>
-            <input type="text" value="<?php echo $satker->id_satker ?>" disabled/>
+            <label>Kode Kementrian</label>
+            <input type="text" value="<?php echo $kementrian->id_kementrian ?>" disabled/>
         </p>
 
         <p>
-            <label>Nama Satker</label>
-            <input type="text" name="nama_satker" value="<?php echo $satker->nama_satker ?>"/>
-			<?php echo form_error('nama_satker', '<div class="error">', '</div>'); ?>
+            <label>Nama Kementrian</label>
+            <input type="text" name="nama_kementrian" value="<?php echo $kementrian->nama_kementrian ?>"/>
+			<?php echo form_error('nama_kementrian', '<div class="error">', '</div>'); ?>
         </p>
 
         <p>

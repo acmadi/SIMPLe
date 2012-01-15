@@ -1,7 +1,7 @@
 <div class="content">
 
-    <h1>Ubah Nama Satker <?php echo $satker->id_satker ?></h1>
-				<?php
+    <h1>Tambah Kementrian</h1>
+<?php
 				// TODO: Satu paket ini untuk alerts. Nanti mau dipindah jadi hanya panggil satu method.
 				if ($this->session->flashdata('success')) {
 					echo '<div class="success">' . $this->session->flashdata('success') . '</div>';
@@ -17,18 +17,23 @@
 					echo '<div class="info">' . $this->session->flashdata('info') . '</div>';
 				}
 				?>
-    <form method="post" action="<?php site_url('/admin/satker/edit/' . $satker->id_satker) ?>">
+    <form method="post" action="<?php site_url('/admin/kementrian/add') ?>">
+
+        
 
         <p>
-            <label>Kode Satker</label>
-            <input type="text" value="<?php echo $satker->id_satker ?>" disabled/>
+            <label>Kode Kementrian</label>
+            <input type="text" name="id_kementrian" value="<?php echo set_value('id_kementrian') ?>" maxlength="3"/>
+			<?php echo form_error('id_kementrian', '<div class="error">', '</div>'); ?>
         </p>
 
         <p>
-            <label>Nama Satker</label>
-            <input type="text" name="nama_satker" value="<?php echo $satker->nama_satker ?>"/>
-			<?php echo form_error('nama_satker', '<div class="error">', '</div>'); ?>
+            <label>Nama Kementrian</label>
+            <input type="text" name="nama_kementrian" value="<?php echo set_value('nama_kementrian')?> "/>
+			<?php echo form_error('nama_kementrian', '<div class="error">', '</div>'); ?>
         </p>
+
+        
 
         <p>
             <input type="submit" class="button blue-pill" value="Simpan"/>
