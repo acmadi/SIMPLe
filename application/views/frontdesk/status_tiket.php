@@ -7,8 +7,7 @@
         <form id="form-cari" action="<?php echo site_url('/frontdesk/status_tiket/index');?>" method="post">
         <input id="teks-cari" type="text" placeholder="Pencarian" name="keyword" value="<?php echo $isian_form;?>" /> 
 		<input type="submit" value="Cari" class="button blue-pill" />
-		<a href="<?php echo site_url('/frontdesk/status_tiket/index');?>" class="button gray-pill">Reset</a>
-        </form>
+		</form>
        	</div>
 
     <div id="tail">
