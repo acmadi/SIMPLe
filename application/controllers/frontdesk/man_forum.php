@@ -42,16 +42,6 @@ class Man_forum extends CI_Controller
         $id_parent = ( ! $this->input->post('id_parent') ) ? NULL : $this->input->post('id_parent');
         $referrer = $this->input->post('referrer');
 
-        // upload file
-        // $config['file_name'] = date('isdm') . '_' . $_FILES['file']['name'];
-        // $config['upload_path'] = BASEPATH . 'upload/forum/';
-        // $config['allowed_types'] = 'doc|docx|xls|xlsx|ppt|pptx|txt|rtf|jpg';
-        // $config['max_size'] = '10000';
-
-        // $this->load->library('upload', $config);
-
-        // $this->upload->do_upload();
-
         $nmBr = '';
         if (isset($_FILES['file']['name'])){
             $unik = date('isdm').'_';
