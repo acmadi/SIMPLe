@@ -60,13 +60,7 @@
 
     <h1>Isi Identitas SatKer</h1>
 
-        <?php
-            $errors = validation_errors();
-            if (!empty($errors)) {
-                echo notification(validation_errors(), 'Error', 'red');
-            }
-        ?>
-
+        
     <fieldset>
         <legend>Kategori</legend>
         <label><input type="radio" name="tipe" id="kl_btn" checked="checked" value="kl">K/L</label>
@@ -154,26 +148,31 @@
         <p>
             <label class="aligned">Nama</label>
             <input type="text" id="nama" name="nama_petugas" size="30" value="<?php echo set_value('nama_petugas') ?>">
+			<?php echo form_error('nama_petugas', '<div class="error">', '</div>'); ?>
         </p>
 
         <p class="kl">
             <label class="aligned">Instansi</label>
             <input type="text" id="instansi" name="instansi" size="30" value="<?php echo set_value('instansi') ?>">
+			<?php echo form_error('instansi', '<div class="error">', '</div>'); ?>
         </p>
 
         <p>
             <label class="aligned">Alamat</label>
             <input type="text" id="alamat" name="alamat" size="30" value="<?php echo set_value('alamat') ?>">
+			<?php echo form_error('alamat', '<div class="error">', '</div>'); ?>
         </p>
 
         <p class="kl">
             <label class="aligned">Telpon</label>
             <input type="text" id="no_hp" name="no_hp" size="30" value="<?php echo set_value('no_hp') ?>">
+			<?php echo form_error('no_hp', '<div class="error">', '</div>'); ?>
         </p>
 
         <p>
             <label class="aligned">E-mail</label>
             <input type="email" id="email" name="email" size="30" value="<?php echo set_value('email') ?>">
+			<?php echo form_error('email', '<div class="error">', '</div>'); ?>
         </p>
     </fieldset>
 

@@ -3,7 +3,7 @@
     <h1>Konsultasi Help Desk - Umum</h1>
 
     <div style="text-align: right; text-decoration: underline; font-weight: bold; font-size: 14px;">
-        No Tiket: <?php echo sprintf('%05d', $this->session->userdata('tiket')) ?>
+        No Tiket: <?php echo sprintf('%05d', $this->session->userdata('no_tiket')) ?>
     </div>
 
     <fieldset>
@@ -46,7 +46,7 @@
     <fieldset>
         <legend>Pertanyaan Stakeholder</legend>
 
-        <?php echo form_open('/helpdesk/helpdesk_form_pertanyaan/submit'); ?>
+        <?php echo form_open('/helpdesk/helpdesk_form_pertanyaan/masuk'); ?>
         <input type="hidden" name="no_tiket_helpdesk" value="<?php echo $this->session->userdata('tiket') ?>"/>
 
         <p>
@@ -65,6 +65,7 @@
                 <option value="high">High</option>
             </select>
         </p>
+		
         <p>
             <label for="pertanyaan">Pertanyaan</label>
             <input type="text" name="pertanyaan" id="pertanyaan" value=""/>
