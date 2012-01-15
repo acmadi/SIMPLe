@@ -36,15 +36,14 @@
     <hr/>
     <?php foreach ($forums->result() as $forum): ?>
     <div class="forumpost">
-        
-        <h2><a href="<?php echo site_url('/forum/view/' . $forum->id_forum ) ?>"><?php echo $forum->judul_forum ?></a></h2>
+        <?php $has_attachment = ($forum->file != '' && $forum->file != NULL) ? 'has_attachment' : '' ?>
+        <h2 class="<?php echo $has_attachment ?>"><a href="<?php echo site_url('/forum/view/' . $forum->id_forum ) ?>"><?php echo $forum->judul_forum ?></a></h2>
         <div class="shadow">&nbsp;</div>
 
         <div  class="isi">
             <?php echo word_limiter($forum->isi_forum, 100) ?>
         </div>
         
-        <div style="text-align: right;"></div>
         <em class="meta">
          dikirim pada <?php echo date('d-m-Y', strtotime($forum->tanggal)) ?>
          oleh <?php echo $forum->nama ?>
