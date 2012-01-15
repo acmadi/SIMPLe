@@ -11,7 +11,7 @@ class Forum extends CI_Controller
 
     function index()
     {
-        $this->halaman(0);
+        $this->halaman(1);
     }
 
     function halaman($page = 1)
@@ -33,7 +33,7 @@ class Forum extends CI_Controller
         $data['title'] = 'Manajemen Forum';
         $data['content'] = 'forum/index';
 
-        $offset = ($page - 1) * $config['per_page'];
+        $offset = ((int)$page - 1) * $config['per_page'];
         $data['forums'] = $this->db->query(
             "SELECT f.*, u.nama FROM tb_forum f LEFT JOIN tb_user u
              ON (f.id_user = u.id_user)
