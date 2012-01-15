@@ -27,17 +27,21 @@ header {
 footer {
     color: #fcfcfc;
     padding: 20px 0;
-    background: #2a0038 url(../images/tribal_flower_white.png) right bottom no-repeat;
+    background: #2a0038;
+    /*background: #2a0038 url(../images/tribal_flower_white.png) right bottom no-repeat;*/
     box-shadow: 1px 0 5px #333;
 }
-
+    footer h1{
+        font-size: 12px;
+        margin: 5px 0;
+    }
 	footer ul{
 		list-style:none;
 	}
 	footer ul li
 	{
 		margin-left: 0;
-		margin-bottom: 5px;
+		margin-bottom: 0px;
 	}
 
 
