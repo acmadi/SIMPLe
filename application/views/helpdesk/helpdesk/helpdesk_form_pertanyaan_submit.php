@@ -9,7 +9,7 @@
     <fieldset>
         <legend>Identitas</legend>
 
-        <div style="float: left; width: 500px">
+        <div class="grid_6">
             <p>
                 <label style="display: inline-block; width: 100px;">No Tiket</label>
                 <span><?php echo sprintf('%05d', $this->session->userdata('no_tiket')) ?></span>
@@ -30,7 +30,7 @@
                 <span><?php echo $identitas->nama_petugas ?></span>
             </p>
         </div>
-        <div style="float: left; width: 500px;">
+        <div class="grid_5">
             <p>
                 <label style="display: inline-block; width: 100px;">No Kantor</label>
                 <span><?php echo $identitas->no_kantor ?></span>
@@ -109,7 +109,7 @@
     </fieldset>
 
     <div style="text-align: right;">
-        <a href="<?php echo site_url('/helpdesk/helpdesk/eskalasi/' . $this->session->userdata('id_tiket') ) ?>" class="button blue-pill">Eskalasi</a>
+        <a href="<?php echo site_url('/helpdesk/helpdesk/eskalasi/' . $this->session->userdata('id_tiket') ) ?>" class="button blue">Eskalasi</a>
     </div>
 </div>
 
