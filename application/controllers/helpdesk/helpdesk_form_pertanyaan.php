@@ -98,7 +98,7 @@ class Helpdesk_form_pertanyaan extends CI_Controller
             $pertanyaan = $this->input->post('pertanyaan');
             $description = $this->input->post('description');
 			
-		$result = $this->db->query($gabung);
+		
             $result = $this->db->from('tb_tiket_helpdesk')
                     ->where('id', $this->session->userdata('id_tiket'))
                     ->get();
@@ -172,58 +172,8 @@ class Helpdesk_form_pertanyaan extends CI_Controller
 
 		$this->load->view('new-template', $data);
 
-		$cari = $this->input->get('$pertanyaan');
-		$array= explode(' ', $cari);
-		$gabung='SELECT * FROM tb_knowledge_base WHERE ';
-		foreach( $array as $key=>$value ) {
-		if(count ($array) -1 == $key){
-		$gabung .= "judul LIKE '%" . $value . "%'\n";
-		}else
-		{$gabung .= "judul LIKE '%" . $value . "%' OR\n";
-		}
-		}
-		$result = $this->db->query($gabung);
-        
-		
-        
-                
-
-        //        echo json_encode($result->result(), JSON_FORCE_OBJECT);
-        echo '<ul style="list-style: inside;">';
-        foreach ($result->result() as $value) {
-            echo "<li>
-                    <a href=\"javascript:void(0)\" class=\"referensi-jawaban\" title=\"{$value->id_knowledge_base}\">{$value->judul}</a>
-                 </li>";
-        }
-        echo '</ul>';
     }
-	public function cari()
-    {
-        $cari = $this->input->get('pertanyaan');
-		$array= explode(' ', $cari);
-		$gabung='SELECT * FROM tb_knowledge_base WHERE ';
-		foreach( $array as $key=>$value ) {
-		if(count ($array) -1 == $key){
-		$gabung .= "judul LIKE '%" . $value . "%'\n";
-		}else
-		{$gabung .= "judul LIKE '%" . $value . "%' OR\n";
-		}
-		}
-		$result = $this->db->query($gabung);
-        
-		
-        
-                
-
-        //        echo json_encode($result->result(), JSON_FORCE_OBJECT);
-        echo '<ul style="list-style: inside;">';
-        foreach ($result->result() as $value) {
-            echo "<li>
-                    <a href=\"javascript:void(0)\" class=\"referensi-jawaban\" title=\"{$value->id_knowledge_base}\">{$value->judul}</a>
-                 </li>";
-        }
-        echo '</ul>';
-    }
+	
 function masuk()
     {
         $data = array();
