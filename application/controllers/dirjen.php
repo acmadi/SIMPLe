@@ -243,7 +243,7 @@ class Dirjen extends CI_Controller
 	
 	function reject($id)
     {
-		$this->db->query("UPDATE tb_tiket_frontdesk SET is_active = 3 AND status = 'close' WHERE no_tiket_frontdesk = ?",array($id));		
+		$this->db->query("UPDATE tb_tiket_frontdesk SET is_active = 3,status = 'close' WHERE no_tiket_frontdesk = ?",array($id));		
 		redirect('dirjen/frontdesk');
     }
 

@@ -12,6 +12,8 @@ class Helpdesk extends CI_Controller
 
     function index()
     {
+	  $key = $this->input->post('fcari');
+      $value = $this->input->post('fkeyword');
 	  $page		= $this->helpdesk->get_all_tiket(); 
 	  $pageData	= $page['query']->result();
 	  $pageLink	= $page['pagination1'];
@@ -24,7 +26,9 @@ class Helpdesk extends CI_Controller
                   'petugas'    => 'Nama Petugas',
                   'satker'   => 'Nama Satker',
                 );
-	  $data['cari'] ='';$data['keyword'] = '';
+	  $data['cari'] = $key;
+	  $data['keyword'] = $value;
+	  $nomor	= $page['nomor_item'];
 	  $data['content'] = 'admin/helpdesk/helpdesk';
 
     $bc[0]->link = 'admin/dashboard';
