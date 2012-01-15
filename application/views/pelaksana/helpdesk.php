@@ -10,11 +10,11 @@
         <thead>
         <tr>
             <th class="no">No</th>
-            <th class="no">Tanggal</th>
-            <th class="no">No Antrian</th>
-            <th class="no">Nama Satker</th>
-            <th class="no">Subjek</th>
-            <th class="no">Prioritas</th>
+            <th>Tanggal</th>
+            <th>No Antrian</th>
+            <th>Nama Satker</th>
+            <th>Subjek</th>
+            <th>Prioritas</th>
             <th>&nbsp;</th>
         </tr>
         </thead>
@@ -27,7 +27,7 @@
             <?php $i = 1 ?>
             <?php foreach ($antrian->result() as $value): ?>
         <tr>
-            <td class="no"><?php echo $i++ ?></td>
+            <td><?php echo $i++ ?></td>
             <td><?php echo table_tanggal($value->tanggal) ?></td>
             <td><?php echo $value->no_tiket_helpdesk ?></td>
             <td><?php echo $value->nama_satker ?></td>
