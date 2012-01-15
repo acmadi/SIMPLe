@@ -4,7 +4,7 @@
     <title>Sukses</title>
     <meta http-equiv="refresh" content="<?php echo $time ?>; url=<?php echo $url ?>">
     <link rel="shortcut icon" href="<?php echo base_url() . 'images/icon.jpg';?>"/>
-    <style type="text/css">@import url("<?php echo base_url() . 'css/style.css'; ?>");</style>
+    <style type="text/css">@import url("<?php echo base_url() . 'css/admin-style.css'; ?>");</style>
 </head>
 <body>
 <div class="success" style="width: 500px; margin: 100px auto; text-align: center">
