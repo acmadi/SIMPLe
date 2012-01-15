@@ -133,7 +133,7 @@
         <?php echo $this->load->view($content) ?>
     </div>
 
-    <div>Buka</div>
+    <!-- <div>Buka</div> -->
     <footer>
         <div class="container_12">
             <div class="grid_4 alpha">
