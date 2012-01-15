@@ -49,35 +49,13 @@ class Frontdesk extends CI_Controller
         ), array(
             'no_tiket_frontdesk' => $id
         ));
-		
         $this->_success(site_url('/direktur/dashboard'), 'Tiket berhasil ditetapkan', 3);
     }
 
     function reject($id)
     {
-        if (!$_POST) {
-            $data['data'] = $this->mfrontdesk->get_tiket_frontdesk_by_id($id);
-        } else {
-            $this->db->insert('tb_pengembalian_doc', array(
-                'no_tiket_frontdesk' => $this->input->post('no_tiket_frontdesk'),
-                'id_user' => $this->input->post('id_user'),
-                'catatan' => $this->input->post('catatan'),
-            ));
-
-            $this->db->update('tb_tiket_frontdesk', array(
-                'is_active' => 3,
-                'status' => 'close'
-            ), array(
-                'no_tiket_frontdesk' => $this->input->post('no_tiket_frontdesk'),
-            ));
-
-            redirect('direktur/frontdesk');
-        }
-
-
-        $data['title'] = 'Cek Tiket';
-        $data['content'] = 'direktur/reject';
-        $this->load->view('new-template', $data);
+		$this->db->query("UPDATE tb_tiket_frontdesk SET is_active = 0 ,status = 'close' WHERE no_tiket_frontdesk = ?",array($id));		
+		redirect('direktur/dashboard');
     }
 	
 	

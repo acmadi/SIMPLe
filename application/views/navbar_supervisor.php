@@ -10,9 +10,6 @@ switch ($this->uri->segment(2)) {
     case 'knowledge':
         $nav_knowledge = 'current';
         break;
-    case 'man_forum':
-        $nav_forum = 'current';
-        break;
 }
 $nav_referensi = '';
 if ($this->uri->segment(1) == 'referensi') {
@@ -20,6 +17,9 @@ if ($this->uri->segment(1) == 'referensi') {
 }
 if ($this->uri->segment(1) == 'knowledge') {
     $nav_knowledge = 'current';
+}
+if ($this->uri->segment(1) == 'forum') {
+    $nav_forum = 'current';
 }
 ?>
 
@@ -29,6 +29,6 @@ if ($this->uri->segment(1) == 'knowledge') {
         <li><?php echo anchor('supervisors/list_pertanyaan', 'List Pertanyaan', array('class' => $nav_list_pertanyaan)) ?></li>
         <li><?php echo anchor('knowledge', 'Knowledge Base', array('class' => $nav_knowledge)) ?></li>
         <li><?php echo anchor('referensi', 'Referensi Peraturan', array('class' => $nav_referensi)) ?></li>
-        <li><?php echo anchor('supervisor/man_forum', 'Forum', array('class' => $nav_forum)) ?></li>
+        <li><?php echo anchor('forum', 'Forum', array('class' => $nav_forum)) ?></li>
     </ul>
 </div>

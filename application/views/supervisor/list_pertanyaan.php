@@ -24,11 +24,11 @@
         <thead>
         <tr>
             <th class="no">No</th>
-            <th class="short">Tanggal</th>
-            <th class="short">Nama Satker</th>
-            <th class="short">Pertanyaan</th>
-            <th class="short">Prioritas</th>
-            <th class="">&nbsp;</th>
+            <th class="no">Tanggal</th>
+            <th class="no">Nama Satker</th>
+            <th class="no">Pertanyaan</th>
+            <th class="no">Prioritas</th>
+            <th class="no">&nbsp;</th>
         </tr>
         </thead>
 
@@ -43,11 +43,11 @@
             <?php $i = 1 ?>
             <?php foreach ($pertanyaan->result() as $value): ?>
         <tr>
-            <td><?php echo $i++ ?></td>
-            <td><?php echo table_tanggal($value->tanggal) ?></td>
-            <td><?php echo $value->nama_satker ?></td>
-            <td><?php echo $value->pertanyaan ?></td>
-            <td>
+            <td class="no"><?php echo $i++ ?></td>
+            <td class="no"><?php echo table_tanggal($value->tanggal) ?></td>
+            <td class="no"><?php echo $value->nama_satker ?></td>
+            <td class="no"><?php echo $value->pertanyaan ?></td>
+            <td class="no">
                 <?php if ($value->prioritas == 'high'): ?>
                 <img src="<?php echo base_url(); ?>images/hight.png" style="width:30px; "/>
                 <?php elseif ($value->prioritas == 'medium'): ?>

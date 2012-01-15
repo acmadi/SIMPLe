@@ -22,7 +22,7 @@
             <div class="table">
                 <div id="head">
                     <div style="float: left;">
-                        <form id="cari_unit" action="<?php echo site_url('/admin/helpdesk/search') ?>" method="post">
+                        <form id="cari_unit" action="<?php echo site_url('/admin/helpdesk/index') ?>" method="post">
 							<table>
 								<tr>
 									<td>

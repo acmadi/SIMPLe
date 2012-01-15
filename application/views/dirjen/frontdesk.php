@@ -78,9 +78,10 @@
 						}
 					?>
 					<a class="button <?php echo $style_button;?>" href="<?php echo site_url('/dirjen/diterima/' . $value->no_tiket_frontdesk) ?>">Diterima</a>                  
-                    
-                    <a class="button <?php echo $style_button;?>" href="<?php echo site_url('/dirjen/accept/' . $value->no_tiket_frontdesk) ?>">Ditetapkan</a>
-					<a class="button " href="<?php echo site_url('/dirjen/reject/' . $value->no_tiket_frontdesk) ?>">Ditolak</a>
+                    <input type="button" class="button <?php echo $style_button;?>" onclick="window.location.href='<?php echo site_url('/dirjen/accept/' . $value->no_tiket_frontdesk); ?>'" <?php echo $disabled;?>
+                           value="Ditetapkan"/>
+					<input type="button" class="button <?php echo $style_button;?>" onclick="window.location.href='<?php echo site_url('/dirjen/reject/' . $value->no_tiket_frontdesk); ?>'" <?php echo $disabled;?>
+                           value="Ditolak"/>
 				</td>
             </tr>
                 <?php endforeach ?>
@@ -101,9 +102,7 @@ Tidak ada dokumen
     $(function () {
         $('.bla').click(function () {
             $(this).next().removeClass('gray-pill').addClass('blue-pill').removeAttr('disabled');
-            link = $(this).next().attr('link');
-            $(this).next().attr('onclick', 'window.location.href="' + link + '"');
-            console.log(link);
+            $(this).next().removeClass('gray-pill').addClass('blue-pill').removeAttr('disabled');
             return false;
         })
     })

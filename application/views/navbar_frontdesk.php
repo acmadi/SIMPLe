@@ -17,9 +17,6 @@ switch ($this->uri->segment(2)) {
     case 'status_tiket':
         $nav_status_tiket = 'current';
         break;
-    case 'man_forum':
-        $nav_forum = 'current';
-        break;
     case 'pengembalian_dokumen':
         $nav_pengembalian_dokumen = 'current';
 }
@@ -28,6 +25,9 @@ if ($this->uri->segment(1) == 'referensi') {
 }
 if ($this->uri->segment(1) == 'knowledge') {
     $nav_knowledge = 'current';
+}
+if ($this->uri->segment(1) == 'forum') {
+    $nav_forum = 'current';
 }
 ?>
 
@@ -39,6 +39,6 @@ if ($this->uri->segment(1) == 'knowledge') {
         <li><?php echo anchor('frontdesk/ambil_dokumen', 'Pengambilan Dokumen', "class='$nav_ambil_dokumen'");?></li>
         <li><?php echo anchor('frontdesk/pengembalian_dokumen', 'Pengembalian Dokumen', "class='$nav_pengembalian_dokumen'");?></li>
         <li><?php echo anchor('referensi', 'Referensi Peraturan', "class='$nav_referensi'") ?></li>
-        <li><?php echo anchor('frontdesk/man_forum', 'Forum', "class='$nav_forum'");?></li>
+        <li><?php echo anchor('forum', 'Forum', "class='$nav_forum'");?></li>
     </ul>
 </div>

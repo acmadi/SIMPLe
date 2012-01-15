@@ -23,6 +23,9 @@ if ($this->uri->segment(1) == 'referensi') {
 if ($this->uri->segment(1) == 'knowledge') {
     $nav_knowledge = 'current';
 }
+if ($this->uri->segment(1) == 'forum') {
+    $nav_forum = 'current';
+}
 ?>
 
 
@@ -31,6 +34,6 @@ if ($this->uri->segment(1) == 'knowledge') {
     <li><?php echo anchor('helpdesk/identitas_satker', 'Isi Identitas Satker', "class='$nav_identitas_satker'");?></li>
     <li><?php echo anchor('knowledge', 'Knowledge Base', "class='$nav_knowledge'");?></li>
     <li><?php echo anchor('referensi', 'Referensi Peraturan', "class='$nav_referensi'")?></li>
-    <li><?php echo anchor('helpdesk/man_forum', 'Forum', "class='$nav_forum'");?></li>
+    <li><?php echo anchor('forum', 'Forum', "class='$nav_forum'");?></li>
 </ul>
 

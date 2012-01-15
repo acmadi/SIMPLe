@@ -47,7 +47,10 @@ class Mhelpdesk extends CI_Model
 	
 	function get_all_tiket(){
 		//@F2D
-		$keyword = $this->input->post('keyword',TRUE);
+		$key = $this->input->post('fcari');
+		$value = $this->input->post('fkeyword');
+
+		$keyword = ((!empty($key) && (!empty($value))))?$key.'_'.$value:'';
 
 		$this->load->library('pagination');
 
@@ -80,15 +83,29 @@ class Mhelpdesk extends CI_Model
 		}
 
 		//if from suggest
-		$where = '';
-		if(!empty($keyword)){
-			$where = " AND tbu.nama_unit LIKE '%".$keyword."%'";
+		$num_key = (!empty($keyword))?explode('_',$keyword):array();
+		if(count($num_key)>1){
+			switch($num_key[0]){
+				case 'tiket':
+					$kolom = 'a.no_tiket_helpdesk';
+					break;
+				case 'petugas':
+					$kolom = 'c.nama_petugas';
+					break;
+				default:
+					$kolom = 'b.nama_satker';
+					break;
+					
+			}
+			
+			$where = " AND $kolom LIKE '%".$num_key[1]."%'";
+		}else{
+			$where = " ";
 		}
 
-		$sql = "SELECT tbf.no_tiket_frontdesk,tbf.tanggal,tbu.nama_unit, tbf.id_satker, ts.nama_satker, 
-					   tbf.is_active, tbf.id_unit, tbf.status, tl.nama_lavel
-				FROM tb_unit tbu, tb_lavel tl, tb_tiket_frontdesk tbf LEFT JOIN tb_satker ts ON ts.id_satker = tbf.id_satker
-				WHERE tbu.id_unit =  tbf.id_unit AND tbu.id_kementrian = tbf.id_kementrian AND tbf.lavel = tl.lavel $where ORDER BY tbf.status";
+		$sql = "SELECT a.tanggal, a.no_tiket_helpdesk, b.nama_satker, a.pertanyaan, a.status
+				FROM tb_tiket_helpdesk a LEFT JOIN tb_satker b ON a.id_satker = b.id_satker, tb_petugas_satker c
+				WHERE a.id_petugas_satket = c.id_petugas_satker $where ORDER BY a.tanggal";
 		$query = $this->db->query($sql);
 
 		$config['base_url'] = site_url('/admin/helpdesk/index').'/'.$url_add;
@@ -98,18 +115,18 @@ class Mhelpdesk extends CI_Model
 		$this->pagination->initialize($config);
 
 
-		$sqlb = "SELECT tbf.no_tiket_frontdesk,tbf.tanggal,tbu.nama_unit, tbf.id_satker, ts.nama_satker, 
-					   tbf.is_active, tbf.id_unit, tbf.status, tl.nama_lavel
-				FROM tb_unit tbu, tb_lavel tl, tb_tiket_frontdesk tbf LEFT JOIN tb_satker ts ON ts.id_satker = tbf.id_satker
-				WHERE tbu.id_unit =  tbf.id_unit AND tbu.id_kementrian = tbf.id_kementrian AND tbf.lavel = tl.lavel $where ORDER BY tbf.status
+		$sqlb = "SELECT a.tanggal, a.no_tiket_helpdesk, b.nama_satker, a.pertanyaan, a.status
+				FROM tb_tiket_helpdesk a LEFT JOIN tb_satker b ON a.id_satker = b.id_satker, tb_petugas_satker c
+				WHERE a.id_petugas_satket = c.id_petugas_satker $where ORDER BY a.tanggal
 				LIMIT ?,?";
 		$data["query"] = $this->db->query($sqlb, array($offset ,$config['per_page']));
 
 		$data['isian_form1'] = $keyword;
 		$data['pagination1'] = $this->pagination->create_links();
+		$data['nomor_item'] = $offset;
 
 		return $data;
-		//-----------
+		/*
 		$this->load->library('pagination');		
 		$sql = "SELECT a.tanggal, a.no_tiket_helpdesk, b.nama_satker, a.pertanyaan, a.status
 				FROM tb_satker b, tb_tiket_helpdesk a LEFT JOIN tb_petugas_satker c ON a.id_petugas_satket = c.id_petugas_satker
@@ -134,6 +151,7 @@ class Mhelpdesk extends CI_Model
 		$data['nomor_item'] = $offset;
 
 		return $data;
+		*/
 		
 	}
 	
