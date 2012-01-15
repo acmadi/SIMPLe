@@ -128,10 +128,20 @@ class Knowledge_base extends CI_Controller
     public function search()
     {
         $cari = $this->input->get('cari');
-        $result = $this->db->from('tb_knowledge_base a')
-                ->like('judul', $cari)
-                ->or_like('judul', $cari)
-                ->get();
+		$array= explode(' ', $cari);
+		$gabung='SELECT * FROM tb_knowledge_base WHERE ';
+		foreach( $array as $key=>$value ) {
+		if(count ($array) -1 == $key){
+		$gabung .= "judul LIKE '%" . $value . "%'\n";
+		}else
+		{$gabung .= "judul LIKE '%" . $value . "%' OR\n";
+		}
+		}
+		$result = $this->db->query($gabung);
+        
+		
+        
+                
 
         //        echo json_encode($result->result(), JSON_FORCE_OBJECT);
         echo '<ul style="list-style: inside;">';
