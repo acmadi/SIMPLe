@@ -43,7 +43,7 @@ class Forum extends CI_Controller
         $referrer = $this->input->post('referrer');
 
         $nmBr = '';
-        if (isset($_FILES['file']['name'])){
+        if (isset($_FILES['file']['name']) && $_FILES['file']['name'] != ''){
             $unik = date('isdm').'_';
             $nmBr = $unik . $_FILES['file']['name'];
             move_uploaded_file($_FILES['file']['tmp_name'], 'upload/forum/'. $nmBr);

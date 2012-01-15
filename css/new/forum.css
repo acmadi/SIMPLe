@@ -13,7 +13,7 @@
 	}
 	.forumpost h2{
 		border-radius: 8px 8px 0 0;
-		background: #666;
+		background-color: #666;
 		color: white;
 		padding: 5px 15px;
 		font-size: 14px;
@@ -22,10 +22,14 @@
 	.forumpost.reply h2{
 		border-radius: 8px;
 	}
+	.forumpost h2.has_attachment{
+		background: url('../../images/file_48.png') no-repeat bottom right;
+		background-color: #666;
+	}
 	.forumpost.reply h2,
 	.forumpost:hover h2,
 	.forumpost.ts h2{
-		background: #286;
+		background-color: #286;
 	}
 		.forumpost h2 a,
 		.forumpost h2 a:hover{
@@ -45,3 +49,10 @@
 	.forumpost .isi{
 		padding: 15px;
 	}
+	.forumpost .attachment{
+		padding: 5px 15px;
+	}
+
+.attachment{
+	color: #666;
+}

@@ -59,7 +59,8 @@ footer {
 
 
 
-.content > h1:first-child{
+.content > h1:first-child,
+h2.forumreply{
 	/* Titel teratas setiap halaman */
 	text-align: center;
 	text-transform: uppercase;
