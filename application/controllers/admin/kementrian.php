@@ -77,14 +77,7 @@ class Kementrian extends CI_Controller
                 $this->session->set_flashdata('success', 'Data berhasil diubah');
                 $this->log->create("Mengubah data Kementrian (id_kementrian => {$id_kementrian})");
             
-			if (!$result) {
-                    $this->session->set_flashdata('error', 'Data gagal ditambahkan. ERROR: ' . $this->db->_error_message());
-                    $this->log->create("Gagal menambahkan data Kementrian. ERROR: " . $this->db->_error_message());
-                } else {
-                    $this->session->set_flashdata('success', 'Data berhasil ditambahkan');
-                    $this->log->create("Menambah data Kementrian (id_kementrian => {$this->db->insert_id()})");
-                }
-        }
+			
 		}
         $result = $this->db->from('tb_kementrian')
                 ->where('id_kementrian', $id_kementrian)
@@ -125,9 +118,11 @@ class Kementrian extends CI_Controller
                 if (!$result) {
                     $this->session->set_flashdata('error', 'Data gagal ditambahkan. ERROR: ' . $this->db->_error_message());
                     $this->log->create("Gagal menambahkan data Kementrian. ERROR: " . $this->db->_error_message());
+					redirect('admin/kementrian/add');
                 } else {
                     $this->session->set_flashdata('success', 'Data berhasil ditambahkan');
                     $this->log->create("Menambah data Kementrian (id_kementrian => {$this->db->insert_id()})");
+					redirect('admin/kementrian/add');
                 }
 
             }

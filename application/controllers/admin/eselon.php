@@ -112,22 +112,22 @@ class Eselon extends CI_Controller
             $this->form_validation->set_rules('nama_unit', 'Nama Eselon', 'required');
             $this->form_validation->set_rules('id_kementrian', 'Nama Kementrian', 'required');
 
-            if ($this->form_validation->run()) {
+            if ($this->form_validation->run() === TRUE) {
 
                 $result = $this->db->insert('tb_unit', array(
                     'id_unit' => $this->input->post('id_unit'),
                     'nama_unit' => $this->input->post('nama_unit'),
                     'id_kementrian' => $this->input->post('id_kementrian'),
                 ));
-				
-				
 
                 if (!$result) {
                     $this->session->set_flashdata('error', 'Data gagal ditambahkan. ERROR: ' . $this->db->_error_message());
                     $this->log->create("Gagal menambahkan data Eselon. ERROR: " . $this->db->_error_message());
+					redirect('admin/eselon/add');
                 } else {
                     $this->session->set_flashdata('success', 'Data berhasil ditambahkan');
                     $this->log->create("Menambah data Eselon (id_unit => {$this->db->insert_id()})");
+					redirect('admin/eselon/add');
                 }
 
             }
