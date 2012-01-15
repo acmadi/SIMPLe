@@ -78,9 +78,10 @@
 						}
 					?>
 					<a class="button <?php echo $style_button;?>" href="<?php echo site_url('/dirjen/diterima/' . $value->no_tiket_frontdesk) ?>">Diterima</a>                  
-                    <a class="button " href="<?php echo site_url('/dirjen/reject/' . $value->no_tiket_frontdesk) ?>">Dikembalikan</a>
+                    
                     <a class="button <?php echo $style_button;?>" href="<?php echo site_url('/dirjen/accept/' . $value->no_tiket_frontdesk) ?>">Ditetapkan</a>
-                </td>
+					<a class="button " href="<?php echo site_url('/dirjen/reject/' . $value->no_tiket_frontdesk) ?>">Ditolak</a>
+				</td>
             </tr>
                 <?php endforeach ?>
             </tbody>

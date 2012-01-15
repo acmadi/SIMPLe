@@ -13,7 +13,7 @@ class Dashboard extends CI_Controller
     {
         //status, lavel, is_active
         $data['helpdesk_total'] = $this->mhelpdesk->count_all_tiket('open', 4);
-        $data['frontdesk_total'] = $this->mfrontdesk->count_all_tiket_frontdesk('open',6); 
+        $data['frontdesk_total'] = $this->mfrontdesk->count_all_tiket_frontdesk('open',5); 
         $data['total_tiket_diterima_cs'] = $this->mfrontdesk->count_all_tiket_frontdesk('open',1,1); 
         $data['total_tiket_diteruskan_cs'] = $this->mfrontdesk->count_all_tiket_frontdesk('open',3,2);
         $data['total_tiket_diterima_pelaksana'] = $this->mfrontdesk->count_all_tiket_frontdesk('open',3,1);

@@ -243,29 +243,8 @@ class Dirjen extends CI_Controller
 	
 	function reject($id)
     {
-		$this->load->model('mfrontdesk');
-        if (!$_POST) {
-            $data['data'] = $this->mfrontdesk->get_tiket_frontdesk_by_id($id);
-        } else {
-            $this->db->insert('tb_pengembalian_doc', array(
-                'no_tiket_frontdesk' => $this->input->post('no_tiket_frontdesk'),
-                'id_user' => $this->input->post('id_user'),
-                'catatan' => $this->input->post('catatan'),
-            ));
-
-            $this->db->update('tb_tiket_frontdesk', array(
-                'is_active' => 3,
-                'status' => 'close'
-            ), array(
-                'no_tiket_frontdesk' => $this->input->post('no_tiket_frontdesk'),
-            ));
-			redirect('dirjen/frontdesk');
-        }
-
-
-        $data['title'] = 'Cek Tiket';
-        $data['content'] = 'dirjen/reject';
-        $this->load->view('new-template', $data);
+		$this->db->query("UPDATE tb_tiket_frontdesk SET is_active = 3 AND status = 'close' WHERE no_tiket_frontdesk = ?",array($id));		
+		redirect('dirjen/frontdesk');
     }
 
     function helpdesk()

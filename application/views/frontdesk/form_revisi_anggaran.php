@@ -130,18 +130,18 @@
         <p>
 
         <div style="float: left;">
-            <label>Nomor Surat Usulan</label>
+            <label class="align-right">Nomor Surat Usulan</label>
             <input type="text" id="nomor_surat_usulan" name="nomor_surat_usulan" value="<?php echo set_value('nomor_surat_usulan') ?>"/>
         </div>
         <div style="float: left; margin-left: 50px;">
-            <label>Tanggal Surat Usulan</label>
+            <label class="align-right">Tanggal Surat Usulan</label>
             <input type="text" id="tanggal_surat_usulan" name="tanggal_surat_usulan" value="<?php echo set_value('tanggal_surat_usulan') ?>"/>
         </div>
         <div class="clear"></div>
         </p>
 
         <p>
-            <label>Kode - Nama K/L</label>
+            <label class="align-right">Kode - Nama K/L</label>
             <select name="nama_kl" id="nama_kl" type="text" class="chzn-select" data-placeholder="Pilih nama K/L" style="width: 700px;">
                 <?php
                 foreach ($kementrian->result() as $value) {
@@ -152,13 +152,13 @@
         </p>
 
         <p>
-            <label>Nama Eselon 1</label>
+            <label class="align-right">Nama Eselon 1</label>
             <select id="eselon" name="eselon" class="kl chzn-select" value="<?php echo set_value('eselon') ?>" style="width: 700px;">
             </select>
         </p>
 
         <p class="kode_satker_p">
-            <label>Kode - Nama Satker</label>
+            <label class="align-right">Kode - Nama Satker</label>
             <select name="kode_satker" id="kode_satker" class="kl chzn-select" multiple style="width: 700px;">
             </select>
         </p>
@@ -168,32 +168,32 @@
     <fieldset style="float: left; margin-right: 10px; width: 47%;" class="identitas">
         <legend>Identitas</legend>
         <p>
-            <label>NIP</label>
+            <label class="aligned">NIP</label>
             <input type="text" name="nip" size="30" value="<?php echo set_value('nip') ?>">
         </p>
 
         <p>
-            <label>Nama</label>
+            <label class="aligned">Nama</label>
             <input type="text" name="nama_petugas" size="30" value="<?php echo set_value('nama_petugas') ?>">
         </p>
 
         <p>
-            <label>Jabatan Petugas</label>
+            <label class="aligned">Jabatan Petugas</label>
             <input type="text" name="jabatan_petugas" size="30" value="<?php echo set_value('jabatan_petugas') ?>">
         </p>
 
         <p>
-            <label>Nomor HP</label>
+            <label class="aligned">Nomor HP</label>
             <input type="text" name="no_hp" size="30" value="<?php echo set_value('no_hp') ?>">
         </p>
 
         <p>
-            <label>Telepon Kantor</label>
+            <label class="aligned">Telepon Kantor</label>
             <input type="text" name="no_kantor" size="30" value="<?php echo set_value('no_kantor') ?>">
         </p>
 
         <p>
-            <label>E-mail</label>
+            <label class="aligned">E-mail</label>
             <input type="email" name="email" size="30" value="<?php echo set_value('email') ?>">
         </p>
     </fieldset>
@@ -221,7 +221,7 @@
     </fieldset>
 
     <div style="float: right; width: 47%; text-align: center; margin-top: 20px;">
-        <a style="padding: 20px 40px; font-size: 1.5em; font-weight: bold" class="button green" onclick="identitas_kl.submit()">Kirim</a>
+        <a style="padding: 20px 40px; font-size: 1.5em; font-weight: bold" class="button green" onclick="$('#identitas_kl').submit()">Kirim</a>
         <a style="padding: 20px 40px; font-size: 1.5em; font-weight: bold" href="<?php echo site_url('/frontdesk/form_revisi_anggaran') ?>" class="button gray-pill">Reset</a>
     </div>
 
