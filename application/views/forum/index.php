@@ -2,6 +2,7 @@
 
     <h1>Forum</h1>
 
+    <?php echo 'Halaman: ' . $pagination ?>
     <script>
     $(document).ready(function(){
         $('#postbutton').click(function(){
@@ -52,4 +53,5 @@
 
     </div>
     <?php endforeach ?>
+    <?php echo 'Halaman: ' . $pagination ?>
 </div>
