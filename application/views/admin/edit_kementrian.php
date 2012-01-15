@@ -1,21 +1,23 @@
 <div class="content">
 
     <h1>Ubah Nama Kementrian <?php echo $kementrian->id_kementrian ?></h1>
-
+				<?php
+				// TODO: Satu paket ini untuk alerts. Nanti mau dipindah jadi hanya panggil satu method.
+				if ($this->session->flashdata('success')) {
+					echo '<div class="success">' . $this->session->flashdata('success') . '</div>';
+				}
+				if ($this->session->flashdata('error')) {
+					echo '<div class="error">' . $this->session->flashdata('error') . '</div>';
+				}
+				
+				if ($this->session->flashdata('notice')) {
+					echo '<div class="notice">' . $this->session->flashdata('notice') . '</div>';
+				}
+				if ($this->session->flashdata('info')) {
+					echo '<div class="info">' . $this->session->flashdata('info') . '</div>';
+				}
+				?>
     <form method="post" action="<?php site_url('/admin/kementrian/edit/' . $kementrian->id_kementrian) ?>">
-
-        <?php
-        $errors = validation_errors();
-        if (!empty($errors)) {
-            echo '<div class="error">' . validation_errors() . '</div>';
-        }
-        ?>
-
-        <?php
-        if ($this->session->flashdata('info')) {
-            echo '<div class="success">' . $this->session->flashdata('success') . '</div>';
-        }
-        ?>
 
         <p>
             <label>Kode Kementrian</label>
@@ -25,6 +27,7 @@
         <p>
             <label>Nama Kementrian</label>
             <input type="text" name="nama_kementrian" value="<?php echo $kementrian->nama_kementrian ?>"/>
+			<?php echo form_error('nama_kementrian', '<div class="error">', '</div>'); ?>
         </p>
 
         <p>

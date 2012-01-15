@@ -1,7 +1,8 @@
 <div class="content">
 
-    <h1>Satker</h1>
-
+    <h1>Eselon</h1>
+	
+	
     <a href="<?php echo site_url('/admin/eselon/add/') ?>" class="button blue-pill">Tambah Eselon</a>
 
     <form method="get" action="<?php echo site_url('/admin/eselon/index/') ?>" style="text-align: right;">

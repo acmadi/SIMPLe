@@ -9,6 +9,7 @@
 				if ($this->session->flashdata('error')) {
 					echo '<div class="error">' . $this->session->flashdata('error') . '</div>';
 				}
+				
 				if ($this->session->flashdata('notice')) {
 					echo '<div class="notice">' . $this->session->flashdata('notice') . '</div>';
 				}
@@ -20,12 +21,14 @@
 
         <p>
             <label>Kode Eselon</label>
-            <input type="text" name="id_unit" value="<?php echo set_value('id_unit') ?>" maxlength="6"/>
+            <input type="text" name="id_unit" value="<?php echo set_value('id_unit') ?>" maxlength="2"/>
+			<?php echo form_error('id_unit', '<div class="error">', '</div>'); ?>
         </p>
 
         <p>
             <label>Nama Eselon</label>
             <input type="text" name="nama_unit" value="<?php echo set_value('nama_unit')?> "/>
+			<?php echo form_error('nama_unit', '<div class="error">', '</div>'); ?>
         </p>
 
         <p>
@@ -40,6 +43,7 @@
                     <?php endif ?>
                 <?php endforeach ?>
             </select>
+			<?php echo form_error('id_kementrian', '<div class="error">', '</div>'); ?>
         </p>
 
         <p>
