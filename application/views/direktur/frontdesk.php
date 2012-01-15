@@ -80,9 +80,11 @@
 					<a class="button <?php echo $style_button;?>" href="<?php echo site_url('/direktur/frontdesk/diterima/' . $value->no_tiket_frontdesk) ?>">Diterima</a>
                     <input type="button" class="button <?php echo $style_button;?>" onclick="window.location.href='<?php echo site_url('/direktur/frontdesk/diteruskan/' . $value->no_tiket_frontdesk); ?>'" <?php echo $disabled;?>
                            value="Diteruskan"/>
-                    <a class="button " href="<?php echo site_url('/direktur/frontdesk/reject/' . $value->no_tiket_frontdesk) ?>">Dikembalikan</a>
-                    <a class="button <?php echo $style_button;?>" href="<?php echo site_url('/direktur/frontdesk/accept/' . $value->no_tiket_frontdesk) ?>">Ditetapkan</a>
-                </td>
+                    <input type="button" class="button <?php echo $style_button;?>" onclick="window.location.href='<?php echo site_url('/direktur/frontdesk/accept/' . $value->no_tiket_frontdesk); ?>'" <?php echo $disabled;?>
+                           value="Ditetapkan"/>
+					<input type="button" class="button <?php echo $style_button;?>" onclick="window.location.href='<?php echo site_url('/direktur/frontdesk/reject/' . $value->no_tiket_frontdesk); ?>'" <?php echo $disabled;?>
+                           value="Ditolak"/>
+				</td>
             </tr>
                 <?php endforeach ?>
             </tbody>
@@ -102,9 +104,8 @@ Tidak ada dokumen
     $(function () {
         $('.bla').click(function () {
             $(this).next().removeClass('gray-pill').addClass('blue-pill').removeAttr('disabled');
-            link = $(this).next().attr('link');
-            $(this).next().attr('onclick', 'window.location.href="' + link + '"');
-            console.log(link);
+            $(this).next().removeClass('gray-pill').addClass('blue-pill').removeAttr('disabled');
+            $(this).next().removeClass('gray-pill').addClass('blue-pill').removeAttr('disabled');
             return false;
         })
     })
