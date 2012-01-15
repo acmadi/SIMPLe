@@ -47,7 +47,8 @@ class Helpdesk extends CI_Controller
         if ($this->input->post('submit') == 'Eskalasi') {
 
             $this->db->update('tb_tiket_helpdesk', array(
-                'lavel' => 4
+                'lavel' => 4,
+                'level_2' => 1
             ), array(
                 'no_tiket_helpdesk' => $this->input->post('no_tiket_helpdesk')
             ));
