@@ -122,11 +122,11 @@ class Helpdesk_form_pertanyaan extends CI_Controller
             $data['result'] = $this->db->query("SELECT * FROM tb_knowledge_base WHERE judul LIKE '%{$pertanyaan}%' OR desripsi LIKE '%{$pertanyaan}%'");
 
             $sql = "SELECT * FROM tb_tiket_helpdesk
-                    JOIN tb_petugas_satker
-                    ON tb_tiket_helpdesk.id_satker = tb_petugas_satker.id_satker
-                    JOIN tb_satker
-                    ON tb_tiket_helpdesk.id_satker = tb_satker.id_satker
-                    WHERE no_tiket_helpdesk = ?";
+                JOIN tb_petugas_satker
+                ON tb_tiket_helpdesk.id_petugas_satket = tb_petugas_satker.id_petugas_satker
+                JOIN tb_satker
+                ON tb_tiket_helpdesk.id_satker = tb_satker.id_satker
+                WHERE no_tiket_helpdesk = ?";
 
             $result = $this->db->query($sql, array($this->session->userdata('no_tiket')))->row();
             $data['identitas'] = $result;
