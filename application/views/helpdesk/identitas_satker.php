@@ -60,12 +60,12 @@
 
     <h1>Isi Identitas SatKer</h1>
 
-        <?php
-            $errors = validation_errors();
-            if (!empty($errors)) {
-                echo notification(validation_errors(), 'Error', 'red');
-            }
-        ?>
+    <?php
+    $error = validation_errors();
+    if ($error) {
+        echo notification(validation_errors(), 'ERROR', 'red');
+    }
+    ?>
 
     <fieldset>
         <legend>Kategori</legend>
@@ -73,7 +73,7 @@
         <label><input type="radio" name="tipe" id="non_kl_btn" value="non_kl">Umum</label>
     </fieldset>
 
-    <?php echo form_open('helpdesk/identitas_satker/save_identitas', 
+    <?php echo form_open('helpdesk/identitas_satker/save_identitas',
         array('id' => 'identitas_kl')) ?>
 
     <?php echo form_hidden('tipe', 'kl') ?>
@@ -84,7 +84,8 @@
 
         <p>
             <label>Kode - Nama K/L </label> &nbsp;
-            <select name="nama_kl" id="nama_kl" class="chzn-select" style="width: 400px;">
+            <select name="nama_kl" id="nama_kl" class="chzn-select" data-placeholder="Pilih K/L" style="width: 400px;">
+                <option></option>
                 <?php
                 foreach ($kementrian->result() as $value) {
                     echo sprintf("<option value='%s'>%s</option>", $value->id_kementrian, $value->id_kementrian . ' - ' . $value->nama_kementrian);
@@ -95,12 +96,12 @@
 
         <p>
             <label>Nama Eselon 1 </label>&nbsp;
-            <select id="eselon" name="eselon" class="kl chzn-select" style="width: 400px;"></select>
+            <select id="eselon" name="eselon" class="kl chzn-select" data-placeholder="Pilih Eselon I" style="width: 400px;"></select>
         </p>
 
         <p class="kode_satker_p">
             <label>Kode - Nama Satker</label>
-            <select name="kode_satker" id="kode_satker" class="kl chzn-select" style="width: 400px;"></select>
+            <select name="kode_satker" id="kode_satker" class="kl chzn-select" data-placeholder="Pilih Satker" style="width: 400px;"></select>
         </p>
     </fieldset>
 
@@ -137,9 +138,9 @@
     <div class="clear"></div>
 
     <div style="text-align: right; margin-top: 20px;">
-        <input type="submit" class="button blue-pill" value="Help Desk">
+        <input type="submit" class="button green" value="Help Desk">
 <!--        <input type="submit" class="button blue-pill" value="Saluran Pengaduan">-->
-        <input type="reset" class="button gray-pill" value="Reset">
+        <input type="reset" class="button" value="Reset">
     </div>
 
     </form>
@@ -154,33 +155,38 @@
         <p>
             <label class="aligned">Nama</label>
             <input type="text" id="nama" name="nama_petugas" size="30" value="<?php echo set_value('nama_petugas') ?>">
+			<?php echo form_error('nama_petugas', '<div class="error">', '</div>'); ?>
         </p>
 
         <p class="kl">
             <label class="aligned">Instansi</label>
             <input type="text" id="instansi" name="instansi" size="30" value="<?php echo set_value('instansi') ?>">
+			<?php echo form_error('instansi', '<div class="error">', '</div>'); ?>
         </p>
 
         <p>
             <label class="aligned">Alamat</label>
             <input type="text" id="alamat" name="alamat" size="30" value="<?php echo set_value('alamat') ?>">
+			<?php echo form_error('alamat', '<div class="error">', '</div>'); ?>
         </p>
 
         <p class="kl">
             <label class="aligned">Telpon</label>
             <input type="text" id="no_hp" name="no_hp" size="30" value="<?php echo set_value('no_hp') ?>">
+			<?php echo form_error('no_hp', '<div class="error">', '</div>'); ?>
         </p>
 
         <p>
             <label class="aligned">E-mail</label>
             <input type="email" id="email" name="email" size="30" value="<?php echo set_value('email') ?>">
+			<?php echo form_error('email', '<div class="error">', '</div>'); ?>
         </p>
     </fieldset>
 
     <div style="text-align: right; margin-top: 20px;">
-        <input type="submit" class="button blue-pill" value="Help Desk">
+        <input type="submit" class="button green" value="Help Desk">
 <!--        <input type="submit" class="button blue-pill" value="Saluran Pengaduan">-->
-        <input type="reset" class="button gray-pill" value="Reset">
+        <input type="reset" class="button" value="Reset">
     </div>
 
     </form>

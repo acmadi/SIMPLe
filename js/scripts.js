@@ -7,6 +7,8 @@ jQuery(function () {
         $(this).parent().fadeOut('fast');
     })
 
-    $(".chzn-select").chosen();
+    $(".chzn-select").chosen({
+        no_results_text: 'Data tidak ditemukan'
+    });
 
 })

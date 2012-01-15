@@ -1,19 +1,37 @@
-body {
-    
-}
-
-
-
 ul {
     margin: 0;
     padding: 0;
 }
 
+.profile-menu {
+    text-align: right;
+    background: #333;
+    display: inline-block;
+    position: relative;
+    padding: 4px 8px;
+}
 
+.profile-menu ul {
+    background: #333;
+    display: none;
+    position: absolute;
+    right: 0;
+    /*width: 150px;*/
+    top: 24px;
+}
 
-#main {
-    padding: 20px 0;
-    min-height: 400px;
+.profile-menu li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.profile-menu a {
+    padding: 4px 8px;
+}
+
+.profile-menu:hover ul {
+    display: inline-block;
 }
 
 .title {
@@ -22,89 +40,8 @@ ul {
     border-bottom: 1px dashed #cecece;
 }
 
-
 footer {
 
-}
-
-
-.table {
-    width: 100%;
-    border-spacing: 1px;
-    /*border-collapse: separate;*/
-}
-
-.table th,
-.table td {
-    padding: 5px 10px;
-    /*border: 1px solid red;*/
-}
-
-.table tbody tr {
-    border-bottom: 3px solid #cecece;
-    background: #fcfcfc;
-}
-
-.table tbody tr:nth-child(even) {
-
-}
-
-.table tbody tr:hover {
-    border-bottom: 3px solid #aaa;
-    background: #f9f9f9;
-}
-
-.table th {
-    font-weight: bold;
-    text-shadow: 1px 1px 0 #f0f0f0;
-    /*background: #d9d9d9;*/
-    background: -webkit-linear-gradient(top, #d9d9d9, #c0c0c0);
-}
-
-.table th:first-child {
-    border-radius: 4px 0 0 0;
-}
-
-.table th:last-child {
-    border-radius: 0 4px 0 0;
-}
-
-.table td {
-
-}
-
-.table .no {
-    width: 1px;
-}
-
-.table .short {
-    width: 150px;
-}
-
-.table .medium {
-    width: 400px;
-}
-
-.table .action {
-    text-align: center;
-    background: #f9f9f9;
-    vertical-align: middle;
-}
-
-.table tbody tr .action .button {
-    visibility: hidden;
-}
-
-.table tbody tr:hover .action .button {
-    visibility: visible;
-}
-
-.table tfoot tr {
-    background: -webkit-linear-gradient(top, #d9d9d9, #c0c0c0);
-}
-
-.table tfoot td {
-    border-radius: 0 0 4px 4px;
 }
 
 .button {
@@ -125,7 +62,9 @@ footer {
 
 input[type="submit"].button,
 input[type="button"].button {
-    height: 23px;
+    height: 24px;
+    font-size: 11px;
+    vertical-align: middle;
 }
 
 .button:hover {
@@ -215,9 +154,8 @@ input[type="button"].button {
 }
 
 .search-box input[type="submit"] {
-
+    font-size: 12px;
 }
-
 
 .action-box div {
     padding: 4px 8px;
@@ -259,3 +197,21 @@ input[type="button"].button {
     color: white;
 }
 
+/* Untuk argo yang lewat dari hari yang telah ditentukan */
+.red-row {
+    background: #ff6161 !important;
+    color: #fcfcfc;
+    text-shadow: 1px 1px #444;
+}
+
+.red-row .date {
+    color: #fcfcfc;
+}
+
+.red-row .time {
+    color: #e7e7e7;
+}
+
+.chzn-container .chzn-results li {
+    line-height: normal;
+}

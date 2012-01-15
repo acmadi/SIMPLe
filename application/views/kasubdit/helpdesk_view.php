@@ -1,116 +1,144 @@
-<?php //print_r($antrian) ?>
+<?php //print_r($antrian)?>
 
 <div class="content">
-    <fieldset>
-        <legend>Identitas</legend>
-        <div style="width: 500px; float: left;">
+
+    <h1>Jawab Pertanyaan</h1>
+
+    <form method="post" action="<?php echo site_url('kasubdit/helpdesk/eskalasi') ?>">
+
+        <fieldset>
+            <legend>Identitas</legend>
+            <div class="grid_6 alpha omega">
+                <p>
+                    <label style="display: inline-block; width: 100px;">No Tiket</label>
+                    <span><?php echo $antrian->no_tiket_helpdesk ?></span>
+                    <input type="hidden" name="no_tiket_helpdesk" value="<?php echo $antrian->no_tiket_helpdesk ?>"/>
+                </p>
+
+                <p>
+                    <label style="display: inline-block; width: 100px;">No Satker</label>
+                    <span><?php echo $antrian->id_satker ?></span>
+                    <input type="hidden" name="id_satker" value="<?php echo $antrian->id_satker ?>"/>
+                </p>
+
+                <p>
+                    <label style="display: inline-block; width: 100px;">Nama Satker</label>
+                    <span><?php echo $antrian->nama_satker ?></span>
+                    <input type="hidden" name="nama_satker" value="<?php echo $antrian->nama_satker ?>"/>
+                </p>
+
+                <p>
+                    <label style="display: inline-block; width: 100px;">Nama Petugas</label>
+                    <span><span><?php echo $antrian->nama_petugas ?></span></span>
+                    <input type="hidden" name="nama_petugas" value="<?php echo $antrian->nama_petugas ?>"/>
+                </p>
+
+            </div>
+
+            <div class="grid_6 alpha omega">
+
+                <p>
+                    <label style="display: inline-block; width: 100px;">No Kantor</label>
+                    <span><?php echo $antrian->no_kantor ?></span>
+                    <input type="hidden" name="no_kantor" value="<?php echo $antrian->no_kantor ?>"/>
+                </p>
+
+                <p>
+                    <label style="display: inline-block; width: 100px;">No HP</label>
+                    <span><?php echo $antrian->no_hp ?></span>
+                    <input type="hidden" name="no_hp" value="<?php echo $antrian->no_hp ?>"/>
+                </p>
+
+                <p>
+                    <label style="display: inline-block; width: 100px;">Email</label>
+                    <span><?php echo $antrian->email ?></span>
+                    <input type="hidden" name="email" value="<?php echo $antrian->email ?>"/>
+                </p>
+            </div>
+        </fieldset>
+
+
+        <fieldset>
+            <legend>Pertanyaan</legend>
+            <div class="grid_6 alpha omega">
+
+                <p>
+                    <label style="display: inline-block; width: 100px;">Kategori</label>
+                    <span><?php //echo $antrian->kategori ?></span>
+                    <input type="hidden" name="kategori" value="<?php //echo $antrian->kategori ?>"/>
+                </p>
+
+                <p>
+                    <label style="display: inline-block; width: 100px;">Pertanyaan</label>
+                    <span><?php echo $antrian->pertanyaan ?></span>
+                    <input type="hidden" name="pertanyaan" value="<?php echo $antrian->pertanyaan ?>"/>
+                </p>
+
+            </div>
+
+            <div class="grid_6 alpha omega">
+
+                <p>
+                    <label style="display: inline-block; width: 100px;">Deskripsi</label>
+                    <span><?php echo $antrian->description ?></span>
+                    <input type="hidden" name="description" value="<?php echo $antrian->description ?>"/>
+                </p>
+
+                <p>
+                    <label style="display: inline-block; width: 100px;">Prioritas</label>
+                    <span><?php echo $antrian->prioritas ?></span>
+                    <input type="hidden" name="prioritas" value="<?php echo $antrian->prioritas ?>"/>
+                </p>
+
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Jawaban</legend>
+
+            <div class="grid_5">
             <p>
-                <label>No Tiket</label>
-                <?php echo $antrian->no_tiket_helpdesk ?>
+                <label>
+                    <textarea name="jawaban" rows="7" cols="120"></textarea>
+                </label>
+            </p>
+            </div>
+
+            <div class="grid_5">
+            <p>
+                <label style="display: inline-block; width: 100px;">Nama Nara Sumber: </label>
+                <span><input name="nama_narasumber" type="text"/></span>
             </p>
 
             <p>
-                <label>No Satker</label>
-                <?php echo $antrian->id_satker ?>
+                <label style="display: inline-block; width: 100px;">Jabatan</label>
+                <span><input name="jabatan" type="text"/></span>
             </p>
 
             <p>
-                <label>Nama Satker</label>
-                <?php echo $antrian->nama_satker ?>
+                <label style="display: inline-block; width: 100px;">Bukti File</label>
+                <span><input name="file" type="file"/></span>
             </p>
+            </div>
 
-            <p>
-                <label>Nama Petugas</label>
-                <?php echo $antrian->nama_petugas ?>
-            </p>
+        </fieldset>
+
+        <div>
+            <label><input name="sendmail" type="checkbox"/> Kirim jawaban ke email petugas Satker </label>
         </div>
-        <div style="width: 500px; float: left;">
-            <p>
-                <label>No Kantor</label>
-                <?php echo $antrian->no_kantor ?>
-            </p>
 
-            <p>
-                <label>No HP</label>
-                <?php echo $antrian->no_hp ?>
-            </p>
-
-            <p>
-                <label>Email</label>
-                <?php echo $antrian->email ?>
-            </p>
+        <div style="float: left;">
+            <a class="button" href="<?php echo site_url('pelaksana/helpdesk') ?>">Batal</a>
         </div>
-    </fieldset>
 
-    <fieldset>
-        <legend>Pertanyaan</legend>
-        <div style="width: 500px; float: left;">
-            <p>
-                <label>Kategori</label>
-                <?php echo $antrian->kategori ?>
-            </p>
+        <div style="float: right;">
 
-            <p>
-                <label>Pertanyaan</label>
-                <?php echo $antrian->pertanyaan ?>
-            </p>
-
-            <p>
-                <label>Description</label>
-                <?php echo $antrian->description ?>
-            </p>
+            <input type="button" onclick="window.print()" value="Print" class="button gray-pill"/>
+            <input type="submit" name="submit" value="Eskalasi" class="button blue"/>
+            <input type="submit" name="submit" value="Jawab" class="button green"/>
         </div>
-        <div style="width: 500px; float: left;">
 
-            <p>
-                <label>Prioritas</label>
-                <?php echo $antrian->prioritas ?>
-            </p>
-        </div>
-    </fieldset>
+        <div class="clear"></div>
 
-    <fieldset>
-        <legend>Jawab</legend>
-
-        <p>
-
-            <label>Jawaban <br/>
-                <textarea name="jawaban" rows="10" cols="70"></textarea>
-            </label>
-        </p>
-
-        <p><strong>Sumber Jawaban</strong></p>
-
-        <p>
-            <label>
-                Nama Nara Sumber
-                <input name="nara_sumber" type="text"/>
-            </label>
-        </p>
-
-        <p>
-            <label>
-                Jabatan
-                <input name="jabatan" type="text"/>
-            </label>
-        </p>
-
-        <p>
-            <label>
-                Bukti file
-                <input name="file" type="file"/>
-            </label>
-        </p>
-    </fieldset>
-
-    <p><label><input name="kirim_email" type="checkbox" /> Kirim jawaban ke email petugas satker </label></p>
-
-    <p style="float: left;">
-        <a href="<?php echo site_url('/kasubdit/helpdesk') ?>" class="button gray-pill">Batal</a>
-    </p>
-    
-    <p style="float: right;">
-        <input type="submit" name="eskalasi" value="Eskalasi" class="button blue-pill" />
-        <input type="submit" name="jawab" value="Jawab" class="button blue-pill" />
-    </p>
+    </form>
 </div>

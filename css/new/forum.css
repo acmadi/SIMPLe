@@ -1,0 +1,58 @@
+#postbox{
+	/*border: 1px solid #ddd;*/
+	padding: 20px;
+}
+
+.forumpost{
+	border-radius: 10px;
+	border:1px solid gray;
+	margin-bottom: 10px;
+}
+	.forumpost .shadow{
+		background: url('../../images/forum-shadow.png') no-repeat top center ;
+	}
+	.forumpost h2{
+		border-radius: 8px 8px 0 0;
+		background-color: #666;
+		color: white;
+		padding: 5px 15px;
+		font-size: 14px;
+		margin-bottom: 0 !important;
+	}
+	.forumpost.reply h2{
+		border-radius: 8px;
+	}
+	.forumpost h2.has_attachment{
+		background: url('../../images/file_48.png') no-repeat bottom right;
+		background-color: #666;
+	}
+	.forumpost.reply h2,
+	.forumpost:hover h2,
+	.forumpost.ts h2{
+		background-color: #286;
+	}
+		.forumpost h2 a,
+		.forumpost h2 a:hover{
+			color: inherit;
+		}
+	.forumpost em.meta{
+		font-style: normal;
+		display: block;
+		padding: 5px 15px;
+		border-top: 1px solid #999;
+		color: #777;
+	}
+		.forumpost em.meta a{
+			color: #dd4422;
+			float: right;
+		}
+	.forumpost .isi{
+		padding: 15px;
+	}
+	.forumpost .attachment{
+		padding: 5px 15px;
+	}
+
+.attachment{
+	color: #666;
+}

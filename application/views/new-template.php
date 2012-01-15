@@ -18,7 +18,7 @@
     <link type="text/css" rel="stylesheet" href="<?php echo base_url('css/960gs/text.css') ?>"/>
     <link type="text/css" rel="stylesheet" href="<?php echo base_url('css/960gs/960.css') ?>"/>
     <link type="text/css" rel="stylesheet" href="<?php echo base_url('js/chosen/chosen.css') ?>"/>
-    <link type="text/css" rel="stylesheet" href="<?php echo base_url('css/cupertino/jquery-ui-1.8.16.custom.css') ?>"/>
+    <link type="text/css" rel="stylesheet" href="<?php echo base_url('css/eggplant/jquery-ui-1.8.17.custom.css') ?>"/>
     <link type="text/css" rel="stylesheet" href="<?php echo base_url('js/jQuery-Visualize/css/visualize.css'); ?>"/>
     <link type="text/css" rel="stylesheet" href="<?php echo base_url('js/jQuery-Visualize/css/visualize-light.css'); ?>"/>
     <link type="text/css" rel="stylesheet" href="<?php echo base_url('css/new-style.css') ?>"/>
@@ -132,9 +132,11 @@
     <div id="main" role="main" class="container_12">
         <?php echo $this->load->view($content) ?>
     </div>
+
+    <!-- <div>Buka</div> -->
     <footer>
         <div class="container_12">
-            <div class="grid_3 alpha">
+            <div class="grid_4 alpha">
                 <h1>Pusat Layanan DJA</h1>
                 <ul>
                     <li>Lobby Gedung Sutikno Slamet</li>
@@ -142,6 +144,9 @@
                     <li>Jakarta Pusat</li>
                 </ul>
 
+            </div>
+
+            <div class="grid_4">
                 <h1>Email</h1>
                 <ul>
                     <li>pusatlayanan@anggaran.depkeu.go.id</li>
@@ -156,7 +161,7 @@
                 </ul>
             </div>
 
-            <div class="grid_3">
+            <div class="grid_4 omega">
                 <h1>Online Customer Service</h1>
                 <ul>
                     <li>Customer Service 1</li>
@@ -164,25 +169,6 @@
                     <li>Customer Service 3</li>
                     <li>Customer Service 4</li>
                 </ul>
-            </div>
-
-            <div class="grid_3">
-                <h1>Pusat Layanan DJA</h1>
-                <ul>
-                    <li>Lobby Gedung Sutikno Slamet</li>
-                    <li>Jln. Wahidin No. 1</li>
-                    <li>Jakarta Pusat</li>
-                </ul>
-
-                <h1>Email</h1>
-                <ul>
-                    <li>pusatlayanan@anggaran.depkeu.go.id</li>
-                    <li>pusatlayanan.dja@gmail.com</li>
-                </ul>
-            </div>
-
-            <div class="grid_3 omega">
-
             </div>
         </div>
 

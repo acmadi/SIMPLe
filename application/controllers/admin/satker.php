@@ -124,10 +124,12 @@ class Satker extends CI_Controller
 
                 if (!$result) {
                     $this->session->set_flashdata('error', 'Data gagal ditambahkan. ERROR: ' . $this->db->_error_message());
-                    $this->log->create("Gagal menambahkan data satker. ERROR: " . $this->db->_error_message());
+                    $this->log->create("Gagal menambahkan data Satker. ERROR: " . $this->db->_error_message());
+					redirect('admin/satker/add');
                 } else {
                     $this->session->set_flashdata('success', 'Data berhasil ditambahkan');
-                    $this->log->create("Menambah data satker (id_satker => {$this->db->insert_id()})");
+                    $this->log->create("Menambah data Satker (id_satker => {$this->db->insert_id()})");
+					redirect('admin/satker/add');
                 }
 
             }
