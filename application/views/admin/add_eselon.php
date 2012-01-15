@@ -1,7 +1,7 @@
 <div class="content">
 
-    <h1>Tambah Satker</h1>
-				<?php
+    <h1>Tambah Eselon</h1>
+ <?php
 				// TODO: Satu paket ini untuk alerts. Nanti mau dipindah jadi hanya panggil satu method.
 				if ($this->session->flashdata('success')) {
 					echo '<div class="success">' . $this->session->flashdata('success') . '</div>';
@@ -17,18 +17,18 @@
 					echo '<div class="info">' . $this->session->flashdata('info') . '</div>';
 				}
 				?>
-    <form method="post" action="<?php site_url('/admin/satker/add') ?>">
+    <form method="post" action="<?php site_url('/admin/eselon/add') ?>">
 
         <p>
-            <label>Kode Satker</label>
-            <input type="text" name="id_satker" value="<?php echo set_value('id_satker') ?>" maxlength="6"/>
+            <label>Kode Eselon</label>
+            <input type="text" name="id_unit" value="<?php echo set_value('id_unit') ?>" maxlength="2"/>
 			<?php echo form_error('id_unit', '<div class="error">', '</div>'); ?>
         </p>
 
         <p>
-            <label>Nama Satker</label>
-            <input type="text" name="nama_satker" value="<?php echo set_value('nama_satker')?> "/>
-			<?php echo form_error('nama_satker', '<div class="error">', '</div>'); ?>
+            <label>Nama Eselon</label>
+            <input type="text" name="nama_unit" value="<?php echo set_value('nama_unit')?> "/>
+			<?php echo form_error('nama_unit', '<div class="error">', '</div>'); ?>
         </p>
 
         <p>
@@ -43,6 +43,7 @@
                     <?php endif ?>
                 <?php endforeach ?>
             </select>
+			<?php echo form_error('id_kementrian', '<div class="error">', '</div>'); ?>
         </p>
 
         <p>
