@@ -4,6 +4,8 @@ class Dirjen extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('mhelpdesk');
+        $this->load->model('mfrontdesk');
     }
 
     public function dashboard()
@@ -209,58 +211,75 @@ class Dirjen extends CI_Controller
 
     function frontdesk()
     {
-		$this->load->model('mfrontdesk');
-		$this->load->helper('tanggal_helper');
-        $page		= $this->mfrontdesk->get_all_tiket_frontdesk(6,'');
-		$pageData	= $page['query'];
-		$pageLink	= $page['pagination1'];
-		
-		$data				= array('result'=>$pageData,'pageLink'=>$pageLink,);
-        $data['title'] 		= 'Konsultasi Front Desk';
-        $data['content'] 	= 'dirjen/frontdesk';
-		$data['isian_form']	= $page['isian_form1'];
+        $this->load->model('mfrontdesk');
+        $this->load->helper('tanggal_helper');
+        $page = $this->mfrontdesk->get_all_tiket_frontdesk(6, '');
+        $pageData = $page['query'];
+        $pageLink = $page['pagination1'];
+
+        $data = array('result' => $pageData, 'pageLink' => $pageLink,);
+        $data['title'] = 'Konsultasi Front Desk';
+        $data['content'] = 'dirjen/frontdesk';
+        $data['isian_form'] = $page['isian_form1'];
         $this->load->view('new-template', $data);
     }
-	
-	function diterima($id)
+
+    function diterima($id)
     {
-		$this->db->query("UPDATE tb_tiket_frontdesk SET is_active = 1 WHERE no_tiket_frontdesk = ?",array($id));		
-		redirect('dirjen/frontdesk');
+        $this->db->query("UPDATE tb_tiket_frontdesk SET is_active = 1 WHERE no_tiket_frontdesk = ?", array($id));
+        redirect('dirjen/frontdesk');
     }
-	
-	function accept($id)
+
+    function accept($id)
     {
         $query = $this->db->get_where('tb_tiket_frontdesk', array('no_tiket_frontdesk' => $id))->row();
-		
+
         $this->db->update('tb_tiket_frontdesk', array(
-            'status' => 'close','is_active' => 6
+            'status' => 'close', 'is_active' => 6
         ), array(
             'no_tiket_frontdesk' => $id
         ));
-		
+
         $this->_success(site_url('/dirjen/frontdesk'), 'Tiket berhasil ditetapkan', 3);
     }
-	
-	function reject($id)
+
+    function reject($id)
     {
-		$this->db->query("UPDATE tb_tiket_frontdesk SET is_active = 3,status = 'close' WHERE no_tiket_frontdesk = ?",array($id));		
-		redirect('dirjen/frontdesk');
+        $this->db->query("UPDATE tb_tiket_frontdesk SET is_active = 3,status = 'close' WHERE no_tiket_frontdesk = ?", array($id));
+        redirect('dirjen/frontdesk');
     }
 
-    function helpdesk()
+    function helpdesk($no_tiket_helpdesk = '')
     {
-        $sql = "SELECT * FROM tb_tiket_frontdesk JOIN tb_satker
-                        ON tb_tiket_frontdesk.id_satker = tb_satker.id_satker
+        if ($no_tiket_helpdesk == '') {
+            $sql = "SELECT * FROM tb_tiket_helpdesk JOIN tb_satker
+                ON tb_tiket_helpdesk.id_satker = tb_satker.id_satker
+                WHERE status = 'open' AND
+                lavel = 6";
 
-                        WHERE status = 'open' AND lavel = 6";
-        $data['antrian'] = $this->db->query($sql);
+            $data['antrian'] = $this->db->query($sql);
+            $data['content'] = 'dirjen/helpdesk';
 
+        } else {
+            $sql = "SELECT * FROM tb_tiket_helpdesk JOIN tb_satker
+            ON tb_tiket_helpdesk.id_satker = tb_satker.id_satker
+            WHERE status = 'open' AND
+            lavel = 6 AND
+            tb_tiket_helpdesk.no_tiket_helpdesk = '{$no_tiket_helpdesk}'
+            LIMIT 1";
+
+            $data['antrian'] =  $this->mhelpdesk->get_by_id($no_tiket_helpdesk);
+            $data['content'] = 'dirjen/helpdesk_view';
+        }
         $data['title'] = 'Dirjen';
-        $data['content'] = 'dirjen/helpdesk';
         $this->load->view('new-template', $data);
     }
-	
-	private function _success($url, $message, $time)
+
+    function jawab() {
+
+    }
+
+    private function _success($url, $message, $time)
     {
         $data['url'] = $url;
         $data['message'] = $message;
