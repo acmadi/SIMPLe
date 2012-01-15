@@ -132,6 +132,8 @@
     <div id="main" role="main" class="container_12">
         <?php echo $this->load->view($content) ?>
     </div>
+
+    <div>Buka</div>
     <footer>
         <div class="container_12">
             <div class="grid_4 alpha">
@@ -142,6 +144,9 @@
                     <li>Jakarta Pusat</li>
                 </ul>
 
+            </div>
+
+            <div class="grid_4">
                 <h1>Email</h1>
                 <ul>
                     <li>pusatlayanan@anggaran.depkeu.go.id</li>
@@ -156,28 +161,13 @@
                 </ul>
             </div>
 
-            <div class="grid_4">
+            <div class="grid_4 omega">
                 <h1>Online Customer Service</h1>
                 <ul>
                     <li>Customer Service 1</li>
                     <li>Customer Service 2</li>
                     <li>Customer Service 3</li>
                     <li>Customer Service 4</li>
-                </ul>
-            </div>
-
-            <div class="grid_4 omega">
-                <h1>Pusat Layanan DJA</h1>
-                <ul>
-                    <li>Lobby Gedung Sutikno Slamet</li>
-                    <li>Jln. Wahidin No. 1</li>
-                    <li>Jakarta Pusat</li>
-                </ul>
-
-                <h1>Email</h1>
-                <ul>
-                    <li>pusatlayanan@anggaran.depkeu.go.id</li>
-                    <li>pusatlayanan.dja@gmail.com</li>
                 </ul>
             </div>
         </div>

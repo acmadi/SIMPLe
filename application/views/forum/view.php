@@ -12,7 +12,8 @@
         
         <?php if($forum->file != '') : ?>
         <div class="attachment">
-            File terlampir: 
+            Unduh berkas terlampir:
+            <?php echo img('images/file_small.png')?> 
             <?php echo anchor(base_url() . 'upload/forum/' . $forum->file, $forum->file)?>
         </div>
         <?php endif; ?>
