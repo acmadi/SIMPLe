@@ -1,16 +1,38 @@
-body {
-    
-}
-
-
-
 ul {
     margin: 0;
     padding: 0;
 }
 
+.profile-menu {
+    text-align: right;
+    background: #333;
+    display: inline-block;
+    position: relative;
+    padding: 4px 8px;
+}
 
+.profile-menu ul {
+    background: #333;
+    display: none;
+    position: absolute;
+    right: 0;
+    /*width: 150px;*/
+    top: 24px;
+}
 
+.profile-menu li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.profile-menu a {
+    padding: 4px 8px;
+}
+
+.profile-menu:hover ul {
+    display: inline-block;
+}
 
 .title {
     font-size: 26px;
@@ -18,12 +40,9 @@ ul {
     border-bottom: 1px dashed #cecece;
 }
 
-
 footer {
 
 }
-
-
 
 .button {
     color: #333 !important;
@@ -135,7 +154,6 @@ input[type="button"].button {
 .search-box input[type="submit"] {
 
 }
-
 
 .action-box div {
     padding: 4px 8px;
