@@ -38,9 +38,9 @@ class Helpdesk_form_pertanyaan extends CI_Controller
                 ->order_by('tanggal', 'DESC')
                 ->get();
 
-//        echo $this->db->last_query() . "\n\n";
+        //        echo $this->db->last_query() . "\n\n";
 
-//        print_r($result->result());
+        //        print_r($result->result());
 
         if ($result->num_rows() > 0) {
             $data['pertanyaan_sebelumnya'] = $result;
@@ -76,9 +76,9 @@ class Helpdesk_form_pertanyaan extends CI_Controller
                 ->order_by('tanggal', 'DESC')
                 ->get();
 
-//        echo $this->db->last_query() . "\n\n";
+        //        echo $this->db->last_query() . "\n\n";
 
-//        print_r($result->result());
+        //        print_r($result->result());
 
         if ($result->num_rows() > 0) {
             $data['pertanyaan_sebelumnya'] = $result;
@@ -97,23 +97,20 @@ class Helpdesk_form_pertanyaan extends CI_Controller
             $prioritas = $this->input->post('prioritas');
             $pertanyaan = $this->input->post('pertanyaan');
             $description = $this->input->post('description');
-			
-		$result = $this->db->query($gabung);
+
             $result = $this->db->from('tb_tiket_helpdesk')
                     ->where('id', $this->session->userdata('id_tiket'))
                     ->get();
 
             if ($result->num_rows() == 0) {
 
-//                $sql = "INSERT INTO tb_tiket_helpdesk (prioritas, pertanyaan, description, id_satker, parent_id, tanggal)
-//                        VALUES(?, ?, ?, ?, ?, ?)";
-//
-//                $this->db->query($sql, array($prioritas, $pertanyaan, $description, $this->session->userdata('id_satker'), $no_tiket_helpdesk, date('Y-m-d H:i:s')));
+                //                $sql = "INSERT INTO tb_tiket_helpdesk (prioritas, pertanyaan, description, id_satker, parent_id, tanggal)
+                //                        VALUES(?, ?, ?, ?, ?, ?)";
+                //
+                //                $this->db->query($sql, array($prioritas, $pertanyaan, $description, $this->session->userdata('id_satker'), $no_tiket_helpdesk, date('Y-m-d H:i:s')));
 
-//                echo "insert"; echo $this->db->last_query(); exit();
-           
+                //                echo "insert"; echo $this->db->last_query(); exit();
 
-				 
 
                 $data = array(
                     'prioritas' => $prioritas,
@@ -130,7 +127,7 @@ class Helpdesk_form_pertanyaan extends CI_Controller
 
             } else {
 
-//                echo "update"; echo $this->db->last_query(); exit();
+                //                echo "update"; echo $this->db->last_query(); exit();
 
                 $sql = "UPDATE tb_tiket_helpdesk SET
                         prioritas = ?, pertanyaan = ?, description = ?
@@ -161,8 +158,8 @@ class Helpdesk_form_pertanyaan extends CI_Controller
         $data['content'] = 'helpdesk/helpdesk/helpdesk_form_pertanyaan_submit';
 
         $knowledges = $this->db->query("SELECT * FROM tb_knowledge_base WHERE judul LIKE '%{$pertanyaan}%' OR desripsi LIKE '%{$pertanyaan}%' OR jawaban LIKE '%{$pertanyaan}%'");
-		$data['knowledges'] = $knowledges;
-		// Kategori Knowledge Base
+        $data['knowledges'] = $knowledges;
+        // Kategori Knowledge Base
         $result = $this->db->query("SELECT * FROM tb_kat_knowledge_base WHERE id_kat_knowledge_base = '{$kategori_knowledge_base}'")->row();
         $data['kategori_knowledge_base'] = $result->kat_knowledge_base;
 
@@ -170,50 +167,40 @@ class Helpdesk_form_pertanyaan extends CI_Controller
         $data['pertanyaan'] = $pertanyaan;
         $data['description'] = $description;
 
-		$this->load->view('new-template', $data);
+        $cari = $this->input->post('pertanyaan');
 
-		$cari = $this->input->get('$pertanyaan');
-		$array= explode(' ', $cari);
-		$gabung='SELECT * FROM tb_knowledge_base WHERE ';
-		foreach( $array as $key=>$value ) {
-		if(count ($array) -1 == $key){
-		$gabung .= "judul LIKE '%" . $value . "%'\n";
-		}else
-		{$gabung .= "judul LIKE '%" . $value . "%' OR\n";
-		}
-		}
-		$result = $this->db->query($gabung);
-        
-		
-        
-                
-
-        //        echo json_encode($result->result(), JSON_FORCE_OBJECT);
-        echo '<ul style="list-style: inside;">';
-        foreach ($result->result() as $value) {
-            echo "<li>
-                    <a href=\"javascript:void(0)\" class=\"referensi-jawaban\" title=\"{$value->id_knowledge_base}\">{$value->judul}</a>
-                 </li>";
+        $array = explode(' ', $cari);
+        $gabung = 'SELECT * FROM tb_knowledge_base WHERE ';
+        foreach ($array as $key => $value) {
+            if (count($array) - 1 == $key) {
+                $gabung .= "judul LIKE '%" . $value . "%'\n";
+            } else
+            {
+                $gabung .= "judul LIKE '%" . $value . "%' OR\n";
+            }
         }
-        echo '</ul>';
+        $result = $this->db->query($gabung);
+
+        $data['knowledge'] = $result;
+
+        $this->load->view('new-template', $data);
     }
-	public function cari()
+
+    public function cari()
     {
         $cari = $this->input->get('pertanyaan');
-		$array= explode(' ', $cari);
-		$gabung='SELECT * FROM tb_knowledge_base WHERE ';
-		foreach( $array as $key=>$value ) {
-		if(count ($array) -1 == $key){
-		$gabung .= "judul LIKE '%" . $value . "%'\n";
-		}else
-		{$gabung .= "judul LIKE '%" . $value . "%' OR\n";
-		}
-		}
-		$result = $this->db->query($gabung);
-        
-		
-        
-                
+        $array = explode(' ', $cari);
+        $gabung = 'SELECT * FROM tb_knowledge_base WHERE ';
+        foreach ($array as $key => $value) {
+            if (count($array) - 1 == $key) {
+                $gabung .= "judul LIKE '%" . $value . "%'\n";
+            } else
+            {
+                $gabung .= "judul LIKE '%" . $value . "%' OR\n";
+            }
+        }
+        $result = $this->db->query($gabung);
+
 
         //        echo json_encode($result->result(), JSON_FORCE_OBJECT);
         echo '<ul style="list-style: inside;">';
@@ -224,7 +211,8 @@ class Helpdesk_form_pertanyaan extends CI_Controller
         }
         echo '</ul>';
     }
-function masuk()
+
+    function masuk()
     {
         $data = array();
 
@@ -241,18 +229,18 @@ function masuk()
 
             if ($result->num_rows() == 0) {
 
-//                $sql = "INSERT INTO tb_tiket_helpdesk (prioritas, pertanyaan, description, id_satker, parent_id, tanggal)
-//                        VALUES(?, ?, ?, ?, ?, ?)";
-//
-//                $this->db->query($sql, array($prioritas, $pertanyaan, $description, $this->session->userdata('id_satker'), $no_tiket_helpdesk, date('Y-m-d H:i:s')));
+                //                $sql = "INSERT INTO tb_tiket_helpdesk (prioritas, pertanyaan, description, id_satker, parent_id, tanggal)
+                //                        VALUES(?, ?, ?, ?, ?, ?)";
+                //
+                //                $this->db->query($sql, array($prioritas, $pertanyaan, $description, $this->session->userdata('id_satker'), $no_tiket_helpdesk, date('Y-m-d H:i:s')));
 
-//                echo "insert"; echo $this->db->last_query(); exit();
+                //                echo "insert"; echo $this->db->last_query(); exit();
 
                 $data = array(
                     'prioritas' => $prioritas,
                     'pertanyaan' => $pertanyaan,
                     'description' => $description,
-                    
+
                     'parent_id' => $this->session->userdata('id_tiket'),
                     'tanggal' => date('Y-m-d H:i:s'),
                     'no_tiket_helpdesk' => $this->session->userdata('no_tiket')
@@ -263,7 +251,7 @@ function masuk()
 
             } else {
 
-//                echo "update"; echo $this->db->last_query(); exit();
+                //                echo "update"; echo $this->db->last_query(); exit();
 
                 $sql = "UPDATE tb_tiket_helpdesk SET
                         prioritas = ?, pertanyaan = ?, description = ?
@@ -306,6 +294,7 @@ function masuk()
 
         $this->load->view('new-template', $data);
     }
+
     function popup_ref_jawaban($id)
     {
         $data['title'] = 'Helpdesk Form - Pertanyaan';
