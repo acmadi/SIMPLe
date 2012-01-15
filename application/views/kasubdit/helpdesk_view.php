@@ -128,7 +128,7 @@
         </div>
 
         <div style="float: left;">
-            <a class="button" href="<?php echo site_url('pelaksana/helpdesk') ?>">Batal</a>
+            <a class="button" href="<?php echo site_url('kasubdit/helpdesk') ?>">Batal</a>
         </div>
 
         <div style="float: right;">
