@@ -62,7 +62,9 @@ footer {
 
 input[type="submit"].button,
 input[type="button"].button {
-    height: 23px;
+    height: 24px;
+    font-size: 11px;
+    vertical-align: middle;
 }
 
 .button:hover {
@@ -152,7 +154,7 @@ input[type="button"].button {
 }
 
 .search-box input[type="submit"] {
-
+    font-size: 12px;
 }
 
 .action-box div {
@@ -195,3 +197,17 @@ input[type="button"].button {
     color: white;
 }
 
+/* Untuk argo yang lewat dari hari yang telah ditentukan */
+.red-row {
+    background: #ff6161 !important;
+    color: #fcfcfc;
+    text-shadow: 1px 1px #444;
+}
+
+.red-row .date {
+    color: #fcfcfc;
+}
+
+.red-row .time {
+    color: #e7e7e7;
+}

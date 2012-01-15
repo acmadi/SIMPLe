@@ -30,9 +30,11 @@ function table_tanggal($datetime)
 
 function hari_kerja($tanggal)
 {
+    $CI =& get_instance();
+
     $date1 = new DateTime(date('Y-m-d H:i:s'));
-    $date2 = new DateTime($tanggal);
-    //                            $day = $date1->diff($date2);
+    $date2 = new DateTime(date('Y-m-d H:i:s', strtotime($tanggal)));
+    // $day = $date1->diff($date2);
     $day = date_diff($date1, $date2);
 
     $hari = $day->days;
@@ -41,7 +43,10 @@ function hari_kerja($tanggal)
     $hari_kerja = $hari - $hari_kerja;
 
     $sql = "SELECT * FROM tb_calendar WHERE holiday BETWEEN '{$tanggal}' AND NOW()";
-    $hari_kerja = $hari_kerja - $this->db->query($sql)->num_rows();
+
+    $CI->db->query($sql);
+
+    $hari_kerja = $hari_kerja - $CI->db->query($sql)->num_rows();
 
     //    if ($day->days > 4) {
     //                            echo '<span style="font-weight: bold; font-size: 13px; color: white; background: tomato; padding: 0 4px;">' . $hari_kerja . '</span>';
@@ -52,5 +57,3 @@ function hari_kerja($tanggal)
     //    }
     return $hari_kerja;
 }
-
-?>
