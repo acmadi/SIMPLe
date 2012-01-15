@@ -2,23 +2,23 @@
 
     <h1>Forum</h1>
     <?php $forum = $forums->row() ?>
-    <div class="agan_ts">
+    <div class="forumpost ts">
+        
+        <h2><a href="<?php echo site_url('/forum/view/' . $forum->id_forum ) ?>"><?php echo $forum->judul_forum ?></a></h2>
+        
 
-        <h2 class="entry-title"><?php echo $forum->judul_forum ?></h2>
 
-        <em class="meta">dikirim pada tanggal <?php echo date('d-m-Y', strtotime($forum->tanggal)) ?>,
-         oleh <?php echo $forum->nama ?></em>
-
-        <div class="isi_forum">
-            <?php echo $forum->isi_forum ?>
+        <div  class="isi">
+            <?php echo word_limiter($forum->isi_forum, 100) ?>
         </div>
+        
+        <div style="text-align: right;"></div>
+        <em class="meta">
+         dikirim pada <?php echo date('d-m-Y', strtotime($forum->tanggal)) ?>
+         oleh <?php echo $forum->nama ?>
+         <a href="<?php echo site_url('/forum/view/' . $forum->id_forum ) ?>">Baca selengkapnya</a>
+        </em>
 
-        <?php if($forum->file != '') : ?>
-        <div class="attachment">
-            File terlampir: 
-            <?php echo anchor(base_url() . 'upload/forum/' . $forum->file, $forum->file)?>
-        </div>
-        <?php endif; ?>
     </div>
     
     <hr/>

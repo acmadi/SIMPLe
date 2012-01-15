@@ -134,7 +134,7 @@
     </div>
     <footer>
         <div class="container_12">
-            <div class="grid_3 alpha">
+            <div class="grid_4 alpha">
                 <h1>Pusat Layanan DJA</h1>
                 <ul>
                     <li>Lobby Gedung Sutikno Slamet</li>
@@ -156,7 +156,7 @@
                 </ul>
             </div>
 
-            <div class="grid_3">
+            <div class="grid_4">
                 <h1>Online Customer Service</h1>
                 <ul>
                     <li>Customer Service 1</li>
@@ -166,7 +166,7 @@
                 </ul>
             </div>
 
-            <div class="grid_3">
+            <div class="grid_4 omega">
                 <h1>Pusat Layanan DJA</h1>
                 <ul>
                     <li>Lobby Gedung Sutikno Slamet</li>
@@ -179,10 +179,6 @@
                     <li>pusatlayanan@anggaran.depkeu.go.id</li>
                     <li>pusatlayanan.dja@gmail.com</li>
                 </ul>
-            </div>
-
-            <div class="grid_3 omega">
-
             </div>
         </div>
 

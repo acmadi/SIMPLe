@@ -1,3 +1,6 @@
+@import url('new/table.css');
+@import url('new/forum.css');
+
 a, a:visited {
     color: gold;
     text-decoration: none;
@@ -10,6 +13,7 @@ body {
     font-family: 'Lucida Grande', Tahoma, Arial, sans-serif;
     font-size: 11px;
 }
+
 header {
     color: #fcfcfc;
     background: -webkit-linear-gradient(top, #2a0038 50%, #080027);
@@ -35,6 +39,12 @@ footer {
 		margin-left: 0;
 		margin-bottom: 5px;
 	}
+
+
+#main {
+    padding: 20px 0;
+    min-height: 400px;
+}
 
 .align-right{
     text-align: right;
@@ -338,4 +348,88 @@ label.aligned{
     display: inline-block;
     width: 150px;
     text-align: right;
+}
+
+
+
+/* TABEL */
+
+
+.table {
+    width: 100%;
+    border-spacing: 1px;
+    /*border-collapse: separate;*/
+}
+
+.table th,
+.table td {
+    padding: 5px 10px;
+    /*border: 1px solid red;*/
+}
+
+.table tbody tr {
+    border-bottom: 3px solid #cecece;
+    background: #fcfcfc;
+}
+
+.table tbody tr:nth-child(even) {
+
+}
+
+.table tbody tr:hover {
+    border-bottom: 3px solid #aaa;
+    background: #f9f9f9;
+}
+
+.table th {
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #f0f0f0;
+    /*background: #d9d9d9;*/
+    background: -webkit-linear-gradient(top, #d9d9d9, #c0c0c0);
+}
+
+.table th:first-child {
+    border-radius: 4px 0 0 0;
+}
+
+.table th:last-child {
+    border-radius: 0 4px 0 0;
+}
+
+.table td {
+
+}
+
+.table .no {
+    width: 1px;
+}
+
+.table .short {
+    width: 150px;
+}
+
+.table .medium {
+    width: 400px;
+}
+
+.table .action {
+    text-align: center;
+    background: #f9f9f9;
+    vertical-align: middle;
+}
+
+.table tbody tr .action .button {
+    visibility: hidden;
+}
+
+.table tbody tr:hover .action .button {
+    visibility: visible;
+}
+
+.table tfoot tr {
+    background: -webkit-linear-gradient(top, #d9d9d9, #c0c0c0);
+}
+
+.table tfoot td {
+    border-radius: 0 0 4px 4px;
 }
