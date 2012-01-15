@@ -13,18 +13,11 @@ class Man_user_tambah extends CI_Controller
 
     function index()
     {
-        /*if ($this->session->userdata('login') == TRUE)
-          {*/
 		$data['list_level']	= $this->muser->get_list_level();
 		$data['list_unit']	= $this->muser->get_list_unit();
         $data['title'] = 'Manajemen Tambah User';
         $data['content'] = 'admin/man_user/man_user_tambah';
         $this->load->view('admin/template', $data);
-        /*}
-          else
-          {
-              $this->load->view('login/login_view');
-          }*/
     }
 	
 	function add(){
@@ -61,6 +54,15 @@ class Man_user_tambah extends CI_Controller
 			}
 		}
 	}
-}
 
-?>
+    function pilih_departemen($id_lavel) {
+        $sql = "SELECT * FROM tb_unit_saker
+                WHERE id_lavel = ?";
+        $result = $this->db->query($sql, array($id_lavel))->result();
+
+//        echo $this->db->last_query();
+        foreach ($result as $value) {
+            echo sprintf('<option value="%s">%s</option>', $value->id_unit_satker, $value->nama_unit);
+        }
+    }
+}

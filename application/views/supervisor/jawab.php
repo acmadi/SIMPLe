@@ -94,18 +94,21 @@
         </fieldset>
 
         <fieldset>
-            <legend>Jawab</legend>
+            <legend>Jawaban</legend>
 
+            <div class="grid_6">
             <p>
-                <label style="display: inline-block; width: 100px;">Jawaban</label><br/>
+<!--                <label style="display: inline-block; width: 100px;">Jawaban</label><br/>-->
                 <label>
-                    <textarea name="jawaban" rows="7" cols="120"></textarea>
+                    <textarea name="jawaban" style="width: 450px; min-height: 100px;"></textarea>
                 </label>
             </p>
+            </div>
 
+            <div class="grid_5">
             <p>
-                <label style="display: inline-block; width: 100px;">Nama Nara Sumber: </label>
-                <span><input name="nama_narasumber" type="text"/></span>
+                <label style="display: inline-block; width: 100px;">Nama Nara Sumber </label>
+                <span style="display: inline-block; vertical-align: top"><input name="nama_narasumber" type="text"/></span>
             </p>
 
             <p>
@@ -117,6 +120,7 @@
                 <label style="display: inline-block; width: 100px;">Bukti File</label>
                 <span><input name="file" type="file"/></span>
             </p>
+            </div>
 
         </fieldset>
 

@@ -1,21 +1,21 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
-    <title><?php echo isset($title) ? $title : ''; ?></title>
-    <link rel="shortcut icon" href="<?php echo base_url() . 'images/icon.jpg';?>"/>
-    <style type="text/css">@import url("<?php echo base_url() . 'css/admin-style.css'; ?>");</style>
-    <link href="<?php echo base_url('css/admin-buttons.css'); ?>" rel="stylesheet"/>
-    <link rel="stylesheet" href="<?php echo base_url('css/cupertino/jquery-ui-1.8.16.custom.css');?>" />
-    <link rel="stylesheet" href="<?php echo base_url('/js/tufte-graph/tufte-graph.css');?>" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>Sistem Informasi Pusat Layanan Direktorat Jendral Anggaran - <?php echo isset($title) ? $title : ''; ?></title>
 
-    <!--TABLE JQUERY-->
-    <style type="text/css">@import url("<?php echo base_url() . 'css/table.css'; ?>");</style>
-    <!--POP UP-->
-    <style type="text/css">@import url("<?php echo base_url() . 'css/pop-up.css'; ?>");</style>
-    <style type="text/css">@import url("<?php echo base_url() . 'css/akhyar.css'; ?>");</style>
-    <script type="text/javascript" src="<?php echo base_url(); ?>js/jquery-1.4.2.min.js"></script>
-    <script type="text/javascript" src="<?php echo base_url(); ?>js/jquery-ui-1.8.16.custom.min.js"></script>
+    <link rel="shortcut icon" href="<?php echo base_url() . 'images/icon.jpg';?>"/>
+
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('/css/admin-style.css') ?>" />
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('/css/admin-buttons.css') ?>" />
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('/css/cupertino/jquery-ui-1.8.16.custom.css') ?>" />
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('/css/table.css') ?>" />
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('/css/akhyar.css') ?>" />
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('/js/chosen/chosen.css');?>" />
+
+    <script type="text/javascript" src="<?php echo base_url('/js/jquery-1.7.1.min.js') ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('/js/jquery-ui-1.8.16.custom.min.js') ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('/js/chosen/chosen.jquery.js') ?>"></script>
 </head>
 <body>
 <div id="wrapper">
@@ -28,7 +28,7 @@
             <div id="breadcrumb">
                 <?php
                 $this->load->helper('breadcrumb_helper');
-                breadcrumb($breadcrumb); 
+                breadcrumb($breadcrumb);
                 ?>
             </div>
             <?php endif;?>
@@ -99,6 +99,8 @@
             }
             return false;
         })
+
+        $('.chzn-single').chosen({});
 
     });
 </script>

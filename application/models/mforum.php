@@ -70,6 +70,12 @@ class Mforum extends CI_Model
 	    	 ORDER BY tanggal ASC"
 	    	)->result();	
     }
+    public function count_forums()
+    {
+    	$this->db->where('id_parent', NULL);
+		$this->db->from('tb_forum');
+		return $this->db->count_all_results();
+    }
     public function count_childs($id_parent)
     {
     	$this->db->where('id_parent', $id_parent);
