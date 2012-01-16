@@ -37,6 +37,7 @@
                 var nama_kl = $(this).val();
                 $.get('<?php echo site_url('helpdesk/identitas_satker/cari_kl/') ?>', {id_kementrian:nama_kl}, function (response) {
                     console.log(response);
+                    response = '<option></option>' + response;
                     $('#eselon').html(response);
                     $('#eselon').trigger('liszt:updated');
                     $('#kode_satker').removeAttr('disabled');
@@ -176,6 +177,7 @@
             <label class="align-right">Kode - Nama K/L</label>
             <select name="nama_kl" id="nama_kl" type="text" class="chzn-select" data-placeholder="Pilih nama K/L" style="width: 700px;">
                 <?php
+                echo '<option></option>';
                 foreach ($kementrian->result() as $value) {
                     echo sprintf("<option value='%s'>%s</option>", $value->id_kementrian, $value->id_kementrian . ' - ' . $value->nama_kementrian);
                 }
@@ -185,7 +187,7 @@
 
         <p>
             <label class="align-right">Nama Eselon 1</label>
-            <select id="eselon" name="eselon" class="kl chzn-select" value="<?php echo set_value('eselon') ?>" style="width: 700px;">
+            <select id="eselon" name="eselon" class="kl chzn-select" data-placeholder="Pilih Eselon I" value="<?php echo set_value('eselon') ?>" style="width: 700px;">
             </select>
         </p>
 

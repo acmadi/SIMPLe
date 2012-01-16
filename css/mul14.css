@@ -215,3 +215,7 @@ input[type="button"].button {
 .chzn-container .chzn-results li {
     line-height: normal;
 }
+
+h1 {
+    font-size: 16px;
+}
