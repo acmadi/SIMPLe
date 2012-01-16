@@ -18,6 +18,7 @@ class Man_forum extends CI_Controller
           {*/
 		$page		= $this->mforum->get_all();
 		$pageData	= $page->result();
+		$pageLink	= '';
 		// $pageData	= $page['query']->result();
 		// $pageLink	= $page['pagination1'];
 		
