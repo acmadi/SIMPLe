@@ -21,7 +21,7 @@ Class Login extends CI_Controller
         $login_data = $this->mlogin->cekdb($user, $pass);
 
         if ($login_data) {
-			$this->db->query("DELETE FROM ci_sessions WHERE id_user = ?",array($login_data->id_user));
+			$this->db->query("DELETE FROM tb_online_users WHERE user = ?", array($login_data->username));
 			
             $this->session->set_userdata('user', $login_data->username);
             $this->session->set_userdata('id_user', $login_data->id_user);
@@ -32,8 +32,7 @@ Class Login extends CI_Controller
             $this->session->set_userdata('id_unit_satker', $login_data->id_unit_satker);
             $this->session->set_userdata('anggaran', $login_data->anggaran);
 
-
-			$this->db->query("UPDATE ci_sessions SET id_user = ? WHERE session_id = ?",array($this->session->userdata('id_user'),$this->session->userdata('session_id')));
+			$this->db->query("INSERT INTO tb_online_users(USER,aktifitas_terakhir) VALUES (?,NOW())",array($login_data->username));
 			
             $this->log->create("Login");
 
@@ -91,7 +90,7 @@ Class Login extends CI_Controller
     public function process_logout()
     {
         $this->log->create("Logout");
-		$this->db->query("DELETE FROM ci_sessions WHERE id_user = ?",array($this->session->userdata('id_user')));
+		$this->db->query("DELETE FROM tb_online_users WHERE user = ?",array($this->session->userdata('user')));
         $this->session->unset_userdata('user');
         $this->session->unset_userdata('level');
         $this->session->sess_destroy();
