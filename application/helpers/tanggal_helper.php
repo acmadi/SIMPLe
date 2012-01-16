@@ -57,3 +57,15 @@ function hari_kerja($tanggal)
     //    }
     return $hari_kerja;
 }
+
+
+/**
+ * Numpang disini nih helper untuk ngilangin space
+ * Contoh: "Makan      Nasi     Pakai   Udang" => "MakanNasiPakaiUdang"
+ *
+ * @return mixed
+ */
+function trim_middle($str)
+{
+    return preg_replace("/\s+/", "", $str);
+}
