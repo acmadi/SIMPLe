@@ -19,7 +19,7 @@
 </head>
 <body>
 <div id="wrapper">
-    <div id="header"><img src="<?php echo base_url('images/logo.png') ?>"/>Sistem Informasi Pusat Layanan DJA</div>
+    <div id="header"><img src="<?php echo base_url('images/logo.png') ?>" width="40"/>Sistem Informasi Pusat Layanan DJA</div>
     <div id="navbar"><?php $this->load->view('navbar'); ?></div>
     <div id="container">
 

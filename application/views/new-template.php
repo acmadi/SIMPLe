@@ -114,6 +114,10 @@
                     $navbar = $this->session->userdata('navbar');
                     $this->load->view($navbar);
                 }
+                elseif ($this->uri->segment(1) == 'forum') {
+                    $navbar = $this->session->userdata('navbar');
+                    $this->load->view($navbar);
+                }
 
                 ?>
 
@@ -134,6 +138,7 @@
     </div>
 
     <!-- <div>Buka</div> -->
+</div>
     <footer>
         <div class="container_12">
             <div class="grid_4 alpha">
@@ -180,7 +185,6 @@
             </div>
         </div>
     </footer>
-</div>
 <!--! end of #container -->
 
 
