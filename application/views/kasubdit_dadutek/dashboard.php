@@ -55,15 +55,15 @@
             <caption>Jumlah pertanyaan yang langsung diselesaikan oleh: </caption>
             <tr>
                 <td class="head"><span class="label">CS</span></td>
-                <td><span class="message_box glow_green number">12</span></td>
+                <td><span class="message_box glow_green number"><?php echo $helpdesk_total_cs ?></span></td>
             </tr>
             <tr>
                 <td class="head"><span class="label">Supervisor</span></td>
-                <td><span class="message_box glow_green number">6</span></td>
+                <td><span class="message_box glow_green number"><?php echo $helpdesk_total_supervisor ?></span></td>
             </tr>
             <tr>
                 <td class="head"><span class="label">Kasi & Pelaksana</span></td>
-                <td><span class="message_box glow_green number">0</span></td>
+                <td><span class="message_box glow_green number"><?php echo $helpdesk_total_pelaksana ?></span></td>
             </tr>
         </table>
     </fieldset>
