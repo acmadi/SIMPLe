@@ -27,7 +27,7 @@ class Frontdesk extends CI_Controller
                 c.anggaran = '{$this->session->userdata('anggaran')}'
                 AND status = 'open' AND
                 a.lavel = '{$this->session->userdata('lavel')}'
-                ";
+                ORDER BY tanggal";
 
         $result = $this->db->query($sql);
 
