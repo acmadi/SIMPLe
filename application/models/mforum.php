@@ -83,11 +83,11 @@ class Mforum extends CI_Model
 		return $this->db->count_all_results();
     }
 
-    public function add_forum($id_kat_forum, $judul_forum, $isi_forum, $file = '')
+    public function add_forum($id_kat_forum, $judul_forum, $isi_forum, $file = '', $id_user=NULL)
     {
-        $sql = "INSERT INTO tb_forum (id_kat_forum, judul_forum, isi_forum, file)
-                VALUES (?, ?, ?, ?)";
-        return $this->db->query($sql, array($id_kat_forum, $judul_forum, $isi_forum, $file));
+        $sql = "INSERT INTO tb_forum (id_kat_forum, judul_forum, isi_forum, file, id_user)
+                VALUES (?, ?, ?, ?, ?)";
+        return $this->db->query($sql, array($id_kat_forum, $judul_forum, $isi_forum, $file, $id_user));
     }
 
     public function add_forum_by_array($arr)

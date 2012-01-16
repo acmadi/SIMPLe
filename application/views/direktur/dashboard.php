@@ -7,7 +7,7 @@
 <div class="content">
     <h1>Kasubdit Anggaran Dashboard</h1>
 
-    <fieldset class="grid_5">
+    <fieldset class="left">
         <legend>Report Front Desk</legend>
         <div class="message_box">
             <a class="button green" href="<?php echo site_url('/direktur/frontdesk') ?>"><?php echo $frontdesk_total ?> Tiket</a>
@@ -64,7 +64,7 @@
         </table>
     </fieldset>
 
-    <fieldset class="grid_5">
+    <fieldset class="right">
         <legend>Report Help Desk</legend>
         <div class="message_box">
             <a class="button green" href="<?php echo site_url('/kasubdit/helpdesk') ?>"><?php echo $helpdesk_total ?> Pertanyaan</a>
