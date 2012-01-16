@@ -39,6 +39,11 @@
                 <td><span class="message_box glow_green"><?php echo $total_tiket_open_pelaksana ?></span></td>
             </tr>
         </table>
+
+        <div>
+            <span style="background: red; padding: 0 8px;"></span>&nbsp;
+            Warna merah menunjukkan proses penyelesaian telah melebihi 5 hari kerja
+        </div>
     </fieldset>
 
     <fieldset class="grid_5">
