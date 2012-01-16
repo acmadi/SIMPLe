@@ -23,7 +23,10 @@ class Frontdesk extends CI_Controller
                 JOIN tb_kementrian ON tb_kementrian.id_kementrian = a.id_kementrian
                 JOIN tb_kon_unit_satker b ON a.id_kementrian = b.id_kementrian
                 JOIN tb_unit_saker c ON b.id_unit_satker = c.id_unit_satker
-                WHERE c.anggaran = '{$this->session->userdata('anggaran')}' ";
+                WHERE
+                c.anggaran = '{$this->session->userdata('anggaran')}'
+                AND status = 'open'
+                ";
 
         $result = $this->db->query($sql);
 
@@ -34,7 +37,7 @@ class Frontdesk extends CI_Controller
 
     function diterima($id)
     {
-		$this->db->query("UPDATE tb_tiket_frontdesk SET is_active = 1 WHERE no_tiket_frontdesk = ?",array($id));		
+		$this->db->query("UPDATE tb_tiket_frontdesk SET is_active = 1 WHERE no_tiket_frontdesk = ?",array($id));
 		redirect('pelaksana/frontdesk');
     }
 
