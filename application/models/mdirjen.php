@@ -33,7 +33,7 @@ class Mdirjen extends CI_Model
 		return $this->db->query("SELECT a.no_tiket_frontdesk FROM tb_tiket_frontdesk a, tb_kon_unit_satker b 
 								WHERE a.id_unit = b.id_unit AND a.id_kementrian = b.id_kementrian AND 
 								(SELECT c.anggaran FROM tb_unit_saker c WHERE b.id_unit_satker = c.id_unit_satker ) = ? 
-								AND a.is_active = 6 AND a.status = 'close' AND a.lavel >= ?
+								AND a.is_active = 6 AND a.status = 'close' AND a.lavel = ?
 								",array($anggaran,$level))->num_rows;
 	}
 	
@@ -41,7 +41,7 @@ class Mdirjen extends CI_Model
 		return $this->db->query("SELECT a.no_tiket_frontdesk FROM tb_tiket_frontdesk a, tb_kon_unit_satker b 
 								WHERE a.id_unit = b.id_unit AND a.id_kementrian = b.id_kementrian AND 
 								(SELECT c.anggaran FROM tb_unit_saker c WHERE b.id_unit_satker = c.id_unit_satker ) = ? 
-								AND a.is_active = 0 AND a.status = 'close' AND a.lavel >= ?
+								AND a.is_active = 0 AND a.status = 'close' AND a.lavel = ?
 								",array($anggaran,$level))->num_rows;
 	}
     

@@ -64,7 +64,7 @@ class Dirjen extends CI_Controller
 
        
 
-        $data['a1_dirjen_disetujui'] = $this->dirjen->get_jml_setuju(1,6); //print_r($this->db->last_query());exit;
+        $data['a1_dirjen_disetujui'] = $this->dirjen->get_jml_setuju(1,6);
         $data['a2_dirjen_disetujui'] = $this->dirjen->get_jml_setuju(2,6);
         $data['a3_dirjen_disetujui'] = $this->dirjen->get_jml_setuju(3,6);
 
@@ -93,26 +93,102 @@ class Dirjen extends CI_Controller
         $data['content'] = 'dirjen/dashboard';
         $this->load->view('new-template', $data);
     }
-
-    public function lists($anggaran, $level_id, $is_active)
+	
+	//$ang = 1, $ex = '', $lev, $inc = '' /*
+    function lists_trm($ang, $ex, $lev, $inc)
     {
-        $query = $this->db->from('tb_tiket_frontdesk')
-                ->join('tb_petugas_satker', 'tb_petugas_satker.id_petugas_satker = tb_tiket_frontdesk.id_petugas_satker')
-                ->join('tb_satker', 'tb_satker.id_satker = tb_tiket_frontdesk.id_satker')
-                ->join('tb_kon_unit_satker', 'tb_kon_unit_satker.id_kementrian = tb_satker.id_kementrian')
-                ->join('tb_unit_saker', 'tb_unit_saker.id_unit_satker = tb_kon_unit_satker.id_unit_satker')
-                ->group_by('no_tiket_frontdesk')
-                ->where('lavel >=', $level_id)
-                ->where('anggaran', $anggaran)
-                ->where('is_active', $is_active)
-                ->get();
+		$tmpEx = explode('-',$ex);
+		$tmpEx = implode(',',$tmpEx);
+		$tmpIn = explode('-',$inc);
+		$tmpIn = implode(',',$tmpIn);
+		
+		$kecuali	= " NOT IN($tmpEx) ";
+		$termasuk	= " IN($tmpIn) ";
+				
+		$res = $this->db->query("SELECT a.no_tiket_frontdesk,a.tanggal, c.nama_unit, d.nama_kementrian
+								FROM tb_tiket_frontdesk a, tb_kon_unit_satker b,tb_unit c,tb_kementrian d
+								WHERE a.id_unit = c.id_unit AND a.id_kementrian = c.id_kementrian AND a.id_kementrian = d.id_kementrian
+								 AND a.id_unit = b.id_unit AND a.id_kementrian = b.id_kementrian AND 
+								(SELECT c.anggaran FROM tb_unit_saker c WHERE b.id_unit_satker = c.id_unit_satker ) = ?
+								AND ((a.is_active $kecuali AND lavel = ?) OR (lavel > ?) OR (a.is_active $termasuk AND lavel = ?))
+								",array($ang,$lev,$lev,$lev));
 
-        $data['lists'] = $query;
+        $data['lists'] = $res;
 
         $data['title'] = 'Dirjen';
         $data['content'] = 'dirjen/list_tiket';
         $this->load->view('new-template', $data);
     }
+	
+	//$ang = 1, $ex = '', $lev, $inc = '' /*
+    function lists_trs($ang, $lev)
+    {			
+		$res = $this->db->query("SELECT a.no_tiket_frontdesk,a.tanggal, c.nama_unit, d.nama_kementrian
+								FROM tb_tiket_frontdesk a, tb_kon_unit_satker b,tb_unit c,tb_kementrian d
+								WHERE a.id_unit = c.id_unit AND a.id_kementrian = c.id_kementrian AND a.id_kementrian = d.id_kementrian
+								 AND a.id_unit = b.id_unit AND a.id_kementrian = b.id_kementrian AND 
+								(SELECT c.anggaran FROM tb_unit_saker c WHERE b.id_unit_satker = c.id_unit_satker ) = ?
+								AND lavel > ?
+								",array( $ang, $lev));
+
+        $data['lists'] = $res;
+
+        $data['title'] = 'Dirjen';
+        $data['content'] = 'dirjen/list_tiket';
+        $this->load->view('new-template', $data);
+    }
+	
+	function lists_trs_sub($ang, $lev)
+    {			
+		$res = $this->db->query("SELECT a.no_tiket_frontdesk,a.tanggal, c.nama_unit, d.nama_kementrian
+								FROM tb_tiket_frontdesk a, tb_kon_unit_satker b,tb_unit c,tb_kementrian d
+								WHERE a.id_unit = c.id_unit AND a.id_kementrian = c.id_kementrian AND a.id_kementrian = d.id_kementrian
+								 AND a.id_unit = b.id_unit AND a.id_kementrian = b.id_kementrian AND 
+								(SELECT c.anggaran FROM tb_unit_saker c WHERE b.id_unit_satker = c.id_unit_satker ) = ?
+								AND ((a.is_active >= 4 AND a.lavel > ?) OR (a.lavel > ?))
+								",array( $ang, $lev, $lev));
+
+        $data['lists'] = $res;
+
+        $data['title'] = 'Dirjen';
+        $data['content'] = 'dirjen/list_tiket';
+        $this->load->view('new-template', $data);
+    }
+	
+	function lists_setuju($ang, $lev)
+    {			
+		$res = $this->db->query("SELECT a.no_tiket_frontdesk,a.tanggal, c.nama_unit, d.nama_kementrian
+								FROM tb_tiket_frontdesk a, tb_kon_unit_satker b,tb_unit c,tb_kementrian d
+								WHERE a.id_unit = c.id_unit AND a.id_kementrian = c.id_kementrian AND a.id_kementrian = d.id_kementrian
+								 AND a.id_unit = b.id_unit AND a.id_kementrian = b.id_kementrian AND 
+								(SELECT c.anggaran FROM tb_unit_saker c WHERE b.id_unit_satker = c.id_unit_satker ) = ?
+								AND a.is_active = 6 AND a.status = 'close' AND a.lavel = ?
+								",array( $ang, $lev));
+
+        $data['lists'] = $res;
+
+        $data['title'] = 'Dirjen';
+        $data['content'] = 'dirjen/list_tiket';
+        $this->load->view('new-template', $data);
+    }
+	
+	function lists_tolak($ang, $lev)
+    {			
+		$res = $this->db->query("SELECT a.no_tiket_frontdesk,a.tanggal, c.nama_unit, d.nama_kementrian
+								FROM tb_tiket_frontdesk a, tb_kon_unit_satker b,tb_unit c,tb_kementrian d
+								WHERE a.id_unit = c.id_unit AND a.id_kementrian = c.id_kementrian AND a.id_kementrian = d.id_kementrian
+								 AND a.id_unit = b.id_unit AND a.id_kementrian = b.id_kementrian AND 
+								(SELECT c.anggaran FROM tb_unit_saker c WHERE b.id_unit_satker = c.id_unit_satker ) = ?
+								AND a.is_active = 0 AND a.status = 'close' AND a.lavel = ?
+								",array( $ang, $lev));
+
+        $data['lists'] = $res;
+
+        $data['title'] = 'Dirjen';
+        $data['content'] = 'dirjen/list_tiket';
+        $this->load->view('new-template', $data);
+    }
+	
 
     public function list_argo()
     {

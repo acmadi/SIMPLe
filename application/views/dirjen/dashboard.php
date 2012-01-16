@@ -167,19 +167,19 @@
 
         <tr>
             <td class="level"> CS</td>
-            <td><a href="<?php echo site_url('/dirjen/lists/1/1/1') ?>" class="green-box"><?php echo $a1_cs_diterima ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_trm/1/2/1/1') ?>" class="green-box"><?php echo $a1_cs_diterima ?></a></td>
             <td> <?php //echo $cs_diteruskan ?> </td>
             <td></td>
             <td></td>
 
             <td style="border: none;"> &nbsp;</td>
-            <td><a href="<?php echo site_url('/dirjen/lists/2/1/1') ?>" class="green-box"><?php echo $a2_cs_diterima ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_trm/2/2/1/1') ?>" class="green-box"><?php echo $a2_cs_diterima ?></a></td>
             <td></td>
             <td></td>
             <td></td>
 
             <td style="border: none;"> &nbsp;</td>
-            <td><a href="<?php echo site_url('/dirjen/lists/3/1/1') ?>" class="green-box"><?php echo $a3_cs_diterima ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_trm/3/2/1/1') ?>" class="green-box"><?php echo $a3_cs_diterima ?></a></td>
             <td></td>
             <td></td>
             <td></td>
@@ -187,98 +187,98 @@
         </tr>
         <tr>
             <td class="level"> Kasi & Pelaksana</td>
-            <td><a href="<?php echo site_url('/dirjen/lists/1/2/1') ?>" class="green-box"><?php echo $a1_pelaksana_diterima ?></a></td>
-            <td><a href="<?php echo site_url('/dirjen/lists/1/2/2') ?>" class="blue-box"><?php echo $a1_pelaksana_diteruskan ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_trm/1/2/3/1') ?>" class="green-box"><?php echo $a1_pelaksana_diterima ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_trs/1/1') ?>" class="blue-box"><?php echo $a1_pelaksana_diteruskan ?></a></td>
             <td></td>
             <td></td>
 
             <td style="border: none;"> &nbsp;</td>
-            <td><a href="<?php echo site_url('/dirjen/lists/2/2/1') ?>" class="green-box"><?php echo $a2_pelaksana_diterima ?></a></td>
-            <td><a href="<?php echo site_url('/dirjen/lists/2/2/2') ?>" class="blue-box"><?php echo $a2_pelaksana_diteruskan ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_trm/2/2/3/1') ?>" class="green-box"><?php echo $a2_pelaksana_diterima ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_trs/2/1') ?>" class="blue-box"><?php echo $a2_pelaksana_diteruskan ?></a></td>
             <td></td>
             <td></td>
 
             <td style="border: none;"> &nbsp;</td>
-            <td><a href="<?php echo site_url('/dirjen/lists/3/2/1') ?>" class="green-box"><?php echo $a3_pelaksana_diterima ?></a></td>
-            <td><a href="<?php echo site_url('/dirjen/lists/3/2/2') ?>" class="blue-box"><?php echo $a3_pelaksana_diteruskan ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_trm/3/2/3/1') ?>" class="green-box"><?php echo $a3_pelaksana_diterima ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_trs/3/1') ?>" class="blue-box"><?php echo $a3_pelaksana_diteruskan ?></a></td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <td class="level"> Subdit Anggaran</td>
-            <td><a href="<?php echo site_url('/dirjen/lists/1/3/1') ?>" class="green-box"><?php echo $a1_subdit_anggaran_diterima ?></a></td>
-            <td><a href="<?php echo site_url('/dirjen/lists/1/3/2') ?>" class="blue-box"><?php echo $a1_subdit_anggaran_diteruskan ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_trm/1/2/4/1-4-5') ?>" class="green-box"><?php echo $a1_subdit_anggaran_diterima ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_trs/1/3') ?>" class="blue-box"><?php echo $a1_subdit_anggaran_diteruskan ?></a></td>
             <td></td>
             <td></td>
 
             <td style="border: none;"> &nbsp;</td>
-            <td><a href="<?php echo site_url('/dirjen/lists/2/3/1') ?>" class="green-box"><?php echo $a2_subdit_anggaran_diterima ?></a></td>
-            <td><a href="<?php echo site_url('/dirjen/lists/2/3/2') ?>" class="blue-box"><?php echo $a2_subdit_anggaran_diteruskan ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_trm/2/2/3/1-4-5') ?>" class="green-box"><?php echo $a2_subdit_anggaran_diterima ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_trs/2/3') ?>" class="blue-box"><?php echo $a2_subdit_anggaran_diteruskan ?></a></td>
             <td></td>
             <td></td>
 
             <td style="border: none;"> &nbsp;</td>
-            <td><a href="<?php echo site_url('/dirjen/lists/3/3/1') ?>" class="green-box"><?php echo $a3_subdit_anggaran_diterima ?></a></td>
-            <td><a href="<?php echo site_url('/dirjen/lists/3/3/2') ?>" class="blue-box"><?php echo $a3_subdit_anggaran_diteruskan ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_trm/3/2/4/1-4-5') ?>" class="green-box"><?php echo $a3_subdit_anggaran_diterima ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_trs/3/3') ?>" class="blue-box"><?php echo $a3_subdit_anggaran_diteruskan ?></a></td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <td class="level"> Subdit Dadutek</td>
-            <td><a href="<?php echo site_url('/dirjen/lists/1/4/1') ?>" class="green-box"><?php echo $a1_subdit_dadutek_diterima ?></a></td>
-            <td><a href="<?php echo site_url('/dirjen/lists/1/4/2') ?>" class="blue-box"><?php echo $a1_subdit_dadutek_diteruskan ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_trm/1/1-2-4/4/5') ?>" class="green-box"><?php echo $a1_subdit_dadutek_diterima ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_trs_sub/1/3') ?>" class="blue-box"><?php echo $a1_subdit_dadutek_diteruskan ?></a></td>
             <td></td>
             <td></td>
 
             <td style="border: none;"> &nbsp;</td>
-            <td><a href="<?php echo site_url('/dirjen/lists/2/4/1') ?>" class="green-box"><?php echo $a2_subdit_dadutek_diterima ?></a></td>
-            <td><a href="<?php echo site_url('/dirjen/lists/2/4/2') ?>" class="blue-box"><?php echo $a2_subdit_dadutek_diteruskan ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_trm/2/2/4/1-4-5')?> class="green-box"><?php echo $a2_subdit_dadutek_diterima ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_trs_sub/2/3') ?>" class="blue-box"><?php echo $a2_subdit_dadutek_diteruskan ?></a></td>
             <td></td>
             <td></td>
 
             <td style="border: none;"> &nbsp;</td>
-            <td><a href="<?php echo site_url('/dirjen/lists/3/4/1') ?>" class="green-box"><?php echo $a3_subdit_dadutek_diterima ?></a></td>
-            <td><a href="<?php echo site_url('/dirjen/lists/3/4/2') ?>" class="blue-box"><?php echo $a3_subdit_dadutek_diteruskan ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_trm/3/1-2-4/4/5') ?>" class="green-box"><?php echo $a3_subdit_dadutek_diterima ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_trs/3/3') ?>" class="blue-box"><?php echo $a3_subdit_dadutek_diteruskan ?></a></td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <td class="level">Direktur</td>
-            <td><a href="<?php echo site_url('/dirjen/lists/1/5/1') ?>" class="green-box"><?php echo $a1_direktur_diterima ?></a></td>
-            <td><a href="<?php echo site_url('/dirjen/lists/1/5/2') ?>" class="blue-box"><?php echo $a1_direktur_diteruskan ?></a></td>
-            <td><a href="<?php echo site_url('/dirjen/lists/3/6/') ?>" class="yellow-box"><?php echo $a1_direktur_disetujui ?></a></td>
-            <td><a href="<?php echo site_url('/dirjen/lists/3/6/') ?>" class="red-box"><?php echo $a1_direktur_ditolak ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_trm/1/2/5/1') ?>" class="green-box"><?php echo $a1_direktur_diterima ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_trs/1/4') ?>" class="blue-box"><?php echo $a1_direktur_diteruskan ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_setuju/1/5') ?>" class="yellow-box"><?php echo $a1_direktur_disetujui ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_tolak/1/5') ?>" class="red-box"><?php echo $a1_direktur_ditolak ?></a></td>
 
             <td style="border: none;"> &nbsp;</td>
-            <td><a href="<?php echo site_url('/dirjen/lists/2/5/1') ?>" class="green-box"><?php echo $a2_direktur_diterima ?></a></td>
-            <td><a href="<?php echo site_url('/dirjen/lists/2/5/2') ?>" class="blue-box"><?php echo $a2_direktur_diteruskan ?></a></td>
-            <td><a href="<?php echo site_url('/dirjen/lists/3/6/') ?>" class="yellow-box"><?php echo $a2_direktur_disetujui ?></a></td>
-            <td><a href="<?php echo site_url('/dirjen/lists/3/6/') ?>" class="red-box"><?php echo $a2_direktur_ditolak ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_trm/2/2/5/1') ?>" class="green-box"><?php echo $a2_direktur_diterima ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_trs/2/4') ?>" class="blue-box"><?php echo $a2_direktur_diteruskan ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_setuju/2/5') ?>" class="yellow-box"><?php echo $a2_direktur_disetujui ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_tolak/2/5') ?>" class="red-box"><?php echo $a2_direktur_ditolak ?></a></td>
 
             <td style="border: none;"> &nbsp;</td>
-            <td><a href="<?php echo site_url('/dirjen/lists/3/5/1') ?>" class="green-box"><?php echo $a3_direktur_diterima ?></a></td>
-            <td><a href="<?php echo site_url('/dirjen/lists/3/5/2') ?>" class="blue-box"><?php echo $a3_direktur_diteruskan ?></a></td>
-			<td><a href="<?php echo site_url('/dirjen/lists/3/6/') ?>" class="yellow-box"><?php echo $a3_direktur_disetujui ?></a></td>
-            <td><a href="<?php echo site_url('/dirjen/lists/3/6/') ?>" class="red-box"><?php echo $a3_direktur_ditolak ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_trm/3/2/5/1') ?>" class="green-box"><?php echo $a3_direktur_diterima ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_trs/3/4') ?>" class="blue-box"><?php echo $a3_direktur_diteruskan ?></a></td>
+			<td><a href="<?php echo site_url('/dirjen/lists_setuju/3/5') ?>" class="yellow-box"><?php echo $a3_direktur_disetujui ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_tolak/3/5') ?>" class="red-box"><?php echo $a3_direktur_ditolak ?></a></td>
         </tr>
         <tr>
             <td class="level">Dirjen</td>
-            <td><a href="<?php echo site_url('/dirjen/lists/1/6/1') ?>" class="green-box"><?php echo $a1_dirjen_diterima ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_trm/1/2/6/1') ?>" class="green-box"><?php echo $a1_dirjen_diterima ?></a></td>
             <td>&nbsp;</td>
-            <td><a href="<?php echo site_url('/dirjen/lists/1/6/') ?>" class="yellow-box"><?php echo $a1_dirjen_disetujui ?></a></td>
-            <td><a href="<?php echo site_url('/dirjen/lists/1/6/') ?>" class="red-box"><?php echo $a1_dirjen_ditolak ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_setuju/1/6') ?>" class="yellow-box"><?php echo $a1_dirjen_disetujui ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_tolak/1/6') ?>" class="red-box"><?php echo $a1_dirjen_ditolak ?></a></td>
 
             <td style="border: none;"> &nbsp;</td>
-            <td><a href="<?php echo site_url('/dirjen/lists/2/6/1') ?>" class="green-box"><?php echo $a2_dirjen_diterima ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_trm/2/2/6/1') ?>" class="green-box"><?php echo $a2_dirjen_diterima ?></a></td>
             <td>&nbsp;</td>
-            <td><a href="<?php echo site_url('/dirjen/lists/2/6/') ?>" class="yellow-box"><?php echo $a2_dirjen_disetujui ?></a></td>
-            <td><a href="<?php echo site_url('/dirjen/lists/2/6/') ?>" class="red-box"><?php echo $a2_dirjen_ditolak ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_setuju/2/6') ?>" class="yellow-box"><?php echo $a2_dirjen_disetujui ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_tolak/2/6/') ?>" class="red-box"><?php echo $a2_dirjen_ditolak ?></a></td>
 
             <td style="border: none;"> &nbsp;</td>
-            <td><a href="<?php echo site_url('/dirjen/lists/3/6/1') ?>" class="green-box"><?php echo $a3_dirjen_diterima ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_trm/3/2/6/1') ?>" class="green-box"><?php echo $a3_dirjen_diterima ?></a></td>
             <td>&nbsp;</td>
-            <td><a href="<?php echo site_url('/dirjen/lists/3/6/') ?>" class="yellow-box"><?php echo $a3_dirjen_disetujui ?></a></td>
-            <td><a href="<?php echo site_url('/dirjen/lists/3/6/') ?>" class="red-box"><?php echo $a3_dirjen_ditolak ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_setuju/3/6') ?>" class="yellow-box"><?php echo $a3_dirjen_disetujui ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_tolak/3/6') ?>" class="red-box"><?php echo $a3_dirjen_ditolak ?></a></td>
         </tr>
 
 
