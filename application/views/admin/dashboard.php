@@ -44,7 +44,7 @@
                 <?php
                 
 				$result = $this->db->query("SELECT user 
-											FROM tb_online_users WHERE MINUTE(TIMEDIFF(NOW(),aktifitas_terakhir)) <= 20 ")->result();
+											FROM tb_online_users WHERE MINUTE(TIMEDIFF(NOW(),aktifitas_terakhir)) <= 30 ")->result();
 				foreach ($result as $val) {
 					//$udata = unserialize($val->user_data);
 					echo "<dd ><img src='".base_url()."images/user.png' > " . $val->user . "</dd>";
