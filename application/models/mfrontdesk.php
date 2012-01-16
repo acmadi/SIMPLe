@@ -32,6 +32,17 @@ class Mfrontdesk extends CI_Model
 	
 	public function get_all_tiket_frontdesk($level = 3,$optional = ''){
 		//@F2D
+		$anggaran = $this->db->query("SELECT a.anggaran
+					FROM tb_unit_saker a, tb_user b
+					WHERE a.id_unit_satker = b.id_unit_satker AND b.id_user = ?",array($this->session->userdata('id_user')))->row()->anggaran;
+					
+		//print_r($this->db->last_query());exit;
+		//print_r($this->session->all_userdata());exit;
+		//if(!$anggaran) redirect(base_url());
+		$where_ang = ' AND FALSE ';
+		//if(!$anggaran) $anggaran = ''
+		if($anggaran != NULL) $where_ang = " AND (SELECT c.anggaran FROM tb_unit_saker c WHERE b.id_unit_satker = c.id_unit_satker ) = $anggaran";
+		
 		$keyword = $this->input->post('keyword',TRUE);
 		
 		$this->load->library('pagination');
@@ -78,7 +89,8 @@ class Mfrontdesk extends CI_Model
 		$sql = "SELECT tf.no_tiket_frontdesk, tf.tanggal,tf.id_unit, tu.nama_unit, tm.nama_kementrian,tf.is_active
 				FROM tb_tiket_frontdesk tf, tb_unit tu, tb_kementrian tm 
 				WHERE tu.id_unit = tf.id_unit AND tu.id_kementrian = tf.id_kementrian AND tf.status = 'open' 
-				AND tf.lavel = ? AND tm.id_kementrian = tf.id_kementrian $where $where2 ORDER BY tf.status";
+				AND tf.lavel = ? AND tm.id_kementrian = tf.id_kementrian $where $where2 $where_ang
+				ORDER BY tf.status"; //print_r($this->db->last_query());//exit;
 				
 		$query = $this->db->query($sql,array($level));
 
@@ -92,8 +104,8 @@ class Mfrontdesk extends CI_Model
 		$sqlb = "SELECT tf.no_tiket_frontdesk, tf.tanggal,tf.id_unit, tu.nama_unit, tm.nama_kementrian,tf.is_active
 				FROM tb_tiket_frontdesk tf, tb_unit tu, tb_kementrian tm 
 				WHERE tu.id_unit = tf.id_unit AND tu.id_kementrian = tf.id_kementrian AND tf.status = 'open' 
-				AND tf.lavel = ?  AND tm.id_kementrian = tf.id_kementrian $where $where2 ORDER BY tf.status
-				LIMIT ?,?";
+				AND tf.lavel = ?  AND tm.id_kementrian = tf.id_kementrian $where $where2 $where_ang
+				LIMIT ?,?"; //print_r($this->db->last_query());
 		$data["query"] = $this->db->query($sqlb, array($level,$offset ,$config['per_page']));
 
 		$data['isian_form1'] = $keyword;
