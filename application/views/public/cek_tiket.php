@@ -36,8 +36,8 @@
         </p>
 
         <p>
-            <span>Kode Eselon</span>
-            <span><?php echo $tiket->id_satker ?></span>
+            <span>Kode Kementrian - Kode Eselon </span>
+            <span><?php echo $tiket->id_kementrian.' - '.$tiket->id_unit ?></span>
         </p>
 
         <p>
