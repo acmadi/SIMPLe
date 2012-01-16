@@ -200,8 +200,10 @@
             </select>
         </div>
 
-        <div class="low container"  style="position:relative; top: 50px; float: left;">
+        <div class="low container"  style="position:relative; top: 0px; float: left; text-align: center">
             <div><input name="left2right" value=">" type="button" style="padding: 10px;"></div>
+            <div><input id="all_left2right" value=">>" type="button" style="padding: 10px;"></div>
+            <div><input id="all_right2left" value="<<" type="button" style="padding: 10px;"></div>
             <div><input name="right2left" value="<" type="button" style="padding: 10px;"></div>
         </div>
 
