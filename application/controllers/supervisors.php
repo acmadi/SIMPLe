@@ -25,6 +25,16 @@ class Supervisors extends CI_Controller
         $this->load->view($this->template, $data);
     }
 
+    public function report($tipe = 'helpdesk')
+    {
+        if($tipe == 'helpdesk') :
+            $data['tiket_helpdesk'] = $this->mhelpdesk->get_all_closed_ticket_by(2, FALSE, TRUE);
+            $data['title'] = 'Dashboard';
+            $data['content'] = 'supervisor/report_helpdesk';
+            $this->load->view($this->template, $data);
+        endif;
+    }
+
     public function list_pertanyaan()
     {
         $sort = '';
