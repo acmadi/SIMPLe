@@ -17,6 +17,12 @@ class mreferensi extends CI_Model
 
 	public function cari($keyword)
 	{
+		return $this->get_by_keyword($keyword);
+	}
+
+	// GAK DIPAKE LAGI, sekedar kenang-kenangan
+	public function cari_legacy($keyword)
+	{
 		$url = 
 			'http://www.kemenkumham.go.id/pencarian?searchword=' . 
 			$keyword . 
@@ -47,45 +53,38 @@ class mreferensi extends CI_Model
 
 	function get_categories()
 	{
-		$url = 'http://www.kemenkumham.go.id/produk-hukum';
 
-		// tarik dari website menkumham
-		$raw_string = $this->fetch_url($url);
+		$q = "SELECT * FROM tb_referensi_kat";
+		$kats = $this->db->query($q)->result();
 
-		// parsing html
-		$html = new simple_html_dom();
-		$html->load($raw_string);
-
-		$links = $html->find('a[class="category"]');
-
-		foreach($links as &$link) :
-			$tmp = explode('/produk-hukum/', $link->href);
-			$link->href = base_url() . index_page() . '/referensi/category/' . $tmp[1];
+		foreach ($kats as &$kat) :
+			$kat->href = 'referensi/category/' . $kat->id_referensi_kat;
 		endforeach;
 
-		return $links;
+		return $kats;
 	}
 
 	function get_by_category($cat)
 	{
-		$url = 'http://www.kemenkumham.go.id/produk-hukum/' . $cat;
 
-		// tarik dari website menkumham
-		$raw_string = $this->fetch_url($url);
+		$q = "SELECT * FROM tb_referensi WHERE id_referensi_kat='$cat'";
+		$refs = $this->db->query($q)->result();
 
-		// parsing html
-		$html = new simple_html_dom();
-		$html->load($raw_string);
-
-		$tds = $html->find('td[headers="tableOrdering"]');
-
-		foreach($tds as &$td) :
-			foreach($td->find('a') as $a) :
-				$a->target="_blank";
-				$a->href = 'http://www.kemenkumham.go.id' . $a->href;
-			endforeach;
+		foreach($refs as &$ref) :
+			$ref->href= base_url('upload/referensi/' . $ref->nama_file);
 		endforeach;
 
-		return $tds;
+		return $refs;
+	}
+	function get_by_keyword($keyword)
+	{
+		$q = "SELECT * FROM tb_referensi WHERE nama_ref LIKE '%$keyword%'";
+		$refs = $this->db->query($q)->result();
+
+		foreach($refs as &$ref) :
+			$ref->href= base_url('upload/referensi/' . $ref->nama_file);
+		endforeach;
+		
+		return $refs;
 	}
 }

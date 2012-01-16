@@ -20,11 +20,11 @@
 			if ($result_array != NULL) :
 				echo '<ol>';
 				foreach($result_array as $item) :
-					$item_string = $item->outertext;
-					$item_string = str_replace(
-						'<a href="', '<a href="http://www.kemenkumham.go.id', 
-							 $item_string);
-					echo '<li>' . $item_string . '</li>';
+					// $item_string = $item->outertext;
+					// $item_string = str_replace(
+					// 	'<a href="', '<a href="http://www.kemenkumham.go.id', 
+					// 		 $item_string);
+					echo '<li>' . anchor($item->href, $item->nama_ref) . '</li>';
 				endforeach;
 				echo '</ol>';
 			else :
