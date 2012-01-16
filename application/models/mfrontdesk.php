@@ -49,7 +49,7 @@ class Mfrontdesk extends CI_Model
 		//if(!$anggaran) redirect(base_url());
 		$where_ang = ' AND FALSE ';
 		//if(!$anggaran) $anggaran = ''
-		if($utkAnggr != NULL) $where_ang = " AND (SELECT c.id_unit_satker FROM tb_kon_unit_satker c WHERE c.id_unit = tf.id_unit AND c.id_kementrian = tf.id_kementrian ) = $utkAnggr";
+		if($utkAnggr != NULL) $where_ang = " AND (SELECT c.id_unit_satker FROM tb_kon_unit_satker c WHERE c.id_unit = tf.id_unit AND c.id_kementrian = tf.id_kementrian LIMIT 1) = $utkAnggr";
 		//print_r($utkAnggr);exit;
 		$keyword = $this->input->post('keyword',TRUE);
 		
@@ -93,7 +93,6 @@ class Mfrontdesk extends CI_Model
 		if(!empty($optional)){
 			$where2 = $optional;
 		}
-		
 		$sql = "SELECT tf.no_tiket_frontdesk, tf.tanggal,tf.id_unit, tu.nama_unit, tm.nama_kementrian,tf.is_active
 				FROM tb_tiket_frontdesk tf, tb_unit tu, tb_kementrian tm 
 				WHERE tu.id_unit = tf.id_unit AND tu.id_kementrian = tf.id_kementrian AND tf.status = 'open' 

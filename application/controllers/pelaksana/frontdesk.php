@@ -19,6 +19,8 @@ class Frontdesk extends CI_Controller
         $data['content'] 	= 'pelaksana/frontdesk';
 		$data['isian_form']	= $page['isian_form1'];
 
+
+        //TODO Masih ragu dengan query ini. Mesti di recheck lagi. Tapi untuk sementara bolehlah. Fuuu!!
         $sql = "SELECT * FROM `tb_tiket_frontdesk` a
                 JOIN tb_kementrian ON tb_kementrian.id_kementrian = a.id_kementrian
                 JOIN tb_kon_unit_satker b ON a.id_kementrian = b.id_kementrian
@@ -26,7 +28,9 @@ class Frontdesk extends CI_Controller
                 WHERE
                 c.anggaran = '{$this->session->userdata('anggaran')}'
                 AND status = 'open' AND
-                a.lavel = '{$this->session->userdata('lavel')}'
+                a.lavel = '{$this->session->userdata('lavel')}' AND
+                c.id_unit_satker = '{$this->session->userdata('id_unit_satker')}'
+                GROUP BY no_tiket_frontdesk
                 ORDER BY tanggal";
 
         $result = $this->db->query($sql);
