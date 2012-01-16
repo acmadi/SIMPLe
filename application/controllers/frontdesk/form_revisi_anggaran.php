@@ -81,7 +81,7 @@ class Form_revisi_anggaran extends CI_Controller
         $result = $this->db->query($sql);
 
         foreach ($result->result() as $value) {
-            echo sprintf('<option value="%s">%s</option>', $value->id_satker, $value->nama_satker);
+            echo sprintf('<option value="%s">%s</option>', $value->id_satker, $value->id_satker . ' - ' . $value->nama_satker);
         }
     }
 
