@@ -10,13 +10,13 @@
         })
     });
     </script>
-    
+    <!--
     <div class="forumpost reply">
         <h2>
         <button id="postbutton" class="button gray-pill">Tulis Forum Baru</button>
         </h2>
 
-<!--         <div id="postbox" style="display:none">
+        <div id="postbox" style="display:none">
             <?php 
 
             $q_kat = $this->mforum->get_categories();
@@ -31,9 +31,9 @@
             $data['referrer']     = 'forum';
             $this->load->view('forum/form', $data) 
             ?>
-        </div> -->
+        </div>
     </div>
-
+    -->
     <hr/>
     <?php foreach ($forums->result() as $forum): ?>
     <div class="forumpost">
