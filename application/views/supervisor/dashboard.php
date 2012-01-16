@@ -12,7 +12,10 @@
             <span class="xxlabel">Langsung terselesaikan oleh CS Helpdesk</span> <span class="xxlabel red"><?php echo $total_selesai_oleh_cs ?></span>
             </a>
             </dd>
-            <dd><span class="xxlabel">Eskalasi</span> <span class="xxlabel red"><?php echo $helpdesk_total ?></span></dd>
+
+            <dd>
+            <span class="xxlabel">Eskalasi</span> <span class="xxlabel red"><?php echo $helpdesk_total ?></span>
+            </dd>
         </dl>
     </fieldset>
 </div>
