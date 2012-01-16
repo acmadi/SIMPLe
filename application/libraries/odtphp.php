@@ -45,7 +45,7 @@ class Odtphp
      * @param $emails Array of Emails
      * @return array
      */
-    public function create_pengajuan($tiket, $no_surat_usulan, $no_tiket, $kementrian, $eselon, $nip, $nama, $jabatan, $hp, $tlpkantor, $emails)
+    public function create_pengajuan($tiket, $no_surat_usulan, $no_tiket, $kementrian, $eselon, $nip, $nama, $jabatan, $hp, $tlpkantor, $emails, $tgl_pengajuan, $tgl_selesai)
     {
         $odf = new odf($this->print_template_path . 'pengajuan.odt');
 
@@ -58,6 +58,9 @@ class Odtphp
         $odf->setVars('var7', $jabatan);
         $odf->setVars('var8', $hp);
         $odf->setVars('var9', $tlpkantor);
+
+        $odf->setVars('var11', $tgl_pengajuan);
+        $odf->setVars('var12', $tgl_selesai);
 
         $email = '';
         $i = 1;

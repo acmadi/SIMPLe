@@ -184,7 +184,7 @@ class Form_revisi_anggaran extends CI_Controller
 
             $tiket_id = $this->db->insert_id();
 
-            $now = date('Y-m-d');
+            $now = date('Y-m-d H:i:s');
 
             $sql = "INSERT INTO tb_tiket_frontdesk (id_satker, id_formulir, tanggal, status, lavel, id_petugas_satker, id_unit, id_kementrian,nomor_surat_usulan,tanggal_surat_usulan,is_active)
 					VALUES ({$kode_satker_select}, NULL, '{$now}', 'open', 3, {$tiket_id},'{$eselon}','{$nama_kl}','{$nomor_surat_usulan}','{$tanggal_surat_usulan}',2)";
@@ -275,7 +275,7 @@ class Form_revisi_anggaran extends CI_Controller
         $input_filename = $this->odtphp->create($no_tiket_frontdesk, 'tanggal', '10:00');
 
 
-//        print_r($data['identitas'][0]);
+//        print_r($data['identitas']);
 
 
         $emails = explode(';', trim_middle($data['identitas'][0]->email));
@@ -291,7 +291,9 @@ class Form_revisi_anggaran extends CI_Controller
             $data['identitas'][0]->jabatan_petugas,
             $data['identitas'][0]->no_hp,
             $data['identitas'][0]->no_kantor,
-            $emails
+            $emails,
+            date('Y-m-d H:i:s'),
+            date('Y-m-d H:i:s', strtotime('+7 days'))
         );
 
         $output = preg_replace('/.odt/', '.pdf', $input_filename['full_filename']);
