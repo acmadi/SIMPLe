@@ -154,18 +154,21 @@
     <fieldset id="kl">
         <legend>Kementrian / Lembaga</legend>
 
-        <div id="anggaran" style="padding: 20px; display: inline-block; float: right; font-size: 24px;"></div>
+        <!-- <div id="anggaran" style="padding: 20px; display: inline-block; float: right; font-size: 24px;"></div> -->
 
+        <div id="anggaran" style="padding: 10px; display: inline-block; float: right; font-size: 24px;"></div>
         <p>
 
         <div style="float: left;">
             <label class="align-right">Nomor Surat Usulan</label>
             <input type="text" id="nomor_surat_usulan" name="nomor_surat_usulan" value="<?php echo set_value('nomor_surat_usulan') ?>"/>
         </div>
-        <div style="float: left; margin-left: 50px;">
-            <label class="align-right">Tanggal Surat Usulan</label>
+        <div style="float: right; margin-left: 20px; width:400px">
+            <label class="align-right" style="width: 150px">Tanggal Surat Usulan</label>
             <input type="text" id="tanggal_surat_usulan" name="tanggal_surat_usulan" value="<?php echo set_value('tanggal_surat_usulan') ?>"/>
         </div>
+
+        
         <div class="clear"></div>
         </p>
 
@@ -188,8 +191,8 @@
 
         <p class="kode_satker_p">
             <label class="align-right" style="float: left;">Kode - Nama Satker</label>
-            <!--            <select name="kode_satker" id="kode_satker" class="kl chzn-select" multiple style="width: 700px;">-->
-            <!--            </select>-->
+<!--            <select name="kode_satker" id="kode_satker" class="kl chzn-select" multiple style="width: 700px;">-->
+<!--            </select>-->
 
         <div class="container" style="float: left" id="kode_satker">
             <select name="itemsToChoose" id="left" size="10" multiple="multiple" style="width: 350px;">
@@ -197,15 +200,13 @@
             </select>
         </div>
 
-        <div class="low container" style="position:relative; top: 0; float: left; text-align: center;">
+        <div class="low container"  style="position:relative; top: 50px; float: left;">
             <div><input name="left2right" value=">" type="button" style="padding: 10px;"></div>
-            <div><input id="all_left2right" value=">>" type="button" style="padding: 10px;"></div>
-            <div><input id="all_right2left" value="<<" type="button" style="padding: 10px;"></div>
             <div><input name="right2left" value="<" type="button" style="padding: 10px;"></div>
         </div>
 
         <div class="container" style="float: left">
-            <select name="kode_satker" id="right" size="10" multiple="multiple" style="width: 350px;">
+            <select name="kode_satker" id="right" size="10" multiple="multiple"  style="width: 350px;">
             </select>
         </div>
 

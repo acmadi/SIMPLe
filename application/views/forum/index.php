@@ -10,7 +10,7 @@
         })
     });
     </script>
-    
+    <!--
     <div class="forumpost reply">
         <h2>
         <button id="postbutton" class="button gray-pill">Tulis Forum Baru</button>
@@ -33,7 +33,7 @@
             ?>
         </div>
     </div>
-
+    -->
     <hr/>
     <?php foreach ($forums->result() as $forum): ?>
     <div class="forumpost">
@@ -47,7 +47,7 @@
         
         <em class="meta">
          dikirim pada <?php echo date('d-m-Y', strtotime($forum->tanggal)) ?>
-         oleh <?php echo $forum->nama ?>
+         oleh <?php echo 'Admin' // $forum->nama ?>
          <a href="<?php echo site_url('/forum/view/' . $forum->id_forum ) ?>">Baca selengkapnya</a>
         </em>
 
