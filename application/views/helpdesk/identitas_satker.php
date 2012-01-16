@@ -13,6 +13,7 @@
             var nama_kl = $(this).val();
             $.get('<?php echo site_url('helpdesk/identitas_satker/cari_kl/') ?>', {id_kementrian:nama_kl}, function (response) {
                 console.log(response);
+                response = '<option></option>' + response;
                 $('#eselon').html(response);
                 $('#eselon').trigger('liszt:updated');
                 $('#kode_satker').removeAttr('disabled');
@@ -30,6 +31,7 @@
             url = '<?php echo site_url('frontdesk/form_revisi_anggaran/cari_satker') ?>/' + id_kementrian + '/' + $(this).val();
             console.log(url);
             $.get(url, function(response){
+                response = '<option></option>' + response;
                 $('#kode_satker').html(response);
                 $('#kode_satker').trigger('liszt:updated');
                 console.log(response);
