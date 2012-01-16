@@ -29,7 +29,10 @@ Class Login extends CI_Controller
             $this->session->set_userdata('lavel', $login_data->lavel);
             $this->session->set_userdata('nama_lavel', $login_data->nama_lavel);
             $this->session->set_userdata('nama', $login_data->nama);
-			
+            $this->session->set_userdata('id_unit_satker', $login_data->id_unit_satker);
+            $this->session->set_userdata('anggaran', $login_data->anggaran);
+
+
 			$this->db->query("UPDATE ci_sessions SET id_user = ? WHERE session_id = ?",array($this->session->userdata('id_user'),$this->session->userdata('session_id')));
 			
             $this->log->create("Login");
