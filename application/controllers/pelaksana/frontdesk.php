@@ -25,7 +25,8 @@ class Frontdesk extends CI_Controller
                 JOIN tb_unit_saker c ON b.id_unit_satker = c.id_unit_satker
                 WHERE
                 c.anggaran = '{$this->session->userdata('anggaran')}'
-                AND status = 'open'
+                AND status = 'open' AND
+                a.lavel = '{$this->session->userdata('lavel')}'
                 ";
 
         $result = $this->db->query($sql);
