@@ -43,11 +43,13 @@
             <dl>
                 <?php
                 
-				$result = $this->db->query("SELECT user_data FROM ci_sessions WHERE user_data != ''")->result();
-                foreach ($result as $val) {
-					$udata = unserialize($val->user_data);
-                    echo "<dd ><img src='".base_url()."images/user.png' > " . $udata['user'] . "</dd>";
-                }
+				$result = $this->db->query("SELECT user 
+											FROM tb_online_users WHERE MINUTE(TIMEDIFF(NOW(),aktifitas_terakhir)) <= 20 ")->result();
+				foreach ($result as $val) {
+					//$udata = unserialize($val->user_data);
+					echo "<dd ><img src='".base_url()."images/user.png' > " . $val->user . "</dd>";
+				}
+				
 				
                 ?>
             </dl>
