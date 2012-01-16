@@ -53,7 +53,7 @@
             <nav class="grid_10 alpha omega">
 
                 <?php
-				$this->session->set_userdata('navbar', 'navbar_default');
+				//$this->session->set_userdata('navbar', 'navbar_default');
 
                 if ($this->session->userdata('lavel') == '2') {
                     $this->session->set_userdata('navbar', 'navbar_supervisor');

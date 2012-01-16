@@ -14,18 +14,30 @@ class Helpdesk extends CI_Controller
 
     public function done($tiket_id, $id_knowledge_base)
     {
+
+        // update tabel tiket 
         $data = array(
             'id_knowledge_base' => $id_knowledge_base,
             'status' => 'close',
             'tanggal' => date('Y-m-d H:i:s')
         );
         $this->db->update('tb_tiket_helpdesk', $data, array('id' => $tiket_id));
+
+
+        // update log tiket 
+        $data = array(
+            'id_user' => $this->session->userdata('id_user'),
+            'id_tiket' => $tiket_id,
+            );
+        $this->db->insert('tb_tiket_log', $data);
+            
         $this->log->create("Pertanyaan dengan tiket #{$tiket_id} telah dijawab.");
         $this->_success(site_url('/helpdesk/dashboard'), 'Jawaban berhasil dimasukkan', 3);
     }
 
     public function next($tiket_id, $id_knowledge_base)
     {
+
         $data = array(
             'id_knowledge_base' => $id_knowledge_base,
             'status' => 'close',
@@ -33,6 +45,8 @@ class Helpdesk extends CI_Controller
             'no_tiket_helpdesk' => $this->session->userdata('no_tiket')
         );
         $this->db->update('tb_tiket_helpdesk', $data, array('id' => $this->session->userdata('id_satker')));
+
+
 
         $temp = $this->db->from('tb_tiket_helpdesk')->where('id', $this->session->userdata('id_tiket'))->limit(1)->get();
 
