@@ -275,21 +275,21 @@ class Form_revisi_anggaran extends CI_Controller
         $input_filename = $this->odtphp->create($no_tiket_frontdesk, 'tanggal', '10:00');
 
 
-        print_r($data);
+//        print_r($data['identitas'][0]);
 
 
         $input_filename2 = $this->odtphp->create_pengajuan(
             $no_tiket_frontdesk,
-            $data['nomor_surat_usulan'],
+            $data['identitas'][0]->nomor_surat_usulan,
             $no_tiket_frontdesk,
             $data['kementrian']->id_kementrian . ' - ' . $data['kementrian']->nama_kementrian,
             $data['unit']->id_unit . ' - ' . $data['unit']->nama_unit,
-            $data['nip'],
-            $data['nama_petugas'],
-            $data['jabatan_petugas'],
-            $data['no_hp'],
-            $data['no_kantor'],
-            $data['email']
+            $data['identitas'][0]->nip,
+            $data['identitas'][0]->nama_petugas,
+            $data['identitas'][0]->jabatan_petugas,
+            $data['identitas'][0]->no_hp,
+            $data['identitas'][0]->no_kantor,
+            $data['identitas'][0]->email
         );
 
         $output = preg_replace('/.odt/', '.pdf', $input_filename['full_filename']);
