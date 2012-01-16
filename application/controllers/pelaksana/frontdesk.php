@@ -18,6 +18,17 @@ class Frontdesk extends CI_Controller
         $data['title'] 		= 'Konsultasi Front Desk';
         $data['content'] 	= 'pelaksana/frontdesk';
 		$data['isian_form']	= $page['isian_form1'];
+
+        $sql = "SELECT * FROM `tb_tiket_frontdesk` a
+                JOIN tb_kementrian ON tb_kementrian.id_kementrian = a.id_kementrian
+                JOIN tb_kon_unit_satker b ON a.id_kementrian = b.id_kementrian
+                JOIN tb_unit_saker c ON b.id_unit_satker = c.id_unit_satker
+                WHERE c.anggaran = '{$this->session->userdata('anggaran')}' ";
+
+        $result = $this->db->query($sql);
+
+        $data['result'] = $result;
+
         $this->load->view('new-template', $data);
     }
 

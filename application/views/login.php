@@ -6,7 +6,6 @@
     <link href="<?php echo base_url('/css/admin-style.css') ?>" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url('css/admin-buttons.css'); ?>" rel="stylesheet"/>
     <script src="<?php echo base_url('js/jquery-1.7.1.min.js') ?>"></script>
-    <style type="text/css">@import url("<?php echo base_url() . 'css/style.css'; ?>");</style>
     <title>Login</title>
 </head>
 
@@ -88,7 +87,7 @@
         <div id="title_form_login"><img src="<?php echo base_url('images/logo.png') ?>" /><br/>Sistem Informasi Pusat Layanan DJA</div>
 
         <?php echo $this->session->flashdata('error') ?>
-        <?php echo form_open("login/usermasuk"); ?>
+        <?php echo form_open("login/usermasuk", array('id' => 'login_form')); ?>
 
         <p>
             <label for="user" style="text-align: left; width: 300px; color: #666" >User ID</label><br/>

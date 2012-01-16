@@ -16,7 +16,15 @@ class Mfrontdesk extends CI_Model
 		}else{
 			$where = '';
 		}
-		
+
+        // TODO ini code deteksi anggaran keberapa
+//        $sql = "SELECT * FROM `tb_tiket_frontdesk` a
+//        JOIN tb_kon_unit_satker b ON a.id_kementrian = b.id_kementrian
+//        JOIN tb_unit_saker c ON b.id_unit_satker = c.id_unit_satker
+//        WHERE c.anggaran = '{$this->session->userdata('anggaran')}' ";
+//        $result = $this->db->query($sql);
+
+
 		return $this->db->query("SELECT * FROM tb_tiket_frontdesk $where")->num_rows();
 	}
 	

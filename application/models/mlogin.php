@@ -8,6 +8,7 @@ class Mlogin extends CI_Model
         $query = $this->db->from('tb_user')
                       ->where('username', $user)
                       ->where('password', md5($pass))
+                        ->join('tb_unit_saker d', 'd.id_unit_satker = tb_user.id_unit_satker')
                       ->join('tb_lavel', 'tb_lavel.id_lavel = tb_user.id_lavel')
                       ->get();
 
