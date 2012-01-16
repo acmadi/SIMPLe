@@ -12,6 +12,7 @@ class Tiket extends CI_Controller
             $result = $this->db->from('tb_tiket_frontdesk')
                     ->select('no_tiket_frontdesk,
                                   id_unit,
+								  id_kementrian,
                                   keputusan,
                                   status,
                                   tanggal_selesai
