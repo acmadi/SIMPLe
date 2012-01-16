@@ -27,9 +27,12 @@ class Frontdesk extends CI_Controller
                         c.anggaran = '{$this->session->userdata('anggaran')}'
                         AND status = 'open' AND
                         a.lavel = '{$this->session->userdata('lavel')}' AND
-                        c.id_unit_satker = '{$this->session->userdata('id_unit_satker')}'
+                        c.id_unit_satker = '{$this->session->userdata('id_unit_satker')}' AND
+                        a.is_active = '5'
                         GROUP BY no_tiket_frontdesk
                         ORDER BY tanggal";
+
+        //1 = diterima, 2 = diteruskan , 3= ditolak (bag pelaksana), 4= terima (bag subdit anggaran) , 5 = terima (bag subdit dadutek)
 
         $result = $this->db->query($sql);
 
