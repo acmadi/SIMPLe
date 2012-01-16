@@ -4,7 +4,7 @@
     <title>Sukses</title>
     <meta http-equiv="refresh" content="10; url=<?php echo site_url('/frontdesk/form_revisi_anggaran')  ?>">
     <link rel="shortcut icon" href="<?php echo base_url() . 'images/icon.jpg';?>"/>
-    <style type="text/css">@import url("<?php echo base_url() . 'css/style.css'; ?>");</style>
+    <style type="text/css">@import url("<?php echo base_url() . 'css/admin-style.css'; ?>");</style>
     <script>
         window.open('<?php echo $pdf_file?>', '_newtab');
     </script>

@@ -4,7 +4,7 @@
 
     <h1>Jawab Pertanyaan</h1>
 
-    <form method="post" action="<?php echo site_url('kasubdit/helpdesk/eskalasi') ?>">
+    <form method="post" action="<?php echo site_url('kasubdit_dadutek/helpdesk/eskalasi') ?>">
 
         <fieldset>
             <legend>Identitas</legend>
@@ -128,7 +128,7 @@
         </div>
 
         <div style="float: left;">
-            <a class="button" href="<?php echo site_url('kasubdit/helpdesk') ?>">Batal</a>
+            <a class="button" href="<?php echo site_url('kasubdit_dadutek/helpdesk') ?>">Batal</a>
         </div>
 
         <div style="float: right;">

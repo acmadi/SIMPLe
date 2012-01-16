@@ -14,8 +14,9 @@
     }
 
     #kl label {
-        width: 180px;
+        width: 120px;
         display: inline-block;
+        text-align: left;
     }
 </style>
 <script type="text/javascript">
@@ -32,7 +33,7 @@
 
         $(function () {
 
-            $('#nama_kl').chosen().change(function(){
+            $('#nama_kl').chosen().change(function () {
                 var nama_kl = $(this).val();
                 $.get('<?php echo site_url('helpdesk/identitas_satker/cari_kl/') ?>', {id_kementrian:nama_kl}, function (response) {
                     console.log(response);
@@ -53,11 +54,12 @@
 
                 url = '<?php echo site_url('frontdesk/form_revisi_anggaran/cari_satker') ?>/' + id_kementrian + '/' + $(this).val();
                 console.log(url);
-                $.get(url, function(response){
-                    $('#kode_satker').html(response);
-                    $('#kode_satker').trigger('liszt:updated');
+                $.get(url, function (response) {
+                    $('#kode_satker select').html(response);
+                    $('#kode_satker select').trigger('liszt:updated');
                     console.log(response);
                 });
+                $('#kode_satker select').html('');
             });
 
 
@@ -101,7 +103,34 @@
         })
 
         $(".chzn-select").chosen();
+
+        $(".low input[type='button']").click(function () {
+            var arr = $(this).attr("name").split("2");
+            var from = arr[0];
+            var to = arr[1];
+            $("#" + from + " option:selected").each(function () {
+                $("#" + to).append($(this).clone());
+                $(this).remove();
+            });
+        });
+
+        $('#all_left2right').live('click', function () {
+            $('#left').each(function () {
+                bla = $('#left option').attr('selected', 'selected');
+                bla.clone().appendTo('#right');
+                $('#left option').remove();
+            })
+        });
+
+        $('#all_right2left').live('click', function () {
+            $('#right').each(function () {
+                bla = $('#right option').attr('selected', 'selected');
+                bla.clone().appendTo('#left');
+                $('#right option').remove();
+            })
+        });
     })
+
 </script>
 
 <div class="content">
@@ -117,26 +146,29 @@
     }
     ?>
 
-    <?php echo form_open('frontdesk/form_revisi_anggaran/save_identitas', 
-        array('id'   => 'identitas_kl')) ?>
+    <?php echo form_open('frontdesk/form_revisi_anggaran/save_identitas',
+    array('id' => 'identitas_kl')) ?>
 
     <?php echo form_hidden('tipe', 'kl') ?>
 
     <fieldset id="kl">
         <legend>Kementrian / Lembaga</legend>
 
-        <div id="anggaran" style="padding: 20px; display: inline-block; float: right; font-size: 24px;"></div>
+        <!-- <div id="anggaran" style="padding: 20px; display: inline-block; float: right; font-size: 24px;"></div> -->
 
+        <div id="anggaran" style="padding: 10px; display: inline-block; float: right; font-size: 24px;"></div>
         <p>
 
         <div style="float: left;">
             <label class="align-right">Nomor Surat Usulan</label>
             <input type="text" id="nomor_surat_usulan" name="nomor_surat_usulan" value="<?php echo set_value('nomor_surat_usulan') ?>"/>
         </div>
-        <div style="float: left; margin-left: 50px;">
-            <label class="align-right">Tanggal Surat Usulan</label>
+        <div style="float: right; margin-left: 20px; width:400px">
+            <label class="align-right" style="width: 150px">Tanggal Surat Usulan</label>
             <input type="text" id="tanggal_surat_usulan" name="tanggal_surat_usulan" value="<?php echo set_value('tanggal_surat_usulan') ?>"/>
         </div>
+
+        
         <div class="clear"></div>
         </p>
 
@@ -158,9 +190,29 @@
         </p>
 
         <p class="kode_satker_p">
-            <label class="align-right">Kode - Nama Satker</label>
-            <select name="kode_satker" id="kode_satker" class="kl chzn-select" multiple style="width: 700px;">
+            <label class="align-right" style="float: left;">Kode - Nama Satker</label>
+<!--            <select name="kode_satker" id="kode_satker" class="kl chzn-select" multiple style="width: 700px;">-->
+<!--            </select>-->
+
+        <div class="container" style="float: left" id="kode_satker">
+            <select name="itemsToChoose" id="left" size="10" multiple="multiple" style="width: 350px;">
+
             </select>
+        </div>
+
+        <div class="low container"  style="position:relative; top: 0px; float: left; text-align: center">
+            <div><input name="left2right" value=">" type="button" style="padding: 10px;"></div>
+            <div><input id="all_left2right" value=">>" type="button" style="padding: 10px;"></div>
+            <div><input id="all_right2left" value="<<" type="button" style="padding: 10px;"></div>
+            <div><input name="right2left" value="<" type="button" style="padding: 10px;"></div>
+        </div>
+
+        <div class="container" style="float: left">
+            <select name="kode_satker" id="right" size="10" multiple="multiple"  style="width: 350px;">
+            </select>
+        </div>
+
+        <div class="clear"></div>
         </p>
 
     </fieldset>

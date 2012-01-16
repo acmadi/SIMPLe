@@ -8,7 +8,7 @@
             <div id="cari_unit" action="man_unit_cari">
                 <p>
                     <?php
-                    echo form_open('pelaksana/helpdesk/search');
+                    echo form_open('dirjen/helpdesk/search');
 
                     echo 'Kode Satker: ' .
                             form_input('keyword', '', 'placeholder="Masukkan kode satker"') . ' ';
@@ -48,7 +48,7 @@
                     <td><?php echo $value->pertanyaan ?></td>
                     <td><?php echo $value->prioritas ?></td>
                     <td class="action">
-                        <a class="button green" href="<?php echo site_url('/pelaksana/helpdesk/view/' . $value->no_tiket_helpdesk) ?>">Jawab</a>
+                        <a class="button green" href="<?php echo site_url('/dirjen/helpdesk/' . $value->no_tiket_helpdesk) ?>">Jawab</a>
                     </td>
                 </tr>
                     <?php endforeach ?>
