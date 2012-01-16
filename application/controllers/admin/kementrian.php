@@ -29,7 +29,7 @@ class Kementrian extends CI_Controller
             $this->pagination->initialize($config);
 
             $result = $this->db->from('tb_kementrian')
-                    //->join('tb_petugas_satker c', 'c.id_satker = a.id_satker')
+            //->join('tb_petugas_satker c', 'c.id_satker = a.id_satker')
                     ->limit($config['per_page'], $id)
                     ->get();
         }
@@ -76,27 +76,28 @@ class Kementrian extends CI_Controller
                 ));
                 $this->session->set_flashdata('success', 'Data berhasil diubah');
                 $this->log->create("Mengubah data Kementrian (id_kementrian => {$id_kementrian})");
-            
-			
-		}
-        $result = $this->db->from('tb_kementrian')
-                ->where('id_kementrian', $id_kementrian)
-                ->get()->row();
 
-        $data['kementrian'] = $result;
 
-        $data['title'] = 'Ubah Kementrian';
-        $data['content'] = 'admin/edit_kementrian';
+            }
+            $result = $this->db->from('tb_kementrian')
+                    ->where('id_kementrian', $id_kementrian)
+                    ->get()->row();
 
-        $bc[0]->link = 'admin/dashboard';
-        $bc[0]->label = 'Home';
-        $bc[1]->link = 'admin/kementrian';
-        $bc[1]->label = 'Kementrian';
-        $bc[2]->link = $this->uri->uri_string();
-        $bc[2]->label = 'Ubah Data';
-        $data['breadcrumb'] = $bc;
+            $data['kementrian'] = $result;
 
-        $this->load->view('admin/template', $data);
+            $data['title'] = 'Ubah Kementrian';
+            $data['content'] = 'admin/edit_kementrian';
+
+            $bc[0]->link = 'admin/dashboard';
+            $bc[0]->label = 'Home';
+            $bc[1]->link = 'admin/kementrian';
+            $bc[1]->label = 'Kementrian';
+            $bc[2]->link = $this->uri->uri_string();
+            $bc[2]->label = 'Ubah Data';
+            $data['breadcrumb'] = $bc;
+
+            $this->load->view('admin/template', $data);
+        }
     }
 
     public function add()
@@ -105,24 +106,24 @@ class Kementrian extends CI_Controller
 
             $this->form_validation->set_rules('id_kementrian', 'Kode Kementrian', 'required|numeric|min_length[3]|max_length[3]');
             $this->form_validation->set_rules('nama_kementrian', 'Nama Kementrian', 'required');
-           
+
 
             if ($this->form_validation->run()) {
 
                 $result = $this->db->insert('tb_kementrian', array(
                     'id_kementrian' => $this->input->post('id_kementrian'),
                     'nama_kementrian' => $this->input->post('nama_kementrian'),
-                   
+
                 ));
 
                 if (!$result) {
                     $this->session->set_flashdata('error', 'Data gagal ditambahkan. ERROR: ' . $this->db->_error_message());
                     $this->log->create("Gagal menambahkan data Kementrian. ERROR: " . $this->db->_error_message());
-					redirect('admin/kementrian/add');
+                    redirect('admin/kementrian/add');
                 } else {
                     $this->session->set_flashdata('success', 'Data berhasil ditambahkan');
                     $this->log->create("Menambah data Kementrian (id_kementrian => {$this->db->insert_id()})");
-					redirect('admin/kementrian/add');
+                    redirect('admin/kementrian/add');
                 }
 
             }
