@@ -2,7 +2,6 @@
     <li><a href="#tab1" class="active">Forum</a></li>
     <li><a href="#tab2">Kategori Forum</a></li>
     <li><a href="#tab3">Tambah Forum</a></li>
-    <li><a href="#tab4">Tambah Kategori Forum</a></li>
 </ul>
 <div class="clear"></div>
 
@@ -23,6 +22,7 @@
         ?>
 
         <div style="display: none;" id="tab1" class="tab_konten">
+            <?php //$this->load->view('forum/form') ?>
             <div class="table">
                 <div id="head">
                     <form id="textfield-search" action="<?php echo site_url('/admin/man_forum_cari') ?>" method="post">
@@ -34,6 +34,8 @@
                         <thead>
                         <tr>
                            
+                            <th>Tanggal</th>
+                            <th>Pengirim</th>
                             <th>Judul</th>
                             <th>Kategori</th>
                             <th class="action">Aksi</th>
@@ -44,6 +46,8 @@
                         <?php foreach ($result as $forum): ?>
                         <tr>
                            
+                            <td><?php echo $forum->tanggal ?></td>
+                            <td><?php echo $forum->nama ?></td>
                             <td><?php echo $forum->judul_forum ?></td>
                             <td><?php echo $forum->kat_forum ?></td>
                             <td class="action">
@@ -69,12 +73,27 @@
                         </tbody>
                     </table>
                 </div>
-				<div class="pagination"><?php echo ($pageLink)?'Halaman '.$pageLink:'';?></div><br />
+				<!-- <div class="pagination"><?php echo ($pageLink)?'Halaman '.$pageLink:'';?></div><br /> -->
             </div>
         </div>
 
 
         <div style="display: none;" id="tab2" class="tab_konten">
+
+            <form action="<?php echo site_url('/admin/man_forum/add_category') ?>" method="post"
+                  style="border: 1px solid #999; padding: 13px 30px 13px 13px; margin:5px 0px 0px 20px;">
+                <table>
+                    <tr>
+                        <td>Nama Kategori Forum:</td>
+                        <td><input type="text" name="kat_forum" value=""/></td>
+                    </tr>
+                </table>
+                <br/>
+                <input type="reset" class="button gray-pill"
+                       value="Reset"/>
+                <input type="submit" class="button blue-pill" value="Tambah"/>
+            </form>
+
             <div class="table">
                 
                 <div id="tail">
@@ -154,23 +173,7 @@
         </div>
 
 
-        <div style="display: none;" id="tab4" class="tab_konten">
-            <div id="tail">
-                <form action="<?php echo site_url('/admin/man_forum/add_category') ?>" method="post"
-                      style="border: 1px solid #999; padding: 13px 30px 13px 13px; margin:5px 0px 0px 20px;">
-                    <table>
-                        <tr>
-                            <td>Nama Kategori Forum:</td>
-                            <td><input type="text" name="kat_forum" value=""/></td>
-                        </tr>
-                    </table>
-                    <br/>
-                    <input type="reset" class="button gray-pill"
-                           value="Reset"/>
-                    <input type="submit" class="button blue-pill" value="Tambah"/>
-                </form>
-            </div>
-        </div>
+
 
 
         <script type="text/javascript" src="<?php echo base_url(); ?>js/fungsi.js"></script>

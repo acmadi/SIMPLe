@@ -16,11 +16,12 @@ class Man_forum extends CI_Controller
     {
         /*if ($this->session->userdata('login') == TRUE)
           {*/
-		$page		= $this->mforum->get_parents();
-		$pageData	= $page['query']->result();
-		$pageLink	= $page['pagination1'];
+		$page		= $this->mforum->get_all();
+		$pageData	= $page->result();
+		// $pageData	= $page['query']->result();
+		// $pageLink	= $page['pagination1'];
 		
-		$data		= array('result'=>$pageData,'pageLink'=>$pageLink,);
+		$data		= array('result' => $pageData, 'pageLink' => $pageLink,);
 		
         $data['title'] = 'Manajemen Forum';
         $data['content'] = 'admin/man_forum/man_forum';
