@@ -14,8 +14,9 @@
     }
 
     #kl label {
-        width: 180px;
+        width: 120px;
         display: inline-block;
+        text-align: left;
     }
 </style>
 <script type="text/javascript">
@@ -32,7 +33,7 @@
 
         $(function () {
 
-            $('#nama_kl').chosen().change(function(){
+            $('#nama_kl').chosen().change(function () {
                 var nama_kl = $(this).val();
                 $.get('<?php echo site_url('helpdesk/identitas_satker/cari_kl/') ?>', {id_kementrian:nama_kl}, function (response) {
                     console.log(response);
@@ -53,11 +54,12 @@
 
                 url = '<?php echo site_url('frontdesk/form_revisi_anggaran/cari_satker') ?>/' + id_kementrian + '/' + $(this).val();
                 console.log(url);
-                $.get(url, function(response){
-                    $('#kode_satker').html(response);
-                    $('#kode_satker').trigger('liszt:updated');
+                $.get(url, function (response) {
+                    $('#kode_satker select').html(response);
+                    $('#kode_satker select').trigger('liszt:updated');
                     console.log(response);
                 });
+                $('#kode_satker select').html('');
             });
 
 
@@ -101,7 +103,18 @@
         })
 
         $(".chzn-select").chosen();
+
+        $(".low input[type='button']").click(function(){
+          var arr = $(this).attr("name").split("2");
+          var from = arr[0];
+          var to = arr[1];
+          $("#" + from + " option:selected").each(function(){
+            $("#" + to).append($(this).clone());
+            $(this).remove();
+          });
+        });
     })
+
 </script>
 
 <div class="content">
@@ -117,14 +130,15 @@
     }
     ?>
 
-    <?php echo form_open('frontdesk/form_revisi_anggaran/save_identitas', 
-        array('id'   => 'identitas_kl')) ?>
+    <?php echo form_open('frontdesk/form_revisi_anggaran/save_identitas',
+    array('id' => 'identitas_kl')) ?>
 
     <?php echo form_hidden('tipe', 'kl') ?>
 
     <fieldset id="kl">
         <legend>Kementrian / Lembaga</legend>
 
+        <div id="anggaran" style="padding: 20px; display: inline-block; float: right; font-size: 24px;"></div>
 
         <p>
 

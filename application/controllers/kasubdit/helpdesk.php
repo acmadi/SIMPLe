@@ -23,8 +23,10 @@ class Helpdesk extends CI_Controller
                 : '';
         $sql = "SELECT * FROM tb_tiket_helpdesk JOIN tb_satker
                                 ON tb_tiket_helpdesk.id_satker = tb_satker.id_satker
-                                WHERE status = 'open' AND
-                                lavel = 4";
+                                WHERE
+                                status = 'open' AND
+                                lavel = 4 AND
+                                level_2 = 1";
 
         $data['antrian'] = $this->db->query($sql);
 
@@ -48,7 +50,8 @@ class Helpdesk extends CI_Controller
         if ($this->input->post('submit') == 'Eskalasi') {
 
             $this->db->update('tb_tiket_helpdesk', array(
-                'lavel' => 5
+                'lavel' => 4,
+                'level_2' => 2
             ), array(
                 'no_tiket_helpdesk' => $this->input->post('no_tiket_helpdesk')
             ));

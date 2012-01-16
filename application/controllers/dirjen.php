@@ -4,6 +4,8 @@ class Dirjen extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('mhelpdesk');
+        $this->load->model('mfrontdesk');
     }
 
     public function dashboard()
@@ -305,20 +307,37 @@ class Dirjen extends CI_Controller
 		redirect('dirjen/frontdesk');
     }
 
-    function helpdesk()
+    function helpdesk($no_tiket_helpdesk = '')
     {
-        $sql = "SELECT * FROM tb_tiket_frontdesk JOIN tb_satker
-                        ON tb_tiket_frontdesk.id_satker = tb_satker.id_satker
+        if ($no_tiket_helpdesk == '') {
+            $sql = "SELECT * FROM tb_tiket_helpdesk JOIN tb_satker
+                ON tb_tiket_helpdesk.id_satker = tb_satker.id_satker
+                WHERE status = 'open' AND
+                lavel = 6";
 
-                        WHERE status = 'open' AND lavel = 6";
-        $data['antrian'] = $this->db->query($sql);
+            $data['antrian'] = $this->db->query($sql);
+            $data['content'] = 'dirjen/helpdesk';
 
+        } else {
+            $sql = "SELECT * FROM tb_tiket_helpdesk JOIN tb_satker
+            ON tb_tiket_helpdesk.id_satker = tb_satker.id_satker
+            WHERE status = 'open' AND
+            lavel = 6 AND
+            tb_tiket_helpdesk.no_tiket_helpdesk = '{$no_tiket_helpdesk}'
+            LIMIT 1";
+
+            $data['antrian'] =  $this->mhelpdesk->get_by_id($no_tiket_helpdesk);
+            $data['content'] = 'dirjen/helpdesk_view';
+        }
         $data['title'] = 'Dirjen';
-        $data['content'] = 'dirjen/helpdesk';
         $this->load->view('new-template', $data);
     }
-	
-	private function _success($url, $message, $time)
+
+    function jawab() {
+
+    }
+
+    private function _success($url, $message, $time)
     {
         $data['url'] = $url;
         $data['message'] = $message;
