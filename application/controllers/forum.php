@@ -56,6 +56,10 @@ class Forum extends CI_Controller
         $this->load->view('new-template', $data);
     }
 
+    function edit($id_forum)
+    {
+        // $forum = $this->mforum->
+    }
     function kirim()
     {
 
