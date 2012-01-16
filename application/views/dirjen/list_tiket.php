@@ -3,11 +3,6 @@
 
     <?php if ($lists->num_rows() > 0): ?>
     <div class="table">
-        <div id="head">
-            <form id="form-cari" action="list_antrian_cari">
-                Kode Satker : <input id="teks-cari" type="text" value="292292"/> <input type="submit" value="Cari"/>
-            </form>
-        </div>
 
         <div id="tail">
             <div class="tab">
@@ -18,8 +13,8 @@
                         <th class="short">Tanggal</th>
                         <th class="short">Hari</th>
                         <th class="short">No Tiket</th>
-                        <th>Nama Petugas Satker</th>
-                        <th>Nama Satker</th>
+                        <th>Nama K/L</th>
+                        <th>Nama Eselon</th>
 
                         <?php if ($this->uri->segment(4) == 6): ?>
                         <th class="action">Aksi</th>
@@ -48,8 +43,8 @@
                             ?>
                         </td>
                         <td class="short"><?php echo sprintf('%05d', $value->no_tiket_frontdesk) ?></td>
-                        <td><?php echo $value->nama_petugas ?></td>
-                        <td><?php echo $value->nama_satker ?></td>
+                        <td><?php echo $value->nama_kementrian ?></td>
+                        <td><?php echo $value->nama_unit ?></td>
 
                         <?php if ($this->uri->segment(4) == 6): ?>
                         <td class="action">
@@ -64,8 +59,7 @@
                 </table>
             </div>
         </div>
-        <div class="pagination">Halaman <a href="#"><<</a> <a href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <a href="#">6</a> <a href="#">>></a></div>
-        <br/>
+         <br/>
     </div>
 
     <?php else: ?>

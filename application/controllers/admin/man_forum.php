@@ -16,11 +16,13 @@ class Man_forum extends CI_Controller
     {
         /*if ($this->session->userdata('login') == TRUE)
           {*/
-		$page		= $this->mforum->get_parents();
-		$pageData	= $page['query']->result();
-		$pageLink	= $page['pagination1'];
+		$page		= $this->mforum->get_all();
+		$pageData	= $page->result();
+		$pageLink	= '';
+		// $pageData	= $page['query']->result();
+		// $pageLink	= $page['pagination1'];
 		
-		$data		= array('result'=>$pageData,'pageLink'=>$pageLink,);
+		$data		= array('result' => $pageData, 'pageLink' => $pageLink,);
 		
         $data['title'] = 'Manajemen Forum';
         $data['content'] = 'admin/man_forum/man_forum';
@@ -59,6 +61,8 @@ class Man_forum extends CI_Controller
 
     public function add_forum()
     {
+    	$id_user = $this->session->userdata('id_user');
+    	
 		$this->form_validation->set_rules('id_kat_forum', 'Kategori Forum', 'required');
 		$this->form_validation->set_rules('judul_forum', 'Judul Forum', 'required');
 		$this->form_validation->set_rules('isi_forum', 'Isi Forum', 'required');
@@ -79,7 +83,7 @@ class Man_forum extends CI_Controller
 				move_uploaded_file($_FILES['lampiran']['tmp_name'], 'upload/'.$nmBr);
 			}
 
-			$result = $this->mforum->add_forum($id_kat_forum, $judul_forum, $isi_forum, $nmBr);
+			$result = $this->mforum->add_forum($id_kat_forum, $judul_forum, $isi_forum, $nmBr, $id_user);
 
 			if ($result) {
 				$this->session->set_flashdata('success', 'Data sukses ditambahkan');
