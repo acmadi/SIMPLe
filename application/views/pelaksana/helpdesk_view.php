@@ -134,7 +134,7 @@
         <div style="float: right;">
 
             <input type="button" onclick="window.print()" value="Print" class="button gray-pill"/>
-            <input type="submit" name="submit" value="Eskalasi" class="button blue"/>
+<!--            <input type="submit" name="submit" value="Eskalasi" class="button blue" onlick="return false" />-->
             <input type="submit" name="submit" value="Jawab" class="button green"/>
         </div>
 
