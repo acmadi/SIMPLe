@@ -19,7 +19,7 @@ class Helpdesk extends CI_Controller
             'status' => 'close',
             'tanggal' => date('Y-m-d H:i:s')
         );
-        $this->db->update('tb_tiket_helpdesk', $data, array('no_tiket_helpdesk' => $tiket_id));
+        $this->db->update('tb_tiket_helpdesk', $data, array('id' => $tiket_id));
         $this->log->create("Pertanyaan dengan tiket #{$tiket_id} telah dijawab.");
         $this->_success(site_url('/helpdesk/dashboard'), 'Jawaban berhasil dimasukkan', 3);
     }
