@@ -6,8 +6,8 @@
         <thead>
         <tr>
             <th scope="col">Tiket hari ini</th>
-            <th scope="col">Dokumen yang bisa diambil</th>
-            <th scope="col">Dokumen yang dikembalikan</th>
+<!--            <th scope="col">Dokumen yang bisa diambil</th>-->
+<!--            <th scope="col">Dokumen yang dikembalikan</th>-->
         </tr>
         </thead>
         <tbody>
