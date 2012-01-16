@@ -26,6 +26,11 @@ class Dashboard extends CI_Controller
 		$data['total_tiket_open_cs'] = $this->mfrontdesk->count_all_tiket_frontdesk('open',1);
 		$data['total_tiket_open_pelaksana'] = $this->mfrontdesk->count_all_tiket_frontdesk('open',3);
 
+        $merah = $this->db->query('SELECT * from tb_tiket_frontdesk WHERE (DATEDIFF(NOW(), tanggal) > 5)');
+        if ($merah->num_rows() > 0) {
+            $data['merah'] = true;
+        }
+
         $data['title'] = 'Dashboard';
         $data['content'] = 'pelaksana/dashboard';
         $this->load->view('new-template', $data);

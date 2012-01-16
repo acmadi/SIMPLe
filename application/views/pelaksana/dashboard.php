@@ -10,7 +10,14 @@
     <fieldset class="grid_5">
         <legend>Report Front Desk</legend>
         <div class="message_box">
-            <a class="button green" href="<?php echo site_url('/pelaksana/frontdesk') ?>"><?php echo $frontdesk_total ?> Tiket</a>
+            <?php
+            if (isset($merah)) {
+                $merah = 'red';
+            } else {
+                $merah = 'green';
+            }
+            ?>
+            <a class="button <?php echo $merah ?>" href="<?php echo site_url('/pelaksana/frontdesk') ?>"><?php echo $frontdesk_total ?> Tiket</a>
         </div>
         <table class="table">
             <tr>
@@ -40,7 +47,7 @@
             <a class="button green" href="<?php echo site_url('/pelaksana/helpdesk') ?>"><?php echo $helpdesk_total ?> Pertanyaan</a>
         </div>
         <table class="table">
-            <caption>Jumlah pertanyaan yang langsung diselesaikan oleh: </caption>
+            <caption>Jumlah pertanyaan yang langsung diselesaikan oleh:</caption>
             <tr>
                 <td class="head"><span class="label">CS</span></td>
                 <td><span class="message_box glow_green number"><?php echo $helpdesk_total_cs ?></span></td>
