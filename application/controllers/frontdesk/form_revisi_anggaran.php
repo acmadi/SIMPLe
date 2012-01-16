@@ -278,6 +278,8 @@ class Form_revisi_anggaran extends CI_Controller
 //        print_r($data['identitas'][0]);
 
 
+        $emails = explode(';', trim_middle($data['identitas'][0]->email));
+
         $input_filename2 = $this->odtphp->create_pengajuan(
             $no_tiket_frontdesk,
             $data['identitas'][0]->nomor_surat_usulan,
@@ -289,7 +291,7 @@ class Form_revisi_anggaran extends CI_Controller
             $data['identitas'][0]->jabatan_petugas,
             $data['identitas'][0]->no_hp,
             $data['identitas'][0]->no_kantor,
-            $data['identitas'][0]->email
+            $emails
         );
 
         $output = preg_replace('/.odt/', '.pdf', $input_filename['full_filename']);
