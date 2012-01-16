@@ -32,17 +32,17 @@ class Mfrontdesk extends CI_Model
 	
 	public function get_all_tiket_frontdesk($level = 3,$optional = ''){
 		//@F2D
-		$anggaran = $this->db->query("SELECT a.anggaran
-					FROM tb_unit_saker a, tb_user b
-					WHERE a.id_unit_satker = b.id_unit_satker AND b.id_user = ?",array($this->session->userdata('id_user')))->row()->anggaran;
+		$utkAnggr = $this->db->query("SELECT id_unit_satker
+					FROM tb_user 
+					WHERE id_user = ?",array($this->session->userdata('id_user')))->row()->id_unit_satker;
 					
 		//print_r($this->db->last_query());exit;
 		//print_r($this->session->all_userdata());exit;
 		//if(!$anggaran) redirect(base_url());
 		$where_ang = ' AND FALSE ';
 		//if(!$anggaran) $anggaran = ''
-		if($anggaran != NULL) $where_ang = " AND (SELECT c.anggaran FROM tb_unit_saker c WHERE b.id_unit_satker = c.id_unit_satker ) = $anggaran";
-		
+		if($utkAnggr != NULL) $where_ang = " AND (SELECT c.id_unit_satker FROM tb_kon_unit_satker c WHERE c.id_unit = tf.id_unit AND c.id_kementrian = tf.id_kementrian ) = $utkAnggr";
+		//print_r($utkAnggr);exit;
 		$keyword = $this->input->post('keyword',TRUE);
 		
 		$this->load->library('pagination');
