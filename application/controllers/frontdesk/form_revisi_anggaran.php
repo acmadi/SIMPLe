@@ -317,7 +317,7 @@ class Form_revisi_anggaran extends CI_Controller
         $pdf_file2 = preg_replace('/.odt/', '.pdf', $input_filename2['filename']);
 
         $data['pdf_file'] = base_url() . 'output/' . $pdf_file;
-        $data['pdf_file'] = base_url() . 'output/' . $pdf_file2;
+        $data['pdf_file2'] = base_url() . 'output/' . $pdf_file2;
 
         $this->load->view('frontdesk/success2', $data);
     }
