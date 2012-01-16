@@ -104,14 +104,30 @@
 
         $(".chzn-select").chosen();
 
-        $(".low input[type='button']").click(function(){
-          var arr = $(this).attr("name").split("2");
-          var from = arr[0];
-          var to = arr[1];
-          $("#" + from + " option:selected").each(function(){
-            $("#" + to).append($(this).clone());
-            $(this).remove();
-          });
+        $(".low input[type='button']").click(function () {
+            var arr = $(this).attr("name").split("2");
+            var from = arr[0];
+            var to = arr[1];
+            $("#" + from + " option:selected").each(function () {
+                $("#" + to).append($(this).clone());
+                $(this).remove();
+            });
+        });
+
+        $('#all_left2right').live('click', function () {
+            $('#left').each(function () {
+                bla = $('#left option').attr('selected', 'selected');
+                bla.clone().appendTo('#right');
+                $('#left option').remove();
+            })
+        });
+
+        $('#all_right2left').live('click', function () {
+            $('#right').each(function () {
+                bla = $('#right option').attr('selected', 'selected');
+                bla.clone().appendTo('#left');
+                $('#right option').remove();
+            })
         });
     })
 
@@ -174,9 +190,29 @@
         </p>
 
         <p class="kode_satker_p">
-            <label class="align-right">Kode - Nama Satker</label>
-            <select name="kode_satker" id="kode_satker" class="kl chzn-select" multiple style="width: 700px;">
+            <label class="align-right" style="float: left;">Kode - Nama Satker</label>
+<!--            <select name="kode_satker" id="kode_satker" class="kl chzn-select" multiple style="width: 700px;">-->
+<!--            </select>-->
+
+        <div class="container" style="float: left" id="kode_satker">
+            <select name="itemsToChoose" id="left" size="10" multiple="multiple" style="width: 350px;">
+
             </select>
+        </div>
+
+        <div class="low container"  style="position:relative; top: 0px; float: left; text-align: center">
+            <div><input name="left2right" value=">" type="button" style="padding: 10px;"></div>
+            <div><input id="all_left2right" value=">>" type="button" style="padding: 10px;"></div>
+            <div><input id="all_right2left" value="<<" type="button" style="padding: 10px;"></div>
+            <div><input name="right2left" value="<" type="button" style="padding: 10px;"></div>
+        </div>
+
+        <div class="container" style="float: left">
+            <select name="kode_satker" id="right" size="10" multiple="multiple"  style="width: 350px;">
+            </select>
+        </div>
+
+        <div class="clear"></div>
         </p>
 
     </fieldset>
