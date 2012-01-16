@@ -274,19 +274,50 @@ class Form_revisi_anggaran extends CI_Controller
 
         $input_filename = $this->odtphp->create($no_tiket_frontdesk, 'tanggal', '10:00');
 
+
+//        print_r($data['identitas'][0]);
+
+
+        $input_filename2 = $this->odtphp->create_pengajuan(
+            $no_tiket_frontdesk,
+            $data['identitas'][0]->nomor_surat_usulan,
+            $no_tiket_frontdesk,
+            $data['kementrian']->id_kementrian . ' - ' . $data['kementrian']->nama_kementrian,
+            $data['unit']->id_unit . ' - ' . $data['unit']->nama_unit,
+            $data['identitas'][0]->nip,
+            $data['identitas'][0]->nama_petugas,
+            $data['identitas'][0]->jabatan_petugas,
+            $data['identitas'][0]->no_hp,
+            $data['identitas'][0]->no_kantor,
+            $data['identitas'][0]->email
+        );
+
         $output = preg_replace('/.odt/', '.pdf', $input_filename['full_filename']);
+
+        $output2 = preg_replace('/.odt/', '.pdf', $input_filename2['full_filename']);
 
         $command = sprintf('"%s" DocumentConverter.py "%s" "%s"',
             $this->config->item('libreoffice_python'),
             $input_filename['full_filename'],
             $output);
 
+        $command2 = sprintf('"%s" DocumentConverter.py "%s" "%s"',
+                    $this->config->item('libreoffice_python'),
+                    $input_filename2['full_filename'],
+                    $output2);
+
         exec($command);
+
+        exec($command2);
 
         $data['title'] = '';
         $data['content'] = 'frontdesk/success2';
+
         $pdf_file = preg_replace('/.odt/', '.pdf', $input_filename['filename']);
+        $pdf_file2 = preg_replace('/.odt/', '.pdf', $input_filename2['filename']);
+
         $data['pdf_file'] = base_url() . 'output/' . $pdf_file;
+        $data['pdf_file'] = base_url() . 'output/' . $pdf_file2;
 
         $this->load->view('frontdesk/success2', $data);
     }
