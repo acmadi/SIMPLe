@@ -16,7 +16,7 @@
         <button id="postbutton" class="button gray-pill">Tulis Forum Baru</button>
         </h2>
 
-        <div id="postbox" style="display:none">
+<!--         <div id="postbox" style="display:none">
             <?php 
 
             $q_kat = $this->mforum->get_categories();
@@ -31,7 +31,7 @@
             $data['referrer']     = 'forum';
             $this->load->view('forum/form', $data) 
             ?>
-        </div>
+        </div> -->
     </div>
 
     <hr/>
@@ -47,7 +47,7 @@
         
         <em class="meta">
          dikirim pada <?php echo date('d-m-Y', strtotime($forum->tanggal)) ?>
-         oleh <?php echo $forum->nama ?>
+         oleh <?php echo 'Admin' // $forum->nama ?>
          <a href="<?php echo site_url('/forum/view/' . $forum->id_forum ) ?>">Baca selengkapnya</a>
         </em>
 

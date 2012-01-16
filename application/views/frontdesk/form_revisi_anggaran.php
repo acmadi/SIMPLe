@@ -138,20 +138,20 @@
     <fieldset id="kl">
         <legend>Kementrian / Lembaga</legend>
 
-        <div id="anggaran" style="padding: 20px; display: inline-block; float: right; font-size: 24px;"></div>
+        <!-- <div id="anggaran" style="padding: 20px; display: inline-block; float: right; font-size: 24px;"></div> -->
 
+        <div id="anggaran" style="padding: 10px; display: inline-block; float: right; font-size: 24px;"></div>
         <p>
 
         <div style="float: left;">
             <label class="align-right">Nomor Surat Usulan</label>
             <input type="text" id="nomor_surat_usulan" name="nomor_surat_usulan" value="<?php echo set_value('nomor_surat_usulan') ?>"/>
         </div>
-        <div style="float: right; margin-left: 50px;">
-            <label class="align-right">Tanggal Surat Usulan</label>
+        <div style="float: right; margin-left: 20px; width:400px">
+            <label class="align-right" style="width: 150px">Tanggal Surat Usulan</label>
             <input type="text" id="tanggal_surat_usulan" name="tanggal_surat_usulan" value="<?php echo set_value('tanggal_surat_usulan') ?>"/>
         </div>
 
-        <div id="anggaran" style="padding: 20px; display: inline-block; float: right; font-size: 24px;"></div>
         
         <div class="clear"></div>
         </p>
