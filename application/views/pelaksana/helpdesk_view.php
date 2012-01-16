@@ -94,15 +94,17 @@
         </fieldset>
 
         <fieldset>
-            <legend>Jawab</legend>
+            <legend>Jawaban</legend>
 
+            <div class="grid_5">
             <p>
-                <label style="display: inline-block; width: 100px;">Jawaban</label><br/>
                 <label>
                     <textarea name="jawaban" rows="7" cols="120"></textarea>
                 </label>
             </p>
+            </div>
 
+            <div class="grid_5">
             <p>
                 <label style="display: inline-block; width: 100px;">Nama Nara Sumber: </label>
                 <span><input name="nama_narasumber" type="text"/></span>
@@ -117,6 +119,7 @@
                 <label style="display: inline-block; width: 100px;">Bukti File</label>
                 <span><input name="file" type="file"/></span>
             </p>
+            </div>
 
         </fieldset>
 
@@ -125,14 +128,14 @@
         </div>
 
         <div style="float: left;">
-            <input type="submit" value="Batal" class="button gray-pill"/>
+            <a class="button" href="<?php echo site_url('pelaksana/helpdesk') ?>">Batal</a>
         </div>
 
         <div style="float: right;">
 
             <input type="button" onclick="window.print()" value="Print" class="button gray-pill"/>
-            <input type="submit" name="submit" value="Eskalasi" class="button blue-pill"/>
-            <input type="submit" name="submit" value="Jawab" class="button blue-pill"/>
+            <input type="submit" name="submit" value="Eskalasi" class="button blue"/>
+            <input type="submit" name="submit" value="Jawab" class="button green"/>
         </div>
 
         <div class="clear"></div>

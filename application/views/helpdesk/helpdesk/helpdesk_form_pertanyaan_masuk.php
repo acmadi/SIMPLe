@@ -1,6 +1,6 @@
 <div class="content">
 
-    <h1>Konsultasi Help Desk</h1>
+    <h1>Konsultasi Help Desk-Umum</h1>
 
     <div style="text-align: right; text-decoration: underline; font-weight: bold; font-size: 14px;">
         No Tiket: <?php echo sprintf('%05d', $this->session->userdata('no_tiket')) ?>
@@ -9,32 +9,20 @@
     <fieldset>
         <legend>Identitas</legend>
 
-        <div class="grid_6">
-            <p>
-                <label style="display: inline-block; width: 100px;">No Tiket</label>
-                <span><?php echo sprintf('%05d', $this->session->userdata('no_tiket')) ?></span>
-            </p>
-
-            <p>
-                <label style="display: inline-block; width: 100px;">No Satker</label>
-                <span><?php echo $identitas->id_satker ?></span>
-            </p>
-
-            <p>
-                <label style="display: inline-block; width: 100px;">Nama Satker</label>
-                <span><?php echo $identitas->nama_satker ?></span>
-            </p>
-
-            <p>
-                <label style="display: inline-block; width: 100px;">Nama Petugas</label>
+        <div style="float: left; width: 500px">
+             <p>
+                <label style="display: inline-block; width: 100px;">Nama</label>
                 <span><?php echo $identitas->nama_petugas ?></span>
             </p>
-        </div>
-        <div class="grid_5">
+
             <p>
-                <label style="display: inline-block; width: 100px;">No Kantor</label>
-                <span><?php echo $identitas->no_kantor ?></span>
+                <label style="display: inline-block; width: 100px;">Instansi</label>
+                <span><?php echo $identitas->instansi ?></span>
             </p>
+
+
+        </div>
+        <div style="float: left; width: 500px;">
 
             <p>
                 <label style="display: inline-block; width: 100px;">No HP</label>
@@ -45,32 +33,12 @@
                 <label style="display: inline-block; width: 100px;">Email</label>
                 <span><?php echo $identitas->email ?></span>
             </p>
-        </div>
-    </fieldset>
 
-    <fieldset>
+            <p>
+                <label style="display: inline-block; width: 100px;">Alamat</label>
+                <span><?php echo $identitas->alamat ?></span>
+            </p>
 
-        <legend>Pertanyaan</legend>
-
-        <p>
-            <label style="width: 120px; display: inline-block;">Kategori</label>
-            <span>: <?php echo $kategori_knowledge_base ?></span>
-        </p>
-
-        <p>
-            <label style="width: 120px; display: inline-block;">Pertanyaan</label>
-            <span>: <?php echo $pertanyaan ?></span>
-        </p>
-
-        <p>
-            <label style="width: 120px; display: inline-block;">Deskripsi</label>
-            <span>: <?php echo $description ?></span>
-        </p>
-
-        <p>
-            <label style="width: 120px; display: inline-block;">Prioritas</label>
-            <span>: <?php echo $prioritas ?></span>
-        </p>
 
     </fieldset>
 
@@ -93,10 +61,9 @@
         <hr style="margin: 20px 0;"/>
 
         <div id="referensi_jawaban">
-
-            <?php if ($knowledge->num_rows() > 0): ?>
+            <?php if ($knowledges->num_rows() > 0): ?>
             <ul style="list-style: inside">
-                <?php foreach ($knowledge->result() as $value): ?>
+                <?php foreach ($knowledges->result() as $value): ?>
                 <li>
                     <a href="javascript:void(0)" class="referensi-jawaban" title="<?php echo $value->id_knowledge_base ?>"><?php echo $value->judul ?></a>
                 </li>
@@ -109,7 +76,7 @@
     </fieldset>
 
     <div style="text-align: right;">
-        <a href="<?php echo site_url('/helpdesk/helpdesk/eskalasi/' . $this->session->userdata('id_tiket') ) ?>" class="button blue">Eskalasi</a>
+        <a href="<?php echo site_url('/helpdesk/helpdesk/eskalasi/' . $this->session->userdata('id_tiket') ) ?>" class="button blue-pill">Eskalasi</a>
     </div>
 </div>
 
