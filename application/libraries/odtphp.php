@@ -64,7 +64,7 @@ class Odtphp
 
         $email = '';
         $i = 1;
-        foreach($emails as $value) {
+        foreach ($emails as $value) {
             $email .= "$i. $value\n";
             $i++;
         }
@@ -84,9 +84,50 @@ class Odtphp
     /**
      * PengAMBILan dokumen
      */
-    public function create_ambil()
+    public function create_ambil($no_surat_pengajuan, $no_tiket, $id_petugas_cs, $nama_petugas_cs, $kl, $eselon, $nip, $nama_petugas, $jabatan, $no_hp, $tlpkantor, $emails, $tgl_pengajuan)
     {
+        $odf = new odf($this->print_template_path . 'ambil.odt');
 
+        $odf->setVars('var1', $no_surat_pengajuan);
+        $odf->setVars('var2', $no_tiket);
+        $odf->setVars('var3', $id_petugas_cs);
+        $odf->setVars('var4', $nama_petugas_cs);
+        $odf->setVars('var5', $kl);
+        $odf->setVars('var6', $eselon);
+        $odf->setVars('var7', $nip);
+        $odf->setVars('var8', $nama_petugas);
+        $odf->setVars('var9', $jabatan);
+
+        $odf->setVars('var10', $no_hp);
+        $odf->setVars('var11', $tlpkantor);
+
+        $emails = explode(';', trim_middle($emails));
+
+        $email = '';
+        $i = 1;
+        foreach ($emails as $value) {
+            $email .= "$i. $value\n";
+            $i++;
+        }
+
+        $odf->setVars('var12', $email);
+
+
+        $odf->setVars('var13', date('Y-m-d H:i:s'));
+
+        $odf->setVars('var14', $tgl_pengajuan);
+
+        $odf->setVars('var15', $nama_petugas_cs);
+
+
+        $output_filename = 'ambil' . $no_tiket . '.odt';
+
+        $odf->saveToDisk(FCPATH . 'output/' . $output_filename);
+
+        return array(
+            'full_filename' => FCPATH . 'output/' . $output_filename,
+            'filename' => $output_filename
+        );
     }
 
     /**
