@@ -4,6 +4,7 @@ class Jawab extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('mknowledge');
     }
 
     public function index($id)
@@ -52,6 +53,34 @@ class Jawab extends CI_Controller
 
         }
     }
+
+    public function do_jawab()
+    {
+        if ($this->input->post('submit') == 'Jawab') {
+
+            // masukkan ke knowledge base
+            $arr = array(
+                'judul' => $this->input->post('pertanyaan'),
+                'desripsi' => $this->input->post('description'),
+                'jawaban' => $this->input->post('jawaban'),
+                'nama_narasumber' => $this->input->post('nama_narasumber'),
+                'jabatan_narasumber' => $this->input->post('jabatan_narasumber'),
+                );
+            $id_knowledge_base = $this->mknowledge->add($arr);
+
+            // kembalikan ke helpdesk
+            $this->db->update('tb_tiket_helpdesk', array(
+                'lavel' => 1,
+                'id_knowledge_base' => $id_knowledge_base,
+                'jawab' => $this->input->post('jawaban'),
+                'sumber' => $this->input->post('nama_narasumber')
+            ), array(
+                'no_tiket_helpdesk' => $this->input->post('no_tiket_helpdesk')
+            ));
+
+            $this->_success(site_url('supervisors/list_pertanyaan'), 'Pertanyaan berhasil dijawab', 5);
+        }
+    } 
 
     private function _success($url, $message, $time)
     {

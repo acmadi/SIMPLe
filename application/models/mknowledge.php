@@ -59,6 +59,19 @@ class Mknowledge extends CI_Model
 			return false;
 		}
     }
+    public function add($data = array())
+    {
+    	$sql = "INSERT INTO tb_knowledge_base(judul,desripsi,jawaban,nama_narasumber,jabatan_narasumber)
+				VALUES(?,?,?,?,?);";
+
+        $query = $this->db->query(
+	        $sql,
+	        array($data['judul'],$data['desripsi'],$data['jawaban'],
+	        	$data['nama_narasumber'],$data['jabatan_narasumber'])
+	        );
+	    return $this->db->insert_id();
+    }
+
 
     /**
      * Ambil kategori pada knowledge base

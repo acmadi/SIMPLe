@@ -4,7 +4,7 @@
 
     <h1>Jawab Pertanyaan</h1>
 
-    <form method="post" action="<?php echo site_url('supervisor/jawab/eskalasi') ?>">
+    <form method="post" action="<?php echo site_url('supervisor/jawab/do_jawab') ?>">
 
         <fieldset>
             <legend>Identitas</legend>
