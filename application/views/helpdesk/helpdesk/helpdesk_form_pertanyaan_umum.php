@@ -49,6 +49,11 @@
         <?php echo form_open('/helpdesk/helpdesk_form_pertanyaan/masuk'); ?>
         <input type="hidden" name="no_tiket_helpdesk" value="<?php echo $this->session->userdata('tiket') ?>"/>
 
+        <p style="float:right; margin-right: 300px">
+            <label for="description">Description</label>
+            <textarea name="description" id="description" cols="70" rows="10"></textarea>
+        </p>
+
         <p>
             <label for="kategori">Kategori</label>
             <select name="kategori_knowledge_base" id="kategori">
@@ -65,18 +70,14 @@
                 <option value="high">High</option>
             </select>
         </p>
-		
+        
         <p>
             <label for="pertanyaan">Pertanyaan</label>
             <input type="text" name="pertanyaan" id="pertanyaan" value=""/>
         </p>
 
-        <p>
-            <label for="description">Description</label>
-            <textarea name="description" id="description" cols="70" rows="10"></textarea>
-        </p>
 
-        <p>
+        <p style="clear:both">
             <input type="submit" class="button blue-pill" value="Submit" onclick="return adaPertanyaanBaru()">
         </p>
 
