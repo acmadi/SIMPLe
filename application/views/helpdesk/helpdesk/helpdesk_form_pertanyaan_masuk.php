@@ -56,16 +56,16 @@
             <span>: <?php echo $pertanyaan ?></span>
         </p>
 
-        <p>
-            <label style="width: 120px; display: inline-block;">Deskripsi</label>
-            <span>: <?php echo $description ?></span>
-        </p>
 
         <p>
             <label style="width: 120px; display: inline-block;">Prioritas</label>
             <span>: <?php echo $prioritas ?></span>
         </p>
 
+        <p>
+            <label style="width: 120px; display: inline-block;">Deskripsi</label><br/>
+            <span>: <?php echo $description ?></span>
+        </p>
     </fieldset>
 	
     <fieldset>

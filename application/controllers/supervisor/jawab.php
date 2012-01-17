@@ -19,6 +19,18 @@ class Jawab extends CI_Controller
         $result = $this->db->query($sql);
         $result = $result->row();
 
+        // $sql2 = "SELECT * 
+        //          FROM tb_tiket_helpdesk tkt
+        //          LEFT JOIN tb_knowledge_base knw
+        //          ON(tkt.id_knowledge_base = knw.id_knowledge_base)
+        //          LEFT JOIN tb_kat_knowledge_base kat
+        //          ON(knw.id_kat_knowledge_base = kat.id_kat_knowledge_base)
+        //          WHERE tkt.no_tiket_helpdesk = '{$id}'";
+        // $result2 = $this->db->query($sql);
+        // $result2 = $result->row();
+
+        // $data['kategori_jawaban'] = $result2->kat_knowledge_base;
+
         $data['title'] = 'Supervisor Jawab';
         $data['content'] = 'supervisor/jawab';
 

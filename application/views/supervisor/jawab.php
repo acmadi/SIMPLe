@@ -62,14 +62,14 @@
             <legend>Pertanyaan</legend>
             <div class="grid_6 alpha omega">
 
-                <p>
+                <!-- <p>
                     <label style="display: inline-block; width: 100px;">Kategori</label>
-                    <span><?php //echo $pertanyaan->kategori ?></span>
+                    <span><?php echo $kategori_jawaban ?></span>
                     <input type="hidden" name="kategori" value="<?php //echo $pertanyaan->kategori ?>"/>
-                </p>
+                </p> -->
 
                 <p>
-                    <label style="display: inline-block; width: 100px;">Pertanyaan</label>
+                    <label style="display: inline-block; width: 100px;">Pertanyaan</label><br/>
                     <span><?php echo $pertanyaan->pertanyaan ?></span>
                     <input type="hidden" name="pertanyaan" value="<?php echo $pertanyaan->pertanyaan ?>"/>
                 </p>
@@ -78,11 +78,6 @@
 
             <div class="grid_6 alpha omega">
 
-                <p>
-                    <label style="display: inline-block; width: 100px;">Deskripsi</label>
-                    <span><?php echo $pertanyaan->description ?></span>
-                    <input type="hidden" name="description" value="<?php echo $pertanyaan->description ?>"/>
-                </p>
 
                 <p>
                     <label style="display: inline-block; width: 100px;">Prioritas</label>
@@ -91,6 +86,11 @@
                 </p>
 
             </div>
+                <div class="grid_12 alpha omega">
+                    <label style="display: inline-block; width: 100px;">Deskripsi</label><br/>
+                    <span><?php echo $pertanyaan->description ?></span>
+                    <input type="hidden" name="description" value="<?php echo $pertanyaan->description ?>"/>
+                </div>
         </fieldset>
 
         <fieldset>
