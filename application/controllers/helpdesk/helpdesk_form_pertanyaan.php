@@ -281,7 +281,7 @@ class Helpdesk_form_pertanyaan extends CI_Controller
 
         $knowledges = $this->db->query("SELECT * FROM tb_knowledge_base WHERE judul LIKE '%{$pertanyaan}%' OR desripsi LIKE '%{$pertanyaan}%' OR jawaban LIKE '%{$pertanyaan}%'");
 
-        $data['knowledges'] = $knowledges;
+        $data['knowledge'] = $knowledges;
 
         // Kategori Knowledge Base
         $result = $this->db->query("SELECT * FROM tb_kat_knowledge_base WHERE id_kat_knowledge_base = '{$kategori_knowledge_base}'")->row();
