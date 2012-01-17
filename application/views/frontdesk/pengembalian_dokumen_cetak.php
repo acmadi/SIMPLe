@@ -82,27 +82,41 @@
         Tanggal / Jam : <?php echo date('d-m-Y') ?> / <?php echo date('H:i') ?>
         <br/><br/><br/><br/>
     </p>
-	<table>
-		<tr>
-			<td style="text-decoration:underline;width:700px;">
-				IDENTITAS ESELON
-			</td>
-			<td>
-				Tanggal/ jam pengajuan
-			</td>
-			<td>:</td>
-			<td><?php 
-					$temp_tgl = explode(' ',$dokumen->tanggal);
-					echo set_tanggal_normal($temp_tgl[0]).'/'.$temp_tgl[1];?></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td>No. Tiket</td>
-			<td>:</td>
-			<td><?php echo sprintf('#%05d', $dokumen->no_tiket_frontdesk) ?></td>
-		</tr>
-	</table>
-    
+    <table>
+        <tr>
+            <td style="text-decoration:underline;width:700px;">
+                IDENTITAS ESELON
+            </td>
+            <td>
+                Tanggal/ jam pengajuan
+            </td>
+            <td>:</td>
+            <td><?php
+                $temp_tgl = explode(' ', $dokumen->tanggal);
+                echo set_tanggal_normal($temp_tgl[0]) . '/' . $temp_tgl[1];?></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>No. Tiket</td>
+            <td>:</td>
+            <td><?php echo sprintf('#%05d', $dokumen->no_tiket_frontdesk) ?></td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td>Nomor Surat Pengajuan</td>
+            <td>:</td>
+            <td><?php echo $dokumen->nomor_surat_usulan ?></td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td>Tanggal Surat Pengajuan</td>
+            <td>:</td>
+            <td><?php echo $dokumen->tanggal_surat_usulan ?></td>
+        </tr>
+    </table>
+
     <div>
         <table style="width: 100%;">
             <tr>
@@ -114,27 +128,27 @@
                 <td style="width: 50px;">Kode - Nama Eselon</td>
                 <td style="width: 320px;">: <?php echo $dokumen->id_unit . ' - ' . $dokumen->nama_unit ?></td>
             </tr>
-		</table >
-		<table style="margin-top: 24pt">
-			<tr>
-				<td style="text-decoration:underline;width:700px;">
-					IDENTITAS PETUGAS
-				</td>
-			</tr>
-		</table>
-	
-		<table style="width: 100%;">
+        </table>
+        <table style="margin-top: 24pt">
+            <tr>
+                <td style="text-decoration:underline;width:700px;">
+                    IDENTITAS PETUGAS
+                </td>
+            </tr>
+        </table>
+
+        <table style="width: 100%;">
             <tr>
                 <td style="width: 50px;">NIP</td>
                 <td style="width: 320px;">: <?php echo $dokumen->nip ?></td>
             </tr>
-			
-			<tr>
+
+            <tr>
                 <td style="width: 50px;">Nama Petugas</td>
                 <td style="width: 320px;">: <?php echo $dokumen->nama_petugas ?></td>
             </tr>
-			
-			<tr>
+
+            <tr>
                 <td style="width: 50px;">Jabatan</td>
                 <td style="width: 320px;">: <?php echo $dokumen->jabatan_petugas ?></td>
             </tr>
@@ -154,15 +168,15 @@
                 <td style="width: 320px;">: <?php echo $dokumen->email ?></td>
             </tr>
         </table>
-		
-		<table style="margin-top: 24pt">
-			<tr>
-				<td style="text-decoration:underline;width:700px;">
-					CATATAN PENGEMBALIAN DOKUMEN
-			</tr>
-		</table>
-		
-		<table style="width: 60%;border: solid black;border-width:thin;margin-bottom:24pt;">
+
+        <table style="margin-top: 24pt">
+            <tr>
+                <td style="text-decoration:underline;width:700px;">
+                    CATATAN PENGEMBALIAN DOKUMEN
+            </tr>
+        </table>
+
+        <table style="width: 60%;border: solid black;border-width:thin;margin-bottom:24pt;">
             <tr>
                 <td><?php echo $dokumen->catatan;?></td>
             </tr>
