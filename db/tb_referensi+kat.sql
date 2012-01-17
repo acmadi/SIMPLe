@@ -47,6 +47,34 @@ CREATE TABLE IF NOT EXISTS `tb_referensi_kat` (
   PRIMARY KEY (`id_referensi_kat`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
+
+
+
+
+
+--
+-- Dumping data for table `tb_referensi_kat`
+--
+
+INSERT INTO `tb_referensi_kat` (`id_referensi_kat`, `nama_kat`) VALUES
+(1, 'Undang-Undang'),
+(2, 'Perpu'),
+(3, 'Peraturan Pemerintah'),
+(4, 'Peraturan Presiden'),
+(5, 'Keputusan Presiden'),
+(6, 'Instruksi Presiden'),
+(7, 'Peraturan Menteri'),
+(8, 'Keputusan Menteri'),
+(9, 'Instruksi Menteri'),
+(10, 'Surat Edaran'),
+(11, 'MoU'),
+(12, 'Produk Hukum Kepegawaian');
+
+
+
+
+
+
 --
 -- Constraints for dumped tables
 --
