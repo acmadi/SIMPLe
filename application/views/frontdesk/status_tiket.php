@@ -11,8 +11,8 @@
             <th class="short">Tanggal</th>
             <th class="short">Kode Eselon</th>
             <th class="short">Nama Eselon</th>
-            <th class="short">Kode Satker</th>
-            <th>Nama Satker</th>
+<!--            <th class="short">Kode Satker</th>-->
+<!--            <th>Nama Satker</th>-->
             <th class="short">Status Tiket</th>
             <th class="short">Status Dokumen</th>
         </tr>
@@ -29,8 +29,8 @@
             <td class="short"><?php echo table_tanggal($value->tanggal) ?></td>
             <td class="short"><?php echo $value->id_unit ?></td>
             <td class="short"><?php echo $value->nama_unit ?></td>
-            <td class="short"><?php echo $value->id_satker ?></td>
-            <td><?php echo $value->nama_satker ?></td>
+<!--            <td class="short">--><?php //echo $value->id_satker ?><!--</td>-->
+<!--            <td>--><?php //echo $value->nama_satker ?><!--</td>-->
             <td class="short"><?php echo $value->status ?></td>
             <td class="short">
                 <?php
