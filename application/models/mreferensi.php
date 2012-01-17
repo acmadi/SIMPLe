@@ -20,40 +20,18 @@ class mreferensi extends CI_Model
 		return $this->get_by_keyword($keyword);
 	}
 
-	// GAK DIPAKE LAGI, sekedar kenang-kenangan
-	public function cari_legacy($keyword)
+	function get_all()
 	{
-		$url = 
-			'http://www.kemenkumham.go.id/pencarian?searchword=' . 
-			$keyword . 
-			'&ordering=newest&searchphrase=exact&limit=0';
-		
-		// tarik dari website menkumham
-		$raw_string = $this->fetch_url($url);
+		$q = "SELECT * FROM tb_referensi r
+			  LEFT JOIN tb_referensi_kat k
+			  ON (r.id_referensi_kat = k.id_referensi_kat)
+		";
+		$refs = $this->db->query($q)->result();
 
-		// parsing html
-		$html = new simple_html_dom();
-		$html->load($raw_string);
-		
-		// ekstraksi tahap satu
-		$temp = $html->find('table[class="contentpaneopen"]', 1);
-
-		// ekstraksi tahap dua
-		if(is_object($temp)) : 
-			$str_temp = $temp->outertext;
-			$html = new simple_html_dom();
-			$html->load($str_temp);
-			$result_array = $html->find('a[href*="produk-hukum"]');
-		else :
-			$result_array = NULL;
-		endif;
-		
-		return $result_array;
+		return $refs;
 	}
-
 	function get_categories()
 	{
-
 		$q = "SELECT * FROM tb_referensi_kat";
 		$kats = $this->db->query($q)->result();
 
@@ -84,7 +62,7 @@ class mreferensi extends CI_Model
 		foreach($refs as &$ref) :
 			$ref->href= base_url('upload/referensi/' . $ref->nama_file);
 		endforeach;
-		
+
 		return $refs;
 	}
 }
