@@ -4,9 +4,9 @@ switch ($this->uri->segment(2)) {
     case 'dashboard':
         $nav_pengaduan = 'current';
         break;
-    case 'man_forum':
-        $nav_forum = 'current';
-        break;
+}
+if ($this->uri->segment(1) == 'forum') {
+    $nav_forum = 'current';
 }
 ?>
 
@@ -16,6 +16,6 @@ switch ($this->uri->segment(2)) {
     <ul class="sf-menu">
 <!--        <li class="current ">--><?php //echo anchor('pengaduan/dashboard', 'Dashboard');?><!--</li>-->
         <li><?php echo anchor('pengaduan/dashboard', 'Pengaduan', "class='$nav_pengaduan'");?></li>
-        <li><?php echo anchor('pengaduan/man_forum', 'Forum', "class='$nav_forum'");?></li>
+        <li><?php echo anchor('forum', 'Forum', "class='$nav_forum'");?></li>
     </ul>
 </div>

@@ -8,19 +8,39 @@
         padding-right: 20px;
     }
 </style>
-
 <script type="text/javascript">
-    $(function () {
-        $('#nama_kl').blur(function () {
-            var nama_kl = $('#nama_kl').val();
+    $(function() {
+
+        $('#nama_kl').chosen().change(function(){
+            var nama_kl = $(this).val();
             $.get('<?php echo site_url('helpdesk/identitas_satker/cari_kl/') ?>', {id_kementrian:nama_kl}, function (response) {
                 console.log(response);
+                response = '<option></option>' + response;
                 $('#eselon').html(response);
+                $('#eselon').trigger('liszt:updated');
                 $('#kode_satker').removeAttr('disabled');
             })
         })
 
-        $('#kl_btn').click(function () {
+        $('#eselon').chosen().change(function () {
+            id_kementrian = substr($('#nama_kl').val(), 0, 3);
+            url = '<?php echo site_url('frontdesk/form_revisi_anggaran/anggaran') ?>/' + id_kementrian;
+            console.log(url);
+            $.get(url, function (response) {
+                $('#anggaran').html('A' + response);
+            });
+
+            url = '<?php echo site_url('frontdesk/form_revisi_anggaran/cari_satker') ?>/' + id_kementrian + '/' + $(this).val();
+            console.log(url);
+            $.get(url, function(response){
+                response = '<option></option>' + response;
+                $('#kode_satker').html(response);
+                $('#kode_satker').trigger('liszt:updated');
+                console.log(response);
+            });
+        });
+
+        $('#kl_btn').click(function() {
             $('#kl').slideDown('fast');
             $('#kl').attr('disabled', false);
             $('#identitas_kl').show();
@@ -29,7 +49,7 @@
             $('#identitas_umum input').attr('disabled', true);
         })
 
-        $('#non_kl_btn').click(function () {
+        $('#non_kl_btn').click(function() {
             $('#kl').slideUp('fast');
             $('#kl').attr('disabled', true);
             $('#identitas_kl').hide();
@@ -37,52 +57,10 @@
             $('#identitas_umum').show();
             $('#identitas_umum input').attr('disabled', false);
         })
-
-        $('form').submit(function () {
-            data = $(this).serialize();
-//            console.log(data);
-//            return false;
-        })
-
-        var kementrian_list = [
-        <?php
-        foreach ($kementrian->result() as $value) {
-            echo sprintf("{ label: \"%s\", value: \"%s\" }, ", $value->id_kementrian . ' - ' . $value->nama_kementrian, $value->id_kementrian . ' - ' . $value->nama_kementrian);
-        }
-        ?>
-        ];
-
-        $('#nama_kl').autocomplete({
-            source:kementrian_list
-        });
-
-        $('#kode_satker').autocomplete({
-            source:function (request, response) {
-                $.ajax({
-                    url:"<?php echo site_url('/helpdesk/identitas_satker/cari_satker') ?>",
-
-                    data:{
-                        term:request.term,
-                        eselon:$('#eselon').val(),
-                        nama_kl:$('#nama_kl').val()
-                    },
-
-                    dataType:'json',
-
-                    success:function (data) {
-                        response(data);
-                    }
-                })
-            },
-            delay:500,
-            minLength:1
-        })
-
-        $('#clear_nama_kl').click(function () {
-            $('#nama_kl').val('');
-        })
     })
 </script>
+
+
 
 <!--<ul id="nav">-->
 <!--    <li><a href="#tab1">Isi Identitas SatKer (simpan di tb_tiket_helpdesk)</a></li>-->
@@ -114,18 +92,24 @@
 
         <p>
             <label>Kode - Nama K/L</label>
-            <input type="text" id="nama_kl" name="nama_kl" value="<?php echo set_value('nama_kl') ?>"/>
-            <a href="javascript:void(0)" class="clear_btn" id="clear_nama_kl">Hapus</a>
+            <select name="nama_kl" id="nama_kl" class="chzn-select" data-placeholder="Pilih K/L" style="width: 400px;">
+                <option></option>
+                <?php
+                foreach ($kementrian->result() as $value) {
+                    echo sprintf("<option value='%s'>%s</option>", $value->id_kementrian, $value->id_kementrian . ' - ' . $value->nama_kementrian);
+                }
+                ?>
+            </select>
         </p>
 
         <p>
             <label>Nama Eselon 1</label>
-            <select id="eselon" name="eselon" class="kl" value="<?php echo set_value('eselon') ?>"></select>
+            <select id="eselon" name="eselon" class="kl chzn-select" data-placeholder="Pilih Eselon I" style="width: 400px;"></select>
         </p>
 
         <p>
             <label>Kode - Nama Satker</label>
-            <input type="text" name="kode_satker" id="kode_satker" class="kl" size="30" disabled/>
+            <select name="kode_satker" id="kode_satker" class="kl chzn-select" data-placeholder="Pilih Satker" style="width: 400px;"></select>
         </p>
     </fieldset>
 

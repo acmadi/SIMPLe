@@ -68,15 +68,35 @@ class Dashboard extends CI_Controller
                     VALUES(?, ?, ?, NOW())";
             $this->db->query($sql, array($petugas_id, $kepada, $pengaduan));
 
+            if ($this->db->trans_status() === FALSE)
+            {
+                $this->db->trans_rollback();
+            }
+            else
+            {
+                $this->db->trans_commit();
+            }
+
             $this->session->set_flashdata('success', 'Data berhasil disimpan');
-            redirect('/pengaduan/dashboard');
+            $this->_success('/pengaduan/dashboard', 'Pengaduan berhasil dikirim', 5);
+            // redirect('/pengaduan/dashboard');
 
 
         } else {
+            // echo 'gagal';
             $this->index();
         }
 
 
+    }
+
+    private function _success($url, $message, $time)
+    {
+        $data['url'] = $url;
+        $data['message'] = $message;
+        $data['time'] = $time;
+
+        $this->load->view('helpdesk/success', $data);
     }
 
     public function antrian()
