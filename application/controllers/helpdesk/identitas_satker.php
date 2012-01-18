@@ -38,28 +38,35 @@ class Identitas_satker extends CI_Controller
         exit();
     }
 
-    function cari_kl()
+    //FIXME: Ini seharusnya cari_eselon(). Data Eselon diambil setelah mendapatkan kode kementrian
+    function cari_kl($id_kementrian)
     {
-        if ($this->input->is_ajax_request()) {
 
-            $id_kementrian = $this->input->get('id_kementrian');
+        /* $select digunakan saat validasi gagal dan untuk tetap memlilih opsi terakhir tetap terpilih.
+           Method set_value() tidak bisa digunakan di controller. Sehingga set_value('eselon') dikirim
+           kembali ke controller untuk diproses. Lihat views/helpdesk/identitas_satker pada Nama Eselon.
+        */
+        $select = $this->input->get('select');
 
-            $id_kementrian = substr($id_kementrian, 0, 3);
+        $id_kementrian = substr($id_kementrian, 0, 3);
 
-            $result = $this->db->query("SELECT * FROM tb_unit WHERE id_kementrian = ?", array($id_kementrian));
+        $result = $this->db->query("SELECT * FROM tb_unit WHERE id_kementrian = ?", array($id_kementrian));
 
-            if ($result->num_rows() > 0) {
-                $result = $result->result();
+        if ($result->num_rows() > 0) {
+            $result = $result->result();
 
-                foreach ($result as $value) {
+            foreach ($result as $value) {
+                if ($select AND $select == $value->id_unit) {
+                    echo sprintf('<option selected value="%s">%s - %s</option>', $value->id_unit, $value->id_unit, $value->nama_unit);
+                } else {
                     echo sprintf('<option value="%s">%s - %s</option>', $value->id_unit, $value->id_unit, $value->nama_unit);
                 }
             }
         }
         exit();
     }
-	
-	
+
+
 
     function cari_satker($id_kementrian, $eselon)
     {
@@ -154,19 +161,19 @@ class Identitas_satker extends CI_Controller
                 $alamat = $this->input->post('alamat');
                 $email = $this->input->post('email');
                 $no_hp = $this->input->post('no_hp');
-				
+
                 // Simpan Nama orang umum
 				$sql = "INSERT INTO tb_petugas_satker
                         ( nama_petugas, instansi, alamat, email, no_hp, tipe)
                         VALUES (?, ?, ?, ?, ?, ?)";
                 $this->db->query($sql, array($nama_petugas, $instansi, $alamat, $email, $no_hp, $tipe));
 				$id_petugas_satker = $this->db->insert_id();
-				
-				
-				
-               
 
-               
+
+
+
+
+
 
                 // Set tiket untuk helpdesk
 				$last_tiket_number = $this->db->select_max('no_tiket_helpdesk')->get('tb_tiket_helpdesk')->row();
@@ -189,8 +196,8 @@ class Identitas_satker extends CI_Controller
 
                 $this->log->create("Tiket baru di Helpdesk #{$last_tiket_number}");
 
-                
-               
+
+
 
                 redirect('/helpdesk/helpdesk_form_pertanyaan/umum');
             }
