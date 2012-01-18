@@ -65,7 +65,7 @@ class Kategori_ref extends CI_Controller
     {
         if (isset($_POST)) {
 
-            $this->form_validation->set_rules('nama_ref', 'Nama Kategori Referensi', 'required');
+            $this->form_validation->set_rules('nama_kat', 'Nama Kategori Referensi', 'required');
 
             if ($this->form_validation->run()) {
                 //SEKRETARIAT JENDERAL
@@ -104,14 +104,12 @@ class Kategori_ref extends CI_Controller
     {
         if (isset($_POST)) {
 
-            
-            $this->form_validation->set_rules('nama_ref', 'Nama Referensi', 'required');
+            $this->form_validation->set_rules('nama_kat', 'Nama Kategori', 'required');
 
 
             if ($this->form_validation->run()) {
 
                 $result = $this->db->insert('tb_referensi_kat', array(
-                    'id_referensi_kat' => $this->input->post('id_referensi_kat'),
                     'nama_kat' => $this->input->post('nama_kat'),
 
                 ));
