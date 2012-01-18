@@ -442,3 +442,12 @@ label.aligned{
 .table tfoot td {
     border-radius: 0 0 4px 4px;
 }
+
+
+
+
+/* MisC */
+
+div.nicEdit-main{
+    background: white;
+}

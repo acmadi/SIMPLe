@@ -1,4 +1,6 @@
 <?php //print_r($pertanyaan)?>
+<script src="<?php echo base_url() ?>js/nicedit/nicEdit.js.php?base=<?php echo base_url() ?>" type="text/javascript"></script>
+<script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
 
 <div class="content">
 
@@ -125,7 +127,7 @@
         </fieldset>
 
         <div>
-            <label><input name="sendmail" type="checkbox"/> Kirim jawaban ke email petugas Satker </label>
+            <label><input name="sendmail" type="checkbox" checked="checked"/> Kirim jawaban ke email petugas Satker </label>
         </div>
 
         <div style="float: left;">
