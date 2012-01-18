@@ -5,6 +5,7 @@ class Frontdesk extends CI_Controller
     {
         parent::__construct();
         $this->load->model('mfrontdesk');
+        $this->load->model('munit');
     }
 
     public function index()
@@ -13,8 +14,12 @@ class Frontdesk extends CI_Controller
         $page		= $this->mfrontdesk->get_all_tiket_frontdesk();
 		$pageData	= $page['query'];
 		$pageLink	= $page['pagination1'];
-		
-		$data				= array('result'=>$pageData,'pageLink'=>$pageLink,);
+
+        $page = $this->munit->filter($page);
+		// echo '<pre>';
+        // print_r($page);
+		// echo '</pre>';
+        $data				= array('result'=>$pageData,'pageLink'=>$pageLink,);
         $data['title'] 		= 'Konsultasi Front Desk';
         $data['content'] 	= 'pelaksana/frontdesk';
 		$data['isian_form']	= $page['isian_form1'];
