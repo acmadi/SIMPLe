@@ -96,8 +96,13 @@
                 <option></option>
                 <?php
                 foreach ($kementrian->result() as $value) {
-                    echo sprintf("<option value='%s'>%s</option>", $value->id_kementrian, $value->id_kementrian . ' - ' . $value->nama_kementrian);
+				if($value->id_kementrian == set_value('nama_kl')){
+                    echo sprintf("<option selected value='%s'>%s</option>", $value->id_kementrian, $value->id_kementrian . ' - ' . $value->nama_kementrian);
                 }
+				else{
+				echo sprintf("<option value='%s'>%s</option>", $value->id_kementrian, $value->id_kementrian . ' - ' . $value->nama_kementrian);
+				}
+				}
                 ?>
             </select>
         </p>
@@ -112,43 +117,42 @@
             <select name="kode_satker" id="kode_satker" class="kl chzn-select" data-placeholder="Pilih Satker" style="width: 400px;"></select>
         </p>
     </fieldset>
-
-    <!--    <fieldset style="float: right; width: 570px; height: 320px;">-->
-    <fieldset class="right">
-        <!-- TODO: (simpan di tb_petugas_satker) field kurang tambahin -->
+<fieldset style="float: left; margin-left: 15px; width: 47%;" class="identitas">
         <legend>Identitas</legend>
+        
         <p>
-            <label>Nama</label>
+            <label class="aligned">Nama</label>
             <input type="text" name="nama_petugas" size="30" value="<?php echo set_value('nama_petugas') ?>">
         </p>
 
         <p>
-            <label>Jabatan Petugas</label>
+            <label class="aligned">Jabatan Petugas</label>
             <input type="text" name="jabatan_petugas" size="30" value="<?php echo set_value('jabatan_petugas') ?>">
         </p>
 
         <p>
-            <label>No. Hp</label>
+            <label class="aligned">Nomor HP</label>
             <input type="text" name="no_hp" size="30" value="<?php echo set_value('no_hp') ?>">
         </p>
 
         <p>
-            <label>No. Kantor</label>
+            <label class="aligned">Telepon Kantor</label>
             <input type="text" name="no_kantor" size="30" value="<?php echo set_value('no_kantor') ?>">
         </p>
 
         <p>
-            <label>E-mail</label>
+            <label class="aligned">E-mail</label>
             <input type="email" name="email" size="30" value="<?php echo set_value('email') ?>">
         </p>
     </fieldset>
+    
 
     <div class="clear"></div>
 
-    <fieldset>
+    <fieldset style="float: left; margin-left: 15px; width: 47%;" class="identitas">
         <legend>Pengaduan</legend>
         <p>
-            <label>Kepada</label>
+            <label >Kepada</label>
             <select name="kepada">
                 <?php foreach ($level->result() as $value): ?>
                 <option value="<?php echo $value->lavel ?>"><?php echo $value->nama ?></option>

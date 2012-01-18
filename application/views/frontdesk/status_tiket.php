@@ -2,7 +2,7 @@
 
     <h1>Status Tiket</h1>
 
-    <?php echo search('/frontdesk/status_tiket/index') ?>
+    <?php //echo search('/frontdesk/status_tiket/index') ?>
 
     <table class="table">
         <thead>
