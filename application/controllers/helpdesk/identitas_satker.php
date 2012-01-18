@@ -11,16 +11,9 @@ class Identitas_satker extends CI_Controller
     function index()
     {
         $data['kementrian'] = $this->db->query('SELECT * FROM tb_kementrian ORDER BY id_kementrian');
-        /*if ($this->session->userdata('login') == TRUE)
-          {*/
         $data['title'] = 'Isi Identitas Satker';
         $data['content'] = 'helpdesk/identitas_satker';
         $this->load->view('new-template', $data);
-        /*}
-          else
-          {
-              $this->load->view('login/login_view');
-          }*/
     }
 
     /**
@@ -38,13 +31,22 @@ class Identitas_satker extends CI_Controller
         exit();
     }
 
+    /**
+     * Digunakan untuk mencari Eselon.
+     * Output berupa <option value="kode_eselon">nama_eselon</option>
+     *
+     * @param $id_kementrian Kode Kementrian (e.g 002, 014)
+     * @output HTML
+     */
     //FIXME: Ini seharusnya cari_eselon(). Data Eselon diambil setelah mendapatkan kode kementrian
     function cari_kl($id_kementrian)
     {
 
-        /* $select digunakan saat validasi gagal dan untuk tetap memlilih opsi terakhir tetap terpilih.
+        /* INFO:
+           $select digunakan saat validasi gagal dan untuk tetap memlilih opsi terakhir tetap terpilih.
            Method set_value() tidak bisa digunakan di controller. Sehingga set_value('eselon') dikirim
-           kembali ke controller untuk diproses. Lihat views/helpdesk/identitas_satker pada Nama Eselon.
+           kembali ke controller untuk diproses. Lihat views/helpdesk/identitas_satker pada Nama Eselon,
+           ada file_get_contents()
         */
         $select = $this->input->get('select');
 
@@ -67,7 +69,14 @@ class Identitas_satker extends CI_Controller
     }
 
 
-
+    /**
+     * Digunakan untuk mencari Satker.
+     * Output berupa <option value="kode_satker">nama_satker</option>
+     *
+     * @param $id_kementrian Kode Kementrian (e.g 002, 014)
+     * @param $eselon Kode Eselon (e.g 01, 06)
+     * @output HTML
+     */
     function cari_satker($id_kementrian, $eselon)
     {
             $sql = "SELECT * FROM tb_satker WHERE
