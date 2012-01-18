@@ -90,7 +90,12 @@
                 <option></option>
                 <?php
                 foreach ($kementrian->result() as $value) {
-                    echo sprintf("<option value='%s'>%s</option>", $value->id_kementrian, $value->id_kementrian . ' - ' . $value->nama_kementrian);
+				
+					if ($value->id_kementrian == set_value('nama_kl')) {
+						echo sprintf("<option selected value='%s'>%s</option>", $value->id_kementrian, $value->id_kementrian . ' - ' . $value->nama_kementrian);
+					} else {
+						echo sprintf("<option value='%s'>%s</option>", $value->id_kementrian, $value->id_kementrian . ' - ' . $value->nama_kementrian);
+					}
                 }
                 ?>
             </select>
