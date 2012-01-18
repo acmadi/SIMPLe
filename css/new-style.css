@@ -1,5 +1,6 @@
 @import url('new/table.css');
 @import url('new/forum.css');
+@import url('new/animation.css');
 
 a, a:visited {
     color: gold;
@@ -12,6 +13,7 @@ body {
     /*background: #fff url(../images/.png) fixed bottom right no-repeat;*/
     font-family: 'Lucida Grande', Tahoma, Arial, sans-serif;
     font-size: 11px;
+    -webkit-animation: slide 0.2s ease-in-out;
 }
 
 header {
