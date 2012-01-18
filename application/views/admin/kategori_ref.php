@@ -1,11 +1,10 @@
 <div class="content">
 
-    <h1>Eselon</h1>
-	
-	
-    <a href="<?php echo site_url('/admin/eselon/add/') ?>" class="button blue-pill">Tambah Eselon</a>
+    <h1>Kategori Referensi</h1>
 
-    <form method="get" action="<?php echo site_url('/admin/eselon/index/') ?>" style="text-align: right;">
+    <a href="<?php echo site_url('/admin/kategori_ref/add/') ?>" class="button blue-pill">Tambah Kategori</a>
+
+    <form method="get" action="<?php echo site_url('/admin/kategori_ref/index/') ?>" style="text-align: right;">
         <input type="text" name="cari"/>
         <input type="submit" name="submit" value="Cari" class="button blue-pill"/>
     </form>
@@ -14,9 +13,8 @@
         <thead>
         <tr>
             <th class="short">No</th>
-            <th class="short">Kode Eselon</th>
-            <th>Nama Eselon</th>
-            <th>Kementrian</th>
+            <th class="short">Kode Kategori</th>
+            <th>Kategori</th>
             <th class="action">Aksi</th>
         </tr>
         </thead>
@@ -25,11 +23,11 @@
         <?php foreach ($bla->result() as $value): ?>
         <tr>
             <td class="short"><?php echo $i++ ?></td>
-            <td class="short"><?php echo $value->id_unit ?></a></td>
-            <td style=""><?php echo $value->nama_unit ?></a></td>
-            <td style=""><?php echo $value->nama_kementrian ?></td>
+            <td class="short"><?php echo $value->id_referensi_kat ?></a></td>
+            <td style=""><?php echo $value->nama_kat ?></a></td>
+            
             <td class="action">
-                <a href="<?php echo site_url('/admin/eselon/edit/' . $value->id_unit) ?>" class="button blue-pill">Edit</a>
+                <a href="<?php echo site_url('/admin/kategori_ref/edit/' . $value->id_referensi_kat) ?>" class="button blue-pill">Edit</a>
             </td>
         </tr>
         <?php endforeach ?>

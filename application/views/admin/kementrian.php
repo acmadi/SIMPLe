@@ -23,8 +23,8 @@
         <?php foreach ($bla->result() as $value): ?>
         <tr>
             <td class="short"><?php echo $i++ ?></td>
-            <td class="short"><a href="<?php echo site_url('/admin/kementrian/view_kementrian/' . $value->id_kementrian) ?>"><?php echo $value->id_kementrian ?></a></td>
-            <td style=""><a href="<?php echo site_url('/admin/kementrian/view_kementrian/' . $value->id_kementrian) ?>"><?php echo $value->nama_kementrian ?></a></td>
+            <td class="short"><?php echo $value->id_kementrian ?></a></td>
+            <td style=""><?php echo $value->nama_kementrian ?></a></td>
             
             <td class="action">
                 <a href="<?php echo site_url('/admin/kementrian/edit/' . $value->id_kementrian) ?>" class="button blue-pill">Edit</a>
