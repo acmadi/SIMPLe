@@ -71,8 +71,8 @@
 
     <fieldset>
         <legend>Kategori</legend>
-        <label><input type="radio" name="tipe" id="kl_btn" checked="checked" value="kl">K/L</label>
-        <label><input type="radio" name="tipe" id="non_kl_btn" value="non_kl">Umum</label>
+        <input type="radio" name="tipe" id="kl_btn" checked="checked" value="kl"><label for="kl_btn">K/L</label>
+        <input type="radio" name="tipe" id="non_kl_btn" value="non_kl"><label for="non_kl_btn">Umum</label>
     </fieldset>
 
     <?php echo form_open('helpdesk/identitas_satker/save_identitas',
