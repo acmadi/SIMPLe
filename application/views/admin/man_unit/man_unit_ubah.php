@@ -78,11 +78,13 @@
                             <div class="float_break"></div>
                         </div>
                         <div style="float: left; height: 300px;">
-                            <div id="selected_unit"><?php foreach($item['unit_2'] as $un2):?>
-										<div id="unit<?php echo $un2->id_kementrian.$un2->id_unit?>" satker="<?php echo $un2->id_kementrian.$un2->id_unit?>" class="innertxt2">
-											<input type="checkbox" checked="checked" name="funit[]" id="select<?php echo $un2->id_kementrian.$un2->id_unit?>" value="<?php echo $un2->id_kementrian.$un2->id_unit?>" class="selectit"  />&nbsp;&nbsp;<?php echo $un2->id_kementrian,'.',$un2->id_unit,'-',$un2->nama_unit;?>
-										</div>
-								<?php endforeach;?></div>
+                            <div id="selected_unit">
+                            	<?php foreach($item['unit_2'] as $un2):?>
+								<div id="unit<?php echo $un2->id_kementrian.$un2->id_unit?>" satker="<?php echo $un2->id_kementrian.$un2->id_unit?>" class="innertxt2">
+									<input type="checkbox" checked="checked" name="funit[]" id="select<?php echo $un2->id_kementrian.$un2->id_unit?>" value="<?php echo $un2->id_kementrian.$un2->id_unit?>" class="selectit"  />&nbsp;&nbsp;<?php echo $un2->id_kementrian,'.',$un2->id_unit,'-',$un2->nama_unit;?>
+								</div>
+								<?php endforeach;?>
+							</div>
                         </div>
                     </div>
 

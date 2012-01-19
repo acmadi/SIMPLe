@@ -19,15 +19,15 @@
 				?>
     <form method="post" action="<?php site_url('/admin/referensi/add') ?>">
 
-        <p>
+        <!-- <p>
             <label>Kode Referensi</label>
             <input type="text" name="id_referensi" value="<?php echo set_value('id_referensi') ?>" maxlength="6"/>
 			<?php echo form_error('id_referensi', '<div class="error">', '</div>'); ?>
-        </p>
+        </p> -->
 
         <p>
             <label>Nama Referensi</label>
-            <input type="text" name="nama_satker" value="<?php echo set_value('nama_satker')?> "/>
+            <input type="text" name="nama_ref" value="<?php echo set_value('nama_satker')?> "/>
 			<?php echo form_error('nama_ref', '<div class="error">', '</div>'); ?>
         </p>
 		
