@@ -63,12 +63,12 @@ $(document).ready(function(){
 
     </table>
     <?php 
-    if(ENVIRONMENT == 'development'):
-    echo '<strong>Dump Data, development only</strong>';
-    echo '<pre>'; 
-    var_dump($tiket_helpdesk); 
-    echo '</pre>';
-    endif;
+    // if(ENVIRONMENT == 'development'):
+    // echo '<strong>Dump Data, development only</strong>';
+    // echo '<pre>'; 
+    // var_dump($tiket_helpdesk); 
+    // echo '</pre>';
+    // endif;
     ?>
 </div>
 <div id="jawaban" style="display: none;"></div>
