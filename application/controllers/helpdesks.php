@@ -275,5 +275,28 @@ class Helpdesks extends CI_Controller
         ));
     }
 
+    /**
+     * Untuk ngecek ada pertanyaan yang sudah dijawab oleh supervisor atau belum
+     */
+    public function check()
+    {
+        $result = $this->db->from('tb_tiket_helpdesk a')
+                ->where('status', 'open')
+                ->where('id_user', $this->session->userdata('id_user'))
+                ->where('jawab !=', '')
+                ->where('notify', false)
+                ->join('tb_satker b', 'b.id_satker = a.id_satker')
+                ->get();
+
+        foreach ($result->result() as $value) {
+            $this->db->update('tb_tiket_helpdesk', array(
+                'notify' => true
+            ), array(
+                'id' => $value->id,
+            ));
+        }
+
+        echo $result->num_rows();
+    }
 
 }
