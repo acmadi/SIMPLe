@@ -19,7 +19,7 @@
     <?php if ($result->num_rows() > 0): ?>
 
     <?php echo search('/frontdesk/pengembalian_dokumen/index') ?>
-
+  <div class="pagination"><?php echo ($pageLink) ? 'Halaman ' . $pageLink : '';?></div>
     <table class="table">
         <thead>
         <tr>
