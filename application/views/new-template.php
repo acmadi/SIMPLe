@@ -79,7 +79,7 @@
                     $this->session->set_userdata('navbar', 'navbar_dirjen');
                     $this->load->view('navbar_dirjen');
                 }
-                elseif ($this->uri->segment(1) == 'helpdesk') {
+                elseif ($this->uri->segment(1) == 'helpdesks' || $this->uri->segment(1) == 'helpdesk') {
                     $this->session->set_userdata('navbar', 'navbar_helpdesk');
                     $this->load->view('navbar_helpdesk');
                 }

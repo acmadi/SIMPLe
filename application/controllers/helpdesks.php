@@ -88,8 +88,6 @@ class Helpdesks extends CI_Controller
                 ->or_like('jawaban', $this->input->post('pertanyaan'))
                 ->get();
 
-        echo $this->db->last_query();
-
         $data['jawaban'] = $result;
 
         $data['title'] = 'Helpdesk - Jawaban';
