@@ -9,6 +9,8 @@ class Helpdesks extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->form_validation->set_message('required', '%s harus diisi');
+        $this->form_validation->set_message('numeric', '%s harus berupa angka');
     }
 
     public function index()
@@ -113,43 +115,58 @@ class Helpdesks extends CI_Controller
         // Simpan Identitas Satker
         if ($step == 'step1') {
 
-            // Simpan data Satker yang bertanya
-            $this->db->insert('tb_petugas_satker', array(
-                'nama_petugas' => $this->input->post('nama_petugas'),
-                'jabatan_petugas' => $this->input->post('jabatan_petugas'),
-                'no_hp' => $this->input->post('no_hp'),
-                'no_kantor' => $this->input->post('no_kantor'),
-                'email' => $this->input->post('email'),
-                'id_satker' => $this->input->post('kode_satker'),
-            ));
+            $this->form_validation->set_rules('nama_kl', 'K/L', 'required');
+            $this->form_validation->set_rules('eselon', 'Eselon I', 'required');
+            $this->form_validation->set_rules('kode_satker', 'Satker', 'required');
+            $this->form_validation->set_rules('nama_petugas', 'Nama Petugas', 'required');
+            $this->form_validation->set_rules('jabatan_petugas', 'Jabatan', 'required');
+            $this->form_validation->set_rules('no_hp', 'No HP', 'required|numeric');
+            $this->form_validation->set_rules('no_kantor', 'Telpon Kantor', 'required|numeric');
+            $this->form_validation->set_rules('email', 'Email', 'required|email');
 
-            // Simpan ID terakhir yang dimasukkan untuk nandain petugas satker
-            $id_petugas_satker = $this->db->insert_id();
-            $this->session->set_userdata('id_petugas_satker', $id_petugas_satker);
-
-            // Ambil tiket terakhir
-            $no_tiket_helpdesk_terakhir = $this->db->select_max('no_tiket_helpdesk')->get('tb_tiket_helpdesk')->row();
-            $no_tiket_helpdesk_terakhir = $no_tiket_helpdesk_terakhir->no_tiket_helpdesk + 1;
-
-            // Simpan tiket baru
-            $this->db->insert('tb_tiket_helpdesk', array(
-                'no_tiket_helpdesk' => $no_tiket_helpdesk_terakhir,
-                'tanggal' => date('Y-m-d H:i:s')
-            ));
-
-            // Simpan ID tiket helpdesk
-            $id_tiket_helpdesk = $this->db->insert_id();
-            $this->session->set_userdata('id_tiket_helpdesk', $id_tiket_helpdesk);
-
-            //            $no_tiket_helpdesk = $this->db->from('tb_tiket_helpdesk')
-            //                    ->where('id', $id_tiket_helpdesk)
-            //                    ->get();
-
-            // Simpan NOMOR tiket helpdesk
-            $this->session->set_userdata('no_tiket_helpdesk', $no_tiket_helpdesk_terakhir);
+            if ($this->form_validation->run() == TRUE) {
 
 
-            redirect('helpdesks/pertanyaan');
+                // Simpan data Satker yang bertanya
+                $this->db->insert('tb_petugas_satker', array(
+                    'nama_petugas' => $this->input->post('nama_petugas'),
+                    'jabatan_petugas' => $this->input->post('jabatan_petugas'),
+                    'no_hp' => $this->input->post('no_hp'),
+                    'no_kantor' => $this->input->post('no_kantor'),
+                    'email' => $this->input->post('email'),
+                    'id_satker' => $this->input->post('kode_satker'),
+                ));
+
+                // Simpan ID terakhir yang dimasukkan untuk nandain petugas satker
+                $id_petugas_satker = $this->db->insert_id();
+                $this->session->set_userdata('id_petugas_satker', $id_petugas_satker);
+
+                // Ambil tiket terakhir
+                $no_tiket_helpdesk_terakhir = $this->db->select_max('no_tiket_helpdesk')->get('tb_tiket_helpdesk')->row();
+                $no_tiket_helpdesk_terakhir = $no_tiket_helpdesk_terakhir->no_tiket_helpdesk + 1;
+
+                // Simpan tiket baru
+                $this->db->insert('tb_tiket_helpdesk', array(
+                    'no_tiket_helpdesk' => $no_tiket_helpdesk_terakhir,
+                    'tanggal' => date('Y-m-d H:i:s')
+                ));
+
+                // Simpan ID tiket helpdesk
+                $id_tiket_helpdesk = $this->db->insert_id();
+                $this->session->set_userdata('id_tiket_helpdesk', $id_tiket_helpdesk);
+
+                //            $no_tiket_helpdesk = $this->db->from('tb_tiket_helpdesk')
+                //                    ->where('id', $id_tiket_helpdesk)
+                //                    ->get();
+
+                // Simpan NOMOR tiket helpdesk
+                $this->session->set_userdata('no_tiket_helpdesk', $no_tiket_helpdesk_terakhir);
+
+
+                redirect('helpdesks/pertanyaan');
+            }
+
+            $this->identity();
 
 
         } elseif ($step == 'step2') {
