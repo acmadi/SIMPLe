@@ -1,17 +1,9 @@
 <script type="text/javascript">
     $(function() {
-//        $('#nama_kl').blur(function() {
-//            var nama_kl = $('#nama_kl').val();
-//            $.get('<?php echo site_url('helpdesk/identitas_satker/cari_kl/') ?>', {id_kementrian : nama_kl}, function(response) {
-//                console.log(response);
-//                $('#eselon').html(response);
-//                $('#kode_satker').removeAttr('disabled');
-//            })
-//        })
 
         $('#nama_kl').chosen().change(function(){
             var nama_kl = $(this).val();
-            $.get('<?php echo site_url('helpdesk/identitas_satker/cari_kl/') ?>', {id_kementrian:nama_kl}, function (response) {
+            $.get('<?php echo site_url('helpdesk/identitas_satker/cari_kl/') ?>/' + nama_kl, function (response) {
                 console.log(response);
                 response = '<option></option>' + response;
                 $('#eselon').html(response);
@@ -71,8 +63,8 @@
 
     <fieldset>
         <legend>Kategori</legend>
-        <label><input type="radio" name="tipe" id="kl_btn" checked="checked" value="kl">K/L</label>
-        <label><input type="radio" name="tipe" id="non_kl_btn" value="non_kl">Umum</label>
+        <input type="radio" name="tipe" id="kl_btn" checked="checked" value="kl"><label for="kl_btn">K/L</label>
+        <input type="radio" name="tipe" id="non_kl_btn" value="non_kl"><label for="non_kl_btn">Umum</label>
     </fieldset>
 
     <?php echo form_open('helpdesk/identitas_satker/save_identitas',
@@ -90,7 +82,7 @@
                 <option></option>
                 <?php
                 foreach ($kementrian->result() as $value) {
-				
+
 					if ($value->id_kementrian == set_value('nama_kl')) {
 						echo sprintf("<option selected value='%s'>%s</option>", $value->id_kementrian, $value->id_kementrian . ' - ' . $value->nama_kementrian);
 					} else {
@@ -103,7 +95,13 @@
 
         <p>
             <label>Nama Eselon 1 </label>&nbsp;
-            <select id="eselon" name="eselon" class="kl chzn-select" data-placeholder="Pilih Eselon I" style="width: 400px;"></select>
+            <select id="eselon" name="eselon" class="kl chzn-select" data-placeholder="Pilih Eselon I" style="width: 400px;">
+                <?php
+                if (set_value('eselon')) {
+                    echo file_get_contents(site_url('helpdesk/identitas_satker/cari_kl/' . set_value('nama_kl') . '?select=' . set_value('eselon')));
+                }
+                ?>
+            </select>
         </p>
 
         <p class="kode_satker_p">
