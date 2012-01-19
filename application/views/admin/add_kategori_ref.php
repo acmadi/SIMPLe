@@ -17,7 +17,7 @@
 					echo '<div class="info">' . $this->session->flashdata('info') . '</div>';
 				}
 				?>
-    <form method="post" action="<?php site_url('/admin/kategori_ref/add') ?>">
+    <form method="post" action="<?php echo site_url('/admin/kategori_ref/add') ?>">
 
         
 

@@ -30,8 +30,8 @@ class Referensi extends CI_Controller
 
             $this->pagination->initialize($config);
 
-            $result = $this->db->from('tb_referensi')
-            //->join('tb_petugas_satker c', 'c.id_satker = a.id_satker')
+            $result = $this->db->from('tb_referensi a')
+                    ->join('tb_referensi_kat b', 'b.id_referensi_kat = a.id_referensi_kat')
                     ->limit($config['per_page'], $id)
                     ->get();
         }
@@ -108,7 +108,7 @@ class Referensi extends CI_Controller
     {
         if (isset($_POST)) {
 
-            $this->form_validation->set_rules('id_referensi', 'Kode Referensi', 'required|numeric|min_length[11]|max_length[11]');
+            // $this->form_validation->set_rules('id_referensi', 'Kode Referensi', 'required|numeric|min_length[11]|max_length[11]');
             $this->form_validation->set_rules('nama_ref', 'Nama Referensi', 'required');
 			 $this->form_validation->set_rules('nama_file', 'Nama File', 'required');
 			  $this->form_validation->set_rules('id_referensi_kat', 'Kode Referensi Kategori', 'required');
@@ -117,7 +117,7 @@ class Referensi extends CI_Controller
             if ($this->form_validation->run()) {
 
                 $result = $this->db->insert('tb_referensi', array(
-                    'id_referensi' => $this->input->post('id_referensi'),
+                    // 'id_referensi' => $this->input->post('id_referensi'),
                     'nama_ref' => $this->input->post('nama_ref'),
 					'nama_file' => $this->input->post('nama_file'),
 					'id_referensi_kat' => $this->input->post('id_referensi_kat'),

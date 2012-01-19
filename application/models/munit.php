@@ -178,6 +178,12 @@ class Munit extends CI_Model {
 		return $data;
 	}
 	
+	function filter($arr, $id_kementrian = NULL, $id_unit = NULL)
+	{
+		$hasil = $arr;
+		return $hasil;
+	}
+
 	function edit_unit($d,$f){
 		$sql = "UPDATE tb_unit_saker SET kode_unit = ?, nama_unit = ?, anggaran = ? WHERE id_unit_satker = ?";
 		$this->db->query($sql,array($d['kd'],$d['nm'],$d['ag'],$f));
