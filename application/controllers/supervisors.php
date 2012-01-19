@@ -51,7 +51,7 @@ class Supervisors extends CI_Controller
                    ORDER BY {$sort} DESC";
         } else {
             $sql = "SELECT * FROM tb_tiket_helpdesk
-                   JOIN tb_satker
+                   LEFT JOIN tb_satker
                    ON tb_tiket_helpdesk.id_satker = tb_satker.id_satker
                    WHERE
                    status = 'open' AND
@@ -71,9 +71,9 @@ class Supervisors extends CI_Controller
     {
         $sql = "SELECT *
                     FROM tb_tiket_helpdesk
-                    JOIN tb_satker
+                    LEFT JOIN tb_satker
                     ON tb_tiket_helpdesk.id_satker = tb_satker.id_satker
-                    JOIN tb_petugas_satker
+                    LEFT JOIN tb_petugas_satker
                     ON tb_tiket_helpdesk.id_satker = tb_petugas_satker.id_satker
                     WHERE no_tiket_helpdesk = '{$id}'";
 
@@ -81,6 +81,7 @@ class Supervisors extends CI_Controller
         $result = $result->row();
 
         $data['title'] = 'Supervisor Jawab';
+
         $data['content'] = 'supervisor/jawab';
 
         $data['pertanyaan'] = $result;
