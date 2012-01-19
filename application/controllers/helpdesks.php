@@ -126,7 +126,6 @@ class Helpdesks extends CI_Controller
 
             if ($this->form_validation->run() == TRUE) {
 
-
                 // Simpan data Satker yang bertanya
                 $this->db->insert('tb_petugas_satker', array(
                     'nama_petugas' => $this->input->post('nama_petugas'),
@@ -148,7 +147,8 @@ class Helpdesks extends CI_Controller
                 // Simpan tiket baru
                 $this->db->insert('tb_tiket_helpdesk', array(
                     'no_tiket_helpdesk' => $no_tiket_helpdesk_terakhir,
-                    'tanggal' => date('Y-m-d H:i:s')
+                    'tanggal' => date('Y-m-d H:i:s'),
+                    'id_satker' => $this->input->post('kode_satker'),
                 ));
 
                 // Simpan ID tiket helpdesk
@@ -195,6 +195,7 @@ class Helpdesks extends CI_Controller
                         'description' => $this->input->post('description'),
                         'prioritas' => $this->input->post('prioritas'),
                         'id_kat_knowledge_base' => $this->input->post('kategori_knowledge_base'),
+                        'id_satker' => $this->input->post('id_satker'),
                     ), array(
                         'id' => $this->session->userdata('id_tiket_helpdesk')
                     )
@@ -221,6 +222,7 @@ class Helpdesks extends CI_Controller
         if ($page == '') {
             $result = $this->db->from('tb_tiket_helpdesk a')
                     ->join('tb_satker b', 'b.id_satker = a.id_satker')
+                    ->where('status', 'open')
                     ->order_by('prioritas DESC')
                     ->order_by('status')
                     ->limit($config['per_page'])
@@ -228,6 +230,7 @@ class Helpdesks extends CI_Controller
         } else {
             $result = $this->db->from('tb_tiket_helpdesk a')
                     ->join('tb_satker b', 'b.id_satker = a.id_satker')
+                    ->where('status', 'open')
                     ->order_by('prioritas DESC')
                     ->order_by('status')
                     ->limit($config['per_page'], $page * $config['per_page'] - $config['per_page'])
@@ -235,6 +238,7 @@ class Helpdesks extends CI_Controller
         }
 
         $config['total_rows'] = $this->db->from('tb_tiket_helpdesk a')
+                ->where('status', 'open')
                 ->join('tb_satker b', 'b.id_satker = a.id_satker')
                 ->order_by('prioritas DESC')
                 ->order_by('status')
@@ -249,6 +253,20 @@ class Helpdesks extends CI_Controller
         $data['title'] = 'List Pertanayaan';
         $data['content'] = 'new-helpdesk/list_pertanyaan';
         $this->load->view('new-template', $data);
+    }
+
+    /**
+     * Untuk menutup tiket
+     *
+     * @param $id_tiket_helpdesk ID Integer
+     */
+    public function close($id_tiket_helpdesk)
+    {
+        $save = $this->db->update('tb_tiket_helpdesk', array(
+            'status' => 'close'
+        ), array(
+            'id' => $id_tiket_helpdesk
+        ));
     }
 
 

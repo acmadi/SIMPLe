@@ -7,6 +7,7 @@
     <h1>Jawab Pertanyaan</h1>
 
     <form method="post" action="<?php echo site_url('supervisor/jawab/do_jawab') ?>">
+        <input type="hidden" name="id" value="<?php echo $pertanyaan->id ?>" />
 
         <fieldset>
             <legend>Identitas</legend>
