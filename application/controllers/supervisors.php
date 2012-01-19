@@ -51,7 +51,7 @@ class Supervisors extends CI_Controller
                    ORDER BY {$sort} DESC";
         } else {
             $sql = "SELECT * FROM tb_tiket_helpdesk
-                   JOIN tb_satker
+                   LEFT JOIN tb_satker
                    ON tb_tiket_helpdesk.id_satker = tb_satker.id_satker
                    WHERE
                    status = 'open' AND
