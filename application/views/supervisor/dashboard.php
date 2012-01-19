@@ -14,7 +14,9 @@
             </dd>
 
             <dd>
+            <a href="<?php echo site_url('/supervisors/list_pertanyaan') ?>">
             <span class="xxlabel">Eskalasi</span> <span class="xxlabel red"><?php echo $helpdesk_total ?></span>
+            </a>
             </dd>
         </dl>
     </fieldset>
