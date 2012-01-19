@@ -4,6 +4,7 @@
 
     <?php //echo search('/frontdesk/status_tiket/index') ?>
 
+    <div class="pagination"><?php echo ($pageLink) ? 'Halaman ' . $pageLink : '';?></div>
     <table class="table">
         <thead>
         <tr>
