@@ -120,15 +120,15 @@
                 <td style="width: 10px"><label>Prioritas</label></td>
                 <td style="width: 100px">
                     <?php if ($pertanyaan->prioritas == 'high'): ?>
-                    <span style="color: red"><?php echo $pertanyaan->prioritas ?></span>
+                    <span style="color: red; text-transform: uppercase;"><?php echo $pertanyaan->prioritas ?></span>
                     <?php endif ?>
 
                     <?php if ($pertanyaan->prioritas == 'medium'): ?>
-                    <span style="color: blue"><?php echo $pertanyaan->prioritas ?></span>
+                    <span style="color: blue; text-transform: uppercase;"><?php echo $pertanyaan->prioritas ?></span>
                     <?php endif ?>
 
                     <?php if ($pertanyaan->prioritas == 'low'): ?>
-                    <span style="color: green"><?php echo $pertanyaan->prioritas ?></span>
+                    <span style="color: green; text-transform: uppercase;"><?php echo $pertanyaan->prioritas ?></span>
                     <?php endif ?>
 
                 </td>

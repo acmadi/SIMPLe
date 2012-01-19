@@ -6,12 +6,12 @@
         <thead>
         <tr>
             <th class="no">No</th>
-            <th>Tiket</th>
-            <th>Satker</th>
-            <th>Tanggal</th>
-            <th>Pertanyaan</th>
-            <th>Prioritas</th>
-            <th>Status</th>
+            <th class="no">Tiket</th>
+            <th class="medium">Satker</th>
+            <th class="no">Tanggal</th>
+            <th class="medium">Pertanyaan</th>
+            <th class="no">Prioritas</th>
+            <th class="no">Status</th>
             <th>&nbsp;</th>
         </tr>
         </thead>
@@ -29,7 +29,20 @@
             <td><?php echo $value->id_satker ?> - <?php echo $value->nama_satker ?></td>
             <td><?php echo table_tanggal($value->tanggal) ?></td>
             <td><?php echo $value->pertanyaan ?></td>
-            <td><?php echo $value->prioritas ?></td>
+            <td>
+                <?php if ($value->prioritas == 'high'): ?>
+                <span style="color: red; text-transform: uppercase;"><?php echo $value->prioritas ?></span>
+                <?php endif ?>
+
+                <?php if ($value->prioritas == 'medium'): ?>
+                <span style="color: blue; text-transform: uppercase;"><?php echo $value->prioritas ?></span>
+                <?php endif ?>
+
+                <?php if ($value->prioritas == 'low'): ?>
+                <span style="color: green; text-transform: uppercase;"><?php echo $value->prioritas ?></span>
+                <?php endif ?>
+
+            </td>
             <td><?php echo $value->status ?></td>
             <td>
                 <?php if ($value->jawab != NULL): ?>
@@ -44,15 +57,20 @@
         </tbody>
     </table>
 
-    <?php echo $this->pagination->create_links() ?>
+    <?php if (($this->pagination->create_links())): ?>
+    <div class="pagination">
+        <?php echo $this->pagination->create_links() ?>
+    </div>
+    <?php endif ?>
 </div>
 
-    
+
 <div style="display: none" id="jawaban">
     <h1 id="pertanyaan"></h1>
+
     <p id="jawabannya"></p>
 </div>
-    
+
 <script type="text/javascript">
     $(function () {
         $('#jawaban').dialog('destroy');

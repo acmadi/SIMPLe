@@ -219,3 +219,35 @@ input[type="button"].button {
 h1 {
     font-size: 16px;
 }
+
+#referensi_jawaban li {
+    font-size: 12px;
+    list-style: outside;
+    padding: 4px 0;
+}
+
+.message p {
+    margin: 0;
+}
+
+.pagination {
+    background: white;
+    border: 1px solid #cecece;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 12px;
+    padding: 4px;
+}
+
+.pagination a,
+.pagination strong {
+    padding: 2px 4px;
+}
+
+.pagination strong {
+    background: #cecece;
+}
+
+.pagination a:hover {
+    background: #f0f0f0;
+}
