@@ -15,15 +15,24 @@ class Knowledge extends CI_Controller
         $this->category();
     }
 
-    public function category($id_kat_knowledge_base = '', $keyword = '')
+    public function category($id_kat_knowledge_base = '', $keyword = '', $prev_keyword = NULL)
     {
         if($keyword != '') :
+            if ($prev_keyword != NULL) :
+                $keyword = $prev_keyword . ' ' . $keyword;
+            endif;
+            $data['prev_keyword'] = $keyword;
+
+            // bikin keyword buat klausa LIKE di SQL
+            $like_keyword = '%' . str_replace(' ', '%', $keyword) . '%';
+
             $query = $this->db->query(
                 "SELECT * FROM tb_knowledge_base WHERE 
-                    judul    LIKE '%$keyword%'
-                 OR desripsi LIKE '%$keyword%'
-                 OR jawaban LIKE '%$keyword%'
+                    judul    LIKE '$like_keyword'
+                 OR desripsi LIKE '$like_keyword'
+                 OR jawaban LIKE '$like_keyword'
                  ");
+
             $data['kb'] = $query->result();
 
             $data['keyword'] = $keyword;
@@ -55,6 +64,7 @@ class Knowledge extends CI_Controller
     public function search()
     {
         $keyword = $this->input->post('keyword');
-        $this->category('', $keyword);
+        $prev_keyword = $this->input->post('prev_keyword');
+        $this->category('', $keyword, $prev_keyword);
     }
 }
