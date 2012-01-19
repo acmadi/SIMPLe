@@ -208,5 +208,48 @@ class Helpdesks extends CI_Controller
         }
     }
 
+    function list_pertanyaan($page = '')
+    {
+        $config['base_url'] = site_url('helpdesks/list_pertanyaan');
+        $config['uri_segment'] = 3;
+        $config['num_links'] = 10;
+
+        $config['per_page'] = 20;
+        $config['use_page_numbers'] = TRUE;
+
+
+        if ($page == '') {
+            $result = $this->db->from('tb_tiket_helpdesk a')
+                    ->join('tb_satker b', 'b.id_satker = a.id_satker')
+                    ->order_by('prioritas DESC')
+                    ->order_by('status')
+                    ->limit($config['per_page'])
+                    ->get();
+        } else {
+            $result = $this->db->from('tb_tiket_helpdesk a')
+                    ->join('tb_satker b', 'b.id_satker = a.id_satker')
+                    ->order_by('prioritas DESC')
+                    ->order_by('status')
+                    ->limit($config['per_page'], $page * $config['per_page'] - $config['per_page'])
+                    ->get();
+        }
+
+        $config['total_rows'] = $this->db->from('tb_tiket_helpdesk a')
+                ->join('tb_satker b', 'b.id_satker = a.id_satker')
+                ->order_by('prioritas DESC')
+                ->order_by('status')
+                ->get()
+                ->num_rows();
+
+        $this->pagination->initialize($config);
+
+        $data['helpdesk'] = $result;
+
+        $data['kementrian'] = $this->db->query('SELECT * FROM tb_kementrian ORDER BY id_kementrian');
+        $data['title'] = 'List Pertanayaan';
+        $data['content'] = 'new-helpdesk/list_pertanyaan';
+        $this->load->view('new-template', $data);
+    }
+
 
 }
