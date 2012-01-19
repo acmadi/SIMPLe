@@ -290,9 +290,25 @@ class Helpdesk_form_pertanyaan extends CI_Controller
         $data['prioritas'] = $prioritas;
         $data['pertanyaan'] = $pertanyaan;
         $data['description'] = $description;
+		$cari = $this->input->post('pertanyaan');
 
+        $array = explode(' ', $cari);
+        $gabung = 'SELECT * FROM tb_knowledge_base WHERE ';
+        foreach ($array as $key => $value) {
+            if (count($array) - 1 == $key) {
+                $gabung .= "judul LIKE '%" . $value . "%'\n";
+            } else
+            {
+                $gabung .= "judul LIKE '%" . $value . "%' OR\n";
+            }
+        }
+        $result = $this->db->query($gabung);
+
+        $data['knowledge'] = $result;
 
         $this->load->view('new-template', $data);
+
+ 
     }
 
     function popup_ref_jawaban($id)
