@@ -98,7 +98,7 @@
             <select id="eselon" name="eselon" class="kl chzn-select" data-placeholder="Pilih Eselon I" style="width: 400px;">
                 <?php
                 if (set_value('eselon')) {
-                    echo file_get_contents(site_url('helpdesk/identitas_satker/cari_kl/' . set_value('nama_kl') . '?select=' . set_value('eselon')));
+                    //echo file_get_contents(site_url('helpdesk/identitas_satker/cari_kl/' . set_value('nama_kl') . '?select=' . set_value('eselon')));
                 }
                 ?>
             </select>

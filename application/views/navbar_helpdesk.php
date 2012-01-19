@@ -1,5 +1,5 @@
 <?php
-$nav_dashboard = $nav_identitas_satker = $nav_antrian = $nav_knowledge = $nav_forum = $nav_referensi = '';
+$nav_dashboard = $nav_identitas_satker = $nav_antrian = $nav_knowledge = $nav_forum = $nav_referensi = $nav_list_pertanyaan = '';
 switch ($this->uri->segment(2)) {
     case 'dashboard':
         $nav_dashboard = 'current';
@@ -26,12 +26,17 @@ if ($this->uri->segment(1) == 'knowledge') {
 if ($this->uri->segment(1) == 'forum') {
     $nav_forum = 'current';
 }
+if ($this->uri->segment(2) == 'list_pertanyaan') {
+    $nav_list_pertanyaan = 'current';
+}
+
 ?>
 
 
 <ul class="sf-menu">
     <li><?php echo anchor('helpdesk/dashboard', 'Dashboard', "class='$nav_dashboard'");?></li>
     <li><?php echo anchor('helpdesk/identitas_satker', 'Isi Identitas Satker', "class='$nav_identitas_satker'");?></li>
+    <li><?php echo anchor('helpdesk/list_pertanyaan', 'List Pertanyaan', "class='$nav_list_pertanyaan'");?></li>
     <li><?php echo anchor('knowledge', 'Knowledge Base', "class='$nav_knowledge'");?></li>
     <li><?php echo anchor('referensi', 'Referensi Peraturan', "class='$nav_referensi'")?></li>
     <li><?php echo anchor('forum', 'Forum', "class='$nav_forum'");?></li>
