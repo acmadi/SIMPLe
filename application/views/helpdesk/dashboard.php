@@ -1,6 +1,8 @@
 <div class="content">
     <h1>Dashboard</h1>
-
+    <pre>
+    <?php print_r($tikets) ?>
+    </pre>
     <table class="chart" style="display: none;">
         <!--<caption>Hello</caption>-->
         <thead>
