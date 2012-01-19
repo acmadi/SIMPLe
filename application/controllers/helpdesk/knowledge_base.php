@@ -127,27 +127,30 @@ class Knowledge_base extends CI_Controller
 
     public function search()
     {
-        $cari = $this->input->get('cari');
-		$array= explode(' ', $cari);
-		$gabung='SELECT * FROM tb_knowledge_base WHERE ';
-		foreach( $array as $key=>$value ) {
-		if(count ($array) -1 == $key){
-		$gabung .= "judul LIKE '%" . $value . "%'\n";
-		}else
-		{$gabung .= "judul LIKE '%" . $value . "%' OR\n";
-		}
-		}
-		$result = $this->db->query($gabung);
-        
-		
-        
-                
+        $cari = $this->input->get('keyword');
+        $array = explode(' ', $cari);
+        $gabung = 'SELECT * FROM tb_knowledge_base WHERE ';
+        foreach ($array as $key => $value) {
+            if (count($array) - 1 == $key) {
+                $gabung .= "judul LIKE '%" . $value . "%'\n";
+            } else {
+                $gabung .= "judul LIKE '%" . $value . "%' OR\n";
+            }
+        }
+        $result = $this->db->query($gabung);
 
-        //        echo json_encode($result->result(), JSON_FORCE_OBJECT);
+
         echo '<ul style="list-style: inside;">';
         foreach ($result->result() as $value) {
             echo "<li>
-                    <a href=\"javascript:void(0)\" class=\"referensi-jawaban\" title=\"{$value->id_knowledge_base}\">{$value->judul}</a>
+                    <a href=\"javascript:void(0)\"
+                       class=\"jawaban\"
+                       data-id_knowledge_base=\"{$value->id_knowledge_base}\"
+                       data-pertanyaan=\"{$value->judul}\"
+                       data-deskripsi=\"{$value->desripsi}\"
+                       data-jawaban=\"{$value->jawaban}\">
+                        {$value->judul}
+                    </a>
                  </li>";
         }
         echo '</ul>';

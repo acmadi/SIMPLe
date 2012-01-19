@@ -106,7 +106,8 @@
     </fieldset>
 
     <p>
-        <input type="submit" class="button blue-pill" value="Submit" onclick="return adaPertanyaanBaru()">
+        <input type="submit" class="button" value="Submit" onclick="return adaPertanyaanBaru()">
+        <a class="button blue" href="<?php echo site_url('helpdesks/identity') ?>">Selesai</a>
     </p>
 
     </form>

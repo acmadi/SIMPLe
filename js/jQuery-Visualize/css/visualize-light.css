@@ -4,8 +4,8 @@ body { font-size:62.5%; }
 /*demo styles*/
 table.chart {width: 500px; height: 200px; margin-left: 30px; }
 table.accessHide { position: absolute; left: -999999px; }
-td, th {  font-size: 1.2em; padding: 2px; width: 13%; }
-th { background-color:#f4f4f4; } 
+.chart td, .chart th {  font-size: 1.2em; padding: 2px; width: 13%; }
+.chart th { background-color:#f4f4f4; }
 caption { font-size: 1.5em;  }
 
 /*visualize extension styles*/

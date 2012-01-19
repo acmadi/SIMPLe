@@ -37,7 +37,7 @@ if ($this->uri->segment(2) == 'list_pertanyaan') {
 <ul class="sf-menu">
     <li><?php echo anchor('helpdesks/dashboard', 'Dashboard', "class='$nav_dashboard'");?></li>
     <li><?php echo anchor('helpdesks/identity', 'Isi Identitas Satker', "class='$nav_identitas_satker'");?></li>
-    <li><?php echo anchor('helpdesk/list_pertanyaan', 'List Pertanyaan', "class='$nav_list_pertanyaan'");?></li>
+    <li><?php echo anchor('helpdesks/list_pertanyaan', 'List Pertanyaan', "class='$nav_list_pertanyaan'");?></li>
     <li><?php echo anchor('knowledge', 'Knowledge Base', "class='$nav_knowledge'");?></li>
     <li><?php echo anchor('referensi', 'Referensi Peraturan', "class='$nav_referensi'")?></li>
     <li><?php echo anchor('forum', 'Forum', "class='$nav_forum'");?></li>
