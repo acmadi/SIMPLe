@@ -34,7 +34,7 @@
                     click:function () {
                         var status = confirm('Anda yakin akan melakukan eskalasi?');
                         if (status === true) {
-                            window.location.href = '<?php echo site_url("/helpdesks/eskalasi/{$this->session->userdata('id_tiket')}") ?>/';
+                            window.location.href = '<?php echo site_url('helpdesks/eskalasi/' . $this->session->userdata('id_tiket_helpdesk') . '/' . $this->session->userdata('no_tiket_helpdesk')) ?>';
                         }
                     }
                 }
@@ -47,15 +47,22 @@
             $('#dialog').dialog('open');
         })
 
+        $('#cari_knowledge form').submit(function () {
+            data = $(this).serialize();
+
+            $.get('<?php echo site_url('/helpdesk/knowledge_base/search') ?>', data, function (response) {
+                console.log(response);
+                $('#referensi_jawaban').html(response);
+            });
+            return false;
+        })
+
     })
 </script>
 
 <div class="content">
 
     <h1>Konsultasi Help Desk</h1>
-
-    <?php echo form_open('/helpdesks/save/step3'); ?>
-    <input type="hidden" name="no_tiket_helpdesk" value="<?php echo $this->session->userdata('no_tiket_helpdesk') ?>"/>
 
     <div style="text-align: right; text-decoration: underline; font-weight: bold; font-size: 14px;">
         No Tiket: <?php echo sprintf('%05d', $this->session->userdata('no_tiket_helpdesk')) ?>
@@ -136,26 +143,30 @@
     <fieldset>
         <legend>Referensi Jawaban</legend>
 
-        <?php echo search('#') ?>
+        <div id="cari_knowledge">
+            <?php echo search('#') ?>
+        </div>
 
         <hr/>
 
-        <ul>
-            <?php foreach ($jawaban->result() as $value): ?>
+        <div id="referensi_jawaban">
+            <ul>
+                <?php foreach ($jawaban->result() as $value): ?>
 
-            <li>
-                <a href="javascript:void(0)"
-                   class="jawaban"
-                   data-id_knowledge_base="<?php echo $value->id_knowledge_base ?>"
-                   data-pertanyaan="<?php echo $value->judul ?>"
-                   data-deskripsi="<?php echo $value->desripsi ?>"
-                   data-jawaban="<?php echo $value->jawaban ?>">
-                    <?php echo $value->judul ?>
-                </a>
-            </li>
+                <li>
+                    <a href="javascript:void(0)"
+                       class="jawaban"
+                       data-id_knowledge_base="<?php echo $value->id_knowledge_base ?>"
+                       data-pertanyaan="<?php echo $value->judul ?>"
+                       data-deskripsi="<?php echo $value->desripsi ?>"
+                       data-jawaban="<?php echo $value->jawaban ?>">
+                        <?php echo $value->judul ?>
+                    </a>
+                </li>
 
-            <?php endforeach ?>
-        </ul>
+                <?php endforeach ?>
+            </ul>
+        </div>
     </fieldset>
 
     <p>
@@ -165,7 +176,6 @@
         </a>
     </p>
 
-    </form>
 </div>
 
 <div id="dialog">
