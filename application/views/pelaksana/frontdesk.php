@@ -8,7 +8,6 @@
             <form id="form-cari" action="<?php echo site_url('/pelaksana/frontdesk/index');?>" method="post">
                 <p><input type="text" size="60" placeholder="Pencarian" name="keyword" value="<?php echo $isian_form;?>"/>
                     &nbsp;<input type="submit" value="cari" class="button blue-pill"/>
-                    <a href="<?php echo site_url('/pelaksana/frontdesk/index');?>" class="button gray-pill">Reset</a>
                 </p>
             </form>
         </div>
