@@ -26,7 +26,7 @@
         <tr>
             <td class="short"><?php echo $i++ ?></td>
             <td style=""><?php echo $value->nama_ref ?></a></td>
-            <td style=""><?php echo $value->nama_file ?></td>
+            <td style=""><?php echo anchor(base_url('upload/referensi/' . $value->nama_file), $value->nama_file) ?></td>
             <td style=""><?php echo $value->nama_kat ?></td>
             <td class="action">
                 <a href="<?php echo site_url('/admin/referensi/edit/' . $value->id_referensi) ?>" class="button blue-pill">Edit</a>
