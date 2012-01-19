@@ -75,7 +75,7 @@ class Jawab extends CI_Controller
                 'jawab' => $this->input->post('jawaban'),
                 'sumber' => $this->input->post('nama_narasumber')
             ), array(
-                'no_tiket_helpdesk' => $this->input->post('no_tiket_helpdesk')
+                'id' => $this->input->post('id')
             ));
 
             $this->_success(site_url('supervisors/list_pertanyaan'), 'Pertanyaan berhasil dijawab', 5);
