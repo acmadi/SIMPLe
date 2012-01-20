@@ -1,4 +1,4 @@
-<meta http-equiv="refresh" content="10; url=<?php echo site_url('/frontdesk/ambil_dokumen')  ?>">
+<meta http-equiv="refresh" content="30; url=<?php echo site_url('/frontdesk/ambil_dokumen')  ?>">
 
 <div class="content">
 
@@ -27,11 +27,9 @@
         <tr>
             <th class="short">No Tiket</th>
             <th class="short">Tanggal</th>
-            <th class="short">Kode Eselon</th>
-            <th class="short">Nama Eselon</th>
-<!--            <th class="short">Kode Satker</th>-->
-<!--            <th>Nama Satker</th>-->
-            <th class="short">Status</th>
+            <th class="medium">Kementrian</th>
+            <th class="medium">Eselon</th>
+            <th class="no">Status</th>
             <th>&nbsp;</th>
         </tr>
         </thead>
@@ -40,8 +38,8 @@
         <tr>
             <td><?php echo sprintf('%05d', $value->no_tiket_frontdesk) ?></td>
             <td><?php echo table_tanggal($value->tanggal) ?></td>
-            <td><?php echo $value->id_unit ?></td>
-            <td><?php echo $value->nama_unit ?></td>
+            <td><strong><?php echo $value->id_kementrian ?></strong> - <?php echo $value->nama_kementrian ?></td>
+            <td><strong><?php echo $value->id_unit ?></strong> - <?php echo $value->nama_unit ?></td>
 <!--            <td>--><?php //echo $value->id_satker ?><!--</td>-->
 <!--            <td>--><?php //echo $value->nama_satker ?><!--</td>-->
             <td><?php echo $value->status ?></td>
