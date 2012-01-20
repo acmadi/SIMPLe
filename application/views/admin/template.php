@@ -100,7 +100,7 @@
             return false;
         })
 
-        $('.chzn-single').chosen({});
+//        $('.chzn-single').chosen({});
 
     });
 </script>
