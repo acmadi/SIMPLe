@@ -44,8 +44,10 @@ class Mtiket extends CI_Model
         }
 
         $sql = "SELECT tbf.no_tiket_frontdesk,tbf.tanggal,tbu.nama_unit, tbf.id_satker, ts.nama_satker,
-					   tbf.is_active, tbf.id_unit, tbf.status, tl.nama_lavel
+					   tbf.is_active, tbf.id_unit, tbf.status, tl.nama_lavel,
+				       tb_kementrian.id_kementrian, tb_kementrian.nama_kementrian
 				FROM tb_unit tbu, tb_lavel tl, tb_tiket_frontdesk tbf LEFT JOIN tb_satker ts ON ts.id_satker = tbf.id_satker
+                LEFT JOIN tb_kementrian ON tb_kementrian.id_kementrian = tbf.id_kementrian
 				WHERE tbu.id_unit =  tbf.id_unit AND tbu.id_kementrian = tbf.id_kementrian AND tbf.lavel = tl.lavel $where ORDER BY tbf.status";
         $query = $this->db->query($sql);
 
@@ -57,8 +59,10 @@ class Mtiket extends CI_Model
 
 
         $sqlb = "SELECT tbf.no_tiket_frontdesk,tbf.tanggal,tbu.nama_unit, tbf.id_satker, ts.nama_satker,
-					   tbf.is_active, tbf.id_unit, tbf.status, tl.nama_lavel
+					   tbf.is_active, tbf.id_unit, tbf.status, tl.nama_lavel,
+					   tb_kementrian.id_kementrian, tb_kementrian.nama_kementrian
 				FROM tb_unit tbu, tb_lavel tl, tb_tiket_frontdesk tbf LEFT JOIN tb_satker ts ON ts.id_satker = tbf.id_satker
+				LEFT JOIN tb_kementrian ON tb_kementrian.id_kementrian = tbf.id_kementrian
 				WHERE tbu.id_unit =  tbf.id_unit AND tbu.id_kementrian = tbf.id_kementrian AND tbf.lavel = tl.lavel $where ORDER BY tbf.status
 				LIMIT ?,?";
         $data["query"] = $this->db->query($sqlb, array($offset, $config['per_page']));
