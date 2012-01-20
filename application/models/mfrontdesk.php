@@ -220,10 +220,10 @@ class Mfrontdesk extends CI_Model
 		return $data;
     }
 
-    public function count_all_tiket($status = 'open', $lavel)
+    public function count_all_tiket($status = 'open', $lavel, $optional = '')
     {
         $result = $this->db->query("SELECT no_tiket_frontdesk FROM tb_tiket_frontdesk WHERE status = '{$status}'
-         AND lavel = $lavel");
+         AND lavel = $lavel $optional");
         return $result->num_rows();
     }
 
