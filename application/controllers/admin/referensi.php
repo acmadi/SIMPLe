@@ -110,16 +110,23 @@ class Referensi extends CI_Controller
 
             // $this->form_validation->set_rules('id_referensi', 'Kode Referensi', 'required|numeric|min_length[11]|max_length[11]');
             $this->form_validation->set_rules('nama_ref', 'Nama Referensi', 'required');
-			 $this->form_validation->set_rules('nama_file', 'Nama File', 'required');
+			 // $this->form_validation->set_rules('file', 'File', 'required');
 			  $this->form_validation->set_rules('id_referensi_kat', 'Kode Referensi Kategori', 'required');
 
 
             if ($this->form_validation->run()) {
 
+                $nmBr = '';
+                if (isset($_FILES['file']['name']) && $_FILES['file']['name'] != '') :
+                    $unik = date('isdm').'_';
+                    $nmBr =  $nmBr . '_' . $_FILES['file']['name'];
+                    move_uploaded_file($_FILES['file']['tmp_name'], 'upload/referensi/'. $nmBr);
+                endif;
+
                 $result = $this->db->insert('tb_referensi', array(
                     // 'id_referensi' => $this->input->post('id_referensi'),
                     'nama_ref' => $this->input->post('nama_ref'),
-					'nama_file' => $this->input->post('nama_file'),
+					'nama_file' => $nmBr,
 					'id_referensi_kat' => $this->input->post('id_referensi_kat'),
 
                 ));

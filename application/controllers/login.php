@@ -21,8 +21,25 @@ Class Login extends CI_Controller
         $login_data = $this->mlogin->cekdb($user, $pass);
 
         if ($login_data) {
-			$this->db->query("DELETE FROM tb_online_users WHERE user = ?", array($login_data->username));
-			
+
+            // Cek masa kerja
+            if ($login_data->lavel != 0) {
+                $result = $this->db->from('tb_masa_kerja')
+                        ->where('id_user', $login_data->id_user)->get();
+
+                $sql = "SELECT * FROM tb_masa_kerja WHERE id_user = ? AND
+                    NOW() >= `tanggal_mulai`  AND
+                    NOW() <= `tanggal_selesai`";
+                $result = $this->db->query($sql, array($login_data->id_user));
+
+                if ($result->num_rows() == 0) {
+                    redirect('login/process_logout');
+                }
+            }
+
+
+            $this->db->query("DELETE FROM tb_online_users WHERE user = ?", array($login_data->username));
+
             $this->session->set_userdata('user', $login_data->username);
             $this->session->set_userdata('id_user', $login_data->id_user);
             $this->session->set_userdata('id_lavel', $login_data->id_lavel);
@@ -32,8 +49,8 @@ Class Login extends CI_Controller
             $this->session->set_userdata('id_unit_satker', $login_data->id_unit_satker);
             $this->session->set_userdata('anggaran', $login_data->anggaran);
 
-			$this->db->query("INSERT INTO tb_online_users(USER,aktifitas_terakhir) VALUES (?,NOW())",array($login_data->username));
-			
+            $this->db->query("INSERT INTO tb_online_users(USER,aktifitas_terakhir) VALUES (?,NOW())", array($login_data->username));
+
             $this->log->create("Login");
 
             switch (strtolower($login_data->id_lavel)) {
@@ -76,9 +93,9 @@ Class Login extends CI_Controller
                 case '13':
                     redirect('kb_koordinator/dashboard');
                     break;
-				case '14':
+                case '14':
                     redirect('admin_pengaduan/dashboard');
-					break;
+                    break;
             }
         } else {
             $this->session->set_flashdata('error', 'Login gagal');
@@ -90,7 +107,7 @@ Class Login extends CI_Controller
     public function process_logout()
     {
         $this->log->create("Logout");
-		$this->db->query("DELETE FROM tb_online_users WHERE user = ?",array($this->session->userdata('user')));
+        $this->db->query("DELETE FROM tb_online_users WHERE user = ?", array($this->session->userdata('user')));
         $this->session->unset_userdata('user');
         $this->session->unset_userdata('level');
         $this->session->sess_destroy();

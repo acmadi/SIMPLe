@@ -17,7 +17,7 @@
 					echo '<div class="info">' . $this->session->flashdata('info') . '</div>';
 				}
 				?>
-    <form method="post" action="<?php site_url('/admin/referensi/add') ?>">
+    <?php echo form_open_multipart('admin/referensi/add') ?>
 
         <!-- <p>
             <label>Kode Referensi</label>
@@ -32,9 +32,9 @@
         </p>
 		
 		<p>
-            <label>Nama File</label>
-            <input type="text" name="nama_file" value="<?php echo set_value('nama_file')?> "/>
-			<?php echo form_error('nama_file', '<div class="error">', '</div>'); ?>
+            <label>File Lampiran</label>
+            <input type="file" name="file"/>
+			<?php echo form_error('file', '<div class="error">', '</div>'); ?>
         </p>
 
         <p>

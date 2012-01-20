@@ -3,7 +3,7 @@ $nav_dashboard = $nav_identitas_satker = $nav_antrian = $nav_knowledge = $nav_fo
 switch ($this->uri->segment(2)) {
     case 'dashboard':
         $nav_dashboard = 'current';
-            break;
+        break;
     case 'identitas_satker':
     case 'identity':
         $nav_identitas_satker = 'current';
@@ -43,3 +43,15 @@ if ($this->uri->segment(2) == 'list_pertanyaan') {
     <li><?php echo anchor('forum', 'Forum', "class='$nav_forum'");?></li>
 </ul>
 
+<script type="text/javascript">
+    // JS Untuk ngecek pertanyaan sudah dijawab atau belum
+    function check() {
+        $.get('<?php echo site_url('helpdesks/check') ?>', function (response) {
+            if (response > 0) {
+                notify('Jawaban baru', 'Ada pertanyaan yang telah dijawab');
+            }
+        });
+    }
+
+    setInterval('check()', 30000);
+</script>
