@@ -35,7 +35,7 @@
 
             $('#nama_kl').chosen().change(function () {
                 var nama_kl = $(this).val();
-                $.get('<?php echo site_url('helpdesk/identitas_satker/cari_kl/') ?>', {id_kementrian:nama_kl}, function (response) {
+                $.get('<?php echo site_url('helpdesk/identitas_satker/cari_kl/') ?>/' + nama_kl, function (response) {
                     console.log(response);
                     response = '<option></option>' + response;
                     $('#eselon').html(response);
