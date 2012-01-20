@@ -1,15 +1,19 @@
 <script type="text/javascript">
     $(function () {
-//        $('#flevel').chosen().change(function () {
-//            var level = $(this).val();
-//            $.get('<?php echo site_url('/admin/man_user_tambah/pilih_departemen') ?>' + '/' + level,
+        $('#flevel').chosen().change(function () {
+//            var level = $(this).attr('title');
+//            console.log($(this).html());
+//            console.log(level);
+<!--            $.get('--><?php //echo site_url('/admin/man_user_tambah/pilih_departemen') ?><!--' + '/' + level,-->
 //                    function (response) {;
 //                        response = '<option></option>' + response;
 //                        $('#fdepartemen').html(response);
 //                        $('#fdepartemen').trigger('liszt:updated');
 //                        console.log(response);
 //                    })
-//        });
+        });
+
+        $('#fdepartemen').chosen();
     })
 </script>
 
@@ -79,7 +83,7 @@
                                 <select name="flevel" id="flevel" class="chzn-single" data-placeholder="Pilih Level" style="width: 500px;">
                                     <option></option>
                                     <?php foreach ($list_level as $a): ?>
-                                    <option value="<?php echo $a->id_lavel?>"><?php echo $a->nama_lavel?></option>
+                                    <option value="<?php echo $a->id_lavel?>" title="<?php echo $a->id_lavel ?>"><?php echo $a->nama_lavel?></option>
                                     <?php endforeach;?>
                                 </select>
                             </td>
@@ -88,8 +92,8 @@
                             <td>Departemen</td>
                             <td>:</td>
                             <td>
-                                <select name="fdepartemen">
-                                    <option value="" selected="selected">- Nama Departemen -</option>
+                                <select name="fdepartemen" id="fdepartemen" class="chzn-single" data-placeholder="Pilih Departemen" style="width: 500px;">
+                                    <option></option>
                                     <?php foreach ($list_unit as $b): ?>
                                     <option value="<?php echo $b->id_unit_satker?>"><?php echo $b->nama_unit?></option>
                                     <?php endforeach;?>

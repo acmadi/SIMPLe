@@ -151,7 +151,7 @@ class Muser extends CI_Model
 	}
 	
 	function get_list_unit(){
-		return $this->db->query("SELECT * FROM tb_lavel")->result();
+		return $this->db->query("SELECT * FROM tb_unit_saker")->result();
 	}
 	
 	function reset_password($user){
