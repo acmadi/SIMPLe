@@ -45,15 +45,28 @@
 <div id="container">
     <header>
         <div class="container_12">
-            <div id="logo">
-                <img src="<?php echo base_url('images/header-logo.png') ?>" />
+            <div id="logo" class="grid_6">
+                <img src="<?php echo base_url('images/header-logo.png') ?>"/>
                 <!-- <img src="<?php echo base_url('images/logo.png') ?>" width="50" height="50" />
                 &nbsp;&nbsp; Sistem Informasi Pusat Layanan DJA -->
             </div>
+
+
+            <?php if (!$this->session->userdata('id_user')): ?>
+            <div class="grid_6" style="padding-top: 20px; text-align: right;">
+                <?php echo form_open("login/usermasuk", array('id' => 'login_form')); ?>
+                <input type="text" id="user" name="user" placeholder="Username" style="width: 100px;"/>
+                <input type="password" id="pass" name="pass" placeholder="Password" style="width: 100px;"/>
+                <input type="submit" name="submit" class="button blue" value="Login"/>
+                <?php echo form_close() ?>
+            </div>
+            <?php endif ?>
+
+
             <nav class="grid_10 alpha omega">
 
                 <?php
-				//$this->session->set_userdata('navbar', 'navbar_default');
+                //$this->session->set_userdata('navbar', 'navbar_default');
 
                 if ($this->session->userdata('lavel') == '2') {
                     $this->session->set_userdata('navbar', 'navbar_supervisor');
@@ -67,7 +80,7 @@
                     $this->session->set_userdata('navbar', 'navbar_pelaksana');
                     $this->load->view('navbar_kasubdit');
                 }
-				elseif ($this->uri->segment(1) == 'kasubdit_dadutek') {
+                elseif ($this->uri->segment(1) == 'kasubdit_dadutek') {
                     $this->session->set_userdata('navbar', 'navbar_dadutek');
                     $this->load->view('navbar_dadutek');
                 }
@@ -118,15 +131,16 @@
                 elseif ($this->uri->segment(1) == 'forum') {
                     $navbar = $this->session->userdata('navbar');
                     $this->load->view($navbar);
-                } 
+                }
                 else {
                     $this->load->view('navbar_default');
-                } 
+                }
 
                 ?>
 
             </nav>
             <div class="grid_2 alpha omega" style="text-align: right;">
+                <?php if ($this->session->userdata('id_user')): ?>
                 <div class="profile-menu">
                     <a href="javascript:void(0)"><?php echo $this->session->userdata('nama') ?></a>
                     <ul>
@@ -134,6 +148,7 @@
                         <li><a href="<?php echo site_url('login/process_logout') ?>">Logout</a></li>
                     </ul>
                 </div>
+                <?php endif ?>
             </div>
         </div>
     </header>
@@ -143,52 +158,52 @@
 
     <!-- <div>Buka</div> -->
 </div>
-    <footer>
+<footer>
+    <div class="container_12">
+        <div class="grid_4 alpha">
+            <h1>Pusat Layanan DJA</h1>
+            <ul>
+                <li>Lobby Gedung Sutikno Slamet</li>
+                <li>Jln. Wahidin No. 1</li>
+                <li>Jakarta Pusat</li>
+            </ul>
+
+        </div>
+
+        <div class="grid_4">
+            <h1>Email</h1>
+            <ul>
+                <li>pusatlayanan@anggaran.depkeu.go.id</li>
+                <li>pusatlayanan.dja@gmail.com</li>
+            </ul>
+
+            <h1>Line</h1>
+            <ul>
+                <li>021-34 83 25 11 (Call Center)</li>
+                <li>021-34 83 25 16 (Customer Service)</li>
+                <li>021-34 83 25 15 (Fax)</li>
+            </ul>
+        </div>
+
+        <div class="grid_4 omega">
+            <h1>Online Customer Service</h1>
+            <ul>
+                <li>Customer Service 1</li>
+                <li>Customer Service 2</li>
+                <li>Customer Service 3</li>
+                <li>Customer Service 4</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="attribution">
         <div class="container_12">
-            <div class="grid_4 alpha">
-                <h1>Pusat Layanan DJA</h1>
-                <ul>
-                    <li>Lobby Gedung Sutikno Slamet</li>
-                    <li>Jln. Wahidin No. 1</li>
-                    <li>Jakarta Pusat</li>
-                </ul>
-
-            </div>
-
-            <div class="grid_4">
-                <h1>Email</h1>
-                <ul>
-                    <li>pusatlayanan@anggaran.depkeu.go.id</li>
-                    <li>pusatlayanan.dja@gmail.com</li>
-                </ul>
-
-                <h1>Line</h1>
-                <ul>
-                    <li>021-34 83 25 11 (Call Center)</li>
-                    <li>021-34 83 25 16 (Customer Service)</li>
-                    <li>021-34 83 25 15 (Fax)</li>
-                </ul>
-            </div>
-
-            <div class="grid_4 omega">
-                <h1>Online Customer Service</h1>
-                <ul>
-                    <li>Customer Service 1</li>
-                    <li>Customer Service 2</li>
-                    <li>Customer Service 3</li>
-                    <li>Customer Service 4</li>
-                </ul>
-            </div>
-        </div>
-
-        <div id="attribution">
-            <div class="container_12">
             <div class="grid_12 alpha omega">
-                Copyright &copy; 2011 Komuri & Ortala DJA
-            </div>
+                Copyright &copy; 2011-2012 Komuri & Ortala DJA
             </div>
         </div>
-    </footer>
+    </div>
+</footer>
 <!--! end of #container -->
 
 
@@ -211,9 +226,11 @@
 
 
 <!--[if lt IE 7 ]>
-<!--<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>-->
-<!--    <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>-->
+<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+    <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
 <![endif]-->
+
+<?php echo $this->session->userdata('id_user')?>
 
 </body>
 </html>

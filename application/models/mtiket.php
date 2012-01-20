@@ -44,8 +44,10 @@ class Mtiket extends CI_Model
         }
 
         $sql = "SELECT tbf.no_tiket_frontdesk,tbf.tanggal,tbu.nama_unit, tbf.id_satker, ts.nama_satker,
-					   tbf.is_active, tbf.id_unit, tbf.status, tl.nama_lavel
+					   tbf.is_active, tbf.id_unit, tbf.status, tl.nama_lavel,
+				       tb_kementrian.id_kementrian, tb_kementrian.nama_kementrian
 				FROM tb_unit tbu, tb_lavel tl, tb_tiket_frontdesk tbf LEFT JOIN tb_satker ts ON ts.id_satker = tbf.id_satker
+                LEFT JOIN tb_kementrian ON tb_kementrian.id_kementrian = tbf.id_kementrian
 				WHERE tbu.id_unit =  tbf.id_unit AND tbu.id_kementrian = tbf.id_kementrian AND tbf.lavel = tl.lavel $where ORDER BY tbf.status";
         $query = $this->db->query($sql);
 
@@ -57,8 +59,10 @@ class Mtiket extends CI_Model
 
 
         $sqlb = "SELECT tbf.no_tiket_frontdesk,tbf.tanggal,tbu.nama_unit, tbf.id_satker, ts.nama_satker,
-					   tbf.is_active, tbf.id_unit, tbf.status, tl.nama_lavel
+					   tbf.is_active, tbf.id_unit, tbf.status, tl.nama_lavel,
+					   tb_kementrian.id_kementrian, tb_kementrian.nama_kementrian
 				FROM tb_unit tbu, tb_lavel tl, tb_tiket_frontdesk tbf LEFT JOIN tb_satker ts ON ts.id_satker = tbf.id_satker
+				LEFT JOIN tb_kementrian ON tb_kementrian.id_kementrian = tbf.id_kementrian
 				WHERE tbu.id_unit =  tbf.id_unit AND tbu.id_kementrian = tbf.id_kementrian AND tbf.lavel = tl.lavel $where ORDER BY tbf.status
 				LIMIT ?,?";
         $data["query"] = $this->db->query($sqlb, array($offset, $config['per_page']));
@@ -110,8 +114,9 @@ class Mtiket extends CI_Model
             $where = " AND tbu.nama_unit LIKE '%" . $keyword . "%'";
         }
 
-        $sql = "SELECT tbf.no_tiket_frontdesk,tbf.tanggal,tbu.nama_unit, tbf.id_satker, ts.nama_satker, tbf.is_active,tbf.status,tbf.id_unit
+        $sql = "SELECT tbf.no_tiket_frontdesk, tbf.id_kementrian, tb_kementrian.nama_kementrian, tbf.tanggal,tbu.nama_unit, tbf.id_satker, ts.nama_satker, tbf.is_active,tbf.status,tbf.id_unit
 				FROM tb_unit tbu, tb_tiket_frontdesk tbf LEFT JOIN tb_satker ts ON ts.id_satker = tbf.id_satker
+				JOIN tb_kementrian ON tbf.id_kementrian = tb_kementrian.id_kementrian
 				WHERE tbu.id_unit =  tbf.id_unit AND tbu.id_kementrian = tbf.id_kementrian AND tbf.status = 'close' AND tbf.is_active = 6 $where 
 				ORDER BY tbf.status";
         $query = $this->db->query($sql);
@@ -123,8 +128,9 @@ class Mtiket extends CI_Model
         $this->pagination->initialize($config);
 
 
-        $sqlb = "SELECT tbf.no_tiket_frontdesk,tbf.tanggal,tbu.nama_unit, tbf.id_satker, ts.nama_satker, tbf.is_active,tbf.status,tbf.id_unit
+        $sqlb = "SELECT tbf.no_tiket_frontdesk, tbf.id_kementrian, tb_kementrian.nama_kementrian, tbf.tanggal,tbu.nama_unit, tbf.id_satker, ts.nama_satker, tbf.is_active,tbf.status,tbf.id_unit
 				FROM tb_unit tbu, tb_tiket_frontdesk tbf LEFT JOIN tb_satker ts ON ts.id_satker = tbf.id_satker
+				JOIN tb_kementrian ON tbf.id_kementrian = tb_kementrian.id_kementrian
 				WHERE tbu.id_unit =  tbf.id_unit AND tbu.id_kementrian = tbf.id_kementrian AND tbf.status = 'close' AND tbf.is_active = 6 $where 
 				ORDER BY tbf.status
 				LIMIT ?,?";
@@ -194,10 +200,11 @@ class Mtiket extends CI_Model
             $where = " AND tu.nama_unit LIKE '%" . $keyword . "%'";
         }
 
-        $sql = "SELECT  ttf.no_tiket_frontdesk, ttf.tanggal, ttf.id_satker, ts.nama_satker, tpd.id_pengembalian_doc, ttf.id_unit, tu.nama_unit
-				FROM tb_pengembalian_doc tpd, tb_tiket_frontdesk ttf 
+        $sql = "SELECT  ttf.no_tiket_frontdesk, ttf.id_kementrian, tb_kementrian.nama_kementrian, ttf.tanggal, ttf.id_satker, ts.nama_satker, tpd.id_pengembalian_doc, ttf.id_unit, tu.nama_unit
+				FROM tb_pengembalian_doc tpd, tb_tiket_frontdesk ttf
 				LEFT JOIN tb_satker ts ON ts.id_satker = ttf.id_satker
 				LEFT JOIN tb_unit tu ON tu.id_unit = ttf.id_unit AND tu.id_kementrian = ttf.id_kementrian
+                LEFT JOIN tb_kementrian ON tb_kementrian.id_kementrian = ttf.id_kementrian
 				WHERE tpd.no_tiket_frontdesk = ttf.no_tiket_frontdesk AND tpd.sudah_diambil = 0 AND ttf.is_active = 3 AND ttf.status = 'close' $where
 				GROUP BY tpd.no_tiket_frontdesk";
         $query = $this->db->query($sql);
@@ -209,10 +216,11 @@ class Mtiket extends CI_Model
         $this->pagination->initialize($config);
 
 
-        $sqlb = "SELECT  ttf.no_tiket_frontdesk, ttf.tanggal, ttf.id_satker, ts.nama_satker, tpd.id_pengembalian_doc, ttf.id_unit, tu.nama_unit
+        $sqlb = "SELECT  ttf.no_tiket_frontdesk, ttf.id_kementrian, tb_kementrian.nama_kementrian, ttf.tanggal, ttf.id_satker, ts.nama_satker, tpd.id_pengembalian_doc, ttf.id_unit, tu.nama_unit
 				FROM tb_pengembalian_doc tpd, tb_tiket_frontdesk ttf 
 				LEFT JOIN tb_satker ts ON ts.id_satker = ttf.id_satker
 				LEFT JOIN tb_unit tu ON tu.id_unit = ttf.id_unit AND tu.id_kementrian = ttf.id_kementrian
+				LEFT JOIN tb_kementrian ON tb_kementrian.id_kementrian = ttf.id_kementrian
 				WHERE tpd.no_tiket_frontdesk = ttf.no_tiket_frontdesk AND tpd.sudah_diambil = 0 AND ttf.is_active = 3 AND ttf.status = 'close' $where
 				GROUP BY tpd.no_tiket_frontdesk
 				LIMIT ?,?";

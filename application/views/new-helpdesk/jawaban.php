@@ -71,38 +71,56 @@
     <fieldset>
         <legend>Identitas</legend>
 
-        <div class="grid_6">
-            <p>
-                <label style="display: inline-block; width: 100px;">No Tiket</label>
-                <span><?php echo sprintf('%05d', $this->session->userdata('no_tiket_helpdesk')) ?></span>
-            </p>
+        <table style="width: 100%">
+            <tr>
+                <td style="width: 200px">
+                    <label>No Tiket</label>
+                </td>
+                <td style="width: 200px">
+                    <?php echo sprintf('%05d', $this->session->userdata('no_tiket_helpdesk')) ?>
+                </td>
 
-            <p>
-                <label style="display: inline-block; width: 100px;">Kode - Nama Satker</label>
-                <span><?php echo $identitas->id_satker . ' - ' . $identitas->nama_satker ?></span>
-            </p>
+                <td>
+                    <label>Telpon Kantor</label>
+                </td>
+                <td>
+                    <span><?php echo $identitas->no_kantor ?></span>
+                </td>
+            </tr>
 
-            <p>
-                <label style="display: inline-block; width: 100px;">Nama Petugas</label>
-                <span><?php echo $identitas->nama_petugas ?></span>
-            </p>
-        </div>
-        <div class="grid_5">
-            <p>
-                <label style="display: inline-block; width: 100px;">Telpon Kantor</label>
-                <span><?php echo $identitas->no_kantor ?></span>
-            </p>
+            <tr>
+                <td style="width: 150px">
+                    <label>Kode - Nama Satker</label>
+                </td>
+                <td style="width: 500px">
+                    <span><?php echo $identitas->id_satker . ' - ' . $identitas->nama_satker ?></span>
+                </td>
 
-            <p>
-                <label style="display: inline-block; width: 100px;">No HP</label>
-                <span><?php echo $identitas->no_hp ?></span>
-            </p>
+                <td>
+                    <label>No HP</label>
+                </td>
+                <td>
+                    <span><?php echo $identitas->no_hp ?></span>
+                </td>
+            </tr>
 
-            <p>
-                <label style="display: inline-block; width: 100px;">Email</label>
-                <span><?php echo $identitas->email ?></span>
-            </p>
-        </div>
+            <tr>
+                <td>
+                    <label style="display: inline-block; width: 100px;">Nama Petugas</label>
+                </td>
+                <td>
+                    <span><?php echo $identitas->nama_petugas ?></span>
+                </td>
+
+                <td>
+                    <label style="display: inline-block; width: 100px;">Email</label>
+                </td>
+                <td>
+                    <span><?php echo $identitas->email ?></span>
+                </td>
+            </tr>
+
+        </table>
     </fieldset>
 
     <fieldset>
@@ -156,10 +174,10 @@
                 <li>
                     <a href="javascript:void(0)"
                        class="jawaban"
-                       data-id_knowledge_base="<?php echo $value->id_knowledge_base ?>"
-                       data-pertanyaan="<?php echo $value->judul ?>"
-                       data-deskripsi="<?php echo $value->desripsi ?>"
-                       data-jawaban="<?php echo $value->jawaban ?>">
+                       data-id_knowledge_base='<?php echo $value->id_knowledge_base ?>'
+                       data-pertanyaan='<?php echo ascii_to_entities($value->judul) ?>'
+                       data-deskripsi='<?php echo ascii_to_entities($value->desripsi) ?>'
+                       data-jawaban='<?php echo ascii_to_entities($value->jawaban) ?>'>
                         <?php echo $value->judul ?>
                     </a>
                 </li>

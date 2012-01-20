@@ -47,10 +47,10 @@
             <td>
                 <?php if ($value->jawab != NULL): ?>
                 <a class="button green referensi-jawaban"
-                   data-id="<?php echo $value->id ?>"
-                   data-pertanyaan="<?php echo $value->pertanyaan ?>"
-                   data-jawaban="<?php echo $value->jawab ?>"
-                   href="javascript:void(0)">Lihat Jawaban</a>
+                   data-id='<?php echo $value->id ?>'
+                   data-pertanyaan='<?php echo ascii_to_entities($value->pertanyaan) ?>'
+                   data-jawaban='<?php echo ascii_to_entities($value->jawab) ?>'
+                   href='javascript:void(0)'>Lihat Jawaban</a>
                 <?php endif ?>
             </td>
         </tr>

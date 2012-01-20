@@ -97,6 +97,24 @@ class Dirjen extends CI_Controller
         $this->load->view('new-template', $data);
     }
 	
+    // TODO: kacau, gak ngerti quernya... asal kopas dan semoga gak salah T_T
+    function lists($ang, $lev, $adasda)
+    {
+        $res = $this->db->query("SELECT a.no_tiket_frontdesk,a.tanggal, c.nama_unit, d.nama_kementrian
+                                FROM tb_tiket_frontdesk a, tb_kon_unit_satker b,tb_unit c,tb_kementrian d
+                                WHERE a.id_unit = c.id_unit AND a.id_kementrian = c.id_kementrian AND a.id_kementrian = d.id_kementrian
+                                 AND a.id_unit = b.id_unit AND a.id_kementrian = b.id_kementrian AND 
+                                (SELECT c.anggaran FROM tb_unit_saker c WHERE b.id_unit_satker = c.id_unit_satker ) = ?
+                                AND lavel <= ?
+                                ",array($ang,$lev));
+            $data['lists'] = $res;
+
+            $data['title'] = 'Dirjen';
+            $data['content'] = 'dirjen/list_tiket';
+            $this->load->view('new-template', $data);
+    }
+
+
 	//$ang = 1, $ex = '', $lev, $inc = '' /*
     function lists_trm($ang, $ex, $lev, $inc)
     {

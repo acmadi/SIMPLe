@@ -8,13 +8,13 @@
     <table class="table">
         <thead>
         <tr>
-            <th class="short">No Tiket</th>
-            <th class="short">Tanggal</th>
-            <th class="short">Kode Eselon</th>
-            <th class="short">Nama Eselon</th>
+            <th class="no">No Tiket</th>
+            <th class="no">Tanggal</th>
+            <th class="short">Kementrian</th>
+            <th class="short">Eselon</th>
 <!--            <th class="short">Kode Satker</th>-->
 <!--            <th>Nama Satker</th>-->
-            <th class="short">Status Tiket</th>
+            <th class="no">Status Tiket</th>
             <th class="short">Status Dokumen</th>
         </tr>
         </thead>
@@ -26,14 +26,14 @@
         <tbody>
         <?php foreach ($result as $value): ?>
         <tr>
-            <td class="short"><?php echo sprintf('%05d', $value->no_tiket_frontdesk) ?></td>
-            <td class="short"><?php echo table_tanggal($value->tanggal) ?></td>
-            <td class="short"><?php echo $value->id_unit ?></td>
-            <td class="short"><?php echo $value->nama_unit ?></td>
+            <td><?php echo sprintf('%05d', $value->no_tiket_frontdesk) ?></td>
+            <td><?php echo table_tanggal($value->tanggal) ?></td>
+            <td><strong><?php echo $value->id_kementrian ?></strong> - <?php echo $value->nama_kementrian ?></td>
+            <td><strong><?php echo $value->id_unit ?></strong> - <?php echo $value->nama_unit ?></td>
 <!--            <td class="short">--><?php //echo $value->id_satker ?><!--</td>-->
 <!--            <td>--><?php //echo $value->nama_satker ?><!--</td>-->
-            <td class="short"><?php echo $value->status ?></td>
-            <td class="short">
+            <td><?php echo $value->status ?></td>
+            <td>
                 <?php
                 switch ($value->is_active) {
                     case '1':
