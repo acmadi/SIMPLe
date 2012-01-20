@@ -17,7 +17,7 @@ class Dashboard extends CI_Controller
         $data['helpdesk_total_pelaksana'] = $this->mhelpdesk->count_all_tiket('close', 3);
         $data['helpdesk_total'] = $this->mhelpdesk->count_all_tiket('open', 4);
                                   
-        $data['frontdesk_total'] = $this->mfrontdesk->get_all_tiket_frontdesk(4, 'AND is_active IN(4,5)', TRUE);
+        $data['frontdesk_total'] = $this->mfrontdesk->count_all_tiket_frontdesk('open',4,'4,5'); 
         $data['total_tiket_diterima_cs'] = $this->mfrontdesk->count_all_tiket_frontdesk('open',1,1); 
         $data['total_tiket_diteruskan_cs'] = $this->mfrontdesk->count_all_tiket_frontdesk('open',3,2);
         $data['total_tiket_diterima_pelaksana'] = $this->mfrontdesk->count_all_tiket_frontdesk('open',3,1);
