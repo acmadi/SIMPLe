@@ -12,6 +12,7 @@ class Dirjen extends CI_Controller
     {
 		//$ang = 1, $ex = '', $lev, $inc = '' 
 		$this->load->model('Mdirjen','dirjen');
+
         // ========== A1 ==========
         $data['a1_cs_diterima'] = $this->dirjen->get_jml_trm(1, 2, 1,1);
 
