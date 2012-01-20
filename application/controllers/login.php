@@ -9,7 +9,8 @@ Class Login extends CI_Controller
 
     public function index()
     {
-        $this->load->view("login");
+        $data['content'] = 'login';
+        $this->load->view('new-template', $data);
     }
 
     public function usermasuk()
@@ -112,6 +113,8 @@ Class Login extends CI_Controller
         $this->session->unset_userdata('level');
         $this->session->sess_destroy();
         unset($_SESSION);
+        session_start();
+        session_destroy();
         $this->session->set_flashdata("anda telah berhasil logout");
         redirect("login");
 
