@@ -38,7 +38,7 @@ class Mfrontdesk extends CI_Model
 	}
 	*/
 	
-	public function get_all_tiket_frontdesk($level = 3,$optional = ''){
+	public function get_all_tiket_frontdesk($level = 3,$optional = '', $isCount = FALSE){
 		//@F2D
 		$utkAnggr = $this->db->query("SELECT id_unit_satker
 					FROM tb_user 
@@ -117,6 +117,10 @@ class Mfrontdesk extends CI_Model
 
 		$data['isian_form1'] = $keyword;
 		$data['pagination1'] = $this->pagination->create_links();
+
+		if ($isCount) :
+			return $data["query"]->num_rows();
+		endif;
 
 		return $data;
 	}
@@ -208,9 +212,10 @@ class Mfrontdesk extends CI_Model
 		return $data;
     }
 
-    public function count_all_tiket($status = 'open')
+    public function count_all_tiket($status = 'open', $lavel)
     {
-        $result = $this->db->query("SELECT no_tiket_frontdesk FROM tb_tiket_frontdesk WHERE status = '{$status}'");
+        $result = $this->db->query("SELECT no_tiket_frontdesk FROM tb_tiket_frontdesk WHERE status = '{$status}'
+         AND lavel = $lavel");
         return $result->num_rows();
     }
 
