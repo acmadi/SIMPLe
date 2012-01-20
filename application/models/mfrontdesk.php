@@ -94,8 +94,12 @@ class Mfrontdesk extends CI_Model
 			$where2 = $optional;
 		}
 		$sql = "SELECT tf.no_tiket_frontdesk, tf.tanggal,tf.id_unit, tu.nama_unit, tm.nama_kementrian,tf.is_active
-				FROM tb_tiket_frontdesk tf, tb_unit tu, tb_kementrian tm 
-				WHERE tu.id_unit = tf.id_unit AND tu.id_kementrian = tf.id_kementrian AND tf.status = 'open' 
+				FROM tb_tiket_frontdesk tf 
+				LEFT JOIN tb_unit tu 
+					ON(tu.id_unit = tf.id_unit)  
+				LEFT JOIN tb_kementrian tm 
+					ON (tu.id_kementrian = tf.id_kementrian) 
+				WHERE tf.status = 'open' 
 				AND tf.lavel = ? AND tm.id_kementrian = tf.id_kementrian $where $where2 $where_ang
 				ORDER BY tf.status"; //print_r($this->db->last_query());//exit;
 				
@@ -109,9 +113,13 @@ class Mfrontdesk extends CI_Model
 		
 		
 		$sqlb = "SELECT tf.no_tiket_frontdesk, tf.tanggal,tf.id_unit, tu.nama_unit, tm.nama_kementrian,tf.is_active
-				FROM tb_tiket_frontdesk tf, tb_unit tu, tb_kementrian tm 
-				WHERE tu.id_unit = tf.id_unit AND tu.id_kementrian = tf.id_kementrian AND tf.status = 'open' 
-				AND tf.lavel = ?  AND tm.id_kementrian = tf.id_kementrian $where $where2 $where_ang
+				FROM tb_tiket_frontdesk tf 
+				LEFT JOIN tb_unit tu 
+					ON(tu.id_unit = tf.id_unit)  
+				LEFT JOIN tb_kementrian tm 
+					ON (tm.id_kementrian = tf.id_kementrian) 
+				WHERE tf.status = 'open' 
+				AND tf.lavel = ? $where $where2 $where_ang
 				LIMIT ?,?"; //print_r($this->db->last_query());
 		$data["query"] = $this->db->query($sqlb, array($level,$offset ,$config['per_page']));
 

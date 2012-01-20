@@ -1,7 +1,6 @@
 <div class="content">
 
     <h1>Front Desk</h1>
-
     <?php if ($result->num_rows() > 0): ?>
 
         <?php echo search('') ?>
@@ -27,7 +26,10 @@
             <?php $i = 1 ?>
             <?php foreach ($result->result() as $value): ?>
 
-            <?php
+<!--     <pre>
+    <?php print_r($value) ?>
+    </pre>
+ -->            <?php
             $date1 = new DateTime(date('Y-m-d H:i:s'));
             $date2 = new DateTime($value->tanggal);
             //                            $day = $date1->diff($date2);
