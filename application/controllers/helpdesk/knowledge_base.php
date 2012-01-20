@@ -142,16 +142,17 @@ class Knowledge_base extends CI_Controller
 
         echo '<ul style="list-style: inside;">';
         foreach ($result->result() as $value) {
-            echo "<li>
-                    <a href=\"javascript:void(0)\"
-                       class=\"jawaban\"
-                       data-id_knowledge_base=\"{$value->id_knowledge_base}\"
-                       data-pertanyaan=\"{$value->judul}\"
-                       data-deskripsi=\"{$value->desripsi}\"
-                       data-jawaban=\"{$value->jawaban}\">
+            $string = "<li>
+                    <a href='javascript:void(0)'
+                       class='jawaban'
+                       data-id_knowledge_base='{$value->id_knowledge_base}'
+                       data-pertanyaan='{$value->judul}'
+                       data-deskripsi='{$value->desripsi}'
+                       data-jawaban='{$value->jawaban}'>
                         {$value->judul}
                     </a>
                  </li>";
+            echo $string;
         }
         echo '</ul>';
     }
