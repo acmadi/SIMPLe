@@ -57,10 +57,11 @@ class Man_user_tambah extends CI_Controller
 
     function pilih_departemen($id_lavel) {
         $sql = "SELECT * FROM tb_unit_saker
-                WHERE id_lavel = ?";
+                JOIN tb_lavel ON tb_unit_saker.id_lavel = tb_lavel.lavel
+                WHERE lavel = ?";
         $result = $this->db->query($sql, array($id_lavel))->result();
 
-//        echo $this->db->last_query();
+        echo $this->db->last_query();
         foreach ($result as $value) {
             echo sprintf('<option value="%s">%s</option>', $value->id_unit_satker, $value->nama_unit);
         }

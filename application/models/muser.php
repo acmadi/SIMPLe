@@ -45,19 +45,19 @@ class Muser extends CI_Model
 
 		$sql = "SELECT a.id_user, a.username, a.nama, a.email, a.no_tlp, b.nama_unit, a.id_lavel, c.nama_lavel
 				FROM tb_user a, tb_unit_saker b,tb_lavel c WHERE a.id_lavel = c.id_lavel AND a.id_unit_satker = b.id_unit_satker
-				 $where ORDER BY id_user ASC";
+				 $where ORDER BY username ASC";
 		$query = $this->db->query($sql);
 
 		$config['base_url'] = site_url('/admin/man_user/index').'/'.$url_add;
 		$config['total_rows'] = $query->num_rows();
-		$config['per_page'] = 10;
+		$config['per_page'] = 30;
 		$config['uri_segment'] = $uri_segment;
 		$this->pagination->initialize($config);
 
 
 		$sqlb = "SELECT a.id_user, a.username, a.nama, a.email, a.no_tlp, b.nama_unit, a.id_lavel, c.nama_lavel
 				FROM tb_user a, tb_unit_saker b,tb_lavel c WHERE a.id_lavel = c.id_lavel AND a.id_unit_satker = b.id_unit_satker
-				 $where ORDER BY id_user ASC
+				 $where ORDER BY username ASC
 				LIMIT ?,?";
 		$data["query"] = $this->db->query($sqlb, array($offset ,$config['per_page']));
 
@@ -151,7 +151,7 @@ class Muser extends CI_Model
 	}
 	
 	function get_list_unit(){
-		return $this->db->query("SELECT * FROM tb_unit_saker")->result();
+		return $this->db->query("SELECT * FROM tb_lavel")->result();
 	}
 	
 	function reset_password($user){
