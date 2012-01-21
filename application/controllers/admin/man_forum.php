@@ -100,7 +100,7 @@ class Man_forum extends CI_Controller
 		
 		if($nm_file != '') {
 			$nmBr = $nm_file->file;
-			$ft = 'upload/'.$nmBr;
+			$ft = 'upload/forum/'.$nmBr;
 			@unlink ($ft);
 		}
         $this->db->query("DELETE FROM tb_forum WHERE id_forum=?", array($id));
@@ -178,12 +178,12 @@ class Man_forum extends CI_Controller
 			$nmBr = '';
 			if(!empty($_FILES['lampiran']['name'])){
 				if(!empty($nama_file->file)){
-					$ft = 'upload/'.$nama_file->file;
+					$ft = 'upload/forum/'.$nama_file->file;
 					@unlink ($ft);
 				}
 				$unik = date('isdm').'_forum_';
 				$nmBr = $unik.$_FILES['lampiran']['name'];
-				move_uploaded_file($_FILES['lampiran']['tmp_name'], 'upload/'.$nmBr);
+				move_uploaded_file($_FILES['lampiran']['tmp_name'], 'upload/forum/'.$nmBr);
 			}
 
 			$result = $this->mforum->update_forum($id_kat_forum, $judul_forum, $isi_forum, $nmBr,$id);
