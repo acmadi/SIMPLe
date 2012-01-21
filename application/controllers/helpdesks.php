@@ -29,8 +29,16 @@ class Helpdesks extends CI_Controller
     {
         if ($_POST) {
             $eselon = $this->cari_eselon($this->input->post('nama_kl'), $this->input->post('eselon'));
+            $satker = $this->cari_satker(
+                $this->input->post('nama_kl'),
+                $this->input->post('eselon'),
+                $this->input->post('kode_satker')
+            );
+
             $data['eselon'] = $eselon;
+            $data['satker'] = $satker;
         }
+
         $data['kementrian'] = $this->db->get('tb_kementrian');
         $data['title'] = 'Helpdesk - Identitas';
         $data['content'] = 'new-helpdesk/identity';
@@ -307,9 +315,10 @@ class Helpdesks extends CI_Controller
      * Output berupa <option value="kode_eselon">nama_eselon</option>
      *
      * @param $id_kementrian Kode Kementrian (e.g 002, 014)
+     * @param $eselon Kode Eselon (e.g 01, 06, 21)
      * @output HTML
      */
-    function cari_eselon($id_kementrian, $select = '')
+    function cari_eselon($id_kementrian, $id_eselon = '')
     {
 
         /* INFO:
@@ -324,10 +333,9 @@ class Helpdesks extends CI_Controller
         $result = $this->db->query("SELECT * FROM tb_unit WHERE id_kementrian = ?", array($id_kementrian));
         $eselon = '';
         if ($result->num_rows() > 0) {
-            $result = $result->result();
 
-            foreach ($result as $value) {
-                if ($select != '' AND $select == $value->id_unit) {
+            foreach ($result->result() as $value) {
+                if ($id_eselon != '' AND $id_eselon == $value->id_unit) {
                     $eselon .= sprintf('<option selected value="%s">%s - %s</option>', $value->id_unit, $value->id_unit, $value->nama_unit);
                 } else {
                     $eselon .= sprintf('<option value="%s">%s - %s</option>', $value->id_unit, $value->id_unit, $value->nama_unit);
@@ -337,4 +345,30 @@ class Helpdesks extends CI_Controller
         return $eselon;
     }
 
+    /**
+     * Mencari data Satker
+     *
+     * @param $id_kementrian Kode Kementrian (e.g 002, 014)
+     * @param $id_eselon Kode Eselon (e.g 01, 06, 21)
+     * @param $id_satker Kode Satker (e.g 004028, 309050)
+     */
+    function cari_satker($id_kementrian, $id_eselon, $id_satker = '')
+    {
+        $sql = "SELECT * FROM tb_satker
+                WHERE id_unit = ? AND id_kementrian = ?
+                ORDER BY id_unit";
+
+        $result = $this->db->query($sql, array($id_eselon, $id_kementrian));
+
+        $satker = '';
+
+        foreach ($result->result() as $value) {
+            if ($id_satker != '' AND $id_satker == $value->id_satker) {
+                $satker .= sprintf('<option selected value="%s">%s</option>', $value->id_satker, $value->id_satker . ' - ' . $value->nama_satker);
+            } else {
+                $satker .= sprintf('<option value="%s">%s</option>', $value->id_satker, $value->id_satker . ' - ' . $value->nama_satker);
+            }
+        }
+        return $satker;
+    }
 }

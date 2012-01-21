@@ -93,7 +93,7 @@
 
         <p>
             <label>Nama Eselon 1 </label>&nbsp;
-            <select id="eselon" name="eselon" class="kl chzn-select" data-placeholder="Pilih Eselon I" style="width: 400px;">
+            <select name="eselon" id="eselon" class="kl chzn-select" data-placeholder="Pilih Eselon I" style="width: 400px;">
                 <?php
                 if (set_value('eselon')) {
                     echo $eselon;
@@ -104,7 +104,13 @@
 
         <p class="kode_satker_p">
             <label>Kode - Nama Satker</label>
-            <select name="kode_satker" id="kode_satker" class="kl chzn-select" data-placeholder="Pilih Satker" style="width: 400px;"></select>
+            <select name="kode_satker" id="kode_satker" class="kl chzn-select" data-placeholder="Pilih Satker" style="width: 400px;">
+                <?php
+                if (set_value('kode_satker')) {
+                    echo $satker;
+                }
+                ?>
+            </select>
         </p>
     </fieldset>
 
