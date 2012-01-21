@@ -13,16 +13,17 @@
             <th class="no">Proses (Hari)</th>
             <th>Kementrian</th>
             <th>Eselon</th>
+<!--            <th>Posisi</th>-->
 
             <?php if ($this->uri->segment(4) == 6): ?>
-            <th>Aksi</th>
+            <th>&nbsp;</th>
             <?php endif ?>
 
         </tr>
         </thead>
         <tfoot>
         <tr>
-            <td colspan="7">&nbsp;</td>
+            <td colspan="8">&nbsp;</td>
         </tr>
         </tfoot>
         <tbody>
@@ -38,13 +39,26 @@
                     <td><?php echo hari_kerja($value->tanggal) ?></td>
                     <td><strong><?php echo $value->id_kementrian ?></strong> - <?php echo $value->nama_kementrian ?></td>
                     <td><strong><?php echo $value->id_unit ?></strong> - <?php echo $value->nama_unit ?></td>
+<!--                    <td>--><?php //echo $value->lavel ?><!--</td>-->
 
-                    <?php if ($this->uri->segment(4) == 6): ?>
                     <td class="action">
-                        <a href="#" class="button green" onclick="return confirm('Anda yakin menyetujui tiket ini?')">Disetujui</a>
-                        <a href="#" class="button red" onclick="return confirm('Anda yakin menolak tiket ini?')">Ditolak</a>
+                        <?php if ($value->lavel == 6): ?>
+                            <?php if ($value->is_active == 2): ?>
+
+                            <a href="<?php echo site_url('dirjen/diterima/' . $value->no_tiket_frontdesk) ?>" class="button green">Diterima</a>
+                            <a href="javascript:void(0)" class="button disabled">Ditetapkan</a>
+                            <a href="javascript:void(0)" class="button disabled">Ditolak</a>
+
+
+                            <?php else: ?>
+
+                            <a href="javascript:void(0)" class="button disabled">Diterima</a>
+                            <a href="#" class="button green" onclick="return confirm('Anda yakin menetapkan tiket ini?')">Ditetapkan</a>
+                            <a href="<?php echo site_url('dirjen/reject/' . $value->no_tiket_frontdesk) ?>" class="button red" onclick="return confirm('Anda yakin menolak tiket ini?')">Ditolak</a>
+
+                            <?php endif; ?>
+                        <?php endif; ?>
                     </td>
-                    <?php endif ?>
 
                 </tr>
 
