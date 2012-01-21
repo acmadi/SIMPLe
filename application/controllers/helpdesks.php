@@ -183,43 +183,50 @@ class Helpdesks extends CI_Controller
 
         } elseif ($step == 'step2') {
 
-            if ($this->input->get('prev_question')) {
-                // Simpan tiket baru
-                $this->db->insert('tb_tiket_helpdesk', array(
-                    'no_tiket_helpdesk' => $this->session->userdata('no_tiket_helpdesk'),
-                    'pertanyaan' => $this->input->post('pertanyaan'),
-                    'description' => $this->input->post('description'),
-                    'prioritas' => $this->input->post('prioritas'),
-                    'id_kat_knowledge_base' => $this->input->post('kategori_knowledge_base'),
-                    'id_satker' => $this->input->post('id_satker'),
-                    'id_user' => $this->session->userdata('id_user'),
-                    'tanggal' => date('Y-m-d H:i:s')
-                ));
+            $this->form_validation->set_rules('kategori_knowledge_base', 'Kategori Knowledge Base', 'required');
+            $this->form_validation->set_rules('prioritas', 'Prioritas', 'required');
+            $this->form_validation->set_rules('pertanyaan', 'Pertanyaan', 'required');
+            $this->form_validation->set_rules('description', 'Description', 'required');
 
-                // Simpan ID tiket helpdesk
-                $id_tiket_helpdesk = $this->db->insert_id();
-                $this->session->set_userdata('id_tiket_helpdesk', $id_tiket_helpdesk);
+            if ($this->form_validation->run() == TRUE) {
 
-            } else {
-
-                $this->db->update('tb_tiket_helpdesk', array(
-                        'no_tiket_helpdesk' => $this->input->post('no_tiket_helpdesk'),
+                if ($this->input->get('prev_question')) {
+                    // Simpan tiket baru
+                    $this->db->insert('tb_tiket_helpdesk', array(
+                        'no_tiket_helpdesk' => $this->session->userdata('no_tiket_helpdesk'),
                         'pertanyaan' => $this->input->post('pertanyaan'),
                         'description' => $this->input->post('description'),
                         'prioritas' => $this->input->post('prioritas'),
                         'id_kat_knowledge_base' => $this->input->post('kategori_knowledge_base'),
                         'id_satker' => $this->input->post('id_satker'),
                         'id_user' => $this->session->userdata('id_user'),
-                    ), array(
-                        'id' => $this->session->userdata('id_tiket_helpdesk')
-                    )
-                );
+                        'tanggal' => date('Y-m-d H:i:s')
+                    ));
 
-                $this->session->set_userdata('no_tiket_helpdesk', $this->input->post('no_tiket_helpdesk'));
+                    // Simpan ID tiket helpdesk
+                    $id_tiket_helpdesk = $this->db->insert_id();
+                    $this->session->set_userdata('id_tiket_helpdesk', $id_tiket_helpdesk);
+
+                } else {
+
+                    $this->db->update('tb_tiket_helpdesk', array(
+                            'no_tiket_helpdesk' => $this->input->post('no_tiket_helpdesk'),
+                            'pertanyaan' => $this->input->post('pertanyaan'),
+                            'description' => $this->input->post('description'),
+                            'prioritas' => $this->input->post('prioritas'),
+                            'id_kat_knowledge_base' => $this->input->post('kategori_knowledge_base'),
+                            'id_satker' => $this->input->post('id_satker'),
+                            'id_user' => $this->session->userdata('id_user'),
+                        ), array(
+                            'id' => $this->session->userdata('id_tiket_helpdesk')
+                        )
+                    );
+
+                    $this->session->set_userdata('no_tiket_helpdesk', $this->input->post('no_tiket_helpdesk'));
+                }
+                $this->jawaban();
             }
-
-            $this->jawaban();
-            //            redirect('helpdesks/jawaban');
+            $this->pertanyaan();
         }
     }
 
