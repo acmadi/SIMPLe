@@ -104,7 +104,7 @@
                 </td>
                 <td style="padding: 10px; width: 100px;">
                     <label for="pertanyaan" style="display: inline-block; width: 70px;">Pertanyaan</label>
-                    <input type="text" name="pertanyaan" id="pertanyaan" tabindex="3" style="width: 400px;"/>
+                    <input type="text" name="pertanyaan" id="pertanyaan" value="<?php echo set_value('pertanyaan') ?>" tabindex="3" style="width: 400px;"/>
                 </td>
             </tr>
             <tr>
@@ -118,7 +118,7 @@
                 </td>
                 <td style="padding: 10px; width: 100px;">
                     <label for="description" style="display: inline-block; width: 70px;">Deskripsi</label>
-                    <input type="text" name="description" id="description" tabindex="4" style="width: 400px;"/>
+                    <input type="text" name="description" id="description" value="<?php echo set_value('description') ?>" tabindex="4" style="width: 400px;"/>
                 </td>
             </tr>
         </table>
