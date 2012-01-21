@@ -93,10 +93,10 @@
 
         <p>
             <label>Nama Eselon 1 </label>&nbsp;
-            <select id="eselon" name="eselon" class="kl chzn-select" data-placeholder="Pilih Eselon I" style="width: 400px;">
+            <select name="eselon" id="eselon" class="kl chzn-select" data-placeholder="Pilih Eselon I" style="width: 400px;">
                 <?php
                 if (set_value('eselon')) {
-                    //echo file_get_contents(site_url('helpdesk/identitas_satker/cari_kl/' . set_value('nama_kl') . '?select=' . set_value('eselon')));
+                    echo $eselon;
                 }
                 ?>
             </select>
@@ -104,7 +104,13 @@
 
         <p class="kode_satker_p">
             <label>Kode - Nama Satker</label>
-            <select name="kode_satker" id="kode_satker" class="kl chzn-select" data-placeholder="Pilih Satker" style="width: 400px;"></select>
+            <select name="kode_satker" id="kode_satker" class="kl chzn-select" data-placeholder="Pilih Satker" style="width: 400px;">
+                <?php
+                if (set_value('kode_satker')) {
+                    echo $satker;
+                }
+                ?>
+            </select>
         </p>
     </fieldset>
 
@@ -140,7 +146,7 @@
 
     <div class="clear"></div>
 
-    <div style="text-align: right; margin-top: 20px;">
+    <div style="text-align: center; margin-top: 20px;">
         <input type="submit" class="button green" value="Help Desk">
 <!--        <input type="submit" class="button blue-pill" value="Saluran Pengaduan">-->
         <input type="reset" class="button" value="Reset">
@@ -186,7 +192,7 @@
         </p>
     </fieldset>
 
-    <div style="text-align: right; margin-top: 20px;">
+    <div style="text-align: center; margin-top: 20px;">
         <input type="submit" class="button green" value="Help Desk">
 <!--        <input type="submit" class="button blue-pill" value="Saluran Pengaduan">-->
         <input type="reset" class="button" value="Reset">

@@ -30,4 +30,21 @@ jQuery(function () {
     $(".chzn-select").chosen({
         no_results_text:'Data tidak ditemukan'
     });
+
+    $('.table').dataTable({
+        sPaginationType:'full_numbers',
+        "oLanguage":{
+            sLengthMenu:'Memperlihatkan _MENU_ data per halaman',
+            sZeroRecords:'Data tidak ditemukan',
+            sInfo:'Memperlihatkan _START_ hingga _END_ dari _TOTAL_ data',
+            sInfoEmpty:'Memperlihatkan 0 hingga 0 dari 0 data',
+            sInfoFiltered:'(Menyaring dari _MAX_ jumlah data)',
+            oPaginate:{
+                sFirst:'Awal',
+                sLast:'Akhir',
+                sNext:'Berikutnya',
+                sPrevious:'Akhir'
+            },
+        }
+    });
 })

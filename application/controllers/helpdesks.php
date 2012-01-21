@@ -27,6 +27,17 @@ class Helpdesks extends CI_Controller
 
     public function identity()
     {
+        if ($_POST) {
+            $eselon = $this->cari_eselon($this->input->post('nama_kl'), $this->input->post('eselon'));
+            $satker = $this->cari_satker(
+                $this->input->post('nama_kl'),
+                $this->input->post('eselon'),
+                $this->input->post('kode_satker')
+            );
+
+            $data['eselon'] = $eselon;
+            $data['satker'] = $satker;
+        }
 
         $data['kementrian'] = $this->db->get('tb_kementrian');
         $data['title'] = 'Helpdesk - Identitas';
@@ -172,43 +183,51 @@ class Helpdesks extends CI_Controller
 
         } elseif ($step == 'step2') {
 
-            if ($this->input->get('prev_question')) {
-                // Simpan tiket baru
-                $this->db->insert('tb_tiket_helpdesk', array(
-                    'no_tiket_helpdesk' => $this->session->userdata('no_tiket_helpdesk'),
-                    'pertanyaan' => $this->input->post('pertanyaan'),
-                    'description' => $this->input->post('description'),
-                    'prioritas' => $this->input->post('prioritas'),
-                    'id_kat_knowledge_base' => $this->input->post('kategori_knowledge_base'),
-                    'id_satker' => $this->input->post('id_satker'),
-                    'id_user' => $this->session->userdata('id_user'),
-                    'tanggal' => date('Y-m-d H:i:s')
-                ));
+            $this->form_validation->set_rules('kategori_knowledge_base', 'Kategori Knowledge Base', 'required');
+            $this->form_validation->set_rules('prioritas', 'Prioritas', 'required');
+            $this->form_validation->set_rules('pertanyaan', 'Pertanyaan', 'required');
+            $this->form_validation->set_rules('description', 'Description', 'required');
 
-                // Simpan ID tiket helpdesk
-                $id_tiket_helpdesk = $this->db->insert_id();
-                $this->session->set_userdata('id_tiket_helpdesk', $id_tiket_helpdesk);
+            if ($this->form_validation->run() == TRUE) {
 
-            } else {
-
-                $this->db->update('tb_tiket_helpdesk', array(
-                        'no_tiket_helpdesk' => $this->input->post('no_tiket_helpdesk'),
+                if ($this->input->get('prev_question')) {
+                    // Simpan tiket baru
+                    $this->db->insert('tb_tiket_helpdesk', array(
+                        'no_tiket_helpdesk' => $this->session->userdata('no_tiket_helpdesk'),
                         'pertanyaan' => $this->input->post('pertanyaan'),
                         'description' => $this->input->post('description'),
                         'prioritas' => $this->input->post('prioritas'),
                         'id_kat_knowledge_base' => $this->input->post('kategori_knowledge_base'),
                         'id_satker' => $this->input->post('id_satker'),
                         'id_user' => $this->session->userdata('id_user'),
-                    ), array(
-                        'id' => $this->session->userdata('id_tiket_helpdesk')
-                    )
-                );
+                        'tanggal' => date('Y-m-d H:i:s')
+                    ));
 
-                $this->session->set_userdata('no_tiket_helpdesk', $this->input->post('no_tiket_helpdesk'));
+                    // Simpan ID tiket helpdesk
+                    $id_tiket_helpdesk = $this->db->insert_id();
+                    $this->session->set_userdata('id_tiket_helpdesk', $id_tiket_helpdesk);
+
+                } else {
+
+                    $this->db->update('tb_tiket_helpdesk', array(
+                            'no_tiket_helpdesk' => $this->input->post('no_tiket_helpdesk'),
+                            'pertanyaan' => $this->input->post('pertanyaan'),
+                            'description' => $this->input->post('description'),
+                            'prioritas' => $this->input->post('prioritas'),
+                            'id_kat_knowledge_base' => $this->input->post('kategori_knowledge_base'),
+                            'id_satker' => $this->input->post('id_satker'),
+                            'id_user' => $this->session->userdata('id_user'),
+                        ), array(
+                            'id' => $this->session->userdata('id_tiket_helpdesk')
+                        )
+                    );
+
+                    $this->session->set_userdata('no_tiket_helpdesk', $this->input->post('no_tiket_helpdesk'));
+                }
+                $this->jawaban();
+            } else {
+                $this->pertanyaan();
             }
-
-            $this->jawaban();
-            //            redirect('helpdesks/jawaban');
         }
     }
 
@@ -299,4 +318,65 @@ class Helpdesks extends CI_Controller
         echo $result->num_rows();
     }
 
+    /**
+     * Digunakan untuk mencari Eselon.
+     * Output berupa <option value="kode_eselon">nama_eselon</option>
+     *
+     * @param $id_kementrian Kode Kementrian (e.g 002, 014)
+     * @param $eselon Kode Eselon (e.g 01, 06, 21)
+     * @output HTML
+     */
+    function cari_eselon($id_kementrian, $id_eselon = '')
+    {
+
+        /* INFO:
+           $select digunakan saat validasi gagal dan untuk tetap memlilih opsi terakhir tetap terpilih.
+           Method set_value() tidak bisa digunakan di controller. Sehingga set_value('eselon') dikirim
+           kembali ke controller untuk diproses. Lihat views/helpdesk/identitas_satker pada Nama Eselon,
+           ada file_get_contents()
+        */
+
+        $id_kementrian = substr($id_kementrian, 0, 3);
+
+        $result = $this->db->query("SELECT * FROM tb_unit WHERE id_kementrian = ?", array($id_kementrian));
+        $eselon = '';
+        if ($result->num_rows() > 0) {
+
+            foreach ($result->result() as $value) {
+                if ($id_eselon != '' AND $id_eselon == $value->id_unit) {
+                    $eselon .= sprintf('<option selected value="%s">%s - %s</option>', $value->id_unit, $value->id_unit, $value->nama_unit);
+                } else {
+                    $eselon .= sprintf('<option value="%s">%s - %s</option>', $value->id_unit, $value->id_unit, $value->nama_unit);
+                }
+            }
+        }
+        return $eselon;
+    }
+
+    /**
+     * Mencari data Satker
+     *
+     * @param $id_kementrian Kode Kementrian (e.g 002, 014)
+     * @param $id_eselon Kode Eselon (e.g 01, 06, 21)
+     * @param $id_satker Kode Satker (e.g 004028, 309050)
+     */
+    function cari_satker($id_kementrian, $id_eselon, $id_satker = '')
+    {
+        $sql = "SELECT * FROM tb_satker
+                WHERE id_unit = ? AND id_kementrian = ?
+                ORDER BY id_unit";
+
+        $result = $this->db->query($sql, array($id_eselon, $id_kementrian));
+
+        $satker = '';
+
+        foreach ($result->result() as $value) {
+            if ($id_satker != '' AND $id_satker == $value->id_satker) {
+                $satker .= sprintf('<option selected value="%s">%s</option>', $value->id_satker, $value->id_satker . ' - ' . $value->nama_satker);
+            } else {
+                $satker .= sprintf('<option value="%s">%s</option>', $value->id_satker, $value->id_satker . ' - ' . $value->nama_satker);
+            }
+        }
+        return $satker;
+    }
 }

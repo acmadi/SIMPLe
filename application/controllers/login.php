@@ -9,6 +9,7 @@ Class Login extends CI_Controller
 
     public function index()
     {
+        $data['title'] = 'Home';
         $data['content'] = 'login';
         $this->load->view('new-template', $data);
     }

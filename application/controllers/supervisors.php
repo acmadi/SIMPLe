@@ -27,7 +27,7 @@ class Supervisors extends CI_Controller
 
     public function report($tipe = 'helpdesk')
     {
-        if($tipe == 'helpdesk') :
+        if ($tipe == 'helpdesk') :
             $data['tiket_helpdesk'] = $this->mhelpdesk->get_all_closed_ticket_by(2, FALSE, TRUE);
             $data['title'] = 'Dashboard';
             $data['content'] = 'supervisor/report_helpdesk';
@@ -41,7 +41,7 @@ class Supervisors extends CI_Controller
         $sql = '';
 
         if (isset($_GET['sort'])) {
-            $sort = $this->input->get('sort'); 
+            $sort = $this->input->get('sort');
             $sql = "SELECT * FROM tb_tiket_helpdesk
                    LEFT JOIN tb_satker
                    ON tb_tiket_helpdesk.id_satker = tb_satker.id_satker
@@ -69,12 +69,48 @@ class Supervisors extends CI_Controller
 
     public function jawab($id)
     {
+        if ($this->input->post('submit') == 'Jawab') {
+
+            $this->form_validation->set_rules('jawaban', 'Jawaban', 'required|trim');
+            // $this->form_validation->set_rules('nama_narasumber', 'Nama Nara Sumber', 'required');
+            // $this->form_validation->set_rules('jabatan', 'Jabatan', 'required');
+            // $this->form_validation->set_rules('file', 'File', 'required');
+
+            if ($this->form_validation->run() == TRUE AND $this->input->post('jawaban') != '<br/>') {
+                // masukkan ke knowledge base
+                $arr = array(
+                    'judul' => $this->input->post('pertanyaan'),
+                    'desripsi' => $this->input->post('description'),
+                    'jawaban' => $this->input->post('jawaban'),
+                    'nama_narasumber' => $this->input->post('nama_narasumber'),
+                    'jabatan_narasumber' => $this->input->post('jabatan_narasumber'),
+                );
+                $id_knowledge_base = $this->mknowledge->add($arr);
+
+                // kembalikan ke helpdesk
+                $this->db->update('tb_tiket_helpdesk', array(
+                    'lavel' => 1,
+                    'id_knowledge_base' => $id_knowledge_base,
+                    'jawab' => $this->input->post('jawaban'),
+                    'sumber' => $this->input->post('nama_narasumber')
+                ), array(
+                    'id' => $this->input->post('id')
+                ));
+
+                $this->session->set_flashdata('success', 'Pertanyaan telah dijawab');
+                redirect('supervisors/list_pertanyaan');
+
+            }
+        }
+
         $sql = "SELECT *
                     FROM tb_tiket_helpdesk
                     LEFT JOIN tb_satker
                     ON tb_tiket_helpdesk.id_satker = tb_satker.id_satker
                     LEFT JOIN tb_petugas_satker
                     ON tb_tiket_helpdesk.id_satker = tb_petugas_satker.id_satker
+                    JOIN tb_kat_knowledge_base
+                    ON tb_kat_knowledge_base.id_kat_knowledge_base = tb_tiket_helpdesk.id_kat_knowledge_base
                     WHERE id = '{$id}'";
 
         $result = $this->db->query($sql);
