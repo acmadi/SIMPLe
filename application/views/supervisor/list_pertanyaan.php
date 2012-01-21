@@ -1,7 +1,19 @@
 <div class="content">
-<h1>Penyelia - Daftar Pertanyaan</h1>
+    <h1>Penyelia - Daftar Pertanyaan</h1>
 
-<?php if ($pertanyaan->num_rows() > 0): ?>
+    <?php
+    if ($this->session->flashdata('success')) {
+        echo notification($this->session->flashdata('success'), 'Sukses', 'green');
+    }
+    if ($this->session->flashdata('info')) {
+        echo notification($this->session->flashdata('info'), 'Informasi', 'blue');
+    }
+    if (validation_errors()) {
+        echo notification(validation_errors(), 'ERROR', 'red');
+    }
+    ?>
+
+    <?php if ($pertanyaan->num_rows() > 0): ?>
 
 
     <div style="text-align: right; margin-bottom: 20px">
@@ -37,11 +49,11 @@
             <td class="no"><?php echo $value->pertanyaan ?></td>
             <td class="no">
                 <?php if ($value->prioritas == 'high'): ?>
-                    <span style="color: green; font-weight: bold;">LOW</span>
+                <span style="color: green; font-weight: bold;">LOW</span>
                 <?php elseif ($value->prioritas == 'medium'): ?>
-                    <span style="color: blue; font-weight: bold;">MEDIUM</span>
+                <span style="color: blue; font-weight: bold;">MEDIUM</span>
                 <?php else: ?>
-                    <span style="color: red; font-weight: bold;">HIGH</span>
+                <span style="color: red; font-weight: bold;">HIGH</span>
                 <?php endif ?>
             </td>
             <td class="action">
@@ -54,9 +66,9 @@
     </table>
 
 
-<?php else: ?>
+    <?php else: ?>
     Tidak ada pertanyaan yang dieskalasi
-<?php endif; ?>
+    <?php endif; ?>
 
 </div>
 <script type="text/javascript" src="<?php echo base_url(); ?>js/fungsi.js"></script>
