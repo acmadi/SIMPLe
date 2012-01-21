@@ -225,8 +225,9 @@ class Helpdesks extends CI_Controller
                     $this->session->set_userdata('no_tiket_helpdesk', $this->input->post('no_tiket_helpdesk'));
                 }
                 $this->jawaban();
+            } else {
+                $this->pertanyaan();
             }
-            $this->pertanyaan();
         }
     }
 
