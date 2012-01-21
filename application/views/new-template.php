@@ -32,6 +32,7 @@
     <script type="text/javascript" src="<?php echo base_url('js/jquery-ui-1.8.16.custom.min.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/chosen/chosen.jquery.min.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/jQuery-Visualize/js/visualize.jQuery.js') ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('js/jquery.dataTables.min.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/phpjs/substr.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/scripts.js') ?>"></script>
     <!-- JavaScript END -->
