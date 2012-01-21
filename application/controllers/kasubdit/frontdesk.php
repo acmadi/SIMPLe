@@ -50,10 +50,10 @@ class Frontdesk extends CI_Controller
 
     function diteruskan($id)
     {
-        $query = $this->db->get_where('tb_tiket_frontdesk', array('no_tiket_frontdesk' => $id))->row();
+        // $query = $this->db->get_where('tb_tiket_frontdesk', array('no_tiket_frontdesk' => $id))->row();
 
         $this->db->update('tb_tiket_frontdesk', array(
-            'lavel' => $query->lavel, 'is_active' => 5
+            'is_active' => 5
         ), array(
             'no_tiket_frontdesk' => $id
         ));

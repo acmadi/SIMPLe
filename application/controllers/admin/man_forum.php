@@ -16,7 +16,7 @@ class Man_forum extends CI_Controller
     {
         /*if ($this->session->userdata('login') == TRUE)
           {*/
-		$page		= $this->mforum->get_all();
+		$page		= $this->mforum->get_all(TRUE);
 		$pageData	= $page->result();
 		$pageLink	= '';
 		// $pageData	= $page['query']->result();
@@ -80,7 +80,7 @@ class Man_forum extends CI_Controller
 			if (isset($_FILES['lampiran']['name'])){
 				$unik = date('isdm').'_forum_';
 				$nmBr = $unik.$_FILES['lampiran']['name'];
-				move_uploaded_file($_FILES['lampiran']['tmp_name'], 'upload/'.$nmBr);
+				move_uploaded_file($_FILES['lampiran']['tmp_name'], 'upload/forum/'.$nmBr);
 			}
 
 			$result = $this->mforum->add_forum($id_kat_forum, $judul_forum, $isi_forum, $nmBr, $id_user);

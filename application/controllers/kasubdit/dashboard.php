@@ -11,7 +11,7 @@ class Dashboard extends CI_Controller
 
     function index()
     {
-        //status, lavel, is_active
+		//status, lavel, is_active
         $data['helpdesk_total_cs'] = $this->mhelpdesk->count_all_tiket('close', 1);
         $data['helpdesk_total_supervisor'] = $this->mhelpdesk->count_all_tiket('close', 2);
         $data['helpdesk_total_pelaksana'] = $this->mhelpdesk->count_all_tiket('close', 3);
