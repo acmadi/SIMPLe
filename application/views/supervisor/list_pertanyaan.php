@@ -2,22 +2,10 @@
 <h1>Penyelia - Daftar Pertanyaan</h1>
 
 <?php if ($pertanyaan->num_rows() > 0): ?>
-    <div class="table">
-        <div id="head">
-            <div id="form-cari">
-                Urutkan berdasar :
-                <form action="<?php echo '' ?>" method="get" name="form">
-                    <select name="sort" onchange="javascript: $('form').submit() ">
-                        <option value="" selected="selected"> -</option>
-                        <option value="tanggal">Tanggal</option>
-                        <option value="prioritas">Prioritas</option>
-                    </select>
-                </form>
-            </div>
 
-            <span id="tambah" class="xxlabel"><?php echo $pertanyaan->num_rows() ?> TIKET</span>
-            <br/><br/>
-        </div>
+
+    <div style="text-align: right; margin-bottom: 20px">
+        <span id="tambah" class="xxlabel"><?php echo $pertanyaan->num_rows() ?> TIKET</span>
     </div>
 
     <table class="table">
@@ -49,11 +37,11 @@
             <td class="no"><?php echo $value->pertanyaan ?></td>
             <td class="no">
                 <?php if ($value->prioritas == 'high'): ?>
-                <img src="<?php echo base_url(); ?>images/hight.png" style="width:30px; "/>
+                    <span style="color: green; font-weight: bold;">LOW</span>
                 <?php elseif ($value->prioritas == 'medium'): ?>
-                <img src="<?php echo base_url(); ?>images/medium.png" style="width:30px; "/>
+                    <span style="color: blue; font-weight: bold;">MEDIUM</span>
                 <?php else: ?>
-                <img src="<?php echo base_url(); ?>images/low.png" style="width:30px; "/>
+                    <span style="color: red; font-weight: bold;">HIGH</span>
                 <?php endif ?>
             </td>
             <td class="action">
