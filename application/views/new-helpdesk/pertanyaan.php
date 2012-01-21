@@ -89,44 +89,46 @@
     <fieldset>
         <legend>Pertanyaan</legend>
 
-        <div class="grid_5">
-            <p>
-                <label for="kategori">Kategori</label>
-                <select name="kategori_knowledge_base" id="kategori">
-                    <?php foreach ($kategori->result() as $value): ?>
-                    <option value="<?php echo $value->id_kat_knowledge_base ?>"><?php echo $value->kat_knowledge_base ?></option>
-                    <?php endforeach ?>
-                </select>
-            </p>
-            <p>
-                <label for="prioritas">Prioritas</label>
-                <select name="prioritas" id="prioritas">
-                    <option value="low">Low</option>
-                    <option value="medium">Medium</option>
-                    <option value="high">High</option>
-                </select>
-            </p>
-            <p>
-                <label for="pertanyaan">Pertanyaan</label>
-                <input type="text" name="pertanyaan" id="pertanyaan" value=""/>
-            </p>
-        </div>
-
-        <div class="grid_5">
-            <p>
-                <label for="description">Deskripsi</label>
-                <textarea name="description" id="description" cols="70" rows="10"></textarea>
-            </p>
-        </div>
-
-        <div class="clear"></div>
+        <table style="width: 100%;">
+            <tr>
+                <td style="padding: 10px; width: 100px;">
+                    <label for="kategori" style="display: inline-block; width: 70px;">Kategori</label>
+                    <select name="kategori_knowledge_base" id="kategori" tabindex="1">
+                        <?php foreach ($kategori->result() as $value): ?>
+                        <option value="<?php echo $value->id_kat_knowledge_base ?>"><?php echo $value->kat_knowledge_base ?></option>
+                        <?php endforeach ?>
+                    </select>
+                </td>
+                <td style="padding: 10px; width: 100px;">
+                    <label for="pertanyaan" style="display: inline-block; width: 70px;">Pertanyaan</label>
+                    <input type="text" name="pertanyaan" id="pertanyaan" tabindex="3" style="width: 400px;"/>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; width: 100px;">
+                    <label for="prioritas" style="display: inline-block; width: 70px;">Prioritas</label>
+                    <select name="prioritas" id="prioritas" tabindex="2">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </td>
+                <td style="padding: 10px; width: 100px;">
+                    <label for="description" style="display: inline-block; width: 70px;">Deskripsi</label>
+                    <input type="text" name="description" id="description" tabindex="4" style="width: 400px;"/>
+                </td>
+            </tr>
+        </table>
 
     </fieldset>
 
-    <p>
+    <div style="text-align: center; margin-top: 20px;">
         <input type="submit" class="button green" value="Submit" onclick="return adaPertanyaanBaru()">
+
+        <?php if (isset($prev_question)): ?>
         <a class="button blue" href="<?php echo site_url('helpdesks/identity') ?>">Selesai</a>
-    </p>
+        <?php endif ?>
+    </div>
 
     </form>
 </div>

@@ -146,7 +146,7 @@
 
     <div class="clear"></div>
 
-    <div style="text-align: right; margin-top: 20px;">
+    <div style="text-align: center; margin-top: 20px;">
         <input type="submit" class="button green" value="Help Desk">
 <!--        <input type="submit" class="button blue-pill" value="Saluran Pengaduan">-->
         <input type="reset" class="button" value="Reset">
@@ -192,7 +192,7 @@
         </p>
     </fieldset>
 
-    <div style="text-align: right; margin-top: 20px;">
+    <div style="text-align: center; margin-top: 20px;">
         <input type="submit" class="button green" value="Help Desk">
 <!--        <input type="submit" class="button blue-pill" value="Saluran Pengaduan">-->
         <input type="reset" class="button" value="Reset">
