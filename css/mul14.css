@@ -60,6 +60,10 @@ footer {
     outline: none;
 }
 
+.button.disabled {
+    cursor: not-allowed;
+}
+
 input[type="submit"].button,
 input[type="button"].button {
     height: 24px;
