@@ -97,7 +97,7 @@ class Dirjen extends CI_Controller
 
     function lists($ang, $lev, $adasda)
     {
-        $sql = "SELECT a.no_tiket_frontdesk, a.tanggal,
+        $sql = "SELECT a.no_tiket_frontdesk, a.tanggal, a.lavel, a.is_active,
                        c.nama_unit, c.id_unit,
                        d.nama_kementrian, d.id_kementrian
 
@@ -140,13 +140,29 @@ class Dirjen extends CI_Controller
         $kecuali = " NOT IN($tmpEx) ";
         $termasuk = " IN($tmpIn) ";
 
-        $res = $this->db->query("SELECT a.no_tiket_frontdesk,a.tanggal, c.nama_unit, d.nama_kementrian
-								FROM tb_tiket_frontdesk a, tb_kon_unit_satker b,tb_unit c,tb_kementrian d
-								WHERE a.id_unit = c.id_unit AND a.id_kementrian = c.id_kementrian AND a.id_kementrian = d.id_kementrian
-								 AND a.id_unit = b.id_unit AND a.id_kementrian = b.id_kementrian AND 
-								(SELECT c.anggaran FROM tb_unit_saker c WHERE b.id_unit_satker = c.id_unit_satker ) = ?
-								AND ((a.is_active $kecuali AND lavel = ?) OR (lavel > ?) OR (a.is_active $termasuk AND lavel = ?))
-								", array($ang, $lev, $lev, $lev));
+        $sql = "SELECT a.no_tiket_frontdesk, a.tanggal, a.lavel, a.is_active,
+                       c.nama_unit, c.id_unit,
+                       d.nama_kementrian, d.id_kementrian
+
+                FROM tb_tiket_frontdesk a,
+                     tb_kon_unit_satker b,
+                     tb_unit c,
+                     tb_kementrian d
+
+                WHERE a.id_unit = c.id_unit
+                  AND a.id_kementrian = c.id_kementrian
+                  AND a.id_kementrian = d.id_kementrian
+                  AND a.id_unit = b.id_unit
+                  AND a.id_kementrian = b.id_kementrian
+                  AND (SELECT c.anggaran FROM tb_unit_saker c WHERE b.id_unit_satker = c.id_unit_satker ) = ?
+                  AND ((a.is_active $kecuali AND lavel = ?)
+                   OR (lavel > ?)
+                   OR (a.is_active $termasuk AND lavel = ?))
+
+                GROUP BY a.no_tiket_frontdesk
+                ";
+
+        $res = $this->db->query($sql, array($ang, $lev, $lev, $lev));
 
         $data['lists'] = $res;
 
@@ -158,13 +174,27 @@ class Dirjen extends CI_Controller
     //$ang = 1, $ex = '', $lev, $inc = '' /*
     function lists_trs($ang, $lev)
     {
-        $res = $this->db->query("SELECT a.no_tiket_frontdesk,a.tanggal, c.nama_unit, d.nama_kementrian
-								FROM tb_tiket_frontdesk a, tb_kon_unit_satker b,tb_unit c,tb_kementrian d
-								WHERE a.id_unit = c.id_unit AND a.id_kementrian = c.id_kementrian AND a.id_kementrian = d.id_kementrian
-								 AND a.id_unit = b.id_unit AND a.id_kementrian = b.id_kementrian AND 
-								(SELECT c.anggaran FROM tb_unit_saker c WHERE b.id_unit_satker = c.id_unit_satker ) = ?
-								AND lavel > ?
-								", array($ang, $lev));
+        $sql = "SELECT a.no_tiket_frontdesk, a.tanggal, a.lavel, a.is_active,
+                       c.nama_unit,
+                       d.nama_kementrian
+
+                FROM tb_tiket_frontdesk a,
+                     tb_kon_unit_satker b,
+                     tb_unit c,
+                     tb_kementrian d
+
+                WHERE a.id_unit = c.id_unit
+                  AND a.id_kementrian = c.id_kementrian
+                  AND a.id_kementrian = d.id_kementrian
+                  AND a.id_unit = b.id_unit
+                  AND a.id_kementrian = b.id_kementrian
+                  AND (SELECT c.anggaran FROM tb_unit_saker c WHERE b.id_unit_satker = c.id_unit_satker ) = ?
+                  AND lavel > ?
+
+
+                ";
+
+        $res = $this->db->query($sql, array($ang, $lev));
 
         $data['lists'] = $res;
 
@@ -326,7 +356,7 @@ class Dirjen extends CI_Controller
         $query = $this->db->get_where('tb_tiket_frontdesk', array('no_tiket_frontdesk' => $id))->row();
 
         $this->db->update('tb_tiket_frontdesk', array(
-            'status' => 'close', 'is_active' => 6
+            'status' => 'close', 'is_active' => 6, 'keputusan' => 'disahkan'
         ), array(
             'no_tiket_frontdesk' => $id
         ));
@@ -336,7 +366,13 @@ class Dirjen extends CI_Controller
 
     function reject($id)
     {
-        $this->db->query("UPDATE tb_tiket_frontdesk SET is_active = 0,status = 'close' WHERE no_tiket_frontdesk = ?", array($id));
+        $sql = "UPDATE tb_tiket_frontdesk
+                SET is_active = 0,
+                status = 'close',
+                keputusan = 'ditolak'
+                WHERE no_tiket_frontdesk = ?";
+
+        $this->db->query($sql, array($id));
         redirect('dirjen/frontdesk');
     }
 
