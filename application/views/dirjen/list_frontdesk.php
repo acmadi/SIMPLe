@@ -1,7 +1,7 @@
 <div id="konten">
-			
-            
-    <div class="table"> 
+
+
+    <div class="table">
         <div id="head">
             Cari Tiket
             <div id="cari_unit" action="man_unit_cari" class="cari">
@@ -9,10 +9,10 @@
                 </div>
 
     <div id="tail">
-    <div class="tab">               
-		<table id="tableOne" class="yui">    
+    <div class="tab">
+		<table id="tableOne" class="yui">
 			<thead>
-				<tr>            		    
+				<tr>
 					<th>No</th>
 					<th>Tanggal</th>
 					<th>Hari</th>
