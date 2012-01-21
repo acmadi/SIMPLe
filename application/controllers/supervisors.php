@@ -75,6 +75,8 @@ class Supervisors extends CI_Controller
                     ON tb_tiket_helpdesk.id_satker = tb_satker.id_satker
                     LEFT JOIN tb_petugas_satker
                     ON tb_tiket_helpdesk.id_satker = tb_petugas_satker.id_satker
+                    JOIN tb_kat_knowledge_base
+                    ON tb_kat_knowledge_base.id_kat_knowledge_base = tb_tiket_helpdesk.id_kat_knowledge_base
                     WHERE id = '{$id}'";
 
         $result = $this->db->query($sql);
