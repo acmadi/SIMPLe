@@ -109,8 +109,16 @@ Class Login extends CI_Controller
     {
         $this->log->create("Logout");
         $this->db->query("DELETE FROM tb_online_users WHERE user = ?", array($this->session->userdata('user')));
+
         $this->session->unset_userdata('user');
-        $this->session->unset_userdata('level');
+        $this->session->unset_userdata('id_user');
+        $this->session->unset_userdata('id_lavel');
+        $this->session->unset_userdata('lavel');
+        $this->session->unset_userdata('nama_lavel');
+        $this->session->unset_userdata('nama');
+        $this->session->unset_userdata('id_unit_satker');
+        $this->session->unset_userdata('anggaran');
+
         $this->session->sess_destroy();
         unset($_SESSION);
         session_start();
