@@ -64,8 +64,9 @@ class Mtiket extends CI_Model
 				FROM tb_unit tbu, tb_lavel tl, tb_tiket_frontdesk tbf LEFT JOIN tb_satker ts ON ts.id_satker = tbf.id_satker
 				LEFT JOIN tb_kementrian ON tb_kementrian.id_kementrian = tbf.id_kementrian
 				WHERE tbu.id_unit =  tbf.id_unit AND tbu.id_kementrian = tbf.id_kementrian AND tbf.lavel = tl.lavel $where ORDER BY tbf.status
-				LIMIT ?,?";
-        $data["query"] = $this->db->query($sqlb, array($offset, $config['per_page']));
+				";
+        // $data["query"] = $this->db->query($sqlb, array($offset, $config['per_page']));
+        $data["query"] = $this->db->query($sqlb);
 
         $data['isian_form1'] = $keyword;
         $data['pagination1'] = $this->pagination->create_links();

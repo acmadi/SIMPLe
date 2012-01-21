@@ -4,7 +4,7 @@
 
     <?php //echo search('/frontdesk/status_tiket/index') ?>
 
-    <div class="pagination"><?php echo ($pageLink) ? 'Halaman ' . $pageLink : '';?></div>
+    <!-- <div class="pagination"><?php echo ($pageLink) ? 'Halaman ' . $pageLink : '';?></div> -->
     <table class="table">
         <thead>
         <tr>
@@ -65,6 +65,6 @@
         </tbody>
     </table>
 
-    <div class="pagination"><?php echo ($pageLink) ? 'Halaman ' . $pageLink : '';?></div>
+    <!-- <div class="pagination"><?php echo ($pageLink) ? 'Halaman ' . $pageLink : '';?></div> -->
 
 </div>
