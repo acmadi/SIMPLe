@@ -270,6 +270,10 @@ h1 {
     margin-bottom: 10px;
 }
 
+.dataTables_length select {
+    width: 75px;
+}
+
 .dataTables_filter {
     float: right;
     margin-bottom: 10px;
