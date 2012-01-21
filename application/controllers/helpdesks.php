@@ -27,7 +27,10 @@ class Helpdesks extends CI_Controller
 
     public function identity()
     {
-
+        if ($_POST) {
+            $eselon = $this->cari_eselon($this->input->post('nama_kl'), $this->input->post('eselon'));
+            $data['eselon'] = $eselon;
+        }
         $data['kementrian'] = $this->db->get('tb_kementrian');
         $data['title'] = 'Helpdesk - Identitas';
         $data['content'] = 'new-helpdesk/identity';
@@ -297,6 +300,41 @@ class Helpdesks extends CI_Controller
         }
 
         echo $result->num_rows();
+    }
+
+    /**
+     * Digunakan untuk mencari Eselon.
+     * Output berupa <option value="kode_eselon">nama_eselon</option>
+     *
+     * @param $id_kementrian Kode Kementrian (e.g 002, 014)
+     * @output HTML
+     */
+    function cari_eselon($id_kementrian, $select = '')
+    {
+
+        /* INFO:
+           $select digunakan saat validasi gagal dan untuk tetap memlilih opsi terakhir tetap terpilih.
+           Method set_value() tidak bisa digunakan di controller. Sehingga set_value('eselon') dikirim
+           kembali ke controller untuk diproses. Lihat views/helpdesk/identitas_satker pada Nama Eselon,
+           ada file_get_contents()
+        */
+
+        $id_kementrian = substr($id_kementrian, 0, 3);
+
+        $result = $this->db->query("SELECT * FROM tb_unit WHERE id_kementrian = ?", array($id_kementrian));
+        $eselon = '';
+        if ($result->num_rows() > 0) {
+            $result = $result->result();
+
+            foreach ($result as $value) {
+                if ($select != '' AND $select == $value->id_unit) {
+                    $eselon .= sprintf('<option selected value="%s">%s - %s</option>', $value->id_unit, $value->id_unit, $value->nama_unit);
+                } else {
+                    $eselon .= sprintf('<option value="%s">%s - %s</option>', $value->id_unit, $value->id_unit, $value->nama_unit);
+                }
+            }
+        }
+        return $eselon;
     }
 
 }
