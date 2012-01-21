@@ -67,12 +67,3 @@
 <?php endif ?>
 
 <?php echo $this->session->flashdata('error') ?>
-<?php echo form_open("login/usermasuk", array('id' => 'login_form')); ?>
-
-<div>
-    <input type="text" id="user" name="user" placeholder="Username" />
-    <input type="password" id="pass" name="pass" placeholder="Password" />
-    <input type="submit" name="submit" class="button blue" value="Login"/>
-</div>
-
-<?php echo form_close() ?>

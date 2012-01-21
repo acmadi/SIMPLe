@@ -83,11 +83,11 @@ class Mforum extends CI_Model
 		return $this->db->count_all_results();
     }
 
-    public function add_forum($id_kat_forum, $judul_forum, $isi_forum, $file = '', $id_user=NULL)
+    public function add_forum($id_kat_forum, $judul_forum, $isi_forum, $file = '', $id_user = NULL, $id_parent = NULL)
     {
-        $sql = "INSERT INTO tb_forum (id_kat_forum, judul_forum, isi_forum, file, id_user)
-                VALUES (?, ?, ?, ?, ?)";
-        return $this->db->query($sql, array($id_kat_forum, $judul_forum, $isi_forum, $file, $id_user));
+        $sql = "INSERT INTO tb_forum (id_kat_forum, judul_forum, isi_forum, file, id_user, id_parent)
+                VALUES (?, ?, ?, ?, ?, ?)";
+        return $this->db->query($sql, array($id_kat_forum, $judul_forum, $isi_forum, $file, $id_user, $id_parent));
     }
 
     public function add_forum_by_array($arr)
@@ -110,14 +110,17 @@ class Mforum extends CI_Model
         $sql = "SELECT * FROM `tb_forum` LEFT JOIN tb_kat_forum ON (tb_forum.id_kat_forum = tb_kat_forum.id_kat_forum) WHERE id_forum = '{$id}'";
         return $this->db->query($sql);
     }
-	public function get_all()
+	public function get_all($parent_only = FALSE)
 	{
+		$parent_only = ($parent_only) ? 'WHERE f.id_parent IS NULL' : '';
+
 		$sql = 
 			"SELECT f.*, u.nama AS nama, k.kat_forum AS kat_forum FROM tb_forum f 
 			 LEFT JOIN tb_user u
              ON (f.id_user = u.id_user)
              LEFT JOIN tb_kat_forum k
              ON (f.id_kat_forum = k.id_kat_forum)
+             $parent_only
              ORDER BY f.tanggal DESC"
              ;
 		return $this->db->query($sql);
