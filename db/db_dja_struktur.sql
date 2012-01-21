@@ -270,21 +270,28 @@ CREATE TABLE `tb_satker` (
 CREATE TABLE `tb_tiket_frontdesk` (
   `no_tiket_frontdesk` int(11) NOT NULL AUTO_INCREMENT,
   `id_satker` varchar(7) DEFAULT NULL,
-  `id_formulir` int(11) DEFAULT NULL,
-  `tanggal` date DEFAULT NULL,
-  `tanggal_selesai` date DEFAULT NULL,
+  `id_formulir` int(11) DEFAULT NULL COMMENT 'belum digunakan',
+  `tanggal` datetime DEFAULT NULL,
+  `tanggal_selesai` datetime DEFAULT NULL,
   `no_antrian` varchar(10) DEFAULT NULL,
   `status` varchar(10) DEFAULT NULL,
   `lavel` int(11) DEFAULT NULL,
   `id_petugas_satker` int(11) DEFAULT NULL,
-  `is_active` tinyint(1) NOT NULL DEFAULT '1',
+  `is_active` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1 = diterima, 2 = diteruskan , 3= ditolak (bag pelaksana), 4= terima (bag subdit anggaran) , 5 = terima (bag subdit dadutek)',
+  `keputusan` enum('','disahkan','ditolak') NOT NULL DEFAULT '',
+  `nomor_surat_usulan` varchar(100) DEFAULT NULL,
+  `tanggal_surat_usulan` date DEFAULT NULL,
+  `id_kementrian` varchar(3) DEFAULT NULL,
+  `id_unit` varchar(3) DEFAULT NULL,
+  `tipe_subdit` enum('','anggaran','dutek') DEFAULT NULL,
   PRIMARY KEY (`no_tiket_frontdesk`),
-  KEY `FK_tb_tiket_frontdesk_formulir` (`id_formulir`),
   KEY `FK_tb_tiket_frontdesk_satker_a` (`id_petugas_satker`),
   KEY `FK_tb_tiket_frontdesk_satker` (`id_satker`),
+  KEY `id_kementrian` (`id_kementrian`),
   CONSTRAINT `tb_tiket_frontdesk_ibfk_1` FOREIGN KEY (`id_satker`) REFERENCES `tb_satker` (`id_satker`),
-  CONSTRAINT `tb_tiket_frontdesk_ibfk_2` FOREIGN KEY (`id_petugas_satker`) REFERENCES `tb_petugas_satker` (`id_petugas_satker`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+  CONSTRAINT `tb_tiket_frontdesk_ibfk_2` FOREIGN KEY (`id_petugas_satker`) REFERENCES `tb_petugas_satker` (`id_petugas_satker`),
+  CONSTRAINT `tb_tiket_frontdesk_ibfk_3` FOREIGN KEY (`id_kementrian`) REFERENCES `tb_kementrian` (`id_kementrian`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Table structure for table `tb_tiket_helpdesk` */
 
