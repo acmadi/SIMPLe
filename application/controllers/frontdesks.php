@@ -32,7 +32,7 @@ class Frontdesks extends CI_Controller
 				$optional_sql
                 GROUP BY no_tiket_frontdesk
                 ORDER BY tanggal";
-		print_r($sql);exit;
+		//print_r($sql);exit;
 				
         $result = $this->db->query($sql);
         $data['result'] = $result;
