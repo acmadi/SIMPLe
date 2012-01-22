@@ -5,7 +5,7 @@
 </style>
 
 <div class="content">
-    <h1>Kasie & Pelaksana Dashboard</h1>
+    <h1>Dashboard <?php echo $this->session->userdata('nama_lavel')?></h1>
 
     <fieldset class="grid_6">
         <legend>Report Front Desk</legend>

@@ -250,7 +250,5 @@
     <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
 <![endif]-->
 
-<?php echo $this->session->userdata('id_user')?>
-
 </body>
 </html>
