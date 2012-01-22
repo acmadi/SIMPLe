@@ -106,6 +106,10 @@
                         $this->session->set_userdata('navbar', 'navbar_helpdesk');
                         $this->load->view('navbar_helpdesk');
                     }
+                    elseif ($this->uri->segment(1) == 'helpdesks') {
+                        $this->session->set_userdata('navbar', 'navbar_helpdesk');
+                        $this->load->view('navbar_helpdesk');
+                    }
                     elseif ($this->uri->segment(1) == 'frontdesk') {
                         $this->session->set_userdata('navbar', 'navbar_frontdesk');
                         $this->load->view('navbar_frontdesk');
