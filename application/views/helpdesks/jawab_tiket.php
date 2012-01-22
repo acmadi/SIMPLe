@@ -1,11 +1,12 @@
-<?php //print_r($antrian)?>
+<?php dump($antrian) ?>
 
 <div class="content">
 
     <h1>Jawab Pertanyaan</h1>
 
-    <form method="post" action="<?php echo site_url('pelaksana/helpdesk/eskalasi') ?>">
-
+    <form method="post" action="<?php echo site_url('helpdesks/jawab') ?>">
+        <?php echo form_hidden('id_tiket', $antrian->id); ?>
+        <?php echo form_hidden('id_kat_knowledge_base', $antrian->id_kat_knowledge_base); ?>
         <fieldset>
             <legend>Identitas</legend>
             <div class="grid_6 alpha omega">

@@ -417,6 +417,7 @@ class Helpdesks extends CI_Controller
         $this->load->view('new-template', $data);
     }
 
+    // tampilkan satu tiket
     function view($id)
     {
         $data['title'] = 'Cek Tiket';
@@ -424,6 +425,19 @@ class Helpdesks extends CI_Controller
         $data['antrian'] = $this->mhelpdesks->get_by_id($id);
 
         $this->load->view('new-template', $data);
+    }
+
+    function jawab()
+    {
+        // dump($this->input->post());
+        $arr = $this->input->post();
+
+        $this->mhelpdesks->jawab($arr);
+
+        $this->session->set_flashdata('success', 
+            '1 (satu) pertanyaan berhasil dijawab dan telah dikembalikan ke Customer Service Helpdesk!');
+
+        redirect('helpdesks/all');
     }
 
     // beda sama fungsi eskalasi(), ini khusus lavel di atas CS

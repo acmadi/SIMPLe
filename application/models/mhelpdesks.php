@@ -41,6 +41,37 @@ class Mhelpdesks extends CI_Model{
 		return FALSE;
 	}
 
+	public function jawab($arr) 
+	{
+		$id = $arr['id_tiket'];
+
+		// tambahkan jawaban ke dalam tb_knowledge_base
+		$arr_knowledge = array(
+			'judul'                 => $arr['pertanyaan'],
+			'desripsi'              => $arr['description'],
+			'jawaban'               => $arr['jawaban'],
+			'nama_narasumber'       => $arr['nama_narasumber'],
+			'jabatan_narasumber'    => $arr['jabatan'],
+			'id_kat_knowledge_base' => $arr['id_kat_knowledge_base'],
+			);	
+		$this->db->insert('tb_knowledge_base', $arr_knowledge);
+		$id_knowledge_base = $this->db->insert_id();
+
+		// update tiket
+		$arr_tiket = array(
+			'id_knowledge_base'     => $id_knowledge_base,
+			'id_kat_knowledge_base' => $arr['id_kat_knowledge_base'],
+			'jawab'                 => $arr['jawaban'],
+			'sumber'                => $arr['nama_narasumber'],
+			'status'                => 'close',
+			'tanggal_selesai'       => date('Y-m-d H:i:s'),
+			'lavel'                 => 1
+			);
+		$this->db->where('id', $id);
+		$this->db->update('tb_tiket_helpdesk', $arr_tiket);
+
+	}
+
 }
 
 ?>
