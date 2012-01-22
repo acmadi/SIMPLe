@@ -3,16 +3,7 @@
     <h1>Front Desk</h1>
 
 <?php if ($result->num_rows() > 0): ?>
-    <div class="table">
-        <div id="head">
-            <form id="form-cari" action="<?php echo site_url('/pelaksana/frontdesk/index');?>" method="post">
-                <p><input type="text" size="60" placeholder="Pencarian" name="keyword" value="<?php echo $isian_form;?>"/>
-                    &nbsp;<input type="submit" value="cari" class="button blue-pill"/>
-                </p>
-            </form>
-        </div>
-
-
+ 
         <table class="table">
             <thead>
             <tr>
@@ -85,25 +76,10 @@
                 <?php endforeach ?>
             </tbody>
         </table>
-    </div>
-    <div class="pagination"><?php echo ($pageLink) ? 'Halaman ' . $pageLink : '';?></div>
-    <br/>
-    </div>
-    <?php else: ?>
+<?php else: ?>
     <div class="notification yellow">
     Tidak ada dokumen
     </div>
-    <?php endif ?>
+<?php endif ?>
 </div>
 
-<script type="text/javascript">
-    $(function () {
-        $('.bla').click(function () {
-            $(this).next().removeClass('gray-pill').addClass('blue-pill').removeAttr('disabled');
-            link = $(this).next().attr('link');
-            $(this).next().attr('onclick', 'window.location.href="' + link + '"');
-            console.log(link);
-            return false;
-        })
-    })
-</script>
