@@ -45,7 +45,7 @@
         <tr>
             <td class="no"><?php echo $i++ ?></td>
             <td class="no"><?php echo table_tanggal($value->tanggal) ?></td>
-            <td class="no"><?php echo $value->nama_satker ?></td>
+            <td class="no"><?php echo ($value->nama_satker) ? $value->nama_satker : 'UMUM' ?></td>
             <td class="no"><?php echo $value->pertanyaan ?></td>
             <td class="no">
                 <?php if ($value->prioritas == 'high'): ?>
