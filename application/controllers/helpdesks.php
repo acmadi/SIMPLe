@@ -9,6 +9,7 @@ class Helpdesks extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('mhelpdesks');
         $this->form_validation->set_message('required', '%s harus diisi');
         $this->form_validation->set_message('numeric', '%s harus berupa angka');
     }
@@ -378,5 +379,76 @@ class Helpdesks extends CI_Controller
             }
         }
         return $satker;
+    }
+
+
+    /**********************************************************************************************/
+    /* Mulai bawah sini, merupakan fungsi-fungsi buat level di atas CS (penyelia, pelaksana, dst) */
+    /**********************************************************************************************/
+
+    /**
+     * Menampilkan seluruh tiket, tergantung lavel user yang sedang login
+     *
+     * @param none
+     */
+    function all()
+    {
+        $my_lavel = $this->session->userdata('lavel');
+
+        // query list tiket
+        $sql = "SELECT * 
+                FROM tb_tiket_helpdesk 
+                LEFT JOIN tb_satker
+                ON (tb_tiket_helpdesk.id_satker = tb_satker.id_satker)
+                WHERE status = 'open' 
+                AND lavel = {$my_lavel}
+                ORDER BY prioritas DESC";
+        $data['tikets'] = $this->db->query($sql);
+
+        // query nama lavel, kosmetik doang
+        $sql = "SELECT * FROM tb_lavel
+                WHERE lavel = $my_lavel
+                LIMIT 1";
+        $data['nama_level'] = $this->db->query($sql)->row()->nama_lavel;
+        
+        $data['flashmessage'] = $this->showmessage('success', 'green');
+        $data['title'] = 'Konsultasi Help Desk';
+        $data['content'] = 'helpdesks/all_tiket';
+        $this->load->view('new-template', $data);
+    }
+
+    function view($id)
+    {
+        $data['title'] = 'Cek Tiket';
+        $data['content'] = 'helpdesks/jawab_tiket';
+        $data['antrian'] = $this->mhelpdesks->get_by_id($id);
+
+        $this->load->view('new-template', $data);
+    }
+
+    // beda sama fungsi eskalasi(), ini khusus lavel di atas CS
+    function eskalasikan($id)
+    {
+        $next_lavel = $this->mhelpdesks->eskalasi($id);
+        if (TRUE) :
+            $this->session->set_flashdata('success', 'Pertanyaan berhasil di-eskalasi ke level ' . $next_lavel);
+        else :
+            $this->session->set_flashdata('error', 'Pertanyaan gagal di-eskalasi!');
+        endif;
+
+        redirect('helpdesks/all');
+    }
+
+
+    // NOT USED 
+    private function showmessage($type, $color)
+    {
+        if($this->session->flashdata($type)) : 
+            $result = '<div class="notification ' . $color. '">' . 
+                       $this->session->flashdata($type) .
+                      '</div>';
+            return $result;
+        endif;
+        return FALSE;
     }
 }
