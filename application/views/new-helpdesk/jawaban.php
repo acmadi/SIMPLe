@@ -161,38 +161,56 @@
     <fieldset>
         <legend>Referensi Jawaban</legend>
 
-        <div id="cari_knowledge">
-            <?php echo search('#') ?>
-        </div>
-
-        <hr/>
-
         <div id="referensi_jawaban">
-            <ul>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th class="no">No</th>
+                    <th class="medium">Judul</th>
+                    <th class="medium">Jawaban</th>
+                    <th>&nbsp;</th>
+                </tr>
+                </thead>
+                <tfoot>
+                <tr>
+                    <td colspan="4"></td>
+                </tr>
+                </tfoot>
+                <?php $i = 1 ?>
                 <?php foreach ($jawaban->result() as $value): ?>
-
-                <li>
-                    <a href="javascript:void(0)"
-                       class="jawaban"
-                       data-id_knowledge_base='<?php echo $value->id_knowledge_base ?>'
-                       data-pertanyaan='<?php echo ascii_to_entities($value->judul) ?>'
-                       data-deskripsi='<?php echo ascii_to_entities($value->desripsi) ?>'
-                       data-jawaban='<?php echo ascii_to_entities($value->jawaban) ?>'>
-                        <?php echo $value->judul ?>
-                    </a>
-                </li>
-
+                <tr>
+                    <td><?php echo $i++ ?></td>
+                    <td>
+                        <?php echo ascii_to_entities($value->judul) ?>
+                    </td>
+                    <td>
+                        <?php echo word_limiter(ascii_to_entities($value->jawaban), 50) ?>
+                    </td>
+                    <td class="action">
+                        <a href="javascript:void(0)"
+                           class="button green jawaban"
+                           data-id_knowledge_base='<?php echo $value->id_knowledge_base ?>'
+                           data-pertanyaan='<?php echo ascii_to_entities($value->judul) ?>'
+                           data-deskripsi='<?php echo ascii_to_entities($value->desripsi) ?>'
+                           data-jawaban='<?php echo ascii_to_entities($value->jawaban) ?>'>
+                           Lihat
+                        </a>
+                    </td>
+                </tr>
                 <?php endforeach ?>
-            </ul>
+            </table>
         </div>
     </fieldset>
 
-    <p>
+    <div style="text-align: center;">
         <a href="<?php echo site_url('helpdesks/eskalasi/' . $this->session->userdata('id_tiket_helpdesk') . '/' . $this->session->userdata('no_tiket_helpdesk')) ?>"
-           type="submit" class="button blue" onclick="return confirm('Anda yakin akan melakukan eskalasi?') ? true : false">
+           type="submit"
+           class="button blue"
+           style="padding: 10px 20px; font-size: 16px;"
+           onclick="return confirm('Anda yakin akan melakukan eskalasi?') ? true : false">
             Eskalasi
         </a>
-    </p>
+    </div>
 
 </div>
 
