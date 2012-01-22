@@ -169,7 +169,7 @@
                 <div class="profile-menu">
                     <a href="javascript:void(0)"><?php echo $this->session->userdata('nama') ?></a>
                     <ul>
-                        <li><a href="#">Profile</a></li>
+                        <li><a href="<?php echo site_url('profiles') ?>">Profile</a></li>
                         <li><a href="<?php echo site_url('login/process_logout') ?>">Logout</a></li>
                     </ul>
                 </div>
