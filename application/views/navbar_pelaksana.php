@@ -24,6 +24,9 @@ if ($this->uri->segment(1) == 'forum') {
 if ($this->uri->segment(1) == 'frontdesks') {
     $nav_frontdesk = 'current';
 }
+if ($this->uri->segment(1) == 'dashboards') {
+    $nav_dashboard = 'current';
+}
 if ($this->uri->segment(1) == 'helpdesks') {
     $nav_helpdesk = 'current';
 }
