@@ -80,16 +80,16 @@ Class Login extends CI_Controller
                     redirect('supervisors/dashboard');
                     break;
                 case '8':
-                    redirect('pelaksana/dashboard');
+                    redirect('dashboards');
                     break;
                 case '9':
-                    redirect('kasubdit/dashboard');
+                    redirect('dashboards');
                     break;
                 case '10':
-                    redirect('kasubdit_dadutek/dashboard');
+                    redirect('dashboards');
                     break;
                 case '11':
-                    redirect('direktur/dashboard');
+                    redirect('dashboards');
                     break;
                 case '12':
                     redirect('dirjen/dashboard');

@@ -2,41 +2,60 @@
 
 class Mfrontdesk extends CI_Model
 {
-	public function count_all_tiket_frontdesk($stat = '',$lav = '',$act=''){
-		$where = array();
-		if(!empty($stat)) $where[] = " status = '".$stat."'";
-		if(!empty($lav)) $where[] = " lavel = '".$lav."'";
+	public function count_all_tiket_frontdesk($status = '',$level = '', $act = '',$kep = ''){
+		$optional_sql = '';
+		if($this->session->userdata('lavel') != '7'):
+			$optional_sql = " AND c.anggaran = '{$this->session->userdata('anggaran')}' 
+							  AND c.id_unit_satker = '{$this->session->userdata('id_unit_satker')}' ";
+		endif;
+		
 		if(!empty($act)){
-			$tmp_act = explode(',',$act);
-			$where[] = " is_active IN ('".implode("','",$tmp_act)."')";
+			$optional_sql .= " AND a.is_active = '{$act}' ";
 		}
 		
-		if(count($where) > 0){
-			$where = ' WHERE '.implode(' AND ',$where);
-		}else{
-			$where = '';
+		if(!empty($kep)){
+			$optional_sql .= " AND a.keputusan = '{$kep}' ";
 		}
+	
+        $sql = "SELECT a.no_tiket_frontdesk FROM `tb_tiket_frontdesk` a
+                JOIN tb_kementrian ON tb_kementrian.id_kementrian = a.id_kementrian
+                JOIN tb_kon_unit_satker b ON a.id_kementrian = b.id_kementrian
+                JOIN tb_unit_saker c ON b.id_unit_satker = c.id_unit_satker
+                WHERE
+                 status = '{$status}' AND
+                a.lavel = '{$level}'
+				$optional_sql
+                GROUP BY no_tiket_frontdesk
+                ORDER BY tanggal";
+		
 
-        // TODO ini code deteksi anggaran keberapa
-//        $sql = "SELECT * FROM `tb_tiket_frontdesk` a
-//        JOIN tb_kon_unit_satker b ON a.id_kementrian = b.id_kementrian
-//        JOIN tb_unit_saker c ON b.id_unit_satker = c.id_unit_satker
-//        WHERE c.anggaran = '{$this->session->userdata('anggaran')}' ";
-//        $result = $this->db->query($sql);
-
-
-		return $this->db->query("SELECT * FROM tb_tiket_frontdesk $where")->num_rows();
+		return $this->db->query($sql)->num_rows();
 	}
 	
-	/*
-	public function count_all_tiket_frontdesk($stat,$lav){
-		return $this->db->query("SELECT * FROM tb_tiket_frontdesk JOIN tb_satker
-                                                    ON tb_tiket_frontdesk.id_satker = tb_satker.id_satker
-                                                    WHERE status = ? AND
-                                                    lavel <= ? AND
-                                                    is_active = 1",array($stat,$lav))->num_rows();
+	//dapatkan jumlah tiket yang sudah lewat batas waktu
+	public function get_tiket_lewat_waktu(){
+		if($this->session->userdata('lavel') != '7'):
+			$optional_sql = " AND c.anggaran = '{$this->session->userdata('anggaran')}' 
+							  AND c.id_unit_satker = '{$this->session->userdata('id_unit_satker')}' ";
+		endif;
+		
+        $sql = "SELECT * FROM `tb_tiket_frontdesk` a
+                JOIN tb_kementrian ON tb_kementrian.id_kementrian = a.id_kementrian
+                JOIN tb_kon_unit_satker b ON a.id_kementrian = b.id_kementrian
+                JOIN tb_unit_saker c ON b.id_unit_satker = c.id_unit_satker
+                WHERE
+                 status = 'open' AND
+                a.lavel = '{$this->session->userdata('lavel')}' AND
+				(( (DATEDIFF(NOW(),a.tanggal) - ( (DATEDIFF(NOW(),a.tanggal)/7) * 2 )) - 
+                      (SELECT COUNT(id) FROM tb_calendar f WHERE holiday BETWEEN a.tanggal AND NOW())  )) > 5 
+				$optional_sql
+                GROUP BY no_tiket_frontdesk
+                ORDER BY tanggal";
+				
+        $result = $this->db->query($sql);
+		
+		return $result->num_rows();
 	}
-	*/
 	
 	public function get_all_tiket_frontdesk($level = 3,$optional = '', $isCount = FALSE){
 		//@F2D

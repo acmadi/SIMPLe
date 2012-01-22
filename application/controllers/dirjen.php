@@ -14,54 +14,39 @@ class Dirjen extends CI_Controller
         $this->load->model('Mdirjen', 'dirjen');
         // ========== A1 ==========
         $data['a1_cs_diterima'] = $this->dirjen->get_jml_trm(1, 2, 1, 1);
-
         $data['a1_pelaksana_diterima'] = $this->dirjen->get_jml_trm(1, 2, 3, 1);
         $data['a1_pelaksana_diteruskan'] = $this->dirjen->get_jml_trs(1, 1);
-
         $data['a1_subdit_anggaran_diterima'] = $this->dirjen->get_jml_trm(1, 2, 4, '1,4,5');
         $data['a1_subdit_anggaran_diteruskan'] = $this->dirjen->get_jml_trs(1, 3);
-
         $data['a1_subdit_dadutek_diterima'] = $this->dirjen->get_jml_trm(1, '1,2,4', 4, 5);
         $data['a1_subdit_dadutek_diteruskan'] = $this->dirjen->get_jml_trs_sub(1, 3);
-
         $data['a1_direktur_diterima'] = $this->dirjen->get_jml_trm(1, 2, 5, 1);
         $data['a1_direktur_diteruskan'] = $this->dirjen->get_jml_trs(1, 4);
-
         $data['a1_dirjen_diterima'] = $this->dirjen->get_jml_trm(1, 2, 6, 1);
 
 
         // ========== A2 ==========
         $data['a2_cs_diterima'] = $this->dirjen->get_jml_trm(2, 2, 1, 1);
-
         $data['a2_pelaksana_diterima'] = $this->dirjen->get_jml_trm(2, 2, 3, 1);
         $data['a2_pelaksana_diteruskan'] = $this->dirjen->get_jml_trs(2, 1);
-
         $data['a2_subdit_anggaran_diterima'] = $this->dirjen->get_jml_trm(2, 2, 4, '1,4,5');
         $data['a2_subdit_anggaran_diteruskan'] = $this->dirjen->get_jml_trs(2, 3);
-
         $data['a2_subdit_dadutek_diterima'] = $this->dirjen->get_jml_trm(2, '1,2,4', 4, 5);
         $data['a2_subdit_dadutek_diteruskan'] = $this->dirjen->get_jml_trs_sub(2, 3);
-
         $data['a2_direktur_diterima'] = $this->dirjen->get_jml_trm(2, 2, 5, 1);
         $data['a2_direktur_diteruskan'] = $this->dirjen->get_jml_trs(2, 4);
-
         $data['a2_dirjen_diterima'] = $this->dirjen->get_jml_trm(2, 2, 6, 1);
 
         // ========== A3 ==========
         $data['a3_cs_diterima'] = $this->dirjen->get_jml_trm(3, 2, 1, 1);
-
         $data['a3_pelaksana_diterima'] = $this->dirjen->get_jml_trm(3, 2, 3, 1);
         $data['a3_pelaksana_diteruskan'] = $this->dirjen->get_jml_trs(3, 1);
-
         $data['a3_subdit_anggaran_diterima'] = $this->dirjen->get_jml_trm(3, 2, 4, '1,4,5');
         $data['a3_subdit_anggaran_diteruskan'] = $this->dirjen->get_jml_trs(3, 3);
-
         $data['a3_subdit_dadutek_diterima'] = $this->dirjen->get_jml_trm(3, '1,2,4', 4, 5);
         $data['a3_subdit_dadutek_diteruskan'] = $this->dirjen->get_jml_trs_sub(3, 3);
-
         $data['a3_direktur_diterima'] = $this->dirjen->get_jml_trm(3, 2, 5, 1);
         $data['a3_direktur_diteruskan'] = $this->dirjen->get_jml_trs(3, 4);
-
         $data['a3_dirjen_diterima'] = $this->dirjen->get_jml_trm(3, 2, 6, 1);
 
 
