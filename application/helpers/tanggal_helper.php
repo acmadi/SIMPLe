@@ -14,9 +14,9 @@ function set_tanggal_normal($data = '')
     return $data;
 }
 
-function table_tanggal($datetime)
+function table_tanggal($datetime, $oleh ='')
 {
-    $html = '<abbr title="%s">
+    $html = '<abbr title="%s oleh ' . $oleh . '">
                     <span class="date">%s</span>
                     <span class="time">%s</span>
                </abbr>';

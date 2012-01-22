@@ -1,41 +1,61 @@
+    <script>
+    $(document).ready(function(){
+        
+        $('.popupz').twipsy(
+            );
+    });
+    </script>
 <div class="content">
-
-    <?php echo search('helpdesks/list_pertanyaan/?search', 'keyword', 'get') ?>
-
+    <h1>Pertanyaan</h1>
     <table class="table">
         <thead>
         <tr>
             <th class="no">No</th>
             <th class="no">Tiket</th>
-            <th class="medium">Satker</th>
-            <th class="no">Tanggal</th>
-            <th class="medium">Pertanyaan</th>
+            <th class="medium">Identitas Penanya</th>
             <th class="no">Prioritas</th>
+            <th class="medium">Pertanyaan</th>
+            <th class="no">Ditanyakan</th>
+            <th class="no">Terjawab</th>
             <th class="no">Status</th>
             <th>&nbsp;</th>
         </tr>
         </thead>
         <tfoot>
         <tr>
-            <td colspan="8">&nbsp;</td>
+            <td colspan="9">&nbsp;</td>
         </tr>
         </tfoot>
         <tbody>
         <?php $i = 1 ?>
-        <?php foreach ($helpdesk->result() as $value): ?>
+        <?php foreach ($tikets->result() as $value): ?>
         <tr>
+            <!-- Nomor -->
             <td><?php echo $i++ ?></td>
+            
+            <!-- Nomor Tiket -->
             <td><?php echo $value->no_tiket_helpdesk ?></td>
-            <td><?php echo $value->id_satker ?> - <?php echo $value->nama_satker ?></td>
-            <td><?php echo table_tanggal($value->tanggal) ?></td>
-            <td><?php echo $value->pertanyaan ?></td>
+            
+            <!-- Identitas Penanya -->
+            <td>
+                <?php 
+                if($value->id_satker == NULL) : 
+                    echo 'UMUM - ' . $value->nama_petugas;
+                else :
+                    echo $value->id_satker ?> - <?php echo $value->nama_satker;
+                endif; 
+                ?>
+            </td>
+            
+            
+            <!-- Prioritas -->
             <td>
                 <?php if ($value->prioritas == 'high'): ?>
                 <span style="color: red; text-transform: uppercase;"><?php echo $value->prioritas ?></span>
                 <?php endif ?>
 
                 <?php if ($value->prioritas == 'medium'): ?>
-                <span style="color: blue; text-transform: uppercase;"><?php echo $value->prioritas ?></span>
+                <span style="color: orange; text-transform: uppercase;"><?php echo $value->prioritas ?></span>
                 <?php endif ?>
 
                 <?php if ($value->prioritas == 'low'): ?>
@@ -43,15 +63,46 @@
                 <?php endif ?>
 
             </td>
-            <td><?php echo $value->status ?></td>
+
+            <!-- Pertanyaan -->
+            <td> <?php echo $value->pertanyaan ?> </td>
+
+            <!-- Tanggal Ditanyakan -->
+            <td><?php echo table_tanggal($value->tanggal) ?></td>
+            
+            <!-- Tanggal Terjawab -->
             <td>
-                <?php if ($value->jawab != NULL): ?>
-                <a class="button green referensi-jawaban"
-                   data-id='<?php echo $value->id ?>'
-                   data-pertanyaan='<?php echo ascii_to_entities($value->pertanyaan) ?>'
-                   data-jawaban='<?php echo ascii_to_entities($value->jawab) ?>'
-                   href='javascript:void(0)'>Lihat Jawaban</a>
-                <?php endif ?>
+                <?php if ($value->tanggal_selesai != NULL) : ?>
+                    <a class="referensi-jawaban"
+                       data-id='<?php echo $value->id ?>'
+                       data-pertanyaan='<?php echo ascii_to_entities($value->pertanyaan) ?>'
+                       data-jawaban='<?php echo ascii_to_entities($value->jawab) ?>'
+                       href='javascript:void(0)'>
+                    <span class="text green">
+                    <?php 
+                        echo table_tanggal($value->tanggal_selesai, $value->nama)
+                            ;
+                    ?>
+                    </span>
+                </a>
+                <?php else :
+                    echo '-';
+                endif;
+                ?>
+            </td>
+
+            <!-- Status -->
+            <td>
+                <?php 
+                $color = ($value->status == 'open') ? 'yellow' : 'grey'; ?>
+                    <a class="referensi-jawaban button <?php echo $color ?>"
+                       data-id='<?php echo $value->id ?>'
+                       data-pertanyaan='<?php echo ascii_to_entities($value->pertanyaan) ?>'
+                       data-jawaban='<?php echo ascii_to_entities($value->jawab) ?>'
+                       href='javascript:void(0)'><?php echo strtoupper($value->status) ?></a>
+            </td>
+            <td>
+                
             </td>
         </tr>
             <?php endforeach ?>

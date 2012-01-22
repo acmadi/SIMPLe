@@ -63,9 +63,9 @@ class Mhelpdesks extends CI_Model{
 			'id_kat_knowledge_base' => $arr['id_kat_knowledge_base'],
 			'jawab'                 => $arr['jawaban'],
 			'sumber'                => $arr['nama_narasumber'],
-			'status'                => 'close',
 			'tanggal_selesai'       => date('Y-m-d H:i:s'),
-			'lavel'                 => 1
+			'lavel'                 => 1,
+			'id_user'               => $this->session->userdata('id_user')
 			);
 		$this->db->where('id', $id);
 		$this->db->update('tb_tiket_helpdesk', $arr_tiket);
