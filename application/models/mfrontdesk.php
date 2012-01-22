@@ -2,6 +2,7 @@
 
 class Mfrontdesk extends CI_Model
 {
+	//
 	public function count_all_tiket_frontdesk($status = '',$level = '', $act = '',$kep = ''){
 		$optional_sql = '';
 		if($this->session->userdata('lavel') != '7'):
@@ -34,6 +35,7 @@ class Mfrontdesk extends CI_Model
 	
 	//dapatkan jumlah tiket yang sudah lewat batas waktu
 	public function get_tiket_lewat_waktu(){
+		$optional_sql = '';
 		if($this->session->userdata('lavel') != '7'):
 			$optional_sql = " AND c.anggaran = '{$this->session->userdata('anggaran')}' 
 							  AND c.id_unit_satker = '{$this->session->userdata('id_unit_satker')}' ";

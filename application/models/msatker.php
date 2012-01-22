@@ -91,10 +91,10 @@ class Msatker extends CI_Model
 	}
 	
 	public function get_jml_dokumen_selesai(){
-		return $this->db->from('tb_tiket_frontdesk')->where('status', 'close')->where('is_active', 6)->get()->num_rows();
+		return $this->db->from('tb_tiket_frontdesk')->where('status', 'close')->where('keputusan', 'disahkan')->get()->num_rows();
 	}
 	
 	public function get_jml_dokumen_kembali(){
-		return $this->db->from('tb_tiket_frontdesk')->where('is_active', 3)->get()->num_rows();
+		return $this->db->from('tb_tiket_frontdesk')->where('status', 'close')->where('keputusan', 'ditolak')->where('is_active', 3)->get()->num_rows();
 	}
 }
