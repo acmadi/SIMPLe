@@ -21,7 +21,7 @@
                 <?php $i = 1 ?>
                 <?php foreach ($result->result() as $value): ?>
 
-            <tr <?php echo (hari_kerja($value->tanggal > 5) ? 'class="red-row"' : '') ?>>
+            <tr <?php echo (hari_kerja($value->tanggal) > 5 ? 'class="red-row"' : '') ?>>
                 <td><?php echo $i++ ?></td>
                 <td>
                     <?php echo table_tanggal($value->tanggal) ?>
