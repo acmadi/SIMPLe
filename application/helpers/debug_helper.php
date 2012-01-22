@@ -1,7 +1,9 @@
 <?php
 function dump($var) 
 {
-	echo '<pre>';
-	print_r($var);
-	echo '</pre>';
+	if(ENVIRONMENT == 'development'):
+		echo '<pre>';
+		print_r($var);
+		echo '</pre>';
+	endif;
 }
