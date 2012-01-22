@@ -31,7 +31,7 @@ if ($this->uri->segment(1) == 'forum') {
 <div id="navbar" class="clearfloat">
     <ul class="sf-menu">
         <li><?php echo anchor('dirjen/dashboard', 'Dashboard', "class='$nav_dashboard'");?></li>
-        <li><?php echo anchor('dirjen/frontdesk', 'Front Desk', "class='$nav_frontdesk'");?></li>
+        <li><?php echo anchor('frontdesks', 'Front Desk', "class='$nav_frontdesk'");?></li>
         <li><?php echo anchor('dirjen/helpdesk', 'Helpdesk', "class='$nav_helpdesk'");?></li>
         <li><?php echo anchor('knowledge', 'Knowledge Base', "class='$nav_knowledge_base'");?></li>
         <li><?php echo anchor('referensi', 'Referensi Peraturan', "class='$nav_referensi'") ?></li>
