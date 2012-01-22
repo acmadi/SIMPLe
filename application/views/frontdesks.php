@@ -1,7 +1,5 @@
 <div class="content">
-
     <h1>Front Desk</h1>
-
 <?php if ($result->num_rows() > 0): ?>
         <table class="table">
             <thead>
@@ -65,11 +63,47 @@
 							$disabled = 'disabled';
 							$style_button = 'blue-pill';
 						}
+						
+						$level_selected = $this->session->userdata('lavel');
+						switch($level_selected){
+							case '3':
+								$jml_sel = 2;
+								break;
+							
+							case '6':
+								$jml_sel = 3;
+								break;
+							
+							case '7':
+								$jml_sel = 2;
+								break;
+								
+							default:
+								$jml_sel = 1;
+								break;
+						}
 					?>
+					
 					<a class="button <?php echo $style_button;?>" href="<?php echo site_url('/frontdesks/diterima/' . $value->no_tiket_frontdesk) ?>">Diterima</a>
-                    <input type="button" class="button <?php echo $style_button;?>" onclick="window.location.href='<?php echo site_url('/frontdesks/diteruskan/' . $value->no_tiket_frontdesk); ?>'" <?php echo $disabled;?>
-                           value="Diteruskan"/>
-                    <a class="button " href="<?php echo site_url('/frontdesks/reject/' . $value->no_tiket_frontdesk) ?>">Dikembalikan</a>
+                    
+					<?php if($level_selected != '7'): ?>
+					<input type="button" class="button <?php echo $style_button;?>" onclick="window.location.href='<?php echo site_url('/frontdesks/diteruskan/' . $value->no_tiket_frontdesk); ?>'" 
+					<?php echo $disabled;?> value="Diteruskan"/>
+                    <?php endif; ?>
+					
+					
+					<?php if($level_selected == '3'): ?>
+						<input type="button" class="button <?php echo $style_button;?>" onclick="window.location.href='<?php echo site_url('/frontdesks/reject/' . $value->no_tiket_frontdesk); ?>'" 
+						<?php echo $disabled;?> value="Dikembalikan"/>
+                    <?php endif; ?>
+					
+					<?php if(($level_selected == '7') or ($level_selected == '6')): ?>
+					<input type="button" class="button <?php echo $style_button;?>" onclick="window.location.href='<?php echo site_url('/frontdesks/accept/' . $value->no_tiket_frontdesk); ?>'" 
+					<?php echo $disabled;?> value="Ditetapkan"/>
+					<input type="button" class="button <?php echo $style_button;?>" onclick="window.location.href='<?php echo site_url('/frontdesks/reject/' . $value->no_tiket_frontdesk); ?>'" 
+					<?php echo $disabled;?> value="Ditolak"/>
+                    <?php endif; ?>
+					
                 </td>
             </tr>
                 <?php endforeach ?>
@@ -89,10 +123,9 @@
 <script type="text/javascript">
     $(function () {
         $('.bla').click(function () {
-            $(this).next().removeClass('gray-pill').addClass('blue-pill').removeAttr('disabled');
-            link = $(this).next().attr('link');
-            $(this).next().attr('onclick', 'window.location.href="' + link + '"');
-            console.log(link);
+			<?php for($i = 0 ; $i < $jml_sel ; $i++){?>
+				$(this).next().removeClass('gray-pill').addClass('blue-pill').removeAttr('disabled');
+			<?php }?>
             return false;
         })
     })

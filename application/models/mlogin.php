@@ -11,7 +11,6 @@ class Mlogin extends CI_Model
                         ->join('tb_unit_saker d', 'd.id_unit_satker = tb_user.id_unit_satker')
                       ->join('tb_lavel', 'tb_lavel.id_lavel = tb_user.id_lavel')
                       ->get();
-
         if ($query->num_rows() == 1) {
             $query = $query->result();
             return $query[0];

@@ -54,7 +54,9 @@ Class Login extends CI_Controller
             $this->db->query("INSERT INTO tb_online_users(USER,aktifitas_terakhir) VALUES (?,NOW())", array($login_data->username));
 
             $this->log->create("Login");
-
+			
+			//print_r($login_data->id_lavel);exit;
+			
             switch (strtolower($login_data->id_lavel)) {
                 case '1':
                     redirect('admin/dashboard');
