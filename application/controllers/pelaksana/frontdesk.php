@@ -27,9 +27,9 @@ class Frontdesk extends CI_Controller
 
         //TODO Masih ragu dengan query ini. Mesti di recheck lagi. Tapi untuk sementara bolehlah. Fuuu!!
         $sql = "SELECT * FROM `tb_tiket_frontdesk` a
-                JOIN tb_kementrian ON tb_kementrian.id_kementrian = a.id_kementrian
-                JOIN tb_kon_unit_satker b ON a.id_kementrian = b.id_kementrian
-                JOIN tb_unit_saker c ON b.id_unit_satker = c.id_unit_satker
+                LEFT JOIN tb_kementrian ON tb_kementrian.id_kementrian = a.id_kementrian
+                LEFT JOIN tb_kon_unit_satker b ON a.id_kementrian = b.id_kementrian
+                LEFT JOIN tb_unit_saker c ON b.id_unit_satker = c.id_unit_satker
                 WHERE
                 c.anggaran = '{$this->session->userdata('anggaran')}'
                 AND status = 'open' AND

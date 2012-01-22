@@ -3,6 +3,7 @@
     <h1>Front Desk</h1>
 
 <?php if ($result->num_rows() > 0): ?>
+ 
         <table class="table">
             <thead>
             <tr>
@@ -66,34 +67,19 @@
 							$style_button = 'blue-pill';
 						}
 					?>
-					<a class="button <?php echo $style_button;?>" href="<?php echo site_url('/frontdesks/diterima/' . $value->no_tiket_frontdesk) ?>">Diterima</a>
-                    <input type="button" class="button <?php echo $style_button;?>" onclick="window.location.href='<?php echo site_url('/frontdesks/diteruskan/' . $value->no_tiket_frontdesk); ?>'" <?php echo $disabled;?>
+					<a class="button <?php echo $style_button;?>" href="<?php echo site_url('/pelaksana/frontdesk/diterima/' . $value->no_tiket_frontdesk) ?>">Diterima</a>
+                    <input type="button" class="button <?php echo $style_button;?>" onclick="window.location.href='<?php echo site_url('/pelaksana/frontdesk/diteruskan/' . $value->no_tiket_frontdesk); ?>'" <?php echo $disabled;?>
                            value="Diteruskan"/>
-                    <a class="button " href="<?php echo site_url('/frontdesks/reject/' . $value->no_tiket_frontdesk) ?>">Dikembalikan</a>
+                    <a class="button " href="<?php echo site_url('/pelaksana/frontdesk/reject/' . $value->no_tiket_frontdesk) ?>">Dikembalikan</a>
                 </td>
             </tr>
                 <?php endforeach ?>
             </tbody>
         </table>
- 
-    
-    <br/>
-    </div>
-    <?php else: ?>
+<?php else: ?>
     <div class="notification yellow">
     Tidak ada dokumen
     </div>
-    <?php endif ?>
+<?php endif ?>
 </div>
 
-<script type="text/javascript">
-    $(function () {
-        $('.bla').click(function () {
-            $(this).next().removeClass('gray-pill').addClass('blue-pill').removeAttr('disabled');
-            link = $(this).next().attr('link');
-            $(this).next().attr('onclick', 'window.location.href="' + link + '"');
-            console.log(link);
-            return false;
-        })
-    })
-</script>
