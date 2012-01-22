@@ -5,15 +5,6 @@ switch ($this->uri->segment(2)) {
     case 'dashboard':
         $nav_dashboard = 'current';
         break;
-    case 'helpdesk':
-        $nav_helpdesk = 'current';
-        break;
-    case 'frontdesk':
-        $nav_frontdesk = 'current';
-        break;
-    case 'knowledge_base':
-        $nav_knowledge = 'current';
-        break;
 }
 $nav_referensi = '';
 if ($this->uri->segment(1) == 'referensi') {
@@ -25,10 +16,9 @@ if ($this->uri->segment(1) == 'knowledge') {
 if ($this->uri->segment(1) == 'forum') {
     $nav_forum = 'current';
 }
-if ($this->uri->segment(1) == 'dashboards') {
-    $nav_dashboard = 'current';
+if ($this->uri->segment(1) == 'helpdesks') {
+    $nav_helpdesk = 'current';
 }
-
 if ($this->uri->segment(1) == 'frontdesks') {
     $nav_frontdesk = 'current';
 }
@@ -38,7 +28,7 @@ if ($this->uri->segment(1) == 'frontdesks') {
     <ul class="sf-menu">
         <li><?php echo anchor('dashboards', 'Dashboard', "class='$nav_dashboard'");?></li>
         <li><?php echo anchor('frontdesks', 'Front Desk', "class='$nav_frontdesk'");?></li>
-        <li><?php echo anchor('kasubdit_dadutek/helpdesk', 'Helpdesk', "class='$nav_helpdesk'");?></li>
+        <li><?php echo anchor('helpdesks/all', 'Helpdesk', "class='$nav_helpdesk'");?></li>
         <li><?php echo anchor('knowledge', 'Knowledge Base', "class='$nav_knowledge'");?></li>
         <li><?php echo anchor('referensi', 'Referensi Peraturan', "class='$nav_referensi'") ?></li>
         <li><?php echo anchor('forum', 'Forum', "class='$nav_forum'");?></li>

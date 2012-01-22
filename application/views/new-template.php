@@ -79,7 +79,7 @@
                         $this->load->view('navbar_pelaksana');
                     }
                     elseif ($this->uri->segment(1) == 'kasubdit') {
-                        $this->session->set_userdata('navbar', 'navbar_pelaksana');
+                        $this->session->set_userdata('navbar', 'navbar_kasubdit');
                         $this->load->view('navbar_kasubdit');
                     }
                     elseif ($this->uri->segment(1) == 'kasubdit_dadutek') {
@@ -102,7 +102,7 @@
                         $this->session->set_userdata('navbar', 'navbar_dirjen');
                         $this->load->view('navbar_dirjen');
                     }
-                    elseif ($this->uri->segment(1) == 'helpdesks' || $this->uri->segment(1) == 'helpdesk') {
+                    elseif ($this->uri->segment(1) == 'helpdesk') {
                         $this->session->set_userdata('navbar', 'navbar_helpdesk');
                         $this->load->view('navbar_helpdesk');
                     }
@@ -139,6 +139,14 @@
                         $this->load->view($navbar);
                     }
                     elseif ($this->uri->segment(1) == 'forum') {
+                        $navbar = $this->session->userdata('navbar');
+                        $this->load->view($navbar);
+                    }
+                    elseif ($this->uri->segment(1) == 'helpdesks') {
+                        $navbar = $this->session->userdata('navbar');
+                        $this->load->view($navbar);
+                    }
+                    elseif ($this->uri->segment(1) == 'frontdesks') {
                         $navbar = $this->session->userdata('navbar');
                         $this->load->view($navbar);
                     }
