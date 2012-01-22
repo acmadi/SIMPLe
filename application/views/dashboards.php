@@ -7,7 +7,7 @@
 <div class="content">
     <h1>Kasie & Pelaksana Dashboard</h1>
 
-    <fieldset class="grid_5">
+    <fieldset class="grid_6">
         <legend>Report Front Desk</legend>
         <div class="message_box">
             <?php
@@ -44,6 +44,7 @@
                 <td><span class="message_box glow_green">0</span></td>
                 <td><span class="message_box glow_green">0</span></td>
             </tr>
+			<?php if( $level_aktif > 3): ?>
 			<tr>
                 <td class="head">Kasubdit Anggaran</td>
                 <td><span class="message_box glow_green"><?php echo $total_tiket_diterima_kasubdit ?></span></td>
@@ -52,6 +53,9 @@
                 <td><span class="message_box glow_green">0</span></td>
                 <td><span class="message_box glow_green">0</span></td>
             </tr>
+			<?php endif; //kasubdit?>
+			
+			<?php if( $level_aktif > 4): ?>
 			<tr>
                 <td class="head">Kasubdit Dadutek</td>
                 <td><span class="message_box glow_green"><?php echo $total_tiket_diterima_dadutek ?></span></td>
@@ -60,6 +64,9 @@
                 <td><span class="message_box glow_green">0</span></td>
                 <td><span class="message_box glow_green">0</span></td>
             </tr>
+			<?php endif; //dutek?>
+			
+			<?php if( $level_aktif > 5): ?>
 			<tr>
                 <td class="head">Direktur</td>
                 <td><span class="message_box glow_green"><?php echo $total_tiket_diterima_direktur ?></span></td>
@@ -68,6 +75,7 @@
                 <td><span class="message_box glow_green"><?php echo $total_tiket_dtetap_direktur ?></span></td>
                 <td><span class="message_box glow_green"><?php echo $total_tiket_dtolak_direktur ?></span></td>
             </tr>
+			<?php endif; //direktur?>
         </table>
 
         <div>

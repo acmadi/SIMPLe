@@ -44,12 +44,14 @@ class Dashboards extends CI_Controller
 		$data['total_tiket_open_dadutek'] = $this->mfrontdesk->count_all_tiket_frontdesk('open',5);
 		$data['total_tiket_open_direktur'] = $this->mfrontdesk->count_all_tiket_frontdesk('open',6);
 
-        $merah = $this->db->query('SELECT * from tb_tiket_frontdesk WHERE (DATEDIFF(NOW(), tanggal) > 5)');
-        if ($merah->num_rows() > 0) {
+        //$merah = $this->db->query('SELECT * from tb_tiket_frontdesk WHERE (DATEDIFF(NOW(), tanggal) > 5)');
+        $merah = $this->mfrontdesk->get_tiket_lewat_waktu();
+        if ($merah > 0) {
             $data['merah'] = true;
         }
 
         $data['title'] = 'Dashboard';
+        $data['level_aktif'] = $this->session->userdata('lavel');
         $data['content'] = 'dashboards';
         $this->load->view('new-template', $data);
     }
