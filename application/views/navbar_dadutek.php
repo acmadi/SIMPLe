@@ -25,6 +25,13 @@ if ($this->uri->segment(1) == 'knowledge') {
 if ($this->uri->segment(1) == 'forum') {
     $nav_forum = 'current';
 }
+if ($this->uri->segment(1) == 'dashboards') {
+    $nav_dashboard = 'current';
+}
+
+if ($this->uri->segment(1) == 'frontdesks') {
+    $nav_frontdesk = 'current';
+}
 ?>
 
 <div id="navbar" class="clearfloat">

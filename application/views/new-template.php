@@ -86,7 +86,15 @@
                         $this->session->set_userdata('navbar', 'navbar_dadutek');
                         $this->load->view('navbar_dadutek');
                     }
-                    elseif ($this->session->userdata('lavel') == '6') {
+                    elseif ($this->session->userdata('lavel') == '4') {
+                        $this->session->set_userdata('navbar', 'navbar_kasubdit');
+                        $this->load->view('navbar_direktur');
+                    }
+					elseif ($this->session->userdata('lavel') == '5') {
+                        $this->session->set_userdata('navbar', 'navbar_dadutek');
+                        $this->load->view('navbar_direktur');
+                    }
+					elseif ($this->session->userdata('lavel') == '6') {
                         $this->session->set_userdata('navbar', 'navbar_direktur');
                         $this->load->view('navbar_direktur');
                     }
