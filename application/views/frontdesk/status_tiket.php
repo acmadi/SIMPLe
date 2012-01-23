@@ -37,7 +37,11 @@
                 <?php
                 switch ($value->is_active) {
                     case '1':
-                        echo 'Diterima ' . $value->nama_lavel;
+						if($value->keputusan == 'disahkan'){
+							echo 'Disetujui ' . $value->nama_lavel;
+						}else{
+							echo 'Diterima ' . $value->nama_lavel;
+						}
                         break;
                     case '2':
                         echo 'Diteruskan ke ' . $value->nama_lavel;
@@ -50,9 +54,6 @@
                         break;
                     case '5':
                         echo 'Diteruskan ke ' . $value->nama_lavel;
-                        break;
-                    case '6':
-                        echo 'Disetujui ' . $value->nama_lavel;
                         break;
                     default :
                         echo '-';

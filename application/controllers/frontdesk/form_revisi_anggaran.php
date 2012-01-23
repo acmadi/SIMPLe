@@ -127,7 +127,7 @@ class Form_revisi_anggaran extends CI_Controller
     }
 
     function save_identitas()
-    {
+    {	
         $status = false;
         $this->form_validation->set_rules('nama_kl', 'Nama K/L', 'required');
         $this->form_validation->set_rules('eselon', 'Eselon', 'required');
@@ -156,6 +156,8 @@ class Form_revisi_anggaran extends CI_Controller
             $nomor_surat_usulan = $this->input->post('nomor_surat_usulan');
             $tanggal_surat_usulan = $this->input->post('tanggal_surat_usulan');
             $kode_satker = $this->input->post('kode_satker');
+			
+			
 
             $this->load->helper('tanggal_helper');
 
@@ -185,7 +187,8 @@ class Form_revisi_anggaran extends CI_Controller
             $tiket_id = $this->db->insert_id();
 
             $now = date('Y-m-d H:i:s');
-
+			
+			
             $sql = "INSERT INTO tb_tiket_frontdesk (id_satker, id_formulir, tanggal, status, lavel, id_petugas_satker, id_unit, id_kementrian,nomor_surat_usulan,tanggal_surat_usulan,is_active)
 					VALUES ({$kode_satker_select}, NULL, '{$now}', 'open', 3, {$tiket_id},'{$eselon}','{$nama_kl}','{$nomor_surat_usulan}','{$tanggal_surat_usulan}',2)";
 

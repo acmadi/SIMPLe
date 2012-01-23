@@ -197,7 +197,7 @@
 <!--            </select>-->
 
         <div class="container" style="float: left" id="kode_satker">
-            <select name="itemsToChoose" id="left" size="10" multiple="multiple" style="width: 350px;">
+            <select name="itemsToChoose[]" id="left" size="10" multiple="multiple" style="width: 350px;">
 
             </select>
         </div>
@@ -210,7 +210,7 @@
         </div>
 
         <div class="container" style="float: left">
-            <select name="kode_satker" id="right" size="10" multiple="multiple"  style="width: 350px;">
+            <select name="kode_satker[]" id="right" size="10" multiple="multiple"  style="width: 350px;">
             </select>
         </div>
 
