@@ -56,7 +56,7 @@
         <input type="hidden" name="submit" value="password"/>
 
         <fieldset>
-            <legend>Profil</legend>
+            <legend>Password</legend>
             <p>
                 <label> Password </label>
                 <input type="password" name="password"/>
