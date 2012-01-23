@@ -1,10 +1,6 @@
 <div class="content">
 
-    <h1>Status Tiket</h1>
-
-    <?php //echo search('/frontdesk/status_tiket/index') ?>
-
-    <!-- <div class="pagination"><?php echo ($pageLink) ? 'Halaman ' . $pageLink : '';?></div> -->
+    <h1>Status Tiket</h1>    
     <table class="table">
         <thead>
         <tr>
@@ -24,7 +20,7 @@
         </tr>
         </tfoot>
         <tbody>
-        <?php foreach ($result as $value): ?>
+        <?php foreach ($result->result() as $value): ?>
         <tr>
             <td><?php echo sprintf('%05d', $value->no_tiket_frontdesk) ?></td>
             <td><?php echo table_tanggal($value->tanggal) ?></td>
@@ -65,7 +61,4 @@
             <?php endforeach ?>
         </tbody>
     </table>
-
-    <!-- <div class="pagination"><?php echo ($pageLink) ? 'Halaman ' . $pageLink : '';?></div> -->
-
 </div>
