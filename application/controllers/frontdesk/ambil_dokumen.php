@@ -22,6 +22,8 @@ class Ambil_dokumen extends CI_Controller
 
     function cetak($no_tiket_frontdesk)
     {
+		$this->db->query("INSERT tb_pengembalian_doc(no_tiket_frontdesk, id_user, sudah_diambil, tanggal)
+						  VALUES(?,?,1,NOW())",array($no_tiket_frontdesk,$this->session->userdata('id_user')));
         $result = $this->db->from('tb_tiket_frontdesk a')
                 ->join('tb_kementrian b', 'b.id_kementrian = a.id_kementrian')
                 ->join('tb_unit c', 'c.id_unit = a.id_unit')

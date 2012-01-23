@@ -42,7 +42,12 @@
 <!--            <td>--><?php //echo $value->nama_satker ?><!--</td>-->
             <td><?php echo $value->status ?></td>
             <td class="action">
-                <a href="<?php echo site_url('/frontdesk/ambil_dokumen/cetak/' . $value->no_tiket_frontdesk) ?>" class="button blue-pill">Ambil Dokumen</a>
+				<?php
+					$style_button = 'green';
+					$tmp = $this->db->query('SELECT * FROM tb_pengembalian_doc WHERE no_tiket_frontdesk = ? AND sudah_diambil = 1',array($value->no_tiket_frontdesk))->num_rows();
+					if($tmp > 0) $style_button = '';
+				?>
+                <a href="<?php echo site_url('/frontdesk/ambil_dokumen/cetak/' . $value->no_tiket_frontdesk) ?>" class="button <?php echo $style_button;?>">Ambil Dokumen</a>
             </td>
         </tr>
             <?php endforeach ?>
