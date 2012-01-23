@@ -207,10 +207,9 @@ class Form_revisi_anggaran extends CI_Controller
                     $this->db->query($sql);
                 }
             }
-
-            if (isset($dokumen_lainnya) AND count($dokumen_lainnya) > 1) {
-                $dokumen_lainnya = $this->input->post('dokumen_lainnya');
-
+			
+			$dokumen_lainnya = $this->input->post('dokumen_lainnya');
+            if (isset($dokumen_lainnya) AND count($dokumen_lainnya) > 0) {
                 foreach ($dokumen_lainnya as $value) {
                     if (isset($_POST['dokumen_lainnya'])) {
                         $sql = "INSERT INTO tb_kelengkapan_formulir
