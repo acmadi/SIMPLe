@@ -33,6 +33,8 @@
     <script type="text/javascript" src="<?php echo base_url('js/chosen/chosen.jquery.min.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/jQuery-Visualize/js/visualize.jQuery.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/jquery.dataTables.min.js') ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('js/highcharts/highcharts.js') ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('js/highcharts/themes/grid.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/phpjs/substr.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/bootstrap/bootstrap-twipsy.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/prefixfree.min.js') ?>"></script>

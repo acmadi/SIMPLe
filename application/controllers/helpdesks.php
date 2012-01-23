@@ -21,6 +21,13 @@ class Helpdesks extends CI_Controller
 
 	public function dashboard()
 	{
+		$this->load->model('mchart');
+
+		$this->mchart->get_helpdesk_table();
+
+		$data['terjawab'] = $this->mchart->tiket_terjawab();
+		$data['today_open'] = $this->mchart->today('open');
+		$data['today_close'] = $this->mchart->today('close');
 		$data['title'] = 'Helpdesk - Dashboard';
 		$data['content'] = 'new-helpdesk/dashboard';
 		$this->load->view($this->template, $data);
