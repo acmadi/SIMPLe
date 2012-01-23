@@ -124,7 +124,11 @@
     <h1>Dirjen Dashboard</h1>
 
     <div style="text-align: right;">
-        <a href="<?php echo site_url('/dirjen/list_argo') ?>" class="red-box" style="padding: 10px; display: inline-block; color: white; margin-bottom: 10px;">
+		<?php 
+		$button_lwt_style = 'green-box'; 
+		if($argo > 0) $button_lwt_style = 'red-box';
+		?>
+        <a href="<?php echo site_url('/dirjen/list_argo') ?>" class="<?php echo $button_lwt_style;?>" style="padding: 10px; display: inline-block; color: white; margin-bottom: 10px;">
             <strong><?php echo $argo ?></strong> Tiket melebihi target waktu
         </a>
     </div>
