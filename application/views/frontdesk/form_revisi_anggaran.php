@@ -179,7 +179,12 @@
                 <?php
                 echo '<option></option>';
                 foreach ($kementrian->result() as $value) {
-                    echo sprintf("<option value='%s'>%s</option>", $value->id_kementrian, $value->id_kementrian . ' - ' . $value->nama_kementrian);
+
+                    if ($value->id_kementrian == set_value('nama_kl')) {
+                        echo sprintf("<option selected value='%s'>%s</option>", $value->id_kementrian, $value->id_kementrian . ' - ' . $value->nama_kementrian);
+                    } else {
+                        echo sprintf("<option value='%s'>%s</option>", $value->id_kementrian, $value->id_kementrian . ' - ' . $value->nama_kementrian);
+                    }
                 }
                 ?>
             </select>
@@ -188,6 +193,11 @@
         <p>
             <label class="align-right">Nama Eselon 1</label>
             <select id="eselon" name="eselon" class="kl chzn-select" data-placeholder="Pilih Eselon I" value="<?php echo set_value('eselon') ?>" style="width: 700px;">
+                <?php
+                if (set_value('eselon')) {
+                    echo $eselon;
+                }
+                ?>
             </select>
         </p>
 
@@ -197,7 +207,7 @@
 <!--            </select>-->
 
         <div class="container" style="float: left" id="kode_satker">
-            <select name="itemsToChoose" id="left" size="10" multiple="multiple" style="width: 350px;">
+            <select name="itemsToChoose[]" id="left" size="10" multiple="multiple" style="width: 350px;">
 
             </select>
         </div>

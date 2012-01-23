@@ -9,6 +9,9 @@
     <h1>Profil</h1>
 
     <?php
+    if ($this->session->flashdata('success'))
+        echo notification($this->session->flashdata('success'), 'BERHASIL', 'green');
+
     if (validation_errors())
         echo notification(validation_errors(), 'ERROR', 'red');
     ?>
@@ -23,17 +26,17 @@
             <legend>Profil</legend>
             <p>
                 <label> Nama </label>
-                <input type="text" name="nama" value="<?php echo ($_POST['submit'] == 'profile') ? set_value('nama') : $profile->nama ?>"/>
+                <input type="text" name="nama" value="<?php echo (isset($_POST['submit']) AND $_POST['submit'] == 'profile') ? set_value('nama') : $profile->nama ?>"/>
             </p>
 
             <p>
                 <label> Email </label>
-                <input type="text" name="email" value="<?php echo ($_POST['submit'] == 'profile') ? set_value('email') : $profile->email ?>"/>
+                <input type="text" name="email" value="<?php echo (isset($_POST['submit']) AND $_POST['submit'] == 'profile') ? set_value('email') : $profile->email ?>"/>
             </p>
 
             <p>
                 <label> Telpon </label>
-                <input type="text" name="no_tlp" value="<?php echo ($_POST['submit'] == 'profile') ? set_value('no_tlp') : $profile->no_tlp ?>"/>
+                <input type="text" name="no_tlp" value="<?php echo (isset($_POST['submit']) AND $_POST['submit'] == 'profile') ? set_value('no_tlp') : $profile->no_tlp ?>"/>
             </p>
 
             <div>

@@ -33,7 +33,9 @@ jQuery(function () {
 
     $('.table').dataTable({
         sPaginationType:'full_numbers',
+        iDisplayLength: 25,
         "oLanguage":{
+            sSearch: 'Pencarian',
             sLengthMenu:'Memperlihatkan _MENU_ data per halaman',
             sZeroRecords:'Data tidak ditemukan',
             sInfo:'Memperlihatkan _START_ hingga _END_ dari _TOTAL_ data',

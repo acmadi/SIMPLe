@@ -12,6 +12,7 @@ class Form_revisi_anggaran extends CI_Controller
     function index()
     {
         $data['kementrian'] = $this->db->query('SELECT * FROM tb_kementrian ORDER BY id_kementrian');
+        $data['eselon'] = $this->cari_eselon($this->input->post('nama_kl'), $this->input->post('eselon'));
         $data['kelengkapan_dokumen'] = $this->db->query('SELECT * FROM tb_kelengkapan_doc ORDER BY id_kelengkapan');
         $data['title'] = 'Form Revisi Anggaran';
         $data['content'] = 'frontdesk/form_revisi_anggaran';
@@ -127,7 +128,7 @@ class Form_revisi_anggaran extends CI_Controller
     }
 
     function save_identitas()
-    {
+    {	
         $status = false;
         $this->form_validation->set_rules('nama_kl', 'Nama K/L', 'required');
         $this->form_validation->set_rules('eselon', 'Eselon', 'required');
@@ -156,6 +157,8 @@ class Form_revisi_anggaran extends CI_Controller
             $nomor_surat_usulan = $this->input->post('nomor_surat_usulan');
             $tanggal_surat_usulan = $this->input->post('tanggal_surat_usulan');
             $kode_satker = $this->input->post('kode_satker');
+			
+			
 
             $this->load->helper('tanggal_helper');
 
@@ -179,21 +182,22 @@ class Form_revisi_anggaran extends CI_Controller
             // Save Identitas Petugas Satker
             $sql = "INSERT INTO tb_petugas_satker (nama_petugas, jabatan_petugas, no_hp, email, no_kantor, tipe, nip)
                     VALUES ('{$nama_petugas}', '{$jabatan_petugas}', '{$no_hp}', '{$email}', '{$no_kantor}', '{$tipe}','{$nip}')";
-		
+
             $this->db->query($sql);
 
             $tiket_id = $this->db->insert_id();
 
             $now = date('Y-m-d H:i:s');
-
+			
+			
             $sql = "INSERT INTO tb_tiket_frontdesk (id_satker, id_formulir, tanggal, status, lavel, id_petugas_satker, id_unit, id_kementrian,nomor_surat_usulan,tanggal_surat_usulan,is_active)
 					VALUES ({$kode_satker_select}, NULL, '{$now}', 'open', 3, {$tiket_id},'{$eselon}','{$nama_kl}','{$nomor_surat_usulan}','{$tanggal_surat_usulan}',2)";
 
 
             $this->db->query($sql);
-			
-			
-			
+
+
+
             // Simpan dokumen di tb_kelengkapan_formulir
             $dokumen = $this->input->post('dokumen');
             $no_tiket_frontdesk = $this->db->insert_id();
@@ -208,16 +212,17 @@ class Form_revisi_anggaran extends CI_Controller
                 }
             }
 
-            if (isset($dokumen_lainnya) AND count($dokumen_lainnya) > 1) {
+            if ($this->input->post('dokumen_lainnya')) {
                 $dokumen_lainnya = $this->input->post('dokumen_lainnya');
-
-                foreach ($dokumen_lainnya as $value) {
-                    if (isset($_POST['dokumen_lainnya'])) {
-                        $sql = "INSERT INTO tb_kelengkapan_formulir
+                if (isset($dokumen_lainnya) AND count($dokumen_lainnya) > 0) {
+                    foreach ($dokumen_lainnya as $value) {
+                        if (isset($_POST['dokumen_lainnya'])) {
+                            $sql = "INSERT INTO tb_kelengkapan_formulir
 									(no_tiket_frontdesk, kelengkapan, id_kelengkapan)
 									VALUES ('{$no_tiket_frontdesk}', '{$value}', 0)";
 
-                        $this->db->query($sql);
+                            $this->db->query($sql);
+                        }
                     }
                 }
             }
@@ -347,5 +352,40 @@ class Form_revisi_anggaran extends CI_Controller
         $anggaran = $result->row();
         $anggaran = $anggaran->anggaran;
         echo $anggaran;
+    }
+
+    /**
+     * Digunakan untuk mencari Eselon.
+     * Output berupa <option value="kode_eselon">nama_eselon</option>
+     *
+     * @param $id_kementrian Kode Kementrian (e.g 002, 014)
+     * @param $eselon Kode Eselon (e.g 01, 06, 21)
+     * @output HTML
+     */
+    function cari_eselon($id_kementrian, $id_eselon = '')
+    {
+
+        /* INFO:
+                 $select digunakan saat validasi gagal dan untuk tetap memlilih opsi terakhir tetap terpilih.
+                 Method set_value() tidak bisa digunakan di controller. Sehingga set_value('eselon') dikirim
+                 kembali ke controller untuk diproses. Lihat views/helpdesk/identitas_satker pada Nama Eselon,
+                 ada file_get_contents()
+              */
+
+        $id_kementrian = substr($id_kementrian, 0, 3);
+
+        $result = $this->db->query("SELECT * FROM tb_unit WHERE id_kementrian = ?", array($id_kementrian));
+        $eselon = '';
+        if ($result->num_rows() > 0) {
+
+            foreach ($result->result() as $value) {
+                if ($id_eselon != '' AND $id_eselon == $value->id_unit) {
+                    $eselon .= sprintf('<option selected value="%s">%s - %s</option>', $value->id_unit, $value->id_unit, $value->nama_unit);
+                } else {
+                    $eselon .= sprintf('<option value="%s">%s - %s</option>', $value->id_unit, $value->id_unit, $value->nama_unit);
+                }
+            }
+        }
+        return $eselon;
     }
 }

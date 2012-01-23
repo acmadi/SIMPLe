@@ -16,3 +16,6 @@ desktop.ini
 *~
 /.idea/
 nbproject
+
+# Supaya gak accident commit file ini
+/output/*.odt

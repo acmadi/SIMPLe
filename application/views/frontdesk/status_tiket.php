@@ -1,10 +1,6 @@
 <div class="content">
 
-    <h1>Status Tiket</h1>
-
-    <?php //echo search('/frontdesk/status_tiket/index') ?>
-
-    <!-- <div class="pagination"><?php echo ($pageLink) ? 'Halaman ' . $pageLink : '';?></div> -->
+    <h1>Status Tiket</h1>    
     <table class="table">
         <thead>
         <tr>
@@ -24,7 +20,7 @@
         </tr>
         </tfoot>
         <tbody>
-        <?php foreach ($result as $value): ?>
+        <?php foreach ($result->result() as $value): ?>
         <tr>
             <td><?php echo sprintf('%05d', $value->no_tiket_frontdesk) ?></td>
             <td><?php echo table_tanggal($value->tanggal) ?></td>
@@ -37,7 +33,11 @@
                 <?php
                 switch ($value->is_active) {
                     case '1':
-                        echo 'Diterima ' . $value->nama_lavel;
+						if($value->keputusan == 'disahkan'){
+							echo 'Disetujui ' . $value->nama_lavel;
+						}else{
+							echo 'Diterima ' . $value->nama_lavel;
+						}
                         break;
                     case '2':
                         echo 'Diteruskan ke ' . $value->nama_lavel;
@@ -51,9 +51,6 @@
                     case '5':
                         echo 'Diteruskan ke ' . $value->nama_lavel;
                         break;
-                    case '6':
-                        echo 'Disetujui ' . $value->nama_lavel;
-                        break;
                     default :
                         echo '-';
                         break;
@@ -64,7 +61,4 @@
             <?php endforeach ?>
         </tbody>
     </table>
-
-    <!-- <div class="pagination"><?php echo ($pageLink) ? 'Halaman ' . $pageLink : '';?></div> -->
-
 </div>

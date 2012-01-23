@@ -36,6 +36,7 @@ class Profiles extends CI_Controller
                 ));
 
                 $this->session->set_flashdata('success', 'Profil berhasil diubah');
+                redirect('profiles');
 
             }
 
@@ -56,6 +57,7 @@ class Profiles extends CI_Controller
                 ));
 
                 $this->session->set_flashdata('success', 'Password berhasil diubah');
+                redirect('profiles');
 
             }
 
