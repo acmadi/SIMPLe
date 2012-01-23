@@ -256,6 +256,7 @@ class Mhelpdesk extends CI_Model
 		 LEFT JOIN tb_lavel l ON ( u.id_lavel = l.id_lavel ) 
 		 WHERE l.lavel =  '$lavel'
 		 AND status = 'close'
+		 ORDER BY tanggal_selesai DESC
     	 ";
     	$query = $this->db->query($string);
 

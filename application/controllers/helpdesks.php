@@ -10,8 +10,8 @@ class Helpdesks extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('mhelpdesks');
-		$this->form_validation->set_message('required', '%s harus diisi');
-		$this->form_validation->set_message('numeric', '%s harus berupa angka');
+		$this->form_validation->set_message('required', '<strong>%s</strong> harus diisi');
+		$this->form_validation->set_message('numeric', '<strong>%s</strong> harus berupa angka');
 	}
 
 	public function index()
@@ -431,7 +431,7 @@ class Helpdesks extends CI_Controller
 				->where('status', 'open')
 				->where('lavel', $my_lavel)
 				->order_by('prioritas DESC')
-				->order_by('status')
+				->order_by('tanggal DESC')
 				->get();
 
 		// echo $this->db->last_query();
@@ -460,15 +460,19 @@ class Helpdesks extends CI_Controller
 
 	function jawab()
 	{
-		// dump($this->input->post());
-		$arr = $this->input->post();
+		$this->form_validation->set_rules('jawaban',         'Jawaban',         'required');
+		$this->form_validation->set_rules('nama_narasumber', 'Nama Narasumber', 'required');
 
-		$this->mhelpdesks->jawab($arr);
+		if ($this->form_validation->run() == TRUE) :
+			$arr = $this->input->post();
+			$this->mhelpdesks->jawab($arr);
 
-		$this->session->set_flashdata('success', 
-			'1 (satu) pertanyaan berhasil dijawab dan telah dikembalikan ke Customer Service Helpdesk!');
+			$this->session->set_flashdata('success', 
+				'1 (satu) pertanyaan berhasil dijawab dan telah dikembalikan ke Customer Service Helpdesk!');
+			redirect('helpdesks/all');
+		endif;
 
-		redirect('helpdesks/all');
+		$this->view($this->input->post('id_tiket'));
 	}
 
 	// penjawaban yang dilakukan oleh CS
@@ -487,10 +491,9 @@ class Helpdesks extends CI_Controller
 			'jawab'             => $knowledge->jawaban,
 			'sumber'            => $knowledge->nama_narasumber
 			));
-
-		$this->session->set_flashdata('success', 
+		$this->session->set_flashdata('info', 
 			'1 (satu) tiket berhasil anda jawab !');
-		redirect('helpdesks/list_pertanyaan');
+		redirect('helpdesks/pertanyaan/?prev_question=true');
 	}
 
 	// beda sama fungsi eskalasi(), ini khusus lavel di atas CS

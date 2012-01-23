@@ -18,17 +18,17 @@
                     click:function () {
                         $(this).dialog('close');
                     }
-                },
-                {
-                    text:'Pilih Jawaban Ini',
-                    click:function () {
-                        var status = confirm('Anda yakin memilih jawaban ini?');
-                        if (status === true) {
-                            url = '<?php echo site_url("/helpdesks/jawab/{$this->session->userdata('id_tiket_helpdesk')}") ?>/';
-                            console.log(url)
-                        }
-                    }
                 }
+                // {
+                //     text:'Pilih Jawaban Ini',
+                //     click:function () {
+                //         var status = confirm('Anda yakin memilih jawaban ini?');
+                //         if (status === true) {
+                //             url = '<?php echo site_url("/helpdesks/jawab/{$this->session->userdata('id_tiket_helpdesk')}") ?>/';
+                //             console.log(url)
+                //         }
+                //     }
+                // }
             ]
         });
 
@@ -140,7 +140,7 @@
                     <?php endif ?>
 
                     <?php if ($pertanyaan->prioritas == 'medium'): ?>
-                    <span style="color: blue; text-transform: uppercase;"><?php echo $pertanyaan->prioritas ?></span>
+                    <span style="color: orange; text-transform: uppercase;"><?php echo $pertanyaan->prioritas ?></span>
                     <?php endif ?>
 
                     <?php if ($pertanyaan->prioritas == 'low'): ?>

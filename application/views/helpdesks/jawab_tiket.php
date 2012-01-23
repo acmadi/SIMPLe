@@ -1,5 +1,4 @@
-<?php dump($antrian) ?>
-
+<?php // dump($antrian) ?>
 <div class="content">
 
     <h1>Jawab Pertanyaan</h1>
@@ -96,11 +95,12 @@
 
         <fieldset>
             <legend>Jawaban</legend>
-
-            <div class="grid_5">
+            <?php echo form_error('nama_narasumber', '<div class="notification red">', '</div>'); ?>
+            <?php echo form_error('jawaban'        , '<div class="notification red">', '</div>'); ?>
+            <div class="grid_6">
             <p>
                 <label>
-                    <textarea name="jawaban" rows="7" cols="120"></textarea>
+                    <textarea name="jawaban" rows="10" style="width: 390px"></textarea>
                 </label>
             </p>
             </div>

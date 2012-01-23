@@ -3,7 +3,7 @@
     $(document).ready(function(){
         
         oTable = $('.table').dataTable();
-        oTable.fnSort( [ [2,'asc']] );
+        oTable.fnSort( [ [6,'desc'],[2,'asc'] ] );
         oTable.fnAdjustColumnSizing();
         oTable.fnFilter( 'open', 6 );
 
