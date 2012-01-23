@@ -22,6 +22,7 @@ class Pengembalian_dokumen extends CI_Controller
     function cetak($id)
     {
         $result = $this->tiket->get_detail_pengembalian_by_id($id);
+		$this->db->query("UPDATE tb_pengembalian_doc SET sudah_diambil = 1, id_user = ? WHERE id_pengembalian_doc = ?",array($this->session->userdata('id_user'),$id));
 
         // Bikin Pengembalian Dokumen
         $input_filename= $this->odtphp->create_kembali($result->row());
