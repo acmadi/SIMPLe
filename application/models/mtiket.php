@@ -46,75 +46,16 @@ class Mtiket extends CI_Model
 
     public function get_list_pengembalian_dokumen()
     {
-        //@F2D
-        $keyword = $this->input->post('keyword', TRUE);
-
-        $this->load->library('pagination');
-
-        $total_seg = $this->uri->total_segments();
-        $default = array("keyword");
-        $this->terms = $this->uri->uri_to_assoc(4, $default);
-
-        if (($this->terms['keyword'] != '') OR ($keyword != '')) {
-            $uri_segment = 6;
-            $offset = (int)$this->uri->segment($uri_segment, 0);
-
-            if ($this->terms['keyword'] != '') {
-                $keyword = $this->terms['keyword'];
-            } else {
-                $this->terms['keyword'] = $keyword;
-            }
-
-            $uriparams['keyword'] = $this->terms['keyword'];
-
-            if (($total_seg % 2) > 0) {
-                $offset = (int)$this->uri->segment(6, 0);
-            }
-
-            $url_add = $this->uri->assoc_to_uri($uriparams) . '/';
-        } else {
-            $uri_segment = 4;
-            $offset = (int)$this->uri->segment($uri_segment, 0);
-            $url_add = '';
-
-        }
-
-        //if from suggest
-        $where = '';
-        if (!empty($keyword)) {
-            $where = " AND tu.nama_unit LIKE '%" . $keyword . "%'";
-        }
-
-        $sql = "SELECT  ttf.no_tiket_frontdesk, ttf.id_kementrian, tb_kementrian.nama_kementrian, ttf.tanggal, ttf.id_satker, ts.nama_satker, tpd.id_pengembalian_doc, ttf.id_unit, tu.nama_unit
+		$sql = "SELECT  ttf.no_tiket_frontdesk, ttf.id_kementrian, tb_kementrian.nama_kementrian, ttf.tanggal, ttf.id_satker, ts.nama_satker, tpd.id_pengembalian_doc, ttf.id_unit, tu.nama_unit
 				FROM tb_pengembalian_doc tpd, tb_tiket_frontdesk ttf
 				LEFT JOIN tb_satker ts ON ts.id_satker = ttf.id_satker
 				LEFT JOIN tb_unit tu ON tu.id_unit = ttf.id_unit AND tu.id_kementrian = ttf.id_kementrian
                 LEFT JOIN tb_kementrian ON tb_kementrian.id_kementrian = ttf.id_kementrian
-				WHERE tpd.no_tiket_frontdesk = ttf.no_tiket_frontdesk AND tpd.sudah_diambil = 0 AND ttf.is_active = 3 AND ttf.status = 'close' $where
+				WHERE tpd.no_tiket_frontdesk = ttf.no_tiket_frontdesk AND tpd.sudah_diambil = 0 AND ttf.is_active = 3 AND ttf.status = 'close'
 				GROUP BY tpd.no_tiket_frontdesk";
         $query = $this->db->query($sql);
-
-        $config['base_url'] = site_url('/frontdesk/pengembalian_dokumen/index') . '/' . $url_add;
-        $config['total_rows'] = $query->num_rows();
-        $config['per_page'] = 10;
-        $config['uri_segment'] = $uri_segment;
-        $this->pagination->initialize($config);
-
-
-        $sqlb = "SELECT  ttf.no_tiket_frontdesk, ttf.id_kementrian, tb_kementrian.nama_kementrian, ttf.tanggal, ttf.id_satker, ts.nama_satker, tpd.id_pengembalian_doc, ttf.id_unit, tu.nama_unit
-				FROM tb_pengembalian_doc tpd, tb_tiket_frontdesk ttf 
-				LEFT JOIN tb_satker ts ON ts.id_satker = ttf.id_satker
-				LEFT JOIN tb_unit tu ON tu.id_unit = ttf.id_unit AND tu.id_kementrian = ttf.id_kementrian
-				LEFT JOIN tb_kementrian ON tb_kementrian.id_kementrian = ttf.id_kementrian
-				WHERE tpd.no_tiket_frontdesk = ttf.no_tiket_frontdesk AND tpd.sudah_diambil = 0 AND ttf.is_active = 3 AND ttf.status = 'close' $where
-				GROUP BY tpd.no_tiket_frontdesk
-				LIMIT ?,?";
-        $data["query"] = $this->db->query($sqlb, array($offset, $config['per_page']));
-
-        $data['isian_form1'] = $keyword;
-        $data['pagination1'] = $this->pagination->create_links();
-
-        return $data;
+		
+		return $query;
     }
 
     public function get_detail_pengembalian_by_id($id)
