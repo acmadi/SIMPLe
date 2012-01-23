@@ -34,10 +34,14 @@
                 <td class="action">
 					<?php
 						$disabled =  $onclick = '';
-						$style_button = 'gray-pill';
+						$style_button = 'green';
+						$style_button_t = '';
+						$style_button_r = 'red';
 						if($value->is_active == 2){
 							$disabled = 'disabled';
-							$style_button = 'blue-pill';
+							$style_button = '';
+							$style_button_t = 'green';
+							$style_button_r = '';
 						}
 
 						$level_selected = $this->session->userdata('lavel');
@@ -60,7 +64,7 @@
 						}
 					?>
 
-					<a class="button <?php echo $style_button;?>" href="<?php echo site_url('/frontdesks/diterima/' . $value->no_tiket_frontdesk) ?>">Diterima</a>
+					<a class="button <?php echo $style_button_t;?>" href="<?php echo site_url('/frontdesks/diterima/' . $value->no_tiket_frontdesk) ?>">Diterima</a>
 
 					<?php if($level_selected != '7'): ?>
 					<input type="button" class="button <?php echo $style_button;?>" onclick="window.location.href='<?php echo site_url('/frontdesks/diteruskan/' . $value->no_tiket_frontdesk); ?>'"
@@ -69,14 +73,14 @@
 
 
 					<?php if($level_selected == '3'): ?>
-						<input type="button" class="button <?php echo $style_button;?>" onclick="window.location.href='<?php echo site_url('/frontdesks/reject/' . $value->no_tiket_frontdesk); ?>'"
+						<input type="button" class="button <?php echo $style_button_r;?>" onclick="window.location.href='<?php echo site_url('/frontdesks/reject/' . $value->no_tiket_frontdesk); ?>'"
 						<?php echo $disabled;?> value="Dikembalikan"/>
                     <?php endif; ?>
 
 					<?php if(($level_selected == '7') or ($level_selected == '6')): ?>
 					<input type="button" class="button <?php echo $style_button;?>" onclick="window.location.href='<?php echo site_url('/frontdesks/accept/' . $value->no_tiket_frontdesk); ?>'"
 					<?php echo $disabled;?> value="Ditetapkan"/>
-					<input type="button" class="button <?php echo $style_button;?>" onclick="window.location.href='<?php echo site_url('/frontdesks/reject/' . $value->no_tiket_frontdesk); ?>'"
+					<input type="button" class="button <?php echo $style_button_r;?>" onclick="window.location.href='<?php echo site_url('/frontdesks/reject/' . $value->no_tiket_frontdesk); ?>'"
 					<?php echo $disabled;?> value="Ditolak"/>
                     <?php endif; ?>
 
