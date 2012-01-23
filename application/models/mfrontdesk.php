@@ -41,6 +41,7 @@ class Mfrontdesk extends CI_Model
 							  AND c.id_unit_satker = '{$this->session->userdata('id_unit_satker')}' ";
 		endif;
 		
+		/*
         $sql = "SELECT * FROM `tb_tiket_frontdesk` a
                 JOIN tb_kementrian ON tb_kementrian.id_kementrian = a.id_kementrian
                 JOIN tb_kon_unit_satker b ON a.id_kementrian = b.id_kementrian
@@ -53,10 +54,29 @@ class Mfrontdesk extends CI_Model
 				$optional_sql
                 GROUP BY no_tiket_frontdesk
                 ORDER BY tanggal";
+		*/
+		
+		$jml = 0;
+		$sql = "SELECT * FROM `tb_tiket_frontdesk` a
+                JOIN tb_kementrian ON tb_kementrian.id_kementrian = a.id_kementrian
+                JOIN tb_kon_unit_satker b ON a.id_kementrian = b.id_kementrian
+                JOIN tb_unit_saker c ON b.id_unit_satker = c.id_unit_satker
+                WHERE
+                 status = 'open' AND
+                a.lavel = '{$this->session->userdata('lavel')}'
+				$optional_sql
+                GROUP BY no_tiket_frontdesk
+                ORDER BY tanggal";
+		
 				
         $result = $this->db->query($sql);
 		
-		return $result->num_rows();
+		foreach($result->result() as $value){
+			if( (hari_kerja($value->tanggal)) > 5 ) $jml += 1;
+		}
+		
+		//return $result->num_rows();
+		return $jml;
 	}
 	
 	public function get_all_tiket_frontdesk($level = 3,$optional = '', $isCount = FALSE){
