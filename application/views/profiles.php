@@ -23,7 +23,7 @@
 
 
         <fieldset>
-            <legend>Profil</legend>
+            <legend>Identitas</legend>
             <p>
                 <label> Nama </label>
                 <input type="text" name="nama" value="<?php echo (isset($_POST['submit']) AND $_POST['submit'] == 'profile') ? set_value('nama') : $profile->nama ?>"/>
@@ -56,7 +56,7 @@
         <input type="hidden" name="submit" value="password"/>
 
         <fieldset>
-            <legend>Profil</legend>
+            <legend>Password</legend>
             <p>
                 <label> Password </label>
                 <input type="password" name="password"/>
