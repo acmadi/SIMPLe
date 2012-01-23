@@ -29,26 +29,26 @@
                         <tr>
                         	<td colspan="2"><b style="font-size: 120%">Identitas Petugas Satker</b></td>
                         </tr>
-                            
+
                         <tr>
                         	<td width="150">Nama Petugas</td>
                             <td>
                             <select id="id_petugas_satker" name="id_petugas_satker">
                             <?php foreach($petugas as $petugas): ?>
-                            <option value="<?php echo $petugas->id_petugas_satker ?>"> <?php 
+                            <option value="<?php echo $petugas->id_petugas_satker ?>"> <?php
                             echo $petugas->nama_petugas ?> </option>
                             <?php endforeach; ?>
                             </select>
                             </td>
-                        </tr> 
+                        </tr>
                         <tr>
                         	<td width="150">Jabatan Petugas</td>
                             <td><input id="jabatan" type="text" size="30" readonly="readonly" ></td>
-                        </tr> 
+                        </tr>
                         <tr>
                         	<td width="150">No. Hp</td>
                             <td><input id="no_hp" type="text" size="30" readonly="readonly" ></td>
-                        </tr> 
+                        </tr>
                         <tr>
                             <td colspan="2">
                             <div class="warning">
@@ -59,11 +59,11 @@
                         <tr>
                         	<td width="150">No. Kantor</td>
                             <td><input type="text" size="30" readonly="readonly" ></td>
-                        </tr> 
+                        </tr>
                         <tr>
                         	<td width="150">E-mail</td>
                             <td><input type="text" size="30" readonly="readonly" ></td>
-                        </tr> 
+                        </tr>
                         </div>
                      	<tr>
                         	<td colspan="2">&nbsp;</td>
@@ -76,7 +76,7 @@
                             </form>
                             -->
                             <input type="submit" value="Saluran Pengaduan" style="width:105px; height:26px; font-size:10px;">
-                            <input type="button" value="close" style="width:105px; height:26px; font-size:10px;">                  
+                            <input type="button" value="close" style="width:105px; height:26px; font-size:10px;">
                     	</td>
                         </tr>
                     </table>
