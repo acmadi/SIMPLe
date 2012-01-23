@@ -46,6 +46,9 @@ function hari_kerja($startDate, $endDate = '', $holidays = array())
         array_push($holidays, $value->holiday);
     }
 
+    $startDate = date('Y-m-d', strtotime($startDate));
+    $endDate = date('Y-m-d');
+
     // do strtotime calculations just once
     $endDate = strtotime($endDate);
     $startDate = strtotime($startDate);
