@@ -133,8 +133,38 @@ class Odtphp
     /**
      * PeNGEMBALIAN dokumen
      */
-    public function create_kembali()
+    public function create_kembali($data)
     {
+        $odf = new odf($this->print_template_path . 'kembali.odt');
 
+        $odf->setVars('var1', $data->id_kementrian . ' - ' . $data->nama_kementrian);
+        $odf->setVars('var2', $data->id_unit . ' - ' . $data->id_kementrian);
+        $odf->setVars('var3', $data->nip);
+        $odf->setVars('var4', $data->nama_petugas);
+        $odf->setVars('var5', $data->jabatan_petugas);
+        $odf->setVars('var6', $data->no_hp);
+        $odf->setVars('var7', $data->no_kantor);
+
+        $emails = explode(';', trim_middle($data->email));
+        $email = '';
+        $i = 1;
+        foreach ($emails as $value) {
+            $email .= "$i. $value\n";
+            $i++;
+        }
+        $odf->setVars('var8', $email);
+
+
+        $odf->setVars('var9', $data->catatan);
+
+
+        $output_filename = 'ambil' . $data->no_tiket_frontdesk . '.odt';
+
+        $odf->saveToDisk(FCPATH . 'output/' . $output_filename);
+
+        return array(
+            'full_filename' => FCPATH . 'output/' . $output_filename,
+            'filename' => $output_filename
+        );
     }
 }
