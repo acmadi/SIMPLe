@@ -1,12 +1,35 @@
     <script>
+    var oTable;
     $(document).ready(function(){
         
         oTable = $('.table').dataTable();
         oTable.fnSort( [ [2,'asc']] );
+        oTable.fnAdjustColumnSizing();
+
+        $('#Semua').click(function(){
+            oTable.fnFilter( '', 6);
+        });
+        $('#Open').click(function(){
+            oTable.fnFilter( 'open', 6 );
+        });
+        $('#Close').click(function(){
+            oTable.fnFilter( 'close', 6 );
+        });
     });
     </script>
 <div class="content">
     <h1>Pertanyaan</h1>
+
+    <fieldset>
+        <legend>Filter berdasarkan status tiket</legend>
+        <input type="radio" id="Semua" value="Semua" name="filter" checked="checked" />
+            <label for="Semua">Semua</label>
+        <input type="radio" id="Open" value="Open" name="filter"/>
+            <label for="Open">Open</label>
+        <input type="radio" id="Close" value="Close" name="filter"/>
+            <label for="Close">Close</label>
+    </fieldset>
+    <br/>
     <table class="table">
         <thead>
         <tr>
