@@ -78,7 +78,7 @@ class Dashboard extends CI_Controller
             }
 
             $this->session->set_flashdata('success', 'Data berhasil disimpan');
-            $this->_success('/pengaduan/dashboard', 'Pengaduan berhasil dikirim', 5);
+            $this->_success(site_url('/pengaduan/dashboard'), 'Pengaduan berhasil dikirim', 5);
             // redirect('/pengaduan/dashboard');
 
 

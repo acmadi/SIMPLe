@@ -51,7 +51,7 @@ Class Login extends CI_Controller
             $this->session->set_userdata('id_unit_satker', $login_data->id_unit_satker);
             $this->session->set_userdata('anggaran', $login_data->anggaran);
 
-            $this->db->query("INSERT INTO tb_online_users(USER,aktifitas_terakhir) VALUES (?,NOW())", array($login_data->username));
+            $this->db->query("INSERT INTO tb_online_users(user,aktifitas_terakhir,session_id) VALUES (?,NOW(),?)", array($login_data->username,$this->session->userdata('session_id')));
 
             $this->log->create("Login");
 			

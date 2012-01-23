@@ -1,19 +1,8 @@
-<style type="text/css">
-    .ui-autocomplete {
-        max-height: 300px;
-        overflow-y: auto;
-        /* prevent horizontal scrollbar */
-        overflow-x: hidden;
-        /* add padding to account for vertical scrollbar */
-        padding-right: 20px;
-    }
-</style>
 <script type="text/javascript">
-    $(function() {
-
-        $('#nama_kl').chosen().change(function(){
+    $(function () {
+        $('#nama_kl').chosen().change(function () {
             var nama_kl = $(this).val();
-            $.get('<?php echo site_url('helpdesk/identitas_satker/cari_kl/') ?>', {id_kementrian:nama_kl}, function (response) {
+            $.get('<?php echo site_url('helpdesk/identitas_satker/cari_kl/') ?>/' + nama_kl, function (response) {
                 console.log(response);
                 response = '<option></option>' + response;
                 $('#eselon').html(response);
@@ -32,7 +21,7 @@
 
             url = '<?php echo site_url('frontdesk/form_revisi_anggaran/cari_satker') ?>/' + id_kementrian + '/' + $(this).val();
             console.log(url);
-            $.get(url, function(response){
+            $.get(url, function (response) {
                 response = '<option></option>' + response;
                 $('#kode_satker').html(response);
                 $('#kode_satker').trigger('liszt:updated');
@@ -40,7 +29,7 @@
             });
         });
 
-        $('#kl_btn').click(function() {
+        $('#kl_btn').click(function () {
             $('#kl').slideDown('fast');
             $('#kl').attr('disabled', false);
             $('#identitas_kl').show();
@@ -49,7 +38,7 @@
             $('#identitas_umum input').attr('disabled', true);
         })
 
-        $('#non_kl_btn').click(function() {
+        $('#non_kl_btn').click(function () {
             $('#kl').slideUp('fast');
             $('#kl').attr('disabled', true);
             $('#identitas_kl').hide();
@@ -87,7 +76,7 @@
     <?php echo form_hidden('tipe', 'kl') ?>
 
     <!--    <fieldset id="kl" style="float: left; margin-right: 20px; width: 570px; height: 320px;">-->
-    <fieldset id="kl" class="left">
+    <fieldset id="kl" class="left" style="height: 250px;">
         <legend>Satker</legend>
 
         <p>
@@ -96,13 +85,13 @@
                 <option></option>
                 <?php
                 foreach ($kementrian->result() as $value) {
-				if($value->id_kementrian == set_value('nama_kl')){
-                    echo sprintf("<option selected value='%s'>%s</option>", $value->id_kementrian, $value->id_kementrian . ' - ' . $value->nama_kementrian);
+                    if ($value->id_kementrian == set_value('nama_kl')) {
+                        echo sprintf("<option selected value='%s'>%s</option>", $value->id_kementrian, $value->id_kementrian . ' - ' . $value->nama_kementrian);
+                    }
+                    else {
+                        echo sprintf("<option value='%s'>%s</option>", $value->id_kementrian, $value->id_kementrian . ' - ' . $value->nama_kementrian);
+                    }
                 }
-				else{
-				echo sprintf("<option value='%s'>%s</option>", $value->id_kementrian, $value->id_kementrian . ' - ' . $value->nama_kementrian);
-				}
-				}
                 ?>
             </select>
         </p>
@@ -117,9 +106,9 @@
             <select name="kode_satker" id="kode_satker" class="kl chzn-select" data-placeholder="Pilih Satker" style="width: 400px;"></select>
         </p>
     </fieldset>
-<fieldset style="float: left; margin-left: 15px; width: 47%;" class="identitas">
+    <fieldset style="float: left; margin-left: 15px; width: 47%; height: 250px;" class="identitas">
         <legend>Identitas</legend>
-        
+
         <p>
             <label class="aligned">Nama</label>
             <input type="text" name="nama_petugas" size="30" value="<?php echo set_value('nama_petugas') ?>">
@@ -145,14 +134,14 @@
             <input type="email" name="email" size="30" value="<?php echo set_value('email') ?>">
         </p>
     </fieldset>
-    
+
 
     <div class="clear"></div>
 
-    <fieldset style="float: left; margin-left: 15px; width: 47%;" class="identitas">
+    <fieldset class="identitas">
         <legend>Pengaduan</legend>
         <p>
-            <label >Kepada</label>
+            <label>Kepada</label>
             <select name="kepada">
                 <?php foreach ($level->result() as $value): ?>
                 <option value="<?php echo $value->lavel ?>"><?php echo $value->nama ?></option>
@@ -162,14 +151,14 @@
 
         <p>
             <label>Pengaduan</label>
-            <textarea name="pengaduan" rows="10" cols="100"></textarea>
+            <textarea name="pengaduan" style="width: 940px; height: 175px;"></textarea>
         </p>
     </fieldset>
 
     <div style="text-align: right; margin-top: 20px;">
-        <input type="submit" class="button blue-pill" value="Kirim">
+        <input type="submit" class="button green" value="Kirim">
         <!--        <input type="submit" class="button blue-pill" value="Saluran Pengaduan">-->
-        <input type="reset" class="button gray-pill" value="Reset">
+        <input type="reset" class="button" value="Reset">
     </div>
 
     </form>
@@ -180,30 +169,34 @@
 
     <fieldset>
         <legend>Identitas</legend>
-        <p>
-            <label>Nama</label>
-            <input type="text" id="nama" name="nama_petugas" size="30" value="<?php echo set_value('nama_petugas') ?>">
-        </p>
+        <div class="grid_5">
+            <p>
+                <label>Nama</label>
+                <input type="text" id="nama" name="nama_petugas" size="30" value="<?php echo set_value('nama_petugas') ?>">
+            </p>
 
-        <p class="kl">
-            <label>Instansi</label>
-            <input type="text" id="instansi" name="instansi" size="30" value="<?php echo set_value('instansi') ?>">
-        </p>
+            <p class="kl">
+                <label>Instansi</label>
+                <input type="text" id="instansi" name="instansi" size="30" value="<?php echo set_value('instansi') ?>">
+            </p>
 
-        <p>
-            <label>Alamat</label>
-            <input type="text" id="alamat" name="alamat" size="30" value="<?php echo set_value('alamat') ?>">
-        </p>
+            <p>
+                <label>Alamat</label>
+                <input type="text" id="alamat" name="alamat" size="30" value="<?php echo set_value('alamat') ?>">
+            </p>
+        </div>
 
-        <p class="kl">
-            <label>Telpon</label>
-            <input type="text" id="no_hp" name="no_hp" size="30" value="<?php echo set_value('no_hp') ?>">
-        </p>
+        <div class="grid_5">
+            <p class="kl">
+                <label>Telpon</label>
+                <input type="text" id="no_hp" name="no_hp" size="30" value="<?php echo set_value('no_hp') ?>">
+            </p>
 
-        <p>
-            <label>E-mail</label>
-            <input type="email" id="email" name="email" size="30" value="<?php echo set_value('email') ?>">
-        </p>
+            <p>
+                <label>E-mail</label>
+                <input type="email" id="email" name="email" size="30" value="<?php echo set_value('email') ?>">
+            </p>
+        </div>
     </fieldset>
 
     <fieldset>
@@ -219,7 +212,7 @@
 
         <p>
             <label>Pengaduan</label>
-            <textarea name="pengaduan" rows="10" cols="100"></textarea>
+            <textarea name="pengaduan" style="width: 940px; height: 175px;"></textarea>
         </p>
     </fieldset>
 
