@@ -18,18 +18,19 @@
     <table class="table">
         <thead>
         <tr>
-            <th class="no">No</th>
-            <th>Tanggal</th>
-            <th>No Antrian</th>
-            <th>Nama Satker</th>
-            <th>Subjek</th>
-            <th>Prioritas</th>
+            <th class="no">#</th>
+            <th class="no">Tiket</th>
+            <th class="medium">Identitas Penanya</th>
+            <th class="no">Prioritas</th>
+            <th class="medium">Pertanyaan</th>
+            <th class="medium">Deskripsi</th>
+            <th class="no">Tanggal</th>
             <th>&nbsp;</th>
         </tr>
         </thead>
         <tfoot>
         <tr>
-            <td colspan="7">&nbsp;</td>
+            <td colspan="8">&nbsp;</td>
         </tr>
         </tfoot>
         <tbody>
@@ -37,13 +38,40 @@
             <?php foreach ($tikets->result() as $value): ?>
         <tr>
             <td><?php echo $i++ ?></td>
-            <td><?php echo table_tanggal($value->tanggal) ?></td>
             <td><?php echo $value->no_tiket_helpdesk ?></td>
-            <td><?php echo $value->nama_satker ?></td>
+
+            <!-- Identitas Penanya -->
+            <td>
+                <?php 
+                if($value->tipe == 'kl') : 
+                    echo $value->id_satker ?> - <?php echo $value->nama_satker;
+                else :
+                    echo 'UMUM - ' . $value->nama_petugas;
+                endif; 
+                ?>
+            </td>
+            
+            <!-- Prioritas -->
+            <td>
+                <?php if ($value->prioritas == 'high'): ?>
+                <span style="color: red; text-transform: uppercase;"><?php echo $value->prioritas ?></span>
+                <?php endif ?>
+
+                <?php if ($value->prioritas == 'medium'): ?>
+                <span style="color: orange; text-transform: uppercase;"><?php echo $value->prioritas ?></span>
+                <?php endif ?>
+
+                <?php if ($value->prioritas == 'low'): ?>
+                <span style="color: green; text-transform: uppercase;"><?php echo $value->prioritas ?></span>
+                <?php endif ?>
+
+            </td>
+
             <td><?php echo $value->pertanyaan ?></td>
-            <td><?php echo $value->prioritas ?></td>
+            <td><?php echo $value->description ?></td>
+            <td><?php echo table_tanggal($value->tanggal) ?></td>
             <td class="action">
-                <a class="button green" href="<?php echo site_url('/helpdesks/view/' . $value->id) ?>">Jawab</a>
+                <a class="button green" href="<?php echo site_url('/helpdesks/view/' . $value->id) ?>">Jawab/Eskalasi</a>
             </td>
         </tr>
             <?php endforeach ?>

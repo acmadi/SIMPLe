@@ -7,6 +7,7 @@ class Pengembalian_dokumen extends CI_Controller
         parent::__construct();
         $this->load->model('Mtiket', 'tiket');
         $this->load->library('odtphp');
+        $this->load->config('appconfig');
     }
 
     function index()

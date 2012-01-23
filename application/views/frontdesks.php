@@ -5,6 +5,7 @@
             <thead>
             <tr>
                 <th class="no">No</th>
+                <th class="no">No Tiket</th>
                 <th class="short">Tanggal Pengajuan</th>
                 <th class="no">Proses (Hari)</th>
                 <th>Kementrian</th>
@@ -14,7 +15,7 @@
             </thead>
             <tfoot>
             <tr>
-                <td colspan="6">&nbsp;</td>
+                <td colspan="7">&nbsp;</td>
             </tr>
             </tfoot>
             <tbody>
@@ -23,6 +24,7 @@
 
             <tr <?php echo (hari_kerja($value->tanggal) > 5 ? 'class="red-row"' : '') ?>>
                 <td><?php echo $i++ ?></td>
+                <td><?php echo sprintf('%05d', $value->no_tiket_frontdesk) ?></td>
                 <td>
                     <?php echo table_tanggal($value->tanggal) ?>
                 </td>

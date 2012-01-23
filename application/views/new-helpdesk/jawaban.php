@@ -57,6 +57,13 @@
             return false;
         })
 
+        oTable = $('.table').dataTable();
+        oTable.fnFilter( '<?php echo $pertanyaan->pertanyaan ?>' );
+
+        $('.dataTables_filter input').click(function(){
+            $(this).select();
+        });
+
     })
 </script>
 

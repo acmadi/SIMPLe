@@ -125,7 +125,7 @@
         </fieldset>
 
         <div>
-            <label><input name="sendmail" type="checkbox"/> Kirim jawaban ke email petugas Satker </label>
+            <label><input name="sendmail" value="true" checked="checked" type="checkbox"/> Kirim jawaban ke email petugas Satker </label>
         </div>
 
         <div style="float: left;">
