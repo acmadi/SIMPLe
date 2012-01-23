@@ -12,7 +12,6 @@ class Pengembalian_dokumen extends CI_Controller
     {
 		$this->load->helper('tanggal_helper');
         $data['result'] 	= $this->tiket->get_list_pengembalian_dokumen();
-		//print_r($this->db->last_query());exit;
         $data['title'] 		= 'Pengambilan Dokumen';
         $data['content'] 	= 'frontdesk/pengembalian_dokumen';
         $this->load->view('new-template', $data);
