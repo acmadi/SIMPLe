@@ -35,6 +35,7 @@
     <script type="text/javascript" src="<?php echo base_url('js/jquery.dataTables.min.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/phpjs/substr.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/bootstrap/bootstrap-twipsy.js') ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('js/prefixfree.min.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/scripts.js') ?>"></script>
     <!-- JavaScript END -->
 

@@ -13,7 +13,7 @@ body {
     /*background: #fff url(../images/.png) fixed bottom right no-repeat;*/
     font-family: 'Lucida Grande', Tahoma, Arial, sans-serif;
     font-size: 11px;
-    -webkit-animation: slide 0.2s ease-in-out;
+    animation: slide 0.2s ease-in-out;
 }
 
 header {
@@ -195,7 +195,7 @@ span.xxlabel.red{
     margin: 8px 0;
     border-radius: 4px;
     background: #cecece;
-    background: -webkit-linear-gradient(top, #d9d9d9, #c0c0c0);
+    background: linear-gradient(top, #d9d9d9, #c0c0c0);
     text-shadow: 1px 1px #fff;
 }
 
@@ -212,7 +212,7 @@ span.xxlabel.red{
 
 .notification.green {
     background: #57A957;
-    background: -webkit-linear-gradient(top, #62c462, #57A957);
+    background: linear-gradient(top, #62c462, #57A957);
     color: white !important;
     text-shadow: 1px 1px #666;
 }
@@ -222,14 +222,14 @@ span.xxlabel.red{
 }
 
 .notification.blue {
-    background: -webkit-linear-gradient(top, #5bc0de, #339bb9);
+    background: linear-gradient(top, #5bc0de, #339bb9);
     color: white !important;
     text-shadow: 1px 1px #666;
 }
 
 .notification.yellow {
     background: #EEDC94;
-    background: -webkit-linear-gradient(top, #fceec1, #EEDC94);
+    background: linear-gradient(top, #fceec1, #EEDC94);
     color: #333 !important;
     text-shadow: 1px 1px #fff;
 }
@@ -239,7 +239,7 @@ span.xxlabel.red{
 }
 
 .notification.red {
-    background: -webkit-linear-gradient(top, #ee5f5b, #C43C35);
+    background: linear-gradient(top, #ee5f5b, #C43C35);
     color: white !important;
     text-shadow: 1px 1px #666;
 }
@@ -267,7 +267,7 @@ td.head{
     border-radius: 5px 5px 0 0;
     text-align: right;
     background: #333;
-    background: -webkit-linear-gradient(bottom, #333 20%, #444);
+    background: linear-gradient(bottom, #333 20%, #444);
     display: inline-block;
     position: relative;
     padding: 4px 8px;
@@ -329,8 +329,7 @@ legend {
     background: white;
     color: black;
     text-shadow: 1px 1px 0 #fff;
-    /*background: -webkit-linear-gradient(top, #fcfcfc, #cecece);*/
-    /*background: -moz-linear-gradient(top, #fcfcfc, #cecece);*/
+    /*background: linear-gradient(top, #fcfcfc, #cecece);*/
 }
 fieldset {
     border: 1px solid #cecece;
@@ -339,7 +338,7 @@ fieldset {
     border-radius: 5px;
     box-shadow: 0 0 0px #d9d9d9;
     background: white;
-    background: -webkit-linear-gradient(top, #fcfcfc 50%, #cecece);
+    background: linear-gradient(top, #fcfcfc 50%, #cecece);
 }
 fieldset.left{
     width: 450px;
@@ -396,7 +395,7 @@ label.aligned{
     font-weight: bold;
     text-shadow: 1px 1px 0 #f0f0f0;
     /*background: #d9d9d9;*/
-    background: -webkit-linear-gradient(top, #d9d9d9, #c0c0c0);
+    background: linear-gradient(top, #d9d9d9, #c0c0c0);
 }
 
 .table th:first-child {
@@ -438,7 +437,7 @@ label.aligned{
 }
 
 .table tfoot tr {
-    background: -webkit-linear-gradient(top, #d9d9d9, #c0c0c0);
+    background: linear-gradient(top, #d9d9d9, #c0c0c0);
 }
 
 .table tfoot td {
