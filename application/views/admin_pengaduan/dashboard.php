@@ -24,37 +24,36 @@
     <h1>Admin Pengaduan</h1>
 
     <table class="table">
+        <thead>
         <tr>
-            <th class="short">No</th>
-            <th>Pengaduan</th>
+            <th class="no">No</th>
             <th>Tanggal</th>
+            <th>Pengaduan</th>
             <th>Nama Petugas</th>
             <th>Level</th>
             <th>&nbsp;</th>
         </tr>
         </thead>
+
         <tfoot>
         <tr>
             <td colspan="6">&nbsp;</td>
         </tr>
         </tfoot>
+
         <tbody>
         <?php $i = 1 ?>
         <?php foreach ($list_pengaduan as $item): ?>
         <tr>
-            <td class="no"><?php echo $i++ ?></td>
+            <td><?php echo $i++ ?></td>
+            <td><?php echo table_tanggal($item->tanggal) ?></td>
             <td><?php echo $item->pengaduan ?></td>
-            <td><?php echo $item->tanggal ?></td>
             <td><?php echo $item->nama_petugas ?></td>
             <td><?php echo $item->nama_lavel ?></td>
             <td class="action">
-          
-                    <span class="button_kecil">
-                        <a title="Lihat"
-                           href="<?php echo site_url("/admin_pengaduan/dashboard/") . '/view/' . $item->id_pengaduan ?>">
-                            <img src="<?php echo base_url(); ?>images/view.png"/>
-                        </a>
-                    </span>
+                <a class="button green" href="<?php echo site_url("/admin_pengaduan/dashboard/") . '/view/' . $item->id_pengaduan ?>">
+                    Lihat Aduan
+                </a>
             </td>
         </tr>
             <?php endforeach;?>
