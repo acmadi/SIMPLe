@@ -98,8 +98,8 @@ class Helpdesks extends CI_Controller
 
 		$result = $this->db->from('tb_knowledge_base')
 				->where('id_kat_knowledge_base', $pertanyaan->id_kat_knowledge_base)
-				->or_like('judul', $this->input->post('pertanyaan'))
-				->or_like('jawaban', $this->input->post('pertanyaan'))
+				// ->or_like('judul', $this->input->post('pertanyaan'))
+				// ->or_like('jawaban', $this->input->post('pertanyaan'))
 				->get();
 
 		$data['jawaban'] = $result;
