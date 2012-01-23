@@ -17,7 +17,7 @@ class Login_checker extends CI_Controller
 		
             if (($kontrl != 'login') AND ($kontrl != 'tiket') ) {
 				$do_logout = false;
-				//var_dump($this->session->userdata('session_id'));exit;
+				//var_dump($this->session->userdata('session_id'));
 				$result_cek_ol 		= $this->db->query("SELECT user FROM tb_online_users WHERE MINUTE(TIMEDIFF(NOW(),aktifitas_terakhir)) < 30 AND user = ? AND session_id = ?", array($this->session->userdata('user'),$this->session->userdata('session_id')));
 		
 				if(!$this->session->userdata('user')) $do_logout = true;
