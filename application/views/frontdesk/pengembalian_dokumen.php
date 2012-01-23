@@ -1,25 +1,25 @@
 <div class="content">
 
     <h1>Daftar Pengembalian Dokumen</h1>
+
     <?php
-// TODO: Satu paket ini untuk alerts. Nanti mau dipindah jadi hanya panggil satu method.
+    // TODO: Satu paket ini untuk alerts. Nanti mau dipindah jadi hanya panggil satu method.
     if ($this->session->flashdata('success')) {
-        echo '<div class="success">' . $this->session->flashdata('success') . '</div>';
+        notification($this->session->flashdata('success'), 'BERHASIL', 'green');
     }
     if ($this->session->flashdata('error')) {
-        echo '<div class="error">' . $this->session->flashdata('error') . '</div>';
+        notification($this->session->flashdata('error'), 'ERROR', 'red');
     }
     if ($this->session->flashdata('notice')) {
-        echo '<div class="notice">' . $this->session->flashdata('notice') . '</div>';
+        notification($this->session->flashdata('notice'), 'WARNING', 'yellow');
     }
     if ($this->session->flashdata('info')) {
-        echo '<div class="info">' . $this->session->flashdata('info') . '</div>';
+        notification($this->session->flashdata('info'), 'INFORMASI', 'blue');
     }
     ?>
     <?php if ($result->num_rows() > 0): ?>
 
-    <?php echo search('/frontdesk/pengembalian_dokumen/index') ?>
-  <div class="pagination"><?php echo ($pageLink) ? 'Halaman ' . $pageLink : '';?></div>
+
     <table class="table">
         <thead>
         <tr>
@@ -50,11 +50,11 @@
         </tbody>
     </table>
 
-    <div class="pagination"><?php echo ($pageLink) ? 'Halaman ' . $pageLink : '';?></div>
-
     <?php else: ?>
 
+    <div class="notification yellow">
     Tidak ada dokumen
+    </div>
 
     <?php endif ?>
 </div>
