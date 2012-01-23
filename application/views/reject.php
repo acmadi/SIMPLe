@@ -4,7 +4,7 @@
     <fieldset>
         <legend>Identitas</legend>
 
-        <div class="grid_5">
+        <div class="grid_10">
             <p>
                 <label style="width: 120px; display: inline-block;">No Tiket</label>
                 <span>#<?php echo sprintf('%05d', $this->uri->segment(3)) ?></span>
@@ -20,17 +20,17 @@
                 <span><?php echo $data->id_unit . ' - ' . $data->nama_unit; ?></span>
             </p>
         </div>
-        <div class="grid_5">
-            <p>
-                <label style="width: 120px; display: inline-block;">Kode Satker</label>
-                <span><?php echo $data->id_satker ?></span>
-            </p>
-
-            <p>
-                <label style="width: 120px; display: inline-block;">Nama Satker</label>
-                <span><?php echo $data->nama_satker ?></span>
-            </p>
-        </div>
+<!--        <div class="grid_5">-->
+<!--            <p>-->
+<!--                <label style="width: 120px; display: inline-block;">Kode Satker</label>-->
+<!--                <span>--><?php //echo $data->id_satker ?><!--</span>-->
+<!--            </p>-->
+<!---->
+<!--            <p>-->
+<!--                <label style="width: 120px; display: inline-block;">Nama Satker</label>-->
+<!--                <span>--><?php //echo $data->nama_satker ?><!--</span>-->
+<!--            </p>-->
+<!--        </div>-->
     </fieldset>
 
     <form method="post" action="<?php echo site_url('/frontdesks/reject/' . $this->uri->segment(3)) ?>">
