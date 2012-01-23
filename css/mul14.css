@@ -258,7 +258,8 @@ h1 {
 
 /* DataTables */
 .dataTables_wrapper {
-
+    float: left;
+    width: 100%;
 }
 
 .dataTables_wrapper th:hover {
