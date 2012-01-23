@@ -5,6 +5,7 @@
         oTable = $('.table').dataTable();
         oTable.fnSort( [ [2,'asc']] );
         oTable.fnAdjustColumnSizing();
+        oTable.fnFilter( 'open', 6 );
 
         $('#Semua').click(function(){
             oTable.fnFilter( '', 6);
@@ -29,9 +30,9 @@
     ?>
     <fieldset>
         <legend>Filter berdasarkan status tiket</legend>
-        <input type="radio" id="Semua" value="Semua" name="filter" checked="checked" />
+        <input type="radio" id="Semua" value="Semua" name="filter" />
             <label for="Semua">Semua</label>
-        <input type="radio" id="Open" value="Open" name="filter"/>
+        <input type="radio" id="Open" value="Open" name="filter" checked="checked"/>
             <label for="Open">Open</label>
         <input type="radio" id="Close" value="Close" name="filter"/>
             <label for="Close">Close</label>
