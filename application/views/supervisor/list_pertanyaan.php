@@ -48,10 +48,10 @@
             <td class="no"><?php echo ($value->nama_satker) ? $value->nama_satker : 'UMUM' ?></td>
             <td class="no"><?php echo $value->pertanyaan ?></td>
             <td class="no">
-                <?php if ($value->prioritas == 'high'): ?>
+                <?php if ($value->prioritas == 'low'): ?>
                 <span style="color: green; font-weight: bold;">LOW</span>
                 <?php elseif ($value->prioritas == 'medium'): ?>
-                <span style="color: blue; font-weight: bold;">MEDIUM</span>
+                <span style="color: orange; font-weight: bold;">MEDIUM</span>
                 <?php else: ?>
                 <span style="color: red; font-weight: bold;">HIGH</span>
                 <?php endif ?>

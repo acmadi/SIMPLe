@@ -158,7 +158,7 @@ class Odtphp
         $odf->setVars('var9', $data->catatan);
 
 
-        $output_filename = 'ambil' . $data->no_tiket_frontdesk . '.odt';
+        $output_filename = 'kembali_' . $data->no_tiket_frontdesk . '.odt';
 
         $odf->saveToDisk(FCPATH . 'output/' . $output_filename);
 
