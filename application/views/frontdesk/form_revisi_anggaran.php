@@ -169,7 +169,7 @@
             <input type="text" id="tanggal_surat_usulan" name="tanggal_surat_usulan" value="<?php echo set_value('tanggal_surat_usulan') ?>"/>
         </div>
 
-        
+
         <div class="clear"></div>
         </p>
 
@@ -177,9 +177,13 @@
             <label class="align-right">Kode - Nama K/L</label>
             <select name="nama_kl" id="nama_kl" type="text" class="chzn-select" data-placeholder="Pilih nama K/L" style="width: 700px;">
                 <?php
-                echo '<option></option>';
                 foreach ($kementrian->result() as $value) {
-                    echo sprintf("<option value='%s'>%s</option>", $value->id_kementrian, $value->id_kementrian . ' - ' . $value->nama_kementrian);
+
+                    if ($value->id_kementrian == set_value('nama_kl')) {
+                        echo sprintf("<option selected value='%s'>%s</option>", $value->id_kementrian, $value->id_kementrian . ' - ' . $value->nama_kementrian);
+                    } else {
+                        echo sprintf("<option value='%s'>%s</option>", $value->id_kementrian, $value->id_kementrian . ' - ' . $value->nama_kementrian);
+                    }
                 }
                 ?>
             </select>
@@ -188,13 +192,18 @@
         <p>
             <label class="align-right">Nama Eselon 1</label>
             <select id="eselon" name="eselon" class="kl chzn-select" data-placeholder="Pilih Eselon I" value="<?php echo set_value('eselon') ?>" style="width: 700px;">
+                <?php
+                if (set_value('eselon')) {
+                    echo $eselon;
+                }
+                ?>
             </select>
         </p>
 
         <p class="kode_satker_p">
             <label class="align-right" style="float: left;">Kode - Nama Satker</label>
-<!--            <select name="kode_satker" id="kode_satker" class="kl chzn-select" multiple style="width: 700px;">-->
-<!--            </select>-->
+            <!--            <select name="kode_satker" id="kode_satker" class="kl chzn-select" multiple style="width: 700px;">-->
+            <!--            </select>-->
 
         <div class="container" style="float: left" id="kode_satker">
             <select name="itemsToChoose" id="left" size="10" multiple="multiple" style="width: 350px;">
@@ -202,7 +211,7 @@
             </select>
         </div>
 
-        <div class="low container"  style="position:relative; top: 0px; float: left; text-align: center">
+        <div class="low container" style="position:relative; top: 0px; float: left; text-align: center">
             <div><input name="left2right" value=">" type="button" style="padding: 10px;"></div>
             <div><input id="all_left2right" value=">>" type="button" style="padding: 10px;"></div>
             <div><input id="all_right2left" value="<<" type="button" style="padding: 10px;"></div>
@@ -210,7 +219,7 @@
         </div>
 
         <div class="container" style="float: left">
-            <select name="kode_satker" id="right" size="10" multiple="multiple"  style="width: 350px;">
+            <select name="kode_satker" id="right" size="10" multiple="multiple" style="width: 350px;">
             </select>
         </div>
 
