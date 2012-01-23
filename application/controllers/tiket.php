@@ -29,6 +29,8 @@ class Tiket extends CI_Controller
             $data['tiket'] = $result->row();
         }
         $data['title'] = 'Cek Tiket';
+        $data['no_tiket'] = $this->input->post('no_tiket');
+        $data['id_unit'] = $this->input->post('id_unit');
         $data['content'] = 'public/cek_tiket';
 
         $this->load->view('new-template', $data);

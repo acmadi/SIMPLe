@@ -72,7 +72,8 @@ class Frontdesks extends CI_Controller
             $this->db->update('tb_tiket_frontdesk', array(
                 'is_active' => 3,
                 'status' => 'close',
-                'keputusan' => 'ditolak'
+                'keputusan' => 'ditolak',
+				'tanggal_selesai' => date('Y-m-d h:i:s')
             ), array(
                 'no_tiket_frontdesk' => $this->input->post('no_tiket_frontdesk'),
             ));
@@ -93,7 +94,8 @@ class Frontdesks extends CI_Controller
 
         $this->db->update('tb_tiket_frontdesk', array(
             'status' => 'close', 
-            'keputusan' => 'disahkan' 
+            'keputusan' => 'disahkan',
+			'tanggal_selesai' => date('Y-m-d h:i:s')
         ), array(
             'no_tiket_frontdesk' => $id
         ));

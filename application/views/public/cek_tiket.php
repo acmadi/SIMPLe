@@ -20,9 +20,9 @@
     <fieldset>
         <legend>Pengecekan Tiket</legend>
         <form method="post" action="<?php echo site_url('/tiket/cek_tiket') ?>">
-            <p>Nomer Tiket <input type="text" name="no_tiket"/></p>
+            <p>Nomer Tiket <input type="text" name="no_tiket" value="<?php echo $no_tiket;?>"/></p>
 
-            <p>Kode Eselon <input type="text" name="id_unit"/></p>
+            <p>Kode Eselon <input type="text" name="id_unit" value="<?php echo $id_unit;?>"/></p>
             <input type="submit" value="Cek" class="button blue-pill"/>
         </form>
     </fieldset>
@@ -32,27 +32,32 @@
         <legend>Status Tiket</legend>
         <p>
             <span>Nomer Tiket</span>
-            <span>#<?php echo sprintf('%05d', $tiket->no_tiket_frontdesk) ?></span>
+            <span>:</span>
+            <span><strong>#<?php echo sprintf('%05d', $tiket->no_tiket_frontdesk) ?></strong></span>
         </p>
 
         <p>
             <span>Kode Kementrian - Kode Eselon </span>
-            <span><?php echo $tiket->id_kementrian.' - '.$tiket->id_unit ?></span>
+			<span>:</span>
+            <span><strong><?php echo $tiket->id_kementrian.' - '.$tiket->id_unit ?></strong></span>
         </p>
 
         <p>
             <span>Keputusan</span>
-            <span><?php echo $tiket->keputusan ?></span>
+			<span>:</span>
+            <span><strong><?php echo $tiket->keputusan ?></strong></span>
         </p>
 
         <p>
             <span>Tanggal Selesai</span>
-            <span><?php echo $tiket->tanggal_selesai ?></span>
+			<span>:</span>
+            <span><strong><?php echo date('d M Y', strtotime($tiket->tanggal_selesai));  ?></strong></span>
         </p>
 
         <p>
             <span>Status </span>
-            <span><?php echo $tiket->status ?></span>
+			<span>:</span>
+            <span><strong><?php echo $tiket->status ?></strong></span>
         </p>
     </fieldset>
 
