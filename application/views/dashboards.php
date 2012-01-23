@@ -25,24 +25,30 @@
                 <td class="head">Diterima</td>
                 <td class="head">Diteruskan</td>
                 <td class="head">Open</td>
+				<?php if($level_aktif > 5){?>
                 <td class="head">Ditetapkan</td>
                 <td class="head">Ditolak</td>
+				<?php } ?>
             </tr>
             <tr>
                 <td class="head">CS</td>
                 <td><span class="message_box glow_green"><?php echo $total_tiket_diterima_cs ?></span></td>
                 <td><span class="message_box glow_green"><?php echo $total_tiket_diteruskan_cs?></span></td>
                 <td><span class="message_box glow_green"><?php echo $total_tiket_open_cs ?></span></td>
+				<?php if($level_aktif > 5){?>
                 <td><span class="message_box glow_green">0</span></td>
                 <td><span class="message_box glow_green">0</span></td>
+				<?php } ?>
             </tr>
             <tr>
                 <td class="head">Kasi & Pelaksana</td>
                 <td><span class="message_box glow_green"><?php echo $total_tiket_diterima_pelaksana ?></span></td>
                 <td><span class="message_box glow_green"><?php echo $total_tiket_diteruskan_pelaksana ?></span></td>
                 <td><span class="message_box glow_green"><?php echo $total_tiket_open_pelaksana ?></span></td>
+                <?php if($level_aktif > 5){?>
                 <td><span class="message_box glow_green">0</span></td>
                 <td><span class="message_box glow_green">0</span></td>
+				<?php } ?>
             </tr>
 			<?php if( $level_aktif > 3): ?>
 			<tr>
@@ -50,8 +56,10 @@
                 <td><span class="message_box glow_green"><?php echo $total_tiket_diterima_kasubdit ?></span></td>
                 <td><span class="message_box glow_green"><?php echo $total_tiket_diteruskan_kasubdit ?></span></td>
                 <td><span class="message_box glow_green"><?php echo $total_tiket_open_kasubdit ?></span></td>
+                <?php if($level_aktif > 5){?>
                 <td><span class="message_box glow_green">0</span></td>
                 <td><span class="message_box glow_green">0</span></td>
+				<?php } ?>
             </tr>
 			<?php endif; //kasubdit?>
 			
@@ -61,8 +69,10 @@
                 <td><span class="message_box glow_green"><?php echo $total_tiket_diterima_dadutek ?></span></td>
                 <td><span class="message_box glow_green"><?php echo $total_tiket_diteruskan_dadutek ?></span></td>
                 <td><span class="message_box glow_green"><?php echo $total_tiket_open_dadutek ?></span></td>
+                <?php if($level_aktif > 5){?>
                 <td><span class="message_box glow_green">0</span></td>
                 <td><span class="message_box glow_green">0</span></td>
+				<?php } ?>
             </tr>
 			<?php endif; //dutek?>
 			
