@@ -22,30 +22,32 @@
 
 
     <h1>Admin Pengaduan</h1>
-    <div style="clear: both;"></div>
 
-    <div id="tail">
-        <table id="tableOne" class="yui">
-            <thead>
-            <tr>
-                <th class="short">No</th>
-                <th>Pengaduan</th>
-                <th>Tanggal</th>
-                <th>Nama Petugas</th>
-                <th>Level</th>
-                <th class="action">Aksi</th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php $i = 1 ?>
-            <?php foreach ($list_pengaduan as $item): ?>
-            <tr>
-                <td class="short"><?php echo $i++ ?></td>
-                <td><?php echo $item->pengaduan ?></td>
-                <td><?php echo $item->tanggal ?></td>
-                <td><?php echo $item->nama_petugas ?></td>
-                <td><?php echo $item->nama_lavel ?></td>
-                <td class="action">
+    <table class="table">
+        <tr>
+            <th class="short">No</th>
+            <th>Pengaduan</th>
+            <th>Tanggal</th>
+            <th>Nama Petugas</th>
+            <th>Level</th>
+            <th>&nbsp;</th>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+            <td colspan="6">&nbsp;</td>
+        </tr>
+        </tfoot>
+        <tbody>
+        <?php $i = 1 ?>
+        <?php foreach ($list_pengaduan as $item): ?>
+        <tr>
+            <td class="no"><?php echo $i++ ?></td>
+            <td><?php echo $item->pengaduan ?></td>
+            <td><?php echo $item->tanggal ?></td>
+            <td><?php echo $item->nama_petugas ?></td>
+            <td><?php echo $item->nama_lavel ?></td>
+            <td class="action">
           
                     <span class="button_kecil">
                         <a title="Lihat"
@@ -53,10 +55,10 @@
                             <img src="<?php echo base_url(); ?>images/view.png"/>
                         </a>
                     </span>
-                </td>
-            </tr>
+            </td>
+        </tr>
             <?php endforeach;?>
-            </tbody>
-        </table>
-    </div>
+        </tbody>
+    </table>
+
 </div>
