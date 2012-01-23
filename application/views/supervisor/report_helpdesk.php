@@ -50,7 +50,7 @@ $(document).ready(function(){
   		<td class="no"><?php echo $tiket->description ?></td>
 
   		<td class="no"><?php 
-              echo $tiket->jawab . '<br/>';
+              echo word_limiter($tiket->jawab, 20) . '<br/>';
   						echo ($tiket->id_knowledge_base != NULL) 
                   ? form_button('show', 'Knowledge base #' . $tiket->id_knowledge_base, 
   						      'class="button" 
