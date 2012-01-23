@@ -458,3 +458,7 @@ div.nicEdit-main{
 .green.text span{
     color: green !important;
 }
+
+tr.row-highlight{
+    background-color: #ffeedd !important;
+}

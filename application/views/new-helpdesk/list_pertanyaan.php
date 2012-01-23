@@ -1,8 +1,8 @@
     <script>
     $(document).ready(function(){
         
-        $('.popupz').twipsy(
-            );
+        oTable = $('.table').dataTable();
+        oTable.fnSort( [ [2,'asc']] );
     });
     </script>
 <div class="content">
@@ -10,8 +10,8 @@
     <table class="table">
         <thead>
         <tr>
-            <th class="no">No</th>
-            <th class="no">Tiket</th>
+            <!-- <th class="no">No</th> -->
+            <th class="no">#Tiket</th>
             <th class="medium">Identitas Penanya</th>
             <th class="no">Prioritas</th>
             <th class="medium">Pertanyaan</th>
@@ -23,15 +23,20 @@
         </thead>
         <tfoot>
         <tr>
-            <td colspan="9">&nbsp;</td>
+            <td colspan="8">&nbsp;</td>
         </tr>
         </tfoot>
         <tbody>
         <?php $i = 1 ?>
         <?php foreach ($tikets->result() as $value): ?>
-        <tr>
+        <?php
+            $row_status = ($value->tanggal_selesai != NULL && $value->status == 'open')
+                ? 'row-highlight' 
+                : '';
+        ?>
+        <tr class="<?php echo $row_status?>">
             <!-- Nomor -->
-            <td><?php echo $i++ ?></td>
+            <!-- <td><?php echo $i++ ?></td> -->
             
             <!-- Nomor Tiket -->
             <td><?php echo $value->no_tiket_helpdesk ?></td>
@@ -101,8 +106,20 @@
                        data-jawaban='<?php echo ascii_to_entities($value->jawab) ?>'
                        href='javascript:void(0)'><?php echo strtoupper($value->status) ?></a>
             </td>
+
+            <!-- Lihat jawaban -->
             <td>
-                
+                <?php if ($value->id_knowledge_base != NULL) : ?>
+                    <a class="referensi-jawaban button green"
+                       data-id='<?php echo $value->id ?>'
+                       data-pertanyaan='<?php echo ascii_to_entities($value->pertanyaan) ?>'
+                       data-jawaban='<?php echo ascii_to_entities($value->jawab) ?>'
+                       href='javascript:void(0)'>
+                    <span class="text green">
+                        Lihat Jawaban
+                    </span>
+                    </a>
+                <?php endif; ?>
             </td>
         </tr>
             <?php endforeach ?>

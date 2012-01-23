@@ -239,8 +239,9 @@ class Helpdesks extends CI_Controller
 				->join('tb_satker b', 'b.id_satker = a.id_satker', 'left')
 				->join('tb_petugas_satker c', 'a.id_petugas_satket = c.id_petugas_satker', 'left')
 				->join('tb_user d', 'a.id_user = d.id_user', 'left')
+				->order_by('tanggal_selesai DESC')
 				->order_by('prioritas DESC')
-				->order_by('status')
+				// ->order_by('status DESC')
 				->get();
 
 
@@ -358,6 +359,8 @@ class Helpdesks extends CI_Controller
 
 	/**
 	 * Menampilkan seluruh tiket, tergantung lavel user yang sedang login
+	 * 
+	 * Fungsi ini khusus untuk selain CS, jadi gak bisa netapin status open/close
 	 *
 	 * @param none
 	 */
@@ -366,14 +369,18 @@ class Helpdesks extends CI_Controller
 		$my_lavel = $this->session->userdata('lavel');
 
 		// query list tiket
-		$sql = "SELECT * 
-				FROM tb_tiket_helpdesk 
-				LEFT JOIN tb_satker
-				ON (tb_tiket_helpdesk.id_satker = tb_satker.id_satker)
-				WHERE status = 'open' 
-				AND lavel = {$my_lavel}
-				ORDER BY prioritas DESC";
-		$data['tikets'] = $this->db->query($sql);
+		$data['tikets'] = $this->db->select('*')
+				->from('tb_tiket_helpdesk a')
+				->join('tb_satker b', 'b.id_satker = a.id_satker', 'left')
+				->join('tb_petugas_satker c', 'a.id_petugas_satket = c.id_petugas_satker', 'left')
+				->join('tb_user d', 'a.id_user = d.id_user', 'left')
+				->where('status', 'open')
+				->where('lavel', $my_lavel)
+				->order_by('prioritas DESC')
+				->order_by('status')
+				->get();
+
+		// echo $this->db->last_query();
 
 		// query nama lavel, kosmetik doang
 		$sql = "SELECT * FROM tb_lavel
