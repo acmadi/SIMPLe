@@ -1,6 +1,6 @@
 <div class="content">
 
-    <h1>Tiket Helpdesk</h1>
+    <h1>Tiket Helpdesk yang Dieskalasi</h1>
 
     <!-- <div class="notification yellow">
         Tiket Helpdesk yang dieskalasi ke level 
@@ -35,6 +35,7 @@
         </tfoot>
         <tbody>
             <?php $i = 1 ?>
+            <?php // dump($tikets->result() ) ?>
             <?php foreach ($tikets->result() as $value): ?>
         <tr>
             <td><?php echo $i++ ?></td>
@@ -44,9 +45,9 @@
             <td>
                 <?php 
                 if($value->tipe == 'kl') : 
-                    echo $value->id_satker ?> - <?php echo $value->nama_satker;
+                    echo $value->id_satker . ' - ' . $value->nama_satker ;
                 else :
-                    echo 'UMUM - ' . $value->nama_petugas;
+                    echo $value->nama_petugas . ' (' . $value->instansi . ')';
                 endif; 
                 ?>
             </td>

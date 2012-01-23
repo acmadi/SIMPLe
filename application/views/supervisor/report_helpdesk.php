@@ -33,29 +33,29 @@ $(document).ready(function(){
     <thead>
     <tr>
     	<th class="no">No</th>
-    	<th class="no">Terjawab</th>
-    	<th class="no">ID / Nama CS</th>
-    	<th class="no">Pertanyaan</th>
-    	<th class="no">Deskripsi</th>
-    	<th class="no">Jawaban</th>
+    	<th class="no">Tanggal</th>
+    	<th class="medium">Dijawab oleh</th>
+    	<th class="medium">Pertanyaan</th>
+    	<th class="medium">Deskripsi</th>
+    	<th class="medium">Jawaban</th>
     </tr>
     </thead>
     <tbody>
     <?php $i=1; foreach($tiket_helpdesk as $tiket) : ?>
   	<tr>
   		<td class="no"><?php echo $i++ ?></td>
-  		<td class="no"><?php echo $tiket->timestamp ?></td>
+  		<td class="no"><?php echo table_tanggal($tiket->tanggal_selesai) ?></td>
   		<td class="no"><?php echo $tiket->username . ' / ' . $tiket->nama ?></td>
   		<td class="no"><?php echo $tiket->pertanyaan ?></td>
   		<td class="no"><?php echo $tiket->description ?></td>
 
   		<td class="no"><?php 
-  						echo ($tiket->id_knowledge_base != NULL) ?
-  						form_button('show', 'Lihat', 
-  						'class="button" 
-  						 onclick="return knowledge('.$tiket->id_knowledge_base.')"') . ' ' .
-  					    'Knowledge base #' . $tiket->id_knowledge_base : 
-  					    ' - ';
+              echo $tiket->jawab . '<br/>';
+  						echo ($tiket->id_knowledge_base != NULL) 
+                  ? form_button('show', 'Knowledge base #' . $tiket->id_knowledge_base, 
+  						      'class="button" 
+  						       onclick="return knowledge('. $tiket->id_knowledge_base. ')"')
+  					      : ' - ';
   					    ?></td>
   	</tr>
     <?php endforeach ?>

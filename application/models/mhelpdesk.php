@@ -241,23 +241,21 @@ class Mhelpdesk extends CI_Model
     // TODO: Ganti supaya bisa detect CS berdasarkan tb_level
     public function count_all_closed_ticket_by($lavel = 2)
     {
-    	return $this->get_all_closed_ticket_by(2, TRUE);
+    	return $this->get_all_closed_ticket_by($lavel, TRUE);
     }
 
-    public function get_all_closed_ticket_by($lavel = 2, $count = FALSE, $plus_tiket = FALSE)
+    public function get_all_closed_ticket_by($lavel = 2, $count = FALSE)
     {
-    	$join_tiket = ($plus_tiket && $lavel == 2) 
-    		? 'LEFT JOIN tb_tiket_helpdesk t 
-    		   ON (l.id_tiket = t.id)'
-    		: '';
 
+    	// jadi gini,
+    	// cari tiket yg statusnya closed dan ditutup oleh user dengan lavel 1 
     	$string = 
     	"SELECT * 
-    	 FROM tb_tiket_log l 
-    	 LEFT JOIN tb_user u
-    	 ON (l.id_user = u.id_user)
-    	 $join_tiket
-    	 WHERE u.id_lavel = '$lavel'
+		 FROM tb_tiket_helpdesk t
+		 LEFT JOIN tb_user u ON ( t.id_user = u.id_user ) 
+		 LEFT JOIN tb_lavel l ON ( u.id_lavel = l.id_lavel ) 
+		 WHERE l.lavel =  '$lavel'
+		 AND status = 'close'
     	 ";
     	$query = $this->db->query($string);
 

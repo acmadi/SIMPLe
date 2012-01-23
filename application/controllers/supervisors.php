@@ -19,7 +19,7 @@ class Supervisors extends CI_Controller
     public function dashboard()
     {
         $data['helpdesk_total'] = $this->mhelpdesk->count_all_tiket('open', 2);
-        $data['total_selesai_oleh_cs'] = $this->mhelpdesk->count_all_closed_ticket_by();
+        $data['total_selesai_oleh_cs'] = $this->mhelpdesk->count_all_closed_ticket_by(1);
         $data['title'] = 'Dashboard';
         $data['content'] = 'supervisor/dashboard';
         $this->load->view($this->template, $data);
@@ -28,7 +28,7 @@ class Supervisors extends CI_Controller
     public function report($tipe = 'helpdesk')
     {
         if ($tipe == 'helpdesk') :
-            $data['tiket_helpdesk'] = $this->mhelpdesk->get_all_closed_ticket_by(2, FALSE, TRUE);
+            $data['tiket_helpdesk'] = $this->mhelpdesk->get_all_closed_ticket_by(1, FALSE, TRUE);
             $data['title'] = 'Dashboard';
             $data['content'] = 'supervisor/report_helpdesk';
             $this->load->view($this->template, $data);

@@ -24,17 +24,8 @@
                     click:function () {
                         var status = confirm('Anda yakin memilih jawaban ini?');
                         if (status === true) {
-                            url = '<?php echo site_url("/helpdesks/jawab/{$this->session->userdata('no_tiket_helpdesk')}") ?>/';
+                            url = '<?php echo site_url("/helpdesks/jawab/{$this->session->userdata('id_tiket_helpdesk')}") ?>/';
                             console.log(url)
-                        }
-                    }
-                },
-                {
-                    text:'Eskalasi',
-                    click:function () {
-                        var status = confirm('Anda yakin akan melakukan eskalasi?');
-                        if (status === true) {
-                            window.location.href = '<?php echo site_url('helpdesks/eskalasi/' . $this->session->userdata('id_tiket_helpdesk') . '/' . $this->session->userdata('no_tiket_helpdesk')) ?>';
                         }
                     }
                 }
@@ -58,7 +49,7 @@
         })
 
         oTable = $('.table').dataTable();
-        oTable.fnFilter( '<?php echo $pertanyaan->pertanyaan ?>' );
+        oTable.fnFilter( '' );
 
         $('.dataTables_filter input').click(function(){
             $(this).select();
@@ -162,11 +153,20 @@
 
             </tr>
         </table>
+        <div style="text-align: center;">
+            <a href="<?php echo site_url('helpdesks/eskalasi/' . $this->session->userdata('id_tiket_helpdesk') . '/' . $this->session->userdata('no_tiket_helpdesk')) ?>"
+               type="submit"
+               class="button blue"
+               style="padding: 10px 20px; font-size: 16px;"
+               onclick="return confirm('Anda yakin akan melakukan eskalasi?') ? true : false">
+                Eskalasi
+            </a>
+        </div>
 
     </fieldset>
 
     <fieldset>
-        <legend>Referensi Jawaban</legend>
+        <legend>Referensi jawaban untuk kategori: <?php echo $pertanyaan->kat_knowledge_base ?></legend>
 
         <div id="referensi_jawaban">
             <table class="table">
@@ -201,7 +201,15 @@
                            data-deskripsi='<?php echo ascii_to_entities($value->desripsi) ?>'
                            data-jawaban='<?php echo ascii_to_entities($value->jawaban) ?>'>
                            Lihat
-                        </a>
+                        </a> <br/>
+                        <?php
+                        echo anchor('helpdesks/jawab_cs/' . $this->session->userdata('id_tiket_helpdesk') . 
+                                        '/'. $value->id_knowledge_base,
+                                    'Jawab',
+                                    'class="button blue"
+                                     onclick="return confirm(\'Anda yakin ingin menjawab dengan knowledge ini?\')"'
+                                   );
+                        ?>
                     </td>
                 </tr>
                 <?php endforeach ?>

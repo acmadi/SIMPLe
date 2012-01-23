@@ -47,6 +47,13 @@
             $('#identitas_umum').show();
             $('#identitas_umum input').attr('disabled', false);
         })
+
+        <?php if($show_umum != '') : ?>
+            $('#identitas_kl').hide();
+            $('#identitas_umum').show();
+            $('#kl_btn').removeAttr('checked');
+            $('#non_kl_btn').attr('checked', 'checked');
+        <?php endif; ?>
     })
 </script>
 
@@ -155,40 +162,40 @@
     </form>
 
     <!-- IDENTITAS UMUM -->
-    <?php echo form_open('helpdesk/identitas_satker/save_identitas', array('id' => 'identitas_umum', 'style' => 'display: none')) ?>
+    <?php echo form_open('helpdesks/save/step1-umum', array('id' => 'identitas_umum', 'style' => 'display: none')) ?>
 
-    <?php echo form_hidden('tipe', 'non_kl') ?>
+    <?php echo form_hidden('tipe', 'umum') ?>
 
     <fieldset>
         <legend>Identitas</legend>
         <p>
             <label class="aligned">Nama</label>
-            <input type="text" id="nama" name="nama_petugas" size="30" value="<?php echo set_value('nama_petugas') ?>">
-			<?php echo form_error('nama_petugas', '<div class="error">', '</div>'); ?>
+            <input type="text" id="nama" name="umum_nama" size="30" value="<?php echo set_value('nama_petugas') ?>">
+			<?php echo form_error('umum_nama', '<div class="error">', '</div>'); ?>
         </p>
 
         <p class="kl">
             <label class="aligned">Instansi</label>
-            <input type="text" id="instansi" name="instansi" size="30" value="<?php echo set_value('instansi') ?>">
-			<?php echo form_error('instansi', '<div class="error">', '</div>'); ?>
+            <input type="text" id="instansi" name="umum_instansi" size="30" value="<?php echo set_value('instansi') ?>">
+			<?php echo form_error('umum_instansi', '<div class="error">', '</div>'); ?>
         </p>
 
         <p>
             <label class="aligned">Alamat</label>
-            <input type="text" id="alamat" name="alamat" size="30" value="<?php echo set_value('alamat') ?>">
-			<?php echo form_error('alamat', '<div class="error">', '</div>'); ?>
+            <input type="text" id="alamat" name="umum_alamat" size="30" value="<?php echo set_value('alamat') ?>">
+			<?php echo form_error('umum_alamat', '<div class="error">', '</div>'); ?>
         </p>
 
         <p class="kl">
-            <label class="aligned">Telpon</label>
-            <input type="text" id="no_hp" name="no_hp" size="30" value="<?php echo set_value('no_hp') ?>">
-			<?php echo form_error('no_hp', '<div class="error">', '</div>'); ?>
+            <label class="aligned">No HP</label>
+            <input type="text" id="no_hp" name="umum_no_hp" size="30" value="<?php echo set_value('no_hp') ?>">
+			<?php echo form_error('umum_no_hp', '<div class="error">', '</div>'); ?>
         </p>
 
         <p>
             <label class="aligned">E-mail</label>
-            <input type="email" id="email" name="email" size="30" value="<?php echo set_value('email') ?>">
-			<?php echo form_error('email', '<div class="error">', '</div>'); ?>
+            <input type="email" id="email" name="umum_email" size="30" value="<?php echo set_value('email') ?>">
+			<?php echo form_error('umum_email', '<div class="error">', '</div>'); ?>
         </p>
     </fieldset>
 

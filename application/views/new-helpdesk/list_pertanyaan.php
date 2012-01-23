@@ -17,9 +17,16 @@
         });
     });
     </script>
-<div class="content">
-    <h1>Pertanyaan</h1>
 
+<div class="content">
+    <h1>Pertanyaan Helpdesk</h1>
+    <?php
+    if($this->session->flashdata('success')) : 
+        echo '<div class="notification green">';
+        echo $this->session->flashdata('success');
+        echo '</div>';
+    endif;
+    ?>
     <fieldset>
         <legend>Filter berdasarkan status tiket</legend>
         <input type="radio" id="Semua" value="Semua" name="filter" checked="checked" />
@@ -41,7 +48,7 @@
             <th class="no">Ditanyakan</th>
             <th class="no">Terjawab</th>
             <th class="no">Status</th>
-            <th>&nbsp;</th>
+            <th width="110">&nbsp;</th>
         </tr>
         </thead>
         <tfoot>
@@ -68,7 +75,7 @@
             <td>
                 <?php 
                 if($value->id_satker == NULL) : 
-                    echo 'UMUM - ' . $value->nama_petugas;
+                    echo 'UMUM - ' . $value->nama_petugas . ' (' . $value->instansi .')';
                 else :
                     echo $value->id_satker ?> - <?php echo $value->nama_satker;
                 endif; 
@@ -79,14 +86,17 @@
             <!-- Prioritas -->
             <td>
                 <?php if ($value->prioritas == 'high'): ?>
+                <span style="display:none">1</span>
                 <span style="color: red; text-transform: uppercase;"><?php echo $value->prioritas ?></span>
                 <?php endif ?>
 
                 <?php if ($value->prioritas == 'medium'): ?>
+                <span style="display:none">2</span>
                 <span style="color: orange; text-transform: uppercase;"><?php echo $value->prioritas ?></span>
                 <?php endif ?>
 
                 <?php if ($value->prioritas == 'low'): ?>
+                <span style="display:none">3</span>
                 <span style="color: green; text-transform: uppercase;"><?php echo $value->prioritas ?></span>
                 <?php endif ?>
 
@@ -114,7 +124,8 @@
                     </span>
                 </a>
                 <?php else :
-                    echo '-';
+                    if($value->lavel > 1)
+                        echo 'Eskalasi';
                 endif;
                 ?>
             </td>
@@ -133,15 +144,16 @@
             <!-- Lihat jawaban -->
             <td>
                 <?php if ($value->id_knowledge_base != NULL) : ?>
-                    <a class="referensi-jawaban button green"
+                    <a class="link-jawaban referensi-jawaban button green"
                        data-id='<?php echo $value->id ?>'
                        data-pertanyaan='<?php echo ascii_to_entities($value->pertanyaan) ?>'
                        data-jawaban='<?php echo ascii_to_entities($value->jawab) ?>'
                        href='javascript:void(0)'>
                     <span class="text green">
-                        Lihat Jawaban
+                        Jawaban
                     </span>
                     </a>
+
                 <?php endif; ?>
             </td>
         </tr>

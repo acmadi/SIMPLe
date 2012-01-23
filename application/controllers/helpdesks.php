@@ -26,7 +26,7 @@ class Helpdesks extends CI_Controller
 		$this->load->view($this->template, $data);
 	}
 
-	public function identity()
+	public function identity($show_umum = '')
 	{
 		if ($_POST) {
 			$eselon = $this->cari_eselon($this->input->post('nama_kl'), $this->input->post('eselon'));
@@ -43,6 +43,7 @@ class Helpdesks extends CI_Controller
 		$data['kementrian'] = $this->db->get('tb_kementrian');
 		$data['title'] = 'Helpdesk - Identitas';
 		$data['content'] = 'new-helpdesk/identity';
+		$data['show_umum'] = $show_umum;
 		$this->load->view($this->template, $data);
 	}
 
@@ -52,7 +53,7 @@ class Helpdesks extends CI_Controller
 		$id_petugas_satker = $this->session->userdata('id_petugas_satker');
 
 		$result = $this->db->from('tb_petugas_satker a')
-				->join('tb_satker b', 'a.id_satker = b.id_satker')
+				->join('tb_satker b', 'a.id_satker = b.id_satker', 'left')
 				->where('id_petugas_satker', $id_petugas_satker)
 				->get()->row();
 
@@ -81,7 +82,7 @@ class Helpdesks extends CI_Controller
 		$id_petugas_satker = $this->session->userdata('id_petugas_satker');
 
 		$result = $this->db->from('tb_petugas_satker a')
-				->join('tb_satker b', 'a.id_satker = b.id_satker')
+				->join('tb_satker b', 'a.id_satker = b.id_satker', 'left')
 				->where('id_petugas_satker', $id_petugas_satker)
 				->get()->row();
 
@@ -89,7 +90,7 @@ class Helpdesks extends CI_Controller
 
 		// Load Kategori Knowledge Base
 		$result = $this->db->from('tb_tiket_helpdesk a')
-				->join('tb_kat_knowledge_base b', 'a.id_kat_knowledge_base = b.id_kat_knowledge_base')
+				->join('tb_kat_knowledge_base b', 'a.id_kat_knowledge_base = b.id_kat_knowledge_base', 'left')
 				->where('no_tiket_helpdesk', $this->session->userdata('no_tiket_helpdesk'))
 				->get();
 
@@ -103,8 +104,8 @@ class Helpdesks extends CI_Controller
 				->get();
 
 		$data['jawaban'] = $result;
-
-		$data['title'] = 'Helpdesk - Jawaban';
+		
+		$data['title']   = 'Helpdesk - Jawaban';
 		$data['content'] = 'new-helpdesk/jawaban';
 		$this->load->view($this->template, $data);
 	}
@@ -125,7 +126,7 @@ class Helpdesks extends CI_Controller
 	public function save($step)
 	{
 		// Simpan Identitas Satker
-		if ($step == 'step1') {
+		if ($step == 'step1') :
 
 			$this->form_validation->set_rules('nama_kl', 'K/L', 'required');
 			$this->form_validation->set_rules('eselon', 'Eselon I', 'required');
@@ -136,16 +137,16 @@ class Helpdesks extends CI_Controller
 			$this->form_validation->set_rules('no_kantor', 'Telpon Kantor', 'required|numeric');
 			$this->form_validation->set_rules('email', 'Email', 'required|email');
 
-			if ($this->form_validation->run() == TRUE) {
+			if ($this->form_validation->run() == TRUE) :
 
 				// Simpan data Satker yang bertanya
 				$this->db->insert('tb_petugas_satker', array(
-					'nama_petugas' => $this->input->post('nama_petugas'),
+					'nama_petugas'    => $this->input->post('nama_petugas'),
 					'jabatan_petugas' => $this->input->post('jabatan_petugas'),
-					'no_hp' => $this->input->post('no_hp'),
-					'no_kantor' => $this->input->post('no_kantor'),
-					'email' => $this->input->post('email'),
-					'id_satker' => $this->input->post('kode_satker'),
+					'no_hp'           => $this->input->post('no_hp'),
+					'no_kantor'       => $this->input->post('no_kantor'),
+					'email'           => $this->input->post('email'),
+					'id_satker'       => $this->input->post('kode_satker'),
 				));
 
 				// Simpan ID terakhir yang dimasukkan untuk nandain petugas satker
@@ -159,9 +160,9 @@ class Helpdesks extends CI_Controller
 				// Simpan tiket baru
 				$this->db->insert('tb_tiket_helpdesk', array(
 					'no_tiket_helpdesk' => $no_tiket_helpdesk_terakhir,
-					'tanggal' => date('Y-m-d H:i:s'),
-					'id_satker' => $this->input->post('kode_satker'),
-					'id_user' => $this->session->userdata('id_user'),
+					'tanggal'           => date('Y-m-d H:i:s'),
+					'id_petugas_satket' => $id_petugas_satker,
+					'id_satker'         => $this->input->post('kode_satker'),
 				));
 
 				// Simpan ID tiket helpdesk
@@ -177,12 +178,59 @@ class Helpdesks extends CI_Controller
 
 
 				redirect('helpdesks/pertanyaan');
-			}
+			endif;
 
 			$this->identity();
 
 
-		} elseif ($step == 'step2') {
+		elseif ($step == 'step1-umum') :
+
+			$this->form_validation->set_rules('umum_nama',     'Nama',     'required');
+			$this->form_validation->set_rules('umum_instansi', 'Instansi', 'required');
+			$this->form_validation->set_rules('umum_no_hp',    'No HP',    'required|numeric');
+			$this->form_validation->set_rules('umum_email',    'Email',    'required|email');
+
+			if($this->form_validation->run() == TRUE) :
+				// dump($this->input->post());
+
+				// Simpan data orang yang bertanya
+				$this->db->insert('tb_petugas_satker', array(
+					'nama_petugas' => $this->input->post('umum_nama'),
+					'instansi'     => $this->input->post('umum_instansi'),
+					'alamat'       => $this->input->post('umum_alamat'),
+					'no_hp'        => $this->input->post('umum_no_hp'),
+					'email'        => $this->input->post('umum_email'),
+					'tipe'         => 'umum',
+				));
+				$id_petugas_satker = $this->db->insert_id();
+				$this->session->set_userdata('id_petugas_satker', $id_petugas_satker);
+
+				// Ambil tiket terakhir
+				$no_tiket_helpdesk_terakhir = 
+					$this->db->select_max('no_tiket_helpdesk')->get('tb_tiket_helpdesk')->row();
+				$no_tiket_helpdesk_terakhir = 
+					$no_tiket_helpdesk_terakhir->no_tiket_helpdesk + 1;
+				$this->session->set_userdata('no_tiket_helpdesk', $no_tiket_helpdesk_terakhir);
+
+				// Simpan tiket baru
+				$this->db->insert('tb_tiket_helpdesk', array(
+					'no_tiket_helpdesk' => $no_tiket_helpdesk_terakhir,
+					'id_petugas_satket' => $id_petugas_satker,
+					'tanggal'           => date('Y-m-d H:i:s'),
+				));
+
+				// Simpan ID tiket helpdesk
+				$id_tiket_helpdesk = $this->db->insert_id();
+				$this->session->set_userdata('id_tiket_helpdesk', $id_tiket_helpdesk);
+
+				$this->session->set_userdata('tipe_penanya', 'umum');
+					
+				redirect('helpdesks/pertanyaan');
+			endif;
+
+			$this->identity('umum');
+
+		elseif ($step == 'step2') :
 
 			$this->form_validation->set_rules('kategori_knowledge_base', 'Kategori Knowledge Base', 'required');
 			$this->form_validation->set_rules('prioritas', 'Prioritas', 'required');
@@ -191,33 +239,37 @@ class Helpdesks extends CI_Controller
 
 			if ($this->form_validation->run() == TRUE) {
 
+				$id_satker = ($this->session->userdata('tipe_penanya') == 'umum') 
+					? NULL
+					: $this->input->post('id_satker');
+				// bila ini pertanyaan kedua, maka tambahin tiket baru
 				if ($this->input->get('prev_question')) {
 					// Simpan tiket baru
 					$this->db->insert('tb_tiket_helpdesk', array(
-						'no_tiket_helpdesk' => $this->session->userdata('no_tiket_helpdesk'),
-						'pertanyaan' => $this->input->post('pertanyaan'),
-						'description' => $this->input->post('description'),
-						'prioritas' => $this->input->post('prioritas'),
+						'no_tiket_helpdesk'     => $this->session->userdata('no_tiket_helpdesk'),
+						'pertanyaan'            => $this->input->post('pertanyaan'),
+						'description'           => $this->input->post('description'),
+						'prioritas'             => $this->input->post('prioritas'),
 						'id_kat_knowledge_base' => $this->input->post('kategori_knowledge_base'),
-						'id_satker' => $this->input->post('id_satker'),
-						'id_user' => $this->session->userdata('id_user'),
-						'tanggal' => date('Y-m-d H:i:s')
+						'id_satker'             => $id_satker,
+						'id_petugas_satket'     => $this->session->userdata('id_petugas_satker'),
+						'tanggal'               => date('Y-m-d H:i:s')
 					));
 
 					// Simpan ID tiket helpdesk
 					$id_tiket_helpdesk = $this->db->insert_id();
 					$this->session->set_userdata('id_tiket_helpdesk', $id_tiket_helpdesk);
-
+				
+				// bila ini pertanyaan pertama, maka apdet tiket
 				} else {
-
 					$this->db->update('tb_tiket_helpdesk', array(
-							'no_tiket_helpdesk' => $this->input->post('no_tiket_helpdesk'),
-							'pertanyaan' => $this->input->post('pertanyaan'),
-							'description' => $this->input->post('description'),
-							'prioritas' => $this->input->post('prioritas'),
+							'no_tiket_helpdesk'     => $this->input->post('no_tiket_helpdesk'),
+							'pertanyaan'            => $this->input->post('pertanyaan'),
+							'description'           => $this->input->post('description'),
+							'prioritas'             => $this->input->post('prioritas'),
 							'id_kat_knowledge_base' => $this->input->post('kategori_knowledge_base'),
-							'id_satker' => $this->input->post('id_satker'),
-							'id_user' => $this->session->userdata('id_user'),
+							'id_petugas_satket'     => $this->session->userdata('id_petugas_satker'),
+							'id_satker'             => $id_satker,
 						), array(
 							'id' => $this->session->userdata('id_tiket_helpdesk')
 						)
@@ -226,10 +278,11 @@ class Helpdesks extends CI_Controller
 					$this->session->set_userdata('no_tiket_helpdesk', $this->input->post('no_tiket_helpdesk'));
 				}
 				$this->jawaban();
+
 			} else {
 				$this->pertanyaan();
 			}
-		}
+		endif;
 	}
 
 	function list_pertanyaan()
@@ -260,6 +313,7 @@ class Helpdesks extends CI_Controller
 	public function close($id_tiket_helpdesk)
 	{
 		$save = $this->db->update('tb_tiket_helpdesk', array(
+			'tanggal_selesai' => date('Y-m-d H:i:s'),
 			'status' => 'close'
 		), array(
 			'id' => $id_tiket_helpdesk
@@ -415,6 +469,28 @@ class Helpdesks extends CI_Controller
 			'1 (satu) pertanyaan berhasil dijawab dan telah dikembalikan ke Customer Service Helpdesk!');
 
 		redirect('helpdesks/all');
+	}
+
+	// penjawaban yang dilakukan oleh CS
+	function jawab_cs($id_tiket_helpdesk, $id_knowledge_base)
+	{
+		$knowledge = $this->db->query(
+			"SELECT * FROM tb_knowledge_base 
+			 WHERE id_knowledge_base = {$id_knowledge_base}
+			 LIMIT 1")->row();
+		$this->db->where('id', $id_tiket_helpdesk);
+		$this->db->update('tb_tiket_helpdesk', array(
+			'id_knowledge_base' => $id_knowledge_base,
+			'id_user'           => $this->session->userdata('id_user'),
+			'tanggal_selesai'   => date('Y-m-d H:i:s'),
+			'status'            => 'close',
+			'jawab'             => $knowledge->jawaban,
+			'sumber'            => $knowledge->nama_narasumber
+			));
+
+		$this->session->set_flashdata('success', 
+			'1 (satu) tiket berhasil anda jawab !');
+		redirect('helpdesks/list_pertanyaan');
 	}
 
 	// beda sama fungsi eskalasi(), ini khusus lavel di atas CS

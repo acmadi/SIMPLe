@@ -28,49 +28,49 @@
 
         <table style="width: 100%">
             <tr>
-                <td style="width: 200px">
+                <td style="width: 15%">
                     <label>No Tiket</label>
                 </td>
-                <td style="width: 200px">
+                <td style="width: 35%">
                     <?php echo sprintf('%05d', $this->session->userdata('no_tiket_helpdesk')) ?>
                 </td>
 
-                <td>
+                <td style="width: 15%">
                     <label>Telpon Kantor</label>
                 </td>
-                <td>
+                <td  style="width: 35%">
                     <span><?php echo $identitas->no_kantor ?></span>
                 </td>
             </tr>
 
             <tr>
-                <td style="width: 150px">
+                <td style="width: 15%">
                     <label>Kode - Nama Satker</label>
                 </td>
-                <td style="width: 500px">
+                <td style="width: 35%">
                     <span><?php echo $identitas->id_satker . ' - ' . $identitas->nama_satker ?></span>
                 </td>
 
-                <td>
+                <td style="width: 15%">
                     <label>No HP</label>
                 </td>
-                <td>
+                <td style="width: 35%">
                     <span><?php echo $identitas->no_hp ?></span>
                 </td>
             </tr>
 
             <tr>
-                <td>
+                <td style="width: 15%">
                     <label style="display: inline-block; width: 100px;">Nama Petugas</label>
                 </td>
-                <td>
+                <td style="width: 35%">
                     <span><?php echo $identitas->nama_petugas ?></span>
                 </td>
 
-                <td>
+                <td style="width: 15%">
                     <label style="display: inline-block; width: 100px;">Email</label>
                 </td>
-                <td>
+                <td style="width: 35%">
                     <span><?php echo $identitas->email ?></span>
                 </td>
             </tr>

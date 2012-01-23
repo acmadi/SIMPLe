@@ -462,3 +462,11 @@ div.nicEdit-main{
 tr.row-highlight{
     background-color: #ffeedd !important;
 }
+
+tr .link-jawaban{
+    display: none !important;
+}
+
+tr:hover .link-jawaban{
+    display: inline-block !important;
+}
