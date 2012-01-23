@@ -51,7 +51,7 @@
         <p>
             <span>Tanggal Selesai</span>
 			<span>:</span>
-            <span><strong><?php echo date('d M Y', strtotime($tiket->tanggal_selesai));  ?></strong></span>
+            <span><strong><?php echo ((!empty($tiket->tanggal_selesai))?date('d M Y', strtotime($tiket->tanggal_selesai)):'');  ?></strong></span>
         </p>
 
         <p>
