@@ -453,3 +453,8 @@ label.aligned{
 div.nicEdit-main{
     background: white;
 }
+
+
+.green.text span{
+    color: green !important;
+}

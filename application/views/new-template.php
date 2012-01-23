@@ -34,6 +34,7 @@
     <script type="text/javascript" src="<?php echo base_url('js/jQuery-Visualize/js/visualize.jQuery.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/jquery.dataTables.min.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/phpjs/substr.js') ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('js/bootstrap/bootstrap-twipsy.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/scripts.js') ?>"></script>
     <!-- JavaScript END -->
 
@@ -106,6 +107,10 @@
                         $this->session->set_userdata('navbar', 'navbar_helpdesk');
                         $this->load->view('navbar_helpdesk');
                     }
+                    elseif ($this->uri->segment(1) == 'helpdesks') {
+                        $this->session->set_userdata('navbar', 'navbar_helpdesk');
+                        $this->load->view('navbar_helpdesk');
+                    }
                     elseif ($this->uri->segment(1) == 'frontdesk') {
                         $this->session->set_userdata('navbar', 'navbar_frontdesk');
                         $this->load->view('navbar_frontdesk');
@@ -164,7 +169,7 @@
                 <div class="profile-menu">
                     <a href="javascript:void(0)"><?php echo $this->session->userdata('nama') ?></a>
                     <ul>
-                        <li><a href="#">Profile</a></li>
+                        <li><a href="<?php echo site_url('profiles') ?>">Profile</a></li>
                         <li><a href="<?php echo site_url('login/process_logout') ?>">Logout</a></li>
                     </ul>
                 </div>
