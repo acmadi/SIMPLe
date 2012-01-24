@@ -3,9 +3,10 @@
 
     <h1>Jawab Pertanyaan</h1>
 
-    <form method="post" action="<?php echo site_url('helpdesks/jawab') ?>">
+    <?php echo form_open_multipart('helpdesks/jawab') ?>
         <?php echo form_hidden('id_tiket', $antrian->id); ?>
         <?php echo form_hidden('id_kat_knowledge_base', $antrian->id_kat_knowledge_base); ?>
+        <?php echo form_hidden('instansi', $antrian->instansi); ?>
         <fieldset>
             <legend>Identitas</legend>
             <div class="grid_6 alpha omega">

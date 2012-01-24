@@ -469,15 +469,52 @@ class Helpdesks extends CI_Controller
 	{
 		$this->form_validation->set_rules('jawaban',         'Jawaban',         'required');
 		$this->form_validation->set_rules('nama_narasumber', 'Nama Narasumber', 'required');
+		// dump($this->input->post());
 
 		if ($this->form_validation->run() == TRUE) :
+			
+			// upload file bukti
+			$nmBr = '';
+	        if (isset($_FILES['file']['name']) && $_FILES['file']['name'] != ''){
+	            $unik = date('YmdHis').'_';
+	            $nmBr = $unik . $_FILES['file']['name'];
+	            move_uploaded_file($_FILES['file']['tmp_name'], 'upload/referensi/'. $nmBr);
+	        }
+
+			// kirim jawaban
 			$arr = $this->input->post();
+			$arr['bukti_file'] = $nmBr;
 			$this->mhelpdesks->jawab($arr);
 
+			// kirim email notifikasi
+			if($this->input->post('sendmail')) :
+				$this->load->library('djamail');
+
+				$instansi = ($this->input->post('nama_satker')) ? $this->input->post('nama_satker') : '';
+				$instansi = ($this->input->post('instansi')) ? $this->input->post('instansi') : $instansi;
+
+				$mail['kepada']     = $this->input->post('nama_petugas');
+				$mail['instansi']   = $instansi;
+				$mail['pertanyaan'] = $this->input->post('pertanyaan');
+				$mail['deskripsi']  = $this->input->post('description');
+				$mail['jawaban']    = $this->input->post('jawaban');
+
+				$isi = $this->load->view('mail-template', $mail, TRUE);
+				$attachment = ($nmBr != '') ? 'upload/referensi/'. $nmBr : '';
+				$this->djamail->kirim(
+					$this->input->post('email'),
+					'Pemberitahuan Jawaban Pertanyaan Anda #' . $this->input->post('no_tiket_helpdesk'),
+					$isi, 
+					$attachment);
+
+			endif;
+			
 			$this->session->set_flashdata('success', 
-				'1 (satu) pertanyaan berhasil dijawab dan telah dikembalikan ke Customer Service Helpdesk!');
+				'1 (satu) pertanyaan berhasil dijawab dan telah dikembalikan ke Customer Service Helpdesk!' 
+				. '');
 			redirect('helpdesks/all');
 		endif;
+
 
 		$this->view($this->input->post('id_tiket'));
 	}

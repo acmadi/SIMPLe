@@ -53,6 +53,7 @@ class Mhelpdesks extends CI_Model{
 			'nama_narasumber'       => $arr['nama_narasumber'],
 			'jabatan_narasumber'    => $arr['jabatan'],
 			'id_kat_knowledge_base' => $arr['id_kat_knowledge_base'],
+			'bukti_file'            => $arr['bukti_file'],
 			);	
 		$this->db->insert('tb_knowledge_base', $arr_knowledge);
 		$id_knowledge_base = $this->db->insert_id();
