@@ -18,7 +18,8 @@ USE `db_dja`;
 
 CREATE TABLE `tb_online_users` (
   `user` varchar(100) NOT NULL,
-  `aktifitas_terakhir` varchar(100) NOT NULL
+  `aktifitas_terakhir` varchar(100) NOT NULL,
+  `session_id` varchar(100) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
