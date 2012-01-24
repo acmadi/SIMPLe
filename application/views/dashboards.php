@@ -97,7 +97,7 @@
     <fieldset class="grid_5">
         <legend>Report Help Desk</legend>
         <div class="message_box">
-            <a class="button green" href="<?php echo site_url('/pelaksana/helpdesk') ?>"><?php echo $helpdesk_total ?> Pertanyaan</a>
+            <a class="button green" href="<?php echo site_url('/helpdesks/all') ?>"><?php echo $helpdesk_total ?> Pertanyaan</a>
         </div>
         <table class="table">
             <caption>Jumlah pertanyaan yang langsung diselesaikan oleh:</caption>
