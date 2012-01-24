@@ -42,6 +42,7 @@ class Frontdesks extends CI_Controller
     function diterima($id)
     {
 		$this->db->query("UPDATE tb_tiket_frontdesk SET is_active = 1 WHERE no_tiket_frontdesk = ?",array($id));
+		$this->log->create("Dokumen Frontdesk dengan nomor tiket ".$id." diterima");
 		redirect('frontdesks');
     }
 
@@ -54,6 +55,8 @@ class Frontdesks extends CI_Controller
         ), array(
             'no_tiket_frontdesk' => $id
         ));
+		
+		$this->log->create("Dokumen Frontdesk dengan nomor tiket ".$id." diteruskan");
 		
         $this->_success(site_url('/dashboards'), 'Tiket berhasil diteruskan', 3);
     }
@@ -77,7 +80,8 @@ class Frontdesks extends CI_Controller
             ), array(
                 'no_tiket_frontdesk' => $this->input->post('no_tiket_frontdesk'),
             ));
-
+			
+			$this->log->create("Dokumen Frontdesk dengan nomor tiket ".$this->input->post('no_tiket_frontdesk')." ditolak atau dikembalikan");
             redirect('frontdesks');
         }
 
@@ -99,6 +103,8 @@ class Frontdesks extends CI_Controller
         ), array(
             'no_tiket_frontdesk' => $id
         ));
+		
+		$this->log->create("Dokumen Frontdesk dengan nomor tiket ".$id." disetujui");
         $this->_success(site_url('/dashboards'), 'Tiket berhasil ditetapkan', 3);
     }
 
