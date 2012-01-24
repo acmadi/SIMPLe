@@ -105,7 +105,7 @@ class Frontdesks extends CI_Controller
         ));
 		
 		$this->log->create("Dokumen Frontdesk dengan nomor tiket ".$id." disetujui");
-        $this->_success(site_url('/dashboards'), 'Tiket berhasil ditetapkan', 3);
+        $this->_success(site_url('/frontdesks'), 'Tiket berhasil ditetapkan', 3);
     }
 
     private function _success($url, $message, $time)
