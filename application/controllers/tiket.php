@@ -33,7 +33,7 @@ class Tiket extends CI_Controller
         $data['id_unit'] = $this->input->post('id_unit');
         $data['content'] = 'public/cek_tiket';
 
-        $this->load->view('new-template', $data);
+        $this->load->view('new-template-tiket', $data);
     }
 
     public function frontdesk($no_tiket_frontdesk)
