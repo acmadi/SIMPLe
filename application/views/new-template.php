@@ -71,7 +71,7 @@
             <nav class="grid_10 alpha omega">
 
                 <?php
-                
+                //print_r($this->session->userdata('lavel'));exit;
                 if ($this->session->userdata('id_user')): 
 
                     if ($this->session->userdata('lavel') == '2') {
@@ -105,6 +105,10 @@
                     elseif ($this->session->userdata('lavel') == '7') {
                         $this->session->set_userdata('navbar', 'navbar_dirjen');
                         $this->load->view('navbar_dirjen');
+                    }
+					elseif ($this->session->userdata('lavel') == '9') {
+                        $this->session->set_userdata('navbar', 'navbar_admin_pengaduan');
+                        $this->load->view('navbar_admin_pengaduan');
                     }
                     elseif ($this->uri->segment(1) == 'helpdesk') {
                         $this->session->set_userdata('navbar', 'navbar_helpdesk');
