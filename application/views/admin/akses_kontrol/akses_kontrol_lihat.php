@@ -65,23 +65,23 @@
                         <td><?php echo $item->nama_lavel?></td>
                         <td class="action">
                             <span class="button_kecil">
-                                <a title="Surat kerja" href="<?php echo site_url('admin/akses_kontrol_surat_kerja/index/'.$item->id_user.'/'.$item->id_lavel)?>"/>
+                                <a title="Surat kerja" href="<?php echo site_url('admin/akses_kontrol_surat_kerja/index/'.$item->id_user.'/'.$info_kontrol->id_lavel)?>"/>
                                     <img src="<?php echo base_url(); ?>images/icon_suratkerja.png" />
                                 </a>
                             </span>
                             <span class="button_kecil">
-                                <a title="Reset password" href="<?php echo site_url('admin/akses_kontrol/reset_password/'.$item->id_user.'/'.$item->id_lavel)?>" onclick='return resetpassword()'/>
+                                <a title="Reset password" href="<?php echo site_url('admin/akses_kontrol/reset_password/'.$item->id_user.'/'.$info_kontrol->id_lavel)?>" onclick='return resetpassword()'/>
                                     <img src="<?php echo base_url(); ?>images/icon_reset.png" />
                                 </a>
                             </span>
                             <span class="button_kecil">
-                                <a title="Ubah" href="<?php echo site_url('admin/akses_kontrol_ubah/user/'.$item->id_user.'/'.$item->id_lavel)?>"/>
+                                <a title="Ubah" href="<?php echo site_url('admin/akses_kontrol_ubah/user/'.$item->id_user.'/'.$info_kontrol->id_lavel)?>"/>
                                     <img src="<?php echo base_url(); ?>images/icon_edit.png" />
                                 </a>
                             </span>
                             <span class="button_kecil">
                                 <?php if ($item->id_lavel != 1): ?>
-                                <a title="Delete" href="<?php echo site_url('admin/akses_kontrol/delete_user/'.$item->id_user.'/'.$item->id_lavel)?>" onclick="return hapus()"/>
+                                <a title="Delete" href="<?php echo site_url('admin/akses_kontrol/delete_user/'.$item->id_user.'/'.$info_kontrol->id_lavel)?>" onclick="return hapus()"/>
                                     <img src="<?php echo base_url(); ?>images/icon_delete.png" />
                                 </a>
                                 <?php endif ?>
