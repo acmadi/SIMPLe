@@ -119,14 +119,14 @@
         <legend>Pengaduan</legend>
 
         <table style="width: 100%;">
-            <tr>
+            <!--tr>
                 <td style="width: 10%;">
                     <label>Kepada</label>
                 </td>
                 <td>
                     <?php echo $detail_pengaduan->nama_lavel?>
                 </td>
-            </tr>
+            </tr-->
 
             <tr>
                 <td>

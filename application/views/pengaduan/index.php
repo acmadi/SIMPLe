@@ -141,12 +141,12 @@
     <fieldset class="identitas">
         <legend>Pengaduan</legend>
         <p>
-            <label>Kepada</label>
+            <!--label>Kepada</label>
             <select name="kepada">
                 <?php foreach ($level->result() as $value): ?>
                 <option value="<?php echo $value->lavel ?>"><?php echo $value->nama ?></option>
                 <?php endforeach ?>
-            </select>
+            </select-->
         </p>
 
         <p>
@@ -202,12 +202,12 @@
     <fieldset>
         <legend>Pengaduan</legend>
         <p>
-            <label>Kepada</label>
+            <!--label>Kepada</label>
             <select name="kepada">
                 <?php foreach ($level->result() as $value): ?>
                 <option value="<?php echo $value->lavel ?>"><?php echo $value->nama ?></option>
                 <?php endforeach ?>
-            </select>
+            </select-->
         </p>
 
         <p>

@@ -30,14 +30,14 @@
             <th>Tanggal</th>
             <th>Pengaduan</th>
             <th>Nama Petugas</th>
-            <th>Level</th>
+            <!--th>Level</th-->
             <th>&nbsp;</th>
         </tr>
         </thead>
 
         <tfoot>
         <tr>
-            <td colspan="6">&nbsp;</td>
+            <td colspan="5">&nbsp;</td>
         </tr>
         </tfoot>
 
@@ -49,7 +49,7 @@
             <td><?php echo table_tanggal($item->tanggal) ?></td>
             <td><?php echo $item->pengaduan ?></td>
             <td><?php echo $item->nama_petugas ?></td>
-            <td><?php echo $item->nama_lavel ?></td>
+            <!--td><?php echo $item->nama_lavel ?></td-->
             <td class="action">
                 <a class="button green" href="<?php echo site_url("/admin_pengaduan/dashboard/") . '/view/' . $item->id_pengaduan ?>">
                     Lihat Aduan

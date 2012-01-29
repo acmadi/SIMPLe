@@ -80,6 +80,7 @@ if ($this->uri->segment(1) == 'knowledge') {
 		<li><?php echo anchor('admin/eselon', 'Eselon', "class='$nav_eselon'");?></li>
         <li><?php echo anchor('admin/calendar', 'Calendar', "class='$nav_calendar'");?></li>
         <li><?php echo anchor('admin/sms', 'SMS', "class='$nav_sms'");?></li>
+        <li><?php echo anchor('admin/man_kelengkapan_doc', 'kel', "class='$nav_sms'");?></li>
     </ul>
     <div id="logout"><?php echo $this->session->userdata('nama') ?> &nbsp; | &nbsp; <?php echo anchor("login/process_logout", 'Logout') ?> &nbsp; <em><?php //echo date('d-m-Y') ?></em></div>
 </div>
