@@ -130,6 +130,16 @@
                 $('#right option').remove();
             })
         });
+
+        // Tombol Catatan CS
+        $('#add-note').click(function(){
+            $('fieldset#catatan').fadeIn();
+            $(this).remove();
+        })
+
+        if ($('fieldset#catatan').css('display') != 'none') {
+            $('#add-note').remove();
+        }
     })
 
 </script>
@@ -284,7 +294,15 @@
         </div>
     </fieldset>
 
-    <div style="float: right; width: 47%; text-align: center; margin-top: 20px;">
+
+    <?php $catatan_style = (set_value('catatan')) ? '' : 'display: none;' ?>
+    <fieldset id="catatan" style="<?php echo $catatan_style ?>">
+        <legend>Catatan CS</legend>
+        <textarea name="catatan" style="width: 960px; min-height: 70px;"><?php echo set_value('catatan') ?></textarea>
+    </fieldset>
+
+    <div style="clear: both; text-align: center; margin-top: 20px;">
+        <a style="padding: 20px 40px; font-size: 1.5em; font-weight: bold" href="javascript:void(0)" id="add-note" class="button">Tambah catatan</a>
         <a style="padding: 20px 40px; font-size: 1.5em; font-weight: bold" class="button green" onclick="$('#identitas_kl').submit()">Kirim</a>
         <a style="padding: 20px 40px; font-size: 1.5em; font-weight: bold" href="<?php echo site_url('/frontdesk/form_revisi_anggaran') ?>" class="button gray-pill">Reset</a>
     </div>
