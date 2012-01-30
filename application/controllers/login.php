@@ -26,20 +26,42 @@ Class Login extends CI_Controller
 
             // Cek masa kerja
             if ($login_data->lavel != 0) {
-                $result = $this->db->from('tb_masa_kerja')
-                        ->where('id_user', $login_data->id_user)->get();
+                /*$result = $this->db->from('tb_masa_kerja')
+                        ->where('id_user', $login_data->id_user)->get();*/
 
-                $sql = "SELECT * FROM tb_masa_kerja WHERE id_user = ? AND
+                /*$sql = "SELECT * FROM tb_masa_kerja WHERE id_user = ? AND
                     NOW() >= `tanggal_mulai`  AND
-                    NOW() <= `tanggal_selesai`";
+                    NOW() <= `tanggal_selesai`";*/
+					
+				$sql = "SELECT a.id_lavel,
+						a.id_unit_satker,
+						c.nama_lavel,
+						c.lavel,
+						b.anggaran
+						FROM tb_masa_kerja a 
+						JOIN tb_unit_saker b ON a.id_unit_satker = b.id_unit_satker 
+						JOIN tb_lavel c ON a.id_lavel = c.id_lavel
+						WHERE a.id_user = ? AND NOW() >= a.tanggal_mulai  AND
+						NOW() <= a.tanggal_selesai LIMIT 0,1";
                 $result = $this->db->query($sql, array($login_data->id_user));
-
+				
+				if ($result->num_rows() > 0) {
+					$tmp_data = $result->row();
+                    $login_data->id_lavel	= $tmp_data->id_lavel;
+					$login_data->lavel		= $tmp_data->lavel;
+					$login_data->nama_lavel	= $tmp_data->nama_lavel;
+					$login_data->anggaran	= $tmp_data->anggaran;
+					$login_data->id_unit_satker = $tmp_data->id_unit_satker;
+                }
+				
+				/*
                 if ($result->num_rows() == 0) {
                     redirect('login/process_logout');
                 }
+				*/
             }
 
-
+	
             $this->db->query("DELETE FROM tb_online_users WHERE user = ?", array($login_data->username));
 
             $this->session->set_userdata('user', $login_data->username);

@@ -184,6 +184,22 @@ class Muser extends CI_Model
 		return $info;
 	}
 	
+	
+	function delete_masa_kerja($id){
+		$cek = $this->db->query("select id_user from tb_masa_kerja where id_masa_kerja = ?", array($id));
+		$info = false;
+		if($cek->num_rows() > 0){
+			$tmp_id_user = $cek->row();
+			if($this->db->query("DELETE FROM tb_masa_kerja WHERE id_masa_kerja = ?", array($id))){
+				$info = $tmp_id_user->id_user;
+			}else{
+				$info = false;
+			}
+		}
+		
+		return $info;
+	}
+	
 	function add_user($d){
 		$sql = "INSERT INTO tb_user(username,password,nama,email,no_tlp,id_unit_satker,id_lavel) values(?,?,?,?,?,?,?)";
 		$this->db->query($sql,array($d['usr'],md5($d['pwd']),$d['nm'],$d['em'],$d['telp'],$d['dep'],$d['lev']));
@@ -201,10 +217,11 @@ class Muser extends CI_Model
 	}
 	
 	function get_masa_kerja($u){
-		$sql = "SELECT id_user,tanggal_mulai,tanggal_selesai
-				FROM tb_masa_kerja
-				WHERE id_user = ?
-				ORDER BY id_masa_kerja DESC";
+		$sql = "SELECT a.id_masa_kerja,a.id_user,a.tanggal_mulai,a.tanggal_selesai,c.nama_lavel, b.nama_unit
+				FROM tb_masa_kerja a JOIN tb_unit_saker b ON a.id_unit_satker = b.id_unit_satker
+				JOIN tb_lavel c ON a.id_lavel = c.id_lavel 
+				WHERE a.id_user = ?
+				ORDER BY a.id_masa_kerja DESC";
 		return $this->db->query($sql,array($u))->result();
 	}
 	
@@ -252,8 +269,8 @@ class Muser extends CI_Model
 				if(strtotime($tgl_mulai) > strtotime($tgl_selesai)){
 					$this->session->set_flashdata('error',"tanggal awal lebih besar dari tanggal akhir");
 				}else{
-					$sql = "INSERT INTO tb_masa_kerja(id_user,tanggal_mulai,tanggal_selesai) VALUES(?,?,?)";
-					$this->db->query($sql,array($d['id'],$tgl_mulai,$tgl_selesai));
+					$sql = "INSERT INTO tb_masa_kerja(id_user,tanggal_mulai,tanggal_selesai,id_lavel,id_unit_satker) VALUES(?,?,?,?,?)";
+					$this->db->query($sql,array($d['id'],$tgl_mulai,$tgl_selesai,$d['lev'],$d['dep']));
 					
 					if($this->db->affected_rows() > 0){
 						$this->log->create("suksee menambahkan data masa kerja user : ".$d['id']);
