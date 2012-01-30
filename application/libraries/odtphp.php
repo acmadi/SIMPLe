@@ -51,7 +51,7 @@ class Odtphp
         $odf = new odf($this->print_template_path . 'pengajuan.odt');
 
         $odf->setVars('var1', $no_surat_usulan);
-        $odf->setVars('var2', $no_tiket);
+        $odf->setVars('var2', $no_tiket . '/' . date('Y'));
         $odf->setVars('var3', $kementrian);
         $odf->setVars('var4', $eselon);
         $odf->setVars('var5', $nip);
