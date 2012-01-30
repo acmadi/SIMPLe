@@ -16,7 +16,7 @@
             <th class="short">No</th>
             <th class="short">Kode Eselon</th>
             <th>Nama Eselon</th>
-            <th>Kementrian</th>
+            <th>Kementerian</th>
             <th class="action">Aksi</th>
         </tr>
         </thead>

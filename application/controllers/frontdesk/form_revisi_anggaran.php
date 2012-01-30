@@ -144,7 +144,8 @@ class Form_revisi_anggaran extends CI_Controller
         $this->form_validation->set_rules('nip', 'NIP', 'required');
 
 
-        $this->form_validation->set_rules('dokumen', 'Dokumen', 'callback_dokumen_check');
+        $this->form_validation->set_rules('dokumen', 'Dokumen', 'required');
+        $this->form_validation->set_rules('catatan', 'Catatan CS', 'trim');
 
         if ($this->form_validation->run() == TRUE) {
 
@@ -157,6 +158,7 @@ class Form_revisi_anggaran extends CI_Controller
             $nomor_surat_usulan = $this->input->post('nomor_surat_usulan');
             $tanggal_surat_usulan = $this->input->post('tanggal_surat_usulan');
             $kode_satker = $this->input->post('kode_satker');
+            $catatan = $this->input->post('catatan');
 			
 			
 
@@ -189,9 +191,9 @@ class Form_revisi_anggaran extends CI_Controller
 
             $now = date('Y-m-d H:i:s');
 			
-			
-            $sql = "INSERT INTO tb_tiket_frontdesk (id_satker, id_formulir, tanggal, status, lavel, id_petugas_satker, id_unit, id_kementrian,nomor_surat_usulan,tanggal_surat_usulan,is_active)
-					VALUES ({$kode_satker_select}, NULL, '{$now}', 'open', 3, {$tiket_id},'{$eselon}','{$nama_kl}','{$nomor_surat_usulan}','{$tanggal_surat_usulan}',2)";
+
+            $sql = "INSERT INTO tb_tiket_frontdesk (id_satker, id_formulir, tanggal, status, lavel, id_petugas_satker, id_unit, id_kementrian,nomor_surat_usulan,tanggal_surat_usulan,is_active, catatan)
+					VALUES ({$kode_satker_select}, NULL, '{$now}', 'open', 3, {$tiket_id},'{$eselon}','{$nama_kl}','{$nomor_surat_usulan}','{$tanggal_surat_usulan}',2, '{$catatan}')";
 
 
             $this->db->query($sql);
@@ -202,13 +204,14 @@ class Form_revisi_anggaran extends CI_Controller
             $dokumen = $this->input->post('dokumen');
             $no_tiket_frontdesk = $this->db->insert_id();
 
-            if (count($dokumen) > 1) {
+            if (count($dokumen) >= 1) {
                 foreach ($dokumen as $key => $value) {
                     $sql = "INSERT INTO tb_kelengkapan_formulir
 										(no_tiket_frontdesk, id_kelengkapan)
 										VALUES ('{$no_tiket_frontdesk}', '{$key}')";
 
                     $this->db->query($sql);
+                    echo $this->db->last_query();
                 }
             }
 
@@ -279,9 +282,11 @@ class Form_revisi_anggaran extends CI_Controller
 
         $input_filename = $this->odtphp->create($no_tiket_frontdesk, 'tanggal', '10:00');
 
-
-//        print_r($data['identitas']);
-
+        $sql = 'SELECT * FROM tb_kelengkapan_formulir a
+                JOIN tb_kelengkapan_doc b ON a.id_kelengkapan = b.id_kelengkapan
+                WHERE no_tiket_frontdesk = ?
+                ORDER by b.id_kelengkapan';
+        $kelengkapan_dokumen = $this->db->query($sql, array($no_tiket_frontdesk))->result();
 
         $emails = explode(';', trim_middle($data['identitas'][0]->email));
 
@@ -297,8 +302,10 @@ class Form_revisi_anggaran extends CI_Controller
             $data['identitas'][0]->no_hp,
             $data['identitas'][0]->no_kantor,
             $emails,
-            date('Y-m-d H:i:s'),
-            date('Y-m-d H:i:s', strtotime('+7 days'))
+            date('d-m-Y H:i:s'),
+            date('d-m-Y H:i:s', strtotime('+7 days')),
+            $kelengkapan_dokumen,
+            $data['identitas'][0]->catatan
         );
 
         $output = preg_replace('/.odt/', '.pdf', $input_filename['full_filename']);

@@ -13,7 +13,7 @@
             <th class="no">No</th>
             <th class="short">Tanggal Pengajuan</th>
             <th class="no">Proses (Hari)</th>
-            <th>Kementrian</th>
+            <th>Kementerian</th>
             <th>Eselon</th>
             <th>&nbsp;</th>
         </tr>

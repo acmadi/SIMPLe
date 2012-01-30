@@ -6,7 +6,7 @@
         <tr>
             <th class="no">No Tiket</th>
             <th class="no">Tanggal</th>
-            <th class="short">Kementrian</th>
+            <th class="short">Kementerian</th>
             <th class="short">Eselon</th>
 <!--            <th class="short">Kode Satker</th>-->
 <!--            <th>Nama Satker</th>-->

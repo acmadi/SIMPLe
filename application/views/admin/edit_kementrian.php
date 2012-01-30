@@ -1,6 +1,6 @@
 <div class="content">
 
-    <h1>Ubah Nama Kementrian <?php echo $kementrian->id_kementrian ?></h1>
+    <h1>Ubah Nama Kementerian <?php echo $kementrian->id_kementrian ?></h1>
 				<?php
 				// TODO: Satu paket ini untuk alerts. Nanti mau dipindah jadi hanya panggil satu method.
 				if ($this->session->flashdata('success')) {
@@ -20,12 +20,12 @@
     <form method="post" action="<?php site_url('/admin/kementrian/edit/' . $kementrian->id_kementrian) ?>">
 
         <p>
-            <label>Kode Kementrian</label>
+            <label>Kode Kementerian</label>
             <input type="text" value="<?php echo $kementrian->id_kementrian ?>" disabled/>
         </p>
 
         <p>
-            <label>Nama Kementrian</label>
+            <label>Nama Kementerian</label>
             <input type="text" name="nama_kementrian" value="<?php echo $kementrian->nama_kementrian ?>"/>
 			<?php echo form_error('nama_kementrian', '<div class="error">', '</div>'); ?>
         </p>

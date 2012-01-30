@@ -25,7 +25,7 @@
         <tr>
             <th class="short">No Tiket</th>
             <th class="short">Tanggal</th>
-            <th class="medium">Kementrian</th>
+            <th class="medium">Kementerian</th>
             <th class="medium">Eselon</th>
             <th class="no">Status</th>
             <th>&nbsp;</th>

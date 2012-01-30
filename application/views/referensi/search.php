@@ -6,7 +6,7 @@
 	<div class="notice">
 		Bila pencarian tidak menemukan referensi yang anda cari, silakan cari secara manual 
 		referensi yang dibutuhkan di 
-		<a href="http://www.kemenkumham.go.id/produk-hukum">Website Resmi Kementrian Hukum dan HAM RI</a>
+		<a href="http://www.kemenkumham.go.id/produk-hukum">Website Resmi Kementerian Hukum dan HAM RI</a>
 	</div>
 	<?php 
 		if ($keyword != NULL && isset($keyword)) : 

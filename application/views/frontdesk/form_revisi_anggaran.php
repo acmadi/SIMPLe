@@ -163,7 +163,7 @@
     <?php echo form_hidden('tipe', 'kl') ?>
 
     <fieldset id="kl">
-        <legend>Kementrian / Lembaga</legend>
+        <legend>Kementerian / Lembaga</legend>
 
         <!-- <div id="anggaran" style="padding: 20px; display: inline-block; float: right; font-size: 24px;"></div> -->
 
