@@ -56,8 +56,8 @@
                 &nbsp;&nbsp; Sistem Informasi Pusat Layanan DJA -->
             </div>
 
-
             <?php if (!$this->session->userdata('id_user')): ?>
+
             <div class="grid_6" style="padding-top: 20px; text-align: right;">
                 <?php echo form_open("login/usermasuk", array('id' => 'login_form')); ?>
                 <input type="text" id="user" name="user" placeholder="Username" style="width: 100px;"/>
@@ -65,10 +65,25 @@
                 <input type="submit" name="submit" class="button blue" value="Login"/>
                 <?php echo form_close() ?>
             </div>
+
+            <?php else: ?>
+
+            <div class="grid_2 alpha omega prefix_4" style="text-align: right;">
+                <?php if ($this->session->userdata('id_user')): ?>
+                <div class="profile-menu">
+                    <a href="javascript:void(0)"><?php echo $this->session->userdata('nama') ?></a>
+                    <ul>
+                        <li><a href="<?php echo site_url('profiles') ?>">Profile</a></li>
+                        <li><a href="<?php echo site_url('login/process_logout') ?>">Logout</a></li>
+                    </ul>
+                </div>
+                <?php endif ?>
+            </div>
+
             <?php endif ?>
 
 
-            <nav class="grid_10 alpha omega">
+            <nav class="grid_12 alpha omega">
 
                 <?php
                 //print_r($this->session->userdata('lavel'));exit;
@@ -171,17 +186,6 @@
                 ?>
 
             </nav>
-            <div class="grid_2 alpha omega" style="text-align: right;">
-                <?php if ($this->session->userdata('id_user')): ?>
-                <div class="profile-menu">
-                    <a href="javascript:void(0)"><?php echo $this->session->userdata('nama') ?></a>
-                    <ul>
-                        <li><a href="<?php echo site_url('profiles') ?>">Profile</a></li>
-                        <li><a href="<?php echo site_url('login/process_logout') ?>">Logout</a></li>
-                    </ul>
-                </div>
-                <?php endif ?>
-            </div>
         </div>
     </header>
     <div id="main" role="main" class="container_12">

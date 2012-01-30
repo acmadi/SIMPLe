@@ -1,5 +1,8 @@
 <?php
-$nav_dashboard = $nav_form = $nav_knowledge = $nav_forum = $nav_ambil_dokumen = $nav_status_tiket = $nav_pengembalian_dokumen = $nav_referensi = '';
+$nav_dashboard = $nav_form = $nav_knowledge =
+$nav_forum = $nav_ambil_dokumen = $nav_status_tiket =
+$nav_pengembalian_dokumen = $nav_referensi = $nav_telpon = '';
+
 switch ($this->uri->segment(2)) {
 
     case 'dashboard':
@@ -29,6 +32,9 @@ if ($this->uri->segment(1) == 'knowledge') {
 if ($this->uri->segment(1) == 'forum') {
     $nav_forum = 'current';
 }
+if ($this->uri->segment(1) == 'telpon') {
+    $nav_telpon = 'current';
+}
 ?>
 
 <div id="navbar" class="clearfloat">
@@ -40,5 +46,6 @@ if ($this->uri->segment(1) == 'forum') {
         <li><?php echo anchor('frontdesk/pengembalian_dokumen', 'Pengembalian Dokumen', "class='$nav_pengembalian_dokumen'");?></li>
         <li><?php echo anchor('referensi', 'Referensi Peraturan', "class='$nav_referensi'") ?></li>
         <li><?php echo anchor('forum', 'Forum', "class='$nav_forum'");?></li>
+        <li><?php echo anchor('telpon', 'Telpon', "class='$nav_telpon'");?></li>
     </ul>
 </div>

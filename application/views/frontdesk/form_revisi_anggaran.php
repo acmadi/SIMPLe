@@ -115,6 +115,20 @@
             });
         });
 
+        $('#left').dblclick(function(){
+            var selected = $('#left option:selected');
+            var clone = selected.clone();
+            $('#right').append(clone);
+            selected.remove();
+        })
+
+        $('#right').dblclick(function(){
+            var selected = $('#right option:selected');
+            var clone = selected.clone();
+            $('#left').append(clone);
+            selected.remove();
+        })
+
         $('#all_left2right').live('click', function () {
             $('#left').each(function () {
                 bla = $('#left option').attr('selected', 'selected');
