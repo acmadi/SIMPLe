@@ -217,7 +217,7 @@
     </fieldset>
 
     <div style="text-align: right; margin-top: 20px;">
-        <input type="submit" class="button blue-pill" value="Kirim">
+        <input type="submit" class="button green" value="Kirim">
         <!--        <input type="submit" class="button blue-pill" value="Saluran Pengaduan">-->
         <input type="reset" class="button gray-pill" value="Reset">
     </div>

@@ -29,17 +29,25 @@ class Dashboard extends CI_Controller
 
     public function save_identitas()
     {
-        $this->form_validation->set_rules('nama_kl', 'Nama K/L', 'required');
-        $this->form_validation->set_rules('eselon', 'Eselon', 'required');
-        $this->form_validation->set_rules('kode_satker', 'Nama - Kode Satker', 'required');
+        
         $this->form_validation->set_rules('nama_petugas', 'Nama Petugas', 'required');
-        $this->form_validation->set_rules('jabatan_petugas', 'Jabatan Petugas', 'required');
+        
         $this->form_validation->set_rules('no_hp', 'No HP', 'required');
-        $this->form_validation->set_rules('no_kantor', 'No Kantor', 'required');
+        
         $this->form_validation->set_rules('email', 'Email', 'required');
         $this->form_validation->set_rules('pengaduan', 'Pengaduan', 'required');
-        $this->form_validation->set_rules('kepada', 'Kepada', 'required');
-
+        //$this->form_validation->set_rules('kepada', 'Kepada', 'required');
+		
+		$tipe = $this->input->post('tipe');
+		
+		if($tipe == 'kl'){
+			$this->form_validation->set_rules('nama_kl', 'Nama K/L', 'required');
+			$this->form_validation->set_rules('eselon', 'Eselon', 'required');
+			$this->form_validation->set_rules('kode_satker', 'Nama - Kode Satker', 'required');
+			$this->form_validation->set_rules('no_kantor', 'No Kantor', 'required');
+			$this->form_validation->set_rules('jabatan_petugas', 'Jabatan Petugas', 'required');
+		}
+		
         if ($this->form_validation->run() == TRUE) {
 
             $nama_petugas = $this->input->post('nama_petugas');
@@ -47,7 +55,7 @@ class Dashboard extends CI_Controller
             $no_hp = $this->input->post('no_hp');
             $email = $this->input->post('email');
             $no_kantor = $this->input->post('no_kantor');
-            $tipe = $this->input->post('tipe');
+            
             $pengaduan = $this->input->post('pengaduan');
             $kepada = $this->input->post('kepada');
 
@@ -58,7 +66,7 @@ class Dashboard extends CI_Controller
 
             // Save Identitas Petugas Satker
             $sql = "INSERT INTO tb_petugas_satker (nama_petugas, jabatan_petugas, no_hp, email, no_kantor, tipe)
-                           VALUES ('{$nama_petugas}', '{$jabatan_petugas}', '{$no_hp}', '{$email}', '{$no_kantor}', '{$tipe}')";
+                    VALUES ('{$nama_petugas}', '{$jabatan_petugas}', '{$no_hp}', '{$email}', '{$no_kantor}', '{$tipe}')";
 
             $this->db->query($sql);
 
@@ -66,7 +74,7 @@ class Dashboard extends CI_Controller
 
             $sql = "INSERT INTO tb_pengaduan (id_petugas_satker, id_lavel, pengaduan, tanggal)
                     VALUES(?, ?, ?, NOW())";
-            $this->db->query($sql, array($petugas_id, $kepada, $pengaduan));
+            $this->db->query($sql, array($petugas_id, '14', $pengaduan));
 
             if ($this->db->trans_status() === FALSE)
             {
