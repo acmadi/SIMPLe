@@ -570,10 +570,11 @@ class Helpdesks extends CI_Controller
      * CS Menjawab langsung pertanyaan helpdesk
      */
     public function jawab_langsung() {
-        $sql = "INSERT INTO tb_laporan_helpdesk (id_tiket_helpdesk, jawaban) VALUES (?, ?)";
+        $sql = "INSERT INTO tb_laporan_helpdesk (id_tiket_helpdesk, jawaban, id_user) VALUES (?, ?, ?)";
         $result = $this->db->query($sql, array(
             $this->input->post('id_tiket_helpdesk'),
             $this->input->post('jawaban'),
+            $this->session->userdata('id_user')
         ));
 
         if ($result) {

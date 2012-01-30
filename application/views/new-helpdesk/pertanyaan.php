@@ -4,7 +4,7 @@
 
     <?php
     if ($this->session->flashdata('success')) {
-        echo notification($this->session->flashdata('info'), 'Sukses', 'green');
+        echo notification($this->session->flashdata('success'), 'Sukses', 'green');
     }
     if ($this->session->flashdata('info')) {
         echo notification($this->session->flashdata('info'), 'Informasi', 'blue');
