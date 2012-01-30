@@ -29,8 +29,9 @@ class Odtphp
         );
     }
 
+    //TODO: Tanda terima pengajuan revisi, parameter sebaiknya diubah menjadi array atau object. Tidak seperti sekarang, Panjang beud
     /**
-     * Tanda terima pengajuan
+     * Tanda terima pengajuan revisi anggaran
      *
      * @param $tiket
      * @param $no_surat_usulan
@@ -45,7 +46,7 @@ class Odtphp
      * @param $emails Array of Emails
      * @return array
      */
-    public function create_pengajuan($tiket, $no_surat_usulan, $no_tiket, $kementrian, $eselon, $nip, $nama, $jabatan, $hp, $tlpkantor, $emails, $tgl_pengajuan, $tgl_selesai)
+    public function create_pengajuan($tiket, $no_surat_usulan, $no_tiket, $kementrian, $eselon, $nip, $nama, $jabatan, $hp, $tlpkantor, $emails, $tgl_pengajuan, $tgl_selesai, $kelengkapan_dokumen, $catatan)
     {
         $odf = new odf($this->print_template_path . 'pengajuan.odt');
 
@@ -61,6 +62,15 @@ class Odtphp
 
         $odf->setVars('var11', $tgl_pengajuan);
         $odf->setVars('var12', $tgl_selesai);
+
+        $kelengkapan = ''; $i = 1;
+        foreach ($kelengkapan_dokumen as $value) {
+            $kelengkapan .= "$i. {$value->nama_kelengkapan}\n";
+            $i++;
+        }
+
+        $odf->setVars('var13', $kelengkapan);
+        $odf->setVars('var14', $catatan);
 
         $email = '';
         $i = 1;
@@ -113,7 +123,7 @@ class Odtphp
         $odf->setVars('var12', $email);
 
 
-        $odf->setVars('var13', date('Y-m-d H:i:s'));
+        $odf->setVars('var13', date('d-m-Y H:i:s'));
 
         $odf->setVars('var14', $tgl_pengajuan);
 
