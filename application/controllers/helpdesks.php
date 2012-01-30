@@ -565,4 +565,23 @@ class Helpdesks extends CI_Controller
 		endif;
 		return FALSE;
 	}
+
+    /**
+     * CS Menjawab langsung pertanyaan helpdesk
+     */
+    public function jawab_langsung() {
+        $sql = "INSERT INTO tb_laporan_helpdesk (id_tiket_helpdesk, jawaban) VALUES (?, ?)";
+        $result = $this->db->query($sql, array(
+            $this->input->post('id_tiket_helpdesk'),
+            $this->input->post('jawaban'),
+        ));
+
+        if ($result) {
+            $this->session->set_flashdata('success', 'Data berhasil dimasukkan dan dilaporkan ke Knowledge Base Administrator');
+            redirect('helpdesks/pertanyaan/?prev_question=true');
+        } else {
+            $this->session->set_flashdata('error', 'Data gagal dimasukkan');
+            redirect('helpdesks/save/step2');
+        }
+    }
 }
