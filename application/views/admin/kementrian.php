@@ -1,8 +1,8 @@
 <div class="content">
 
-    <h1>Kementrian</h1>
+    <h1>Kementerian</h1>
 
-    <a href="<?php echo site_url('/admin/kementrian/add/') ?>" class="button blue-pill">Tambah Kementrian</a>
+    <a href="<?php echo site_url('/admin/kementrian/add/') ?>" class="button blue-pill">Tambah Kementerian</a>
 
     <form method="get" action="<?php echo site_url('/admin/kementrian/index/') ?>" style="text-align: right;">
         <input type="text" name="cari"/>
@@ -13,8 +13,8 @@
         <thead>
         <tr>
             <th class="short">No</th>
-            <th class="short">Kode Kementrian</th>
-            <th>Kementrian</th>
+            <th class="short">Kode Kementerian</th>
+            <th>Kementerian</th>
             <th class="action">Aksi</th>
         </tr>
         </thead>

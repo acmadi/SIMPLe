@@ -9,7 +9,7 @@
             <th class="no">No Tiket</th>
             <th class="short">Tanggal Pengajuan</th>
             <th class="no">Proses (Hari)</th>
-            <th>Kementrian</th>
+            <th>Kementerian</th>
             <th>Eselon</th>
 
         </tr>

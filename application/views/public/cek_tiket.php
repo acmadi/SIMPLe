@@ -37,7 +37,7 @@
         </p>
 
         <p>
-            <span>Kode Kementrian - Kode Eselon </span>
+            <span>Kode Kementerian - Kode Eselon </span>
 			<span>:</span>
             <span><strong><?php echo $tiket->id_kementrian.' - '.$tiket->id_unit ?></strong></span>
         </p>

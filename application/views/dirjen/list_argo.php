@@ -9,7 +9,7 @@
             <th class="short">Tanggal</th>
             <th class="short">Hari</th>
             <th class="short">No Tiket</th>
-            <th>Kementrian</th>
+            <th>Kementerian</th>
             <th>Eselon</th>
         </tr>
         </thead>

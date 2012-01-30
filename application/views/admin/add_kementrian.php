@@ -1,6 +1,6 @@
 <div class="content">
 
-    <h1>Tambah Kementrian</h1>
+    <h1>Tambah Kementerian</h1>
 <?php
 				// TODO: Satu paket ini untuk alerts. Nanti mau dipindah jadi hanya panggil satu method.
 				if ($this->session->flashdata('success')) {
@@ -22,13 +22,13 @@
         
 
         <p>
-            <label>Kode Kementrian</label>
+            <label>Kode Kementerian</label>
             <input type="text" name="id_kementrian" value="<?php echo set_value('id_kementrian') ?>" maxlength="3"/>
 			<?php echo form_error('id_kementrian', '<div class="error">', '</div>'); ?>
         </p>
 
         <p>
-            <label>Nama Kementrian</label>
+            <label>Nama Kementerian</label>
             <input type="text" name="nama_kementrian" value="<?php echo set_value('nama_kementrian')?> "/>
 			<?php echo form_error('nama_kementrian', '<div class="error">', '</div>'); ?>
         </p>

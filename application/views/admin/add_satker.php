@@ -32,7 +32,7 @@
         </p>
 
         <p>
-            <label>Nama Kementrian</label>
+            <label>Nama Kementerian</label>
             <select name="id_kementrian">
                 <option value="">&nbsp;</option>
                 <?php foreach ($kementrian->result() as $value): ?>
