@@ -122,13 +122,13 @@
     </fieldset>
 
     <fieldset>
-        <legend>Pertanyaan</legend>
+        <legend>Topik</legend>
 
         <table style="width:100%;">
             <tr>
                 <td style="width: 10px"><label>Kategori</label></td>
                 <td style="width: 100px"><?php echo $pertanyaan->kat_knowledge_base ?></td>
-                <td style="width: 10px"><label>Pertanyaan</label></td>
+                <td style="width: 10px"><label>Topik</label></td>
                 <td style="width: 500px"><?php echo $pertanyaan->pertanyaan ?></td>
 
             </tr>
@@ -148,7 +148,7 @@
                     <?php endif ?>
 
                 </td>
-                <td style="width: 10px"><label>Deskripsi</label></td>
+                <td style="width: 10px"><label>Pertanyaan</label></td>
                 <td style="width: 500px"><?php echo $pertanyaan->description ?></td>
 
             </tr>

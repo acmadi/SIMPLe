@@ -80,7 +80,7 @@
 
     <?php if (isset($prev_question)): ?>
     <fieldset>
-        <legend>Pertanyaan Sebelumnya</legend>
+        <legend>Topik Sebelumnya</legend>
         <ul>
             <?php foreach ($prev_question->result() as $value): ?>
             <li><?php echo $value->pertanyaan ?></li>
@@ -90,7 +90,7 @@
     <?php endif ?>
 
     <fieldset>
-        <legend>Pertanyaan</legend>
+        <legend>Topik</legend>
 
         <table style="width: 100%;">
             <tr>
@@ -107,7 +107,7 @@
                     </select>
                 </td>
                 <td style="padding: 10px; width: 100px;">
-                    <label for="pertanyaan" style="display: inline-block; width: 70px;">Pertanyaan</label>
+                    <label for="pertanyaan" style="display: inline-block; width: 70px;">Topik</label>
                     <input type="text" name="pertanyaan" id="pertanyaan" value="<?php echo set_value('pertanyaan') ?>" tabindex="3" style="width: 400px;"/>
                 </td>
             </tr>
@@ -131,7 +131,7 @@
                     </select>
                 </td>
                 <td style="padding: 10px; width: 100px;">
-                    <label for="description" style="display: inline-block; width: 70px;">Deskripsi</label>
+                    <label for="description" style="display: inline-block; width: 70px;">Pertanyaan</label>
                     <input type="text" name="description" id="description" value="<?php echo set_value('description') ?>" tabindex="4" style="width: 400px;"/>
                 </td>
             </tr>
