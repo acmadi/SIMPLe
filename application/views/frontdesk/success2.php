@@ -6,7 +6,7 @@
     <link rel="shortcut icon" href="<?php echo base_url() . 'images/icon.jpg';?>"/>
     <style type="text/css">@import url("<?php echo base_url() . 'css/admin-style.css'; ?>");</style>
     <script>
-        window.open('<?php echo $pdf_file?>', '_newtab');
+        //window.open('<?php echo $pdf_file?>', '_newtab');
         window.open('<?php echo $pdf_file2?>', '_newtab2');
     </script>
 </head>
