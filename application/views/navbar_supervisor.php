@@ -1,5 +1,7 @@
 <?php
-$nav_dashboard = $nav_list_pertanyaan = $nav_knowledge = $nav_forum = $nav_report = '';
+$nav_dashboard = $nav_list_pertanyaan = $nav_knowledge =
+$nav_forum = $nav_report = $nav_telpon = '';
+
 switch ($this->uri->segment(2)) {
     case 'dashboard':
         $nav_dashboard = 'current';
@@ -21,6 +23,9 @@ if ($this->uri->segment(1) == 'forum') {
 if ($this->uri->segment(1) == 'helpdesks') {
     $nav_list_pertanyaan = 'current';
 }
+if ($this->uri->segment(1) == 'telpon') {
+    $nav_telpon = 'current';
+}
 ?>
 
 <div id="navbar" class="clearfloat">
@@ -31,5 +36,6 @@ if ($this->uri->segment(1) == 'helpdesks') {
         <li><?php echo anchor('knowledge', 'Knowledge Base', array('class' => $nav_knowledge)) ?></li>
         <li><?php echo anchor('referensi', 'Referensi Peraturan', array('class' => $nav_referensi)) ?></li>
         <li><?php echo anchor('forum', 'Forum', array('class' => $nav_forum)) ?></li>
+        <li><?php echo anchor('telpon', 'Telpon', "class='$nav_telpon'");?></li>
     </ul>
 </div>

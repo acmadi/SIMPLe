@@ -1,5 +1,8 @@
 <?php
-$nav_dashboard = $nav_identitas_satker = $nav_antrian = $nav_knowledge = $nav_forum = $nav_referensi = $nav_list_pertanyaan = '';
+$nav_dashboard = $nav_identitas_satker = $nav_antrian =
+$nav_knowledge = $nav_forum = $nav_referensi =
+$nav_list_pertanyaan = $nav_telpon = '';
+
 switch ($this->uri->segment(2)) {
     case 'dashboard':
         $nav_dashboard = 'current';
@@ -30,7 +33,9 @@ if ($this->uri->segment(1) == 'forum') {
 if ($this->uri->segment(2) == 'list_pertanyaan') {
     $nav_list_pertanyaan = 'current';
 }
-
+if ($this->uri->segment(1) == 'telpon') {
+    $nav_telpon = 'current';
+}
 ?>
 
 
@@ -41,6 +46,7 @@ if ($this->uri->segment(2) == 'list_pertanyaan') {
     <li><?php echo anchor('knowledge', 'Knowledge Base', "class='$nav_knowledge'");?></li>
     <li><?php echo anchor('referensi', 'Referensi Peraturan', "class='$nav_referensi'")?></li>
     <li><?php echo anchor('forum', 'Forum', "class='$nav_forum'");?></li>
+    <li><?php echo anchor('telpon', 'Telpon', "class='$nav_telpon'");?></li>
 </ul>
 
 <script type="text/javascript">
