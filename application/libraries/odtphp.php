@@ -83,7 +83,7 @@ class Odtphp
         }
 
         foreach ($kelengkapan_dokumen as $value) {
-            if ($value->id_kelengkapan == 0)
+            if ($value->id_kelengkapan == 0 AND $value->kelengkapan != '')
                 $kelengkapan .= "[v] {$value->kelengkapan}\n";
         }
 
