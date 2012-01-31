@@ -36,7 +36,6 @@
     <script type="text/javascript" src="<?php echo base_url('js/highcharts/highcharts.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/highcharts/themes/grid.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/phpjs/substr.js') ?>"></script>
-    <script type="text/javascript" src="<?php echo base_url('js/bootstrap/bootstrap-twipsy.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/prefixfree.min.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/scripts.js') ?>"></script>
     <!-- JavaScript END -->
@@ -265,6 +264,19 @@
 <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
     <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
 <![endif]-->
+
+<script>
+    $(function () {
+        setInterval(function () {
+            $.get('<?php echo site_url('login_status') ?>', function(response){
+                console.log(response);
+                if (response != 'OK') {
+                    window.location.href = '<?php echo site_url('/') ?>';
+                }
+            })
+        }, 30 * 60 * 1000 + 10000) // 30 menit + 10 detik
+    })
+</script>
 
 </body>
 </html>
