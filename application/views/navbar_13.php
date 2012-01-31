@@ -1,4 +1,6 @@
 <?php
+// Navbar KnowledgeBase Coordinator
+
 $nav_dashboard = $nav_helpdesk = $nav_frontdesk = $nav_knowledge = $nav_forum = $nav_jawaban_cs = '';
 
 
