@@ -290,23 +290,24 @@ class Form_revisi_anggaran extends CI_Controller
 
         $emails = explode(';', trim_middle($data['identitas'][0]->email));
 
-        $input_filename2 = $this->odtphp->create_pengajuan(
-            $no_tiket_frontdesk,
-            $data['identitas'][0]->nomor_surat_usulan,
-            $no_tiket_frontdesk,
-            $data['kementrian']->id_kementrian . ' - ' . $data['kementrian']->nama_kementrian,
-            $data['unit']->id_unit . ' - ' . $data['unit']->nama_unit,
-            $data['identitas'][0]->nip,
-            $data['identitas'][0]->nama_petugas,
-            $data['identitas'][0]->jabatan_petugas,
-            $data['identitas'][0]->no_hp,
-            $data['identitas'][0]->no_kantor,
-            $emails,
-            date('d-m-Y H:i:s'),
-            date('d-m-Y H:i:s', strtotime('+7 days')),
-            $kelengkapan_dokumen,
-            $data['identitas'][0]->catatan
-        );
+
+        $document['tiket'] = $no_tiket_frontdesk;
+        $document['no_surat_usulan'] = $data['identitas'][0]->nomor_surat_usulan;
+        $document['no_tiket'] = $no_tiket_frontdesk;
+        $document['kementrian'] = $data['kementrian']->id_kementrian . ' - ' . $data['kementrian']->nama_kementrian;
+        $document['eselon'] = $data['unit']->id_unit . ' - ' . $data['unit']->nama_unit;
+        $document['nip'] = $data['identitas'][0]->nip;
+        $document['nama'] = $data['identitas'][0]->nama_petugas;
+        $document['jabatan'] = $data['identitas'][0]->jabatan_petugas;
+        $document['hp'] = $data['identitas'][0]->no_hp;
+        $document['tlpkantor'] = $data['identitas'][0]->no_kantor;
+        $document['emails'] = $emails;
+        $document['tgl_pengajuan'] = date('d-m-Y H:i:s');
+        $document['tgl_selesai'] = date('d-m-Y H:i:s', strtotime('+7 days'));
+        $document['kelengkapan_dokumen'] = $kelengkapan_dokumen;
+        $document['catatan'] = $data['identitas'][0]->catatan;
+
+        $input_filename2 = $this->odtphp->create_pengajuan($document);
 
         $output = preg_replace('/.odt/', '.pdf', $input_filename['full_filename']);
 

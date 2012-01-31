@@ -29,45 +29,20 @@ class Odtphp
         );
     }
 
-    //TODO: Tanda terima pengajuan revisi, parameter sebaiknya diubah menjadi array atau object. Tidak seperti sekarang, Panjang beud
     /**
-     * Tanda terima pengajuan revisi anggaran
+     * Dokumen Tanda terima pengajuan revisi anggaran
      *
-     * @param $tiket
-     * @param $no_surat_usulan
-     * @param $no_tiket
-     * @param $kementrian
-     * @param $eselon
-     * @param $nip
-     * @param $nama
-     * @param $jabatan
-     * @param $hp
-     * @param $tlpkantor
-     * @param $emails Array of Emails
+     * @param $data array
      * @return array
      */
-    public function create_pengajuan($tiket, $no_surat_usulan, $no_tiket, $kementrian, $eselon, $nip, $nama, $jabatan, $hp, $tlpkantor, $emails, $tgl_pengajuan, $tgl_selesai, $kelengkapan_dokumen, $catatan)
+    public function create_pengajuan($data = array())
     {
-        $odf = new odf($this->print_template_path . 'pengajuan.odt');
-
-        $odf->setVars('var1', $no_surat_usulan);
-        $odf->setVars('var2', $no_tiket . '/' . date('Y'));
-        $odf->setVars('var3', $kementrian);
-        $odf->setVars('var4', $eselon);
-        $odf->setVars('var5', $nip);
-        $odf->setVars('var6', $nama);
-        $odf->setVars('var7', $jabatan);
-        $odf->setVars('var8', $hp);
-        $odf->setVars('var9', $tlpkantor);
-
-        $odf->setVars('var11', date('d-m-Y', strtotime($tgl_pengajuan)));
-        $odf->setVars('var12', $tgl_selesai);
-
-        $kelengkapan = ''; $i = 1;
+        // START Kelengkapan Dokumen
+        $kelengkapan = '';
         $kelengkapan_doc = $this->CI->db->query("SELECT * FROM tb_kelengkapan_doc")->result_array();
 
         $temp = array();
-        foreach ($kelengkapan_dokumen as $value) {
+        foreach ($data['kelengkapan_dokumen'] as $value) {
             $temp[] = $value->id_kelengkapan;
         }
 
@@ -82,26 +57,44 @@ class Odtphp
             }
         }
 
-        foreach ($kelengkapan_dokumen as $value) {
+        foreach ($data['kelengkapan_dokumen'] as $value) {
             if ($value->id_kelengkapan == 0 AND $value->kelengkapan != '')
                 $kelengkapan .= "[v] {$value->kelengkapan}\n";
         }
+        // END Kelengkapan Dokumen
 
-
-        $odf->setVars('var13', $kelengkapan);
-        $odf->setVars('var14', $catatan);
-        $odf->setVars('var15', $this->CI->session->userdata('nama'));
-
+        // START Email
         $email = '';
         $i = 1;
-        foreach ($emails as $value) {
+        foreach ($data['emails'] as $value) {
             $email .= "$i. $value\n";
             $i++;
         }
+        // END Email
 
+        // Buka template dokumen
+        $odf = new odf($this->print_template_path . 'pengajuan.odt');
+
+        // Masukkan variable ke dokumen
+        $odf->setVars('var1', $data['no_surat_usulan']);
+        $odf->setVars('var2', sprintf('%05d', $data['no_tiket']) . '/' . date('Y'));
+        $odf->setVars('var3', $data['kementrian']);
+        $odf->setVars('var4', $data['eselon']);
+        $odf->setVars('var5', $data['nip']);
+        $odf->setVars('var6', $data['nama']);
+        $odf->setVars('var7', $data['jabatan']);
+        $odf->setVars('var8', $data['hp']);
+        $odf->setVars('var9', $data['tlpkantor']);
         $odf->setVars('var10', $email);
+        $odf->setVars('var11', date('d-m-Y', strtotime($data['tgl_pengajuan'])));
+        $odf->setVars('var12', date('d-m-Y', strtotime($data['tgl_selesai'])));
+        $odf->setVars('var13', $kelengkapan);
+        $odf->setVars('var14', $data['catatan']);
+        $odf->setVars('var15', $this->CI->session->userdata('nama'));
 
-        $output_filename = 'pengajuan' . $tiket . '.odt';
+
+        // Persiapkan output file
+        $output_filename = 'pengajuan' . $data['tiket'] . '.odt';
 
         $odf->saveToDisk(FCPATH . 'output/' . $output_filename);
 
