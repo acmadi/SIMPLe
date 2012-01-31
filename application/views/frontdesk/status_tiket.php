@@ -34,22 +34,22 @@
                 switch ($value->is_active) {
                     case '1':
 						if($value->keputusan == 'disahkan'){
-							echo 'Disetujui ' . $value->nama_lavel;
+							echo 'Disetujui oleh ' . '<strong>'.$value->nama_lavel.'</strong>';
 						}else{
-							echo 'Diterima ' . $value->nama_lavel;
+							echo 'Diterima oleh ' . '<strong>'.$value->nama_lavel.'</strong>';
 						}
                         break;
                     case '2':
-                        echo 'Diteruskan ke ' . $value->nama_lavel;
+                        echo 'Diteruskan ke ' . '<strong>'.$value->nama_lavel.'</strong>';
                         break;
                     case '3':
-                        echo 'Dikembalikan ' . $value->nama_lavel;
+                        echo 'Dikembalikan oleh ' . '<strong>'.$value->nama_lavel.'</strong>';
                         break;
                     case '4':
-                        echo 'Diterima ' . $value->nama_lavel;
+                        echo 'Diterima oleh ' . '<strong>'.$value->nama_lavel.'</strong>';
                         break;
                     case '5':
-                        echo 'Diteruskan ke ' . $value->nama_lavel;
+                        echo 'Diteruskan ke ' . '<strong>'.$value->nama_lavel.'</strong>';
                         break;
                     default :
                         echo '-';

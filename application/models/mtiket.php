@@ -9,8 +9,61 @@ class Mtiket extends CI_Model
 				       tb_kementrian.id_kementrian, tb_kementrian.nama_kementrian,tbf.keputusan
 				FROM tb_unit tbu, tb_lavel tl, tb_tiket_frontdesk tbf LEFT JOIN tb_satker ts ON ts.id_satker = tbf.id_satker
                 LEFT JOIN tb_kementrian ON tb_kementrian.id_kementrian = tbf.id_kementrian
-				WHERE tbu.id_unit =  tbf.id_unit AND tbu.id_kementrian = tbf.id_kementrian AND tbf.lavel = tl.lavel ORDER BY tbf.status";
+				WHERE tbu.id_unit =  tbf.id_unit AND tbu.id_kementrian = tbf.id_kementrian AND tbf.lavel = tl.lavel ORDER BY tbf.no_tiket_frontdesk DESC";
         $query = $this->db->query($sql);
+		
+		return $query;
+    }
+	
+	public function get_list_tiket_masuk()
+    {	
+		 
+		 $sql = "SELECT tbf.no_tiket_frontdesk,
+						tbf.tanggal,
+						tbu.nama_unit, 
+						tbf.id_satker, 
+						ts.nama_satker,
+						tbf.is_active, 
+						tbf.id_unit, 
+						tbf.status, 
+						tl.nama_lavel,
+						tb_kementrian.id_kementrian, tb_kementrian.nama_kementrian,tbf.keputusan
+				FROM tb_unit tbu, tb_lavel tl, tb_tiket_frontdesk tbf LEFT JOIN tb_satker ts ON ts.id_satker = tbf.id_satker
+                LEFT JOIN tb_kementrian ON tb_kementrian.id_kementrian = tbf.id_kementrian
+				WHERE tbu.id_unit =  tbf.id_unit AND tbu.id_kementrian = tbf.id_kementrian AND tbf.lavel = tl.lavel 
+						AND tbf.tanggal LIKE '%".date('Y-m-d')."%'  AND tbf.petugas_penerima = ?
+				ORDER BY tbf.no_tiket_frontdesk DESC";
+        $query = $this->db->query($sql,array($this->session->userdata('id_user')));
+		
+		return $query;
+    }
+	
+	public function get_list_tiket_selesai()
+    {	
+		 $sql = "SELECT tbf.no_tiket_frontdesk,tbf.tanggal,tbu.nama_unit, tbf.id_satker, ts.nama_satker,
+					   tbf.is_active, tbf.id_unit, tbf.status, tl.nama_lavel,
+				       tb_kementrian.id_kementrian, tb_kementrian.nama_kementrian,tbf.keputusan
+				FROM tb_unit tbu, tb_lavel tl, tb_tiket_frontdesk tbf LEFT JOIN tb_satker ts ON ts.id_satker = tbf.id_satker
+                LEFT JOIN tb_kementrian ON tb_kementrian.id_kementrian = tbf.id_kementrian
+				WHERE tbu.id_unit =  tbf.id_unit AND tbu.id_kementrian = tbf.id_kementrian AND tbf.lavel = tl.lavel 
+				AND tbf.petugas_penerima = ? AND tbf.status = 'close' AND tbf.keputusan = 'disahkan'
+				ORDER BY tbf.no_tiket_frontdesk DESC";
+        $query = $this->db->query($sql,array($this->session->userdata('id_user')));
+		
+		return $query;
+    }
+	
+	public function get_list_tiket_kembali()
+    {	
+		 $sql = "SELECT tbf.no_tiket_frontdesk,tbf.tanggal,tbu.nama_unit, tbf.id_satker, ts.nama_satker,
+					   tbf.is_active, tbf.id_unit, tbf.status, tl.nama_lavel,
+				       tb_kementrian.id_kementrian, tb_kementrian.nama_kementrian,tbf.keputusan
+				FROM tb_unit tbu, tb_lavel tl, tb_tiket_frontdesk tbf LEFT JOIN tb_satker ts ON ts.id_satker = tbf.id_satker
+                LEFT JOIN tb_kementrian ON tb_kementrian.id_kementrian = tbf.id_kementrian
+				WHERE tbu.id_unit =  tbf.id_unit AND tbu.id_kementrian = tbf.id_kementrian AND tbf.lavel = tl.lavel 
+				AND tbf.petugas_penerima = ? AND tbf.status = 'close' AND tbf.keputusan = 'ditolak' AND tbf.is_active = 3
+				ORDER BY tbf.no_tiket_frontdesk DESC";
+        $query = $this->db->query($sql,array($this->session->userdata('id_user')));
 		
 		return $query;
     }
