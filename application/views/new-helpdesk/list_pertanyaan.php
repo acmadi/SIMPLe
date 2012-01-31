@@ -38,9 +38,9 @@
         <legend>Filter </legend>
 		<table>
 		<tr>
-			<td>Berdasarkan status tiket</td>
+			<td><strong>Berdasarkan status tiket</strong></td>
 			<td>&nbsp;&nbsp;</td>
-			<td>Berdasarkan kategori</td>
+			<td><strong>Berdasarkan kategori</strong></td>
 			
 		</tr>
 		<tr>
