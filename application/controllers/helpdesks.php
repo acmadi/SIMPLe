@@ -299,15 +299,17 @@ class Helpdesks extends CI_Controller
 				->join('tb_satker b', 'b.id_satker = a.id_satker', 'left')
 				->join('tb_petugas_satker c', 'a.id_petugas_satket = c.id_petugas_satker', 'left')
 				->join('tb_user d', 'a.id_user = d.id_user', 'left')
+				->join('tb_kat_knowledge_base e', 'a.id_kat_knowledge_base = e.id_kat_knowledge_base', 'left')
 				->order_by('tanggal_selesai DESC')
 				->order_by('prioritas DESC')
 				// ->order_by('status DESC')
 				->get();
-
+		//print_r($this->db->last_query());
 
 		$data['tikets'] = $result;
 
 		$data['title'] = 'List Pertanayaan';
+		$data['list_kategori'] = $this->db->query("SELECT kat_knowledge_base FROM tb_kat_knowledge_base");
 		$data['content'] = 'new-helpdesk/list_pertanyaan';
 		$this->load->view('new-template', $data);
 	}
