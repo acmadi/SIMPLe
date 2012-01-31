@@ -41,8 +41,8 @@ Class Login extends CI_Controller
 						FROM tb_masa_kerja a 
 						JOIN tb_unit_saker b ON a.id_unit_satker = b.id_unit_satker 
 						JOIN tb_lavel c ON a.id_lavel = c.id_lavel
-						WHERE a.id_user = ? AND NOW() >= a.tanggal_mulai  AND
-						NOW() <= a.tanggal_selesai LIMIT 0,1";
+						WHERE a.id_user = ? AND CURDATE() >= a.tanggal_mulai  AND
+						CURDATE() <= a.tanggal_selesai LIMIT 0,1";
                 $result = $this->db->query($sql, array($login_data->id_user));
 				
 				if ($result->num_rows() > 0) {
