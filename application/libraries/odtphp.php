@@ -60,7 +60,7 @@ class Odtphp
         $odf->setVars('var8', $hp);
         $odf->setVars('var9', $tlpkantor);
 
-        $odf->setVars('var11', $tgl_pengajuan);
+        $odf->setVars('var11', date('d-m-Y', strtotime($tgl_pengajuan)));
         $odf->setVars('var12', $tgl_selesai);
 
         $kelengkapan = ''; $i = 1;
@@ -71,6 +71,7 @@ class Odtphp
 
         $odf->setVars('var13', $kelengkapan);
         $odf->setVars('var14', $catatan);
+        $odf->setVars('var15', $this->CI->session->userdata('nama'));
 
         $email = '';
         $i = 1;

@@ -55,6 +55,10 @@
             $(this).select();
         });
 
+        $('.answer-btn').click(function(){
+
+        })
+
     })
 </script>
 
@@ -153,6 +157,7 @@
 
             </tr>
         </table>
+        <!--
         <div style="text-align: center;">
             <a href="<?php echo site_url('helpdesks/eskalasi/' . $this->session->userdata('id_tiket_helpdesk') . '/' . $this->session->userdata('no_tiket_helpdesk')) ?>"
                type="submit"
@@ -162,6 +167,7 @@
                 Eskalasi
             </a>
         </div>
+        -->
 
     </fieldset>
 
@@ -217,15 +223,32 @@
         </div>
     </fieldset>
 
-    <div style="text-align: center;">
-        <a href="<?php echo site_url('helpdesks/eskalasi/' . $this->session->userdata('id_tiket_helpdesk') . '/' . $this->session->userdata('no_tiket_helpdesk')) ?>"
-           type="submit"
-           class="button blue"
-           style="padding: 10px 20px; font-size: 16px;"
-           onclick="return confirm('Anda yakin akan melakukan eskalasi?') ? true : false">
-            Eskalasi
-        </a>
-    </div>
+    <form method="post" action="<?php echo site_url('helpdesks/jawab_langsung') ?>">
+        <input type="hidden" name="no_tiket_helpdesk" value="<?php echo $this->session->userdata('no_tiket_helpdesk') ?>">
+        <input type="hidden" name="id_tiket_helpdesk" value="<?php echo $this->session->userdata('id_tiket_helpdesk') ?>">
+
+        <fieldset>
+            <legend>Jawab</legend>
+            <textarea name="jawaban" style="min-width: 930px; max-width: 930px; height: 100px;" required></textarea>
+        </fieldset>
+
+        <div style="text-align: center;">
+            <a href="<?php echo site_url('helpdesks/eskalasi/' . $this->session->userdata('id_tiket_helpdesk') . '/' . $this->session->userdata('no_tiket_helpdesk')) ?>"
+               type="submit"
+               class="button blue"
+               style="padding: 10px 20px; font-size: 16px;"
+               onclick="return confirm('Anda yakin akan melakukan eskalasi?') ? true : false">
+                Eskalasi
+            </a>
+            <button type="submit"
+               class="button green answer-btn"
+               style="padding: 10px 20px; font-size: 16px;"
+               onclick="return confirm('Anda yakin akan menjawab langsung?') ? true : false" />
+                Jawab Langsung
+            </button>
+        </div>
+
+    </form>
 
 </div>
 

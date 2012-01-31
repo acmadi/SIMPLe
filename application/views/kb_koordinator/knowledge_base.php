@@ -6,22 +6,22 @@
     </p>
 
 
-    <table width="100%">
-        <thead width="100%">
+    <table class="table">
+        <thead>
         <tr>
-            <th class="short">No</th>
+            <th class="no">No</th>
             <th>Pertanyaan</th>
             <th>Jawaban</th>
             <th>Tipe</th>
             <th>Ranah</th>
-            <th>Aksi</th>
+            <th>&nbsp;</th>
         </tr>
         </thead>
-        <tbody width="100%">
+        <tbody>
         <?php $i = 1 ?>
         <?php foreach ($knowledge_base->result() as $value): ?>
         <tr>
-            <td class="short"><?php echo $i++ ?></td>
+            <td><?php echo $i++ ?></td>
             <td><?php echo $value->judul ?></td>
             <td><?php echo $value->jawaban ?></td>
             <td>
@@ -42,9 +42,9 @@
                 }
                 ?>
             </td>
-            <td>
-                <a href="<?php echo site_url('/kb_koordinator/edit/' . $value->id_knowledge_base) ?>" class="button blue-pill">Ubah</a>
-                <a href="<?php echo site_url('/kb_koordinator/delete/' . $value->id_knowledge_base) ?>" class="button gray-pill" onclick="return confirm('Yakin akan menghapus ini?')">Hapus</a>
+            <td class="action">
+                <a href="<?php echo site_url('/kb_koordinator/edit/' . $value->id_knowledge_base) ?>" class="button blue">Ubah</a>
+                <a href="<?php echo site_url('/kb_koordinator/delete/' . $value->id_knowledge_base) ?>" class="button red" onclick="return confirm('Yakin akan menghapus ini?')">Hapus</a>
             </td>
         </tr>
             <?php endforeach ?>
