@@ -64,10 +64,29 @@ class Odtphp
         $odf->setVars('var12', $tgl_selesai);
 
         $kelengkapan = ''; $i = 1;
+        $kelengkapan_doc = $this->CI->db->query("SELECT * FROM tb_kelengkapan_doc")->result_array();
+
+        $temp = array();
         foreach ($kelengkapan_dokumen as $value) {
-            $kelengkapan .= "$i. {$value->nama_kelengkapan}\n";
-            $i++;
+            $temp[] = $value->id_kelengkapan;
         }
+
+        foreach ($kelengkapan_doc as $value) {
+
+            if ($value['id_kelengkapan'] != 0) {
+                if (in_array($value['id_kelengkapan'], $temp)) {
+                    $kelengkapan .= "[v] {$value['nama_kelengkapan']}\n";
+                } else {
+                    $kelengkapan .= "[_] {$value['nama_kelengkapan']}\n";
+                }
+            }
+        }
+
+        foreach ($kelengkapan_dokumen as $value) {
+            if ($value->id_kelengkapan == 0)
+                $kelengkapan .= "[v] {$value->kelengkapan}\n";
+        }
+
 
         $odf->setVars('var13', $kelengkapan);
         $odf->setVars('var14', $catatan);
