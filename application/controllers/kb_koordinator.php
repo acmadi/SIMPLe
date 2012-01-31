@@ -99,4 +99,19 @@ class Kb_koordinator extends CI_Controller
         $this->load->view('new-template', $data);
 
     }
+
+    public function jawaban_cs()
+    {
+        $sql = "SELECT * FROM tb_laporan_helpdesk a
+                JOIN tb_user b ON b.id_user = a.id_user
+                JOIN tb_tiket_helpdesk c ON c.id = a.id_tiket_helpdesk
+                JOIN tb_kat_knowledge_base d ON d.id_kat_knowledge_base = c.id_kat_knowledge_base
+                ";
+        $result = $this->db->query($sql);
+
+        $data['jawaban_cs'] = $result;
+        $data['title'] = 'Tambah Knowledge Baru';
+        $data['content'] = 'kb_koordinator/jawaban_cs';
+        $this->load->view('new-template', $data);
+    }
 }
