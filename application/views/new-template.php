@@ -83,115 +83,11 @@
 
 
             <nav class="grid_12 alpha omega">
-
                 <?php
-                //print_r($this->session->userdata('lavel'));exit;
-                if ($this->session->userdata('id_user')): 
-
-                    if ($this->session->userdata('lavel') == '2') {
-                        $this->session->set_userdata('navbar', 'navbar_supervisor');
-                        $this->load->view('navbar_supervisor');
-                    }
-                    elseif ($this->session->userdata('lavel') == '3') {
-                        $this->session->set_userdata('navbar', 'navbar_pelaksana');
-                        $this->load->view('navbar_pelaksana');
-                    }
-                    elseif ($this->uri->segment(1) == 'kasubdit') {
-                        $this->session->set_userdata('navbar', 'navbar_kasubdit');
-                        $this->load->view('navbar_kasubdit');
-                    }
-                    elseif ($this->uri->segment(1) == 'kasubdit_dadutek') {
-                        $this->session->set_userdata('navbar', 'navbar_dadutek');
-                        $this->load->view('navbar_dadutek');
-                    }
-                    elseif ($this->session->userdata('lavel') == '4') {
-                        $this->session->set_userdata('navbar', 'navbar_kasubdit');
-                        $this->load->view('navbar_direktur');
-                    }
-					elseif ($this->session->userdata('lavel') == '5') {
-                        $this->session->set_userdata('navbar', 'navbar_dadutek');
-                        $this->load->view('navbar_direktur');
-                    }
-					elseif ($this->session->userdata('lavel') == '6') {
-                        $this->session->set_userdata('navbar', 'navbar_direktur');
-                        $this->load->view('navbar_direktur');
-                    }
-                    elseif ($this->session->userdata('lavel') == '7') {
-                        $this->session->set_userdata('navbar', 'navbar_dirjen');
-                        $this->load->view('navbar_dirjen');
-                    }
-					elseif ($this->session->userdata('lavel') == '9') {
-                        $this->session->set_userdata('navbar', 'navbar_admin_pengaduan');
-                        $this->load->view('navbar_admin_pengaduan');
-                    }
-                    elseif ($this->uri->segment(1) == 'helpdesk') {
-                        $this->session->set_userdata('navbar', 'navbar_helpdesk');
-                        $this->load->view('navbar_helpdesk');
-                    }
-                    elseif ($this->uri->segment(1) == 'helpdesks') {
-                        $this->session->set_userdata('navbar', 'navbar_helpdesk');
-                        $this->load->view('navbar_helpdesk');
-                    }
-                    elseif ($this->uri->segment(1) == 'frontdesk') {
-                        $this->session->set_userdata('navbar', 'navbar_frontdesk');
-                        $this->load->view('navbar_frontdesk');
-                    }
-                    elseif ($this->uri->segment(1) == 'csd') {
-                        $this->session->set_userdata('navbar', 'navbar_csd');
-                        $this->load->view('navbar_csd');
-                    }
-                    elseif ($this->uri->segment(1) == 'pengaduan') {
-                        $this->session->set_userdata('navbar', 'navbar_cse');
-                        $this->load->view('navbar_cse');
-                    }
-                    elseif ($this->uri->segment(1) == 'kb_koordinator') {
-                        $this->session->set_userdata('navbar', 'navbar_kb_koordinator');
-                        $this->load->view('navbar_kb_koordinator');
-                    }
-                    elseif ($this->uri->segment(1) == 'kasubdit_dadutek') {
-                        $this->session->set_userdata('navbar', 'navbar_dadutek');
-                        $this->load->view('navbar_dadutek');
-                    }
-                    elseif ($this->uri->segment(1) == 'pelaksana') {
-                        $this->session->set_userdata('navbar', 'navbar_pelaksana');
-                        $this->load->view('navbar_pelaksana');
-                    }
-                    elseif ($this->uri->segment(1) == 'referensi') {
-                        $navbar = $this->session->userdata('navbar');
-                        $this->load->view($navbar);
-                    }
-                    elseif ($this->uri->segment(1) == 'knowledge') {
-                        $navbar = $this->session->userdata('navbar');
-                        $this->load->view($navbar);
-                    }
-                    elseif ($this->uri->segment(1) == 'forum') {
-                        $navbar = $this->session->userdata('navbar');
-                        $this->load->view($navbar);
-                    }
-                    elseif ($this->uri->segment(1) == 'helpdesks') {
-                        $navbar = $this->session->userdata('navbar');
-                        $this->load->view($navbar);
-                    }
-                    elseif ($this->uri->segment(1) == 'frontdesks') {
-                        $navbar = $this->session->userdata('navbar');
-                        $this->load->view($navbar);
-                    }
-                    elseif ($this->uri->segment(1) == 'telpon') {
-                        $navbar = $this->session->userdata('navbar');
-                        $this->load->view($navbar);
-                    }
-                    elseif ($this->uri->segment(1) == 'profiles') {
-                        $navbar = $this->session->userdata('navbar');
-                        $this->load->view($navbar);
-                    }
-                    else {
-                        $this->load->view('navbar_default');
-                    }
-
-                endif;
-                
+                if ($this->session->userdata('id_user')) {
+                    $this->load->view('navbar_' . $this->session->userdata('id_lavel'));
+                }
                 ?>
-
             </nav>
         </div>
     </header>

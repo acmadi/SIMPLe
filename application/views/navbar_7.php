@@ -1,4 +1,6 @@
 <?php
+// Navbar Supervisor/Penyelia
+
 $nav_dashboard = $nav_list_pertanyaan = $nav_knowledge =
 $nav_forum = $nav_report = $nav_telpon = '';
 
