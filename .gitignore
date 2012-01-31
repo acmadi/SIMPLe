@@ -19,3 +19,4 @@ nbproject
 
 # Supaya gak accident commit file ini
 /output/*.odt
+/output/*.pdf
