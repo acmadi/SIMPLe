@@ -72,7 +72,7 @@
                 <div class="profile-menu">
                     <a href="javascript:void(0)"><?php echo $this->session->userdata('nama') ?></a>
                     <ul>
-                        <li><a href="<?php echo site_url('profiles') ?>">Profile</a></li>
+                        <li><a href="<?php echo site_url('profiles') ?>">Profil</a></li>
                         <li><a href="<?php echo site_url('login/process_logout') ?>">Logout</a></li>
                     </ul>
                 </div>
@@ -173,6 +173,14 @@
                         $this->load->view($navbar);
                     }
                     elseif ($this->uri->segment(1) == 'frontdesks') {
+                        $navbar = $this->session->userdata('navbar');
+                        $this->load->view($navbar);
+                    }
+                    elseif ($this->uri->segment(1) == 'telpon') {
+                        $navbar = $this->session->userdata('navbar');
+                        $this->load->view($navbar);
+                    }
+                    elseif ($this->uri->segment(1) == 'profiles') {
                         $navbar = $this->session->userdata('navbar');
                         $this->load->view($navbar);
                     }
