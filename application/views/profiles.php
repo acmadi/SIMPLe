@@ -25,6 +25,16 @@
         <fieldset>
             <legend>Identitas</legend>
             <p>
+                <label> Username </label>
+                <?php echo $profile->username ?>
+            </p>
+
+            <p>
+                <label> Level </label>
+                <?php echo $profile->nama_lavel ?>
+            </p>
+
+            <p>
                 <label> Nama </label>
                 <input type="text" name="nama" value="<?php echo (isset($_POST['submit']) AND $_POST['submit'] == 'profile') ? set_value('nama') : $profile->nama ?>"/>
             </p>

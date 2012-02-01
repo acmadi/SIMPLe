@@ -64,7 +64,12 @@ class Profiles extends CI_Controller
 
         }
 
-        $sql = "SELECT * FROM tb_user WHERE id_user = ?";
+        $sql = "SELECT a.username, a.nama, a.email, a.no_tlp,
+                       b.nama_lavel
+                FROM tb_user a
+                JOIN tb_lavel b ON a.id_lavel = b.id_lavel
+                WHERE a.id_user = ?
+                ";
 
         $result = $this->db->query($sql, array($this->session->userdata('id_user')))->row();
 
