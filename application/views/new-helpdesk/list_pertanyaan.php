@@ -281,6 +281,9 @@
             var jawabannya = $(this).data('jawaban');
             var id = $(this).data('id');
             var cek = $(this).data('cek');
+			
+			//alert()
+			
 			if(cek == 1){
 				$('#jawaban').dialog('open');
 				$('#jawaban').data('id', id);

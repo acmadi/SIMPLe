@@ -1,6 +1,11 @@
 <div class="content">
     <h1>Daftar Knowledge Base</h1>
-
+	<?php
+	if ($this->session->flashdata('success')) {
+        echo notification($this->session->flashdata('success'), 'Success', 'green');
+    }
+	
+	?>
     <p style="text-align: right">
         <a href="<?php echo site_url('/kb_koordinator/add') ?>" class="button blue-pill">Tambah</a>
     </p>
