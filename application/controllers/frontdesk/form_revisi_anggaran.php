@@ -262,8 +262,6 @@ class Form_revisi_anggaran extends CI_Controller
                 ->where('tb_tiket_frontdesk.no_tiket_frontdesk', $no_tiket_frontdesk)
                 ->get();
 
-//        echo $this->db->last_query();
-
         $data['identitas'] = $result->result();
 
         $temp = $result->row();
@@ -280,8 +278,6 @@ class Form_revisi_anggaran extends CI_Controller
 
         $this->log->create("Cetak tanda terima pengajuan revisi anggaran #{$no_tiket_frontdesk}");
 
-        $this->load->library('odtphp');
-
         $input_filename = $this->odtphp->create($no_tiket_frontdesk, 'tanggal', '10:00');
 
         $sql = 'SELECT * FROM tb_kelengkapan_formulir a
@@ -289,9 +285,6 @@ class Form_revisi_anggaran extends CI_Controller
                 WHERE no_tiket_frontdesk = ?
                 ORDER by b.id_kelengkapan';
         $kelengkapan_dokumen = $this->db->query($sql, array($no_tiket_frontdesk))->result();
-
-        $emails = explode(';', trim_middle($data['identitas'][0]->email));
-
 
         $document['tiket'] = $no_tiket_frontdesk;
         $document['no_surat_usulan'] = $data['identitas'][0]->nomor_surat_usulan;
@@ -304,7 +297,7 @@ class Form_revisi_anggaran extends CI_Controller
         $document['jabatan'] = $data['identitas'][0]->jabatan_petugas;
         $document['hp'] = $data['identitas'][0]->no_hp;
         $document['tlpkantor'] = $data['identitas'][0]->no_kantor;
-        $document['emails'] = $emails;
+        $document['emails'] = $data['identitas'][0]->email;
         $document['tgl_pengajuan'] = date('d-m-Y H:i:s');
 
         // Cek apakah sudah lewat jam 12 siang?
