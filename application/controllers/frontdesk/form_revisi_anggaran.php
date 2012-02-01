@@ -262,6 +262,8 @@ class Form_revisi_anggaran extends CI_Controller
                 ->where('tb_tiket_frontdesk.no_tiket_frontdesk', $no_tiket_frontdesk)
                 ->get();
 
+//        echo $this->db->last_query();
+
         $data['identitas'] = $result->result();
 
         $temp = $result->row();
@@ -293,6 +295,7 @@ class Form_revisi_anggaran extends CI_Controller
 
         $document['tiket'] = $no_tiket_frontdesk;
         $document['no_surat_usulan'] = $data['identitas'][0]->nomor_surat_usulan;
+        $document['tanggal_surat_usulan'] = $data['identitas'][0]->tanggal_surat_usulan;
         $document['no_tiket'] = $no_tiket_frontdesk;
         $document['kementrian'] = $data['kementrian']->id_kementrian . ' - ' . $data['kementrian']->nama_kementrian;
         $document['eselon'] = $data['unit']->id_unit . ' - ' . $data['unit']->nama_unit;
@@ -303,7 +306,20 @@ class Form_revisi_anggaran extends CI_Controller
         $document['tlpkantor'] = $data['identitas'][0]->no_kantor;
         $document['emails'] = $emails;
         $document['tgl_pengajuan'] = date('d-m-Y H:i:s');
-        $document['tgl_selesai'] = date('d-m-Y H:i:s', strtotime('+7 days'));
+
+        //FIXME: Masih salah!!
+        $hari_selesai = 0;
+        $now = date('Y-m-d H:i:s');
+        if (strtotime('H:i') > strtotime('12:00')) {
+            $hari_selesai = hari_kerja($now, strtotime('+5 days'));
+            echo 'lwt';
+        } else {
+            $hari_selesai = hari_kerja($now, strtotime('+5 days'));
+            echo 'gak';
+        }
+        echo $hari_selesai;
+
+        $document['tgl_selesai'] = $hari_selesai;
         $document['kelengkapan_dokumen'] = $kelengkapan_dokumen;
         $document['catatan'] = $data['identitas'][0]->catatan;
 

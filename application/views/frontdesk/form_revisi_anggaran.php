@@ -190,7 +190,7 @@
         </div>
         <div style="float: right; margin-left: 20px; width:400px">
             <label class="align-right" style="width: 150px">Tanggal Surat Usulan</label>
-            <input type="text" id="tanggal_surat_usulan" name="tanggal_surat_usulan" value="<?php echo set_value('tanggal_surat_usulan') ?>"/>
+            <input type="text" id="tanggal_surat_usulan" name="tanggal_surat_usulan" value="<?php echo set_value('tanggal_surat_usulan') ?>" autocomplete="off" />
         </div>
 
         
