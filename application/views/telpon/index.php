@@ -1,4 +1,9 @@
 <div class="content">
+
+    <h1>Daftar Telpon</h1>
+
+    <?php if ($telpon->num_rows() > 0): ?>
+
     <table class="table">
         <thead>
         <tr>
@@ -27,4 +32,11 @@
         <?php endforeach; ?>
         </tbody>
     </table>
+
+    <?php else: ?>
+
+    <div class="notification yellow">Tidak ada data telpon ditemukan</div>
+
+    <?php endif; ?>
+
 </div>
