@@ -90,12 +90,12 @@ class Odtphp
         $odf->setVars('var8', $data['hp']);
         $odf->setVars('var9', $data['tlpkantor']);
         $odf->setVars('var10', $email);
-        $odf->setVars('var11', strftime('%d %B %Y', strtotime($data['tgl_pengajuan'])));
-        //$odf->setVars('var12', strftime('%d %B %Y', strtotime($data['tgl_selesai'])));
-        $odf->setVars('var12', strftime('%d %B %Y', strtotime('+7 days')));
+        $odf->setVars('var11', strftime('%d-%m-%Y %H:%M', strtotime($data['tgl_pengajuan'])));
+        $odf->setVars('var12', strftime('%d-%m-%Y %H:%M', strtotime($data['tgl_selesai'])));
         $odf->setVars('var13', $kelengkapan);
         $odf->setVars('var14', $data['catatan']);
         $odf->setVars('var15', $this->CI->session->userdata('nama'));
+        $odf->setVars('tanggal_sekarang', strftime('%d %B %Y'));
 
 
         // Persiapkan output file

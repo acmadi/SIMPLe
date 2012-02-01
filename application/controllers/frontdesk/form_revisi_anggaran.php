@@ -307,19 +307,19 @@ class Form_revisi_anggaran extends CI_Controller
         $document['emails'] = $emails;
         $document['tgl_pengajuan'] = date('d-m-Y H:i:s');
 
-        //FIXME: Masih salah!!
-        $hari_selesai = 0;
-        $now = date('Y-m-d H:i:s');
-        if (strtotime('H:i') > strtotime('12:00')) {
-            $hari_selesai = hari_kerja($now, strtotime('+5 days'));
-            echo 'lwt';
+        // Cek apakah sudah lewat jam 12 siang?
+        $tanggal_mulai = $data['identitas'][0]->tanggal;
+        if (date('H', strtotime($tanggal_mulai)) >= 12) {
+            $selesai = date('Y-m-d H:i:s', strtotime('+8 days'));
+            $jumlah_hari_kerja = hari_kerja($tanggal_mulai, $selesai);
         } else {
-            $hari_selesai = hari_kerja($now, strtotime('+5 days'));
-            echo 'gak';
+            $selesai = date('Y-m-d H:i:s', strtotime('+7 days'));
+            $jumlah_hari_kerja = hari_kerja($tanggal_mulai, $selesai);
         }
-        echo $hari_selesai;
+        $jumlah_hari_kerja = '+' . $jumlah_hari_kerja . ' days';
+        $tanggal_selesai = date('Y-m-d H:i:s', strtotime($jumlah_hari_kerja));
 
-        $document['tgl_selesai'] = $hari_selesai;
+        $document['tgl_selesai'] = $tanggal_selesai;
         $document['kelengkapan_dokumen'] = $kelengkapan_dokumen;
         $document['catatan'] = $data['identitas'][0]->catatan;
 
