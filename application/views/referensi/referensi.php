@@ -1,6 +1,8 @@
 <div class="content">
     <h1>Referensi Peraturan</h1>
-    <br/>
+
+    <?php if ($referensi->num_rows() > 0): ?>
+
     <table class="table">
         <thead>
         <tr>
@@ -36,4 +38,11 @@
             <?php endforeach ?>
         </tbody>
     </table>
+
+    <?php else: ?>
+
+    <div class="notification yellow">Tidak ada data referensi peraturan</div>
+
+    <?php endif; ?>
+
 </div>
