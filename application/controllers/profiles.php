@@ -12,6 +12,7 @@ class Profiles extends CI_Controller
         $this->form_validation->set_message('numeric', '<strong>%s</strong> harus berupa angka');
         $this->form_validation->set_message('matches', 'Password tidak sama');
         $this->form_validation->set_message('min_length', 'Jumlah karakter %s minimal %s');
+        $this->form_validation->set_message('alphanumeric', '%s harus kombinasi huruf dan angka'); // Callback
 
     }
 
@@ -44,7 +45,7 @@ class Profiles extends CI_Controller
 
         if ($this->input->post('submit') == 'password') {
 
-            $this->form_validation->set_rules('password', 'Password', 'required|trim|matches[password2]|min_length[6]|md5');
+            $this->form_validation->set_rules('password', 'Password', 'callback_alphanumeric|required|trim|matches[password2]|min_length[6]|md5');
             $this->form_validation->set_rules('password2', 'Ulangi Password', 'required|trim|email');
 
             if ($this->form_validation->run() == TRUE) {
@@ -72,5 +73,22 @@ class Profiles extends CI_Controller
         $data['title'] = 'Profil';
         $data['content'] = 'profiles';
         $this->load->view('new-template', $data);
+    }
+
+    /**
+     * Callback untuk mengecek password harus kombinasi huruf dan angka
+     * NOTE: Special character tidak bisa
+     *
+     * @param $string
+     * @return bool
+     */
+    function alphanumeric($string) {
+        // $regex = '/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$/';
+        $pattern = '/^\w*(?=\w*\d)(?=\w*[a-z])\w*$/i'; // Regex harus minimum 1 huruf + 1 angka
+        $regex = preg_match($pattern, $string);
+        if ($regex)
+            return TRUE;
+        else
+            return FALSE;
     }
 }
