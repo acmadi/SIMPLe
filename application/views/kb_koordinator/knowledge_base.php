@@ -7,7 +7,7 @@
 	
 	?>
     <p style="text-align: right">
-        <a href="<?php echo site_url('/kb_koordinator/add') ?>" class="button blue-pill">Tambah</a>
+        <a href="<?php echo site_url('/kb_koordinator/add') ?>" class="button green">Tambah</a>
     </p>
 
 
@@ -15,8 +15,9 @@
         <thead>
         <tr>
             <th class="no">No</th>
-            <th>Pertanyaan</th>
-            <th>Jawaban</th>
+            <th class="medium">Topik</th>
+            <th class="medium">Pertanyaan</th>
+            <th class="medium">Jawaban</th>
             <th>Tipe</th>
             <th>Ranah</th>
             <th>&nbsp;</th>
@@ -28,6 +29,7 @@
         <tr>
             <td><?php echo $i++ ?></td>
             <td><?php echo $value->judul ?></td>
+            <td><?php echo $value->desripsi ?></td>
             <td><?php echo $value->jawaban ?></td>
             <td>
                 <?php
