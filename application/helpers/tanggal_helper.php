@@ -47,7 +47,10 @@ function hari_kerja($startDate, $endDate = '', $holidays = array())
     }
 
     $startDate = date('Y-m-d', strtotime($startDate));
-    $endDate = date('Y-m-d');
+    if ($endDate == '')
+        $endDate = date('Y-m-d');
+    else
+        $endDate = date('Y-m-d', strtotime($endDate));
 
     // do strtotime calculations just once
     $endDate = strtotime($endDate);

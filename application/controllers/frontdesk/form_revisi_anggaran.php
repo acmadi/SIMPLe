@@ -297,8 +297,8 @@ class Form_revisi_anggaran extends CI_Controller
         $document['no_surat_usulan'] = $data['identitas'][0]->nomor_surat_usulan;
         $document['tanggal_surat_usulan'] = $data['identitas'][0]->tanggal_surat_usulan;
         $document['no_tiket'] = $no_tiket_frontdesk;
-        $document['kementrian'] = $data['kementrian']->id_kementrian . ' - ' . $data['kementrian']->nama_kementrian;
-        $document['eselon'] = $data['unit']->id_unit . ' - ' . $data['unit']->nama_unit;
+        $document['kementrian'] = $data['kementrian']->nama_kementrian;
+        $document['eselon'] = $data['unit']->nama_unit;
         $document['nip'] = $data['identitas'][0]->nip;
         $document['nama'] = $data['identitas'][0]->nama_petugas;
         $document['jabatan'] = $data['identitas'][0]->jabatan_petugas;
@@ -307,19 +307,19 @@ class Form_revisi_anggaran extends CI_Controller
         $document['emails'] = $emails;
         $document['tgl_pengajuan'] = date('d-m-Y H:i:s');
 
-        //FIXME: Masih salah!!
-        $hari_selesai = 0;
-        $now = date('Y-m-d H:i:s');
-        if (strtotime('H:i') > strtotime('12:00')) {
-            $hari_selesai = hari_kerja($now, strtotime('+5 days'));
-            echo 'lwt';
+        // Cek apakah sudah lewat jam 12 siang?
+        $tanggal_mulai = $data['identitas'][0]->tanggal;
+        if (date('H', strtotime($tanggal_mulai)) >= 12) {
+            $selesai = date('Y-m-d H:i:s', strtotime('+8 days'));
+            $jumlah_hari_kerja = hari_kerja($tanggal_mulai, $selesai);
         } else {
-            $hari_selesai = hari_kerja($now, strtotime('+5 days'));
-            echo 'gak';
+            $selesai = date('Y-m-d H:i:s', strtotime('+7 days'));
+            $jumlah_hari_kerja = hari_kerja($tanggal_mulai, $selesai);
         }
-        echo $hari_selesai;
+        $jumlah_hari_kerja = '+' . $jumlah_hari_kerja . ' days';
+        $tanggal_selesai = date('Y-m-d H:i:s', strtotime($jumlah_hari_kerja));
 
-        $document['tgl_selesai'] = $hari_selesai;
+        $document['tgl_selesai'] = $tanggal_selesai;
         $document['kelengkapan_dokumen'] = $kelengkapan_dokumen;
         $document['catatan'] = $data['identitas'][0]->catatan;
 

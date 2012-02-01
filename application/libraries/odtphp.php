@@ -1,5 +1,8 @@
 <?php
 require_once(FCPATH . 'library/odtphp/odf.php');
+// Set Locale
+setlocale(LC_ALL, 'id_ID.UTF8', 'id_ID.UTF-8', 'id_ID.8859-1', 'id_ID', 'IND.UTF8', 'IND.UTF-8', 'IND.8859-1', 'IND', 'Indonesian.UTF8', 'Indonesian.UTF-8', 'Indonesian.8859-1', 'Indonesian', 'Indonesia', 'id', 'ID', 'en_US.UTF8', 'en_US.UTF-8', 'en_US.8859-1', 'en_US', 'American', 'ENG', 'English');
+
 class Odtphp
 {
     public $CI;
@@ -72,9 +75,6 @@ class Odtphp
         }
         // END Email
 
-        // Set Locale
-        setlocale(LC_ALL, 'id_ID.UTF8', 'id_ID.UTF-8', 'id_ID.8859-1', 'id_ID', 'IND.UTF8', 'IND.UTF-8', 'IND.8859-1', 'IND', 'Indonesian.UTF8', 'Indonesian.UTF-8', 'Indonesian.8859-1', 'Indonesian', 'Indonesia', 'id', 'ID', 'en_US.UTF8', 'en_US.UTF-8', 'en_US.8859-1', 'en_US', 'American', 'ENG', 'English');
-
         // Buka template dokumen
         $odf = new odf($this->print_template_path . 'pengajuan.odt');
 
@@ -90,12 +90,12 @@ class Odtphp
         $odf->setVars('var8', $data['hp']);
         $odf->setVars('var9', $data['tlpkantor']);
         $odf->setVars('var10', $email);
-        $odf->setVars('var11', strftime('%d %B %Y', strtotime($data['tgl_pengajuan'])));
-        //$odf->setVars('var12', strftime('%d %B %Y', strtotime($data['tgl_selesai'])));
-        $odf->setVars('var12', strftime('%d %B %Y', strtotime('+7 days')));
+        $odf->setVars('var11', strftime('%d-%m-%Y %H:%M', strtotime($data['tgl_pengajuan'])));
+        $odf->setVars('var12', strftime('%d-%m-%Y %H:%M', strtotime($data['tgl_selesai'])));
         $odf->setVars('var13', $kelengkapan);
         $odf->setVars('var14', $data['catatan']);
         $odf->setVars('var15', $this->CI->session->userdata('nama'));
+        $odf->setVars('tanggal_sekarang', strftime('%d %B %Y'));
 
 
         // Persiapkan output file
@@ -165,13 +165,19 @@ class Odtphp
     {
         $odf = new odf($this->print_template_path . 'kembali.odt');
 
-        $odf->setVars('var1', $data->id_kementrian . ' - ' . $data->nama_kementrian);
-        $odf->setVars('var2', $data->id_unit . ' - ' . $data->id_kementrian);
-        $odf->setVars('var3', $data->nip);
-        $odf->setVars('var4', $data->nama_petugas);
-        $odf->setVars('var5', $data->jabatan_petugas);
-        $odf->setVars('var6', $data->no_hp);
-        $odf->setVars('var7', $data->no_kantor);
+        $odf->setVars('nomor_tiket', sprintf('%05d', $data->no_tiket_frontdesk) . '/' . strftime('%Y', strtotime($data->tanggal)));
+        $odf->setVars('tanggal_diterima', strftime('%d-%m-%Y %H:%M', strtotime($data->tanggal)));
+        $odf->setVars('tanggal_dikembalikan', strftime('%d-%m-%Y %H:%M'));
+        $odf->setVars('nomor_surat_usulan', $data->nomor_surat_usulan);
+        $odf->setVars('tanggal_surat_usulan', strftime('%d %B %Y', strtotime($data->tanggal_surat_usulan)));
+        $odf->setVars('nama_kl', $data->nama_kementrian);
+        $odf->setVars('nama_unit', $data->nama_unit);
+        $odf->setVars('nip', $data->nip);
+        $odf->setVars('nama_petugas', $data->nama_petugas);
+        $odf->setVars('jabatan', $data->jabatan_petugas);
+        $odf->setVars('no_hp', $data->no_hp);
+        $odf->setVars('tlp_kantor', $data->no_kantor);
+        $odf->setVars('tanggal_sekarang', strftime('%d %B %Y'));
 
         $emails = explode(';', trim_middle($data->email));
         $email = '';
@@ -180,10 +186,10 @@ class Odtphp
             $email .= "$i. $value\n";
             $i++;
         }
-        $odf->setVars('var8', $email);
+        $odf->setVars('email', $email);
 
 
-        $odf->setVars('var9', $data->catatan);
+        $odf->setVars('catatan_pengembalian_dokumen', $data->catatan);
 
 
         $output_filename = 'kembali_' . $data->no_tiket_frontdesk . '.odt';
