@@ -14,7 +14,9 @@ class Knowledge extends CI_Controller
     {
 		$result = $this->db->query("SELECT * FROM tb_knowledge_base a 
 									JOIN tb_kat_knowledge_base b 
-									ON a.id_kat_knowledge_base = b.id_kat_knowledge_base");
+									ON a.id_kat_knowledge_base = b.id_kat_knowledge_base
+									WHERE a.is_public = 1
+									");
 
 
 		$data['knowledgebase'] = $result;

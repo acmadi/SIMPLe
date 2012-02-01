@@ -224,6 +224,7 @@ class Helpdesks extends CI_Controller
 					'no_tiket_helpdesk' => $no_tiket_helpdesk_terakhir,
 					'id_petugas_satket' => $id_petugas_satker,
 					'tanggal'           => date('Y-m-d H:i:s'),
+					'id_user_cs'        => $this->session->userdata('id_user'),
 				));
 
 				// Simpan ID tiket helpdesk

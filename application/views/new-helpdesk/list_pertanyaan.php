@@ -33,6 +33,8 @@
         echo $this->session->flashdata('success');
         echo '</div>';
     endif;
+	
+	$user = $this->session->userdata('id_user');
     ?>
     <fieldset>
         <legend>Filter </legend>
@@ -167,11 +169,13 @@
             <!-- Status -->
             <td>
                 <?php 
+				$cek = (($user == $value->id_user_cs) AND ($value->tanggal_selesai != NULL))?'1':'2';
                 $color = ($value->status == 'open') ? 'yellow' : 'grey'; ?>
                     <a class="referensi-jawaban button <?php echo $color ?>"
                        data-id='<?php echo $value->id ?>'
                        data-pertanyaan='<?php echo ascii_to_entities($value->pertanyaan) ?>'
                        data-jawaban='<?php echo ascii_to_entities($value->jawab) ?>'
+                       data-cek='<?php echo ascii_to_entities($cek) ?>'
                        href='javascript:void(0)'><?php echo strtoupper($value->status) ?></a>
             </td>
 
@@ -182,6 +186,7 @@
                        data-id='<?php echo $value->id ?>'
                        data-pertanyaan='<?php echo ascii_to_entities($value->pertanyaan) ?>'
                        data-jawaban='<?php echo ascii_to_entities($value->jawab) ?>'
+					   data-cek='<?php echo ascii_to_entities($cek) ?>'
                        href='javascript:void(0)'>
                     <span class="text green">
                         Jawaban
@@ -209,9 +214,16 @@
     <p id="jawabannya"></p>
 </div>
 
+<div style="display: none" id="jawaban_default" data-id="">
+    <h1 id="pertanyaan_def"></h1>
+
+    <p id="jawabannya_def"></p>
+</div>
+
 <script type="text/javascript">
     $(function () {
         $('#jawaban').dialog('destroy');
+        $('#jawaban_default').dialog('destroy');
 
         $('#jawaban').dialog({
             autoOpen:false,
@@ -244,15 +256,45 @@
                 }
             ]
         });
+		
+		$('#jawaban_default').dialog({
+            autoOpen:false,
+            title:'Referensi Jawaban',
+            modal:true,
+            resizable:false,
+            draggable:false,
+            width:700,
+            height:400,
+            dialogClass:'centered-dialog',
+            buttons:[
+                {
+                    text:'Batal',
+                    click:function () {
+                        $(this).dialog('close');
+                    }
+                }
+            ]
+        });
 
         $('.referensi-jawaban').live('click', function () {
             var title = $(this).data('pertanyaan');
             var jawabannya = $(this).data('jawaban');
             var id = $(this).data('id');
-            $('#jawaban').dialog('open');
-            $('#pertanyaan').html(title);
-            $('#jawabannya').html(jawabannya);
-            $('#jawaban').data('id', id);
+            var cek = $(this).data('cek');
+			if(cek == 1){
+				$('#jawaban').dialog('open');
+				$('#jawaban').data('id', id);
+				$('#pertanyaan').html(title);
+				$('#jawabannya').html(jawabannya);
+			}else{
+				$('#jawaban_default').dialog('open');
+				$('#pertanyaan_def').html(title);
+				$('#jawabannya_def').html(jawabannya);
+				$('#jawaban_default').data('id', id);
+			}
+			
+           
+            
         });
     })
 </script>
