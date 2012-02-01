@@ -68,7 +68,7 @@ class Referensi extends CI_Controller
     {
         if (isset($_POST)) {
 
-            $this->form_validation->set_rules('nama_ref', 'Nama Referensi', 'required');
+            $this->form_validation->set_rules('nama_ref', 'Nama Referensi', 'required|trim');
 
             if ($this->form_validation->run()) {
                 //SEKRETARIAT JENDERAL
@@ -109,7 +109,7 @@ class Referensi extends CI_Controller
         if (isset($_POST)) {
 
             // $this->form_validation->set_rules('id_referensi', 'Kode Referensi', 'required|numeric|min_length[11]|max_length[11]');
-            $this->form_validation->set_rules('nama_ref', 'Nama Referensi', 'required');
+            $this->form_validation->set_rules('nama_ref', 'Nama Referensi', 'required|trim');
 			 // $this->form_validation->set_rules('file', 'File', 'required');
 			  $this->form_validation->set_rules('id_referensi_kat', 'Kode Referensi Kategori', 'required');
 
