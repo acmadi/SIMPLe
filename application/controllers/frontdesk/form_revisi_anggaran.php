@@ -297,8 +297,8 @@ class Form_revisi_anggaran extends CI_Controller
         $document['no_surat_usulan'] = $data['identitas'][0]->nomor_surat_usulan;
         $document['tanggal_surat_usulan'] = $data['identitas'][0]->tanggal_surat_usulan;
         $document['no_tiket'] = $no_tiket_frontdesk;
-        $document['kementrian'] = $data['kementrian']->id_kementrian . ' - ' . $data['kementrian']->nama_kementrian;
-        $document['eselon'] = $data['unit']->id_unit . ' - ' . $data['unit']->nama_unit;
+        $document['kementrian'] = $data['kementrian']->nama_kementrian;
+        $document['eselon'] = $data['unit']->nama_unit;
         $document['nip'] = $data['identitas'][0]->nip;
         $document['nama'] = $data['identitas'][0]->nama_petugas;
         $document['jabatan'] = $data['identitas'][0]->jabatan_petugas;
