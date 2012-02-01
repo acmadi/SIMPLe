@@ -18,7 +18,7 @@
     ?>
 	
 	<fieldset style="float:left;width:98%;">
-    <form method="post" action="<?php echo site_url('/kb_koordinator/edit/' . $this->uri->segment('3')) ?>">
+    <form method="post" enctype="multipart/form-data" action="<?php echo site_url('/kb_koordinator/edit/' . $this->uri->segment('3')) ?>">
         <p>
             <label class="aligned">Kategori</label>
             <select name="id_kat_knowledge_base">
@@ -58,14 +58,24 @@
         <p>
             <label class="aligned">Tipe</label>
             <select name="tipe">
-                <option>Permanent</option>
-                <option>Workaround</option>
+				<?php if ($kb->tipe): ?>
+                <option value="0">Permanent</option>
+                <option value="1" selected>Workaround</option>
+                <?php else: ?>
+                <option value="0" selected>Permanent</option>
+                <option value="1">Workaround</option>
+                <?php endif ?>
             </select>
+        </p>
+		
+		<p>
+            <label class="aligned">Topik</label>
+            <input type="text" name="topik" value="<?php echo $kb->judul ?>"/>
         </p>
 	
         <p>
             <label class="aligned">Pertanyaan</label>
-            <input type="text" name="judul" value="<?php echo $kb->judul ?>"/>
+            <input type="text" name="judul" value="<?php echo $kb->desripsi ?>"/>
         </p>
 
         <p>
@@ -75,7 +85,13 @@
 
         <p>
             <label class="aligned">Bukti File</label>
-            <input type="file" name="bukti_file"/>
+            <input type="file" name="bukti_file"/>&nbsp;
+			<?php 
+				if($kb->bukti_file):
+			?><span class="button red"><?php echo $kb->bukti_file;?></span>
+				<?php
+				endif;
+				?>
         </p>
 
         <p>

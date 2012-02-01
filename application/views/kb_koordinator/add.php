@@ -4,22 +4,23 @@
     <?php
     $errors = validation_errors();
     if (!empty($errors)) {
-        echo '<div class="error">' . validation_errors() . '</div>';
+		echo notification(validation_errors(), 'Error', 'red');
     }
     ?>
 
     <?php
     if ($this->session->flashdata('success')) {
-        echo '<div class="success">' . $this->session->flashdata('success') . '</div>';
+        echo notification($this->session->flashdata('success'), 'Success', 'green');
     }
     if ($this->session->flashdata('error')) {
-        echo '<div class="error">' . $this->session->flashdata('error') . '</div>';
+		echo notification($this->session->flashdata('error'), 'Error', 'red');
     }
     ?>
-
-    <form method="post" action="<?php echo site_url('/kb_koordinator/add/') ?>">
+	
+	<fieldset style="float:left;width:98%;">
+    <form method="post" enctype="multipart/form-data" action="<?php echo site_url('/kb_koordinator/add/') ?>" >
         <p>
-            <label>Kategori</label>
+            <label class="aligned">Kategori</label>
             <select name="id_kat_knowledge_base">
 
                 <?php foreach ($categories->result() as $value): ?>
@@ -34,19 +35,20 @@
         </p>
 
         <p>
-            <label>Nama Nara Sumber</label>
-            <input type="text" name="nama_narasumber" value="<?php echo set_value('nama_narasumber') ?>"/>
+            <label class="aligned">Nama Nara Sumber</label>
+			<input type="text" name="narasumber" value="<?php echo set_value('narasumber') ?>"/>
+            <!--input type="text" name="nama_narasumber" value="<?php echo set_value('narasmbr') ?>"/-->
         </p>
 
         <p>
-            <label>Jabatan Nara Sumber</label>
+            <label class="aligned">Jabatan Nara Sumber</label>
             <input type="text" name="jabatan_narasumber" value="<?php echo set_value('jabatan_narasumber') ?>"/>
         </p>
 
         <p>
-            <label>Ranah</label>
+            <label class="aligned">Ranah</label>
             <select name="is_public">
-                <?php if ($row->is_public): ?>
+                <?php if ($is_public == 1): ?>
                 <option value="0">Privat</option>
                 <option value="1" selected>Publik</option>
                 <?php else: ?>
@@ -57,32 +59,43 @@
         </p>
         
         <p>
-            <label>Tipe</label>
+            <label class="aligned">Tipe</label>
             <select name="tipe">
-                <option>Permanent</option>
-                <option>Workaround</option>
+				<?php if ($tipe == 1): ?>
+                <option value="0">Permanent</option>
+                <option value="1" selected>Workaround</option>
+                <?php else: ?>
+                <option value="0" selected>Permanent</option>
+                <option value="1">Workaround</option>
+                <?php endif ?>
             </select>
         </p>
 
         <p>
-            <label>Pertanyaan</label>
+            <label class="aligned">Topik</label>
+            <input type="text" name="topik" value="<?php echo set_value('topik') ?>"/>
+        </p>
+		
+		<p>
+            <label class="aligned">Pertanyaan</label>
             <input type="text" name="judul" value="<?php echo set_value('judul') ?>"/>
         </p>
 
         <p>
-            <label>Jawaban</label><br/>
-            <textarea name="jawaban" cols="70" rows="10"><?php set_value('jawaban') ?></textarea>
+            <label class="aligned">Jawaban</label>
+            <textarea name="jawaban" style="width: 60%; min-height: 70px;"><?php echo (isset($jawaban)?$jawaban:'');?></textarea>
         </p>
 
         <p>
-            <label>Bukti File</label>
+            <label class="aligned">Bukti File</label>
             <input type="file" name="bukti_file"/>
         </p>
 
         <p>
-            <input type="submit" class="button blue-pill" value="Simpan"/>
-            <a href="<?php echo site_url('/kb_koordinator/knowledge_base') ?>" class="button gray-pill">Kembali</a>
+            <input type="submit" class="button green" value="Simpan"/>
+            <a href="<?php echo site_url('/kb_koordinator/knowledge_base') ?>" class="button">Kembali</a>
         </p>
 
     </form>
+	</fieldset>
 </div>
