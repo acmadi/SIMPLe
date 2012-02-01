@@ -11,6 +11,16 @@
 |
 */
 
+$config['benchmarks'] = FALSE;
+$config['config'] = FALSE;
+$config['controller_info'] = TRUE;
+$config['get'] = TRUE;
+$config['http_headers'] = FALSE;
+$config['memory_usage'] = FALSE;
+$config['post'] = TRUE;
+$config['queries'] = TRUE;
+$config['uri_string'] = TRUE;
+$config['query_toggle_count'] = 25;
 
 /* End of file profiler.php */
 /* Location: ./application/config/profiler.php */
