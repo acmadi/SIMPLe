@@ -22,6 +22,7 @@ class Knowledge extends CI_Controller
 		$data['knowledgebase'] = $result;
 
 		$data['title'] = 'List Pertanayaan';
+		$data['list_kategori'] = $this->db->query("SELECT kat_knowledge_base FROM tb_kat_knowledge_base");
 		$data['content'] = 'knowledge/knowledge_base';
 		$this->load->view('new-template', $data);
 		
