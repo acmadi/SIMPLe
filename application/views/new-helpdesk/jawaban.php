@@ -157,17 +157,23 @@
 
             </tr>
         </table>
-        <!--
+       
         <div style="text-align: center;">
             <a href="<?php echo site_url('helpdesks/eskalasi/' . $this->session->userdata('id_tiket_helpdesk') . '/' . $this->session->userdata('no_tiket_helpdesk')) ?>"
                type="submit"
                class="button blue"
-               style="padding: 10px 20px; font-size: 16px;"
+               style="padding: 10px 20px; font-size: 10px;"
                onclick="return confirm('Anda yakin akan melakukan eskalasi?') ? true : false">
                 Eskalasi
             </a>
+			<button type="submit"
+               class="button green answer-btn"
+               style="padding: 10px 20px; font-size: 10px;"
+               onclick="return confirm('Anda yakin akan menjawab langsung?') ? true : false" />
+                Jawab Langsung
+            </button>
         </div>
-        -->
+        
 
     </fieldset>
 

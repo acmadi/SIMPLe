@@ -147,7 +147,7 @@
 
         <p>
             <label class="aligned">E-mail </label>
-            <input type="email" name="email" size="30" value="<?php echo set_value('email') ?>">
+            <input type="text" name="email" size="30" value="<?php echo set_value('email') ?>">
         </p>
     </fieldset>
 
@@ -194,7 +194,7 @@
 
         <p>
             <label class="aligned">E-mail</label>
-            <input type="email" id="email" name="umum_email" size="30" value="<?php echo set_value('email') ?>">
+            <input type="text" id="email" name="umum_email" size="30" value="<?php echo set_value('email') ?>">
 			<?php echo form_error('umum_email', '<div class="error">', '</div>'); ?>
         </p>
     </fieldset>

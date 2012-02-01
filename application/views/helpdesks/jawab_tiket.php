@@ -98,6 +98,7 @@
             <legend>Jawaban</legend>
             <?php echo form_error('nama_narasumber', '<div class="notification red">', '</div>'); ?>
             <?php echo form_error('jawaban'        , '<div class="notification red">', '</div>'); ?>
+            <?php echo form_error('jabatan'        , '<div class="notification red">', '</div>'); ?>
             <div class="grid_6">
             <p>
                 <label>
@@ -109,12 +110,12 @@
             <div class="grid_5">
             <p>
                 <label style="display: inline-block; width: 100px;">Nama Nara Sumber: </label>
-                <span><input name="nama_narasumber" type="text"/></span>
+                <span><input name="nama_narasumber" type="text" value=""/></span>
             </p>
 
             <p>
                 <label style="display: inline-block; width: 100px;">Jabatan</label>
-                <span><input name="jabatan" type="text"/></span>
+                <span><input name="jabatan" type="text" value=""/></span>
             </p>
 
             <p>
