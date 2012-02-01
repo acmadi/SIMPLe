@@ -22,34 +22,27 @@ class Ambil_dokumen extends CI_Controller
 
     function cetak($no_tiket_frontdesk)
     {
-		$this->db->query("INSERT tb_pengembalian_doc(no_tiket_frontdesk, id_user, sudah_diambil, tanggal)
-						  VALUES(?,?,1,NOW())",array($no_tiket_frontdesk,$this->session->userdata('id_user')));
-        $result = $this->db->from('tb_tiket_frontdesk a')
-                ->join('tb_kementrian b', 'b.id_kementrian = a.id_kementrian')
-                ->join('tb_unit c', 'c.id_unit = a.id_unit')
-                ->join('tb_petugas_satker d', 'd.id_petugas_satker = a.id_petugas_satker')
-                ->where('no_tiket_frontdesk', $no_tiket_frontdesk)
-                ->get();
+        // Masukkan data ke pengembalian dokumen
+		$sql = "INSERT tb_pengembalian_doc
+		        (no_tiket_frontdesk, id_user, sudah_diambil, tanggal)
+                VALUES ( ?, ?, 1, NOW() )";
 
-        $row = $result->row();
+        $this->db->query($sql, array($no_tiket_frontdesk, $this->session->userdata('id_user')));
 
-        $this->load->library('odtphp');
+        // Persiapan Membuat pengembalian dokumen -> pdf
+        $sql = "SELECT *
 
-        $input_filename = $this->odtphp->create_ambil(
-            $row->nomor_surat_usulan,
-            $no_tiket_frontdesk,
-            $this->session->userdata('id_user'),
-            $this->session->userdata('nama'),
-                $row->id_kementrian . ' - ' . $row->nama_kementrian,
-                $row->id_unit . ' - ' . $row->nama_unit,
-            $row->nip,
-            $row->nama_petugas,
-            $row->jabatan_petugas,
-            $row->no_hp,
-            $row->no_kantor,
-            $row->tanggal,
-            $this->session->userdata('nama')
-        );
+                FROM tb_tiket_frontdesk a
+                JOIN tb_kementrian b     ON b.id_kementrian = a.id_kementrian
+                JOIN tb_unit c           ON c.id_unit = a.id_unit
+                JOIN tb_petugas_satker d ON d.id_petugas_satker = a.id_petugas_satker
+
+                WHERE no_tiket_frontdesk = ?
+                ";
+
+        $result = $this->db->query($sql, array($no_tiket_frontdesk));
+
+        $input_filename = $this->odtphp->create_ambil($result->row());
 
         $output = preg_replace('/.odt/', '.pdf', $input_filename['full_filename']);
 

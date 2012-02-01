@@ -38,7 +38,7 @@ class Odtphp
      * @param $data array
      * @return array
      */
-    public function create_pengajuan($data = array())
+    public function create_pengajuan($data)
     {
         // START Kelengkapan Dokumen
         $kelengkapan = '';
@@ -67,11 +67,14 @@ class Odtphp
         // END Kelengkapan Dokumen
 
         // START Email
+        $emails = explode(';', trim_middle($data['emails']));
         $email = '';
-        $i = 1;
-        foreach ($data['emails'] as $value) {
-            $email .= "$i. $value\n";
-            $i++;
+        if (count($emails) > 1) {
+            foreach ($emails as $value) {
+                $email .= "$value\n";
+            }
+        } else {
+            $email = $emails[0];
         }
         // END Email
 
@@ -89,7 +92,7 @@ class Odtphp
         $odf->setVars('var7', $data['jabatan']);
         $odf->setVars('var8', $data['hp']);
         $odf->setVars('var9', $data['tlpkantor']);
-        $odf->setVars('var10', $email);
+        $odf->setVars('email', $email);
         $odf->setVars('var11', strftime('%d-%m-%Y %H:%M', strtotime($data['tgl_pengajuan'])));
         $odf->setVars('var12', strftime('%d-%m-%Y %H:%M', strtotime($data['tgl_selesai'])));
         $odf->setVars('var13', $kelengkapan);
@@ -112,43 +115,37 @@ class Odtphp
     /**
      * PengAMBILan dokumen
      */
-    public function create_ambil($no_surat_pengajuan, $no_tiket, $id_petugas_cs, $nama_petugas_cs, $kl, $eselon, $nip, $nama_petugas, $jabatan, $no_hp, $tlpkantor, $emails, $tgl_pengajuan)
+    public function create_ambil($data)
     {
-        $odf = new odf($this->print_template_path . 'ambil.odt');
-
-        $odf->setVars('var1', $no_surat_pengajuan);
-        $odf->setVars('var2', $no_tiket);
-        $odf->setVars('var3', $id_petugas_cs);
-        $odf->setVars('var4', $nama_petugas_cs);
-        $odf->setVars('var5', $kl);
-        $odf->setVars('var6', $eselon);
-        $odf->setVars('var7', $nip);
-        $odf->setVars('var8', $nama_petugas);
-        $odf->setVars('var9', $jabatan);
-
-        $odf->setVars('var10', $no_hp);
-        $odf->setVars('var11', $tlpkantor);
-
-        $emails = explode(';', trim_middle($emails));
-
+        $emails = explode(';', trim_middle($data->email));
         $email = '';
-        $i = 1;
-        foreach ($emails as $value) {
-            $email .= "$i. $value\n";
-            $i++;
+        if (count($emails) > 1) {
+            foreach ($emails as $value) {
+                $email .= "$value\n";
+            }
+        } else {
+            $email = $emails[0];
         }
 
-        $odf->setVars('var12', $email);
+        $odf = new odf($this->print_template_path . 'ambil.odt');
 
+        $odf->setVars('nomor_tiket', sprintf('%05d', $data->no_tiket_frontdesk) . '/' . strftime('%Y', strtotime($data->tanggal)));
+        $odf->setVars('tanggal_diterima', strftime('%d-%m-%Y %H:%M', strtotime($data->tanggal)));
+        $odf->setVars('tanggal_selesai', strftime('%d-%m-%Y %H:%M', strtotime($data->tanggal_selesai)));
+        $odf->setVars('tanggal_diserahkan', strftime('%d-%m-%Y %H:%M'));
+        $odf->setVars('nomor_surat_usulan', $data->nomor_surat_usulan);
+        $odf->setVars('tanggal_surat_usulan', strftime('%d %B %Y', strtotime($data->tanggal_surat_usulan)));
+        $odf->setVars('nama_kl', $data->nama_kementrian);
+        $odf->setVars('nama_unit', $data->nama_unit);
+        $odf->setVars('nip', $data->nip);
+        $odf->setVars('nama_petugas', $data->nama_petugas);
+        $odf->setVars('jabatan', $data->jabatan_petugas);
+        $odf->setVars('no_hp', $data->no_hp);
+        $odf->setVars('tlp_kantor', $data->no_kantor);
+        $odf->setVars('tanggal_sekarang', strftime('%d %B %Y'));
+        $odf->setVars('email', $email);
 
-        $odf->setVars('var13', date('d-m-Y H:i:s'));
-
-        $odf->setVars('var14', $tgl_pengajuan);
-
-        $odf->setVars('var15', $nama_petugas_cs);
-
-
-        $output_filename = 'ambil' . $no_tiket . '.odt';
+        $output_filename = 'ambil' . $data->no_tiket_frontdesk . '.odt';
 
         $odf->saveToDisk(FCPATH . 'output/' . $output_filename);
 
@@ -163,6 +160,16 @@ class Odtphp
      */
     public function create_kembali($data)
     {
+        $emails = explode(';', trim_middle($data->email));
+        $email = '';
+        if (count($emails) > 1) {
+            foreach ($emails as $value) {
+                $email .= "$value\n";
+            }
+        } else {
+            $email = $emails[0];
+        }
+
         $odf = new odf($this->print_template_path . 'kembali.odt');
 
         $odf->setVars('nomor_tiket', sprintf('%05d', $data->no_tiket_frontdesk) . '/' . strftime('%Y', strtotime($data->tanggal)));
@@ -178,17 +185,7 @@ class Odtphp
         $odf->setVars('no_hp', $data->no_hp);
         $odf->setVars('tlp_kantor', $data->no_kantor);
         $odf->setVars('tanggal_sekarang', strftime('%d %B %Y'));
-
-        $emails = explode(';', trim_middle($data->email));
-        $email = '';
-        $i = 1;
-        foreach ($emails as $value) {
-            $email .= "$i. $value\n";
-            $i++;
-        }
         $odf->setVars('email', $email);
-
-
         $odf->setVars('catatan_pengembalian_dokumen', $data->catatan);
 
 
