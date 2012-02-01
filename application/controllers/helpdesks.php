@@ -69,6 +69,7 @@ class Helpdesks extends CI_Controller
 
 		// Load kategori pertanyaan helpdesk
 		$data['kategori'] = $this->db->from('tb_kat_knowledge_base')->order_by('kat_knowledge_base')->get();
+		//print_r($this->db->last_query());exit;
 
 		// Jika ada pertanyaan sebelumnya, Load it!!
 		if ($this->input->get('prev_question')) {
@@ -98,6 +99,7 @@ class Helpdesks extends CI_Controller
 		// Load Kategori Knowledge Base
 		$result = $this->db->from('tb_tiket_helpdesk a')
 				->join('tb_kat_knowledge_base b', 'a.id_kat_knowledge_base = b.id_kat_knowledge_base', 'left')
+				//->where('is_public', '1')
 				->where('no_tiket_helpdesk', $this->session->userdata('no_tiket_helpdesk'))
 				->get();
 
@@ -106,6 +108,7 @@ class Helpdesks extends CI_Controller
 
 		$result = $this->db->from('tb_knowledge_base')
 				->where('id_kat_knowledge_base', $pertanyaan->id_kat_knowledge_base)
+				->where('is_public', '1')
 				// ->or_like('judul', $this->input->post('pertanyaan'))
 				// ->or_like('jawaban', $this->input->post('pertanyaan'))
 				->get();
@@ -467,23 +470,34 @@ class Helpdesks extends CI_Controller
 
 		$this->load->view('new-template', $data);
 	}
-
+	
+	function file_cek($str){
+		if($_FILES['file']['type'] != 'application/pdf'){
+			$this->form_validation->set_message('file_cek', '%s');
+			return false;
+		}else{
+			return true;
+		}
+	}
+	
 	function jawab()
 	{
-		$this->form_validation->set_rules('jawaban',         'Jawaban',         'required');
-		$this->form_validation->set_rules('nama_narasumber', 'Nama Narasumber', 'required');
-		// dump($this->input->post());
-
-		if ($this->form_validation->run() == TRUE) :
-			
+		$this->form_validation->set_rules('jawaban','Jawaban','required');
+		if (isset($_FILES['file']['name']) && $_FILES['file']['name'] != ''){
+			$this->form_validation->set_rules('nama_narasumber', 'Nama Narasumber', 'required');
+			$this->form_validation->set_rules('jabatan','jabatan','required');
+			$this->form_validation->set_rules('file','Tipe file harus PDF','callback_file_cek');
+		}
+		
+		if ($this->form_validation->run() == TRUE) {
 			// upload file bukti
 			$nmBr = '';
 	        if (isset($_FILES['file']['name']) && $_FILES['file']['name'] != ''){
 	            $unik = date('YmdHis').'_';
 	            $nmBr = $unik . $_FILES['file']['name'];
-	            move_uploaded_file($_FILES['file']['tmp_name'], 'upload/referensi/'. $nmBr);
+	            move_uploaded_file($_FILES['file']['tmp_name'], 'upload/knowledge/'. $nmBr);
 	        }
-
+			
 			// kirim jawaban
 			$arr = $this->input->post();
 			$arr['bukti_file'] = $nmBr;
@@ -504,11 +518,17 @@ class Helpdesks extends CI_Controller
 
 				$isi = $this->load->view('mail-template', $mail, TRUE);
 				$attachment = ($nmBr != '') ? 'upload/referensi/'. $nmBr : '';
-				$this->djamail->kirim(
-					$this->input->post('email'),
+				
+				//explode email
+				$email = explode(';',$this->input->post('email'));
+				
+				for($i= 0 ; $i <= count($email) ; $i++){
+					$this->djamail->kirim(
+					$email[$i],
 					'Pemberitahuan Jawaban Pertanyaan Anda #' . $this->input->post('no_tiket_helpdesk'),
 					$isi, 
 					$attachment);
+				}
 
 			endif;
 			
@@ -516,7 +536,7 @@ class Helpdesks extends CI_Controller
 				'1 (satu) pertanyaan berhasil dijawab dan telah dikembalikan ke Customer Service Helpdesk!' 
 				. '');
 			redirect('helpdesks/all');
-		endif;
+		}
 
 
 		$this->view($this->input->post('id_tiket'));
