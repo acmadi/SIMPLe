@@ -179,7 +179,7 @@
                 <thead>
                 <tr>
                     <th class="no">No</th>
-                    <th class="medium">Judul</th>
+                    <th class="medium">Pertanyaan</th>
                     <th class="medium">Jawaban</th>
                     <th>&nbsp;</th>
                 </tr>

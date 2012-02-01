@@ -5,6 +5,7 @@
         <!--<caption>Hello</caption>-->
         <thead>
         <tr>
+
             <th scope="col"><a href="<?php echo site_url('frontdesk/status_tiket/masuk')?>">Tiket hari ini</a></th>
             <th scope="col"><a href="<?php echo site_url('frontdesk/status_tiket/selesai')?>">Dokumen yang bisa diambil</a></th>
             <th scope="col"><a href="<?php echo site_url('frontdesk/status_tiket/kembali')?>">Dokumen yang dikembalikan</a></th>

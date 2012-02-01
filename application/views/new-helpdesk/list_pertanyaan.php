@@ -3,19 +3,25 @@
     $(document).ready(function(){
         
         oTable = $('.table').dataTable();
-        oTable.fnSort( [ [6,'desc'],[2,'asc'] ] );
+        oTable.fnSort( [ [7,'desc'],[2,'asc'] ] );
         oTable.fnAdjustColumnSizing();
-        oTable.fnFilter( 'open', 6 );
+        oTable.fnFilter( 'open', 7 );
 
         $('#Semua').click(function(){
-            oTable.fnFilter( '', 6);
+            oTable.fnFilter( '', 7);
         });
         $('#Open').click(function(){
-            oTable.fnFilter( 'open', 6 );
+            oTable.fnFilter( 'open', 7 );
         });
         $('#Close').click(function(){
-            oTable.fnFilter( 'close', 6 );
+            oTable.fnFilter( 'close', 7 );
         });
+		
+		$('#kategori_list').chosen().change(function(){
+            var nama_kategori = $(this).val();
+			 oTable.fnFilter( nama_kategori, 3 );
+            
+        })
     });
     </script>
 
@@ -29,13 +35,37 @@
     endif;
     ?>
     <fieldset>
-        <legend>Filter berdasarkan status tiket</legend>
-        <input type="radio" id="Semua" value="Semua" name="filter" />
-            <label for="Semua">Semua</label>
-        <input type="radio" id="Open" value="Open" name="filter" checked="checked"/>
-            <label for="Open">Open</label>
-        <input type="radio" id="Close" value="Close" name="filter"/>
-            <label for="Close">Close</label>
+        <legend>Filter </legend>
+		<table>
+		<tr>
+			<td><strong>Berdasarkan status tiket</strong></td>
+			<td>&nbsp;&nbsp;</td>
+			<td><strong>Berdasarkan kategori</strong></td>
+			
+		</tr>
+		<tr>
+			<td>
+				<input type="radio" id="Semua" value="Semua" name="filter" />
+					<label for="Semua">Semua</label>
+				<input type="radio" id="Open" value="Open" name="filter" checked="checked"/>
+					<label for="Open">Open</label>
+				<input type="radio" id="Close" value="Close" name="filter"/>
+					<label for="Close">Close</label>
+			</td>
+			<td>&nbsp;
+			</td>
+			<td>
+				<select name="kategori_list" id="kategori_list" class="chzn-select" data-placeholder="Pilih Kategori" style="width: 200px;float:right;">
+					<option></option>
+					<option value="">Semua</option>
+				<?php foreach($list_kategori->result() as $v):?>
+					<option value="<?php echo $v->kat_knowledge_base;?>"><?php echo $v->kat_knowledge_base;?></option>		
+				<?php endforeach;?>
+				</select>
+			</td>
+			
+		</tr>
+		</table>
     </fieldset>
     <br/>
     <table class="table">
@@ -45,6 +75,7 @@
             <th class="no">#Tiket</th>
             <th class="medium">Identitas Penanya</th>
             <th class="no">Prioritas</th>
+            <th class="no">Kategori</th>
             <th class="medium">Pertanyaan</th>
             <th class="no">Ditanyakan</th>
             <th class="no">Terjawab</th>
@@ -54,7 +85,7 @@
         </thead>
         <tfoot>
         <tr>
-            <td colspan="8">&nbsp;</td>
+            <td colspan="9">&nbsp;</td>
         </tr>
         </tfoot>
         <tbody>
@@ -102,6 +133,8 @@
                 <?php endif ?>
 
             </td>
+			
+			<td><?php echo $value->kat_knowledge_base;?></td>
 
             <!-- Pertanyaan -->
             <td> <?php echo $value->pertanyaan ?> </td>
