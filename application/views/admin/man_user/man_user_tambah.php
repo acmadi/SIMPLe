@@ -49,7 +49,7 @@
                         <tr>
                             <td>Username</td>
                             <td>:</td>
-                            <td><input type="text" value="" size="48" name="fusername"/></td>
+                            <td><input type="text" value="" size="48" name="fusername" maxlength="18" /></td>
                         </tr>
                         <tr>
                             <td>Password</td>

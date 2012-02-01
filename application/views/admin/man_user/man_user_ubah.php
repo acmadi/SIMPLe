@@ -31,7 +31,7 @@
             <tr>
                 <td width="100px">Username</td>
                 <td>:</td>
-                <td><input type="text" value="<?php echo $item->username?>" size="48" name="eusername" /></td>
+                <td><input type="text" value="<?php echo $item->username?>" size="48" name="eusername" maxlength="18" /></td>
             </tr>
             <tr>
                 <td>Nama</td>

@@ -10,10 +10,18 @@
 |
 */
 
-$hook['pre_controller'] = array(
+$hook['pre_controller'][] = array(
     'class' => 'Login_checker',
     'function' => 'login_checker',
     'filename' => 'login_checker.php',
+    'filepath' => 'hooks',
+    'params' => array()
+);
+
+$hook['pre_controller'][] = array(
+    'class' => 'Profiler',
+    'function' => '__construct',
+    'filename' => 'profiler.php',
     'filepath' => 'hooks',
     'params' => array()
 );
