@@ -38,7 +38,7 @@
                             <td><input type="text" size="48" name="fnama" value="<?php echo $item['unit_1']->nama_unit?>"/></td>
                         </tr>
                         <tr>
-                            <td>Anggaran</td>
+                            <td>Unit Eselon II</td>
                             <td>:</td>
                             <td>
                                <?php echo form_dropdown('fanggaran',$opt_a,$item['unit_1']->anggaran)?>
@@ -49,7 +49,7 @@
                     <br/>
 
                     <div>
-                        <h5>Pilih Satker</h5><br/>
+                        <h5>Pilih Unit Eselon I</h5><br/>
 
                         <div id="list_satker" style="float: left; overflow: scroll; height: 300px;">
                             <?php foreach ($list_kementrian as $lk): ?>
