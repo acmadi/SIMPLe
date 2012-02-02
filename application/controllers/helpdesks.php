@@ -173,6 +173,7 @@ class Helpdesks extends CI_Controller
 					'tanggal'           => date('Y-m-d H:i:s'),
 					'id_petugas_satket' => $id_petugas_satker,
 					'id_satker'         => $this->input->post('kode_satker'),
+					'id_user_cs'        => $this->session->userdata('id_user'),
 				));
 
 				// Simpan ID tiket helpdesk
