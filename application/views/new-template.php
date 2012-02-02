@@ -126,11 +126,19 @@
 
         <div class="grid_4 omega">
             <h1>Online Customer Service</h1>
+            <?php
+            // Online Users!!
+            $online_users = $this->db->select('a.id_user, nama, username, nama_lavel, lavel')
+            ->from('tb_online_users a')
+            ->join('tb_user b', 'b.id_user = a.id_user')
+            ->join('tb_lavel c', 'c.id_lavel = b.id_lavel')
+            ->where('lavel', 1)
+            ->get();
+            ?>
             <ul>
-                <li>Customer Service 1</li>
-                <li>Customer Service 2</li>
-                <li>Customer Service 3</li>
-                <li>Customer Service 4</li>
+                <?php foreach ($online_users->result() as $user): ?>
+                    <li><a href="#"><?php echo $user->username ?></a></li>
+                <?php endforeach; ?>
             </ul>
         </div>
     </div>
