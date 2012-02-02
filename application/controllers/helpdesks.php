@@ -436,18 +436,15 @@ class Helpdesks extends CI_Controller
 		$my_lavel = $this->session->userdata('lavel');
 
 		// query list tiket
-		$data['tikets'] = $this->db->select('*')
-				->from('tb_tiket_helpdesk a')
-				->join('tb_satker b', 'b.id_satker = a.id_satker', 'left')
-				->join('tb_petugas_satker c', 'a.id_petugas_satket = c.id_petugas_satker', 'left')
-				->join('tb_user d', 'a.id_user = d.id_user', 'left')
-				->where('status', 'open')
-				->where('lavel', $my_lavel)
-				->order_by('prioritas DESC')
-				->order_by('tanggal DESC')
-				->get();
+		$data['tikets'] = $this->db->query("SELECT * FROM (`tb_tiket_helpdesk` a) 
+											LEFT JOIN `tb_satker` b ON `b`.`id_satker` = `a`.`id_satker` 
+											LEFT JOIN `tb_petugas_satker` c ON `a`.`id_petugas_satket` = `c`.`id_petugas_satker` 
+											LEFT JOIN `tb_user` d ON `a`.`id_user` = `d`.`id_user` 
+											WHERE `lavel` = ? OR ? = (
+												SELECT e.id_lavel FROM tb_user e WHERE e.id_user = a.id_user 
+											) ORDER BY `prioritas` DESC, `tanggal` DESC",array($my_lavel,$this->session->userdata('id_lavel')));
 
-		// echo $this->db->last_query();
+		//echo $this->db->last_query();
 
 		// query nama lavel, kosmetik doang
 		$sql = "SELECT * FROM tb_lavel

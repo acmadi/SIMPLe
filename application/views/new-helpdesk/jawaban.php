@@ -166,12 +166,7 @@
                onclick="return confirm('Anda yakin akan melakukan eskalasi?') ? true : false">
                 Eskalasi
             </a>
-			<button type="submit"
-               class="button green answer-btn"
-               style="padding: 10px 20px; font-size: 10px;"
-               onclick="return confirm('Anda yakin akan menjawab langsung?') ? true : false" />
-                Jawab Langsung
-            </button>
+			
         </div>
         
 

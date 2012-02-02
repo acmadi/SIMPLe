@@ -72,7 +72,15 @@
             <td><?php echo $value->description ?></td>
             <td><?php echo table_tanggal($value->tanggal) ?></td>
             <td class="action">
+				
+				<?php 
+				if($value->tanggal_selesai == ''): ?>
                 <a class="button green" href="<?php echo site_url('/helpdesks/view/' . $value->id) ?>">Jawab/Eskalasi</a>
+				<?php else: ?>
+				<strong>
+					Terjawab
+				</strong>	
+				<?php endif; ?>
             </td>
         </tr>
             <?php endforeach ?>
