@@ -129,10 +129,15 @@ class Referensi extends CI_Controller
                     echo $this->upload->display_errors();
                 }
 
+                $upload_filename = '';
+                if (isset($upload_data['file_name'])) {
+                    $upload_filename = $upload_data['file_name'];
+                }
+
                 $result = $this->db->insert('tb_referensi', array(
                     // 'id_referensi' => $this->input->post('id_referensi'),
                     'nama_ref' => $this->input->post('nama_ref'),
-					'nama_file' => $upload_data['file_name'],
+					'nama_file' => $upload_filename,
 					'id_referensi_kat' => $this->input->post('id_referensi_kat'),
 
                 ));
