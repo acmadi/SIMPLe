@@ -1,39 +1,6 @@
 <?php
 // Navbar Kasubdit Anggaran
-
-$nav_dashboard = $nav_helpdesk = $nav_frontdesk = $nav_knowledge = $nav_forum = '';
-
-switch ($this->uri->segment(2)) {
-    case 'dashboard':
-        $nav_dashboard = 'current';
-        break;
-    case 'knowledge_base':
-        $nav_knowledge = 'current';
-        break;
-    case 'man_forum':
-        $nav_forum = 'current';
-        break;
-
-}
-$nav_referensi = '';
-if ($this->uri->segment(1) == 'referensi') {
-    $nav_referensi = 'current';
-}
-if ($this->uri->segment(1) == 'knowledge') {
-    $nav_knowledge = 'current';
-}
-if ($this->uri->segment(1) == 'forum') {
-    $nav_forum = 'current';
-}
-if ($this->uri->segment(1) == 'helpdesks') {
-    $nav_helpdesk = 'current';
-}
-if ($this->uri->segment(1) == 'frontdesks') {
-    $nav_frontdesk = 'current';
-}
-if ($this->uri->segment(1) == 'dashboards') {
-    $nav_dashboard = 'current';
-}
+require_once(APPPATH . 'views/navbar_init.php');
 ?>
 
 <div id="navbar" class="clearfloat">
@@ -44,5 +11,6 @@ if ($this->uri->segment(1) == 'dashboards') {
         <li><?php echo anchor('knowledge', 'Knowledge Base', "class='$nav_knowledge'");?></li>
         <li><?php echo anchor('referensi', 'Referensi Peraturan', "class='$nav_referensi'") ?></li>
         <li><?php echo anchor('forum', 'Forum', "class='$nav_forum'");?></li>
+        <li><?php echo anchor('telpon', 'Telpon', "class='$nav_telpon'");?></li>
     </ul>
 </div>

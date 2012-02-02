@@ -1,47 +1,9 @@
 <?php
 // Navbar Helpdesk
-
-$nav_dashboard = $nav_identitas_satker = $nav_antrian =
-$nav_knowledge = $nav_forum = $nav_referensi =
-$nav_list_pertanyaan = $nav_telpon = '';
-
-switch ($this->uri->segment(2)) {
-    case 'dashboard':
-        $nav_dashboard = 'current';
-        break;
-    case 'identitas_satker':
-    case 'identity':
-        $nav_identitas_satker = 'current';
-        break;
-    case 'list_antrian':
-        $nav_antrian = 'current';
-        break;
-    case 'knowledge_base':
-        $nav_knowledge = 'current';
-        break;
-    case 'man_forum':
-        $nav_forum = 'current';
-        break;
-}
-if ($this->uri->segment(1) == 'referensi') {
-    $nav_referensi = 'current';
-}
-if ($this->uri->segment(1) == 'knowledge') {
-    $nav_knowledge = 'current';
-}
-if ($this->uri->segment(1) == 'forum') {
-    $nav_forum = 'current';
-}
-if ($this->uri->segment(2) == 'list_pertanyaan') {
-    $nav_list_pertanyaan = 'current';
-}
-if ($this->uri->segment(1) == 'telpon') {
-    $nav_telpon = 'current';
-}
+require_once(APPPATH . 'views/navbar_init.php');
 ?>
 
-
-<ul class="sf-menu">
+<ul>
     <li><?php echo anchor('helpdesks/dashboard', 'Dashboard', "class='$nav_dashboard'");?></li>
     <li><?php echo anchor('helpdesks/identity', 'Isi Identitas Satker', "class='$nav_identitas_satker'");?></li>
     <li><?php echo anchor('helpdesks/list_pertanyaan', 'List Pertanyaan', "class='$nav_list_pertanyaan'");?></li>

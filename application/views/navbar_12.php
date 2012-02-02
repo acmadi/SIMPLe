@@ -1,39 +1,14 @@
 <?php
 // Navbar Dirjen
-
-$nav_dashboard = $nav_helpdesk = $nav_frontdesk = $nav_knowledge_base = $nav_forum = '';
-
-switch ($this->uri->segment(2)) {
-    case 'dashboard':
-        $nav_dashboard = 'current';
-        break;
-}
-$nav_referensi = '';
-if ($this->uri->segment(1) == 'referensi') {
-    $nav_referensi = 'current';
-}
-if ($this->uri->segment(1) == 'knowledge') {
-    $nav_knowledge = 'current';
-}
-if ($this->uri->segment(1) == 'forum') {
-    $nav_forum = 'current';
-}
-if ($this->uri->segment(1) == 'frontdesks') {
-    $nav_frontdesk = 'current';
-}
-if ($this->uri->segment(1) == 'helpdesks') {
-    $nav_helpdesk = 'current';
-}
+require_once(APPPATH . 'views/navbar_init.php');
 ?>
 
-
-<div id="navbar" class="clearfloat">
-    <ul class="sf-menu">
-        <li><?php echo anchor('dirjen/dashboard', 'Dashboard', "class='$nav_dashboard'");?></li>
-        <li><?php echo anchor('frontdesks', 'Front Desk', "class='$nav_frontdesk'");?></li>
-        <li><?php echo anchor('helpdesks/all', 'Helpdesk', "class='$nav_helpdesk'");?></li>
-        <li><?php echo anchor('knowledge', 'Knowledge Base', "class='$nav_knowledge_base'");?></li>
-        <li><?php echo anchor('referensi', 'Referensi Peraturan', "class='$nav_referensi'") ?></li>
-        <li><?php echo anchor('forum', 'Forum', "class='$nav_forum'");?></li>
-    </ul>
-</div>
+<ul>
+    <li><?php echo anchor('dirjen/dashboard', 'Dashboard', "class='$nav_dashboard'");?></li>
+    <li><?php echo anchor('frontdesks', 'Front Desk', "class='$nav_frontdesk'");?></li>
+    <li><?php echo anchor('helpdesks/all', 'Helpdesk', "class='$nav_helpdesk'");?></li>
+    <li><?php echo anchor('knowledge', 'Knowledge Base', "class='$nav_knowledge'");?></li>
+    <li><?php echo anchor('referensi', 'Referensi Peraturan', "class='$nav_referensi'") ?></li>
+    <li><?php echo anchor('forum', 'Forum', "class='$nav_forum'");?></li>
+    <li><?php echo anchor('telpon', 'Telpon', "class='$nav_telpon'");?></li>
+</ul>
