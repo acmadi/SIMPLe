@@ -169,11 +169,13 @@
             <!-- Status -->
             <td>
                 <?php 
-				$cek = (($user == $value->id_user_cs) AND ($value->tanggal_selesai != NULL))?'1':'2';
+				$cek = (($user == $value->id_user_cs) AND ($value->tanggal_selesai != NULL) AND ($value->status == 'open'))?'1':'2';
                 $color = ($value->status == 'open') ? 'yellow' : 'grey'; ?>
                     <a class="referensi-jawaban button <?php echo $color ?>"
                        data-id='<?php echo $value->id ?>'
-                       data-pertanyaan='<?php echo ascii_to_entities($value->pertanyaan) ?>'
+					   data-kategori='<?php echo ascii_to_entities($value->kat_knowledge_base) ?>'
+                       data-topik='<?php echo ascii_to_entities($value->pertanyaan) ?>'
+                       data-pertanyaan='<?php echo ascii_to_entities($value->description) ?>'
                        data-jawaban='<?php echo ascii_to_entities($value->jawab) ?>'
                        data-cek='<?php echo ascii_to_entities($cek) ?>'
                        href='javascript:void(0)'><?php echo strtoupper($value->status) ?></a>
@@ -181,10 +183,12 @@
 
             <!-- Lihat jawaban -->
             <td>
-                <?php if ($value->id_knowledge_base != NULL) : ?>
+                <?php if (($value->id_knowledge_base != NULL) AND ($value->status == 'open')) : ?>
                     <a class="link-jawaban referensi-jawaban button green"
                        data-id='<?php echo $value->id ?>'
-                       data-pertanyaan='<?php echo ascii_to_entities($value->pertanyaan) ?>'
+                       data-kategori='<?php echo ascii_to_entities($value->kat_knowledge_base) ?>'
+                       data-topik='<?php echo ascii_to_entities($value->pertanyaan) ?>'
+                       data-pertanyaan='<?php echo ascii_to_entities($value->description) ?>'
                        data-jawaban='<?php echo ascii_to_entities($value->jawab) ?>'
 					   data-cek='<?php echo ascii_to_entities($cek) ?>'
                        href='javascript:void(0)'>
@@ -209,15 +213,17 @@
 
 
 <div style="display: none" id="jawaban" data-id="">
-    <h1 id="pertanyaan"></h1>
-
-    <p id="jawabannya"></p>
+    Kategori : <h1 id="kategori"></h1>
+    Topik : <h1 id="topik"></h1>
+    Pertanyaan : <h1 id="pertanyaan"></h1>
+    Jawaban : <p id="jawabannya"></p>
 </div>
 
 <div style="display: none" id="jawaban_default" data-id="">
-    <h1 id="pertanyaan_def"></h1>
-
-    <p id="jawabannya_def"></p>
+	Kategori : <h1 id="kategori_def"></h1>
+    Topik : <h1 id="topik_def"></h1>
+    Pertanyaan : <h1 id="pertanyaan_def"></h1>
+    Jawaban : <p id="jawabannya_def"></p>
 </div>
 
 <script type="text/javascript">
@@ -279,18 +285,24 @@
         $('.referensi-jawaban').live('click', function () {
             var title = $(this).data('pertanyaan');
             var jawabannya = $(this).data('jawaban');
+            var topik = $(this).data('topik');
+            var kategori = $(this).data('kategori');
             var id = $(this).data('id');
             var cek = $(this).data('cek');
 			
-			//alert()
+			
 			
 			if(cek == 1){
 				$('#jawaban').dialog('open');
 				$('#jawaban').data('id', id);
+				$('#kategori').html(kategori);
+				$('#topik').html(topik);
 				$('#pertanyaan').html(title);
 				$('#jawabannya').html(jawabannya);
 			}else{
 				$('#jawaban_default').dialog('open');
+				$('#kategori_def').html(kategori);
+				$('#topik_def').html(topik);
 				$('#pertanyaan_def').html(title);
 				$('#jawabannya_def').html(jawabannya);
 				$('#jawaban_default').data('id', id);
