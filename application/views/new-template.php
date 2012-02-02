@@ -137,7 +137,11 @@
             ?>
             <ul>
                 <?php foreach ($online_users->result() as $user): ?>
-                    <li><a href="#"><?php echo $user->username ?></a></li>
+                <?php if ($this->session->userdata('id_user')): ?>
+                    <li><a href="#" onclick="window.open('<?php echo site_url('chat') ?>', 'chat', 'width=700, height=636, status=0, toolbar=0, menubar=0, resizable=0')"><?php echo $user->username ?></a></li>
+                <?php else: ?>
+                    <li><a href="javascript:void(0)"><?php echo $user->username ?></a></li>
+                <?php endif; ?>
                 <?php endforeach; ?>
             </ul>
         </div>
