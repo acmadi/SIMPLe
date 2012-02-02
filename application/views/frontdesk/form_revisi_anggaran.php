@@ -193,7 +193,7 @@
             <input type="text" id="tanggal_surat_usulan" name="tanggal_surat_usulan" value="<?php echo set_value('tanggal_surat_usulan') ?>" autocomplete="off" />
         </div>
 
-        
+
         <div class="clear"></div>
         </p>
 
@@ -290,17 +290,21 @@
         <legend>Kelengkapan Dokumen</legend>
 
         <div style="overflow: auto; margin: 0;">
-            <?php foreach ($kelengkapan_dokumen->result() as $value): ?>
 
-            <?php if ($value->id_kelengkapan != 0): ?>
-                <p>
-                    <label>
-                        <input type="checkbox" name="dokumen[<?php echo $value->id_kelengkapan ?>]"/>
-                        <?php echo $value->nama_kelengkapan ?>
-                    </label>
-                </p>
-                <?php endif ?>
-            <?php endforeach ?>
+            <table>
+                <?php foreach ($kelengkapan_dokumen->result() as $value): ?>
+                <tr style="border-bottom: 10px solid transparent;">
+                    <?php if ($value->id_kelengkapan != 0): ?>
+                    <td style="padding-right: 10px;">
+                        <input type="checkbox" name="dokumen[<?php echo $value->id_kelengkapan ?>]" id="dokumen[<?php echo $value->id_kelengkapan ?>]"/>
+                    </td>
+                    <td>
+                        <label for="dokumen[<?php echo $value->id_kelengkapan ?>]"><?php echo $value->nama_kelengkapan ?></label>
+                    </td>
+                    <?php endif ?>
+                </tr>
+                <?php endforeach ?>
+            </table>
 
             <p id="other-docs"></p>
 

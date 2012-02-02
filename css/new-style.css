@@ -352,7 +352,7 @@ fieldset.right{
 label{
     color: #777;
     font-weight: bold !important;
-    padding: 0 5px;
+    display: inline-block;
 }
 label.aligned{
     display: inline-block;
