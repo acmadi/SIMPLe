@@ -67,3 +67,7 @@
 <?php endif ?>
 
 <?php echo $this->session->flashdata('error') ?>
+
+<div style="text-align: center;">
+    <img src="<?php echo base_url('images/cover.jpg') ?>"/>
+</div>
