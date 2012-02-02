@@ -369,6 +369,7 @@ class Form_revisi_anggaran extends CI_Controller
         $anggaran = $result->row();
         $anggaran = $anggaran->anggaran;
         echo $anggaran;
+        exit();
     }
 
     /**
