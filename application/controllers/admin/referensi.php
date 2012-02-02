@@ -68,7 +68,7 @@ class Referensi extends CI_Controller
     {
         if (isset($_POST)) {
 
-            $this->form_validation->set_rules('nama_ref', 'Nama Referensi', 'required');
+            $this->form_validation->set_rules('nama_ref', 'Nama Referensi', 'required|trim');
 
             if ($this->form_validation->run()) {
                 //SEKRETARIAT JENDERAL
@@ -109,24 +109,30 @@ class Referensi extends CI_Controller
         if (isset($_POST)) {
 
             // $this->form_validation->set_rules('id_referensi', 'Kode Referensi', 'required|numeric|min_length[11]|max_length[11]');
-            $this->form_validation->set_rules('nama_ref', 'Nama Referensi', 'required');
+            $this->form_validation->set_rules('nama_ref', 'Nama Referensi', 'required|trim');
 			 // $this->form_validation->set_rules('file', 'File', 'required');
 			  $this->form_validation->set_rules('id_referensi_kat', 'Kode Referensi Kategori', 'required');
 
 
             if ($this->form_validation->run()) {
 
-                $nmBr = '';
-                if (isset($_FILES['file']['name']) && $_FILES['file']['name'] != '') :
-                    $unik = date('isdm').'_';
-                    $nmBr =  $nmBr . '_' . $_FILES['file']['name'];
-                    move_uploaded_file($_FILES['file']['tmp_name'], 'upload/referensi/'. $nmBr);
-                endif;
+
+                $upload_config['upload_path'] = './upload/referensi/';
+                $upload_config['allowed_types'] = 'doc|docx|pdf';
+
+                $this->upload->initialize($upload_config);
+                $upload_data = array();
+
+                if ($this->upload->do_upload('file')) {
+                    $upload_data = $this->upload->data();
+                } else {
+                    echo $this->upload->display_errors();
+                }
 
                 $result = $this->db->insert('tb_referensi', array(
                     // 'id_referensi' => $this->input->post('id_referensi'),
                     'nama_ref' => $this->input->post('nama_ref'),
-					'nama_file' => $nmBr,
+					'nama_file' => $upload_data['file_name'],
 					'id_referensi_kat' => $this->input->post('id_referensi_kat'),
 
                 ));

@@ -1,6 +1,8 @@
 <div class="content">
     <h1>Referensi Peraturan</h1>
-    <br/>
+
+    <?php if ($referensi->num_rows() > 0): ?>
+
     <table class="table">
         <thead>
         <tr>
@@ -26,7 +28,7 @@
 			<?php 
 				  $file = realpath('upload/referensi/'.$value->nama_file);
 				  if(file_exists($file) AND $value->nama_file != '' ): ?>
-						<a class="button green" href="<?php echo site_url('upload/referensi/'.$value->nama_file);?>">Download</a>
+						<a class="button green" href="<?php echo base_url('upload/referensi/'.$value->nama_file);?>">Download</a>
 			<?php else: ?>
 						<span class="button red">Tidak ada file</span>
 			<?php endif; ?>
@@ -36,4 +38,11 @@
             <?php endforeach ?>
         </tbody>
     </table>
+
+    <?php else: ?>
+
+    <div class="notification yellow">Tidak ada data referensi peraturan</div>
+
+    <?php endif; ?>
+
 </div>
