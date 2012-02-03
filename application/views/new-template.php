@@ -128,12 +128,14 @@
             <h1>Online Customer Service</h1>
             <?php
             // Online Users!!
-            $online_users = $this->db->select('a.id_user, nama, username, nama_lavel, lavel')
-            ->from('tb_online_users a')
-            ->join('tb_user b', 'b.id_user = a.id_user')
-            ->join('tb_lavel c', 'c.id_lavel = b.id_lavel')
-            ->where('lavel', 1)
-            ->get();
+            $sql = "SELECT a.id_user, nama, username, nama_lavel, lavel, aktifitas_terakhir
+                    FROM tb_online_users a
+                    JOIN tb_user b ON b.id_user = a.id_user
+                    JOIN tb_lavel c ON c.id_lavel = b.id_lavel
+                    WHERE lavel = 1
+                    AND aktifitas_terakhir > DATE_SUB(NOW(), INTERVAL 2 HOUR)
+                   ";
+            $online_users = $this->db->query($sql);
             ?>
             <ul>
                 <?php foreach ($online_users->result() as $user): ?>
