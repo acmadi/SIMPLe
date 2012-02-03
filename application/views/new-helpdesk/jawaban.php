@@ -83,7 +83,7 @@
                 </td>
 
                 <td>
-                    <label>Telpon Kantor</label>
+                    <label>Telepon Kantor</label>
                 </td>
                 <td>
                     <span><?php echo $identitas->no_kantor ?></span>

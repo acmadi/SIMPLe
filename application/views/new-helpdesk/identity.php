@@ -141,7 +141,7 @@
         </p>
 
         <p>
-            <label class="aligned">No. Telpon Kantor </label>
+            <label class="aligned">No. Telepon Kantor </label>
             <input type="text" name="no_kantor" size="30" value="<?php echo set_value('no_kantor') ?>">
         </p>
 

@@ -144,7 +144,7 @@ class Helpdesks extends CI_Controller
 			$this->form_validation->set_rules('nama_petugas', 'Nama Petugas', 'required');
 			$this->form_validation->set_rules('jabatan_petugas', 'Jabatan', 'required');
 			$this->form_validation->set_rules('no_hp', 'No HP', 'required|numeric');
-			$this->form_validation->set_rules('no_kantor', 'Telpon Kantor', 'required|numeric');
+			$this->form_validation->set_rules('no_kantor', 'Telepon Kantor', 'required|numeric');
 			$this->form_validation->set_rules('email', 'Email', 'required|email');
 
 			if ($this->form_validation->run() == TRUE) :
@@ -441,6 +441,7 @@ class Helpdesks extends CI_Controller
 											LEFT JOIN `tb_satker` b ON `b`.`id_satker` = `a`.`id_satker` 
 											LEFT JOIN `tb_petugas_satker` c ON `a`.`id_petugas_satket` = `c`.`id_petugas_satker` 
 											LEFT JOIN `tb_user` d ON `a`.`id_user` = `d`.`id_user` 
+											LEFT JOIN `tb_kat_knowledge_base` e ON `e`.`id_kat_knowledge_base` = `a`.`id_kat_knowledge_base`
 											WHERE `lavel` = ? OR ? = (
 												SELECT e.id_lavel FROM tb_user e WHERE e.id_user = a.id_user 
 											) ORDER BY `prioritas` DESC, `tanggal` DESC",array($my_lavel,$this->session->userdata('id_lavel')));
@@ -452,6 +453,8 @@ class Helpdesks extends CI_Controller
 				WHERE lavel = $my_lavel
 				LIMIT 1";
 		$data['nama_level'] = $this->db->query($sql)->row()->nama_lavel;
+
+        $data['list_kategori'] = $this->db->query("SELECT kat_knowledge_base FROM tb_kat_knowledge_base");
 		
 		$data['flashmessage'] = $this->showmessage('success', 'green');
 		$data['title'] = 'Konsultasi Help Desk';

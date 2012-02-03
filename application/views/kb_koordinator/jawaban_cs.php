@@ -30,7 +30,7 @@
             <td><?php echo $value->jawaban ?></td>
             <td class="action">
                 <a href="#" class="button blue">Ubah</a>
-                <a href="http://localhost/" onclick="return confirm('Anda yakin menghapus telpon ini?')" class="button red">Hapus</a>
+                <a href="http://localhost/" onclick="return confirm('Anda yakin menghapus telepon ini?')" class="button red">Hapus</a>
             </td>
         </tr>
         <?php endforeach; ?>

@@ -143,7 +143,7 @@
             echo anchor('helpdesks/eskalasikan/' . $antrian->id, 'Eskalasi', 'class="button blue"')
             ?>
             <input type="submit" name="submit" value="Jawab" class="button green"/>
-            <input type="button" onclick="window.print()" value="Print" class="button gray-pill"/>
+            <a href="<?php echo base_url('print-template/jawab-pertanyaan.pdf') ?>" target="_blank" class="button">Print</a>
         </div>
 
         <div class="clear"></div>

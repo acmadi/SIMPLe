@@ -23,7 +23,7 @@ class Profiles extends CI_Controller
 
             $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
             $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
-            $this->form_validation->set_rules('no_tlp', 'Telpon', 'required|trim|numeric');
+            $this->form_validation->set_rules('no_tlp', 'Telepon', 'required|trim|numeric');
 
             if ($this->form_validation->run() == TRUE) {
 

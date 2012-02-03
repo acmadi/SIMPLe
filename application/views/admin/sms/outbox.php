@@ -31,7 +31,7 @@ $sms[3]['message'] = 'Nomor Tiket #00014 dalam status Open';
             <tr>
                 <th class="short">&nbsp;</th>
                 <th class="short">No</th>
-                <th>Telpon</th>
+                <th>Telepon</th>
                 <th>Status</th>
                 <th>Pesan</th>
             </tr>

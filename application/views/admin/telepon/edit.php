@@ -1,5 +1,5 @@
 <div class="content">
-    <h1>Ubah Telpon</h1>
+    <h1>Ubah Telepon</h1>
 
     <?php
     // TODO: Satu paket ini untuk alerts. Nanti mau dipindah jadi hanya panggil satu method.
@@ -29,27 +29,27 @@
                 <?php if (set_value('nama')): ?>
                 <input type="text" name="nama" id="nama" value="<?php echo set_value('nama') ?>"/>
                 <?php else: ?>
-                <input type="text" name="nama" id="nama" value="<?php echo $telpon->nama ?>"/>
+                <input type="text" name="nama" id="nama" value="<?php echo $telepon->nama ?>"/>
                 <?php endif ?>
             </td>
         </tr>
         <tr>
-            <td><label for="telpon">Telpon #1</label></td>
+            <td><label for="telepon">Telepon #1</label></td>
             <td>
-                <?php if (set_value('telpon')): ?>
-                <input type="text" name="telpon" id="telpon" value="<?php echo set_value('telpon') ?>"/>
+                <?php if (set_value('telepon')): ?>
+                <input type="text" name="telepon" id="telepon" value="<?php echo set_value('telepon') ?>"/>
                 <?php else: ?>
-                <input type="text" name="telpon" id="telpon" value="<?php echo $telpon->telpon1 ?>"/>
+                <input type="text" name="telepon" id="telepon" value="<?php echo $telepon->telepon1 ?>"/>
                 <?php endif ?>
             </td>
         </tr>
         <tr>
-            <td><label for="telpon2">Telpon #2</label></td>
+            <td><label for="telepon2">Telepon #2</label></td>
             <td>
-                <?php if (set_value('telpon2')): ?>
-                <input type="text" name="telpon2" id="telpon2" value="<?php echo set_value('telpon2') ?>"/>
+                <?php if (set_value('telepon2')): ?>
+                <input type="text" name="telepon2" id="telepon2" value="<?php echo set_value('telepon2') ?>"/>
                 <?php else: ?>
-                <input type="text" name="telpon2" id="telpon2" value="<?php echo $telpon->telpon2 ?>"/>
+                <input type="text" name="telepon2" id="telepon2" value="<?php echo $telepon->telepon2 ?>"/>
                 <?php endif ?>
             </td>
         </tr>
@@ -59,7 +59,7 @@
                 <?php if (set_value('keterangan')): ?>
                 <input type="text" name="keterangan" id="keterangan" value="<?php echo set_value('keterangan') ?>"/>
                 <?php else: ?>
-                <input type="text" name="keterangan" id="keterangan" value="<?php echo $telpon->keterangan ?>"/>
+                <input type="text" name="keterangan" id="keterangan" value="<?php echo $telepon->keterangan ?>"/>
                 <?php endif ?>
             </td>
         </tr>
@@ -67,7 +67,7 @@
 
     <div>
         <input type="submit" value="Ubah"/>
-        <a href="<?php echo site_url('admin/telpon') ?>" class="button green">Batal</a>
+        <a href="<?php echo site_url('admin/telepon') ?>" class="button green">Batal</a>
     </div>
 
     <?php echo form_close() ?>

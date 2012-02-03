@@ -130,7 +130,7 @@
         </p>
 
         <p>
-            <label class="aligned">No. Telpon Kantor </label>
+            <label class="aligned">No. Telepon Kantor </label>
             <input type="text" name="no_kantor" size="30" value="<?php echo set_value('no_kantor') ?>">
         </p>
 
@@ -176,7 +176,7 @@
         </p>
 
         <p class="kl">
-            <label class="aligned">Telpon</label>
+            <label class="aligned">Telepon</label>
             <input type="text" id="no_hp" name="no_hp" size="30" value="<?php echo set_value('no_hp') ?>">
 			<?php echo form_error('no_hp', '<div class="error">', '</div>'); ?>
         </p>

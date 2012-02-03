@@ -126,11 +126,25 @@
 
         <div class="grid_4 omega">
             <h1>Online Customer Service</h1>
+            <?php
+            // Online Users!!
+            $sql = "SELECT a.id_user, nama, username, nama_lavel, lavel, aktifitas_terakhir
+                    FROM tb_online_users a
+                    JOIN tb_user b ON b.id_user = a.id_user
+                    JOIN tb_lavel c ON c.id_lavel = b.id_lavel
+                    WHERE lavel = 1
+                    AND aktifitas_terakhir > DATE_SUB(NOW(), INTERVAL 2 HOUR)
+                   ";
+            $online_users = $this->db->query($sql);
+            ?>
             <ul>
-                <li>Customer Service 1</li>
-                <li>Customer Service 2</li>
-                <li>Customer Service 3</li>
-                <li>Customer Service 4</li>
+                <?php foreach ($online_users->result() as $user): ?>
+                <?php if ($this->session->userdata('lavel') == 1): ?>
+                    <li><a href="#" onclick="window.open('<?php echo site_url('chat') ?>', 'chat', 'width=700, height=636, status=0, toolbar=0, menubar=0, resizable=0')"><?php echo $user->username ?></a></li>
+                <?php else: ?>
+                    <li><a href="javascript:void(0)"><?php echo $user->username ?></a></li>
+                <?php endif; ?>
+                <?php endforeach; ?>
             </ul>
         </div>
     </div>

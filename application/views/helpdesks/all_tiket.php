@@ -1,3 +1,22 @@
+<script>
+    var oTable;
+    $(document).ready(function () {
+
+        oTable = $('.table').dataTable();
+        oTable.fnSort([
+            [0, 'asc'],
+            [1, 'asc']
+        ]);
+        oTable.fnAdjustColumnSizing();
+        //oTable.fnFilter( 'open', 7 );
+
+        $('#kategori_list').chosen().change(function () {
+            var nama_kategori = $(this).val();
+            oTable.fnFilter(nama_kategori, 3);
+        })
+    });
+</script>
+
 <div class="content">
 
     <h1>Tiket Helpdesk yang Dieskalasi</h1>
@@ -8,12 +27,24 @@
     </div> -->
 
     <?php
-        echo (isset($flashmessage)) ? $flashmessage : ''; 
+        echo (isset($flashmessage)) ? $flashmessage : '';
     ?>
-    
+
     <br/>
 
     <?php if ($tikets->num_rows() > 0): ?>
+
+    <fieldset>
+        <legend>Filter berdasarkan kategori</legend>
+        <select name="kategori_list" id="kategori_list" class="chzn-select" data-placeholder="Pilih Kategori"
+                style="width: 200px;float:right;">
+            <option></option>
+            <option value="">Semua</option>
+            <?php foreach ($list_kategori->result() as $v): ?>
+            <option value="<?php echo $v->kat_knowledge_base;?>"><?php echo $v->kat_knowledge_base;?></option>
+            <?php endforeach;?>
+        </select>
+    </fieldset>
 
     <table class="table">
         <thead>
@@ -21,6 +52,7 @@
             <th class="no">#</th>
             <th class="no">Tiket</th>
             <th class="medium">Identitas Penanya</th>
+            <th class="short">Kategori</th>
             <th class="no">Prioritas</th>
             <th class="medium">Pertanyaan</th>
             <th class="medium">Deskripsi</th>
@@ -43,15 +75,19 @@
 
             <!-- Identitas Penanya -->
             <td>
-                <?php 
-                if($value->tipe == 'kl') : 
+                <?php
+                if($value->tipe == 'kl') :
                     echo $value->id_satker . ' - ' . $value->nama_satker ;
                 else :
                     echo $value->nama_petugas . ' (' . $value->instansi . ')';
-                endif; 
+                endif;
                 ?>
             </td>
-            
+
+            <td>
+                <?php echo $value->kat_knowledge_base ?>
+            </td>
+
             <!-- Prioritas -->
             <td>
                 <?php if ($value->prioritas == 'high'): ?>
@@ -72,14 +108,14 @@
             <td><?php echo $value->description ?></td>
             <td><?php echo table_tanggal($value->tanggal) ?></td>
             <td class="action">
-				
-				<?php 
+
+				<?php
 				if($value->tanggal_selesai == ''): ?>
                 <a class="button green" href="<?php echo site_url('/helpdesks/view/' . $value->id) ?>">Jawab/Eskalasi</a>
 				<?php else: ?>
 				<strong>
 					Terjawab
-				</strong>	
+				</strong>
 				<?php endif; ?>
             </td>
         </tr>

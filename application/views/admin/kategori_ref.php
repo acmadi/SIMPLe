@@ -28,6 +28,9 @@
             
             <td class="action">
                 <a href="<?php echo site_url('/admin/kategori_ref/edit/' . $value->id_referensi_kat) ?>" class="button blue-pill">Edit</a>
+                <a href="<?php echo site_url('/admin/kategori_ref/delete/' . $value->id_referensi_kat) ?>"
+                   class="button blue-pill"
+                   onclick="return confirm('Anda yakin akan menghapus data ini?')">Hapus</a>
             </td>
         </tr>
         <?php endforeach ?>

@@ -171,4 +171,12 @@ class Referensi extends CI_Controller
 
         $this->load->view('admin/template', $data);
     }
+
+    public function delete($id) {
+        $sql = "DELETE FROM tb_referensi WHERE id_referensi = ?";
+        $this->db->query($sql, array($id));
+        $this->session->set_flashdata('success', 'Berhasil menghapus referensi peraturan');
+        $this->log->create('Menghapus Referensi Peraturan ID ' . $id);
+        redirect('admin/referensi');
+    }
 }

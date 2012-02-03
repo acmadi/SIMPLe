@@ -36,7 +36,7 @@
                 </td>
 
                 <td style="width: 15%">
-                    <label>Telpon Kantor</label>
+                    <label>Telepon Kantor</label>
                 </td>
                 <td  style="width: 35%">
                     <span><?php echo $identitas->no_kantor ?></span>
