@@ -143,4 +143,12 @@ class Kategori_ref extends CI_Controller
 
         $this->load->view('admin/template', $data);
     }
+
+    public function delete($id) {
+        $sql = "DELETE FROM tb_referensi_kat WHERE id_referensi_kat = ?";
+        $this->db->query($sql, array($id));
+        $this->session->set_flashdata('success', 'Berhasil menghapus kategori Referensi Peraturan');
+        $this->log->create('Menghapus Kategori Referensi Peraturan ID ' . $id);
+        redirect('admin/kategori_ref');
+    }
 }
