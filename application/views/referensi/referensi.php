@@ -59,7 +59,7 @@
                 <?php
                 $file = realpath('upload/referensi/' . $value->nama_file);
                 if (file_exists($file) AND $value->nama_file != ''): ?>
-                    <a class="button green" href="<?php echo base_url('upload/referensi/' . $value->nama_file);?>">Download</a>
+                    <a class="button green" href="<?php echo base_url('upload/referensi/' . $value->nama_file);?>" target="_blank">Lihat</a>
                     <?php else: ?>
                     <span class="button red">Tidak ada file</span>
                     <?php endif; ?>
