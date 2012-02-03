@@ -57,7 +57,9 @@ class Mhelpdesks extends CI_Model{
 			);	
 		$this->db->insert('tb_knowledge_base', $arr_knowledge);
 		$id_knowledge_base = $this->db->insert_id();
-
+		
+		$sent = isset($arr['sendmail'])?1:0;
+		
 		// update tiket
 		$arr_tiket = array(
 			'id_knowledge_base'     => $id_knowledge_base,
@@ -66,7 +68,8 @@ class Mhelpdesks extends CI_Model{
 			'sumber'                => $arr['nama_narasumber'],
 			'tanggal_selesai'       => date('Y-m-d H:i:s'),
 			'lavel'                 => 1,
-			'id_user'               => $this->session->userdata('id_user')
+			'id_user'               => $this->session->userdata('id_user'),
+			'sent'               	=> $sent
 			);
 		$this->db->where('id', $id);
 		$this->db->update('tb_tiket_helpdesk', $arr_tiket);

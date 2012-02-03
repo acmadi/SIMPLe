@@ -9,6 +9,3 @@
 # maaf : byk form yg blm q bikin html.. tapi sudah memakai CI
 
 - belum tak masukin user level
-
-# Note
-- Online Users di footer itu query nya ada di new-template.

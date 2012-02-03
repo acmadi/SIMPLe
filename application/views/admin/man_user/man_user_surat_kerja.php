@@ -105,7 +105,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Departemen</td>
+                            <td>Hak Akses K/L</td>
                             <td>:</td>
                             <td>
                                 <select name="fdepartemen" id="fdepartemen" class="chzn-single" data-placeholder="Pilih Departemen" style="width: 500px;">

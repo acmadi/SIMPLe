@@ -22,7 +22,7 @@ class Man_unit_ubah extends CI_Controller
 		$data['list_unit'] = $this->unit->get_list_unit();
 		$data['list_kementrian'] = $this->unit->get_list_kementrian();
 		$data['item'] = $this->unit->get_edited_by_id($id);
-		$data['opt_a'] = array(1=>'Anggaran 1',2=>'Anggaran 2',3=>'Anggaran 3');
+		$data['opt_a'] = array(1=>'Anggaran I',2=>'Anggaran II',3=>'Anggaran III');
 
 		$bc[0]->link = 'admin/dashboard';
         $bc[0]->label = 'Home';
