@@ -23,8 +23,9 @@ class Kb_koordinator extends CI_Controller
     public function knowledge_base()
     {
 
-        $result = $this->db->from('tb_knowledge_base')
-                ->get();
+        $result = $this->db->query("SELECT a.*, (SELECT COUNT(b.no_tiket_helpdesk) 
+									FROM tb_tiket_helpdesk b WHERE b.id_knowledge_base = a.id_knowledge_base ) AS jml_related
+									FROM tb_knowledge_base a");
 
         $data['knowledge_base'] = $result;
 
@@ -37,6 +38,7 @@ class Kb_koordinator extends CI_Controller
 
     public function delete($id)
     {
+		//$cek_related = $this->db->query("SELECT * FROM tb_tiket_helpdesk WHERE id_knowledge_base = ?",array($id))->num_rows();
         $this->db->delete('tb_knowledge_base', array('id_knowledge_base' => $id));
         $this->session->set_flashdata('success', 'Data berhasil dihapus');
         $this->log->create("Menghapus Knowledge_base dengan ID $id");

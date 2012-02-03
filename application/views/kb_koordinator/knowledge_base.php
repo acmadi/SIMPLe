@@ -51,8 +51,10 @@
             </td>
             <td class="action">
                 <a href="<?php echo site_url('/kb_koordinator/edit/' . $value->id_knowledge_base) ?>" class="button blue">Ubah</a>
+				<?php if($value->jml_related == 0):?>
                 <a href="<?php echo site_url('/kb_koordinator/delete/' . $value->id_knowledge_base) ?>" class="button red" onclick="return confirm('Yakin akan menghapus ini?')">Hapus</a>
-            </td>
+				<?php endif; ?>
+			</td>
         </tr>
             <?php endforeach ?>
         </tbody>
