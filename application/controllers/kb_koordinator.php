@@ -78,7 +78,49 @@ class Kb_koordinator extends CI_Controller
 				), array(
 					'id_knowledge_base' => $id
 				));
+				
+				$is_related = $this->db->query("SELECT sent FROM tb_tiket_helpdesk WHERE sent = 1 AND id_knowledge_base = ?",array($id))->num_rows();
+				
+				if(($is_related > 0) AND ($this->input->post('is_public') == 1) ){
+					// kirim email notifikasi
+					$this->load->library('djamail');
+					
+					$kirim = $this->db->query("SELECT *
+												FROM tb_tiket_helpdesk
+												LEFT JOIN tb_petugas_satker
+												ON tb_tiket_helpdesk.id_petugas_satket = tb_petugas_satker.id_petugas_satker
+												LEFT JOIN tb_satker
+												ON tb_tiket_helpdesk.id_satker = tb_satker.id_satker
+												WHERE sent = 1 AND id_knowledge_base = ?",$id);
+												
+					foreach($kirim->result() as $v):
+						$instansi = ($v->nama_satker) ? $v->nama_satker : '';
+						$instansi = ($v->instansi) ? $v->instansi : $instansi;
 
+						$mail['kepada']     = $v->nama_petugas;
+						$mail['instansi']   = $instansi;
+						$mail['pertanyaan'] = $v->pertanyaan;
+						$mail['deskripsi']  = $v->description;
+						$mail['jawaban']    = $this->input->post('jawaban');
+
+						$isi = $this->load->view('mail-template', $mail, TRUE);
+						$attachment = ($nmBr != '') ? 'upload/knowledge/'. $nmBr : '';
+						
+						//explode email
+						$email = explode(';',$v->email);
+						
+						for($i= 0 ; $i <= count($email) ; $i++){
+							$this->djamail->kirim(
+							$email[$i],
+							'Pemberitahuan Jawaban Pertanyaan Anda #' . $v->no_tiket_helpdesk,
+							$isi, 
+							$attachment);
+						}
+					endforeach;
+					
+					$this->db->query("UPDATE tb_tiket_helpdesk SET sent = 0 WHERE id_knowledge_base = ?",array($id));
+				}
+				
 				$this->session->set_flashdata('success', 'Berhasil mengubah data ke knowledge base');
 				$this->log->create("Mengubah Knowledge_base dengan ID {$id}");
 
