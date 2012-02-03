@@ -505,6 +505,7 @@ class Helpdesks extends CI_Controller
 			$this->mhelpdesks->jawab($arr);
 
 			// kirim email notifikasi
+			/*
 			if($this->input->post('sendmail')) :
 				$this->load->library('djamail');
 
@@ -532,6 +533,7 @@ class Helpdesks extends CI_Controller
 				}
 
 			endif;
+			*/
 			
 			$this->session->set_flashdata('success', 
 				'1 (satu) pertanyaan berhasil dijawab dan telah dikembalikan ke Customer Service Helpdesk!' 
