@@ -15,6 +15,7 @@ Class Referensi extends CI_Controller
 
 		$data['referensi'] = $result;
 
+        $data['kategori_referensi'] = $this->db->query("SELECT * FROM tb_referensi_kat");
 		$data['title'] = 'Referensi';
 		$data['content'] = 'referensi/referensi';
 		$this->load->view('new-template', $data);
