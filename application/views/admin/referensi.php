@@ -30,6 +30,7 @@
             <td style=""><?php echo $value->nama_kat ?></td>
             <td class="action">
                 <a href="<?php echo site_url('/admin/referensi/edit/' . $value->id_referensi) ?>" class="button blue-pill">Edit</a>
+                <a href="<?php echo site_url('/admin/referensi/delete/' . $value->id_referensi) ?>" class="button blue-pill">Hapus</a>
             </td>
         </tr>
         <?php endforeach ?>
