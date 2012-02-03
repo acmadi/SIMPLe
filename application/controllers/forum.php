@@ -124,4 +124,9 @@ class Forum extends CI_Controller
         $data['content'] = 'forum/category';
         $this->load->view('new-template', $data);
     }
+
+    public function download($filename) {
+        $file = file_get_contents(FCPATH . 'upload/forum/' . $filename);
+        force_download('test.zip', $file);
+    }
 }
