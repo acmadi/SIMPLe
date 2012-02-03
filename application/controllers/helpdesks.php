@@ -144,7 +144,7 @@ class Helpdesks extends CI_Controller
 			$this->form_validation->set_rules('nama_petugas', 'Nama Petugas', 'required');
 			$this->form_validation->set_rules('jabatan_petugas', 'Jabatan', 'required');
 			$this->form_validation->set_rules('no_hp', 'No HP', 'required|numeric');
-			$this->form_validation->set_rules('no_kantor', 'Telpon Kantor', 'required|numeric');
+			$this->form_validation->set_rules('no_kantor', 'Telepon Kantor', 'required|numeric');
 			$this->form_validation->set_rules('email', 'Email', 'required|email');
 
 			if ($this->form_validation->run() == TRUE) :

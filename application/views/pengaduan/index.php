@@ -188,7 +188,7 @@
 
         <div class="grid_5">
             <p class="kl">
-                <label>Telpon</label>
+                <label>Telepon</label>
                 <input type="text" id="no_hp" name="no_hp" size="30" value="<?php echo set_value('no_hp') ?>">
             </p>
 

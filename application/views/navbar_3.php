@@ -11,5 +11,5 @@ require_once(APPPATH . 'views/navbar_init.php');
     <li><?php echo anchor('frontdesk/pengembalian_dokumen', 'Pengembalian Dokumen', "class='$nav_pengembalian_dokumen'");?></li>
     <li><?php echo anchor('referensi', 'Referensi Peraturan', "class='$nav_referensi'") ?></li>
     <li><?php echo anchor('forum', 'Forum', "class='$nav_forum'");?></li>
-    <li><?php echo anchor('telpon', 'Telpon', "class='$nav_telpon'");?></li>
+    <li><?php echo anchor('telepon', 'Telepon', "class='$nav_telepon'");?></li>
 </ul>

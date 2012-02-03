@@ -9,7 +9,7 @@ $nav_pengembalian_dokumen =
 $nav_report =
 $nav_jawaban_cs =
 
-$nav_referensi = $nav_knowledge = $nav_forum = $nav_telpon = '';
+$nav_referensi = $nav_knowledge = $nav_forum = $nav_telepon = '';
 
 // Common
 if ($this->uri->segment(2) == 'dashboard') $nav_dashboard = 'current';
@@ -39,5 +39,5 @@ if ($this->uri->segment(2) == 'pengembalian_dokumen') $nav_pengembalian_dokumen 
 if ($this->uri->segment(1) == 'referensi') $nav_referensi = 'current';
 if ($this->uri->segment(1) == 'knowledge') $nav_knowledge = 'current';
 if ($this->uri->segment(1) == 'forum') $nav_forum = 'current';
-if ($this->uri->segment(1) == 'telpon') $nav_telpon = 'current';
+if ($this->uri->segment(1) == 'telepon') $nav_telepon = 'current';
 ?>

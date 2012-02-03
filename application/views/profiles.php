@@ -45,7 +45,7 @@
             </p>
 
             <p>
-                <label> Telpon </label>
+                <label> Telepon </label>
                 <input type="text" name="no_tlp" value="<?php echo (isset($_POST['submit']) AND $_POST['submit'] == 'profile') ? set_value('no_tlp') : $profile->no_tlp ?>"/>
             </p>
 

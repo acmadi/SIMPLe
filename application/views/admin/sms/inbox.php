@@ -25,7 +25,7 @@ $sms[3]['message'] = 'INFO 020317 002921';
             <tr>
                 <th class="short">&nbsp;</th>
                 <th class="short">No</th>
-                <th>Telpon</th>
+                <th>Telepon</th>
                 <th>Pesan</th>
             </tr>
             </thead>

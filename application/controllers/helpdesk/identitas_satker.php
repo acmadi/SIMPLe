@@ -159,7 +159,7 @@ class Identitas_satker extends CI_Controller
             $this->form_validation->set_rules('nama_petugas', 'Nama', 'required');
             $this->form_validation->set_rules('instansi', 'Instansi', 'required');
             $this->form_validation->set_rules('alamat', 'Alamat', 'required');
-            $this->form_validation->set_rules('no_hp', 'Telpon', 'required');
+            $this->form_validation->set_rules('no_hp', 'Telepon', 'required');
             $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
 
 
