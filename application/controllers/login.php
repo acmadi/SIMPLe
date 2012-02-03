@@ -40,6 +40,7 @@ Class Login extends CI_Controller
 
         } else {
             $login_data = $this->mlogin->cekdb($user, $pass);
+			
         }
 
         if ($login_data) {
@@ -146,6 +147,9 @@ Class Login extends CI_Controller
                     break;
                 case '14':
                     redirect('admin_pengaduan/dashboard');
+                    break;
+				case '999':
+                    redirect('knowledge');
                     break;
             }
         } else {
