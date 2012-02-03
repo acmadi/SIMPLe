@@ -11,7 +11,14 @@ class Forum extends CI_Controller
 
     function index()
     {
-        $this->halaman(1);
+        //$this->halaman(1);
+
+        $data['kategori'] = $this->mforum->get_categories();
+
+
+        $data['title'] = 'Manajemen Forum';
+        $data['content'] = 'forum/index';
+        $this->load->view('new-template', $data);
     }
 
     function halaman($page = 1)
@@ -22,10 +29,10 @@ class Forum extends CI_Controller
 
         $config['base_url'] = site_url('forum/halaman/');
         $config['total_rows'] = $this->mforum->count_forums();
-        $config['per_page'] = 5; 
+        $config['per_page'] = 5;
         $config['uri_segment'] = 3;
         $config['use_page_numbers'] = TRUE;
-        $this->pagination->initialize($config); 
+        $this->pagination->initialize($config);
 
         $data['pagination'] = $this->pagination->create_links();
 
@@ -60,31 +67,61 @@ class Forum extends CI_Controller
     {
         // $forum = $this->mforum->
     }
+
     function kirim()
     {
 
-        $id_parent = ( ! $this->input->post('id_parent') ) ? NULL : $this->input->post('id_parent');
+        $id_parent = (!$this->input->post('id_parent')) ? NULL : $this->input->post('id_parent');
         $referrer = $this->input->post('referrer');
 
         $nmBr = '';
-        if (isset($_FILES['file']['name']) && $_FILES['file']['name'] != ''){
-            $unik = date('isdm').'_';
+        if (isset($_FILES['file']['name']) && $_FILES['file']['name'] != '') {
+            $unik = date('isdm') . '_';
             $nmBr = $unik . $_FILES['file']['name'];
-            move_uploaded_file($_FILES['file']['tmp_name'], 'upload/forum/'. $nmBr);
+            move_uploaded_file($_FILES['file']['tmp_name'], 'upload/forum/' . $nmBr);
         }
 
         $arr = array(
             'id_kat_forum' => $this->input->post('id_kat_forum'),
-            'judul_forum'  => $this->input->post('judul_forum'),
-            'isi_forum'    => $this->input->post('isi_forum'),
-            'id_parent'    => $id_parent,
-            'id_user'      => $this->session->userdata('id_user'),
-            'file'         => $nmBr,
-            );
+            'judul_forum' => $this->input->post('judul_forum'),
+            'isi_forum' => $this->input->post('isi_forum'),
+            'id_parent' => $id_parent,
+            'id_user' => $this->session->userdata('id_user'),
+            'file' => $nmBr,
+        );
 
 
         $this->mforum->add_forum_by_array($arr);
 
         redirect($referrer);
+    }
+
+    public function category($id)
+    {
+        $sql = "SELECT *
+                FROM tb_forum a
+                JOIN tb_user b ON a.id_user = b.id_user
+                WHERE a.id_kat_forum = ?
+                AND a.id_parent IS NULL
+                ORDER BY a.tanggal
+                ";
+        $forum = $this->db->query($sql, array($id));
+
+        $sql = "SELECT * FROM tb_kat_forum WHERE id_kat_forum = ?";
+        $kategori = $this->db->query($sql, array($id))->row();
+
+        $jumlah_thread = array();
+        foreach ($forum->result() as $value) {
+            $sql = "SELECT * FROM tb_forum WHERE id_parent = ?";
+            $temp = $this->db->query($sql, array($value->id_forum));
+            $jumlah_thread[$value->id_forum] = $temp->num_rows();
+        }
+
+        $data['jumlah_thread'] = $jumlah_thread;
+        $data['kategori'] = $kategori;
+        $data['forum'] = $forum;
+        $data['title'] = 'Manajemen Forum';
+        $data['content'] = 'forum/category';
+        $this->load->view('new-template', $data);
     }
 }
