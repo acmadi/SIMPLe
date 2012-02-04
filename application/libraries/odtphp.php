@@ -99,6 +99,7 @@ class Odtphp
         $odf->setVars('var14', $data['catatan']);
         $odf->setVars('var15', $this->CI->session->userdata('nama'));
         $odf->setVars('tanggal_sekarang', strftime('%d %B %Y'));
+        $odf->setVars('nama_unit_satker', $data['nama_unit_satker']);
 
 
         // Persiapkan output file

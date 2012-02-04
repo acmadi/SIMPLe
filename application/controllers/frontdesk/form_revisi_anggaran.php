@@ -250,17 +250,40 @@ class Form_revisi_anggaran extends CI_Controller
 
     function success($no_tiket_frontdesk)
     {
-        // TODO: Gak optimal ini query nya. Suatu saat nanti harus dioptimalkan.
-        $result = $this->db->from('tb_tiket_frontdesk')
-                ->join('tb_satker', 'tb_satker.id_satker = tb_tiket_frontdesk.id_satker', 'left')
-                ->join('tb_petugas_satker', 'tb_petugas_satker.id_petugas_satker = tb_tiket_frontdesk.id_petugas_satker')
-                ->join('tb_kelengkapan_formulir', 'tb_kelengkapan_formulir.no_tiket_frontdesk = tb_tiket_frontdesk.no_tiket_frontdesk')
-                ->join('tb_kelengkapan_doc', 'tb_kelengkapan_doc.id_kelengkapan = tb_kelengkapan_formulir.id_kelengkapan')
-                ->join('tb_unit', 'tb_unit.id_unit = tb_tiket_frontdesk.id_unit AND tb_unit.id_kementrian = tb_tiket_frontdesk.id_kementrian')
-        //->join('tb_kementrian', 'tb_kementrian.id_kementrian = tb_satker.id_kementrian')
-        //->join('tb_unit', 'tb_unit.id_unit = tb_satker.id_unit')
-                ->where('tb_tiket_frontdesk.no_tiket_frontdesk', $no_tiket_frontdesk)
-                ->get();
+        $sql = "SELECT a.no_tiket_frontdesk, a.tanggal, a.catatan, a.nomor_surat_usulan, a.tanggal_surat_usulan,
+                       a.id_kementrian, a.id_unit, a.petugas_penerima,
+                       c.id_petugas_satker, c.nama_petugas, c.nip, c.jabatan_petugas, c.no_hp, c.email, c.no_kantor, c.tipe,
+                       d.id_kelengkapan_formulir, e.id_kelengkapan, e.nama_kelengkapan,
+                       g.nama_unit AS nama_unit_satker
+                FROM tb_tiket_frontdesk a
+                LEFT JOIN tb_satker b          ON b.id_satker          = a.id_satker
+                JOIN tb_petugas_satker c       ON c.id_petugas_satker  = a.id_petugas_satker
+                JOIN tb_kelengkapan_formulir d ON d.no_tiket_frontdesk = a.no_tiket_frontdesk
+                JOIN tb_kelengkapan_doc e      ON e.id_kelengkapan     = d.id_kelengkapan
+                JOIN tb_kon_unit_satker f      ON (f.id_unit = a.id_unit AND f.id_kementrian = a.id_kementrian)
+                JOIN tb_unit_saker g           ON g.id_unit_satker = f.id_unit_satker
+                WHERE a.no_tiket_frontdesk = ?
+                ";
+
+//        $sql = "SELECT tb_unit.nama_unit, tb_unit.id_unit,
+//                       tb_kementrian.nama_kementrian, tb_kementrian.id_kementrian,
+//                       tb_petugas_satker.nama_petugas, nip, jabatan_petugas, no_hp, no_kantor, email,
+//                       tb_tiket_frontdesk.nomor_surat_usulan, tb_tiket_frontdesk.tanggal_surat_usulan,
+//                       tb_tiket_frontdesk.no_tiket_frontdesk, tb_tiket_frontdesk.tanggal,
+//                       tb_tiket_frontdesk.petugas_penerima, tb_tiket_frontdesk.catatan
+//
+//                FROM (`tb_tiket_frontdesk`)
+//                LEFT JOIN `tb_satker` ON `tb_satker`.`id_satker` = `tb_tiket_frontdesk`.`id_satker`
+//                JOIN `tb_petugas_satker` ON `tb_petugas_satker`.`id_petugas_satker` = `tb_tiket_frontdesk`.`id_petugas_satker`
+//                JOIN `tb_kelengkapan_formulir` ON `tb_kelengkapan_formulir`.`no_tiket_frontdesk` = `tb_tiket_frontdesk`.`no_tiket_frontdesk`
+//                JOIN `tb_kelengkapan_doc` ON `tb_kelengkapan_doc`.`id_kelengkapan` = `tb_kelengkapan_formulir`.`id_kelengkapan`
+//                JOIN `tb_unit` ON `tb_unit`.`id_unit` = `tb_tiket_frontdesk`.`id_unit` AND tb_unit.id_kementrian = tb_tiket_frontdesk.id_kementrian
+//                JOIN tb_kementrian ON tb_kementrian.id_kementrian = tb_tiket_frontdesk.id_kementrian
+//                WHERE `tb_tiket_frontdesk`.`no_tiket_frontdesk` =  ? ";
+
+        $result = $this->db->query($sql, array($no_tiket_frontdesk));
+
+        echo $this->db->last_query();
 
         $data['identitas'] = $result->result();
 
@@ -271,8 +294,13 @@ class Form_revisi_anggaran extends CI_Controller
         $result = $this->db->from('tb_kementrian')->where('id_kementrian', $id_kementrian)->get();
         $data['kementrian'] = $result->row();
 
-        $result = $this->db->from('tb_unit')->where('id_unit', $id_unit)->get();
+        $result = $this->db->from('tb_unit')
+            ->where('id_unit', $id_unit)
+            ->where('id_kementrian', $id_kementrian)
+            ->get();
         $data['unit'] = $result->row();
+
+        print_r($data['unit']);
 
         $data['no_tiket_frontdesk'] = $no_tiket_frontdesk;
 
@@ -299,6 +327,7 @@ class Form_revisi_anggaran extends CI_Controller
         $document['tlpkantor'] = $data['identitas'][0]->no_kantor;
         $document['emails'] = $data['identitas'][0]->email;
         $document['tgl_pengajuan'] = date('d-m-Y H:i:s');
+        $document['nama_unit_satker'] = $data['identitas'][0]->nama_unit_satker;
 
         // Cek apakah sudah lewat jam 12 siang?
         $tanggal_mulai = $data['identitas'][0]->tanggal;
