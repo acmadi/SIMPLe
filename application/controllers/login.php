@@ -9,9 +9,6 @@ Class Login extends CI_Controller
 
     public function index()
     {
-        if ($this->session->userdata('lavel') == 0) {
-            redirect('admin/dashboard');
-        }
         $data['title'] = 'Home';
         $data['content'] = 'login';
         $this->load->view('new-template', $data);
