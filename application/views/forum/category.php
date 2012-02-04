@@ -2,6 +2,12 @@
 
     <h1>Forum - <?php echo $kategori->kat_forum ?></h1>
 
+    <div style="text-align: right;">
+        <a href="<?php echo site_url('forum/add/1/') ?>" class="button green">Tambah Forum Baru</a>
+    </div>
+
+    <?php if ($forum->num_rows() > 0):  ?>
+
     <table class="table">
         <thead>
         <tr>
@@ -35,4 +41,10 @@
 
         </tbody>
     </table>
+
+    <?php else: ?>
+
+    <div class="notification yellow">Forum ini masih kosong</div>
+
+    <?php endif; ?>
 </div>
