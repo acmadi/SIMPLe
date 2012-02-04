@@ -18,7 +18,7 @@ class Dashboard extends CI_Controller
         // Standard inclusions
 		$result_statistik = $this->mdashboard->get_info_statistik();
 		
-		if($result_statistik):
+		if($result_statistik['jml_1'] > 0 OR $result_statistik['jml_2'] > 0 ):
 			include("pChart/pData.class");
 			include("pChart/pChart.class");
 

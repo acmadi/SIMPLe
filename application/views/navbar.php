@@ -1,7 +1,7 @@
 <?php
 $nav_dashboard = $nav_aksescontrol = $nav_manunit = $nav_manuser =
 $nav_helpdesk = $nav_history = $nav_system = $nav_knowledge =
-$nav_frontdesk = $nav_forum = $nav_kementrian = $nav_satker = $nav_eselon = $nav_calendar = $nav_sms = 
+$nav_frontdesk = $nav_forum = $nav_kementrian = $nav_satker = $nav_eselon = $nav_calendar = $nav_sms = $nav_petugas =
 $nav_referensi = $nav_telepon = '';
 switch ($this->uri->segment(2)) {
     case 'dashboard':
@@ -62,6 +62,9 @@ if ($this->uri->segment(1) == 'knowledge') {
 if ($this->uri->segment(1) == 'telepon') {
     $nav_telepon = 'current';
 }
+if ($this->uri->segment(1) == 'report_petugas') {
+    $nav_petugas = 'current';
+}
 ?>
 
 <div id="navbar" class="clearfloat">
@@ -84,6 +87,7 @@ if ($this->uri->segment(1) == 'telepon') {
         <li><?php echo anchor('admin/sms', 'SMS', "class='$nav_sms'");?></li>
         <li><?php echo anchor('admin/man_kelengkapan_doc', 'Kelengkapan Dokumen', "class='$nav_sms'");?></li>
         <li><?php echo anchor('admin/telepon', 'Telepon', "class='$nav_telepon'");?></li>
+        <li><?php echo anchor('admin/report_petugas', 'Report', "class='$nav_petugas'");?></li>
     </ul>
     <div id="logout"><?php echo $this->session->userdata('nama') ?> &nbsp; | &nbsp; <?php echo anchor("login/process_logout", 'Logout') ?> &nbsp; <em><?php //echo date('d-m-Y') ?></em></div>
 </div>
