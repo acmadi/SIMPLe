@@ -75,15 +75,25 @@ class Man_forum extends CI_Controller
 			$id_kat_forum 	= $this->input->post('id_kat_forum');
 			$judul_forum 	= $this->input->post('judul_forum');
 			$isi_forum 		= $this->input->post('isi_forum');
-			
-			$nmBr = '';
-			if (isset($_FILES['lampiran']['name'])){
-				$unik = date('isdm').'_forum_';
-				$nmBr = $unik.$_FILES['lampiran']['name'];
-				move_uploaded_file($_FILES['lampiran']['tmp_name'], 'upload/forum/'.$nmBr);
-			}
 
-			$result = $this->mforum->add_forum($id_kat_forum, $judul_forum, $isi_forum, $nmBr, $id_user);
+            $upload_config['upload_path'] = FCPATH . 'upload/forum/';
+            $upload_config['allowed_types'] = 'rar|zip|pdf|jpg|png';
+
+            $this->upload->initialize($upload_config);
+
+            $upload_data = null;
+            if ($this->upload->do_upload('lampiran')) {
+                $upload_data = $this->upload->data();
+            } else {
+                echo $this->upload->display_errors();
+            }
+
+            $result = null;
+            if ($upload_data != null) {
+                $result = $this->mforum->add_forum($id_kat_forum, $judul_forum, $isi_forum, $upload_data['file_name'], $id_user);
+            } else {
+                $result = $this->mforum->add_forum($id_kat_forum, $judul_forum, $isi_forum, '', $id_user);
+            }
 
 			if ($result) {
 				$this->session->set_flashdata('success', 'Data sukses ditambahkan');
