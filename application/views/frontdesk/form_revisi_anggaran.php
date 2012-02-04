@@ -47,10 +47,11 @@
 
             $('#eselon').chosen().change(function () {
                 id_kementrian = substr($('#nama_kl').val(), 0, 3);
-                url = '<?php echo site_url('frontdesk/form_revisi_anggaran/anggaran') ?>/' + id_kementrian;
+                id_unit = substr($('#eselon').val(), 0, 2);
+                url = '<?php echo site_url('frontdesk/form_revisi_anggaran/anggaran') ?>/' + id_kementrian + '/' + id_unit;
                 console.log(url);
                 $.get(url, function (response) {
-                    $('#anggaran').html('A' + response);
+                    $('#anggaran').html(response);
                 });
 
                 url = '<?php echo site_url('frontdesk/form_revisi_anggaran/cari_satker') ?>/' + id_kementrian + '/' + $(this).val();
@@ -182,6 +183,8 @@
         <!-- <div id="anggaran" style="padding: 20px; display: inline-block; float: right; font-size: 24px;"></div> -->
 
         <div id="anggaran" style="padding: 10px; display: inline-block; float: right; font-size: 24px;"></div>
+        <div class="clear"></div>
+
         <p>
 
         <div style="float: left;">
