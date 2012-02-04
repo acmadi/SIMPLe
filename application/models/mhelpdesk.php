@@ -249,7 +249,7 @@ class Mhelpdesk extends CI_Model
 
     	// jadi gini,
     	// cari tiket yg statusnya closed dan ditutup oleh user dengan lavel 1 
-    	$string = 
+    	/*$string = 
     	"SELECT * 
 		 FROM tb_tiket_helpdesk t
 		 LEFT JOIN tb_user u ON ( t.id_user = u.id_user ) 
@@ -257,7 +257,17 @@ class Mhelpdesk extends CI_Model
 		 WHERE l.lavel =  '$lavel'
 		 AND status = 'close'
 		 ORDER BY tanggal_selesai DESC
+    	 ";*/
+		 
+		$string = 
+    	"SELECT * 
+		 FROM tb_tiket_helpdesk t
+		 LEFT JOIN tb_user u ON ( t.id_user = u.id_user )
+		 WHERE t.lavel =  '$lavel'
+		 AND status = 'close'
+		 ORDER BY tanggal_selesai DESC
     	 ";
+		 
     	$query = $this->db->query($string);
 
         if ($count) :
