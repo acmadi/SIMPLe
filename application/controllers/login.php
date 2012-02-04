@@ -9,6 +9,7 @@ Class Login extends CI_Controller
 
     public function index()
     {
+
         $data['title'] = 'Home';
         $data['content'] = 'login';
         $this->load->view('new-template', $data);
@@ -108,6 +109,7 @@ Class Login extends CI_Controller
 			//print_r($login_data->id_lavel);exit;
 			
             switch (strtolower($login_data->id_lavel)) {
+                case '0':
                 case '1':
                     redirect('admin/dashboard');
                     break;
