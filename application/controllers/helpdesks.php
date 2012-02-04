@@ -300,15 +300,13 @@ class Helpdesks extends CI_Controller
 	function list_pertanyaan()
 	{
 
-		$result = $this->db->from('tb_tiket_helpdesk a')
-				->join('tb_satker b', 'b.id_satker = a.id_satker', 'left')
-				->join('tb_petugas_satker c', 'a.id_petugas_satket = c.id_petugas_satker', 'left')
-				->join('tb_user d', 'a.id_user = d.id_user', 'left')
-				->join('tb_kat_knowledge_base e', 'a.id_kat_knowledge_base = e.id_kat_knowledge_base', 'left')
-				->order_by('tanggal_selesai DESC')
-				->order_by('prioritas DESC')
-				// ->order_by('status DESC')
-				->get();
+		$result = $this->db->query("SELECT *, (SELECT f.jawaban FROM tb_knowledge_base f WHERE f.id_knowledge_base = a.id_knowledge_base AND f.is_public = 1) AS revisi 
+									FROM (`tb_tiket_helpdesk` a) 
+									LEFT JOIN `tb_satker` b ON `b`.`id_satker` = `a`.`id_satker` 
+									LEFT JOIN `tb_petugas_satker` c ON `a`.`id_petugas_satket` = `c`.`id_petugas_satker` 
+									LEFT JOIN `tb_user` d ON `a`.`id_user` = `d`.`id_user` 
+									LEFT JOIN `tb_kat_knowledge_base` e ON `a`.`id_kat_knowledge_base` = `e`.`id_kat_knowledge_base` 
+									ORDER BY `tanggal_selesai` DESC, `prioritas` DESC ");
 		//print_r($this->db->last_query());
 
 		$data['tikets'] = $result;

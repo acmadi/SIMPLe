@@ -5,21 +5,21 @@
         oTable = $('.table').dataTable();
         oTable.fnSort( [ [7,'desc'],[2,'asc'] ] );
         oTable.fnAdjustColumnSizing();
-        oTable.fnFilter( 'open', 7 );
+        oTable.fnFilter( 'open', 8 );
 
         $('#Semua').click(function(){
-            oTable.fnFilter( '', 7);
+            oTable.fnFilter( '', 8);
         });
         $('#Open').click(function(){
-            oTable.fnFilter( 'open', 7 );
+            oTable.fnFilter( 'open', 8 );
         });
         $('#Close').click(function(){
-            oTable.fnFilter( 'close', 7 );
+            oTable.fnFilter( 'close', 8 );
         });
 		
 		$('#kategori_list').chosen().change(function(){
             var nama_kategori = $(this).val();
-			 oTable.fnFilter( nama_kategori, 3 );
+			 oTable.fnFilter( nama_kategori, 4 );
             
         })
     });
@@ -76,6 +76,7 @@
             <!-- <th class="no">No</th> -->
             <th class="no">#Tiket</th>
             <th class="medium">Identitas Penanya</th>
+            <th class="small">No HP</th>
             <th class="no">Prioritas</th>
             <th class="no">Kategori</th>
             <th class="medium">Pertanyaan</th>
@@ -87,7 +88,7 @@
         </thead>
         <tfoot>
         <tr>
-            <td colspan="9">&nbsp;</td>
+            <td colspan="10">&nbsp;</td>
         </tr>
         </tfoot>
         <tbody>
@@ -115,6 +116,12 @@
                 endif; 
                 ?>
             </td>
+			
+			<td>
+				<?php
+					echo $value->no_hp;
+				?>
+			</td>
             
             
             <!-- Prioritas -->
@@ -177,6 +184,7 @@
                        data-topik='<?php echo ascii_to_entities($value->pertanyaan) ?>'
                        data-pertanyaan='<?php echo ascii_to_entities($value->description) ?>'
                        data-jawaban='<?php echo ascii_to_entities($value->jawab) ?>'
+                       data-jawabanrev='<?php echo ascii_to_entities($value->revisi) ?>'
                        data-cek='<?php echo ascii_to_entities($cek) ?>'
                        href='javascript:void(0)'><?php echo strtoupper($value->status) ?></a>
             </td>
@@ -190,6 +198,7 @@
                        data-topik='<?php echo ascii_to_entities($value->pertanyaan) ?>'
                        data-pertanyaan='<?php echo ascii_to_entities($value->description) ?>'
                        data-jawaban='<?php echo ascii_to_entities($value->jawab) ?>'
+                       data-jawabanrev='<?php echo ascii_to_entities($value->revisi) ?>'
 					   data-cek='<?php echo ascii_to_entities($cek) ?>'
                        href='javascript:void(0)'>
                     <span class="text green">
@@ -217,6 +226,7 @@
     Topik : <h1 id="topik"></h1>
     Pertanyaan : <h1 id="pertanyaan"></h1>
     Jawaban : <p id="jawabannya"></p>
+    Jawaban revisi admin : <p id="jawabannya_adm"></p>
 </div>
 
 <div style="display: none" id="jawaban_default" data-id="">
@@ -224,6 +234,7 @@
     Topik : <h1 id="topik_def"></h1>
     Pertanyaan : <h1 id="pertanyaan_def"></h1>
     Jawaban : <p id="jawabannya_def"></p>
+    Jawaban revisi admin : <p id="jawabannya_adm_def"></p>
 </div>
 
 <script type="text/javascript">
@@ -285,6 +296,7 @@
         $('.referensi-jawaban').live('click', function () {
             var title = $(this).data('pertanyaan');
             var jawabannya = $(this).data('jawaban');
+            var jawabannya_rev = $(this).data('jawabanrev');
             var topik = $(this).data('topik');
             var kategori = $(this).data('kategori');
             var id = $(this).data('id');
@@ -299,12 +311,14 @@
 				$('#topik').html(topik);
 				$('#pertanyaan').html(title);
 				$('#jawabannya').html(jawabannya);
+				$('#jawabannya_adm').html(jawabannya_rev);
 			}else{
 				$('#jawaban_default').dialog('open');
 				$('#kategori_def').html(kategori);
 				$('#topik_def').html(topik);
 				$('#pertanyaan_def').html(title);
 				$('#jawabannya_def').html(jawabannya);
+				$('#jawabannya_rev_def').html(jawabannya_rev);
 				$('#jawaban_default').data('id', id);
 			}
 			
