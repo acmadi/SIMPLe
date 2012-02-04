@@ -125,8 +125,64 @@ class Forum extends CI_Controller
         $this->load->view('new-template', $data);
     }
 
-    public function download($filename) {
+    public function download($filename)
+    {
+        // FIXME: Kalau nama file mengandung # masih error
+        $filename = url_title($filename);
         $file = file_get_contents(FCPATH . 'upload/forum/' . $filename);
-        force_download('test.zip', $file);
+        force_download($filename, $file);
+    }
+
+    public function add($forum_id)
+    {
+
+        if ($_POST) {
+            $this->form_validation->set_rules('judul_forum', 'Judul Forum', 'required|trim');
+            $this->form_validation->set_rules('isi_forum', 'Isi Forum', 'required|trim');
+
+            if ($this->form_validation->run()) {
+
+                $upload_config['upload_path'] = FCPATH . 'upload/forum/';
+                $upload_config['allowed_types'] = 'rar|zip|pdf|jpg|png';
+
+                $this->upload->initialize($upload_config);
+
+                $upload_data = null;
+                if ($this->upload->do_upload('file')) {
+                    $upload_data = $this->upload->data();
+                } else {
+                    echo $this->upload->display_errors();
+                }
+
+                if ($upload_data != null) {
+                    $sql = "INSERT INTO tb_forum (judul_forum, isi_forum, id_kat_forum, tanggal, id_parent, id_user, file)
+                            VALUES (?, ?, ?, NOW(), NULL, ?, ?)";
+                    $this->db->query($sql, array(
+                        $this->input->post('judul_forum'),
+                        $this->input->post('isi_forum'),
+                        $forum_id,
+                        $this->session->userdata('id_user'),
+                        $upload_data['file_name']
+                    ));
+                } else {
+                    $sql = "INSERT INTO tb_forum (judul_forum, isi_forum, id_kat_forum, tanggal, id_parent, id_user)
+                            VALUES (?, ?, ?, NOW(), NULL, ?)";
+                    $this->db->query($sql, array(
+                        $this->input->post('judul_forum'),
+                        $this->input->post('isi_forum'),
+                        $forum_id,
+                        $this->session->userdata('id_user'),
+                    ));
+                }
+                $last_id = $this->db->insert_id();
+                $this->session->set_flashdata('success', 'Berhasil menambahkan forum baru');
+                $this->log->create('Menambahkan forum baru ID ' . $last_id);
+                redirect('forum/view/' . $last_id);
+            }
+        }
+
+        $data['title'] = 'Manajemen Forum';
+        $data['content'] = 'forum/add';
+        $this->load->view('new-template', $data);
     }
 }

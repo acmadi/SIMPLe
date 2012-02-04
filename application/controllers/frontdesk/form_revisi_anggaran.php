@@ -360,15 +360,17 @@ class Form_revisi_anggaran extends CI_Controller
         $this->load->view('/frontdesk/cetak_bald', $data);
     }
 
-    function anggaran($id_kementrian)
+    function anggaran($id_kementrian, $id_unit)
     {
         $result = $this->db->from('tb_kon_unit_satker a')
                 ->join('tb_unit_saker b', 'a.id_unit_satker = b.id_unit_satker')
                 ->where('id_kementrian', $id_kementrian)
-                ->get();
-        $anggaran = $result->row();
-        $anggaran = $anggaran->anggaran;
-        echo $anggaran;
+                ->where('id_unit', $id_unit)
+                ->get()
+                ->row();
+
+        $nama_unit = $result->nama_unit;
+        echo $nama_unit;
         exit();
     }
 
