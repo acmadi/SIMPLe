@@ -35,8 +35,8 @@ $(document).ready(function(){
     	<th class="no">No</th>
     	<th class="no">Tanggal</th>
     	<th class="medium">Dijawab oleh</th>
+    	<th class="medium">Topik</th>
     	<th class="medium">Pertanyaan</th>
-    	<th class="medium">Deskripsi</th>
     	<th class="medium">Jawaban</th>
     </tr>
     </thead>

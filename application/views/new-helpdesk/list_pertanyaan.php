@@ -79,7 +79,7 @@
             <th class="small">No HP</th>
             <th class="no">Prioritas</th>
             <th class="no">Kategori</th>
-            <th class="medium">Pertanyaan</th>
+            <th class="medium">Topik</th>
             <th class="no">Ditanyakan</th>
             <th class="no">Terjawab</th>
             <th class="no">Status</th>

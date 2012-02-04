@@ -42,7 +42,9 @@ Class Login extends CI_Controller
             $login_data = $this->mlogin->cekdb($user, $pass);
 			
         }
-
+		
+		//print_r($this->db->last_query());exit;
+		
         if ($login_data) {
 
             // Cek masa kerja

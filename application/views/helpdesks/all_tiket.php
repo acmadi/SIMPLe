@@ -54,8 +54,8 @@
             <th class="medium">Identitas Penanya</th>
             <th class="short">Kategori</th>
             <th class="no">Prioritas</th>
+            <th class="medium">Topik</th>
             <th class="medium">Pertanyaan</th>
-            <th class="medium">Deskripsi</th>
             <th class="no">Tanggal</th>
             <th>&nbsp;</th>
         </tr>
