@@ -128,7 +128,7 @@ class Forum extends CI_Controller
     public function download($filename)
     {
         $file = file_get_contents(FCPATH . 'upload/forum/' . $filename);
-        force_download('test.zip', $file);
+        force_download(url_title($filename), $file);
     }
 
     public function add($forum_id)
