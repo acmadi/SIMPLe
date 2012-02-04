@@ -75,7 +75,7 @@
                 </p> -->
 
                 <p>
-                    <label style="display: inline-block; width: 100px;">Pertanyaan</label>
+                    <label style="display: inline-block; width: 100px;">Topik</label>
                     <span><?php echo $antrian->pertanyaan ?></span>
                     <input type="hidden" name="pertanyaan" value="<?php echo $antrian->pertanyaan ?>"/>
                 </p>
@@ -85,7 +85,7 @@
             <div class="grid_6 alpha omega">
 
                 <p>
-                    <label style="display: inline-block; width: 100px;">Deskripsi</label>
+                    <label style="display: inline-block; width: 100px;">Pertanyaan</label>
                     <span><?php echo $antrian->description ?></span>
                     <input type="hidden" name="description" value="<?php echo $antrian->description ?>"/>
                 </p>
