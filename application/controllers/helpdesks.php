@@ -594,14 +594,52 @@ class Helpdesks extends CI_Controller
      * CS Menjawab langsung pertanyaan helpdesk
      */
     public function jawab_langsung() {
+		//print_r($_POST);exit;
+		
+		$data_helpdesk = $this->db->query("SELECT * FROM tb_tiket_helpdesk WHERE id = ?", $this->input->post('id_tiket_helpdesk'))->row();
+		
+		$id = $this->input->post('id_tiket_helpdesk');
+
+		// tambahkan jawaban ke dalam tb_knowledge_base
+		$arr_knowledge = array(
+			'judul'                 => $data_helpdesk->pertanyaan,
+			'desripsi'              => $data_helpdesk->description,
+			'jawaban'               => $this->input->post('jawaban'),
+			'nama_narasumber'       => '',
+			'jabatan_narasumber'    => '',
+			'id_kat_knowledge_base' => $data_helpdesk->id_kat_knowledge_base,
+			'bukti_file'            => '',
+			);	
+		$this->db->insert('tb_knowledge_base', $arr_knowledge);
+		$id_knowledge_base = $this->db->insert_id();
+		
+		$sent = isset($arr['sendmail'])?1:0;
+		
+		// update tiket
+		$arr_tiket = array(
+			'id_knowledge_base'     => $id_knowledge_base,
+			'id_kat_knowledge_base' => $data_helpdesk->id_kat_knowledge_base,
+			'jawab'                 => $this->input->post('jawaban'),
+			'sumber'                => '',
+			'tanggal_selesai'       => date('Y-m-d H:i:s'),
+			'lavel'                 => 1,
+			'id_user'               => $this->session->userdata('id_user'),
+			'sent'               	=> $sent
+			);
+		$this->db->where('id', $id);
+		$this->db->update('tb_tiket_helpdesk', $arr_tiket);
+				
+		/*
+		$pertanyaan = $this->db->query("SELECT * FROM tb_tiket_helpdesk WHERE ");
         $sql = "INSERT INTO tb_laporan_helpdesk (id_tiket_helpdesk, jawaban, id_user) VALUES (?, ?, ?)";
         $result = $this->db->query($sql, array(
             $this->input->post('id_tiket_helpdesk'),
             $this->input->post('jawaban'),
             $this->session->userdata('id_user')
         ));
-
-        if ($result) {
+		*/
+		
+        if ($this->db->affected_rows() > 0) {
             $this->session->set_flashdata('success', 'Data berhasil dimasukkan dan dilaporkan ke Knowledge Base Administrator');
             redirect('helpdesks/pertanyaan/?prev_question=true');
         } else {
