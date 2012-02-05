@@ -10,6 +10,7 @@ class Helpdesks extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('mhelpdesks');
+        $this->print_template_path = FCPATH . 'print-template/';
 		$this->form_validation->set_message('required', '<strong>%s</strong> harus diisi');
 		$this->form_validation->set_message('numeric', '<strong>%s</strong> harus berupa angka');
 	}
@@ -114,7 +115,7 @@ class Helpdesks extends CI_Controller
 				->get();
 
 		$data['jawaban'] = $result;
-		
+
 		$data['title']   = 'Helpdesk - Jawaban';
 		$data['content'] = 'new-helpdesk/jawaban';
 		$this->load->view($this->template, $data);
@@ -217,9 +218,9 @@ class Helpdesks extends CI_Controller
 				$this->session->set_userdata('id_petugas_satker', $id_petugas_satker);
 
 				// Ambil tiket terakhir
-				$no_tiket_helpdesk_terakhir = 
+				$no_tiket_helpdesk_terakhir =
 					$this->db->select_max('no_tiket_helpdesk')->get('tb_tiket_helpdesk')->row();
-				$no_tiket_helpdesk_terakhir = 
+				$no_tiket_helpdesk_terakhir =
 					$no_tiket_helpdesk_terakhir->no_tiket_helpdesk + 1;
 				$this->session->set_userdata('no_tiket_helpdesk', $no_tiket_helpdesk_terakhir);
 
@@ -236,7 +237,7 @@ class Helpdesks extends CI_Controller
 				$this->session->set_userdata('id_tiket_helpdesk', $id_tiket_helpdesk);
 
 				$this->session->set_userdata('tipe_penanya', 'umum');
-					
+
 				redirect('helpdesks/pertanyaan');
 			endif;
 
@@ -251,7 +252,7 @@ class Helpdesks extends CI_Controller
 
 			if ($this->form_validation->run() == TRUE) {
 
-				$id_satker = ($this->session->userdata('tipe_penanya') == 'umum') 
+				$id_satker = ($this->session->userdata('tipe_penanya') == 'umum')
 					? NULL
 					: $this->input->post('id_satker');
 				// bila ini pertanyaan kedua, maka tambahin tiket baru
@@ -271,7 +272,7 @@ class Helpdesks extends CI_Controller
 					// Simpan ID tiket helpdesk
 					$id_tiket_helpdesk = $this->db->insert_id();
 					$this->session->set_userdata('id_tiket_helpdesk', $id_tiket_helpdesk);
-				
+
 				// bila ini pertanyaan pertama, maka apdet tiket
 				} else {
 					$this->db->update('tb_tiket_helpdesk', array(
@@ -300,7 +301,7 @@ class Helpdesks extends CI_Controller
 	function list_pertanyaan()
 	{
 
-		$result = $this->db->query("SELECT *, (SELECT f.jawaban FROM tb_knowledge_base f WHERE f.id_knowledge_base = a.id_knowledge_base AND f.is_public = 1) AS revisi 
+		$result = $this->db->query("SELECT *, (SELECT f.jawaban FROM tb_knowledge_base f WHERE f.id_knowledge_base = a.id_knowledge_base AND f.is_public = 1) AS revisi
 									FROM (`tb_tiket_helpdesk` a) 
 									LEFT JOIN `tb_satker` b ON `b`.`id_satker` = `a`.`id_satker` 
 									LEFT JOIN `tb_petugas_satker` c ON `a`.`id_petugas_satket` = `c`.`id_petugas_satker` 
@@ -425,7 +426,7 @@ class Helpdesks extends CI_Controller
 
 	/**
 	 * Menampilkan seluruh tiket, tergantung lavel user yang sedang login
-	 * 
+	 *
 	 * Fungsi ini khusus untuk selain CS, jadi gak bisa netapin status open/close
 	 *
 	 * @param none
@@ -435,7 +436,7 @@ class Helpdesks extends CI_Controller
 		$my_lavel = $this->session->userdata('lavel');
 
 		// query list tiket
-		$data['tikets'] = $this->db->query("SELECT * FROM (`tb_tiket_helpdesk` a) 
+		$data['tikets'] = $this->db->query("SELECT * FROM (`tb_tiket_helpdesk` a)
 											LEFT JOIN `tb_satker` b ON `b`.`id_satker` = `a`.`id_satker` 
 											LEFT JOIN `tb_petugas_satker` c ON `a`.`id_petugas_satket` = `c`.`id_petugas_satker` 
 											LEFT JOIN `tb_user` d ON `a`.`id_user` = `d`.`id_user` 
@@ -453,7 +454,7 @@ class Helpdesks extends CI_Controller
 		$data['nama_level'] = $this->db->query($sql)->row()->nama_lavel;
 
         $data['list_kategori'] = $this->db->query("SELECT kat_knowledge_base FROM tb_kat_knowledge_base");
-		
+
 		$data['flashmessage'] = $this->showmessage('success', 'green');
 		$data['title'] = 'Konsultasi Help Desk';
 		$data['content'] = 'helpdesks/all_tiket';
@@ -469,7 +470,7 @@ class Helpdesks extends CI_Controller
 
 		$this->load->view('new-template', $data);
 	}
-	
+
 	function file_cek($str){
 		if($_FILES['file']['type'] != 'application/pdf'){
 			$this->form_validation->set_message('file_cek', '%s');
@@ -478,7 +479,7 @@ class Helpdesks extends CI_Controller
 			return true;
 		}
 	}
-	
+
 	function jawab()
 	{
 		$this->form_validation->set_rules('jawaban','Jawaban','required');
@@ -487,7 +488,7 @@ class Helpdesks extends CI_Controller
 			$this->form_validation->set_rules('jabatan','jabatan','required');
 			$this->form_validation->set_rules('file','Tipe file harus PDF','callback_file_cek');
 		}
-		
+
 		if ($this->form_validation->run() == TRUE) {
 			// upload file bukti
 			$nmBr = '';
@@ -496,7 +497,7 @@ class Helpdesks extends CI_Controller
 	            $nmBr = $unik . $_FILES['file']['name'];
 	            move_uploaded_file($_FILES['file']['tmp_name'], 'upload/knowledge/'. $nmBr);
 	        }
-			
+
 			// kirim jawaban
 			$arr = $this->input->post();
 			$arr['bukti_file'] = $nmBr;
@@ -518,23 +519,23 @@ class Helpdesks extends CI_Controller
 
 				$isi = $this->load->view('mail-template', $mail, TRUE);
 				$attachment = ($nmBr != '') ? 'upload/referensi/'. $nmBr : '';
-				
+
 				//explode email
 				$email = explode(';',$this->input->post('email'));
-				
+
 				for($i= 0 ; $i <= count($email) ; $i++){
 					$this->djamail->kirim(
 					$email[$i],
 					'Pemberitahuan Jawaban Pertanyaan Anda #' . $this->input->post('no_tiket_helpdesk'),
-					$isi, 
+					$isi,
 					$attachment);
 				}
 
 			endif;
 			*/
-			
-			$this->session->set_flashdata('success', 
-				'1 (satu) pertanyaan berhasil dijawab dan telah dikembalikan ke Customer Service Helpdesk!' 
+
+			$this->session->set_flashdata('success',
+				'1 (satu) pertanyaan berhasil dijawab dan telah dikembalikan ke Customer Service Helpdesk!'
 				. '');
 			redirect('helpdesks/all');
 		}
@@ -547,7 +548,7 @@ class Helpdesks extends CI_Controller
 	function jawab_cs($id_tiket_helpdesk, $id_knowledge_base)
 	{
 		$knowledge = $this->db->query(
-			"SELECT * FROM tb_knowledge_base 
+			"SELECT * FROM tb_knowledge_base
 			 WHERE id_knowledge_base = {$id_knowledge_base}
 			 LIMIT 1")->row();
 		$this->db->where('id', $id_tiket_helpdesk);
@@ -559,7 +560,7 @@ class Helpdesks extends CI_Controller
 			'jawab'             => $knowledge->jawaban,
 			'sumber'            => $knowledge->nama_narasumber
 			));
-		$this->session->set_flashdata('info', 
+		$this->session->set_flashdata('info',
 			'1 (satu) tiket berhasil anda jawab !');
 		redirect('helpdesks/pertanyaan/?prev_question=true');
 	}
@@ -578,11 +579,11 @@ class Helpdesks extends CI_Controller
 	}
 
 
-	// NOT USED 
+	// NOT USED
 	private function showmessage($type, $color)
 	{
-		if($this->session->flashdata($type)) : 
-			$result = '<div class="notification ' . $color. '">' . 
+		if($this->session->flashdata($type)) :
+			$result = '<div class="notification ' . $color. '">' .
 					   $this->session->flashdata($type) .
 					  '</div>';
 			return $result;
@@ -595,9 +596,9 @@ class Helpdesks extends CI_Controller
      */
     public function jawab_langsung() {
 		//print_r($_POST);exit;
-		
+
 		$data_helpdesk = $this->db->query("SELECT * FROM tb_tiket_helpdesk WHERE id = ?", $this->input->post('id_tiket_helpdesk'))->row();
-		
+
 		$id = $this->input->post('id_tiket_helpdesk');
 
 		// tambahkan jawaban ke dalam tb_knowledge_base
@@ -609,12 +610,12 @@ class Helpdesks extends CI_Controller
 			'jabatan_narasumber'    => '',
 			'id_kat_knowledge_base' => $data_helpdesk->id_kat_knowledge_base,
 			'bukti_file'            => '',
-			);	
+			);
 		$this->db->insert('tb_knowledge_base', $arr_knowledge);
 		$id_knowledge_base = $this->db->insert_id();
-		
+
 		$sent = isset($arr['sendmail'])?1:0;
-		
+
 		// update tiket
 		$arr_tiket = array(
 			'id_knowledge_base'     => $id_knowledge_base,
@@ -628,7 +629,7 @@ class Helpdesks extends CI_Controller
 			);
 		$this->db->where('id', $id);
 		$this->db->update('tb_tiket_helpdesk', $arr_tiket);
-				
+
 		/*
 		$pertanyaan = $this->db->query("SELECT * FROM tb_tiket_helpdesk WHERE ");
         $sql = "INSERT INTO tb_laporan_helpdesk (id_tiket_helpdesk, jawaban, id_user) VALUES (?, ?, ?)";
@@ -638,7 +639,7 @@ class Helpdesks extends CI_Controller
             $this->session->userdata('id_user')
         ));
 		*/
-		
+
         if ($this->db->affected_rows() > 0) {
             $this->session->set_flashdata('success', 'Data berhasil dimasukkan dan dilaporkan ke Knowledge Base Administrator');
             redirect('helpdesks/pertanyaan/?prev_question=true');
@@ -646,5 +647,33 @@ class Helpdesks extends CI_Controller
             $this->session->set_flashdata('error', 'Data gagal dimasukkan');
             redirect('helpdesks/save/step2');
         }
+    }
+
+    public function cetak_dokumen_pertanyaan($id_helpdesk) {
+        $result = $this->db->query("SELECT * FROM tb_tiket_helpdesk a
+                                    JOIN tb_kat_knowledge_base b ON a.id_kat_knowledge_base = b.id_kat_knowledge_base
+                                    WHERE id = ?",
+                    array($id_helpdesk))->row();
+
+        $odf = new odf($this->print_template_path . 'pertanyaan.odt');
+        $odf->setVars('hari', strftime('%A', now()));
+        $odf->setVars('tanggal', strftime('%d %B %Y', now()));
+        $odf->setVars('nama_penyelia', $this->session->userdata('nama'));
+        $odf->setVars('kategori', $result->kat_knowledge_base);
+        $odf->setVars('topik', $result->pertanyaan);
+        $odf->setVars('pertanyaan', $result->description);
+
+        // Simpan file ODT
+        $odf->saveToDisk(FCPATH . 'output/' . 'pertanyaan_' . $id_helpdesk . '.odt');
+
+        // Convert file ODT ke PDF
+        $command = sprintf('"%s" DocumentConverter.py "%s" "%s"',
+            $this->config->item('libreoffice_python'),
+            FCPATH . 'output/' . 'pertanyaan_' . $id_helpdesk . '.odt',
+            FCPATH . 'output/' . 'pertanyaan_' . $id_helpdesk . '.pdf');
+        exec($command);
+
+
+        redirect(base_url('output/' . 'pertanyaan_' . $id_helpdesk . '.pdf'));
     }
 }
