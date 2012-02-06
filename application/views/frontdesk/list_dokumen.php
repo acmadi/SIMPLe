@@ -15,6 +15,10 @@
 <div class="content">
     <h1>List Dokumen Revisi Anggaran</h1>
 
+    <?php
+    echo ($this->session->flashdata('success') ? '<div class="notification green">' . $this->session->flashdata('success') . '</div>' : '');
+    ?>
+
     <table class="table">
         <thead>
         <tr>
@@ -44,7 +48,7 @@
                 </td>
                 <td class="action">
                     <a href="<?php echo site_url('frontdesks/cetak_dokumen/' . $value->no_tiket_frontdesk ) ?>" class="cetak button green">Cetak</a>
-                    <a href="<?php echo site_url('frontdesks/eskalasi') ?>" class="button blue">Eskalasi</a>
+                    <a href="<?php echo site_url('frontdesks/eskalasi/' . $value->no_tiket_frontdesk) ?>" class="button blue">Eskalasi</a>
                 </td>
             </tr>
 

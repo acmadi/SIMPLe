@@ -183,9 +183,9 @@ class Frontdesks extends CI_Controller
 
             if ($value['id_kelengkapan'] != 0) {
                 if (in_array($value['id_kelengkapan'], $temp)) {
-                    $kelengkapan .= "[V] {$value['nama_kelengkapan']}\n";
+                    $kelengkapan .= "&#9745; {$value['nama_kelengkapan']}\n";
                 } else {
-                    $kelengkapan .= "[_] {$value['nama_kelengkapan']}\n";
+                    $kelengkapan .= "&#9744; {$value['nama_kelengkapan']}\n";
                 }
             }
         }
@@ -261,7 +261,7 @@ class Frontdesks extends CI_Controller
         $odf->setVars('email', $email);
         $odf->setVars('tanggal_diterima', strftime('%d-%m-%Y %H:%M', strtotime($result[0]['tanggal'])));
         $odf->setVars('tanggal_selesai', $tanggal_selesai);
-        $odf->setVars('kelengkapan_dokumen', $kelengkapan);
+        $odf->setVars('kelengkapan_dokumen', $kelengkapan, false, 'utf-8');
         $odf->setVars('catatan', $result[0]['catatan']);
         $odf->setVars('nama_penyelia', $penyelia->nama);
         $odf->setVars('tanggal_sekarang', strftime('%d %B %Y'));
@@ -280,5 +280,14 @@ class Frontdesks extends CI_Controller
 
 
          redirect(base_url('output/' . 'pengajuan_' . $no_tiket_frontdesk . '.pdf'));
+    }
+
+    public function eskalasi($no_tiket_frontdesk) {
+        $this->db->update('tb_tiket_frontdesk',
+            array('lavel' => 3),
+            array('no_tiket_frontdesk' => $no_tiket_frontdesk)
+        );
+        $this->session->set_flashdata('success', 'Dokumen telah dieskalasi');
+        redirect('frontdesks/list_dokumen');
     }
 }
