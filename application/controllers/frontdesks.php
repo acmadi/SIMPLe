@@ -121,9 +121,21 @@ class Frontdesks extends CI_Controller
     public function list_dokumen()
     {
         // Daftar Dokumen
-        $sql = "SELECT * FROM tb_tiket_frontdesk a
-                JOIN tb_kementrian b ON a.id_kementrian = b.id_kementrian
-                JOIN tb_unit c ON a.id_unit = c.id_unit
+        $sql = "SELECT a.no_tiket_frontdesk, a.tanggal, a.catatan, a.nomor_surat_usulan, a.tanggal_surat_usulan,
+                       a.id_kementrian, a.id_unit, a.petugas_penerima,
+                       c.id_petugas_satker, c.nama_petugas, c.nip, c.jabatan_petugas, c.no_hp, c.email, c.no_kantor, c.tipe,
+                       d.id_kelengkapan_formulir, e.id_kelengkapan, e.nama_kelengkapan,
+                       h.nama_kementrian, i.nama_unit,
+                       g.nama_unit AS nama_unit_satker
+                FROM tb_tiket_frontdesk a
+                LEFT JOIN tb_satker b          ON b.id_satker          = a.id_satker
+                JOIN tb_petugas_satker c       ON c.id_petugas_satker  = a.id_petugas_satker
+                JOIN tb_kelengkapan_formulir d ON d.no_tiket_frontdesk = a.no_tiket_frontdesk
+                JOIN tb_kelengkapan_doc e      ON e.id_kelengkapan     = d.id_kelengkapan
+                JOIN tb_kon_unit_satker f      ON (f.id_unit = a.id_unit AND f.id_kementrian = a.id_kementrian)
+                JOIN tb_unit_saker g           ON g.id_unit_satker = f.id_unit_satker
+                JOIN tb_kementrian h           ON h.id_kementrian = a.id_kementrian
+                JOIN tb_unit i                 ON i.id_unit = a.id_unit AND i.id_kementrian = a.id_kementrian
                 WHERE status = 'open' AND lavel = 1
                 GROUP BY no_tiket_frontdesk
                 ";
@@ -153,6 +165,7 @@ class Frontdesks extends CI_Controller
                        a.id_kementrian, a.id_unit, a.petugas_penerima,
                        c.id_petugas_satker, c.nama_petugas, c.nip, c.jabatan_petugas, c.no_hp, c.email, c.no_kantor, c.tipe,
                        d.id_kelengkapan_formulir, e.id_kelengkapan, e.nama_kelengkapan,
+                       h.nama_kementrian, i.nama_unit,
                        g.nama_unit AS nama_unit_satker
                 FROM tb_tiket_frontdesk a
                 LEFT JOIN tb_satker b          ON b.id_satker          = a.id_satker
@@ -161,6 +174,8 @@ class Frontdesks extends CI_Controller
                 JOIN tb_kelengkapan_doc e      ON e.id_kelengkapan     = d.id_kelengkapan
                 JOIN tb_kon_unit_satker f      ON (f.id_unit = a.id_unit AND f.id_kementrian = a.id_kementrian)
                 JOIN tb_unit_saker g           ON g.id_unit_satker = f.id_unit_satker
+                JOIN tb_kementrian h           ON h.id_kementrian = a.id_kementrian
+                JOIN tb_unit i                 ON i.id_unit = a.id_unit AND i.id_kementrian = a.id_kementrian
                 WHERE a.no_tiket_frontdesk = ?
                 ";
         $result = $this->db->query($sql, array($no_tiket_frontdesk))->result_array();
@@ -252,7 +267,7 @@ class Frontdesks extends CI_Controller
         $odf->setVars('tanggal_surat_usulan', strftime('%d %B %Y', strtotime($result[0]['tanggal_surat_usulan'])));
         $odf->setVars('nomor_tiket', sprintf('%05d', $result[0]['no_tiket_frontdesk']) . '/' . date('Y'));
         $odf->setVars('kementerian', $kementerian->nama_kementrian);
-        $odf->setVars('eselon', $unit->nama_unit);
+        $odf->setVars('eselon', $result[0]['nama_unit']);
         $odf->setVars('nip', $result[0]['nip']);
         $odf->setVars('nama_petugas', $result[0]['nama_petugas']);
         $odf->setVars('jabatan', $result[0]['jabatan_petugas']);
