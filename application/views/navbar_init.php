@@ -8,6 +8,7 @@ $nav_ambil_dokumen =
 $nav_pengembalian_dokumen =
 $nav_report =
 $nav_jawaban_cs =
+$nav_list_dokumen =
 
 $nav_referensi = $nav_knowledge = $nav_forum = $nav_telepon = '';
 
@@ -33,6 +34,7 @@ if ($this->uri->segment(2) == 'form_revisi_anggaran') $nav_form = 'current';
 if ($this->uri->segment(2) == 'status_tiket') $nav_status_tiket = 'current';
 if ($this->uri->segment(2) == 'ambil_dokumen') $nav_ambil_dokumen = 'current';
 if ($this->uri->segment(2) == 'pengembalian_dokumen') $nav_pengembalian_dokumen = 'current';
+if ($this->uri->segment(2) == 'list_dokumen') $nav_list_dokumen = 'current';
 
 
 // All
