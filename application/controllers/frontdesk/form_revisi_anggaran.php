@@ -128,7 +128,7 @@ class Form_revisi_anggaran extends CI_Controller
     }
 
     function save_identitas()
-    {	
+    {
         $status = false;
         $this->form_validation->set_rules('nama_kl', 'Nama K/L', 'required');
         $this->form_validation->set_rules('eselon', 'Eselon', 'required');
@@ -138,7 +138,7 @@ class Form_revisi_anggaran extends CI_Controller
         $this->form_validation->set_rules('no_kantor', 'No Kantor', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required');
 
-//        $this->form_validation->set_rules('tipe', 'Kategori', 'required');
+        //        $this->form_validation->set_rules('tipe', 'Kategori', 'required');
         $this->form_validation->set_rules('nomor_surat_usulan', 'Nomor Surat Usulan', 'required');
         $this->form_validation->set_rules('tanggal_surat_usulan', 'Tanggal Surat Usulan', 'required');
         $this->form_validation->set_rules('nip', 'NIP', 'required');
@@ -159,8 +159,7 @@ class Form_revisi_anggaran extends CI_Controller
             $tanggal_surat_usulan = $this->input->post('tanggal_surat_usulan');
             $kode_satker = $this->input->post('kode_satker');
             $catatan = $this->input->post('catatan');
-			
-			
+
 
             $this->load->helper('tanggal_helper');
 
@@ -190,14 +189,14 @@ class Form_revisi_anggaran extends CI_Controller
             $tiket_id = $this->db->insert_id();
 
             $now = date('Y-m-d H:i:s');
-			
 
+
+            // Save Tiket Frontdesk. Lavel tetap satu, sampai ditekan tombol eskalasi
             $sql = "INSERT INTO tb_tiket_frontdesk (id_satker, id_formulir, tanggal, status, lavel, id_petugas_satker, id_unit, id_kementrian,nomor_surat_usulan,tanggal_surat_usulan,is_active, catatan, petugas_penerima)
-					VALUES ({$kode_satker_select}, NULL, '{$now}', 'open', 3, {$tiket_id},'{$eselon}','{$nama_kl}','{$nomor_surat_usulan}','{$tanggal_surat_usulan}',2, '{$catatan}','".$this->session->userdata("id_user")."')";
+					VALUES ({$kode_satker_select}, NULL, '{$now}', 'open', 1, {$tiket_id},'{$eselon}','{$nama_kl}','{$nomor_surat_usulan}','{$tanggal_surat_usulan}',2, '{$catatan}','" . $this->session->userdata("id_user") . "')";
 
 
             $this->db->query($sql);
-
 
 
             // Simpan dokumen di tb_kelengkapan_formulir
@@ -240,7 +239,7 @@ class Form_revisi_anggaran extends CI_Controller
                 redirect('/frontdesk/form_revisi_anggaran/fail');
             } else {
                 $this->db->trans_commit();
-                redirect('/frontdesk/form_revisi_anggaran/success/' . $no_tiket_frontdesk);
+                redirect('/frontdesks/list_dokumen');
             }
         }
         else {
@@ -250,131 +249,138 @@ class Form_revisi_anggaran extends CI_Controller
 
     function success($no_tiket_frontdesk)
     {
-        $sql = "SELECT a.no_tiket_frontdesk, a.tanggal, a.catatan, a.nomor_surat_usulan, a.tanggal_surat_usulan,
-                       a.id_kementrian, a.id_unit, a.petugas_penerima,
-                       c.id_petugas_satker, c.nama_petugas, c.nip, c.jabatan_petugas, c.no_hp, c.email, c.no_kantor, c.tipe,
-                       d.id_kelengkapan_formulir, e.id_kelengkapan, e.nama_kelengkapan,
-                       g.nama_unit AS nama_unit_satker
-                FROM tb_tiket_frontdesk a
-                LEFT JOIN tb_satker b          ON b.id_satker          = a.id_satker
-                JOIN tb_petugas_satker c       ON c.id_petugas_satker  = a.id_petugas_satker
-                JOIN tb_kelengkapan_formulir d ON d.no_tiket_frontdesk = a.no_tiket_frontdesk
-                JOIN tb_kelengkapan_doc e      ON e.id_kelengkapan     = d.id_kelengkapan
-                JOIN tb_kon_unit_satker f      ON (f.id_unit = a.id_unit AND f.id_kementrian = a.id_kementrian)
-                JOIN tb_unit_saker g           ON g.id_unit_satker = f.id_unit_satker
-                WHERE a.no_tiket_frontdesk = ?
-                ";
+//        $sql = "SELECT a.no_tiket_frontdesk, a.tanggal, a.catatan, a.nomor_surat_usulan, a.tanggal_surat_usulan,
+//                       a.id_kementrian, a.id_unit, a.petugas_penerima,
+//                       c.id_petugas_satker, c.nama_petugas, c.nip, c.jabatan_petugas, c.no_hp, c.email, c.no_kantor, c.tipe,
+//                       d.id_kelengkapan_formulir, e.id_kelengkapan, e.nama_kelengkapan,
+//                       g.nama_unit AS nama_unit_satker
+//                FROM tb_tiket_frontdesk a
+//                LEFT JOIN tb_satker b          ON b.id_satker          = a.id_satker
+//                JOIN tb_petugas_satker c       ON c.id_petugas_satker  = a.id_petugas_satker
+//                JOIN tb_kelengkapan_formulir d ON d.no_tiket_frontdesk = a.no_tiket_frontdesk
+//                JOIN tb_kelengkapan_doc e      ON e.id_kelengkapan     = d.id_kelengkapan
+//                JOIN tb_kon_unit_satker f      ON (f.id_unit = a.id_unit AND f.id_kementrian = a.id_kementrian)
+//                JOIN tb_unit_saker g           ON g.id_unit_satker = f.id_unit_satker
+//                WHERE a.no_tiket_frontdesk = ?
+//                ";
 
-//        $sql = "SELECT tb_unit.nama_unit, tb_unit.id_unit,
-//                       tb_kementrian.nama_kementrian, tb_kementrian.id_kementrian,
-//                       tb_petugas_satker.nama_petugas, nip, jabatan_petugas, no_hp, no_kantor, email,
-//                       tb_tiket_frontdesk.nomor_surat_usulan, tb_tiket_frontdesk.tanggal_surat_usulan,
-//                       tb_tiket_frontdesk.no_tiket_frontdesk, tb_tiket_frontdesk.tanggal,
-//                       tb_tiket_frontdesk.petugas_penerima, tb_tiket_frontdesk.catatan
+        //        $sql = "SELECT tb_unit.nama_unit, tb_unit.id_unit,
+        //                       tb_kementrian.nama_kementrian, tb_kementrian.id_kementrian,
+        //                       tb_petugas_satker.nama_petugas, nip, jabatan_petugas, no_hp, no_kantor, email,
+        //                       tb_tiket_frontdesk.nomor_surat_usulan, tb_tiket_frontdesk.tanggal_surat_usulan,
+        //                       tb_tiket_frontdesk.no_tiket_frontdesk, tb_tiket_frontdesk.tanggal,
+        //                       tb_tiket_frontdesk.petugas_penerima, tb_tiket_frontdesk.catatan
+        //
+        //                FROM (`tb_tiket_frontdesk`)
+        //                LEFT JOIN `tb_satker` ON `tb_satker`.`id_satker` = `tb_tiket_frontdesk`.`id_satker`
+        //                JOIN `tb_petugas_satker` ON `tb_petugas_satker`.`id_petugas_satker` = `tb_tiket_frontdesk`.`id_petugas_satker`
+        //                JOIN `tb_kelengkapan_formulir` ON `tb_kelengkapan_formulir`.`no_tiket_frontdesk` = `tb_tiket_frontdesk`.`no_tiket_frontdesk`
+        //                JOIN `tb_kelengkapan_doc` ON `tb_kelengkapan_doc`.`id_kelengkapan` = `tb_kelengkapan_formulir`.`id_kelengkapan`
+        //                JOIN `tb_unit` ON `tb_unit`.`id_unit` = `tb_tiket_frontdesk`.`id_unit` AND tb_unit.id_kementrian = tb_tiket_frontdesk.id_kementrian
+        //                JOIN tb_kementrian ON tb_kementrian.id_kementrian = tb_tiket_frontdesk.id_kementrian
+        //                WHERE `tb_tiket_frontdesk`.`no_tiket_frontdesk` =  ? ";
+
+//        $result = $this->db->query($sql, array($no_tiket_frontdesk));
 //
-//                FROM (`tb_tiket_frontdesk`)
-//                LEFT JOIN `tb_satker` ON `tb_satker`.`id_satker` = `tb_tiket_frontdesk`.`id_satker`
-//                JOIN `tb_petugas_satker` ON `tb_petugas_satker`.`id_petugas_satker` = `tb_tiket_frontdesk`.`id_petugas_satker`
-//                JOIN `tb_kelengkapan_formulir` ON `tb_kelengkapan_formulir`.`no_tiket_frontdesk` = `tb_tiket_frontdesk`.`no_tiket_frontdesk`
-//                JOIN `tb_kelengkapan_doc` ON `tb_kelengkapan_doc`.`id_kelengkapan` = `tb_kelengkapan_formulir`.`id_kelengkapan`
-//                JOIN `tb_unit` ON `tb_unit`.`id_unit` = `tb_tiket_frontdesk`.`id_unit` AND tb_unit.id_kementrian = tb_tiket_frontdesk.id_kementrian
-//                JOIN tb_kementrian ON tb_kementrian.id_kementrian = tb_tiket_frontdesk.id_kementrian
-//                WHERE `tb_tiket_frontdesk`.`no_tiket_frontdesk` =  ? ";
+//        $data['identitas'] = $result->result();
+//
+//        $temp = $result->row();
+//        $id_kementrian = $temp->id_kementrian;
+//        $id_unit = $temp->id_unit;
+//
+//        $result = $this->db->from('tb_kementrian')->where('id_kementrian', $id_kementrian)->get();
+//        $data['kementrian'] = $result->row();
+//
+//        $result = $this->db->from('tb_unit')
+//            ->where('id_unit', $id_unit)
+//            ->where('id_kementrian', $id_kementrian)
+//            ->get();
+//        $data['unit'] = $result->row();
+//        $data['no_tiket_frontdesk'] = $no_tiket_frontdesk;
+//
+//        $this->log->create("Cetak tanda terima pengajuan revisi anggaran #{$no_tiket_frontdesk}");
+//
+//        $input_filename = $this->odtphp->create($no_tiket_frontdesk, 'tanggal', '10:00');
+//
+//        $sql = 'SELECT * FROM tb_kelengkapan_formulir a
+//                JOIN tb_kelengkapan_doc b ON a.id_kelengkapan = b.id_kelengkapan
+//                WHERE no_tiket_frontdesk = ?
+//                ORDER by b.id_kelengkapan';
+//        $kelengkapan_dokumen = $this->db->query($sql, array($no_tiket_frontdesk))->result();
+//
+//        $document['tiket'] = $no_tiket_frontdesk;
+//        $document['no_surat_usulan'] = $data['identitas'][0]->nomor_surat_usulan;
+//        $document['tanggal_surat_usulan'] = $data['identitas'][0]->tanggal_surat_usulan;
+//        $document['no_tiket'] = $no_tiket_frontdesk;
+//        $document['kementrian'] = $data['kementrian']->nama_kementrian;
+//        $document['eselon'] = $data['unit']->nama_unit;
+//        $document['nip'] = $data['identitas'][0]->nip;
+//        $document['nama'] = $data['identitas'][0]->nama_petugas;
+//        $document['jabatan'] = $data['identitas'][0]->jabatan_petugas;
+//        $document['hp'] = $data['identitas'][0]->no_hp;
+//        $document['tlpkantor'] = $data['identitas'][0]->no_kantor;
+//        $document['emails'] = $data['identitas'][0]->email;
+//        $document['tgl_pengajuan'] = $data['identitas'][0]->tanggal;
+//        $document['nama_unit_satker'] = $data['identitas'][0]->nama_unit_satker;
+//
+//
+//        // Jumlah hari kerja
+//        $jml_hari_kerja = hari_kerja(
+//            strftime('%Y-%m-%d %H:%M:%S', strtotime($document['tgl_pengajuan'])),
+//            strftime('%Y-%m-%d %H:%M:%S', strtotime('+7 days'))
+//        );
+//
+//        $i = 7;
+//        while ($jml_hari_kerja <= 5) {
+//            $jml_hari_kerja = hari_kerja(
+//                strftime('%Y-%m-%d %H:%M:%S', strtotime($document['tgl_pengajuan'])),
+//                strftime('%Y-%m-%d %H:%M:%S', strtotime("+$i days"))
+//            );
+//            $i++;
+//        }
+//
+//        // Cek sudah lebih dari jam 12:00 atau belum.
+//        // Kalau belum, dihitung 5 hari kerja.
+//        // Kalau sudah, dihitung 6 hari kerja.
+//        if (strftime('%H:%M', strtotime($document['tgl_pengajuan'])) > strftime('%H:%M', mktime(12, 00, 00))) {
+//            $i++;
+//        }
+//        $tanggal_selesai = date('Y-m-d H:i:s', strtotime("+$i days"));
+//
+//        $document['tgl_selesai'] = $tanggal_selesai;
+//        $document['kelengkapan_dokumen'] = $kelengkapan_dokumen;
+//        $document['catatan'] = $data['identitas'][0]->catatan;
+//
+//        $input_filename2 = $this->odtphp->create_pengajuan($document);
+//
+//        $output = preg_replace('/.odt/', '.pdf', $input_filename['full_filename']);
+//
+//        $output2 = preg_replace('/.odt/', '.pdf', $input_filename2['full_filename']);
+//
+//        $command = sprintf('"%s" DocumentConverter.py "%s" "%s"',
+//            $this->config->item('libreoffice_python'),
+//            $input_filename['full_filename'],
+//            $output);
+//
+//        $command2 = sprintf('"%s" DocumentConverter.py "%s" "%s"',
+//            $this->config->item('libreoffice_python'),
+//            $input_filename2['full_filename'],
+//            $output2);
+//
+//        exec($command);
+//
+//        exec($command2);
+//
+//        $data['title'] = '';
+//        $data['content'] = 'frontdesk/success2';
+//
+//        $pdf_file = preg_replace('/.odt/', '.pdf', $input_filename['filename']);
+//        $pdf_file2 = preg_replace('/.odt/', '.pdf', $input_filename2['filename']);
+//
+//        $data['pdf_file'] = base_url() . 'output/' . $pdf_file;
+//        $data['pdf_file2'] = base_url() . 'output/' . $pdf_file2;
 
-        $result = $this->db->query($sql, array($no_tiket_frontdesk));
-
-        echo $this->db->last_query();
-
-        $data['identitas'] = $result->result();
-
-        $temp = $result->row();
-        $id_kementrian = $temp->id_kementrian;
-        $id_unit = $temp->id_unit;
-
-        $result = $this->db->from('tb_kementrian')->where('id_kementrian', $id_kementrian)->get();
-        $data['kementrian'] = $result->row();
-
-        $result = $this->db->from('tb_unit')
-            ->where('id_unit', $id_unit)
-            ->where('id_kementrian', $id_kementrian)
-            ->get();
-        $data['unit'] = $result->row();
-
-        print_r($data['unit']);
-
-        $data['no_tiket_frontdesk'] = $no_tiket_frontdesk;
-
-        $this->log->create("Cetak tanda terima pengajuan revisi anggaran #{$no_tiket_frontdesk}");
-
-        $input_filename = $this->odtphp->create($no_tiket_frontdesk, 'tanggal', '10:00');
-
-        $sql = 'SELECT * FROM tb_kelengkapan_formulir a
-                JOIN tb_kelengkapan_doc b ON a.id_kelengkapan = b.id_kelengkapan
-                WHERE no_tiket_frontdesk = ?
-                ORDER by b.id_kelengkapan';
-        $kelengkapan_dokumen = $this->db->query($sql, array($no_tiket_frontdesk))->result();
-
-        $document['tiket'] = $no_tiket_frontdesk;
-        $document['no_surat_usulan'] = $data['identitas'][0]->nomor_surat_usulan;
-        $document['tanggal_surat_usulan'] = $data['identitas'][0]->tanggal_surat_usulan;
-        $document['no_tiket'] = $no_tiket_frontdesk;
-        $document['kementrian'] = $data['kementrian']->nama_kementrian;
-        $document['eselon'] = $data['unit']->nama_unit;
-        $document['nip'] = $data['identitas'][0]->nip;
-        $document['nama'] = $data['identitas'][0]->nama_petugas;
-        $document['jabatan'] = $data['identitas'][0]->jabatan_petugas;
-        $document['hp'] = $data['identitas'][0]->no_hp;
-        $document['tlpkantor'] = $data['identitas'][0]->no_kantor;
-        $document['emails'] = $data['identitas'][0]->email;
-        $document['tgl_pengajuan'] = date('d-m-Y H:i:s');
-        $document['nama_unit_satker'] = $data['identitas'][0]->nama_unit_satker;
-
-        // Cek apakah sudah lewat jam 12 siang?
-        $tanggal_mulai = $data['identitas'][0]->tanggal;
-        if (date('H', strtotime($tanggal_mulai)) >= 12) {
-            $selesai = date('Y-m-d H:i:s', strtotime('+8 days'));
-            $jumlah_hari_kerja = hari_kerja($tanggal_mulai, $selesai);
-        } else {
-            $selesai = date('Y-m-d H:i:s', strtotime('+7 days'));
-            $jumlah_hari_kerja = hari_kerja($tanggal_mulai, $selesai);
-        }
-        $jumlah_hari_kerja = '+' . $jumlah_hari_kerja . ' days';
-        $tanggal_selesai = date('Y-m-d H:i:s', strtotime($jumlah_hari_kerja));
-
-        $document['tgl_selesai'] = $tanggal_selesai;
-        $document['kelengkapan_dokumen'] = $kelengkapan_dokumen;
-        $document['catatan'] = $data['identitas'][0]->catatan;
-
-        $input_filename2 = $this->odtphp->create_pengajuan($document);
-
-        $output = preg_replace('/.odt/', '.pdf', $input_filename['full_filename']);
-
-        $output2 = preg_replace('/.odt/', '.pdf', $input_filename2['full_filename']);
-
-        $command = sprintf('"%s" DocumentConverter.py "%s" "%s"',
-            $this->config->item('libreoffice_python'),
-            $input_filename['full_filename'],
-            $output);
-
-        $command2 = sprintf('"%s" DocumentConverter.py "%s" "%s"',
-                    $this->config->item('libreoffice_python'),
-                    $input_filename2['full_filename'],
-                    $output2);
-
-        exec($command);
-
-        exec($command2);
-
-        $data['title'] = '';
-        $data['content'] = 'frontdesk/success2';
-
-        $pdf_file = preg_replace('/.odt/', '.pdf', $input_filename['filename']);
-        $pdf_file2 = preg_replace('/.odt/', '.pdf', $input_filename2['filename']);
-
-        $data['pdf_file'] = base_url() . 'output/' . $pdf_file;
-        $data['pdf_file2'] = base_url() . 'output/' . $pdf_file2;
-
-        $this->load->view('frontdesk/success2', $data);
+//        $this->load->view('frontdesk/success2');
     }
 
     function fail()
@@ -392,11 +398,11 @@ class Form_revisi_anggaran extends CI_Controller
     function anggaran($id_kementrian, $id_unit)
     {
         $result = $this->db->from('tb_kon_unit_satker a')
-                ->join('tb_unit_saker b', 'a.id_unit_satker = b.id_unit_satker')
-                ->where('id_kementrian', $id_kementrian)
-                ->where('id_unit', $id_unit)
-                ->get()
-                ->row();
+            ->join('tb_unit_saker b', 'a.id_unit_satker = b.id_unit_satker')
+            ->where('id_kementrian', $id_kementrian)
+            ->where('id_unit', $id_unit)
+            ->get()
+            ->row();
 
         $nama_unit = $result->nama_unit;
         echo $nama_unit;

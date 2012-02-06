@@ -1,7 +1,5 @@
 <?php
 require_once(FCPATH . 'library/odtphp/odf.php');
-// Set Locale
-setlocale(LC_ALL, 'id_ID.UTF8', 'id_ID.UTF-8', 'id_ID.8859-1', 'id_ID', 'IND.UTF8', 'IND.UTF-8', 'IND.8859-1', 'IND', 'Indonesian.UTF8', 'Indonesian.UTF-8', 'Indonesian.8859-1', 'Indonesian', 'Indonesia', 'id', 'ID', 'en_US.UTF8', 'en_US.UTF-8', 'en_US.8859-1', 'en_US', 'American', 'ENG', 'English');
 
 class Odtphp
 {
@@ -93,8 +91,8 @@ class Odtphp
         $odf->setVars('var8', $data['hp']);
         $odf->setVars('var9', $data['tlpkantor']);
         $odf->setVars('email', $email);
-        $odf->setVars('var11', strftime('%d-%m-%Y %H:%M', strtotime($data['tgl_pengajuan'])));
-        $odf->setVars('var12', strftime('%d-%m-%Y %H:%M', strtotime($data['tgl_selesai'])));
+        $odf->setVars('tanggal_diterima', strftime('%d-%m-%Y %H:%M', strtotime($data['tgl_pengajuan'])));
+        $odf->setVars('tanggal_selesai', strftime('%d-%m-%Y %H:%M', strtotime($data['tgl_selesai'])));
         $odf->setVars('var13', $kelengkapan);
         $odf->setVars('var14', $data['catatan']);
         $odf->setVars('var15', $this->CI->session->userdata('nama'));
