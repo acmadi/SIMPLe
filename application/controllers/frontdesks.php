@@ -205,7 +205,14 @@ class Frontdesks extends CI_Controller
             }
         }
 
-        foreach ($kel as $value) {
+        // Kelengkapan Dokumen Lainnya
+        $sql = 'SELECT * FROM tb_kelengkapan_formulir a
+                JOIN tb_kelengkapan_doc b ON a.id_kelengkapan = b.id_kelengkapan
+                WHERE no_tiket_frontdesk = ?
+                ORDER by b.id_kelengkapan';
+        $kelengkapan_dokumen = $this->db->query($sql, array($no_tiket_frontdesk))->result();
+
+        foreach ($kelengkapan_dokumen as $value) {
             if ($value->id_kelengkapan == 0 AND $value->kelengkapan != '')
                 $kelengkapan .= "- {$value->kelengkapan}\n";
         }
