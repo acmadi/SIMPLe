@@ -217,6 +217,34 @@ class Frontdesks extends CI_Controller
                                          JOIN tb_tiket_frontdesk ON tb_unit.id_unit = tb_tiket_frontdesk.id_unit
                                          WHERE no_tiket_frontdesk = ?", array($no_tiket_frontdesk))->row();
 
+        // Perkiraan Tanggal Target Penyelesaian
+        $jml_hari_kerja = hari_kerja(
+            strftime('%Y-%m-%d %H:%M:%S', strtotime($result[0]['tanggal'])),
+            strftime('%Y-%m-%d %H:%M:%S', strtotime('+7 days'))
+        );
+
+        $i = 7;
+        while ($jml_hari_kerja <= 5) {
+            $jml_hari_kerja = hari_kerja(
+                strftime('%Y-%m-%d %H:%M:%S', strtotime($result[0]['tanggal'])),
+                strftime('%Y-%m-%d %H:%M:%S', strtotime("+$i days"))
+            );
+            $i++;
+        }
+
+
+
+        // Cek sudah lebih dari jam 12:00 atau belum.
+        // Kalau belum, dihitung 5 hari kerja.
+        // Kalau sudah, dihitung 6 hari kerja.
+        if (strftime('%H:%M', strtotime($result[0]['tanggal'])) > strftime('%H:%M', mktime(12, 00, 00))) {
+            $i++;
+        }
+
+        $jam = strftime('%H:%M', strtotime($result[0]['tanggal']));
+        $tanggal_selesai = strftime('%d-%m-%Y',  + strtotime("+$i days"));
+        $tanggal_selesai = $tanggal_selesai . ' ' . $jam;
+
 
         $odf = new odf(FCPATH . 'print-template/' . 'pengajuan.odt');
         // Masukkan variable ke dokumen
@@ -232,7 +260,7 @@ class Frontdesks extends CI_Controller
         $odf->setVars('no_kantor', $result[0]['no_kantor']);
         $odf->setVars('email', $email);
         $odf->setVars('tanggal_diterima', strftime('%d-%m-%Y %H:%M', strtotime($result[0]['tanggal'])));
-        $odf->setVars('tanggal_selesai', 'tanggalselesai');
+        $odf->setVars('tanggal_selesai', $tanggal_selesai);
         $odf->setVars('kelengkapan_dokumen', $kelengkapan);
         $odf->setVars('catatan', $result[0]['catatan']);
         $odf->setVars('nama_penyelia', $penyelia->nama);
