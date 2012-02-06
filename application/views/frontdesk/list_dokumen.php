@@ -9,6 +9,8 @@
             window.open(new_link, '_blank');
             return false;
         })
+
+        $('.chzn-single').chosen();
     })
 </script>
 
@@ -22,8 +24,8 @@
     <table class="table">
         <thead>
         <tr>
-            <th>No</th>
-            <th>No Tiket</th>
+            <th class="no">No</th>
+            <th class="no">No Tiket</th>
             <th>Kementerian</th>
             <th>Eselon</th>
             <th>Penyelia</th>
@@ -37,10 +39,10 @@
             <tr>
                 <td><?php echo $i++ ?></td>
                 <td><?php echo sprintf('%05d', $value->no_tiket_frontdesk) ?></td>
-                <td><?php echo $value->nama_kementrian ?></td>
-                <td><?php echo $value->nama_unit ?></td>
+                <td><strong><?php echo $value->id_kementrian ?></strong> - <?php echo $value->nama_kementrian ?></td>
+                <td><strong><?php echo $value->id_unit ?></strong> - <?php echo $value->nama_unit ?></td>
                 <td class="penyelia">
-                    <select name="penyelia" class="">
+                    <select name="penyelia" class="chzn-single" style="width: 300px;">
                     <?php foreach ($penyelia->result() as $value2): ?>
                         <option value="<?php echo $value2->id_user ?>"><?php echo $value2->nama ?></option>
                     <?php endforeach; ?>
