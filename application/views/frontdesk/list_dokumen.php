@@ -21,6 +21,8 @@
     echo ($this->session->flashdata('success') ? '<div class="notification green">' . $this->session->flashdata('success') . '</div>' : '');
     ?>
 
+    <?php if ($list_dokumen->num_rows() > 0): ?>
+
     <table class="table">
         <thead>
         <tr>
@@ -57,4 +59,11 @@
         <?php endforeach; ?>
         </tbody>
     </table>
+
+    <?php else: ?>
+
+    <?php echo '<div class="notification yellow">Tidak ada dokumen</div>' ?>
+
+    <?php endif; ?>
+
 </div>
