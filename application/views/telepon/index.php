@@ -2,6 +2,10 @@
 
     <h1>Daftar Telepon</h1>
 
+    <p style="text-align: right">
+        <a href="<?php echo site_url('telepon/add') ?>" class="button green">Tambah Telepon</a>
+    </p>
+
     <?php if ($telepon->num_rows() > 0): ?>
 
     <table class="table">
