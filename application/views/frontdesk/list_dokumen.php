@@ -45,6 +45,7 @@
                 <td><strong><?php echo $value->id_unit ?></strong> - <?php echo $value->nama_unit ?></td>
                 <td class="penyelia">
                     <select name="penyelia" class="chzn-single" style="width: 300px;">
+                        <option></option>
                     <?php foreach ($penyelia->result() as $value2): ?>
                         <option value="<?php echo $value2->id_user ?>"><?php echo $value2->nama ?></option>
                     <?php endforeach; ?>
