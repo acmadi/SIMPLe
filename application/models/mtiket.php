@@ -99,12 +99,12 @@ class Mtiket extends CI_Model
 
     public function get_list_pengembalian_dokumen()
     {
-		$sql = "SELECT  ttf.no_tiket_frontdesk, ttf.id_kementrian, tb_kementrian.nama_kementrian, ttf.tanggal, ttf.id_satker, ts.nama_satker, tpd.id_pengembalian_doc, ttf.id_unit, tu.nama_unit
+		$sql = "SELECT  ttf.no_tiket_frontdesk, ttf.id_kementrian, tb_kementrian.nama_kementrian, ttf.tanggal, ttf.id_satker, ts.nama_satker, tpd.id_pengembalian_doc, ttf.id_unit, tu.nama_unit, tpd.sudah_diambil
 				FROM tb_pengembalian_doc tpd, tb_tiket_frontdesk ttf
 				LEFT JOIN tb_satker ts ON ts.id_satker = ttf.id_satker
 				LEFT JOIN tb_unit tu ON tu.id_unit = ttf.id_unit AND tu.id_kementrian = ttf.id_kementrian
                 LEFT JOIN tb_kementrian ON tb_kementrian.id_kementrian = ttf.id_kementrian
-				WHERE tpd.no_tiket_frontdesk = ttf.no_tiket_frontdesk AND tpd.sudah_diambil = 0 AND ttf.is_active = 3 AND ttf.status = 'close'
+				WHERE tpd.no_tiket_frontdesk = ttf.no_tiket_frontdesk AND ttf.is_active = 3 AND ttf.status = 'close'
 				GROUP BY tpd.no_tiket_frontdesk";
         $query = $this->db->query($sql);
 		
@@ -115,11 +115,11 @@ class Mtiket extends CI_Model
     {
         return $this->db->query("SELECT  ttf.no_tiket_frontdesk, ttf.tanggal, ttf.nomor_surat_usulan, ttf.tanggal_surat_usulan, ttf.id_satker, ts.nama_satker, tpd.id_pengembalian_doc,
                                 ttf.id_unit, tu.nama_unit,ttf.id_kementrian, tm.nama_kementrian, tbs.nip, tbs.nama_petugas, tbs.jabatan_petugas,
-                                tbs.no_hp, tbs.no_kantor, tbs.email, tpd.catatan
+                                tbs.no_hp, tbs.no_kantor, tbs.email, tpd.catatan, tpd.sudah_diambil
 								FROM tb_pengembalian_doc tpd, tb_kementrian tm, tb_petugas_satker tbs, tb_tiket_frontdesk ttf 
 								LEFT JOIN tb_satker ts ON ts.id_satker = ttf.id_satker
 								LEFT JOIN tb_unit tu ON tu.id_unit = ttf.id_unit AND tu.id_kementrian = ttf.id_kementrian
-								WHERE tpd.no_tiket_frontdesk = ttf.no_tiket_frontdesk AND tpd.sudah_diambil = 0 AND tpd.id_pengembalian_doc = ?
+								WHERE tpd.no_tiket_frontdesk = ttf.no_tiket_frontdesk AND tpd.id_pengembalian_doc = ?
                                 AND ttf.id_kementrian = tm.id_kementrian AND ttf.id_petugas_satker = tbs.id_petugas_satker
 								GROUP BY tpd.no_tiket_frontdesk ", array($id));
 
