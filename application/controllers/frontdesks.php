@@ -181,6 +181,17 @@ class Frontdesks extends CI_Controller
                 ";
         $result = $this->db->query($sql, array($no_tiket_frontdesk))->result_array();
 
+        // Cari pemroses - Subdirektorat Only
+        // Sorry kejar tayang, jadi kodenya begini T_T
+        $pemroses = '';
+        foreach ($result as $value) {
+            if (preg_match('/SUBDIREKTORAT/i', $value['nama_unit_satker'])) {
+                $pemroses = $value['nama_unit_satker'];
+                break;
+            }
+        }
+
+
         // Cari nama Penyelia
         $penyelia = $this->db->query('SELECT nama FROM tb_user WHERE id_user = ?', array($id_penyelia))->row();
 
@@ -288,8 +299,7 @@ class Frontdesks extends CI_Controller
         $odf->setVars('catatan', $result[0]['catatan']);
         $odf->setVars('nama_penyelia', $penyelia->nama);
         $odf->setVars('tanggal_sekarang', strftime('%d %B %Y'));
-        $odf->setVars('nama_unit_satker', $result[0]['nama_unit_satker']);
-        $odf->setVars('nama_penyelia', $penyelia->nama);
+        $odf->setVars('nama_unit_satker', $pemroses);
 
          // Simpan file ODT
          $odf->saveToDisk(FCPATH . 'output/' . 'pengajuan_' . $no_tiket_frontdesk . '.odt');
