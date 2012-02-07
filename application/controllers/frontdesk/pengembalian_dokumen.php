@@ -56,8 +56,8 @@ class Pengembalian_dokumen extends CI_Controller
         $odf->setVars('tanggal_dikembalikan', strftime('%d-%m-%Y %H:%M'));
         $odf->setVars('nomor_surat_usulan', $result->row()->nomor_surat_usulan);
         $odf->setVars('tanggal_surat_usulan', strftime('%d %B %Y', strtotime($result->row()->tanggal_surat_usulan)));
-        $odf->setVars('nama_kl', $result->row()->nama_kementrian);
-        $odf->setVars('nama_unit', $result->row()->nama_unit);
+        $odf->setVars('nama_kl', $result->row()->id_kementrian . ' - ' . $result->row()->nama_kementrian);
+        $odf->setVars('nama_unit', $result->row()->id_unit . ' - ' . $result->row()->nama_unit);
         $odf->setVars('nip', $result->row()->nip);
         $odf->setVars('nama_petugas', $result->row()->nama_petugas);
         $odf->setVars('jabatan', $result->row()->jabatan_petugas);
