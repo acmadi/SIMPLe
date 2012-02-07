@@ -138,6 +138,7 @@ class Frontdesks extends CI_Controller
                 JOIN tb_unit i                 ON i.id_unit = a.id_unit AND i.id_kementrian = a.id_kementrian
                 WHERE status = 'open' AND lavel = 1
                 GROUP BY no_tiket_frontdesk
+                ORDER BY tanggal DESC
                 ";
         $list_dokumen = $this->db->query($sql);
 
