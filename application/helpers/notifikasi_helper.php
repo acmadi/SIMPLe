@@ -3,19 +3,19 @@
 function generate_notifkasi()
 {
     if ($this->session->flashdata('success')) {
-        echo '<div class="success">' . $this->session->flashdata('success') . '</div>';
+        echo notification($this->session->flashdata('success'), 'Sukses', 'red');
     }
-
-    if ($this->session->flashdata('error')) {
-        echo '<div class="error">' . $this->session->flashdata('error') . '</div>';
-    }
-
-    if ($this->session->flashdata('notice')) {
-        echo '<div class="notice">' . $this->session->flashdata('notice') . '</div>';
-    }
-
     if ($this->session->flashdata('info')) {
-        echo '<div class="info">' . $this->session->flashdata('info') . '</div>';
+        echo notification($this->session->flashdata('info'), 'Informasi', 'blue');
+    }
+    if ($this->session->flashdata('notice')) {
+        echo notification($this->session->flashdata('notice'), 'Perhatian', 'yellow');
+    }
+    if ($this->session->flashdata('error')) {
+        echo notification($this->session->flashdata('error'), 'Error', 'red');
+    }
+    if (validation_errors()) {
+        echo notification(validation_errors(), 'Error', 'red');
     }
 }
 
