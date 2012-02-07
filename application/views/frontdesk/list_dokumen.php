@@ -52,7 +52,7 @@
                 </td>
                 <td class="action">
                     <a href="<?php echo site_url('frontdesks/cetak_dokumen/' . $value->no_tiket_frontdesk ) ?>" class="cetak button green">Cetak</a>
-                    <a href="<?php echo site_url('frontdesks/eskalasi/' . $value->no_tiket_frontdesk) ?>" class="button blue">Eskalasi</a>
+                    <a href="<?php echo site_url('frontdesks/eskalasi/' . $value->no_tiket_frontdesk) ?>" class="button blue">Kirim</a>
                 </td>
             </tr>
 
