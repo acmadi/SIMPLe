@@ -243,7 +243,7 @@ class Frontdesks extends CI_Controller
         // END Email
 
         // Cari kementerian
-        $kementerian = $this->db->query("SELECT nama_kementrian FROM tb_kementrian
+        $kementerian = $this->db->query("SELECT tb_tiket_frontdesk.id_kementrian, nama_kementrian FROM tb_kementrian
                                          JOIN tb_tiket_frontdesk ON tb_kementrian.id_kementrian = tb_tiket_frontdesk.id_kementrian
                                          WHERE no_tiket_frontdesk = ?", array($no_tiket_frontdesk))->row();
         // Cari Unit Eselon
@@ -285,8 +285,8 @@ class Frontdesks extends CI_Controller
         $odf->setVars('nomor_surat_usulan', $result[0]['nomor_surat_usulan']);
         $odf->setVars('tanggal_surat_usulan', strftime('%d %B %Y', strtotime($result[0]['tanggal_surat_usulan'])));
         $odf->setVars('nomor_tiket', sprintf('%05d', $result[0]['no_tiket_frontdesk']) . '/' . date('Y'));
-        $odf->setVars('kementerian', $kementerian->nama_kementrian);
-        $odf->setVars('eselon', $result[0]['nama_unit']);
+        $odf->setVars('kementerian', $kementerian->id_kementrian . ' - ' . $kementerian->nama_kementrian);
+        $odf->setVars('eselon', $result[0]['id_unit'] . ' - ' . $result[0]['nama_unit']);
         $odf->setVars('nip', $result[0]['nip']);
         $odf->setVars('nama_petugas', $result[0]['nama_petugas']);
         $odf->setVars('jabatan', $result[0]['jabatan_petugas']);
@@ -299,7 +299,7 @@ class Frontdesks extends CI_Controller
         $odf->setVars('catatan', $result[0]['catatan']);
         $odf->setVars('nama_penyelia', $penyelia->nama);
         $odf->setVars('tanggal_sekarang', strftime('%d %B %Y'));
-        $odf->setVars('nama_unit_satker', $pemroses);
+        $odf->setVars('pemroses', $pemroses);
 
          // Simpan file ODT
          $odf->saveToDisk(FCPATH . 'output/' . 'pengajuan_' . $no_tiket_frontdesk . '.odt');
