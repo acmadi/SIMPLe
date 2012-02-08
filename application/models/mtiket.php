@@ -9,7 +9,9 @@ class Mtiket extends CI_Model
 				       tb_kementrian.id_kementrian, tb_kementrian.nama_kementrian,tbf.keputusan
 				FROM tb_unit tbu, tb_lavel tl, tb_tiket_frontdesk tbf LEFT JOIN tb_satker ts ON ts.id_satker = tbf.id_satker
                 LEFT JOIN tb_kementrian ON tb_kementrian.id_kementrian = tbf.id_kementrian
-				WHERE tbu.id_unit =  tbf.id_unit AND tbu.id_kementrian = tbf.id_kementrian AND tbf.lavel = tl.lavel ORDER BY tbf.no_tiket_frontdesk DESC";
+				WHERE tbu.id_unit =  tbf.id_unit AND tbu.id_kementrian = tbf.id_kementrian AND tbf.lavel = tl.lavel
+				GROUP BY tbf.no_tiket_frontdesk
+				ORDER BY tbf.no_tiket_frontdesk DESC";
         $query = $this->db->query($sql);
 		
 		return $query;
