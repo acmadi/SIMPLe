@@ -94,30 +94,24 @@ class Dashboard extends CI_Controller
 
     function database_backup()
     {
-        $this->load->dbutil();
+        $filename = $this->db->database . '_backup-' . strftime('%Y-%m-%d') . '.sql';
+        $output = $this->config->item('db_backup_path') . $filename;
 
-        $prefs = array(
-            'format' => 'txt', // gzip, zip, txt
-            'add_drop' => TRUE, // Whether to add DROP TABLE statements to backup file
-            'add_insert' => TRUE, // Whether to add INSERT data to backup file
-            'newline' => "\n" // Newline character used in backup file
+        $command = '"%s" -u %s -p%s -h %s %s > "%s"';
+
+        $final_command = sprintf($command,
+            $this->config->item('mysqldump'), // config/appconfig.php
+            $this->db->username,
+            $this->db->password,
+            $this->db->hostname,
+            $this->db->database,
+            $output
         );
 
-        //        $this->dbutil->backup();
-
-        $backup =& $this->dbutil->backup($prefs);
-
-        $this->load->helper('file');
-
-        $filename = 'db_dja_' . date('Y-m-d_H-i-s') . '.sql';
-        write_file('./db_backup/' . $filename, $backup);
+        exec($final_command);
 
         $this->load->helper('download');
 
-        echo force_download($filename, file_get_contents('./db_backup/' . $filename));
-
-        //echo 'Mengunduh file ' . anchor(base_url('db_backup/' . $filename), base_url('db_backup/' . $filename));
-
-        exit();
+        force_download($filename, file_get_contents($output));
     }
 }
