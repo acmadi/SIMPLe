@@ -193,7 +193,7 @@ class Form_revisi_anggaran extends CI_Controller
 
             // Save Tiket Frontdesk. Lavel tetap satu, sampai ditekan tombol eskalasi
             $sql = "INSERT INTO tb_tiket_frontdesk (id_satker, id_formulir, tanggal, status, lavel, id_petugas_satker, id_unit, id_kementrian,nomor_surat_usulan,tanggal_surat_usulan,is_active, catatan, petugas_penerima)
-					VALUES ({$kode_satker_select}, NULL, '{$now}', 'open', 1, {$tiket_id},'{$eselon}','{$nama_kl}','{$nomor_surat_usulan}','{$tanggal_surat_usulan}',2, '{$catatan}','" . $this->session->userdata("id_user") . "')";
+					VALUES ({$kode_satker_select}, NULL, '{$now}', 'open', 1, {$tiket_id},'{$eselon}','{$nama_kl}','{$nomor_surat_usulan}','{$tanggal_surat_usulan}',1, '{$catatan}','" . $this->session->userdata("id_user") . "')";
 
 
             $this->db->query($sql);
