@@ -33,6 +33,9 @@
                 <?php
                 switch ($value->is_active) {
                     case '1':
+                        if (preg_match('/Helpdesk/i', $value->nama_lavel)) {
+                            $value->nama_lavel = 'CS';
+                        }
 						if($value->keputusan == 'disahkan'){
 							echo 'Disetujui oleh ' . '<strong>'.$value->nama_lavel.'</strong>';
 						}else{
