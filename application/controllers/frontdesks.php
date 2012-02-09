@@ -305,7 +305,7 @@ class Frontdesks extends CI_Controller
 
     public function eskalasi($no_tiket_frontdesk) {
         $this->db->update('tb_tiket_frontdesk',
-            array('lavel' => 3),
+            array('lavel' => 3, 'is_active' => 2),
             array('no_tiket_frontdesk' => $no_tiket_frontdesk)
         );
         $this->session->set_flashdata('success', 'Dokumen telah dieskalasi');
