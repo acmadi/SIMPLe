@@ -10,6 +10,12 @@ class Telepon extends CI_Controller
     {
         $result = $this->db->query("SELECT * FROM tb_telepon");
 
+        $bc[0]->link = 'admin/dashboard';
+        $bc[0]->label = 'Home';
+        $bc[1]->link = 'admin/telepon';
+        $bc[1]->label = 'Telepon';
+        $data['breadcrumb'] = $bc;
+
         $data['telepon'] = $result;
         $data['title'] = 'Daftar Telepon';
         $data['content'] = 'admin/telepon/index';
@@ -36,6 +42,14 @@ class Telepon extends CI_Controller
                 redirect('admin/telepon/add');
             }
         }
+
+        $bc[0]->link = 'admin/dashboard';
+        $bc[0]->label = 'Home';
+        $bc[1]->link = 'admin/telepon';
+        $bc[1]->label = 'Telepon';
+        $bc[2]->link = 'admin/telepon/add';
+        $bc[2]->label = 'Tambah';
+        $data['breadcrumb'] = $bc;
 
         $data['title'] = 'Tambah Telepon';
         $data['content'] = 'admin/telepon/add';
@@ -67,6 +81,14 @@ class Telepon extends CI_Controller
         }
 
         $telepon = $this->db->from('tb_telepon')->where('id', $id)->get()->row();
+
+        $bc[0]->link = 'admin/dashboard';
+        $bc[0]->label = 'Home';
+        $bc[1]->link = 'admin/telepon';
+        $bc[1]->label = 'Telepon';
+        $bc[2]->link = 'admin/telepon/edit/' . $this->uri->segment(4);
+        $bc[2]->label = 'Ubah';
+        $data['breadcrumb'] = $bc;
 
         $data['telepon'] = $telepon;
         $data['title'] = 'Ubah Telepon';
