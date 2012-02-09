@@ -289,4 +289,39 @@ class Mfrontdesk extends CI_Model
 								WHERE tf.id_unit = tu.id_unit AND tf.id_kementrian = tu.id_kementrian AND tf.id_kementrian = tm.id_kementrian 
 								AND tr.id_petugas_satker = tf.id_petugas_satker AND tf.no_tiket_frontdesk = ?",array($id))->row();
 	}
+
+    public function get_list_dokumen_frontdesk($status = '',$level = '', $act = '',$kep = ''){
+        $optional_sql = '';
+        if($this->session->userdata('lavel') != '7'):
+            $optional_sql = " AND c.anggaran = '{$this->session->userdata('anggaran')}'
+                              AND c.id_unit_satker = '{$this->session->userdata('id_unit_satker')}' ";
+        endif;
+
+        if(!empty($act)){
+            $optional_sql .= " AND a.is_active = '{$act}' ";
+        }
+
+        if(!empty($kep)){
+            $optional_sql .= " AND a.keputusan = '{$kep}' ";
+        }
+
+        $sql = "SELECT a.no_tiket_frontdesk, a.tanggal, a.is_active,
+                       tb_kementrian.id_kementrian, tb_kementrian.nama_kementrian,
+                       a.id_unit, tb_unit.nama_unit
+
+                FROM `tb_tiket_frontdesk` a
+                JOIN tb_kementrian ON tb_kementrian.id_kementrian = a.id_kementrian
+                JOIN tb_unit ON tb_unit.id_unit = a.id_unit AND tb_kementrian.id_kementrian = tb_unit.id_kementrian
+                JOIN tb_kon_unit_satker b ON a.id_kementrian = b.id_kementrian
+                JOIN tb_unit_saker c ON b.id_unit_satker = c.id_unit_satker
+                WHERE
+                 status = '{$status}' AND
+                a.lavel = '{$level}'
+                $optional_sql
+                GROUP BY no_tiket_frontdesk
+                ORDER BY tanggal";
+
+
+        return $this->db->query($sql);
+    }
 }

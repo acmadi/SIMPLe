@@ -21,28 +21,8 @@ class Frontdesks extends CI_Controller
 							  AND c.id_unit_satker = '{$this->session->userdata('id_unit_satker')}' ";
 		endif;
 
-        //TODO Masih ragu dengan query ini. Mesti di recheck lagi. Tapi untuk sementara bolehlah. Fuuu!!
-        $sql = "SELECT a.no_tiket_frontdesk, a.tanggal, a.catatan, a.nomor_surat_usulan, a.tanggal_surat_usulan,
-                               a.id_kementrian, a.id_unit, a.petugas_penerima,
-                               c.id_petugas_satker, c.nama_petugas, c.nip, c.jabatan_petugas, c.no_hp, c.email, c.no_kantor, c.tipe,
-                               d.id_kelengkapan_formulir, e.id_kelengkapan, e.nama_kelengkapan,
-                               h.nama_kementrian, i.nama_unit,
-                               g.nama_unit AS nama_unit_satker,
-                               a.is_active
-                        FROM tb_tiket_frontdesk a
-                        LEFT JOIN tb_satker b          ON b.id_satker          = a.id_satker
-                        JOIN tb_petugas_satker c       ON c.id_petugas_satker  = a.id_petugas_satker
-                        JOIN tb_kelengkapan_formulir d ON d.no_tiket_frontdesk = a.no_tiket_frontdesk
-                        JOIN tb_kelengkapan_doc e      ON e.id_kelengkapan     = d.id_kelengkapan
-                        JOIN tb_kon_unit_satker f      ON (f.id_unit = a.id_unit AND f.id_kementrian = a.id_kementrian)
-                        JOIN tb_unit_saker g           ON g.id_unit_satker = f.id_unit_satker
-                        JOIN tb_kementrian h           ON h.id_kementrian = a.id_kementrian
-                        JOIN tb_unit i                 ON i.id_unit = a.id_unit AND i.id_kementrian = a.id_kementrian
-                        GROUP BY a.no_tiket_frontdesk
-                        ";
-		//print_r($sql);exit;
+        $result = $this->mfrontdesk->get_list_dokumen_frontdesk('open', $this->session->userdata('lavel'));
 
-        $result = $this->db->query($sql);
         $data['result'] = $result;
         $this->load->view('new-template', $data);
     }
@@ -330,5 +310,11 @@ class Frontdesks extends CI_Controller
         );
         $this->session->set_flashdata('success', 'Dokumen telah dieskalasi');
         redirect('frontdesks/list_dokumen');
+    }
+
+    public function edit($no_tiket_frontdesk) {
+        $data['title'] = 'Edit Dokumen Revisi Anggaran';
+        $data['content'] = 'frontdesk/edit';
+        $this->load->view('new-template', $data);
     }
 }
