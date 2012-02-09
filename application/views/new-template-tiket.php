@@ -56,7 +56,7 @@
                 &nbsp;&nbsp; Sistem Informasi Pusat Layanan DJA -->
             </div>
 
-            <div class="grid_2 alpha omega" style="text-align: right;">
+            <div class="grid_2 prefix_4 alpha omega" style="text-align: right;">
                 <?php if ($this->session->userdata('id_user')): ?>
                 <div class="profile-menu">
                     <a href="javascript:void(0)"><?php echo $this->session->userdata('nama') ?></a>

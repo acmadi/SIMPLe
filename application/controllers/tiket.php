@@ -9,17 +9,12 @@ class Tiket extends CI_Controller
     public function cek_tiket()
     {
         if ($_POST) {
-            $result = $this->db->from('tb_tiket_frontdesk')
-                    ->select('no_tiket_frontdesk,
-                                  id_unit,
-								  id_kementrian,
-                                  keputusan,
-                                  status,
-                                  tanggal_selesai
-                                  ')
-                    ->where('no_tiket_frontdesk', $this->input->post('no_tiket'))
-                    ->where('id_unit', $this->input->post('id_unit'))
-                    ->get();
+            $sql = "SELECT  no_tiket_frontdesk, a.id_unit, nama_unit, a.id_kementrian, nama_kementrian, keputusan, status, tanggal_selesai
+                    FROM tb_tiket_frontdesk a
+                    JOIN tb_kementrian b ON b.id_kementrian = a.id_kementrian
+                    JOIN tb_unit c ON c.id_unit = a.id_unit AND c.id_kementrian = a.id_kementrian
+                    WHERE a.no_tiket_frontdesk = ?";
+            $result = $this->db->query($sql, array($this->input->post('no_tiket')));
 
             if ($result->num_rows() == 0) {
                 $this->session->set_flashdata('error', 'Tiket tidak ditemukan');
@@ -30,7 +25,6 @@ class Tiket extends CI_Controller
         }
         $data['title'] = 'Cek Tiket';
         $data['no_tiket'] = $this->input->post('no_tiket');
-        $data['id_unit'] = $this->input->post('id_unit');
         $data['content'] = 'public/cek_tiket';
 
         $this->load->view('new-template-tiket', $data);
