@@ -7,7 +7,7 @@
 <div class="content">
     <h1>Dashboard <?php echo $this->session->userdata('nama_lavel')?></h1>
 
-    <fieldset class="grid_6">
+    <fieldset class="grid_12">
         <legend>Report Front Desk</legend>
         <div class="message_box">
             <?php
@@ -94,6 +94,7 @@
         </div>
     </fieldset>
 
+    <!--
     <fieldset class="grid_5">
         <legend>Report Help Desk</legend>
         <div class="message_box">
@@ -115,5 +116,6 @@
             </tr>
         </table>
     </fieldset>
+    -->
 
 </div>
