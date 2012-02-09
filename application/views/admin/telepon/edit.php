@@ -63,11 +63,25 @@
                 <?php endif ?>
             </td>
         </tr>
+        <tr>
+            <td>Status</td>
+            <td>
+                <select name="approved">
+                    <?php if ($telepon->approved): ?>
+                        <option value="1" selected="selected">Ya</option>
+                        <option value="0">Tidak</option>
+                    <?php else: ?>
+                        <option value="1">Ya</option>
+                        <option value="0" selected="selected">Tidak</option>
+                    <?php endif; ?>
+                </select>
+            </td>
+        </tr>
     </table>
 
     <div>
-        <input type="submit" value="Ubah"/>
-        <a href="<?php echo site_url('admin/telepon') ?>" class="button green">Batal</a>
+        <input type="submit" value="Ubah" class="button green"/>
+        <a href="<?php echo site_url('admin/telepon') ?>" class="button">Batal</a>
     </div>
 
     <?php echo form_close() ?>

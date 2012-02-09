@@ -56,6 +56,7 @@ class Telepon extends CI_Controller
                     'telepon1' => $this->input->post('telepon'),
                     'telepon2' => $this->input->post('telepon2'),
                     'keterangan' => $this->input->post('keterangan'),
+                    'approved' => $this->input->post('approved'),
                 ), array(
                     'id' => $id
                 ));

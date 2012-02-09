@@ -14,6 +14,7 @@
             <th>Telepon 1</th>
             <th>Telepon 2</th>
             <th>Keterangan</th>
+            <th>Disetujui</th>
             <th></th>
         </tr>
         </thead>
@@ -31,6 +32,9 @@
             <td><?php echo $value->telepon1 ?></td>
             <td><?php echo $value->telepon2 ?></td>
             <td><?php echo $value->keterangan ?></td>
+            <td>
+                <?php echo ($value->approved) ? 'Ya' : 'Tidak' ?>
+            </td>
             <td class="action">
                 <a href="<?php echo site_url('admin/telepon/edit/' . $value->id) ?>" class="button blue">Ubah</a>
                 <a href="<?php echo site_url('admin/telepon/delete/' . $value->id) ?>" onclick="return confirm('Anda yakin menghapus telepon ini?')"
