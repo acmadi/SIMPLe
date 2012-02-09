@@ -3,7 +3,7 @@
     <h1>Forum - <?php echo $kategori->kat_forum ?></h1>
 
     <div style="text-align: right;">
-        <a href="<?php echo site_url('forum/add/1/') ?>" class="button green">Tambah Forum Baru</a>
+        <a href="<?php echo site_url('forum/add/' . $this->uri->segment(3)) ?>" class="button green">Tambah Forum Baru</a>
     </div>
 
     <?php if ($forum->num_rows() > 0):  ?>
