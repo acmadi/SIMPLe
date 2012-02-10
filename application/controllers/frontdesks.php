@@ -251,6 +251,9 @@ class Frontdesks extends CI_Controller
                 strftime('%Y-%m-%d %H:%M:%S', strtotime($result[0]['tanggal'])),
                 strftime('%Y-%m-%d %H:%M:%S', strtotime("+$i days"))
             );
+            if ($jml_hari_kerja >= 5) {
+                break;
+            }
             $i++;
         }
 
