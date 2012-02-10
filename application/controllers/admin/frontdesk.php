@@ -39,6 +39,12 @@ class Frontdesk extends CI_Controller
 
       $this->load->view('admin/template', $data);
     }
+
+    public function delete($no_tiket_frontdesk) {
+        $sql = "DELETE FROM tb_tiket_frontdesk WHERE no_tiket_frontdesk = ?";
+        $this->db->query($sql, array($no_tiket_frontdesk));
+        redirect('admin/frontdesk');
+    }
 }
 
 ?>

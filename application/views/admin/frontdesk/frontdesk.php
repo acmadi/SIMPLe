@@ -65,7 +65,17 @@
                             <td><?php echo $tiket->nama_unit ?></td>
                             <td><?php echo $tiket->nama_satker ?></td>
                             <td><?php echo $tiket->status ?></td>
-                            <td><a href="<?php echo base_url('output/pengajuan_' . $tiket->no_tiket_frontdesk . '.pdf') ?>" class="button green" target="_blank">Lihat</a></td>
+                            <td>
+                                <a href="<?php echo base_url('output/pengajuan_' . $tiket->no_tiket_frontdesk . '.pdf') ?>"
+                                   class="button green"
+                                   target="_blank">
+                                    Lihat</a>
+
+                                <a href="<?php echo site_url('admin/frontdesk/delete/' . $tiket->no_tiket_frontdesk) ?>"
+                                   class="button red"
+                                   onclick="return confirm('Anda yakin akan menghapus tiket ini?')">
+                                    Hapus</a>
+                            </td>
 
                         </tr>
                         <?php endforeach ?>
