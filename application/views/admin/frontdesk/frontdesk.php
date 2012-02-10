@@ -4,21 +4,8 @@
 <div class="clear"></div>
     <div id="konten">
         <div style="display: none;" id="tab1" class="tab_konten">
-			<?php
-			// TODO: Satu paket ini untuk alerts. Nanti mau dipindah jadi hanya panggil satu method.
-			if ($this->session->flashdata('success')) {
-				echo '<div class="success">' . $this->session->flashdata('success') . '</div>';
-			}
-			if ($this->session->flashdata('error')) {
-				echo '<div class="error">' . $this->session->flashdata('error') . '</div>';
-			}
-			if ($this->session->flashdata('notice')) {
-				echo '<div class="notice">' . $this->session->flashdata('notice') . '</div>';
-			}
-			if ($this->session->flashdata('info')) {
-				echo '<div class="info">' . $this->session->flashdata('info') . '</div>';
-			}
-			?>
+
+            <?php generate_notifkasi() ?>
 
             <div class="table">
                 <div id="head">
@@ -63,6 +50,7 @@
                             <th>Nama Eselon</th>
                             <th>Nama Satker</th>
                             <th>Status</th>
+                            <th>&nbsp;</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -70,14 +58,15 @@
 
                         <?php $i = $nomor +1; foreach ($result as $tiket): ?>
                         <tr>
-                            <td><?php echo $tiket->no_tiket_frontdesk . ' ' . $tiket->no_antrian ?></td>
+                            <td>#<?php echo sprintf('%05d', $tiket->no_tiket_frontdesk) ?></td>
                             <td><?php echo $tiket->tanggal ?></td>
                             <td><?php echo $tiket->tanggal_selesai ?></td>
                             <td><?php echo $tiket->nama_kementrian ?></td>
                             <td><?php echo $tiket->nama_unit ?></td>
                             <td><?php echo $tiket->nama_satker ?></td>
                             <td><?php echo $tiket->status ?></td>
-                            
+                            <td><a href="<?php echo base_url('output/pengajuan_' . $tiket->no_tiket_frontdesk . '.pdf') ?>" class="button green" target="_blank">Lihat</a></td>
+
                         </tr>
                         <?php endforeach ?>
 
