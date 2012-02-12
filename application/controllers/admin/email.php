@@ -20,6 +20,7 @@ class Email extends CI_Controller
             }
             $file .= "?>";
             write_file(FCPATH . 'application/config/email.php', $file);
+            redirect('admin/email');
         }
 
         $this->load->config('email');
@@ -27,8 +28,8 @@ class Email extends CI_Controller
         $data['email_config'] = array(
             'smtp_host' => $this->config->item('smtp_host'),
             'smtp_user' => $this->config->item('smtp_user'),
-            'smtp_pass' => $data['email_config'] = $this->config->item('smtp_pass'),
-            'port' => $data['email_config'] = $this->config->item('port'),
+            'smtp_pass' => $this->config->item('smtp_pass'),
+            'smtp_port' => $this->config->item('smtp_port'),
         );
 
         $data['title'] = 'Daftar Referensi';

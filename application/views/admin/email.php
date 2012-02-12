@@ -19,7 +19,7 @@
 
         <p>
             <label>Port</label>
-            <input type="text" name="port" value="<?php echo $email_config['port'] ?>" /> Default: 25
+            <input type="text" name="smtp_port" value="<?php echo $email_config['smtp_port'] ?>" /> Default: 25
         </p>
 
         <input type="submit" value="Simpan"/>
