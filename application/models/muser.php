@@ -273,7 +273,7 @@ class Muser extends CI_Model
 					$this->db->query($sql,array($d['id'],$tgl_mulai,$tgl_selesai,$d['lev'],$d['dep']));
 					
 					if($this->db->affected_rows() > 0){
-						$this->log->create("suksee menambahkan data masa kerja user : ".$d['id']);
+						$this->log->create("Berhasil menambahkan data masa kerja user ID: ".$d['id']);
 						$this->session->set_flashdata('success',"sukses");
 						return true;
 					}else{

@@ -253,7 +253,7 @@ WHERE tanggal != '' GROUP BY YEAR(tanggal)")->result();
 					$this->db->query($sql,array($d['id'],$tgl_mulai,$tgl_selesai));
 					
 					if($this->db->affected_rows() > 0){
-						$this->log->create("suksee menambahkan data masa kerja user : ".$d['id']);
+						$this->log->create("Menambahkan data masa kerja user ID: ".$d['id']);
 						$this->session->set_flashdata('success',"sukses");
 						return true;
 					}else{
