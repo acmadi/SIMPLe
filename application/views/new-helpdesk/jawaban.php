@@ -1,6 +1,13 @@
 <script type="text/javascript">
     $(function () {
 
+        // Jangan sampai pergi ke halaman lain sebelum pertanyaan selesai
+        $(window).bind('beforeunload', function () { return 'Anda yakin tidak menyelesaikan pertanyaan ini?' } );
+        $('.button').click(function(){
+            $(window).unbind('beforeunload');
+        });
+
+
         $('#dialog').dialog('destroy');
 
         $('#dialog').dialog({
