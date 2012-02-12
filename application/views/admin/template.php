@@ -16,6 +16,15 @@
     <script type="text/javascript" src="<?php echo base_url('/js/jquery-1.7.1.min.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('/js/jquery-ui-1.8.16.custom.min.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('/js/chosen/chosen.jquery.js') ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('/js/prefixfree.min.js') ?>"></script>
+
+    <script>
+        $(function(){
+            $('.close').live('click', function () {
+                $(this).parent().fadeOut('fast');
+            })
+        })
+    </script>
 </head>
 <body>
 <div id="wrapper">

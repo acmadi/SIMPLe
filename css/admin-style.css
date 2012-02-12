@@ -1337,3 +1337,57 @@ hr {
 .chart {
     font-size: 12px !important;
 }
+
+.notification {
+    padding: 4px 8px;
+    margin: 8px 0;
+    border-radius: 4px;
+    background: #cecece;
+    background: linear-gradient(top, #d9d9d9, #c0c0c0);
+    text-shadow: 1px 1px #fff;
+}
+
+.notification .message {
+    float: left;
+}
+
+.notification .close {
+    float: right;
+    color: black;
+    text-shadow: none;
+    font-weight: bold;
+}
+
+.notification.green {
+    background: #57A957;
+    background: linear-gradient(top, #62c462, #57A957);
+    color: white !important;
+    text-shadow: 1px 1px #666;
+}
+
+.notification.green .message:before {
+    content: " ✓ ";
+}
+
+.notification.blue {
+    background: linear-gradient(top, #5bc0de, #339bb9);
+    color: white !important;
+    text-shadow: 1px 1px #666;
+}
+
+.notification.yellow {
+    background: #EEDC94;
+    background: linear-gradient(top, #fceec1, #EEDC94);
+    color: #333 !important;
+    text-shadow: 1px 1px #fff;
+}
+
+.notification.yellow .message:before {
+    content: " ! ";
+}
+
+.notification.red {
+    background: linear-gradient(top, #ee5f5b, #C43C35);
+    color: white !important;
+    text-shadow: 1px 1px #666;
+}
