@@ -9,24 +9,7 @@
 <div class="content">
     <h1>Tambah Data Kalender Baru</h1>
 
-    <?php
-    if ($this->session->flashdata('success')) {
-        echo '<div class="success">' . $this->session->flashdata('success') . '</div>';
-    }
-    if ($this->session->flashdata('error')) {
-        echo '<div class="error">' . $this->session->flashdata('error') . '</div>';
-    }
-    if ($this->session->flashdata('notice')) {
-        echo '<div class="notice">' . $this->session->flashdata('notice') . '</div>';
-    }
-    if ($this->session->flashdata('info')) {
-        echo '<div class="info">' . $this->session->flashdata('info') . '</div>';
-    }
-
-    if (validation_errors()) {
-        echo '<div class="error">' . validation_errors() . '</div>';
-    }
-    ?>
+    <?php generate_notifkasi() ?>
 
     <fieldset>
         <legend>Tanggal Libur</legend>

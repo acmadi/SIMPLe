@@ -18,21 +18,8 @@
 
     <h1>Daftar Pengembalian Dokumen</h1>
 
-    <?php
-    // TODO: Satu paket ini untuk alerts. Nanti mau dipindah jadi hanya panggil satu method.
-    if ($this->session->flashdata('success')) {
-        notification($this->session->flashdata('success'), 'BERHASIL', 'green');
-    }
-    if ($this->session->flashdata('error')) {
-        notification($this->session->flashdata('error'), 'ERROR', 'red');
-    }
-    if ($this->session->flashdata('notice')) {
-        notification($this->session->flashdata('notice'), 'WARNING', 'yellow');
-    }
-    if ($this->session->flashdata('info')) {
-        notification($this->session->flashdata('info'), 'INFORMASI', 'blue');
-    }
-    ?>
+    <?php generate_notifkasi() ?>
+
     <?php if ($result->num_rows() > 0): ?>
 
 

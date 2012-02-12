@@ -17,9 +17,7 @@
 <div class="content">
     <h1>List Dokumen Revisi Anggaran</h1>
 
-    <?php
-    echo ($this->session->flashdata('success') ? '<div class="notification green">' . $this->session->flashdata('success') . '</div>' : '');
-    ?>
+    <?php generate_notifkasi() ?>
 
     <?php if ($list_dokumen->num_rows() > 0): ?>
 

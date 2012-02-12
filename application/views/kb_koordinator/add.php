@@ -1,21 +1,7 @@
 <div class="content">
     <h1>Tambah Knowledge Base</h1>
 
-    <?php
-    $errors = validation_errors();
-    if (!empty($errors)) {
-		echo notification(validation_errors(), 'Error', 'red');
-    }
-    ?>
-
-    <?php
-    if ($this->session->flashdata('success')) {
-        echo notification($this->session->flashdata('success'), 'Success', 'green');
-    }
-    if ($this->session->flashdata('error')) {
-		echo notification($this->session->flashdata('error'), 'Error', 'red');
-    }
-    ?>
+    <?php generate_notifkasi() ?>
 	
 	<fieldset style="float:left;width:98%;">
     <form method="post" enctype="multipart/form-data" action="<?php echo site_url('/kb_koordinator/add/') ?>" >

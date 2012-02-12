@@ -1,17 +1,7 @@
 <div class="content">
     <h1>Penyelia - Daftar Pertanyaan</h1>
 
-    <?php
-    if ($this->session->flashdata('success')) {
-        echo notification($this->session->flashdata('success'), 'Sukses', 'green');
-    }
-    if ($this->session->flashdata('info')) {
-        echo notification($this->session->flashdata('info'), 'Informasi', 'blue');
-    }
-    if (validation_errors()) {
-        echo notification(validation_errors(), 'ERROR', 'red');
-    }
-    ?>
+    <?php generate_notifkasi() ?>
 
     <?php if ($pertanyaan->num_rows() > 0): ?>
 

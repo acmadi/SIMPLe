@@ -12,17 +12,7 @@
 
     <h1>Konsultasi Help Desk</h1>
 
-    <?php
-    if ($this->session->flashdata('success')) {
-        echo notification($this->session->flashdata('success'), 'Sukses', 'green');
-    }
-    if ($this->session->flashdata('info')) {
-        echo notification($this->session->flashdata('info'), 'Informasi', 'blue');
-    }
-    if (validation_errors()) {
-        echo notification(validation_errors(), 'ERROR', 'red');
-    }
-    ?>
+    <?php generate_notifkasi() ?>
 
     <?php $prev_quesion = ($this->input->get('prev_question')) ? '?prev_question=true' : '' ?>
     <?php echo form_open('/helpdesks/save/step2/' . $prev_quesion); ?>

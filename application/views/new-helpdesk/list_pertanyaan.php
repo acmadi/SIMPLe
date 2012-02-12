@@ -27,14 +27,10 @@
 
 <div class="content">
     <h1>Pertanyaan Helpdesk</h1>
-    <?php
-    if($this->session->flashdata('success')) : 
-        echo '<div class="notification green">';
-        echo $this->session->flashdata('success');
-        echo '</div>';
-    endif;
+    <?php generate_notifkasi() ?>
 	
-	$user = $this->session->userdata('id_user');
+	<?php
+    $user = $this->session->userdata('id_user');
     ?>
     <fieldset>
         <legend>Filter </legend>

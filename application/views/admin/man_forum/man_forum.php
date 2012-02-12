@@ -9,17 +9,7 @@
 
     <div id="konten">
 
-        <?php
-        if ($this->session->flashdata('success')) {
-			echo '<div class="success">' . $this->session->flashdata('success') . '</div>';
-		} elseif ($this->session->flashdata('error')) {
-			echo '<div class="error">' . $this->session->flashdata('error') . '</div>';
-		} elseif ($this->session->flashdata('info')) {
-			echo '<div class="info">' . $this->session->flashdata('info') . '</div>';
-		} elseif ($this->session->flashdata('notice')) {
-			echo '<div class="notice">' . $this->session->flashdata('notice') . '</div>';
-		}
-        ?>
+        <?php generate_notifkasi() ?>
 
         <div style="display: none;" id="tab1" class="tab_konten">
             <?php //$this->load->view('forum/form') ?>

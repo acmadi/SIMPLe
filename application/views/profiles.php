@@ -8,13 +8,7 @@
 <div class="content">
     <h1>Profil</h1>
 
-    <?php
-    if ($this->session->flashdata('success'))
-        echo notification($this->session->flashdata('success'), 'BERHASIL', 'green');
-
-    if (validation_errors())
-        echo notification(validation_errors(), 'ERROR', 'red');
-    ?>
+    <?php generate_notifkasi() ?>
 
     <div class="grid_6">
 
