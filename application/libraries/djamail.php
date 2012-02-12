@@ -16,7 +16,7 @@ class DjaMail
     public function kirim($ke, $judul, $isi, $attachment = '')
     {
 		$this->CI->email->clear();
-		$this->CI->email->from('dja.frontdesk@yahoo.com', 'Frontdesk Direktorat Jenderal Anggaran');
+		$this->CI->email->from('pusatlayanan@anggaran.depkeu.go.id', 'Pusat Layanan DJA');
 		$this->CI->email->to($ke); 
 
 		$this->CI->email->subject($judul);
