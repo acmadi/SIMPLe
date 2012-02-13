@@ -39,23 +39,23 @@
 
     <fieldset style="float: left; width: 500px; margin-left: 20px; height: 255px;">
         <legend>User yang sedang online</legend>
-        <div style="height: 240px;">
+        <div style="height: 240px; overflow-y: auto;">
             <dl>
                 <?php
-                
-				$result = $this->db->query("SELECT user 
+
+				$result = $this->db->query("SELECT user
 											FROM tb_online_users WHERE MINUTE(TIMEDIFF(NOW(),aktifitas_terakhir)) <= 30 ")->result();
 				foreach ($result as $val) {
 					//$udata = unserialize($val->user_data);
 					echo "<dd ><img src='".base_url()."images/user.png' > " . $val->user . "</dd>";
 				}
-				
-				
+
+
                 ?>
             </dl>
         </div>
     </fieldset>
-	
+
 	<div class="clear"></div>
 
     <fieldset style="float: left; width: 500px; height: 255px;">
@@ -71,7 +71,7 @@
             </dl>
         </div>
     </fieldset>
-	
+
 	<fieldset style="float: left; width: 500px;margin-left: 20px; height: 255px;">
         <legend>Knowledge Base</legend>
         <div style="height: 240px; ">
@@ -85,8 +85,8 @@
             </dl>
         </div>
     </fieldset>
-	
-	
-	
+
+
+
     <div class="clear"></div>
 </div>
