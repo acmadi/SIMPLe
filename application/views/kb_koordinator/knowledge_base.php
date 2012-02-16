@@ -1,3 +1,14 @@
+<script>
+    $(function(){
+        var oTable = $('.table').dataTable();
+
+        $('select#ranah-filter').change( function () {
+            oTable.fnFilter( $(this).val(), 5);
+            console.log($(this).val());
+        });
+    })
+</script>
+
 <div class="content">
     <h1>Daftar Knowledge Base</h1>
 
@@ -7,6 +18,14 @@
         <a href="<?php echo site_url('/kb_koordinator/add') ?>" class="button green">Tambah</a>
     </p>
 
+    <fieldset>
+        <legend>Filter</legend>
+        Ranah <select id="ranah-filter">
+            <option value="">Semua</option>
+            <option value="privat">Privat</option>
+            <option value="publik">Publik</option>
+        </select>
+    </fieldset>
 
     <table class="table">
         <thead>
