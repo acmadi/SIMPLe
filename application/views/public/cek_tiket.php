@@ -38,7 +38,15 @@
         <p>
             <span>Keputusan</span>
 			<span>:</span>
-            <span><strong><?php echo $tiket->keputusan ?></strong></span>
+            <span><strong>
+                <?php
+                if ($tiket->keputusan == '') {
+                    echo 'Diproses';
+                } else {
+                    echo $tiket->keputusan;
+                }
+                ?>
+            </strong></span>
         </p>
 
         <p>
