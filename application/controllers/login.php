@@ -152,6 +152,9 @@ Class Login extends CI_Controller
                 case '14':
                     redirect('admin_pengaduan/dashboard');
                     break;
+                case '15':
+                    redirect('admin/man_user');
+                    break;
 				case '999':
                     redirect('knowledge');
                     break;

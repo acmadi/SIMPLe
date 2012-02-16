@@ -29,7 +29,15 @@
 <body>
 <div id="wrapper">
     <div id="header"><img src="<?php echo base_url('images/logo.png') ?>" width="40"/>Sistem Informasi Pusat Layanan DJA</div>
-    <div id="navbar"><?php $this->load->view('navbar'); ?></div>
+    <div id="navbar">
+        <?php
+        if ($this->session->userdata('id_lavel') == 15) {
+            $this->load->view('navbar_15');
+        } else {
+            $this->load->view('navbar');
+        }
+        ?>
+    </div>
     <div id="container">
 
         <div id="content">
