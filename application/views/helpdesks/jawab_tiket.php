@@ -140,7 +140,7 @@
             <?php
             // ngapain eskalasi kalo dia sendiri dirjen (level 7)
             if ((int) $this->session->userdata('lavel') < 7 )
-            echo anchor('helpdesks/eskalasikan/' . $antrian->id, 'Eskalasi', 'class="button blue"')
+//            echo anchor('helpdesks/eskalasikan/' . $antrian->id, 'Eskalasi', 'class="button blue"')
             ?>
             <input type="submit" name="submit" value="Jawab" class="button green"/>
             <a href="<?php echo site_url('helpdesks/cetak_dokumen_pertanyaan/' . $antrian->id) ?>" target="_blank" class="button">Print</a>

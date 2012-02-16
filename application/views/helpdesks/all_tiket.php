@@ -111,7 +111,7 @@
 
 				<?php
 				if($value->tanggal_selesai == ''): ?>
-                <a class="button green" href="<?php echo site_url('/helpdesks/view/' . $value->id) ?>">Jawab/Eskalasi</a>
+                <a class="button green" href="<?php echo site_url('/helpdesks/view/' . $value->id) ?>">Jawab</a>
 				<?php else: ?>
 				<strong>
 					Terjawab
