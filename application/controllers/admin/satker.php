@@ -82,13 +82,11 @@ class Satker extends CI_Controller
                 ));
                 $this->session->set_flashdata('success', 'Data berhasil diubah');
                 $this->log->create("Mengubah data satker (id_satker => {$id_satker})");
+                redirect('/admin/satker/edit/' . $id_satker);
             }
         }
-        $result = $this->db->from('tb_petugas_satker a')
-                ->join('tb_satker b', 'b.id_satker = a.id_satker')
-                ->join('tb_kementrian c', 'b.id_kementrian = c.id_kementrian')
-                ->where('a.id_satker', $id_satker)
-                ->get()->row();
+        $sql = "SELECT id_satker, nama_satker FROM tb_satker WHERE id_satker = ?";
+        $result = $this->db->query($sql, array($id_satker))->row();
 
         $data['satker'] = $result;
 

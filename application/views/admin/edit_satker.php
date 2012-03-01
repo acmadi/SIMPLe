@@ -19,6 +19,7 @@
 
         <p>
             <input type="submit" class="button blue-pill" value="Simpan"/>
+            <a href="<?php echo site_url('/admin/satker/index') ?>" class="button gray-pill">Batal</a>
         </p>
     </form>
 </div>
