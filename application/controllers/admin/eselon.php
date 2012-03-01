@@ -65,7 +65,12 @@ class Eselon extends CI_Controller
         $this->load->view('admin/template', $data);
     }
 
-    public function edit($id_unit)
+    /**
+     * Ubah Nama Eselon
+     * @param $id_kementerian
+     * @param $id_unit
+     */
+    public function edit($id_kementrian, $id_unit)
     {
         if (isset($_POST)) {
 
@@ -76,7 +81,8 @@ class Eselon extends CI_Controller
                 $this->db->update('tb_unit', array(
                     'nama_unit' => $this->input->post('nama_unit')
                 ), array(
-                    'id_unit' => $id_unit
+                    'id_kementrian' => $id_kementrian,
+                    'id_unit' => $id_unit,
                 ));
                 $this->session->set_flashdata('success', 'Data berhasil diubah');
                 $this->log->create("Mengubah data Eselon (id_unit => {$id_unit})");
@@ -85,6 +91,7 @@ class Eselon extends CI_Controller
         $result = $this->db->from('tb_unit a')
 
                 ->join('tb_kementrian c', 'a.id_kementrian = c.id_kementrian')
+                ->where('a.id_kementrian', $id_kementrian)
                 ->where('a.id_unit', $id_unit)
                 ->get()->row();
 

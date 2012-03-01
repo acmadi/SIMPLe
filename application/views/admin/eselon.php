@@ -29,7 +29,7 @@
             <td style=""><?php echo $value->nama_unit ?></a></td>
             <td style=""><?php echo $value->nama_kementrian ?></td>
             <td class="action">
-                <a href="<?php echo site_url('/admin/eselon/edit/' . $value->id_unit) ?>" class="button blue-pill">Edit</a>
+                <a href="<?php echo site_url('/admin/eselon/edit/' . $value->id_kementrian . '/' . $value->id_unit) ?>" class="button blue-pill">Edit</a>
             </td>
         </tr>
         <?php endforeach ?>
