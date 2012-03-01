@@ -18,7 +18,7 @@ class Satker extends CI_Controller
                     ->join('tb_petugas_satker c', 'c.id_satker = a.id_satker')
                     ->like('nama_kementrian', $this->input->get('cari'))
                     ->or_like('nama_satker', $this->input->get('cari'))
-                    ->or_like('id_satker', $this->input->get('cari'))
+                    ->or_like('a.id_satker', $this->input->get('cari'))
                     ->get();
 
         } else {
