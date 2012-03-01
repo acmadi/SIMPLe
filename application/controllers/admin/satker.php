@@ -114,13 +114,18 @@ class Satker extends CI_Controller
 
             if ($this->form_validation->run()) {
 
-                $result = $this->db->insert('tb_satker', array(
+                $sql = "INSERT INTO tb_satker (id_satker, nama_satker, id_kementrian) VALUES (?, ?, ?)";
+                $result = $this->db->query($sql, array(
                     'id_satker' => $this->input->post('id_satker'),
                     'nama_satker' => $this->input->post('nama_satker'),
                     'id_kementrian' => $this->input->post('id_kementrian'),
                 ));
 
-                if (!$result) {
+                if ($this->db->_error_number() == 1062) {
+                    $this->session->set_flashdata('error', 'ID Satker ' . $this->input->post('id_satker') . ' sudah digunakan.');
+                    $this->log->create("Gagal menambahkan data Satker, karena ada duplikasi ID Satker " . $this->input->post('id_satker'));
+                    redirect('admin/satker/add');
+                } elseif (!$result) {
                     $this->session->set_flashdata('error', 'Data gagal ditambahkan. ERROR: ' . $this->db->_error_message());
                     $this->log->create("Gagal menambahkan data Satker. ERROR: " . $this->db->_error_message());
 					redirect('admin/satker/add');
