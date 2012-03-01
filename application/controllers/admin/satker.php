@@ -151,4 +151,15 @@ class Satker extends CI_Controller
 
         $this->load->view('admin/template', $data);
     }
+
+    /**
+     * Menghapus data satker
+     * @param $id ID Satker
+     */
+    public function delete($id) {
+        $this->db->query("DELETE FROM tb_satker WHERE id_satker = ?", array($id));
+        $this->session->set_flashdata('success', "Data Satker berhasil dihapus");
+        $this->log->create("Menghapus data Satker ID:" . $id);
+        redirect('/admin/satker/index');
+    }
 }

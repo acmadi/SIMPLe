@@ -2,6 +2,8 @@
 
     <h1>Satker</h1>
 
+    <?php generate_notifkasi() ?>
+
     <a href="<?php echo site_url('/admin/satker/add/') ?>" class="button blue-pill">Tambah Satker</a>
 
     <form method="get" action="<?php echo site_url('/admin/satker/index/') ?>" style="text-align: right;">
@@ -29,6 +31,8 @@
             <td style=""><?php echo $value->nama_kementrian ?></td>
             <td class="action">
                 <a href="<?php echo site_url('/admin/satker/edit/' . $value->id_satker) ?>" class="button blue-pill">Edit</a>
+                <a href="<?php echo site_url('/admin/satker/delete/' . $value->id_satker) ?>" class="button gray-pill"
+                   onclick="return confirm('Anda yakin akan menghapus data ini?')">Hapus</a>
             </td>
         </tr>
         <?php endforeach ?>
