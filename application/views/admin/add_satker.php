@@ -1,3 +1,9 @@
+<script type="text/javascript">
+    $(function(){
+        $('.chzn-single').chosen();
+    })
+</script>
+
 <div class="content">
 
     <h1>Tambah Satker</h1>
@@ -20,7 +26,7 @@
 
         <p>
             <label>Nama Kementerian</label>
-            <select name="id_kementrian">
+            <select name="id_kementrian" class="chzn-single">
                 <option value="">&nbsp;</option>
                 <?php foreach ($kementrian->result() as $value): ?>
                 <?php if (set_value('id_kementrian') == $value->id_kementrian): ?>
