@@ -156,4 +156,20 @@ class Eselon extends CI_Controller
 
         $this->load->view('admin/template', $data);
     }
+
+    public function delete($id_kementrian, $id_unit) {
+        $sql = "DELETE FROM tb_unit WHERE id_kementrian = ? AND id_unit = ?";
+        $this->db->query($sql, array($id_kementrian, $id_unit));
+
+        if ($this->db->_error_number() == 0) {
+            $this->session->set_flashdata('success', 'Data Eselon berhasil dihapus');
+            $this->log->create("Menghapus data eselon (ID Kementerian: {$id_kementrian}, ID Eselon: {$id_unit}");
+
+        } else {
+            $this->session->set_flashdata('error', $this->db->_error_message());
+
+        }
+
+        redirect('admin/eselon');
+    }
 }

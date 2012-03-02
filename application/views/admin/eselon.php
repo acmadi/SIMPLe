@@ -1,7 +1,8 @@
 <div class="content">
 
     <h1>Eselon</h1>
-	
+
+    <?php generate_notifkasi() ?>
 	
     <a href="<?php echo site_url('/admin/eselon/add/') ?>" class="button blue-pill">Tambah Eselon</a>
 
@@ -14,9 +15,8 @@
         <thead>
         <tr>
             <th class="short">No</th>
-            <th class="short">Kode Eselon</th>
-            <th>Nama Eselon</th>
             <th>Kementerian</th>
+            <th>Eselon</th>
             <th class="action">Aksi</th>
         </tr>
         </thead>
@@ -25,11 +25,12 @@
         <?php foreach ($bla->result() as $value): ?>
         <tr>
             <td class="short"><?php echo $i++ ?></td>
-            <td class="short"><?php echo $value->id_unit ?></a></td>
-            <td style=""><?php echo $value->nama_unit ?></a></td>
-            <td style=""><?php echo $value->nama_kementrian ?></td>
+            <td style=""><strong><?php echo $value->id_kementrian ?></strong> - <?php echo $value->nama_kementrian ?></td>
+            <td style=""><strong><?php echo $value->id_unit ?></strong> - <?php echo $value->nama_unit ?></a></td>
             <td class="action">
                 <a href="<?php echo site_url('/admin/eselon/edit/' . $value->id_kementrian . '/' . $value->id_unit) ?>" class="button blue-pill">Edit</a>
+                <a href="<?php echo site_url('/admin/eselon/delete/' . $value->id_kementrian . '/' . $value->id_unit) ?>" class="button gray-pill"
+                   onclick="return confirm('Anda yakin akan menghapus data ini?')">Hapus</a>
             </td>
         </tr>
         <?php endforeach ?>
