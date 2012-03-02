@@ -11,7 +11,7 @@
         <input type="submit" name="submit" value="Cari" class="button blue-pill"/>
     </form>
 
-    <table style="width: 100%;">
+    <table class="table">
         <thead>
         <tr>
             <th class="short">No</th>
