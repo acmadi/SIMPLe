@@ -145,4 +145,22 @@ class Kementrian extends CI_Controller
 
         $this->load->view('admin/template', $data);
     }
+
+    public function delete($id_kementrian) {
+        $sql = "DELETE FROM tb_kementrian WHERE id_kementrian = ?";
+        $this->db->query($sql, array($id_kementrian));
+
+        if ($this->db->_error_number() == 1451) {
+            $this->session->set_flashdata('error', 'Data Kementerian tidak berhasil dihapus karena ada tiket frontdesk yang memiliki referensi ke Kementerian ini.');
+
+        } elseif ($this->db->_error_number() == 0) {
+            $this->session->set_flashdata('success', 'Data Kementerian berhasil dihapus');
+            $this->log->create("Menghapus data kementerian ID: " . $id_kementrian);
+
+        } else {
+            $this->session->set_flashdata('error', $this->db->_error_message());
+
+        }
+        redirect('admin/kementrian');
+    }
 }
