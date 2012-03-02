@@ -84,8 +84,8 @@ if ($this->uri->segment(1) == 'email') {
         <li><?php echo anchor('admin/histori', 'Histori', "class='$nav_history'");?></li>
         <li><?php echo anchor('admin/system', 'Sistem', "class='$nav_system'");?></li>
 		<li><?php echo anchor('admin/kementrian', 'Manajemen Kementrian', "class='$nav_kementrian'");?></li>
-        <li><?php echo anchor('admin/satker', 'Manajemen Satker', "class='$nav_satker'");?></li>
 		<li><?php echo anchor('admin/eselon', 'Manajemen Eselon', "class='$nav_eselon'");?></li>
+        <li><?php echo anchor('admin/satker', 'Manajemen Satker', "class='$nav_satker'");?></li>
         <li><?php echo anchor('admin/calendar', 'Calendar', "class='$nav_calendar'");?></li>
         <li><?php echo anchor('admin/sms', 'SMS', "class='$nav_sms'");?></li>
         <li><?php echo anchor('admin/man_kelengkapan_doc', 'Kelengkapan Dokumen', "class='$nav_sms'");?></li>
