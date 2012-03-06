@@ -38,6 +38,12 @@ class Login_checker extends CI_Controller
 				$this->db->query("UPDATE tb_online_users SET aktifitas_terakhir = NOW() WHERE user = ?", array($this->session->userdata('user')));
 			}
 		}
+
+        if ($this->uri->segment(1) == 'admin') {
+            if ($this->session->userdata('lavel') != 0) {
+                redirect('login/process_logout');
+            }
+        }
 		
 		
     }
