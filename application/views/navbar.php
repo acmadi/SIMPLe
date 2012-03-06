@@ -70,9 +70,10 @@ if ($this->uri->segment(1) == 'email') {
 }
 ?>
 
-<li class="<?php echo $nav_dashboard ?>"><?php echo anchor('admin/dashboard', 'Dashboard');?></li>
+<li class="nav-header"><i class="icon-home"></i>Menu Utama</li>
+<li class="<?php echo $nav_dashboard ?>"><a href="<?php echo site_url('/admin/dashboard') ?>">Dashboard</a></li>
 
-<li class="nav-header">Aplikasi</li>
+<li class="nav-header"><i class="icon-pencil"></i>Aplikasi</li>
 <li class="<?php echo $nav_frontdesk ?>"><?php echo anchor('admin/frontdesk', 'Front Desk');?></li>
 <li class="<?php echo $nav_helpdesk ?>"><?php echo anchor('admin/helpdesk', 'Help Desk');?></li>
 <li class="<?php echo $nav_knowledge ?>"><?php echo anchor('admin/knowledge', 'Knowledge Base');?></li>
@@ -81,14 +82,14 @@ if ($this->uri->segment(1) == 'email') {
 <li class="<?php echo $nav_telepon ?>"><?php echo anchor('admin/telepon', 'Telepon');?></li>
 <li class="<?php echo $nav_kelengkapan_doc ?>"><?php echo anchor('admin/man_kelengkapan_doc', 'Kelengkapan Dokumen');?></li>
 
-<li class="nav-header">Manajemen</li>
+<li class="nav-header"><i class="icon-user"></i>Manajemen</li>
 <li class="<?php echo $nav_manuser ?>"><?php echo anchor('admin/man_user', 'User');?></li>
 <li class="<?php echo $nav_manunit ?>"><?php echo anchor('admin/man_unit', 'Unit');?></li>
 <li class="<?php echo $nav_kementrian ?>"><?php echo anchor('admin/kementrian', 'Kementrian');?></li>
 <li class="<?php echo $nav_eselon ?>"><?php echo anchor('admin/eselon', 'Eselon');?></li>
 <li class="<?php echo $nav_satker ?>"><?php echo anchor('admin/satker', 'Satker');?></li>
 
-<li class="nav-header">Sistem</li>
+<li class="nav-header"><i class="icon-cog"></i>Sistem</li>
 <li class="<?php echo $nav_aksescontrol ?>"><?php echo anchor('admin/akses_kontrol', 'Akses Kontrol');?></li>
 <li class="<?php echo $nav_system ?>"><?php echo anchor('admin/system', 'Backup');?></li>
 <li class="<?php echo $nav_calendar ?>"><?php echo anchor('admin/calendar', 'Calendar');?></li>
