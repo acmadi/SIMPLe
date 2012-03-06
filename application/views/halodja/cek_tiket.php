@@ -7,7 +7,7 @@
         <legend>Pengecekan Tiket</legend>
         <form method="post" action="<?php echo site_url('/halodja/status_tiket') ?>">
             <p>
-                Nomer Tiket <input type="text" name="no_tiket" value="<?php echo $no_tiket;?>" autocomplete="off" />
+                Nomor Tiket <input type="text" name="no_tiket" value="<?php echo $no_tiket;?>" autocomplete="off" />
                 <input type="submit" value="Cek Tiket" class="button green"/>
                 <a href="<?php echo site_url('halodja/status_tiket') ?>" class="button">Reset</a>
             </p>
@@ -19,8 +19,13 @@
         <legend>Status Tiket</legend>
         <table style="width: 100%;">
             <tr>
-                <td>Nomer Tiket</td>
+                <td>Nomor Tiket</td>
                 <td><strong>#<?php echo sprintf('%05d', $tiket->no_tiket_frontdesk) ?></strong></td>
+            </tr>
+
+            <tr>
+                <td>Nomor Surat Usulan</td>
+                <td><strong><?php echo $tiket->nomor_surat_usulan ?></strong></td>
             </tr>
 
             <tr>
