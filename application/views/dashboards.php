@@ -1,3 +1,5 @@
+<meta http-equiv="refresh" content="30; url=<?php echo site_url('/dashboards')  ?>">
+
 <style>
     .message_box {
         text-align: center;
