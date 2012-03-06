@@ -36,8 +36,16 @@ class Halodja extends CI_Controller
                     OR d.nip LIKE ?
                     OR b.nama_kementrian LIKE ?
                     OR c.nama_unit LIKE ?
+                    OR d.nama_petugas LIKE ?
+                    OR d.no_kantor LIKE ?
+                    OR d.no_hp LIKE ?
+                    OR d.email LIKE ?
                     ";
             $result = $this->db->query($sql, array(
+                "%{$this->input->post('pencarian')}%",
+                "%{$this->input->post('pencarian')}%",
+                "%{$this->input->post('pencarian')}%",
+                "%{$this->input->post('pencarian')}%",
                 "%{$this->input->post('pencarian')}%",
                 "%{$this->input->post('pencarian')}%",
                 "%{$this->input->post('pencarian')}%",
