@@ -1,48 +1,107 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <title>Sistem Informasi Pusat Layanan Direktorat Jendral Anggaran - <?php echo isset($title) ? $title : ''; ?></title>
+    <meta charset="utf-8">
+    <title>Pusat Layanan DJA - Administrator - <?php echo @$title ?></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <link rel="shortcut icon" href="<?php echo base_url() . 'images/icon.jpg';?>"/>
+    <!-- Le styles -->
 
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('/css/admin-style.css') ?>" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('/css/admin-buttons.css') ?>" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('/css/cupertino/jquery-ui-1.8.16.custom.css') ?>" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('/css/table.css') ?>" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('/css/akhyar.css') ?>" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('/js/chosen/chosen.css');?>" />
-
-    <script type="text/javascript" src="<?php echo base_url('/js/jquery-1.7.1.min.js') ?>"></script>
-    <script type="text/javascript" src="<?php echo base_url('/js/jquery-ui-1.8.16.custom.min.js') ?>"></script>
-    <script type="text/javascript" src="<?php echo base_url('/js/chosen/chosen.jquery.js') ?>"></script>
-    <script type="text/javascript" src="<?php echo base_url('/js/prefixfree.min.js') ?>"></script>
-
-    <script>
-        $(function(){
-            $('.close').live('click', function () {
-                $(this).parent().fadeOut('fast');
-            })
-        })
-    </script>
-</head>
-<body>
-<div id="wrapper">
-    <div id="header"><img src="<?php echo base_url('images/logo.png') ?>" width="40"/>Sistem Informasi Pusat Layanan DJA</div>
-    <div id="navbar">
-        <?php
-        if ($this->session->userdata('id_lavel') == 15) {
-            $this->load->view('navbar_15');
-        } else {
-            $this->load->view('navbar');
+    <link href="<?php echo base_url('bootstrap/css/bootstrap.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('css/table.css') ?>" rel="stylesheet">
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
         }
-        ?>
-    </div>
-    <div id="container">
 
-        <div id="content">
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        td.action img {
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+    <link href="<?php echo base_url('bootstrap/css/bootstrap-responsive.css') ?>" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="<?php echo base_url('images/favicon.ico') ?>">
+
+    <link rel="apple-touch-icon" href="<?php echo base_url('images/apple-touch-icon.png') ?>">
+    <link rel="apple-touch-icon" sizes="72x72" href="<?php echo base_url('images/apple-touch-icon-72x72.png') ?>">
+    <link rel="apple-touch-icon" sizes="114x114" href="<?php echo base_url('images/apple-touch-icon-114x114.png') ?>">
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="#">SIMPLe DJA - Admin</a>
+
+            <div class="nav-collapse">
+                <ul class="nav">
+
+                    <li class="active"><a href="<?php echo site_url('/admin/dashboard') ?>">Dashboard</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+
+                <div id="logout" class="navbar-text pull-right"><?php echo $this->session->userdata('nama') ?> | <?php echo anchor("login/process_logout", 'Logout') ?></div>
+            </div>
+            <!--/.nav-collapse -->
+
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span2">
+            <div class="well sidebar-nav">
+                <ul class="nav nav-list">
+
+                    <li class="nav-header">Menu Utama</li>
+                    <?php
+                    if ($this->session->userdata('id_lavel') == 15) {
+                        $this->load->view('navbar_15');
+                    } else {
+                        $this->load->view('navbar');
+                    }
+                    ?>
+
+                </ul>
+            </div>
+            <!--/.well -->
+        </div>
+        <!--/span-->
+
+        <div class="span10">
+            <!--<div class="hero-unit">
+                <h1>Hello, world!</h1>
+
+                <p>This is a template for a simple marketing or informational website. It includes a large callout
+                    called the hero unit and three supporting pieces of content. Use it as a starting point to create
+                    something more unique.</p>
+
+                <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+            </div>-->
             <?php if(isset($breadcrumb) && $breadcrumb != '') : ?>
-            <div id="breadcrumb">
                 <?php
                 $this->load->helper('breadcrumb_helper');
                 breadcrumb($breadcrumb);
@@ -50,77 +109,52 @@
             </div>
             <?php endif;?>
 
+
+            <div class="span10">
             <?php
-            if (isset($content)) :
+            if (isset($content)) {
                 $this->load->view($content);
-            elseif (isset($content_html)) :
+            } elseif (isset($content_html)) {
                 echo $content_html;
-            endif;
+            }
             ?>
+            </div>
+            <!--/span-->
+
         </div>
+        <!--/span-->
     </div>
-    <div id="footer"><?php $this->load->view('footer'); ?></div>
+    <!--/row-->
+
+    <hr>
+
+    <footer>
+        <p>&copy; Dirjen Jenderal Anggaran 2012</p>
+    </footer>
+
 </div>
+<!--/.fluid-container-->
+
+<!-- Le javascript
+================================================== -->
+
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="<?php echo base_url('js/jquery-1.7.1.min.js') ?>"></script>
+<script src="<?php echo base_url('bootstrap/js/bootstrap.min.js') ?>"></script>
+<!--<script src="../assets/js/bootstrap-transition.js"></script>-->
+<!--<script src="../assets/js/bootstrap-alert.js"></script>-->
+<!--<script src="../assets/js/bootstrap-modal.js"></script>-->
+<!--<script src="../assets/js/bootstrap-dropdown.js"></script>-->
+
+<!--<script src="../assets/js/bootstrap-scrollspy.js"></script>-->
+<!--<script src="../assets/js/bootstrap-tab.js"></script>-->
+<!--<script src="../assets/js/bootstrap-tooltip.js"></script>-->
+<!--<script src="../assets/js/bootstrap-popover.js"></script>-->
+<!--<script src="../assets/js/bootstrap-button.js"></script>-->
+<!--<script src="../assets/js/bootstrap-collapse.js"></script>-->
+
+<!--<script src="../assets/js/bootstrap-carousel.js"></script>-->
+<!--<script src="../assets/js/bootstrap-typeahead.js"></script>-->
+
 </body>
 </html>
-
-<!--TABS--GANTI MODEL EXTJS ! :) -->
-<script type="text/javascript">
-    $(document).ready(function () {
-        //$('#tab1').fadeIn('slow'); //tab pertama ditampilkan
-        $('<?php echo isset($tabAktif) ? $tabAktif : '#tab1';?>').fadeIn('slow'); //tab pertama ditampilkan
-        $('ul#nav li a').click(function () { // jika link tab di klik
-            $('ul#nav li a').removeClass('active'); //menghilangkan class active (yang tampil)
-            $(this).addClass("active"); // menambahkan class active pada link yang diklik
-            $('.tab_konten').hide(); // menutup semua konten tab
-            var aktif = $(this).attr('href'); // mencari mana tab yang harus ditampilkan
-            $(aktif).fadeIn('slow'); // tab yang dipilih, ditampilkan
-            return false;
-        });
-
-    });
-</script>
-
-<!--TABLE JQUERY-->
-<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.wjb.selectallrows.js"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#tableOne thead tr th:first input:checkbox").click(function () {
-            var checkedStatus = this.checked;
-            $("#tableOne tbody tr td:first-child input:checkbox").each(function () {
-                this.checked = checkedStatus;
-            });
-        });
-
-        $("#tableTwo").selectAllRows();
-
-        $("#tableThree").selectAllRows({ column:'last' });
-
-        $("#tableFour").selectAllRows({
-            column:'2',
-            selectTip:'Select All Students',
-            unselectTip:'Un-Select All Students'
-        })
-                .css("border-width", "10px");
-
-        // Delete confirmation
-        $('.delete').click(function () {
-            answer = confirm('Anda yakin akan menghapus?');
-            if (answer) {
-                _this = $(this);
-                link = _this.attr('href');
-                console.log("href=" + link)
-                $.get(link, function (data) {
-                    _this.closest('tr').css('background', 'red').fadeOut();
-                });
-            }
-            return false;
-        })
-
-//        $('.chzn-single').chosen({});
-
-    });
-</script>
-
-
-

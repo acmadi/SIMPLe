@@ -2,96 +2,97 @@
 $nav_dashboard = $nav_aksescontrol = $nav_manunit = $nav_manuser =
 $nav_helpdesk = $nav_history = $nav_system = $nav_knowledge =
 $nav_frontdesk = $nav_forum = $nav_kementrian = $nav_satker = $nav_eselon = $nav_calendar = $nav_sms = $nav_petugas =
-$nav_referensi = $nav_telepon = $nav_email = '';
+$nav_referensi = $nav_kelengkapan_doc = $nav_telepon = $nav_email = '';
 switch ($this->uri->segment(2)) {
     case 'dashboard':
-        $nav_dashboard = "current";
+        $nav_dashboard = "active";
         break;
     case 'akses_kontrol':
-        $nav_aksescontrol = "current";
+        $nav_aksescontrol = "active";
         break;
     case 'man_user':
-        $nav_manuser = "current";
+        $nav_manuser = "active";
         break;
     case 'man_unit':
-        $nav_manunit = "current";
+        $nav_manunit = "active";
         break;
     case 'knowledge':
-        $nav_knowledge = "current";
+        $nav_knowledge = "active";
         break;
     case 'man_forum':
-        $nav_forum = "current";
+        $nav_forum = "active";
         break;
     case 'helpdesk':
-        $nav_helpdesk = "current";
+        $nav_helpdesk = "active";
         break;
     case 'frontdesk':
-        $nav_frontdesk = "current";
+        $nav_frontdesk = "active";
         break;
     case 'histori':
-        $nav_history = "current";
+        $nav_history = "active";
         break;
     case 'system':
-        $nav_system = "current";
+        $nav_system = "active";
         break;
 	case 'kementrian':
-        $nav_kementrian = "current";
+        $nav_kementrian = "active";
         break;
     case 'satker':
-        $nav_satker = "current";
+        $nav_satker = "active";
         break;
 	case 'eselon':
-        $nav_eselon = "current";
+        $nav_eselon = "active";
         break;
     case 'calendar':
-        $nav_calendar = "current";
+        $nav_calendar = "active";
         break;
     case 'sms':
-        $nav_sms = "current";
+        $nav_sms = "active";
         break;
     case 'referensi':
-        $nav_referensi = "current";
+        $nav_referensi = "active";
         break;
 }
 if ($this->uri->segment(1) == 'referensi') {
-    $nav_referensi = 'current';
+    $nav_referensi = 'active';
 }
 if ($this->uri->segment(1) == 'knowledge') {
-    $nav_knowledge = 'current';
+    $nav_knowledge = 'active';
 }
 if ($this->uri->segment(1) == 'telepon') {
-    $nav_telepon = 'current';
+    $nav_telepon = 'active';
 }
 if ($this->uri->segment(1) == 'report_petugas') {
-    $nav_petugas = 'current';
+    $nav_petugas = 'active';
 }
 if ($this->uri->segment(1) == 'email') {
-    $nav_email = 'current';
+    $nav_email = 'active';
 }
 ?>
 
-<div id="navbar" class="clearfloat">
-    <ul class="sf-menu">
-        <li><?php echo anchor('admin/dashboard', 'Dashboard', "class='$nav_dashboard'");?></li>
-        <li><?php echo anchor('admin/akses_kontrol', 'Akses Kontrol', "class='$nav_aksescontrol'");?></li>
-        <li><?php echo anchor('admin/man_user', 'Manajemen User', "class='$nav_manuser'");?></li>
-        <li><?php echo anchor('admin/man_unit', 'Manajemen Unit', "class='$nav_manunit'");?></li>
-        <li><?php echo anchor('admin/knowledge', 'Knowledge', "class='$nav_knowledge'");?></li>
-        <li><?php echo anchor('admin/referensi', 'Referensi Peraturan', "class='$nav_referensi'");?></li>
-        <li><?php echo anchor('admin/man_forum', 'Forum', "class='$nav_forum'");?></li>
-        <li><?php echo anchor('admin/helpdesk', 'Help Desk', "class='$nav_helpdesk'");?></li>
-        <li><?php echo anchor('admin/frontdesk', 'Sistem Frontdesk', "class='$nav_frontdesk'");?></li>
-        <li><?php echo anchor('admin/histori', 'Histori', "class='$nav_history'");?></li>
-        <li><?php echo anchor('admin/system', 'Sistem', "class='$nav_system'");?></li>
-		<li><?php echo anchor('admin/kementrian', 'Manajemen Kementrian', "class='$nav_kementrian'");?></li>
-		<li><?php echo anchor('admin/eselon', 'Manajemen Eselon', "class='$nav_eselon'");?></li>
-        <li><?php echo anchor('admin/satker', 'Manajemen Satker', "class='$nav_satker'");?></li>
-        <li><?php echo anchor('admin/calendar', 'Calendar', "class='$nav_calendar'");?></li>
-        <li><?php echo anchor('admin/sms', 'SMS', "class='$nav_sms'");?></li>
-        <li><?php echo anchor('admin/man_kelengkapan_doc', 'Kelengkapan Dokumen', "class='$nav_sms'");?></li>
-        <li><?php echo anchor('admin/telepon', 'Telepon', "class='$nav_telepon'");?></li>
-        <li><?php echo anchor('admin/report_petugas', 'Report', "class='$nav_petugas'");?></li>
-        <li><?php echo anchor('admin/email', 'Konfigurasi Email', "class='$nav_email'");?></li>
-    </ul>
-    <div id="logout"><?php echo $this->session->userdata('nama') ?> &nbsp; | &nbsp; <?php echo anchor("login/process_logout", 'Logout') ?> &nbsp; <em><?php //echo date('d-m-Y') ?></em></div>
-</div>
+<li class="<?php echo $nav_dashboard ?>"><?php echo anchor('admin/dashboard', 'Dashboard');?></li>
+
+<li class="nav-header">Aplikasi</li>
+<li class="<?php echo $nav_frontdesk ?>"><?php echo anchor('admin/frontdesk', 'Front Desk');?></li>
+<li class="<?php echo $nav_helpdesk ?>"><?php echo anchor('admin/helpdesk', 'Help Desk');?></li>
+<li class="<?php echo $nav_knowledge ?>"><?php echo anchor('admin/knowledge', 'Knowledge Base');?></li>
+<li class="<?php echo $nav_referensi ?>"><?php echo anchor('admin/referensi', 'Referensi Peraturan');?></li>
+<li class='<?php echo $nav_forum ?>'><?php echo anchor('admin/man_forum', 'Forum');?></li>
+<li class="<?php echo $nav_telepon ?>"><?php echo anchor('admin/telepon', 'Telepon');?></li>
+<li class="<?php echo $nav_kelengkapan_doc ?>"><?php echo anchor('admin/man_kelengkapan_doc', 'Kelengkapan Dokumen');?></li>
+
+<li class="nav-header">Manajemen</li>
+<li class="<?php echo $nav_manuser ?>"><?php echo anchor('admin/man_user', 'User');?></li>
+<li class="<?php echo $nav_manunit ?>"><?php echo anchor('admin/man_unit', 'Unit');?></li>
+<li class="<?php echo $nav_kementrian ?>"><?php echo anchor('admin/kementrian', 'Kementrian');?></li>
+<li class="<?php echo $nav_eselon ?>"><?php echo anchor('admin/eselon', 'Eselon');?></li>
+<li class="<?php echo $nav_satker ?>"><?php echo anchor('admin/satker', 'Satker');?></li>
+
+<li class="nav-header">Sistem</li>
+<li class="<?php echo $nav_aksescontrol ?>"><?php echo anchor('admin/akses_kontrol', 'Akses Kontrol');?></li>
+<li class="<?php echo $nav_system ?>"><?php echo anchor('admin/system', 'Backup');?></li>
+<li class="<?php echo $nav_calendar ?>"><?php echo anchor('admin/calendar', 'Calendar');?></li>
+<li class="<?php echo $nav_email ?>"><?php echo anchor('admin/email', 'Email');?></li>
+<li class="<?php echo $nav_history ?>"><?php echo anchor('admin/histori', 'Histori');?></li>
+<li class="<?php echo $nav_petugas ?>"><?php echo anchor('admin/report_petugas', 'Report');?></li>
+<li class="<?php echo $nav_sms ?>"><?php echo anchor('admin/sms', 'SMS');?></li>

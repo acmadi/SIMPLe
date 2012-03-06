@@ -2,11 +2,16 @@
 
 function breadcrumb($arr)
 {
-	echo '<ul>';
-	for ($i = 0; $i < count($arr); $i++) : 
+	echo '<ul class="breadcrumb">';
+	for ($i = 0; $i < count($arr); $i++) :
 		echo '<li>';
 		echo anchor($arr[$i]->link, $arr[$i]->label);
-		echo '</li>';
+
+        if ($i + 1 != count($arr)) {
+            echo '<span class="divider">/</span>';
+        }
+
+        echo '</li>';
 	endfor;
 	echo '</ul>';
 }

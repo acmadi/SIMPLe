@@ -22,22 +22,32 @@
 </ul>
 <div class="clear"></div>
 <div class="content" id="kontenxxx">
-    <h1>Manajemen User</h1>
+    <div class="page-header">
+        <h1>Manajemen User</h1>
+    </div>
     <?php generate_notifkasi() ?>
     <div style="" id="tab1" class="tab_konten">
-        <div class="table"> 
+        <div class="table">
             <div id="head">
-                <form id="form-cari" action="<?php echo site_url('admin/man_user/index')?>" method="post">
-					Cari : <input id="teks-cari" type="text" name="keyword" value="<?php echo $isian_form;?>" placeholder="Pencarian user" /> <input class="button blue-pill" type="submit" value="Enter"/>
-                </form>
-                
-                <a href="<?php echo site_url('admin/man_user_tambah')?>"><input id="btn-kanan-atas" class='button blue-pill' type="submit" value="Tambah User"/></a>
-                
+
+                <div class="row-fluid">
+                    <div class="span6">
+                        <form id="form-cari" action="<?php echo site_url('admin/man_user/index')?>" method="post">
+                            <input id="teks-cari" type="text" name="keyword" class="search-query" value="<?php echo $isian_form;?>" placeholder="Pencarian user" />
+                            <input class="btn" type="submit" value="Cari"/>
+                        </form>
+                    </div>
+
+                    <div class="span6" style="text-align: right">
+                    <a href="<?php echo site_url('admin/man_user_tambah')?>"><input id="btn-kanan-atas" class='btn btn-primary' type="submit" value="Tambah User"/></a>
+                    </div>
+                </div>
+
             </div>
-            <div id="tail">               
-       			<table id="tableOne" class="yui" style="margin:20px 0px 10px 0px; padding-right:30px; text-align:left;">   
+            <div id="tail">
+       			<table id="tableOne" class="yui" style="margin:20px 0px 10px 0px; padding-right:30px; text-align:left;">
                     <thead>
-                        <tr>            		    
+                        <tr>
                             <th class="short">ID User</th>
                             <th>Username</th>
                             <th>Nama</th>
@@ -64,15 +74,15 @@
                                 <?php endif ?>
                             </td>
                         </tr>
-					<?php endforeach; ?>                     
+					<?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
             <div class="pagination"><?php echo ($pageLink)?'Halaman '.$pageLink:'';?></div><br />
-            <div id="tail">  
-                <table> 
+            <div id="tail">
+                <table>
                     <tr>
-                        <td><a title="surat kerja" href="#"  onclick='return yesOrNo()' /><img src="<?php echo base_url(); ?>images/icon_suratkerja.png"/></a> &nbsp;  &nbsp; Surat Kerja
+                        <td><a title="surat kerja" href="#"  onclick='return yesOrNo()' /><img src="<?php echo base_url(); ?>images/icon_suratkerja.png"/></a> &nbsp;  &nbsp; Surat Kerja</td>
                         <td><a title="ubah" href="#"  onclick='return yesOrNo()' /><img src="<?php echo base_url(); ?>images/edit.png"/></a> &nbsp;  &nbsp; Edit User</td>
                     </tr>
                     <tr>
