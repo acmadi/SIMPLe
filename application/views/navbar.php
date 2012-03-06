@@ -70,9 +70,6 @@ if ($this->uri->segment(1) == 'email') {
 }
 ?>
 
-<li class="nav-header"><i class="icon-home"></i>Menu Utama</li>
-<li class="<?php echo $nav_dashboard ?>"><a href="<?php echo site_url('/admin/dashboard') ?>">Dashboard</a></li>
-
 <li class="nav-header"><i class="icon-pencil"></i>Aplikasi</li>
 <li class="<?php echo $nav_frontdesk ?>"><?php echo anchor('admin/frontdesk', 'Front Desk');?></li>
 <li class="<?php echo $nav_helpdesk ?>"><?php echo anchor('admin/helpdesk', 'Help Desk');?></li>

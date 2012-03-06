@@ -69,7 +69,7 @@
             <div class="nav-collapse">
                 <ul class="nav">
 
-                    <li class="active"><a href="<?php echo site_url('/admin/dashboard') ?>">Dashboard</a></li>
+                    <li class="active"><a href="<?php echo site_url('/admin/dashboard') ?>"><i class="icon-home icon-white"></i> Dashboard</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
