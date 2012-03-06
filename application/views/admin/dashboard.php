@@ -29,64 +29,67 @@
     })
 </script>
 
-<div class="content">
-    <h1>Dashboard</h1>
 
-    <fieldset style=" float: left; width: 500px; ">
-        <legend>Statistik</legend>
+<div class="page-header">
+    <h2>Dashboard</h2>
+</div>
+
+<div class="row-fluid">
+    <div class="span6">
+        <h3>Statistik</h3>
         <img src="<?php echo base_url()?>images/dashboard_bar_admin.png"/>
-    </fieldset>
+    </div>
 
-    <fieldset style="float: left; width: 500px; margin-left: 20px; height: 255px;">
-        <legend>User yang sedang online</legend>
-        <div style="height: 240px; overflow-y: auto;">
+    <div class="span6">
+        <h3>User yang sedang online</h3>
+
+        <div>
             <dl>
                 <?php
 
-				$result = $this->db->query("SELECT user
+                $result = $this->db->query("SELECT user
 											FROM tb_online_users WHERE MINUTE(TIMEDIFF(NOW(),aktifitas_terakhir)) <= 30 ")->result();
-				foreach ($result as $val) {
-					//$udata = unserialize($val->user_data);
-					echo "<dd ><img src='".base_url()."images/user.png' > " . $val->user . "</dd>";
-				}
+                foreach ($result as $val) {
+                    //$udata = unserialize($val->user_data);
+                    echo "<dd ><img src='" . base_url() . "images/user.png' > " . $val->user . "</dd>";
+                }
 
 
                 ?>
             </dl>
         </div>
-    </fieldset>
 
-	<div class="clear"></div>
+    </div>
+</div>
 
-    <fieldset style="float: left; width: 500px; height: 255px;">
-        <legend>Forum</legend>
+<hr/>
+
+<div class="row-fluid">
+    <div class="span6">
+        <h4>Forum</h4>
         <div style="height: 240px;">
             <dl>
                 <?php
                 $result = $this->db->from('tb_forum')->limit(5)->get()->result();
                 foreach ($result as $val) {
-                    echo '<dd>' . anchor('admin/man_forum_ubah/index/'.$val->id_forum, $val->judul_forum) . '</dd>';
+                    echo '<dd>' . anchor('admin/man_forum_ubah/index/' . $val->id_forum, $val->judul_forum) . '</dd>';
                 }
                 ?>
             </dl>
         </div>
-    </fieldset>
+    </div>
 
-	<fieldset style="float: left; width: 500px;margin-left: 20px; height: 255px;">
-        <legend>Knowledge Base</legend>
+    <div class="span6">
+        <h4>Knowledge Base</h4>
         <div style="height: 240px; ">
             <dl>
                 <?php
                 $result = $this->db->from('tb_knowledge_base')->limit(5)->get()->result();
                 foreach ($result as $val) {
-                    echo '<dd>' . anchor('admin/knowledge_ubah/index/'.$val->id_knowledge_base, $val->judul) . '</dd>';
+                    echo '<dd>' . anchor('admin/knowledge_ubah/index/' . $val->id_knowledge_base, $val->judul) . '</dd>';
                 }
                 ?>
             </dl>
         </div>
-    </fieldset>
-
-
-
-    <div class="clear"></div>
+    </div>
 </div>
