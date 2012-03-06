@@ -74,7 +74,8 @@ class Helpdesks extends CI_Controller
 
 		// Jika ada pertanyaan sebelumnya, Load it!!
 		if ($this->input->get('prev_question')) {
-			$prev_question = $this->db->from('tb_tiket_helpdesk')
+			$prev_question = $this->db->from('tb_tiket_helpdesk a')
+                    ->join('tb_kat_knowledge_base b', 'a.id_kat_knowledge_base = b.id_kat_knowledge_base')
 					->where('no_tiket_helpdesk', $this->session->userdata('no_tiket_helpdesk'))
 					->get();
 			$data['prev_question'] = $prev_question;

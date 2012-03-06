@@ -83,7 +83,12 @@
         <legend>Topik Sebelumnya</legend>
         <ul>
             <?php foreach ($prev_question->result() as $value): ?>
-            <li><?php echo $value->pertanyaan ?></li>
+            <li><a href="javascript:void(0)"
+                   data-jawaban="<?php echo $value->jawab ?>"
+                   data-prioritas="<?php echo $value->prioritas ?>"
+                   data-kategori="<?php echo $value->kat_knowledge_base ?>"
+                   onclick="alert('Kategori: ' + $(this).data('kategori') + '\nPrioritas: ' + $(this).data('prioritas') + '\nJawaban: ' + $(this).data('jawaban') )">
+                <?php echo $value->pertanyaan ?></a></li>
             <?php endforeach ?>
         </ul>
     </fieldset>
