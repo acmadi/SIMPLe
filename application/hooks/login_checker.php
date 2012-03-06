@@ -44,6 +44,12 @@ class Login_checker extends CI_Controller
                 redirect('login/process_logout');
             }
         }
+
+        if ($this->uri->segment(1) == 'dirjen') {
+            if ($this->session->userdata('lavel') != 7) {
+                redirect('login/process_logout');
+            }
+        }
 		
 		
     }
