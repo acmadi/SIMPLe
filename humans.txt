@@ -1,0 +1,28 @@
+/* TEAM */
+Komuri Intermedia Team
+
+Leader    : Firmansyah (http://www.facebook.com/profile.php?id=1025139264)
+
+Analyst   : Adi Cahyo Prabowo (http://fb.me/adicp2)
+
+Programmer: Mulia A. Nasution (http://fb.me/mul14)
+            Fadhli Daswir (http://fb.me/fdaswir)
+            Akhyar Amarullah (http://fb.me/akhyrul)
+
+Other     : Bagus Firmansyah (http://www.facebook.com/profile.php?id=1140801861)
+            Faiqunisa (http://fb.me/icha.notme)
+
+Site      : http://komuri.org/
+Email     : info[-at-]komuri[-dot-]org
+Location  : Jogjakarta, Indonesia.
+
+/* THANKS */
+Komuri Team, Ortala & all people in DJA.
+
+/* SITE */
+Standards: HTML5, CSS3
+Components: Modernizr, jQuery, Chosen, jQuery Visualize.
+Software: Jetbrains PHPStorm, Notepad++, Sublime, Textmate.
+
+If you found any bugs or security holes, please email to info[-at-]komuri[-dot-]org or mul14[-at-]komuri[-dot-]org.
+Thank you :)

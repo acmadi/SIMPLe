@@ -12,6 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="author" href="humans.txt" />
 
     <!-- CSS concatenated and minified via ant build script-->
     <link type="text/css" rel="stylesheet" href="<?php echo base_url('css/960gs/reset.css') ?>"/>
@@ -98,7 +99,6 @@
         <?php echo $this->load->view($content) ?>
     </div>
 
-    <!-- <div>Buka</div> -->
 </div>
 <footer>
     <div class="container_12">
@@ -167,24 +167,6 @@
     </div>
 </footer>
 <!--! end of #container -->
-
-
-<!--  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>-->
-<!--<script>window.jQuery || document.write('<script src="--><?php //echo base_url() ?><!--/js/jquery-1.7.1.min.js"><\/script>')</script>-->
-
-
-<!-- scripts concatenated and minified via ant build script-->
-<!--<script defer src="--><?php //echo base_url('/js/plugins.js') ?><!--"></script>-->
-<!--<script defer src="--><?php //echo base_url('/js/script.js') ?><!--"></script>-->
-<!-- end scripts-->
-
-
-<script> // Change UA-XXXXX-X to be your site's ID
-//    window._gaq = [['_setAccount','UAXXXXXXXX1'],['_trackPageview'],['_trackPageLoadTime']];
-//    Modernizr.load({
-//      load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
-//    });
-</script>
 
 
 <!--[if lt IE 7 ]>
