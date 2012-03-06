@@ -133,7 +133,7 @@ Class Login extends CI_Controller
                     redirect("pengaduan/dashboard");
                     break;
                 case '6':
-                    redirect('halodja/dashboard');
+                    redirect('halodja/status_tiket');
                     break;
                 case '7':
                     redirect('supervisors/dashboard');
