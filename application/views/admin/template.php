@@ -10,7 +10,9 @@
     <!-- Le styles -->
 
     <link href="<?php echo base_url('bootstrap/css/bootstrap.css') ?>" rel="stylesheet">
-    <link href="<?php echo base_url('css/table.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('css/new/table.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('js/chosen/chosen.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('css/ui-lightness/jquery-ui-1.8.16.custom.css') ?>" rel="stylesheet">
     <style type="text/css">
         body {
             padding-top: 60px;
@@ -27,6 +29,16 @@
         }
     </style>
     <link href="<?php echo base_url('bootstrap/css/bootstrap-responsive.css') ?>" rel="stylesheet">
+
+    <script src="<?php echo base_url('js/jquery-1.7.1.min.js') ?>"></script>
+    <script src="<?php echo base_url('js/jquery-1.7.1.min.js') ?>"></script>
+    <script src="<?php echo base_url('js/chosen/chosen.jquery.min.js') ?>"></script>
+    <script src="<?php echo base_url('bootstrap/js/bootstrap.min.js') ?>"></script>
+    <script src="<?php echo base_url('js/jquery-ui-1.8.16.custom.min.js') ?>"></script>
+<!--    <script src="--><?php //echo base_url(); ?><!--js/jquery.ui.core.min.js"></script>-->
+<!--    <script src="--><?php //echo base_url(); ?><!--js/jquery.ui.widget.min.js"></script>-->
+<!--    <script src="--><?php //echo base_url(); ?><!--js/jquery.ui.position.min.js"></script>-->
+<!--    <script src="--><?php //echo base_url(); ?><!--js/jquery.ui.autocomplete.min.js"></script>-->
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -76,7 +88,6 @@
             <div class="well sidebar-nav">
                 <ul class="nav nav-list">
 
-                    <li class="nav-header">Menu Utama</li>
                     <?php
                     if ($this->session->userdata('id_lavel') == 15) {
                         $this->load->view('navbar_15');
@@ -139,8 +150,7 @@
 ================================================== -->
 
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="<?php echo base_url('js/jquery-1.7.1.min.js') ?>"></script>
-<script src="<?php echo base_url('bootstrap/js/bootstrap.min.js') ?>"></script>
+
 <!--<script src="../assets/js/bootstrap-transition.js"></script>-->
 <!--<script src="../assets/js/bootstrap-alert.js"></script>-->
 <!--<script src="../assets/js/bootstrap-modal.js"></script>-->
@@ -155,6 +165,11 @@
 
 <!--<script src="../assets/js/bootstrap-carousel.js"></script>-->
 <!--<script src="../assets/js/bootstrap-typeahead.js"></script>-->
+<script>
+    $(function(){
+        $('.chzn-single').chosen();
+    })
+</script>
 
 </body>
 </html>
