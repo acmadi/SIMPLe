@@ -38,6 +38,7 @@ class Kementrian extends CI_Controller
         $data['title'] = 'Daftar Kementrian';
         $data['content'] = 'admin/kementrian';
 
+        $bc = array();
         $bc[0]->link = 'admin/dashboard';
         $bc[0]->label = 'Home';
         $bc[1]->link = 'admin/kementrian';
@@ -88,6 +89,7 @@ class Kementrian extends CI_Controller
             $data['title'] = 'Ubah Kementrian';
             $data['content'] = 'admin/edit_kementrian';
 
+            $bc = array();
             $bc[0]->link = 'admin/dashboard';
             $bc[0]->label = 'Home';
             $bc[1]->link = 'admin/kementrian';
@@ -135,6 +137,7 @@ class Kementrian extends CI_Controller
         $data['title'] = 'Tambah Kementrian';
         $data['content'] = 'admin/add_kementrian';
 
+        $bc = array();
         $bc[0]->link = 'admin/dashboard';
         $bc[0]->label = 'Home';
         $bc[1]->link = 'admin/kementrian';
