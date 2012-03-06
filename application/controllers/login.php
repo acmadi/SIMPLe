@@ -17,6 +17,13 @@ Class Login extends CI_Controller
 
     public function usermasuk()
     {
+        // Simple checker to prevent BOT trying to login.
+        // Human seharusnya tidak bisa mengisi/melihat text field ini.
+        if ($this->input->post('username') != '') {
+            $this->session->sess_destroy();
+            redirect('/');
+        }
+
         $user = $this->input->post('user');
         $pass = $this->input->post('pass');
 

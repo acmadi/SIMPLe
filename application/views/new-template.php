@@ -59,6 +59,9 @@
 
             <div class="grid_6" style="padding-top: 20px; text-align: right;">
                 <?php echo form_open("login/usermasuk", array('id' => 'login_form')); ?>
+                <!-- Cegah BOT. Kalau ini diisi, berarti BOT. Human cannot see this text field -->
+                <input type="text" id="username" name="username" placeholder="Username" style="display: none;"/>
+
                 <input type="text" id="user" name="user" placeholder="Username" style="width: 100px;"/>
                 <input type="password" id="pass" name="pass" placeholder="Password" style="width: 100px;"/>
                 <input type="submit" name="submit" class="button blue" value="Login"/>
