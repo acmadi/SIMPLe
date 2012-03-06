@@ -9,7 +9,7 @@ class Tiket extends CI_Controller
     public function cek_tiket()
     {
         if ($_POST) {
-            $sql = "SELECT  no_tiket_frontdesk, a.id_unit, nama_unit, a.id_kementrian, nama_kementrian, keputusan, status, tanggal_selesai
+            $sql = "SELECT  no_tiket_frontdesk, a.id_unit, nama_unit, a.id_kementrian, nama_kementrian, keputusan, status, tanggal_selesai, nomor_surat_usulan
                     FROM tb_tiket_frontdesk a
                     JOIN tb_kementrian b ON b.id_kementrian = a.id_kementrian
                     JOIN tb_unit c ON c.id_unit = a.id_unit AND c.id_kementrian = a.id_kementrian
