@@ -2,22 +2,23 @@
 
 class Mfrontdesk extends CI_Model
 {
-	//
-	public function count_all_tiket_frontdesk($status = '',$level = '', $act = '',$kep = ''){
-		$optional_sql = '';
-		if($this->session->userdata('lavel') != '7'):
-			$optional_sql = " AND c.anggaran = '{$this->session->userdata('anggaran')}' 
+    //
+    public function count_all_tiket_frontdesk($status = '', $level = '', $act = '', $kep = '')
+    {
+        $optional_sql = '';
+        if ($this->session->userdata('lavel') != '7'):
+            $optional_sql = " AND c.anggaran = '{$this->session->userdata('anggaran')}'
 							  AND c.id_unit_satker = '{$this->session->userdata('id_unit_satker')}' ";
-		endif;
-		
-		if(!empty($act)){
-			$optional_sql .= " AND a.is_active = '{$act}' ";
-		}
-		
-		if(!empty($kep)){
-			$optional_sql .= " AND a.keputusan = '{$kep}' ";
-		}
-	
+        endif;
+
+        if (!empty($act)) {
+            $optional_sql .= " AND a.is_active = '{$act}' ";
+        }
+
+        if (!empty($kep)) {
+            $optional_sql .= " AND a.keputusan = '{$kep}' ";
+        }
+
         $sql = "SELECT a.no_tiket_frontdesk FROM `tb_tiket_frontdesk` a
                 JOIN tb_kementrian ON tb_kementrian.id_kementrian = a.id_kementrian
                 JOIN tb_kon_unit_satker b ON a.id_kementrian = b.id_kementrian
@@ -28,36 +29,37 @@ class Mfrontdesk extends CI_Model
 				$optional_sql
                 GROUP BY no_tiket_frontdesk
                 ORDER BY tanggal";
-		
 
-		return $this->db->query($sql)->num_rows();
-	}
-	
-	//dapatkan jumlah tiket yang sudah lewat batas waktu
-	public function get_tiket_lewat_waktu(){
-		$optional_sql = '';
-		if($this->session->userdata('lavel') != '7'):
-			$optional_sql = " AND c.anggaran = '{$this->session->userdata('anggaran')}' 
+
+        return $this->db->query($sql)->num_rows();
+    }
+
+    //dapatkan jumlah tiket yang sudah lewat batas waktu
+    public function get_tiket_lewat_waktu()
+    {
+        $optional_sql = '';
+        if ($this->session->userdata('lavel') != '7'):
+            $optional_sql = " AND c.anggaran = '{$this->session->userdata('anggaran')}'
 							  AND c.id_unit_satker = '{$this->session->userdata('id_unit_satker')}' ";
-		endif;
-		
-		/*
+        endif;
+
+        /*
+          $sql = "SELECT * FROM `tb_tiket_frontdesk` a
+                  JOIN tb_kementrian ON tb_kementrian.id_kementrian = a.id_kementrian
+                  JOIN tb_kon_unit_satker b ON a.id_kementrian = b.id_kementrian
+                  JOIN tb_unit_saker c ON b.id_unit_satker = c.id_unit_satker
+                  WHERE
+                   status = 'open' AND
+                  a.lavel = '{$this->session->userdata('lavel')}' AND
+                  (( (DATEDIFF(NOW(),a.tanggal) - ( (DATEDIFF(NOW(),a.tanggal)/7) * 2 )) -
+                        (SELECT COUNT(id) FROM tb_calendar f WHERE holiday BETWEEN a.tanggal AND NOW())  )) > 5
+                  $optional_sql
+                  GROUP BY no_tiket_frontdesk
+                  ORDER BY tanggal";
+          */
+
+        $jml = 0;
         $sql = "SELECT * FROM `tb_tiket_frontdesk` a
-                JOIN tb_kementrian ON tb_kementrian.id_kementrian = a.id_kementrian
-                JOIN tb_kon_unit_satker b ON a.id_kementrian = b.id_kementrian
-                JOIN tb_unit_saker c ON b.id_unit_satker = c.id_unit_satker
-                WHERE
-                 status = 'open' AND
-                a.lavel = '{$this->session->userdata('lavel')}' AND
-				(( (DATEDIFF(NOW(),a.tanggal) - ( (DATEDIFF(NOW(),a.tanggal)/7) * 2 )) - 
-                      (SELECT COUNT(id) FROM tb_calendar f WHERE holiday BETWEEN a.tanggal AND NOW())  )) > 5 
-				$optional_sql
-                GROUP BY no_tiket_frontdesk
-                ORDER BY tanggal";
-		*/
-		
-		$jml = 0;
-		$sql = "SELECT * FROM `tb_tiket_frontdesk` a
                 JOIN tb_kementrian ON tb_kementrian.id_kementrian = a.id_kementrian
                 JOIN tb_kon_unit_satker b ON a.id_kementrian = b.id_kementrian
                 JOIN tb_unit_saker c ON b.id_unit_satker = c.id_unit_satker
@@ -67,74 +69,75 @@ class Mfrontdesk extends CI_Model
 				$optional_sql
                 GROUP BY no_tiket_frontdesk
                 ORDER BY tanggal";
-		
-				
+
+
         $result = $this->db->query($sql);
-		
-		foreach($result->result() as $value){
-			if( (hari_kerja($value->tanggal)) > 5 ) $jml += 1;
-		}
-		
-		//return $result->num_rows();
-		return $jml;
-	}
-	
-	public function get_all_tiket_frontdesk($level = 3,$optional = '', $isCount = FALSE){
-		//@F2D
-		$utkAnggr = $this->db->query("SELECT id_unit_satker
+
+        foreach ($result->result() as $value) {
+            if ((hari_kerja($value->tanggal)) > 5) $jml += 1;
+        }
+
+        //return $result->num_rows();
+        return $jml;
+    }
+
+    public function get_all_tiket_frontdesk($level = 3, $optional = '', $isCount = FALSE)
+    {
+        //@F2D
+        $utkAnggr = $this->db->query("SELECT id_unit_satker
 					FROM tb_user 
-					WHERE id_user = ?",array($this->session->userdata('id_user')))->row()->id_unit_satker;
-					
-		//print_r($this->db->last_query());exit;
-		//print_r($this->session->all_userdata());exit;
-		//if(!$anggaran) redirect(base_url());
-		$where_ang = ' AND FALSE ';
-		//if(!$anggaran) $anggaran = ''
-		if($utkAnggr != NULL) $where_ang = " AND (SELECT c.id_unit_satker FROM tb_kon_unit_satker c WHERE c.id_unit = tf.id_unit AND c.id_kementrian = tf.id_kementrian LIMIT 1) = $utkAnggr";
-		//print_r($utkAnggr);exit;
-		$keyword = $this->input->post('keyword',TRUE);
-		
-		$this->load->library('pagination');
-			
-		$total_seg = $this->uri->total_segments();
-		$default = array("keyword");
-		$this->terms = $this->uri->uri_to_assoc(4,$default);
-		
-		if(($this->terms['keyword'] != '') OR ($keyword != '')){
-			$uri_segment = 6;
-			$offset = (int) $this->uri->segment($uri_segment,0);
-			
-			if($this->terms['keyword'] != ''){
-				$keyword = $this->terms['keyword'];
-			}else{
-				$this->terms['keyword'] = $keyword;
-			}
-			
-			$uriparams['keyword'] = $this->terms['keyword'];
-			
-			if(($total_seg % 2) > 0){
-				$offset = (int) $this->uri->segment(6, 0);
-			}
-			
-			$url_add = $this->uri->assoc_to_uri($uriparams).'/';
-		}else{
-			$uri_segment = 4;
-			$offset = (int) $this->uri->segment($uri_segment,0);
-			$url_add = '';
-		
-		}
-		
-		//if from suggest
-		$where = '';
-		$where2 = '';
-		if(!empty($keyword)){
-			$where = " AND tu.nama_unit LIKE '%".$keyword."%'";
-		}
-		
-		if(!empty($optional)){
-			$where2 = $optional;
-		}
-		$sql = "SELECT tf.no_tiket_frontdesk, tf.tanggal,tf.id_unit, tu.nama_unit, tm.nama_kementrian,tf.is_active
+					WHERE id_user = ?", array($this->session->userdata('id_user')))->row()->id_unit_satker;
+
+        //print_r($this->db->last_query());exit;
+        //print_r($this->session->all_userdata());exit;
+        //if(!$anggaran) redirect(base_url());
+        $where_ang = ' AND FALSE ';
+        //if(!$anggaran) $anggaran = ''
+        if ($utkAnggr != NULL) $where_ang = " AND (SELECT c.id_unit_satker FROM tb_kon_unit_satker c WHERE c.id_unit = tf.id_unit AND c.id_kementrian = tf.id_kementrian LIMIT 1) = $utkAnggr";
+        //print_r($utkAnggr);exit;
+        $keyword = $this->input->post('keyword', TRUE);
+
+        $this->load->library('pagination');
+
+        $total_seg = $this->uri->total_segments();
+        $default = array("keyword");
+        $this->terms = $this->uri->uri_to_assoc(4, $default);
+
+        if (($this->terms['keyword'] != '') OR ($keyword != '')) {
+            $uri_segment = 6;
+            $offset = (int)$this->uri->segment($uri_segment, 0);
+
+            if ($this->terms['keyword'] != '') {
+                $keyword = $this->terms['keyword'];
+            } else {
+                $this->terms['keyword'] = $keyword;
+            }
+
+            $uriparams['keyword'] = $this->terms['keyword'];
+
+            if (($total_seg % 2) > 0) {
+                $offset = (int)$this->uri->segment(6, 0);
+            }
+
+            $url_add = $this->uri->assoc_to_uri($uriparams) . '/';
+        } else {
+            $uri_segment = 4;
+            $offset = (int)$this->uri->segment($uri_segment, 0);
+            $url_add = '';
+
+        }
+
+        //if from suggest
+        $where = '';
+        $where2 = '';
+        if (!empty($keyword)) {
+            $where = " AND tu.nama_unit LIKE '%" . $keyword . "%'";
+        }
+
+        if (!empty($optional)) {
+            $where2 = $optional;
+        }
+        $sql = "SELECT tf.no_tiket_frontdesk, tf.tanggal,tf.id_unit, tu.nama_unit, tm.nama_kementrian,tf.is_active
 				FROM tb_tiket_frontdesk tf 
 				LEFT JOIN tb_unit tu 
 					ON(tu.id_unit = tf.id_unit)  
@@ -143,17 +146,17 @@ class Mfrontdesk extends CI_Model
 				WHERE tf.status = 'open' 
 				AND tf.lavel = ? AND tm.id_kementrian = tf.id_kementrian $where $where2 $where_ang
 				ORDER BY tf.status"; //print_r($this->db->last_query());//exit;
-				
-		$query = $this->db->query($sql,array($level));
 
-		$config['base_url'] = site_url('/pelaksana/frontdesk/index').'/'.$url_add;
-		$config['total_rows'] = $query->num_rows();
-		$config['per_page'] = 10;
-		$config['uri_segment'] = $uri_segment;
-		$this->pagination->initialize($config);
-		
-		
-		$sqlb = "SELECT tf.no_tiket_frontdesk, tf.tanggal,tf.id_unit, tu.nama_unit, tm.nama_kementrian,tf.is_active
+        $query = $this->db->query($sql, array($level));
+
+        $config['base_url'] = site_url('/pelaksana/frontdesk/index') . '/' . $url_add;
+        $config['total_rows'] = $query->num_rows();
+        $config['per_page'] = 10;
+        $config['uri_segment'] = $uri_segment;
+        $this->pagination->initialize($config);
+
+
+        $sqlb = "SELECT tf.no_tiket_frontdesk, tf.tanggal,tf.id_unit, tu.nama_unit, tm.nama_kementrian,tf.is_active
 				FROM tb_tiket_frontdesk tf 
 				LEFT JOIN tb_unit tu 
 					ON(tu.id_unit = tf.id_unit)  
@@ -162,103 +165,103 @@ class Mfrontdesk extends CI_Model
 				WHERE tf.status = 'open' 
 				AND tf.lavel = ? $where $where2 $where_ang
 				LIMIT ?,?"; //print_r($this->db->last_query());
-		$data["query"] = $this->db->query($sqlb, array($level,$offset ,$config['per_page']));
+        $data["query"] = $this->db->query($sqlb, array($level, $offset, $config['per_page']));
 
-		$data['isian_form1'] = $keyword;
-		$data['pagination1'] = $this->pagination->create_links();
+        $data['isian_form1'] = $keyword;
+        $data['pagination1'] = $this->pagination->create_links();
 
-		if ($isCount) :
-			return $data["query"]->num_rows();
-		endif;
+        if ($isCount) :
+            return $data["query"]->num_rows();
+        endif;
 
-		return $data;
-	}
-	
+        return $data;
+    }
+
     public function get_all_tiket()
     {
-		//@F2D
-		
-		$key = $this->input->post('fcari');
-		$value = $this->input->post('fkeyword');
+        //@F2D
 
-		$keyword = ((!empty($key) && (!empty($value))))?$key.'_'.$value:'';
+        $key = $this->input->post('fcari');
+        $value = $this->input->post('fkeyword');
 
-		$this->load->library('pagination');
+        $keyword = ((!empty($key) && (!empty($value)))) ? $key . '_' . $value : '';
 
-		$total_seg = $this->uri->total_segments();
-		$default = array("keyword");
-		$this->terms = $this->uri->uri_to_assoc(4,$default);
+        $this->load->library('pagination');
 
-		if(($this->terms['keyword'] != '') OR ($keyword != '')){
-			$uri_segment = 6;
-			$offset = (int) $this->uri->segment($uri_segment,0);
+        $total_seg = $this->uri->total_segments();
+        $default = array("keyword");
+        $this->terms = $this->uri->uri_to_assoc(4, $default);
 
-			if($this->terms['keyword'] != ''){
-				$keyword = $this->terms['keyword'];
-			}else{
-				$this->terms['keyword'] = $keyword;
-			}
+        if (($this->terms['keyword'] != '') OR ($keyword != '')) {
+            $uri_segment = 6;
+            $offset = (int)$this->uri->segment($uri_segment, 0);
 
-			$uriparams['keyword'] = $this->terms['keyword'];
+            if ($this->terms['keyword'] != '') {
+                $keyword = $this->terms['keyword'];
+            } else {
+                $this->terms['keyword'] = $keyword;
+            }
 
-			if(($total_seg % 2) > 0){
-				$offset = (int) $this->uri->segment(6, 0);
-			}
+            $uriparams['keyword'] = $this->terms['keyword'];
 
-			$url_add = $this->uri->assoc_to_uri($uriparams).'/';
-		}else{
-			$uri_segment = 4;
-			$offset = (int) $this->uri->segment($uri_segment,0);
-			$url_add = '';
+            if (($total_seg % 2) > 0) {
+                $offset = (int)$this->uri->segment(6, 0);
+            }
 
-		}
+            $url_add = $this->uri->assoc_to_uri($uriparams) . '/';
+        } else {
+            $uri_segment = 4;
+            $offset = (int)$this->uri->segment($uri_segment, 0);
+            $url_add = '';
 
-		//if from suggest
-		$num_key = (!empty($keyword))?explode('_',$keyword):array();
-		if(count($num_key)>1){
-			switch($num_key[0]){
-				case 'noantrian':
-					$kolom = 'a.no_tiket_frontdesk';
-					break;
-				case 'status':
-					$kolom = 'a.status';
-					break;
-				default:
-					$kolom = 'b.nama_satker';
-					break;
-					
-			}
-			
-			$where = " AND $kolom LIKE '%".$num_key[1]."%'";
-		}else{
-			$where = " ";
-		}
+        }
 
-		$sql = "SELECT a.tanggal, a.no_tiket_frontdesk, a.tanggal_selesai, a.status, a.is_active, a.no_antrian, e.nama_kementrian, d.nama_unit, b.nama_satker
+        //if from suggest
+        $num_key = (!empty($keyword)) ? explode('_', $keyword) : array();
+        if (count($num_key) > 1) {
+            switch ($num_key[0]) {
+                case 'noantrian':
+                    $kolom = 'a.no_tiket_frontdesk';
+                    break;
+                case 'status':
+                    $kolom = 'a.status';
+                    break;
+                default:
+                    $kolom = 'b.nama_satker';
+                    break;
+
+            }
+
+            $where = " AND $kolom LIKE '%" . $num_key[1] . "%'";
+        } else {
+            $where = " ";
+        }
+
+        $sql = "SELECT a.tanggal, a.no_tiket_frontdesk, a.tanggal_selesai, a.status, a.is_active, a.no_antrian, e.nama_kementrian, d.nama_unit, b.nama_satker
 				FROM tb_tiket_frontdesk a LEFT JOIN tb_satker b ON a.id_satker = b.id_satker, tb_petugas_satker c, tb_unit d,tb_kementrian e
 				WHERE a.id_unit = d.id_unit AND a.id_kementrian = e.id_kementrian 
 				AND a.id_kementrian = d.id_kementrian AND c.id_petugas_satker = a.id_petugas_satker $where ORDER BY a.tanggal";
-		$query = $this->db->query($sql);
+        $query = $this->db->query($sql);
 
-		$config['base_url'] = site_url('/admin/frontdesk/index').'/'.$url_add;
-		$config['total_rows'] = $query->num_rows();
-		$config['per_page'] = 10;
-		$config['uri_segment'] = $uri_segment;
-		$this->pagination->initialize($config);
+        $config['base_url'] = site_url('/admin/frontdesk/index') . '/' . $url_add;
+        $config['total_rows'] = $query->num_rows();
+        $config['per_page'] = 10;
+        $config['uri_segment'] = $uri_segment;
+        $this->pagination->initialize($config);
 
 
-		$sqlb = "SELECT a.tanggal, a.no_tiket_frontdesk, a.tanggal_selesai, a.status, a.is_active, a.no_antrian, e.nama_kementrian, d.nama_unit, b.nama_satker
+        $sqlb = "SELECT a.tanggal, a.no_tiket_frontdesk, a.tanggal_selesai, a.status, a.is_active, a.no_antrian, e.nama_kementrian, d.nama_unit, b.nama_satker
 				FROM tb_tiket_frontdesk a LEFT JOIN tb_satker b ON a.id_satker = b.id_satker, tb_petugas_satker c, tb_unit d,tb_kementrian e
 				WHERE a.id_unit = d.id_unit AND a.id_kementrian = e.id_kementrian 
 				AND a.id_kementrian = d.id_kementrian AND c.id_petugas_satker = a.id_petugas_satker $where ORDER BY a.tanggal
 				LIMIT ?,?";
-		$data["query"] = $this->db->query($sqlb, array($offset ,$config['per_page']));
+        $data["query"] = $this->db->query($sqlb, array($offset, $config['per_page']));
 
-		$data['isian_form1'] = $keyword;
-		$data['pagination1'] = $this->pagination->create_links();
-		$data['nomor_item'] = $offset;
+        $data['isian_form1'] = $keyword;
+        $data['pagination1'] = $this->pagination->create_links();
+        $data['nomor_item'] = $offset;
 
-		return $data;
+        return $data;
     }
 
     public function count_all_tiket($status = 'open', $lavel, $optional = '')
@@ -282,26 +285,28 @@ class Mfrontdesk extends CI_Model
         $result = $result->result();
         return $result[0];
     }
-	
-	function get_tiket_frontdesk_by_id($id){
-		return $this->db->query("SELECT tf.no_tiket_frontdesk, tf.id_unit,tf.id_kementrian, tm.nama_kementrian, tu.nama_unit,tf.id_satker,ts.nama_satker
+
+    function get_tiket_frontdesk_by_id($id)
+    {
+        return $this->db->query("SELECT tf.no_tiket_frontdesk, tf.id_unit,tf.id_kementrian, tm.nama_kementrian, tu.nama_unit,tf.id_satker,ts.nama_satker
 								FROM  tb_unit tu, tb_kementrian tm,tb_petugas_satker tr,tb_tiket_frontdesk tf LEFT JOIN tb_satker ts ON tf.id_satker = ts.id_satker
 								WHERE tf.id_unit = tu.id_unit AND tf.id_kementrian = tu.id_kementrian AND tf.id_kementrian = tm.id_kementrian 
-								AND tr.id_petugas_satker = tf.id_petugas_satker AND tf.no_tiket_frontdesk = ?",array($id))->row();
-	}
+								AND tr.id_petugas_satker = tf.id_petugas_satker AND tf.no_tiket_frontdesk = ?", array($id))->row();
+    }
 
-    public function get_list_dokumen_frontdesk($status = '',$level = '', $act = '',$kep = ''){
+    public function get_list_dokumen_frontdesk($status = '', $level = '', $act = '', $kep = '')
+    {
         $optional_sql = '';
-        if($this->session->userdata('lavel') != '7'):
+        if ($this->session->userdata('lavel') != '7'):
             $optional_sql = " AND c.anggaran = '{$this->session->userdata('anggaran')}'
                               AND c.id_unit_satker = '{$this->session->userdata('id_unit_satker')}' ";
         endif;
 
-        if(!empty($act)){
+        if (!empty($act)) {
             $optional_sql .= " AND a.is_active = '{$act}' ";
         }
 
-        if(!empty($kep)){
+        if (!empty($kep)) {
             $optional_sql .= " AND a.keputusan = '{$kep}' ";
         }
 
@@ -323,5 +328,64 @@ class Mfrontdesk extends CI_Model
 
 
         return $this->db->query($sql);
+    }
+
+    /**
+     * Menghitung jumlah tiket yang sedang diproses
+     * @return Integer
+     */
+    public function get_jml_tiket_proses()
+    {
+        $result = $this->db->from('tb_tiket_frontdesk')
+            ->where('status', 'open')
+            ->where('petugas_penerima', $this->session->userdata('id_user'))
+            ->like('tanggal', date('Y-m-d'))
+            ->get()
+            ->num_rows();
+        return $result;
+    }
+
+    /**
+     * Menghitung jumlah tiket yang masuk hari ini
+     * @return Integer
+     */
+    public function get_jml_tkt_hr_ini()
+    {
+        $result = $this->db->from('tb_tiket_frontdesk')
+            ->where('petugas_penerima', $this->session->userdata('id_user'))
+            ->like('tanggal', date('Y-m-d'))
+            ->get()
+            ->num_rows();
+        return $result;
+    }
+
+    /**
+     * Menghitung jumlah dokumen yang bisa diambil/disahkan
+     * @return Integer
+     */
+    public function get_jml_dokumen_selesai()
+    {
+        $result = $this->db->from('tb_tiket_frontdesk')
+            ->where('petugas_penerima', $this->session->userdata('id_user'))
+            ->where('status', 'close')->where('keputusan', 'disahkan')
+            ->get()
+            ->num_rows();
+        return $result;
+    }
+
+    /**
+     * Menghitung jumlah dokumen yang dikembalikan/ditolak
+     * @return Integer
+     */
+    public function get_jml_dokumen_kembali()
+    {
+        $result = $this->db->from('tb_tiket_frontdesk')
+            ->where('petugas_penerima', $this->session->userdata('id_user'))
+            ->where('status', 'close')
+            ->where('keputusan', 'ditolak')
+            ->where('is_active', 3)
+            ->get()
+            ->num_rows();
+        return $result;
     }
 }
