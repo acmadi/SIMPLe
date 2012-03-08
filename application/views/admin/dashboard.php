@@ -1,34 +1,9 @@
-<script src="<?php echo base_url('js/tufte-graph/raphael.js') ?>"></script>
-<script src="<?php echo base_url('js/tufte-graph/jquery.enumerable.js') ?>"></script>
-<script src="<?php echo base_url('js/tufte-graph/jquery.tufte-graph.js') ?>"></script>
-
-<script type="text/javascript">
-    $(function () {
-        $('#graph').tufteBar({
-            data:[
-                [<?php echo $this->db->count_all('tb_tiket_helpdesk') ?>,
-                    {label:'Open'}
-                ],
-                [<?php echo $this->db->count_all('tb_tiket_frontdesk') ?>,
-                    {label:'Pending'}
-                ],
-                [0,
-                    {label:'Resolved'}
-                ],
-                [2,
-                    {label:'Close'}
-                ]
-            ],
-            axisLabel:function (index) {
-                return this[1].label
-            },
-            color:function (index) {
-                return ['#E57536', '#82293B'][index % 2]
-            }
-        })
-    })
-</script>
-
+<style type="text/css">
+    .overflow {
+        overflow: auto;
+        height: 250px;
+    }
+</style>
 
 <div class="page-header">
     <h2>Dashboard</h2>
@@ -43,7 +18,7 @@
     <div class="span6">
         <h3>User yang sedang online</h3>
 
-        <div>
+        <div class="overflow">
             <dl>
                 <?php
 
