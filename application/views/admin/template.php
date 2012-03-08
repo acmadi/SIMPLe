@@ -26,6 +26,14 @@
             width: 20px;
             height: 20px;
         }
+
+        .table tr .action .btn {
+            visibility: hidden;
+        }
+
+        .table tr:hover .action .btn {
+            visibility: visible;
+        }
     </style>
 
     <script src="<?php echo base_url('js/jquery-1.7.1.min.js') ?>"></script>
