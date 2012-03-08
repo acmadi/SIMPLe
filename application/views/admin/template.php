@@ -7,9 +7,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <!-- Le styles -->
-
     <link href="<?php echo base_url('bootstrap/css/bootstrap.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('bootstrap/css/bootstrap-responsive.css') ?>" rel="stylesheet">
     <link href="<?php echo base_url('css/new/table.css') ?>" rel="stylesheet">
     <link href="<?php echo base_url('js/chosen/chosen.css') ?>" rel="stylesheet">
     <link href="<?php echo base_url('css/ui-lightness/jquery-ui-1.8.16.custom.css') ?>" rel="stylesheet">
@@ -28,17 +27,16 @@
             height: 20px;
         }
     </style>
-    <link href="<?php echo base_url('bootstrap/css/bootstrap-responsive.css') ?>" rel="stylesheet">
 
     <script src="<?php echo base_url('js/jquery-1.7.1.min.js') ?>"></script>
     <script src="<?php echo base_url('js/jquery-1.7.1.min.js') ?>"></script>
     <script src="<?php echo base_url('js/chosen/chosen.jquery.min.js') ?>"></script>
     <script src="<?php echo base_url('bootstrap/js/bootstrap.min.js') ?>"></script>
     <script src="<?php echo base_url('js/jquery-ui-1.8.16.custom.min.js') ?>"></script>
-<!--    <script src="--><?php //echo base_url(); ?><!--js/jquery.ui.core.min.js"></script>-->
-<!--    <script src="--><?php //echo base_url(); ?><!--js/jquery.ui.widget.min.js"></script>-->
-<!--    <script src="--><?php //echo base_url(); ?><!--js/jquery.ui.position.min.js"></script>-->
-<!--    <script src="--><?php //echo base_url(); ?><!--js/jquery.ui.autocomplete.min.js"></script>-->
+    <!--    <script src="--><?php //echo base_url(); ?><!--js/jquery.ui.core.min.js"></script>-->
+    <!--    <script src="--><?php //echo base_url(); ?><!--js/jquery.ui.widget.min.js"></script>-->
+    <!--    <script src="--><?php //echo base_url(); ?><!--js/jquery.ui.position.min.js"></script>-->
+    <!--    <script src="--><?php //echo base_url(); ?><!--js/jquery.ui.autocomplete.min.js"></script>-->
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -69,14 +67,15 @@
             <div class="nav-collapse">
                 <ul class="nav">
 
-                    <li class="active"><a href="<?php echo site_url('/admin/dashboard') ?>"><i class="icon-home icon-white"></i> Dashboard</a></li>
+                    <li class="active"><a href="<?php echo site_url('/admin/dashboard') ?>"><i
+                        class="icon-home icon-white"></i> Dashboard</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
 
-                <div id="logout" class="navbar-text pull-right"><?php echo $this->session->userdata('nama') ?> | <?php echo anchor("login/process_logout", 'Logout') ?></div>
+                <div id="logout" class="navbar-text pull-right"><?php echo $this->session->userdata('nama') ?>
+                    | <?php echo anchor("login/process_logout", 'Logout') ?></div>
             </div>
-            <!--/.nav-collapse -->
 
         </div>
     </div>
@@ -98,30 +97,20 @@
 
                 </ul>
             </div>
-            <!--/.well -->
         </div>
-        <!--/span-->
 
-        <div class="span10">
-            <!--<div class="hero-unit">
-                <h1>Hello, world!</h1>
+    <div class="span10">
 
-                <p>This is a template for a simple marketing or informational website. It includes a large callout
-                    called the hero unit and three supporting pieces of content. Use it as a starting point to create
-                    something more unique.</p>
-
-                <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-            </div>-->
-            <?php if(isset($breadcrumb) && $breadcrumb != '') : ?>
-                <?php
-                $this->load->helper('breadcrumb_helper');
-                breadcrumb($breadcrumb);
-                ?>
+        <?php if (isset($breadcrumb) && $breadcrumb != '') : ?>
+        <?php
+        $this->load->helper('breadcrumb_helper');
+        breadcrumb($breadcrumb);
+        ?>
             </div>
             <?php endif;?>
 
 
-            <div class="span10">
+        <div class="span10">
             <?php
             if (isset($content)) {
                 $this->load->view($content);
@@ -129,19 +118,18 @@
                 echo $content_html;
             }
             ?>
-            </div>
-            <!--/span-->
-
         </div>
-        <!--/span-->
+
+
     </div>
-    <!--/row-->
 
     <hr>
 
     <footer>
         <p>&copy; Dirjen Jenderal Anggaran 2012</p>
     </footer>
+</div>
+
 
 </div>
 <!--/.fluid-container-->
@@ -166,7 +154,7 @@
 <!--<script src="../assets/js/bootstrap-carousel.js"></script>-->
 <!--<script src="../assets/js/bootstrap-typeahead.js"></script>-->
 <script>
-    $(function(){
+    $(function () {
         $('.chzn-single').chosen();
     })
 </script>
