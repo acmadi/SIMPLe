@@ -73,6 +73,17 @@ jQuery(function () {
             var option = $(this);
             var textlist = $(this).text();
             var filtering_text = $('#filtering_text').val();
+
+            var string = filtering_text.split(' ');
+            var newstring = '';
+
+            for (i = 0; i < string.length; i++) {
+                newstring += string[i];
+                if (i != string.length - 1)
+                    newstring += '|';
+            }
+
+            filtering_text = newstring;
                 
             regex = new RegExp(filtering_text, 'gi');
             
@@ -87,5 +98,6 @@ jQuery(function () {
         });
         
         $('#filtering > option').tsort() // jquery.tinysort.min.js
+
     })
 })
