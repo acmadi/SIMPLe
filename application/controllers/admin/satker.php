@@ -13,9 +13,10 @@ class Satker extends CI_Controller
     public function index($id = 0)
     {
         if ($this->input->get('submit')) {
-            $result = $this->db->from('tb_satker a')
+            $result = $this->db->select('a.id_satker, a.nama_satker, b.nama_kementrian')
+                    ->from('tb_satker a')
                     ->join('tb_kementrian b', 'b.id_kementrian = a.id_kementrian')
-                    ->join('tb_petugas_satker c', 'c.id_satker = a.id_satker')
+                    //->join('tb_petugas_satker c', 'c.id_satker = a.id_satker')
                     ->like('nama_kementrian', $this->input->get('cari'))
                     ->or_like('nama_satker', $this->input->get('cari'))
                     ->or_like('a.id_satker', $this->input->get('cari'))
@@ -42,9 +43,10 @@ class Satker extends CI_Controller
         $data['title'] = 'Daftar Satker';
         $data['content'] = 'admin/satker';
 
-        $bc[0]->link = 'admin/dashboard';
+        $bc = array();
+        @$bc[0]->link = 'admin/dashboard';
         $bc[0]->label = 'Home';
-        $bc[1]->link = 'admin/satker';
+        @$bc[1]->link = 'admin/satker';
         $bc[1]->label = 'Satker';
         $data['breadcrumb'] = $bc;
 
