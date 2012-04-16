@@ -116,11 +116,12 @@ class Satker extends CI_Controller
 
             if ($this->form_validation->run()) {
 
-                $sql = "INSERT INTO tb_satker (id_satker, nama_satker, id_kementrian) VALUES (?, ?, ?)";
+                $sql = "INSERT INTO tb_satker (id_satker, nama_satker, id_kementrian, id_unit) VALUES (?, ?, ?, ?)";
                 $result = $this->db->query($sql, array(
                     'id_satker' => $this->input->post('id_satker'),
                     'nama_satker' => $this->input->post('nama_satker'),
                     'id_kementrian' => $this->input->post('id_kementrian'),
+                    'id_unit' => $this->input->post('id_unit'),
                 ));
 
                 if ($this->db->_error_number() == 1062) {
@@ -146,11 +147,12 @@ class Satker extends CI_Controller
         $data['title'] = 'Tambah Satker';
         $data['content'] = 'admin/add_satker';
 
-        $bc[0]->link = 'admin/dashboard';
+        $bc = array();
+        @$bc[0]->link = 'admin/dashboard';
         $bc[0]->label = 'Home';
-        $bc[1]->link = 'admin/satker';
+        @$bc[1]->link = 'admin/satker';
         $bc[1]->label = 'Satker';
-        $bc[2]->link = $this->uri->uri_string();
+        @$bc[2]->link = $this->uri->uri_string();
         $bc[2]->label = 'Tambah Baru';
         $data['breadcrumb'] = $bc;
 
