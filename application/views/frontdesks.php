@@ -74,10 +74,10 @@
                     <?php endif; ?>
 
 
-					<?php if($level_selected == '3'): ?>
-						<input type="button" class="button <?php echo $style_button_r;?>" onclick="window.location.href='<?php echo site_url('/frontdesks/reject/' . $value->no_tiket_frontdesk); ?>'"
-						<?php echo $disabled;?> value="Dikembalikan"/>
-                    <?php endif; ?>
+
+                    <input type="button" class="button <?php echo $style_button_r;?>" onclick="window.location.href='<?php echo site_url('/frontdesks/reject/' . $value->no_tiket_frontdesk); ?>'"
+                    <?php echo $disabled;?> value="Dikembalikan"/>
+
 
 					<?php if(($level_selected == '7') or ($level_selected == '6')): ?>
 					<input type="button" class="button <?php echo $style_button;?>" onclick="window.location.href='<?php echo site_url('/frontdesks/accept/' . $value->no_tiket_frontdesk); ?>'"
