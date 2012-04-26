@@ -233,8 +233,11 @@
 <!--            <select name="kode_satker" id="kode_satker" class="kl chzn-select" multiple style="width: 700px;">-->
 <!--            </select>-->
 
+        <input type="text" id="filtering_text" />
+        <a href="javascript:void(0)" id="filter_btn" class="button green">Filter</a>
+        
         <div class="container" style="float: left" id="kode_satker">
-            <select name="itemsToChoose[]" id="left" size="10" multiple="multiple" style="width: 350px;">
+            <select name="itemsToChoose[]" id="left" size="10" multiple="multiple" style="width: 440px;">
 
             </select>
         </div>
@@ -247,7 +250,7 @@
         </div>
 
         <div class="container" style="float: left">
-            <select name="kode_satker" id="right" size="10" multiple="multiple"  style="width: 350px;">
+            <select name="kode_satker" id="right" size="10" multiple="multiple"  style="width: 440px;">
             </select>
         </div>
 

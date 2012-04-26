@@ -148,7 +148,7 @@ class Frontdesks extends CI_Controller
         $this->load->view('new-template', $data);
     }
 
-    public function cetak_dokumen($no_tiket_frontdesk, $id_penyelia) {
+    public function cetak_dokumen($no_tiket_frontdesk, $id_penyelia = 2318) {
 
         $sql = "SELECT a.no_tiket_frontdesk, a.tanggal, a.catatan, a.nomor_surat_usulan, a.tanggal_surat_usulan,
                        a.id_kementrian, a.id_unit, a.petugas_penerima,
@@ -170,7 +170,6 @@ class Frontdesks extends CI_Controller
         $result = $this->db->query($sql, array($no_tiket_frontdesk))->result_array();
 
         // Cari pemroses - Subdirektorat Only
-        // Sorry kejar tayang, jadi kodenya begini T_T
         $pemroses = '';
         foreach ($result as $value) {
             if (preg_match('/SUBDIREKTORAT/i', $value['nama_unit_satker'])) {
@@ -285,7 +284,7 @@ class Frontdesks extends CI_Controller
         $odf->setVars('no_kantor', $result[0]['no_kantor']);
         $odf->setVars('email', $email);
         $odf->setVars('tanggal_diterima', strftime('%d-%m-%Y %H:%M', strtotime($result[0]['tanggal'])));
-        $odf->setVars('tanggal_selesai', $tanggal_selesai);
+//        $odf->setVars('tanggal_selesai', $tanggal_selesai);
         $odf->setVars('kelengkapan_dokumen', $kelengkapan, false, 'utf-8');
         $odf->setVars('catatan', $result[0]['catatan']);
         $odf->setVars('nama_penyelia', $penyelia->nama);

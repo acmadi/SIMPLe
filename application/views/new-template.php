@@ -38,6 +38,7 @@
     <script type="text/javascript" src="<?php echo base_url('js/highcharts/themes/grid.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/phpjs/substr.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/prefixfree.min.js') ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('js/jquery.tinysort.min.js') ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/scripts.js') ?>"></script>
     <!-- JavaScript END -->
 
