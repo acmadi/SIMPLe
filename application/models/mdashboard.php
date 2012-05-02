@@ -156,7 +156,7 @@ WHERE tanggal != '' GROUP BY YEAR(tanggal)")->result();
 		$info = false;
 
 		if($cek > 0){
-			if($this->db->query("UPDATE tb_user SET password = md5('12345') WHERE id_user = ?", array($user))){
+			if($this->db->query("UPDATE tb_user SET password = md5('123456') WHERE id_user = ?", array($user))){
 				$info = true;
 			}else{
 				$info = false;
