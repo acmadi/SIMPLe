@@ -14,11 +14,11 @@ class Referensi extends CI_Controller
     {
         if ($this->input->get('submit')) {
             $result = $this->db->from('tb_referensi a')
-					->join('tb_referensi_kat b', 'b.id_referensi_kat = a.id_referensi_kat')
-                    ->like('nama_ref', $this->input->get('cari'))
-                    ->or_like('id_referensi', $this->input->get('cari'))
-					->or_like('nama_file', $this->input->get('cari'))
-                    ->get();
+                ->join('tb_referensi_kat b', 'b.id_referensi_kat = a.id_referensi_kat')
+                ->like('nama_ref', $this->input->get('cari'))
+                ->or_like('id_referensi', $this->input->get('cari'))
+                ->or_like('nama_file', $this->input->get('cari'))
+                ->get();
 
         } else {
             $config['per_page'] = 25;
@@ -31,19 +31,20 @@ class Referensi extends CI_Controller
             $this->pagination->initialize($config);
 
             $result = $this->db->from('tb_referensi a')
-                    ->join('tb_referensi_kat b', 'b.id_referensi_kat = a.id_referensi_kat')
-                    ->limit($config['per_page'], $id)
-                    ->get();
+                ->join('tb_referensi_kat b', 'b.id_referensi_kat = a.id_referensi_kat')
+                ->limit($config['per_page'], $id)
+                ->get();
         }
 
         $data['bla'] = $result;
         $data['title'] = 'Daftar Referensi';
-        $data['content'] = 'admin/referensi';
+        $data['content'] = 'admin/referensi/index';
 
-        $bc[0]->link = 'admin/dashboard';
-        $bc[0]->label = 'Home';
-        $bc[1]->link = 'admin/referensi';
-        $bc[1]->label = 'Referensi';
+        $bc = array();
+        @$bc[0]->link = 'admin/dashboard';
+        @$bc[0]->label = 'Home';
+        @$bc[1]->link = 'admin/referensi';
+        @$bc[1]->label = 'Referensi';
         $data['breadcrumb'] = $bc;
 
         $this->load->view('admin/template', $data);
@@ -52,9 +53,9 @@ class Referensi extends CI_Controller
     public function view_referensi($id_referensi)
     {
         $result = $this->db->from('tb_referensi a')
-				->join('tb_referensi_kat b', 'b.id_referensi_kat = a.id_referensi_kat')
-                ->where('id_referensi', $id_referensi)
-                ->get();
+            ->join('tb_referensi_kat b', 'b.id_referensi_kat = a.id_referensi_kat')
+            ->where('id_referensi', $id_referensi)
+            ->get();
 
         $data['referensi'] = $result;
 
@@ -83,21 +84,22 @@ class Referensi extends CI_Controller
 
             }
             $result = $this->db->from('tb_referensi a')
-					->join('tb_referensi_kat b', 'b.id_referensi_kat = a.id_referensi_kat')
-                    ->where('id_referensi', $id_referensi)
-                    ->get()->row();
+                ->join('tb_referensi_kat b', 'b.id_referensi_kat = a.id_referensi_kat')
+                ->where('id_referensi', $id_referensi)
+                ->get()->row();
 
             $data['referensi'] = $result;
 
             $data['title'] = 'Ubah Referensi';
-            $data['content'] = 'admin/edit_referensi';
+            $data['content'] = 'admin/referensi/edit';
 
-            $bc[0]->link = 'admin/dashboard';
-            $bc[0]->label = 'Home';
-            $bc[1]->link = 'admin/referensi';
-            $bc[1]->label = 'Referensi';
-            $bc[2]->link = $this->uri->uri_string();
-            $bc[2]->label = 'Ubah Data';
+            $bc = array();
+            @$bc[0]->link = 'admin/dashboard';
+            @$bc[0]->label = 'Home';
+            @$bc[1]->link = 'admin/referensi';
+            @$bc[1]->label = 'Referensi';
+            @$bc[2]->link = $this->uri->uri_string();
+            @$bc[2]->label = 'Ubah Data';
             $data['breadcrumb'] = $bc;
 
             $this->load->view('admin/template', $data);
@@ -110,8 +112,8 @@ class Referensi extends CI_Controller
 
             // $this->form_validation->set_rules('id_referensi', 'Kode Referensi', 'required|numeric|min_length[11]|max_length[11]');
             $this->form_validation->set_rules('nama_ref', 'Nama Referensi', 'required|trim');
-			 // $this->form_validation->set_rules('file', 'File', 'required');
-			  $this->form_validation->set_rules('id_referensi_kat', 'Kode Referensi Kategori', 'required');
+            // $this->form_validation->set_rules('file', 'File', 'required');
+            $this->form_validation->set_rules('id_referensi_kat', 'Kode Referensi Kategori', 'required');
 
 
             if ($this->form_validation->run()) {
@@ -137,8 +139,8 @@ class Referensi extends CI_Controller
                 $result = $this->db->insert('tb_referensi', array(
                     // 'id_referensi' => $this->input->post('id_referensi'),
                     'nama_ref' => $this->input->post('nama_ref'),
-					'nama_file' => $upload_filename,
-					'id_referensi_kat' => $this->input->post('id_referensi_kat'),
+                    'nama_file' => $upload_filename,
+                    'id_referensi_kat' => $this->input->post('id_referensi_kat'),
 
                 ));
 
@@ -159,20 +161,22 @@ class Referensi extends CI_Controller
         $data['kategori'] = $result;
 
         $data['title'] = 'Tambah Referensi';
-        $data['content'] = 'admin/add_referensi';
+        $data['content'] = 'admin/referensi/add';
 
-        $bc[0]->link = 'admin/dashboard';
-        $bc[0]->label = 'Home';
-        $bc[1]->link = 'admin/referensi';
-        $bc[1]->label = 'Referensi';
-        $bc[2]->link = $this->uri->uri_string();
-        $bc[2]->label = 'Tambah Baru';
+        $bc = array();
+        @$bc[0]->link = 'admin/dashboard';
+        @$bc[0]->label = 'Home';
+        @$bc[1]->link = 'admin/referensi';
+        @$bc[1]->label = 'Referensi';
+        @$bc[2]->link = $this->uri->uri_string();
+        @$bc[2]->label = 'Tambah Baru';
         $data['breadcrumb'] = $bc;
 
         $this->load->view('admin/template', $data);
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         $sql = "DELETE FROM tb_referensi WHERE id_referensi = ?";
         $this->db->query($sql, array($id));
         $this->session->set_flashdata('success', 'Berhasil menghapus referensi peraturan');
