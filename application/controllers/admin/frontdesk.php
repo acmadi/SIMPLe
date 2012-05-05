@@ -22,6 +22,8 @@ class Frontdesk extends CI_Controller
         $data['title'] = 'Help Desk';
         $data['pilihan'] = array(
             'noantrian' => 'No Tiket',
+            'nama_kementrian' => 'Nama Kementerian',
+            'nama_unit' => 'Nama Eselon',
             'namasatker' => 'Nama Satker',
             'status' => 'Status',
         );

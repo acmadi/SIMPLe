@@ -239,8 +239,8 @@ class Mfrontdesk extends CI_Model
 
         $sql = "SELECT a.tanggal, a.no_tiket_frontdesk, a.tanggal_selesai, a.status, a.is_active, a.no_antrian,
                        b.nama_satker,
-                       d.nama_unit,
-                       e.nama_kementrian
+                       d.nama_unit, d.id_unit,
+                       e.nama_kementrian, e.id_kementrian
 				FROM tb_tiket_frontdesk a
                   LEFT JOIN tb_satker b ON a.id_satker = b.id_satker, tb_petugas_satker c, tb_unit d,tb_kementrian e
 				WHERE a.id_unit = d.id_unit
@@ -261,8 +261,8 @@ class Mfrontdesk extends CI_Model
 
         $sqlb = "SELECT a.tanggal, a.no_tiket_frontdesk, a.tanggal_selesai, a.status, a.is_active, a.no_antrian,
                         b.nama_satker,
-                        e.nama_kementrian,
-                        d.nama_unit
+                        d.nama_unit, d.id_unit,
+                        e.nama_kementrian, e.id_kementrian
 				FROM tb_tiket_frontdesk a
 				  LEFT JOIN tb_satker b ON a.id_satker = b.id_satker, tb_petugas_satker c, tb_unit d,tb_kementrian e
 				WHERE a.id_unit = d.id_unit AND a.id_kementrian = e.id_kementrian 
