@@ -33,10 +33,10 @@ class Frontdesk extends CI_Controller
         $data['content'] = 'admin/frontdesk/frontdesk';
 
         $bc = array();
-        $bc[0]->link = 'admin/dashboard';
-        $bc[0]->label = 'Home';
-        $bc[1]->link = 'admin/frontdesk';
-        $bc[1]->label = 'Frontdesk';
+        @$bc[0]->link = 'admin/dashboard';
+        @$bc[0]->label = 'Home';
+        @$bc[1]->link = 'admin/frontdesk';
+        @$bc[1]->label = 'Frontdesk';
         $data['breadcrumb'] = $bc;
 
         $this->load->view('admin/template', $data);
