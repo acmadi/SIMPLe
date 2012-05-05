@@ -1,15 +1,5 @@
 <script>
     $(function(){
-        $('.cetak').click(function(){
-            var penyelia = $(this).parent().parent().children('.penyelia').children('select');
-            console.log(penyelia.val());
-            var new_link = $(this).attr('href') + '/' + penyelia.val();
-            console.log(new_link);
-            //$(this).attr('href', new_link);
-            window.open(new_link, '_blank');
-            return false;
-        })
-
         $('.chzn-single').chosen();
     })
 </script>
@@ -29,7 +19,6 @@
             <th>Tanggal</th>
             <th>Kementerian</th>
             <th>Eselon</th>
-            <th>Penyelia</th>
             <th>&nbsp;</th>
         </tr>
         </thead>
@@ -43,18 +32,13 @@
                 <td><?php echo table_tanggal($value->tanggal) ?></td>
                 <td><strong><?php echo $value->id_kementrian ?></strong> - <?php echo $value->nama_kementrian ?></td>
                 <td><strong><?php echo $value->id_unit ?></strong> - <?php echo $value->nama_unit ?></td>
-                <td class="penyelia">
-                    <select name="penyelia" class="chzn-single" style="width: 300px;">
-                        <option></option>
-                    <?php foreach ($penyelia->result() as $value2): ?>
-                        <option value="<?php echo $value2->id_user ?>"><?php echo $value2->nama ?></option>
-                    <?php endforeach; ?>
-                    </select>
-                </td>
                 <td class="action">
-                    <a href="<?php echo site_url('frontdesks/cetak_dokumen/' . $value->no_tiket_frontdesk ) ?>" class="cetak button green">Cetak</a>
+                    <a href="<?php echo site_url('frontdesks/cetak_dokumen/' . $value->no_tiket_frontdesk ) ?>"
+                       class="cetak button green" target="_blank">Cetak</a>
                     <!--<a href="<?php echo site_url('frontdesks/edit/' . $value->no_tiket_frontdesk ) ?>" class="button yellow">Edit</a>-->
-                    <a href="<?php echo site_url('frontdesks/eskalasi/' . $value->no_tiket_frontdesk) ?>" class="button blue">Kirim</a>
+                    <a href="<?php echo site_url('frontdesks/eskalasi/' . $value->no_tiket_frontdesk) ?>"
+                       onclick="return confirm('Anda yakin akan melakukan eskalasi?') ? true : false"
+                       class="button blue">Kirim</a>
                 </td>
             </tr>
 

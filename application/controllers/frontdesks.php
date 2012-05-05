@@ -130,25 +130,13 @@ class Frontdesks extends CI_Controller
                 ";
         $list_dokumen = $this->db->query($sql);
 
-
-        // Daftar Penyelia yang aktif
-        $sql = "SELECT a.id_lavel,
-                       b.nama, b.id_user
-                FROM tb_masa_kerja a
-                JOIN tb_user b ON a.id_user = b.id_user
-                WHERE tanggal_mulai >= CURDATE() AND tanggal_selesai <= CURDATE() AND a.id_lavel = 7
-                ";
-        $penyelia = $this->db->query($sql);
-
-        $data['penyelia'] = $penyelia;
-
         $data['list_dokumen'] = $list_dokumen;
         $data['title'] = 'List Dokumen Revisi Anggaran';
         $data['content'] = 'frontdesk/list_dokumen';
         $this->load->view('new-template', $data);
     }
 
-    public function cetak_dokumen($no_tiket_frontdesk, $id_penyelia = 2318) {
+    public function cetak_dokumen($no_tiket_frontdesk) {
 
         $sql = "SELECT a.no_tiket_frontdesk, a.tanggal, a.catatan, a.nomor_surat_usulan, a.tanggal_surat_usulan,
                        a.id_kementrian, a.id_unit, a.petugas_penerima,
@@ -179,9 +167,9 @@ class Frontdesks extends CI_Controller
         }
 
 
-        // Cari nama Penyelia
-        $penyelia = $this->db->query('SELECT nama FROM tb_user WHERE id_user = ?', array($id_penyelia))->row();
-
+        // Nama Petugas yang tanda tangan
+        $petugas_tanda_tangan = $this->db->query('SELECT nama FROM tb_user WHERE id_user = ?',
+            array($this->session->userdata('id_user')))->row();
 
         // START Kelengkapan Dokumen
         $kel = $this->db->query($sql, array($no_tiket_frontdesk))->result();
@@ -287,7 +275,7 @@ class Frontdesks extends CI_Controller
 //        $odf->setVars('tanggal_selesai', $tanggal_selesai);
         $odf->setVars('kelengkapan_dokumen', $kelengkapan, false, 'utf-8');
         $odf->setVars('catatan', $result[0]['catatan']);
-        $odf->setVars('nama_penyelia', $penyelia->nama);
+        $odf->setVars('nama_petugas_tanda_tangan', $petugas_tanda_tangan->nama);
         $odf->setVars('tanggal_sekarang', strftime('%d %B %Y'));
         $odf->setVars('pemroses', $pemroses);
 
