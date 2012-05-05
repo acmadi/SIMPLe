@@ -1,45 +1,52 @@
 <div class="content">
 
-    <h1>Refensi</h1>
+    <h1>Referensi Peraturan</h1>
 
-    <a href="<?php echo site_url('/admin/referensi/add/') ?>" class="button blue-pill">Tambah Referensi</a>
-	 <a href="<?php echo site_url('/admin/kategori_ref/') ?>" class="button blue-pill">Manajemen Kategori Referensi</a>
+    <div class="well">
+        <div class="pull-left">
+            <a href="<?php echo site_url('/admin/referensi/add/') ?>" class="btn"><i class="icon-plus"></i> Tambah
+                Referensi</a>
+            <a href="<?php echo site_url('/admin/kategori_ref/') ?>" class="btn">Manajemen Kategori Referensi</a>
+        </div>
+        <div class="pull-right">
+            <form method="get" action="<?php echo site_url('/admin/referensi/index/') ?>" class="form-inline">
+                <input type="text" name="cari"/>
+                <button type="submit" name="submit" value="cari" class="btn"><i class="icon-search"></i></button>
+            </form>
+        </div>
+    </div>
 
-    <form method="get" action="<?php echo site_url('/admin/referensi/index/') ?>" style="text-align: right;">
-        <input type="text" name="cari"/>
-        <input type="submit" name="submit" value="Cari" class="button blue-pill"/>
-    </form>
-
-    <table style="width: 100%;">
+    <table class="table">
         <thead>
         <tr>
-            <th class="short">No</th>
             <th>Nama Referensi</th>
-            <th>Nama File</th>
-			<th>Kategori Referensi</th>
-            <th class="action">Aksi</th>
+            <th>Kategori Referensi</th>
+            <th>&nbsp;</th>
         </tr>
         </thead>
         <tbody>
-        <?php $i = 1 ?>
         <?php foreach ($bla->result() as $value): ?>
         <tr>
-            <td class="short"><?php echo $i++ ?></td>
-            <td style=""><?php echo $value->nama_ref ?></a></td>
-            <td style=""><?php echo anchor(base_url('upload/referensi/' . $value->nama_file), $value->nama_file) ?></td>
-            <td style=""><?php echo $value->nama_kat ?></td>
+            <td>
+                <a href="<?php echo base_url('upload/referensi/' . $value->nama_file), $value->nama_file ?>">
+                    <?php echo $value->nama_ref ?></a>
+            </td>
+            <td><?php echo $value->nama_kat ?></td>
             <td class="action">
-                <a href="<?php echo site_url('/admin/referensi/edit/' . $value->id_referensi) ?>" class="button blue-pill">Edit</a>
+                <a href="<?php echo site_url('/admin/referensi/edit/' . $value->id_referensi) ?>"
+                   class="btn btn-info btn-mini">Edit</a>
                 <a href="<?php echo site_url('/admin/referensi/delete/' . $value->id_referensi) ?>"
-                   class="button blue-pill"
-                  onclick="return confirm('Anda yakin akan menghapus data ini?')">Hapus</a>
+                   class="btn btn-danger btn-mini"
+                   onclick="return confirm('Anda yakin akan menghapus data ini?')">Hapus</a>
             </td>
         </tr>
-        <?php endforeach ?>
+            <?php endforeach ?>
 
         </tbody>
     </table>
 
-    <?php echo $this->pagination->create_links() ?>
+    <div class="pagination" style="text-align: center;">
+        <?php echo $this->pagination->create_links() ?>
+    </div>
 
 </div>

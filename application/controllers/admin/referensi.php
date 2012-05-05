@@ -44,7 +44,7 @@ class Referensi extends CI_Controller
         @$bc[0]->link = 'admin/dashboard';
         @$bc[0]->label = 'Home';
         @$bc[1]->link = 'admin/referensi';
-        @$bc[1]->label = 'Referensi';
+        @$bc[1]->label = 'Referensi Peraturan';
         $data['breadcrumb'] = $bc;
 
         $this->load->view('admin/template', $data);
