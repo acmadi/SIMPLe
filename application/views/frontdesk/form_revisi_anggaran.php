@@ -201,6 +201,13 @@
         </p>
 
         <p>
+            <div>
+                <label>Jenis Revisi</label>
+                <input type="text" name="jenis_revisi" />
+            </div>
+        </p>
+
+        <p>
             <label class="align-right">Kode - Nama K/L</label>
             <select name="nama_kl" id="nama_kl" type="text" class="chzn-select" data-placeholder="Pilih nama K/L" style="width: 700px;">
                 <?php

@@ -10,16 +10,16 @@ class Frontdesks extends CI_Controller
 
     public function index()
     {
-		$this->load->helper('tanggal_helper');
+        $this->load->helper('tanggal_helper');
 
-		$data['title'] 		= 'Konsultasi Front Desk';
-        $data['content'] 	= 'frontdesks';
-		$optional_sql		= '';
+        $data['title'] = 'Konsultasi Front Desk';
+        $data['content'] = 'frontdesks';
+        $optional_sql = '';
 
-		if($this->session->userdata('lavel') != '7'):
-			$optional_sql = " AND c.anggaran = '{$this->session->userdata('anggaran')}'
+        if ($this->session->userdata('lavel') != '7'):
+            $optional_sql = " AND c.anggaran = '{$this->session->userdata('anggaran')}'
 							  AND c.id_unit_satker = '{$this->session->userdata('id_unit_satker')}' ";
-		endif;
+        endif;
 
         $result = $this->mfrontdesk->get_list_dokumen_frontdesk('open', $this->session->userdata('lavel'));
 
@@ -29,9 +29,9 @@ class Frontdesks extends CI_Controller
 
     function diterima($id)
     {
-		$this->db->query("UPDATE tb_tiket_frontdesk SET is_active = 1 WHERE no_tiket_frontdesk = ?",array($id));
-		$this->log->create("Dokumen Frontdesk dengan nomor tiket ".$id." diterima");
-		redirect('frontdesks');
+        $this->db->query("UPDATE tb_tiket_frontdesk SET is_active = 1 WHERE no_tiket_frontdesk = ?", array($id));
+        $this->log->create("Dokumen Frontdesk dengan nomor tiket " . $id . " diterima");
+        redirect('frontdesks');
     }
 
     function diteruskan($id)
@@ -39,12 +39,12 @@ class Frontdesks extends CI_Controller
         $query = $this->db->get_where('tb_tiket_frontdesk', array('no_tiket_frontdesk' => $id))->row();
 
         $this->db->update('tb_tiket_frontdesk', array(
-            'lavel' => $this->session->userdata('lavel')+1,'is_active' => 2
+            'lavel' => $this->session->userdata('lavel') + 1, 'is_active' => 2
         ), array(
             'no_tiket_frontdesk' => $id
         ));
 
-		$this->log->create("Dokumen Frontdesk dengan nomor tiket ".$id." diteruskan");
+        $this->log->create("Dokumen Frontdesk dengan nomor tiket " . $id . " diteruskan");
 
         $this->_success(site_url('/dashboards'), 'Tiket berhasil diteruskan', 3);
     }
@@ -64,12 +64,12 @@ class Frontdesks extends CI_Controller
                 'is_active' => 3,
                 'status' => 'close',
                 'keputusan' => 'ditolak',
-				'tanggal_selesai' => date('Y-m-d h:i:s')
+                'tanggal_selesai' => date('Y-m-d h:i:s')
             ), array(
                 'no_tiket_frontdesk' => $this->input->post('no_tiket_frontdesk'),
             ));
 
-			$this->log->create("Dokumen Frontdesk dengan nomor tiket ".$this->input->post('no_tiket_frontdesk')." ditolak atau dikembalikan");
+            $this->log->create("Dokumen Frontdesk dengan nomor tiket " . $this->input->post('no_tiket_frontdesk') . " ditolak atau dikembalikan");
             redirect('frontdesks');
         }
 
@@ -80,19 +80,19 @@ class Frontdesks extends CI_Controller
         $this->load->view('new-template', $data);
     }
 
-	function accept($id)
+    function accept($id)
     {
         $query = $this->db->get_where('tb_tiket_frontdesk', array('no_tiket_frontdesk' => $id))->row();
 
         $this->db->update('tb_tiket_frontdesk', array(
             'status' => 'close',
             'keputusan' => 'disahkan',
-			'tanggal_selesai' => date('Y-m-d h:i:s')
+            'tanggal_selesai' => date('Y-m-d h:i:s')
         ), array(
             'no_tiket_frontdesk' => $id
         ));
 
-		$this->log->create("Dokumen Frontdesk dengan nomor tiket ".$id." disetujui");
+        $this->log->create("Dokumen Frontdesk dengan nomor tiket " . $id . " disetujui");
         $this->_success(site_url('/frontdesks'), 'Tiket berhasil ditetapkan', 3);
     }
 
@@ -130,25 +130,14 @@ class Frontdesks extends CI_Controller
                 ";
         $list_dokumen = $this->db->query($sql);
 
-
-        // Daftar Penyelia yang aktif
-        $sql = "SELECT a.id_lavel,
-                       b.nama, b.id_user
-                FROM tb_masa_kerja a
-                JOIN tb_user b ON a.id_user = b.id_user
-                WHERE tanggal_mulai >= CURDATE() AND tanggal_selesai <= CURDATE() AND a.id_lavel = 7
-                ";
-        $penyelia = $this->db->query($sql);
-
-        $data['penyelia'] = $penyelia;
-
         $data['list_dokumen'] = $list_dokumen;
         $data['title'] = 'List Dokumen Revisi Anggaran';
         $data['content'] = 'frontdesk/list_dokumen';
         $this->load->view('new-template', $data);
     }
 
-    public function cetak_dokumen($no_tiket_frontdesk, $id_penyelia = 2318) {
+    public function cetak_dokumen($no_tiket_frontdesk)
+    {
 
         $sql = "SELECT a.no_tiket_frontdesk, a.tanggal, a.catatan, a.nomor_surat_usulan, a.tanggal_surat_usulan,
                        a.id_kementrian, a.id_unit, a.petugas_penerima,
@@ -179,9 +168,9 @@ class Frontdesks extends CI_Controller
         }
 
 
-        // Cari nama Penyelia
-        $penyelia = $this->db->query('SELECT nama FROM tb_user WHERE id_user = ?', array($id_penyelia))->row();
-
+        // Nama Petugas yang tanda tangan
+        $petugas_tanda_tangan = $this->db->query('SELECT nama FROM tb_user WHERE id_user = ?',
+            array($this->session->userdata('id_user')))->row();
 
         // START Kelengkapan Dokumen
         $kel = $this->db->query($sql, array($no_tiket_frontdesk))->result();
@@ -257,7 +246,6 @@ class Frontdesks extends CI_Controller
         }
 
 
-
         // Cek sudah lebih dari jam 12:00 atau belum.
         // Kalau belum, dihitung 5 hari kerja.
         // Kalau sudah, dihitung 6 hari kerja.
@@ -266,7 +254,7 @@ class Frontdesks extends CI_Controller
         }
 
         $jam = strftime('%H:%M', strtotime($result[0]['tanggal']));
-        $tanggal_selesai = strftime('%d-%m-%Y',  + strtotime("+$i days"));
+        $tanggal_selesai = strftime('%d-%m-%Y', +strtotime("+$i days"));
         $tanggal_selesai = $tanggal_selesai . ' ' . $jam;
 
 
@@ -287,25 +275,28 @@ class Frontdesks extends CI_Controller
 //        $odf->setVars('tanggal_selesai', $tanggal_selesai);
         $odf->setVars('kelengkapan_dokumen', $kelengkapan, false, 'utf-8');
         $odf->setVars('catatan', $result[0]['catatan']);
-        $odf->setVars('nama_penyelia', $penyelia->nama);
+        $odf->setVars('nama_petugas_tanda_tangan', $petugas_tanda_tangan->nama);
         $odf->setVars('tanggal_sekarang', strftime('%d %B %Y'));
         $odf->setVars('pemroses', $pemroses);
 
-         // Simpan file ODT
-         $odf->saveToDisk(FCPATH . 'output/' . 'pengajuan_' . $no_tiket_frontdesk . '.odt');
+        // Simpan file ODT
+        $odf->saveToDisk(FCPATH . 'output/' . 'pengajuan_' . $no_tiket_frontdesk . '.odt');
 
-         // Convert file ODT ke PDF
-         $command = sprintf('"%s" DocumentConverter.py "%s" "%s"',
-             $this->config->item('libreoffice_python'),
-             FCPATH . 'output/' . 'pengajuan_' . $no_tiket_frontdesk . '.odt',
-             FCPATH . 'output/' . 'pengajuan_' . $no_tiket_frontdesk . '.pdf');
-         exec($command);
+        // Convert file ODT ke PDF
+        $command = sprintf('"%s" DocumentConverter.py "%s" "%s"',
+            $this->config->item('libreoffice_python'),
+            FCPATH . 'output/' . 'pengajuan_' . $no_tiket_frontdesk . '.odt',
+            FCPATH . 'output/' . 'pengajuan_' . $no_tiket_frontdesk . '.pdf');
+        exec($command);
 
+        // Simpan ke history
+        $this->log->create('Cetak tanda terima pengajuan revisi nomor tiket #' . sprintf('%05d' , $no_tiket_frontdesk));
 
-         redirect(base_url('output/' . 'pengajuan_' . $no_tiket_frontdesk . '.pdf'));
+        redirect(base_url('output/' . 'pengajuan_' . $no_tiket_frontdesk . '.pdf'));
     }
 
-    public function eskalasi($no_tiket_frontdesk) {
+    public function eskalasi($no_tiket_frontdesk)
+    {
         $this->db->update('tb_tiket_frontdesk',
             array('lavel' => 3, 'is_active' => 2),
             array('no_tiket_frontdesk' => $no_tiket_frontdesk)
@@ -314,7 +305,8 @@ class Frontdesks extends CI_Controller
         redirect('frontdesks/list_dokumen');
     }
 
-    public function edit($no_tiket_frontdesk) {
+    public function edit($no_tiket_frontdesk)
+    {
         $data['title'] = 'Edit Dokumen Revisi Anggaran';
         $data['content'] = 'frontdesk/edit';
         $this->load->view('new-template', $data);

@@ -237,10 +237,19 @@ class Mfrontdesk extends CI_Model
             $where = " ";
         }
 
-        $sql = "SELECT a.tanggal, a.no_tiket_frontdesk, a.tanggal_selesai, a.status, a.is_active, a.no_antrian, e.nama_kementrian, d.nama_unit, b.nama_satker
-				FROM tb_tiket_frontdesk a LEFT JOIN tb_satker b ON a.id_satker = b.id_satker, tb_petugas_satker c, tb_unit d,tb_kementrian e
-				WHERE a.id_unit = d.id_unit AND a.id_kementrian = e.id_kementrian 
-				AND a.id_kementrian = d.id_kementrian AND c.id_petugas_satker = a.id_petugas_satker $where ORDER BY a.tanggal";
+        $sql = "SELECT a.tanggal, a.no_tiket_frontdesk, a.tanggal_selesai, a.status, a.is_active, a.no_antrian,
+                       b.nama_satker,
+                       d.nama_unit,
+                       e.nama_kementrian
+				FROM tb_tiket_frontdesk a
+                  LEFT JOIN tb_satker b ON a.id_satker = b.id_satker, tb_petugas_satker c, tb_unit d,tb_kementrian e
+				WHERE a.id_unit = d.id_unit
+				  AND a.id_kementrian = e.id_kementrian
+				  AND a.id_kementrian = d.id_kementrian
+				  AND c.id_petugas_satker = a.id_petugas_satker
+				  $where
+				ORDER BY a.tanggal DESC, a.no_tiket_frontdesk DESC";
+
         $query = $this->db->query($sql);
 
         $config['base_url'] = site_url('/admin/frontdesk/index') . '/' . $url_add;
@@ -250,11 +259,19 @@ class Mfrontdesk extends CI_Model
         $this->pagination->initialize($config);
 
 
-        $sqlb = "SELECT a.tanggal, a.no_tiket_frontdesk, a.tanggal_selesai, a.status, a.is_active, a.no_antrian, e.nama_kementrian, d.nama_unit, b.nama_satker
-				FROM tb_tiket_frontdesk a LEFT JOIN tb_satker b ON a.id_satker = b.id_satker, tb_petugas_satker c, tb_unit d,tb_kementrian e
+        $sqlb = "SELECT a.tanggal, a.no_tiket_frontdesk, a.tanggal_selesai, a.status, a.is_active, a.no_antrian,
+                        b.nama_satker,
+                        e.nama_kementrian,
+                        d.nama_unit
+				FROM tb_tiket_frontdesk a
+				  LEFT JOIN tb_satker b ON a.id_satker = b.id_satker, tb_petugas_satker c, tb_unit d,tb_kementrian e
 				WHERE a.id_unit = d.id_unit AND a.id_kementrian = e.id_kementrian 
-				AND a.id_kementrian = d.id_kementrian AND c.id_petugas_satker = a.id_petugas_satker $where ORDER BY a.tanggal
+				  AND a.id_kementrian = d.id_kementrian
+				  AND c.id_petugas_satker = a.id_petugas_satker
+				  $where
+				ORDER BY a.tanggal DESC, a.no_tiket_frontdesk DESC
 				LIMIT ?,?";
+
         $data["query"] = $this->db->query($sqlb, array($offset, $config['per_page']));
 
         $data['isian_form1'] = $keyword;

@@ -11,6 +11,10 @@
                 <input type="submit" value="Cek Tiket" class="button green"/>
                 <a href="<?php echo site_url('tiket') ?>" class="button">Reset</a>
             </p>
+            <div>
+                Format: <strong>[Nomor Tiket].[Kode K/L]</strong><br/>
+                Contoh: <strong>00123.016</strong>
+            </div>
         </form>
     </fieldset>
 
