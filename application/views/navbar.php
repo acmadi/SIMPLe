@@ -59,7 +59,7 @@ if ($this->uri->segment(1) == 'referensi') {
 if ($this->uri->segment(1) == 'knowledge') {
     $nav_knowledge = 'active';
 }
-if ($this->uri->segment(1) == 'telepon') {
+if ($this->uri->segment(2) == 'telepon') {
     $nav_telepon = 'active';
 }
 if ($this->uri->segment(1) == 'report_petugas') {

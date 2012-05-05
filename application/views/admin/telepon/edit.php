@@ -1,72 +1,86 @@
 <div class="content">
-    <h1>Ubah Telepon</h1>
+    <div class="page-header">
+        <h1>Ubah Telepon</h1>
+    </div>
 
     <?php generate_notifkasi() ?>
 
-    <?php echo form_open('') ?>
+    <form method="post" action="" class="form-horizontal">
 
-    <table>
-        <tr>
-            <td><label for="nama">Nama</label></td>
-            <td>
+
+        <div class="control-group">
+            <label for="nama" class="control-label">Nama</label>
+
+            <div class="controls">
                 <?php if (set_value('nama')): ?>
                 <input type="text" name="nama" id="nama" value="<?php echo set_value('nama') ?>"/>
                 <?php else: ?>
                 <input type="text" name="nama" id="nama" value="<?php echo $telepon->nama ?>"/>
                 <?php endif ?>
-            </td>
-        </tr>
-        <tr>
-            <td><label for="telepon">Telepon #1</label></td>
-            <td>
+
+            </div>
+        </div>
+
+
+        <div class="control-group">
+            <label for="telepon" class="control-label">Telepon #1</label>
+
+            <div class="controls">
                 <?php if (set_value('telepon')): ?>
                 <input type="text" name="telepon" id="telepon" value="<?php echo set_value('telepon') ?>"/>
                 <?php else: ?>
                 <input type="text" name="telepon" id="telepon" value="<?php echo $telepon->telepon1 ?>"/>
                 <?php endif ?>
-            </td>
-        </tr>
-        <tr>
-            <td><label for="telepon2">Telepon #2</label></td>
-            <td>
+
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="telepon2" class="control-label">Telepon #2</label>
+
+            <div class="controls">
                 <?php if (set_value('telepon2')): ?>
                 <input type="text" name="telepon2" id="telepon2" value="<?php echo set_value('telepon2') ?>"/>
                 <?php else: ?>
                 <input type="text" name="telepon2" id="telepon2" value="<?php echo $telepon->telepon2 ?>"/>
                 <?php endif ?>
-            </td>
-        </tr>
-        <tr>
-            <td><label for="keterangan">Keterangan</label></td>
-            <td>
+
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="keterangan" class="control-label">Keterangan</label>
+
+            <div class="controls">
                 <?php if (set_value('keterangan')): ?>
                 <input type="text" name="keterangan" id="keterangan" value="<?php echo set_value('keterangan') ?>"/>
                 <?php else: ?>
                 <input type="text" name="keterangan" id="keterangan" value="<?php echo $telepon->keterangan ?>"/>
                 <?php endif ?>
-            </td>
-        </tr>
-        <tr>
-            <td>Status</td>
-            <td>
+            </div>
+        </div>
+
+
+        <div class="control-group">
+            <label class="control-label">Status</label>
+
+            <div class="controls">
                 <select name="approved">
                     <?php if ($telepon->approved): ?>
-                        <option value="1" selected="selected">Ya</option>
-                        <option value="0">Tidak</option>
+                    <option value="1" selected="selected">Ya</option>
+                    <option value="0">Tidak</option>
                     <?php else: ?>
-                        <option value="1">Ya</option>
-                        <option value="0" selected="selected">Tidak</option>
+                    <option value="1">Ya</option>
+                    <option value="0" selected="selected">Tidak</option>
                     <?php endif; ?>
                 </select>
-            </td>
-        </tr>
-    </table>
+            </div>
+        </div>
 
-    <div>
-        <input type="submit" value="Ubah" class="button green"/>
-        <a href="<?php echo site_url('admin/telepon') ?>" class="button">Batal</a>
-    </div>
 
-    <?php echo form_close() ?>
+        <div class="form-actions">
+            <input type="submit" value="Ubah" class="btn btn-primary"/>
+            <a href="<?php echo site_url('admin/telepon') ?>" class="btn">Batal</a>
+        </div>
+
+    </form>
 
 </div>

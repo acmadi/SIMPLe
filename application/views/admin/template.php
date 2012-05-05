@@ -40,6 +40,7 @@
     <script src="<?php echo base_url('js/jquery-1.7.1.min.js') ?>"></script>
     <script src="<?php echo base_url('js/chosen/chosen.jquery.min.js') ?>"></script>
     <script src="<?php echo base_url('bootstrap/js/bootstrap.min.js') ?>"></script>
+    <script src="<?php echo base_url('js/jquery.dataTables.min.js') ?>"></script>
     <script src="<?php echo base_url('js/jquery-ui-1.8.16.custom.min.js') ?>"></script>
     <!--    <script src="--><?php //echo base_url(); ?><!--js/jquery.ui.core.min.js"></script>-->
     <!--    <script src="--><?php //echo base_url(); ?><!--js/jquery.ui.widget.min.js"></script>-->

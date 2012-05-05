@@ -1,34 +1,50 @@
 <div class="content">
-    <h1>Tambah Telepon</h1>
+
+    <div class="page-header">
+        <h1>Tambah Telepon</h1>
+    </div>
 
     <?php generate_notifkasi() ?>
 
-    <?php echo form_open('') ?>
+    <form method="post" action="" class="form-horizontal">
 
-    <table>
-        <tr>
-            <td><label for="nama">Nama</label></td>
-            <td><input type="text" name="nama" id="nama"/></td>
-        </tr>
-        <tr>
-            <td><label for="telepon">Telepon #1</label></td>
-            <td><input type="text" name="telepon" id="telepon"/></td>
-        </tr>
-        <tr>
-            <td><label for="telepon2">Telepon #2</label></td>
-            <td><input type="text" name="telepon2" id="telepon2"/></td>
-        </tr>
-        <tr>
-            <td><label for="keterangan">Keterangan</label></td>
-            <td><input type="text" name="keterangan" id="keterangan"/></td>
-        </tr>
-    </table>
+        <div class="control-group">
+            <label for="nama" class="control-label">Nama</label>
 
-    <div>
-        <input type="submit" value="Tambah"/>
-        <a href="<?php echo site_url('admin/telepon') ?>" class="button green">Batal</a>
-    </div>
+            <div class="controls">
+                <input type="text" name="nama" id="nama"/>
+            </div>
+        </div>
 
-    <?php echo form_close() ?>
+        <div class="control-group">
+            <label for="telepon" class="control-label">Telepon #1</label>
+
+            <div class="controls">
+                <input type="text" name="telepon" id="telepon"/>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label for="telepon2" class="control-label">Telepon #2</label>
+
+            <div class="controls">
+                <input type="text" name="telepon2" id="telepon2"/>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label for="keterangan" class="control-label">Keterangan</label>
+
+            <div class="controls">
+                <input type="text" name="keterangan" id="keterangan"/>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <input type="submit" value="Tambah" class="btn btn-primary"/>
+            <a href="<?php echo site_url('admin/telepon') ?>" class="btn">Batal</a>
+        </div>
+
+    </form>
 
 </div>
