@@ -34,3 +34,39 @@ function notification($message, $title = '', $class = '')
 
     return $notification;
 }
+
+function alert()
+{
+    $class = $message = $title = '';
+
+    $CI =& get_instance();
+    if ($CI->session->flashdata('success')) {
+        $message = $CI->session->flashdata('success');
+        $title = "Berhasil";
+        $class = "alert-success";
+    }
+    if ($CI->session->flashdata('info')) {
+        $message = $CI->session->flashdata('info');
+        $title = "Informasi";
+        $class = "alert-info";
+    }
+    if ($CI->session->flashdata('notice')) {
+        $message = $CI->session->flashdata('notice');
+        $title = "Peringatan";
+        $class = "";
+    }
+    if ($CI->session->flashdata('error')) {
+        $message = $CI->session->flashdata('error');
+        $title = "Error";
+        $class = "alert-error";
+    }
+
+    if ($message != '') {
+        $string = '<div class="alert %s">
+                        <button class="close" data-dismiss="alert">×</button>
+                        <strong class="alert-heading">%s</strong><br/>
+                   %s</div>';
+        $alert = sprintf($string, $class, $title, $message);
+        return $alert;
+    }
+}
