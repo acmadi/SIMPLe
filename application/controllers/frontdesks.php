@@ -289,6 +289,8 @@ class Frontdesks extends CI_Controller
             FCPATH . 'output/' . 'pengajuan_' . $no_tiket_frontdesk . '.pdf');
         exec($command);
 
+        // Simpan ke history
+        $this->log->create('Cetak tanda terima pengajuan revisi nomor tiket #' . sprintf('%05d' , $no_tiket_frontdesk));
 
         redirect(base_url('output/' . 'pengajuan_' . $no_tiket_frontdesk . '.pdf'));
     }
