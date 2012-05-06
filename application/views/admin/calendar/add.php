@@ -7,28 +7,35 @@
 </script>
 
 <div class="content">
-    <h1>Tambah Data Kalender Baru</h1>
+
+    <div class="page-header">
+        <h1>Tambah Data Kalender Baru</h1>
+    </div>
 
     <?php generate_notifkasi() ?>
 
-    <fieldset>
-        <legend>Tanggal Libur</legend>
-        <form method="post" action="<?php echo site_url('/admin/calendar/add') ?>">
-            <p>
-                <label style="width: 120px; display: inline-block; ">Tanggal</label>
+    <form method="post" action="<?php echo site_url('/admin/calendar/add') ?>" class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label">Tanggal</label>
+
+            <div class="controls">
                 <input type="text" name="calendar" id="calendar"/>
-            </p>
+            </div>
+        </div>
 
 
-            <p>
-                <label style="width: 120px; display: inline-block;">Keterangan</label>
+        <div class="control-group">
+            <label class="control-label">Keterangan</label>
+
+            <div class="controls">
                 <input type="text" name="keterangan"/>
-            </p>
+            </div>
+        </div>
 
-            <p>
-                <input type="submit" name="submit" value="Simpan" class="button blue-pill"/>
-                <a href="<?php echo site_url('/admin/calendar') ?>" class="button gray-pill">&laquo; Kembali</a>
-            </p>
-        </form>
-    </fieldset>
+        <div class="form-actions">
+            <input type="submit" name="submit" value="Simpan" class="btn btn-primary"/>
+            <a href="<?php echo site_url('/admin/calendar') ?>" class="btn">Batal</a>
+        </div>
+    </form>
+
 </div>

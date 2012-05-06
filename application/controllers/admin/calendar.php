@@ -45,18 +45,19 @@ class Calendar extends CI_Controller
         $this->calendar->initialize($prefs);
 
         $result = $this->db->from('tb_calendar')
-                ->where('year', date('Y'))
-                ->get();
+            ->where('year', date('Y'))
+            ->get();
 
         $data['holiday'] = $result;
 
         $data['title'] = 'Calendar';
-        $data['content'] = 'admin/calendar/calendar';
+        $data['content'] = 'admin/calendar/index';
 
-        $bc[0]->link = 'admin/dashboard';
-        $bc[0]->label = 'Home';
-        $bc[1]->link = 'admin/calendar';
-        $bc[1]->label = 'Kalender';
+        $bc = array();
+        @$bc[0]->link = 'admin/dashboard';
+        @$bc[0]->label = 'Home';
+        @$bc[1]->link = 'admin/calendar';
+        @$bc[1]->label = 'Kalender';
         $data['breadcrumb'] = $bc;
 
         $this->load->view('admin/template', $data);
@@ -99,12 +100,13 @@ class Calendar extends CI_Controller
         $data['title'] = 'Calendar';
         $data['content'] = 'admin/calendar/add';
 
-        $bc[0]->link = 'admin/dashboard';
-        $bc[0]->label = 'Home';
-        $bc[1]->link = 'admin/calendar';
-        $bc[1]->label = 'Kalendar';
-        $bc[2]->link = $this->uri->uri_string();
-        $bc[2]->label = 'Tambah Baru';
+        $bc = array();
+        @$bc[0]->link = 'admin/dashboard';
+        @$bc[0]->label = 'Home';
+        @$bc[1]->link = 'admin/calendar';
+        @$bc[1]->label = 'Kalendar';
+        @$bc[2]->link = $this->uri->uri_string();
+        @$bc[2]->label = 'Tambah Baru';
         $data['breadcrumb'] = $bc;
 
         $this->load->view('admin/template', $data);
@@ -146,15 +148,16 @@ class Calendar extends CI_Controller
         $data['content'] = 'admin/calendar/edit';
 
         $data['row'] = $this->db->from('tb_calendar')
-                ->where('id', $id)
-                ->get()->row();
-        
-        $bc[0]->link = 'admin/dashboard';
-        $bc[0]->label = 'Home';
-        $bc[1]->link = 'admin/calendar';
-        $bc[1]->label = 'Kalendar';
-        $bc[2]->link = $this->uri->uri_string();
-        $bc[2]->label = 'Ubah Data';
+            ->where('id', $id)
+            ->get()->row();
+
+        $bc = array();
+        @$bc[0]->link = 'admin/dashboard';
+        @$bc[0]->label = 'Home';
+        @$bc[1]->link = 'admin/calendar';
+        @$bc[1]->label = 'Kalendar';
+        @$bc[2]->link = $this->uri->uri_string();
+        @$bc[2]->label = 'Ubah Data';
         $data['breadcrumb'] = $bc;
 
         $this->load->view('admin/template', $data);
