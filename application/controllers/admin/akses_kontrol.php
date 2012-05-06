@@ -1,37 +1,29 @@
 <?php
 class Akses_kontrol extends CI_Controller
 {
+    public $title = 'Akses Kontrol';
 
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
         $this->load->model('Makses', 'akses');
         $this->form_validation->set_message('required', '<strong>%s</strong> harus diisi.');
     }
 
-    var $title = 'Akses Kontrol';
-
-    function index()
+    public function index()
     {
-        /*if ($this->session->userdata('login') == TRUE)
-          {*/
-
         $data['list_kontrol'] = $this->akses->get_all();
         $data['title'] = 'Akses Kontrol';
-        $data['content'] = 'admin/akses_kontrol/akses_kontrol';
+        $data['content'] = 'admin/akses_kontrol/index';
 
-        $bc[0]->link = 'admin/dashboard';
-        $bc[0]->label = 'Home';
-        $bc[1]->link = 'admin/akses_kontrol';
-        $bc[1]->label = 'Akses Kontrol';
+        $bc = array();
+        @$bc[0]->link = 'admin/dashboard';
+        @$bc[0]->label = 'Home';
+        @$bc[1]->link = 'admin/akses_kontrol';
+        @$bc[1]->label = 'Akses Kontrol';
         $data['breadcrumb'] = $bc;
 
         $this->load->view('admin/template', $data);
-        /*}
-          else
-          {
-              $this->load->view('login/login_view');
-          }*/
     }
 
     /**
@@ -40,29 +32,28 @@ class Akses_kontrol extends CI_Controller
      * @param $id integer
      * @return void
      */
-    function update()
+    protected function _update()
     {
-            $this->form_validation->set_rules('fid', 'ID', 'required|numeric');
-            $this->form_validation->set_rules('fnamalevel', 'Nama Level', 'required');
+        $this->form_validation->set_rules('fid', 'ID', 'required|numeric');
+        $this->form_validation->set_rules('fnamalevel', 'Nama Level', 'required');
 
-            if ($this->form_validation->run() == FALSE) {
-                $this->session->set_flashdata('error', validation_errors());
-                redirect('/admin/akses_kontrol/view_form');
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('error', validation_errors());
+            redirect($_SERVER['HTTP_REFERER']);
+        }
+        else {
+            $data['fid'] = $this->input->post('fid', TRUE);
+            $data['fnamalevel'] = $this->input->post('fnamalevel', TRUE);
+
+            $this->load->model('Makses', 'akses');
+            $info = $this->akses->update_akses($data);
+            if ($info) {
+                $this->session->set_flashdata('success', "Akses baru telah diubah!");
+            } else {
+                $this->session->set_flashdata('error', "Akses baru gagal diubah!");
             }
-            else
-            {
-                $data['fid'] = $this->input->post('fid', TRUE);
-                $data['fnamalevel'] = $this->input->post('fnamalevel', TRUE);
-	
-                $this->load->model('Makses', 'akses');
-                $info = $this->akses->update_akses($data);
-                if ($info) {
-                    $this->session->set_flashdata('success', "Akses baru telah diubah!");
-                } else {
-                    $this->session->set_flashdata('error', "Akses baru gagal diubah!");
-                }
-                redirect('/admin/akses_kontrol');
-            }
+            redirect('/admin/akses_kontrol');
+        }
     }
 
     public function delete($id)
@@ -84,87 +75,90 @@ class Akses_kontrol extends CI_Controller
         redirect('/admin/akses_kontrol');
     }
 
-    function view_form()
+    public function view_form()
     {
         $data1['fid'] = $this->input->post('fid', TRUE);
         $data1['fnamalevel'] = $this->input->post('fnamalevel', TRUE);
 
         $data['tambah'] = (object)$data1;
         $data['title'] = 'Akses Kontrol';
-        $data['content'] = 'admin/akses_kontrol/akses_kontrol_tambah';
+        $data['content'] = 'admin/akses_kontrol/add';
         $this->load->view('admin/template', $data);
 
     }
 
-    function edit($id)
+    public function edit($id)
     {
-        $data['title'] = 'Akses Kontrol - Ubah';
-        $data['content'] = 'admin/akses_kontrol/akses_kontrol_ubah';
-        $result = $this->db->query("SELECT * FROM tb_lavel WHERE id_lavel = ?",array($id));
-        $result = $result->result();
-        $data['ubah'] = $result[0];
+        if ($this->input->post()) {
+            $this->_update();
+        }
+        $result = $this->db->query("SELECT * FROM tb_lavel WHERE id_lavel = ?", array($id));
+        $result = $result->row();
+        $data['ubah'] = $result;
 
-        $bc[0]->link = 'admin/dashboard';
-        $bc[0]->label = 'Home';
-        $bc[1]->link = 'admin/akses_kontrol';
-        $bc[1]->label = 'Akses Kontrol';
-        $bc[2]->link = $this->uri->uri_string();
-        $bc[2]->label = 'Edit Lavel: ' . $result[0]->nama_lavel;
+        $bc = array();
+        @$bc[0]->link = 'admin/dashboard';
+        @$bc[0]->label = 'Home';
+        @$bc[1]->link = 'admin/akses_kontrol';
+        @$bc[1]->label = 'Akses Kontrol';
+        @$bc[2]->link = $this->uri->uri_string();
+        @$bc[2]->label = 'Edit Lavel: ' . $result->nama_lavel;
         $data['breadcrumb'] = $bc;
+        $data['title'] = "Akses Kontrol - Ubah - {$result->nama_lavel}";
+        $data['content'] = 'admin/akses_kontrol/edit';
         $this->load->view('admin/template', $data);
     }
 
-    function view($id)
+    public function view($id)
     {
-		$data['info_kontrol'] = $this->akses->get_info_kontrol($id);
+        $data['info_kontrol'] = $this->akses->get_info_kontrol($id);
         $data['list_kontrol'] = $this->akses->get_all_users_by_level($id);
-        $data['title'] = 'Akses Kontrol - Ubah';
-        $data['content'] = 'admin/akses_kontrol/akses_kontrol_lihat';
 
-        $bc[0]->link = 'admin/dashboard';
-        $bc[0]->label = 'Home';
-        $bc[1]->link = 'admin/akses_kontrol';
-        $bc[1]->label = 'Akses Kontrol';
-        $bc[2]->link = $this->uri->uri_string();
-        $bc[2]->label = 'Lihat Lavel';
+        $data['title'] = "Akses Kontrol - {$data['info_kontrol']->nama_lavel} ";
+        $data['content'] = 'admin/akses_kontrol/view';
+
+        $bc = array();
+        @$bc[0]->link = 'admin/dashboard';
+        @$bc[0]->label = 'Home';
+        @$bc[1]->link = 'admin/akses_kontrol';
+        @$bc[1]->label = 'Akses Kontrol';
+        @$bc[2]->link = $this->uri->uri_string();
+        @$bc[2]->label = 'Lihat Level';
         $data['breadcrumb'] = $bc;
         $this->load->view('admin/template', $data);
     }
-	
-	function reset_password(){
-		$user	= trim($this->uri->segment(4,''));
-		$level	= trim($this->uri->segment(5,''));
-		
-		if(!empty($user)){
-			$info = $this->akses->reset_password($user);
-			if($info){
-				$this->session->set_flashdata('success',"berhasil reset password");
-				redirect('admin/akses_kontrol/view/'.$level);
-			}else{
-				$this->session->set_flashdata('error',"gagal reset password");
-				redirect('admin/akses_kontrol/view'.$level);
-			}
-		}
-	}
-	
-	function delete_user(){
-		$user	= trim($this->uri->segment(4,''));
-		$level	= trim($this->uri->segment(5,''));
-		
-		if(!empty($user)){
-			$info = $this->akses->delete_user($user);
-			if($info){
-				$this->session->set_flashdata('success',"berhasil menghapus user");
-				redirect('admin/akses_kontrol/view/'.$level);
-			}else{
-				$this->session->set_flashdata('error',"gagal menghapus user");
-				redirect('admin/akses_kontrol/view'.$level);
-			}
-		}
-	}
-	
-	
 
+    public function reset_password()
+    {
+        $user = trim($this->uri->segment(4, ''));
+        $level = trim($this->uri->segment(5, ''));
+
+        if (!empty($user)) {
+            $info = $this->akses->reset_password($user);
+            if ($info) {
+                $this->session->set_flashdata('success', "berhasil reset password");
+                redirect('admin/akses_kontrol/view/' . $level);
+            } else {
+                $this->session->set_flashdata('error', "gagal reset password");
+                redirect('admin/akses_kontrol/view' . $level);
+            }
+        }
+    }
+
+    public function delete_user()
+    {
+        $user = trim($this->uri->segment(4, ''));
+        $level = trim($this->uri->segment(5, ''));
+
+        if (!empty($user)) {
+            $info = $this->akses->delete_user($user);
+            if ($info) {
+                $this->session->set_flashdata('success', "berhasil menghapus user");
+                redirect('admin/akses_kontrol/view/' . $level);
+            } else {
+                $this->session->set_flashdata('error', "gagal menghapus user");
+                redirect('admin/akses_kontrol/view' . $level);
+            }
+        }
+    }
 }
-
-?>
