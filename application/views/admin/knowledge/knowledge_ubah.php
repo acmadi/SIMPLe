@@ -1,87 +1,114 @@
-<ul id="nav">
-    <li><a href="#tab1" class="active">Knowledge Ubah</a></li>
-</ul>
-<div class="clear"></div>
-    <div id="konten">
-        <div style="display: none;" id="tab1" class="tab_konten">
-            <?php echo validation_errors(); ?>
+<div class="content">
+    <div class="page-header">
+        <h1>Ubah Knowledge</h1>
+    </div>
 
-            <div class="table">
-                <?php echo form_open_multipart('admin/knowledge_ubah/save', array('style' => "border: 1px solid #999; padding: 13px 30px 13px 13px; margin:5px 0px 0px 20px; font-size:12px")); ?>
-                <?php if (isset($ubah->id_knowledge_base)) echo form_hidden('id', $ubah->id_knowledge_base);?>
-                <table>
-                    <tr>
-                        <td>Kategori</td>
-                        <td>:</td>
-                        <td>
-                            <select name="fkategori">
-                                <option>Peraturan</option>
-                                <?php foreach ($list_kat->result() as $lk):
-                                if ($lk->id_kat_knowledge_base == $ubah->id_kat_knowledge_base):
-                                    ?>
-                                    <option value="<?php echo $lk->id_kat_knowledge_base?>"
-                                            selected><?php echo $lk->kat_knowledge_base?></option>
-                                    <?php else: ?>
-                                    <option value="<?php echo $lk->id_kat_knowledge_base?>"><?php echo $lk->kat_knowledge_base?></option>
-                                    <?php      endif;
-                            endforeach;?>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Pertanyaan</td>
-                        <td>:</td>
-                        <td><input type="text" name="fjudul" size="65" value="<?php echo $ubah->judul?>"/></td>
-                    </tr>
-                    <tr>
-                        <td valign="top">Deskripsi</td>
-                        <td valign="top">:</td>
-                        <td><textarea name="fdeskripsi" cols="58" rows="6"><?php echo $ubah->desripsi?></textarea>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td valign="top">Jawaban</td>
-                        <td valign="top">:</td>
-                        <td><textarea name="fjawaban" cols="58" rows="6"><?php echo $ubah->jawaban?></textarea></td>
-                    </tr>
-                    <tr>
-                        <td>Ranah</td>
-                        <td valign="top">:</td>
-                        <td>
-                            <select name="is_public">
-                                <option value="0">Privat</option>
-                                <option value="1">Publik</option>
-                            </select>
-                        </td>
-                    </tr>
-                </table>
-                <fieldset>
-                    <legend>Sumber Jawaban</legend>
+    <?php echo validation_errors(); ?>
 
-                    <p>
-                        <label>Nama Nara Sumber</label>
+    <?php echo form_open_multipart('admin/knowledge_ubah/save', 'class="form-horizontal"'); ?>
 
-                        <input type="text" name="fsumber" value="<?php echo $ubah->nama_narasumber?>"/>
-                    </p>
+    <?php if (isset($ubah->id_knowledge_base)) echo form_hidden('id', $ubah->id_knowledge_base); ?>
 
+    <fieldset>
+        <legend>Pertanyaan</legend>
 
-                    <p>
-                        <label>Jabatan</label>
+        <div class="control-group">
+            <label class="control-label">Kategori</label>
 
-                        <input type="text" name="fjabatan" value="<?php echo $ubah->jabatan_narasumber?>"/>
-                    </p>
-
-                    <p>
-                        <label>Bukti file</label>
-
-                        <input type="file" name="ffile"/>
-                    </p>
-                </fieldset>
-                <div>
-                    <input class="button blue-pill" type="submit" value="simpan"/>
-                    <a href="<?php echo site_url('/admin/knowledge') ?>" class="button gray-pill">Batal</a>
-                </div>
-                <div style="clear: both;"></div>
-                <?php echo form_close();?>
-
+            <div class="controls">
+                <select name="fkategori">
+                    <option>Peraturan</option>
+                    <?php foreach ($list_kat->result() as $lk):
+                    if ($lk->id_kat_knowledge_base == $ubah->id_kat_knowledge_base): ?>
+                        <option value="<?php echo $lk->id_kat_knowledge_base?>"
+                                selected><?php echo $lk->kat_knowledge_base?>
+                        </option>
+                        <?php else: ?>
+                        <option
+                            value="<?php echo $lk->id_kat_knowledge_base?>"><?php echo $lk->kat_knowledge_base?></option>
+                        <?php endif; ?>
+                    <?php endforeach;?>
+                </select>
             </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label">Ranah</label>
+
+            <div class="controls">
+                <select name="is_public">
+                    <option value="0">Privat</option>
+                    <option value="1">Publik</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label">Pertanyaan</label>
+
+            <div class="controls">
+                <input type="text"
+                       name="fjudul"
+                       class="input-xxlarge"
+                       value="<?php echo $ubah->judul ?>"/>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label">Deskripsi</label>
+
+            <div class="controls">
+                <textarea name="fdeskripsi"
+                          rows="6"
+                          class="input-xxlarge"><?php echo $ubah->desripsi ?></textarea>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label">Jawaban</label>
+
+            <div class="controls">
+                <textarea name="fjawaban"
+                          rows="6"
+                          class="input-xxlarge"><?php echo $ubah->jawaban ?></textarea>
+            </div>
+        </div>
+
+    </fieldset>
+
+    <fieldset>
+        <legend>Sumber Jawaban</legend>
+
+        <div class="control-group">
+            <label class="control-label">Nama Nara Sumber</label>
+
+            <div class="controls">
+                <input type="text" name="fsumber" value="<?php echo $ubah->nama_narasumber?>"/>
+            </div>
+        </div>
+
+
+        <div class="control-group">
+            <label class="control-label">Jabatan</label>
+
+            <div class="controls">
+                <input type="text" name="fjabatan" value="<?php echo $ubah->jabatan_narasumber?>"/>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label">Bukti file</label>
+
+            <div class="controls">
+                <input type="file" name="ffile"/>
+            </div>
+    </fieldset>
+
+    <div class="form-actions">
+        <input class="btn btn-primary" type="submit" value="Simpan"/>
+        <a href="<?php echo site_url('/admin/knowledge') ?>" class="btn">Batal</a>
+    </div>
+
+    <?php echo form_close(); ?>
+
+</div>
