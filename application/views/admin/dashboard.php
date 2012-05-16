@@ -42,15 +42,11 @@
         <div style="height: 240px; overflow-y: auto;">
             <dl>
                 <?php
-
-				$result = $this->db->query("SELECT user
-											FROM tb_online_users WHERE MINUTE(TIMEDIFF(NOW(),aktifitas_terakhir)) <= 30 ")->result();
-				foreach ($result as $val) {
+				foreach ($online_users->result() as $val) {
 					//$udata = unserialize($val->user_data);
-					echo "<dd ><img src='".base_url()."images/user.png' > " . $val->user . "</dd>";
+					$str = '<dd ><img style="vertical-align: middle;" src="%s"> %s (%s)</dd>';
+                    echo sprintf($str, base_url('images/user.png'), $val->user, $val->nama);
 				}
-
-
                 ?>
             </dl>
         </div>

@@ -79,13 +79,21 @@ class Dashboard extends CI_Controller
 			$Test->Render("images/dashboard_bar_admin.png");
 		endif;
 
+        $result = $this->db->query("SELECT a.user, b.nama
+                                    FROM tb_online_users a
+                                    JOIN tb_user b ON b.id_user = a.id_user
+                                    WHERE MINUTE(TIMEDIFF(NOW(),aktifitas_terakhir)) <= 30
+                                    ORDER BY a.user ASC");
+        $data['online_users'] = $result;
+
         $data['title'] = 'Dashboard';
         $data['content'] = 'admin/dashboard';
 
-        $bc[0]->link = 'admin/dashboard';
-        $bc[0]->label = 'Home';
-        $bc[1]->link = 'admin/dashboard';
-        $bc[1]->label = 'Dashboard';
+        $bc = array();
+        @$bc[0]->link = 'admin/dashboard';
+        @$bc[0]->label = 'Home';
+        @$bc[1]->link = 'admin/dashboard';
+        @$bc[1]->label = 'Dashboard';
         $data['breadcrumb'] = $bc;
 
         $this->load->view('admin/template', $data);
