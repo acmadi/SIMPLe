@@ -140,15 +140,20 @@
             <h1>Online Customer Service</h1>
             <?php
             // Online Users!!
-            $sql = "SELECT a.id_user, nama, username, nama_lavel, lavel, aktifitas_terakhir
-                    FROM tb_online_users a
-                    JOIN tb_user b ON b.id_user = a.id_user
-                    JOIN tb_lavel c ON c.id_lavel = b.id_lavel
-                    JOIN tb_masa_kerja d ON d.id_user = b.id_user
-                    WHERE c.lavel = 3
+            $sql = "SELECT user, id_user, lavel, aktifitas_terakhir
+                    FROM tb_online_users
+                    WHERE lavel = 1 OR lavel = 3
                     AND aktifitas_terakhir > DATE_SUB(NOW(), INTERVAL 2 HOUR)
                    ";
             $online_users = $this->db->query($sql);
+
+            // Jumlah Petugas selain CS dan Penyelia yang online
+            $sql = "SELECT COUNT(id_user) AS count
+                    FROM tb_online_users
+                    WHERE lavel != 1 OR lavel != 3
+                    AND aktifitas_terakhir > DATE_SUB(NOW(), INTERVAL 2 HOUR)
+                   ";
+            $jumlah_petugas_lain_online = $this->db->query($sql)->row()->count;
             ?>
             <ul>
                 <?php $i = 1 ?>
@@ -156,13 +161,14 @@
                 <?php if ($this->session->userdata('lavel') == 1): ?>
                     <li>
                         <a href="#" onclick="window.open('<?php echo site_url('chat') ?>', 'chat', 'width=700, height=636, status=0, toolbar=0, menubar=0, resizable=0')">
-                            <?php echo 'Customer Service ' . $i++ ?> (<?php echo $user->username ?>)
+                            <?php echo 'Customer Service ' . $i++ ?> (<?php echo $user->user ?>)
                         </a>
                     </li>
                 <?php else: ?>
-                    <li><a href="javascript:void(0)"><?php echo 'Customer Service ' . $i++ ?> (<?php echo $user->username ?>)</a></li>
+                    <li><a href="javascript:void(0)"><?php echo 'Customer Service ' . $i++ ?> (<?php echo $user->user ?>)</a></li>
                 <?php endif; ?>
                 <?php endforeach; ?>
+                    <li>Jumlah Petugas Online <?php echo $jumlah_petugas_lain_online ?></li>
             </ul>
         </div>
     </div>
