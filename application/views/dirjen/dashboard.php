@@ -273,13 +273,13 @@
             <td><a href="<?php echo site_url('/dirjen/lists_level/1/7/1/close/ditolak') ?>" class="red-box"><?php echo $a1_dirjen_ditolak ?></a></td>
 
             <td style="border: none;"> &nbsp;</td>
-            <td><a href="<?php echo site_url('/dirjen/lists_trm/2/2/6/1') ?>" class="green-box"><?php echo $a2_dirjen_diterima ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_level/2/7/1') ?>" class="green-box"><?php echo $a2_dirjen_diterima ?></a></td>
             <td>&nbsp;</td>
             <td><a href="<?php echo site_url('/dirjen/lists_level/2/7/1/close/disahkan') ?>" class="yellow-box"><?php echo $a2_dirjen_disetujui ?></a></td>
             <td><a href="<?php echo site_url('/dirjen/lists_level/2/7/1/close/ditolak') ?>" class="red-box"><?php echo $a2_dirjen_ditolak ?></a></td>
 
             <td style="border: none;"> &nbsp;</td>
-            <td><a href="<?php echo site_url('/dirjen/lists_trm/3/2/6/1') ?>" class="green-box"><?php echo $a3_dirjen_diterima ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_level/3/7/1') ?>" class="green-box"><?php echo $a3_dirjen_diterima ?></a></td>
             <td>&nbsp;</td>
             <td><a href="<?php echo site_url('/dirjen/lists_level/3/7/1/close/disahkan') ?>" class="yellow-box"><?php echo $a3_dirjen_disetujui ?></a></td>
             <td><a href="<?php echo site_url('/dirjen/lists_level/3/7/1/close/ditolak') ?>" class="red-box"><?php echo $a3_dirjen_ditolak ?></a></td>
