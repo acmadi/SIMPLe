@@ -124,8 +124,8 @@
     <h1>Dirjen Dashboard</h1>
 
     <div style="text-align: right;">
-		<?php 
-		$button_lwt_style = 'green-box'; 
+		<?php
+		$button_lwt_style = 'green-box';
 		if($argo > 0) $button_lwt_style = 'red-box';
 		?>
         <a href="<?php echo site_url('/dirjen/list_argo') ?>" class="<?php echo $button_lwt_style;?>" style="padding: 10px; display: inline-block; color: white; margin-bottom: 10px;">
@@ -235,7 +235,7 @@
             <td></td>
 
             <td style="border: none;"> &nbsp;</td>
-            <td><a href="<?php echo site_url('/dirjen/lists_level/2/5/1')?> class="green-box"><?php echo $a2_subdit_dadutek_diterima ?></a></td>
+            <td><a href="<?php echo site_url('/dirjen/lists_level/2/5/1')?>" class="green-box"><?php echo $a2_subdit_dadutek_diterima ?></a></td>
             <td><a href="<?php echo site_url('/dirjen/lists_level/2/6/2') ?>" class="blue-box"><?php echo $a2_subdit_dadutek_diteruskan ?></a></td>
             <td></td>
             <td></td>
